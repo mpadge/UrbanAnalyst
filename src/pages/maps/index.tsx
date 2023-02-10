@@ -4,6 +4,7 @@ import {useState} from "react";
 import {GeoJsonLayer} from "@deck.gl/layers/typed";
 import {DeckGL} from "@deck.gl/react/typed";
 import {Map} from "react-map-gl";
+import Control from './control'
 
 import {paletteInferno} from "./palettes.tsx"
 
@@ -28,6 +29,7 @@ const Page: NextPage = () => {
 
     const layers = [
         new GeoJsonLayer({
+            id: 'polygon-layer',
             data,
             filled: true,
             stroked: true,
@@ -63,6 +65,7 @@ const Page: NextPage = () => {
         </Map>
         </DeckGL>
         )}
+        <Control />
         </>
         )
 };
