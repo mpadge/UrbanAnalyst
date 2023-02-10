@@ -8,7 +8,7 @@
 }
 
 .topleft {
-  display: flex;
+  display: inherit;
   justify-content: center;
   align-items: center;
   margin: 20px;
