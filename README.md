@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is modified from a template [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
@@ -14,25 +14,29 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## The deck.gl bit
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+The default landing page from `create-next-app` has only been slightly modified
+to include a link to a `/maps` page which will display internal map data with
+[`deck.gl`](https://deck.gl). The base map requires a Mapbox API token which
+should be saved in the root directory this repo in a file named `.env.local`
+containing this:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=<my-token>
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Building from scratch
 
-## Learn More
+To re-create the whole project, start afresh somewhere else and follow these steps:
 
-To learn more about Next.js, take a look at the following resources:
+- `npx create-next-app@latest --typescript`
+- Make a `.env.local` file with `NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN` + value
+- `npm install deck.gl react-map-gl mapbox-gl`
+- `mkdir src/data` + copy data file across from this repo
+- `mkdir src/pages/maps` + copy 2 files across from this repo
+- Modify `src/pages.index.tsc` to insert link to "maps":
+    - `import Link from 'next/link'`
+    - Replace `<a></a>` with `<Link></Link>`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+And that's it.
