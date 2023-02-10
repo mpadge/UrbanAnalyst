@@ -11,11 +11,25 @@ import {paletteInferno} from "./palettes.tsx"
 
 const Page: NextPage = () => {
 
+    const [city, setCity] = useState(cities[0]);
+
+    console.log("city path = ", city.path)
+
+    const control = <Control />;
+
     return (
         <>
-        <UTAMap />
-        <Control />
+        <UTAMap
+            city = {city}
+        />
+        {control}
         </>
         )
 };
 export default Page;
+
+const cities = [
+    { name: 'Berlin', path: '@/data/berlin/berlin.json' },
+    { name: 'Paris', path: '@/data/paris/paris.json' },
+    { name: 'Hamburg', path: '@/data/hamburg/hamburg.json' },
+];

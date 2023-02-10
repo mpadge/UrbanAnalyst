@@ -5,9 +5,13 @@ import styles from '@/styles/Home.module.css'
 import CityShow from './city-show.tsx';
 import CityList from './citylist';
 
-export default function Control (props:ControlBoxProps) {
+export default function Control () {
 
     const [city, setCity] = useState(cities[0]);
+
+    function handleCityChange(city) {
+        setCity(city.target.value);
+    }
 
     return (
         <div id="top-left-container" className={styles.topleft}>

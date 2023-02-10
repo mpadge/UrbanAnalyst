@@ -13,11 +13,13 @@ const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 // const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-nolabels-gl-style/style.json';
 const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 
-const data = require('../../data/berlin.json')
+export default function UTAMap ({city}) {
 
-export default function UTAMap () {
+    console.log('UTAMap: city = ' + city)
+    console.log('UTAMap: city = ' + city.name)
+    console.log('UTAMap: path = ' + city.path)
 
-    const data = require('../../data/berlin.json')
+    const data = require('@/data/berlin/berlin.json')
 
     const [viewport, setViewport] = useState({
         width: 400,
@@ -44,8 +46,6 @@ export default function UTAMap () {
                 }
             })
         ]
-
-    // console.log("TOKEN = " + MapboxAccessToken)
 
     return (
         <>

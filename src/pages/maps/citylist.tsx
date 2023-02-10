@@ -7,7 +7,7 @@ export default function CityList({
     <section className="city-list">
       <ul>
         {cities.map(city =>
-          <li key={city.email}>
+          <li key={city.path}>
             <button onClick={() => {
               onSelect(city);
             }}>
