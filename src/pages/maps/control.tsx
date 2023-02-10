@@ -34,7 +34,7 @@ export default function Control (props:ControlBoxProps) {
 };
 
 const cities = [
-    { name: 'Berlin' },
+    { name: 'Berlin', path: '@/data/berlin/berlin.json'},
     { name: 'Paris' },
     { name: 'Hamburg' }
 ];
