@@ -7,7 +7,7 @@ import CityList from './citylist';
 
 export default function Control (props:ControlBoxProps) {
 
-    const [to, setTo] = useState(cities[0]);
+    const [city, setCity] = useState(cities[0]);
 
     return (
         <div id="top-left-container" className={styles.topleft}>
@@ -25,16 +25,16 @@ export default function Control (props:ControlBoxProps) {
         <h2>Cities</h2>
         <CityList
             cities={cities}
-            selectedCity={to}
-            onSelect={city => setTo(city)}
+            selectedCity={city}
+            onSelect={city => setCity(city)}
         />
-        <CityShow city={to} />
+        <CityShow city={city} />
         </div>
         )
 };
 
 const cities = [
-    { name: 'Berlin', path: '@/data/berlin/berlin.json'},
-    { name: 'Paris' },
-    { name: 'Hamburg' }
+    { name: 'Berlin', path: '@/data/berlin/berlin.json' },
+    { name: 'Paris', path: '@/data/paris/paris.json' },
+    { name: 'Hamburg', path: '@/data/hamburg/hamburg.json' },
 ];
