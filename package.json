@@ -13,11 +13,14 @@
     "@types/node": "18.13.0",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
+    "deck.gl": "^8.8.23",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
+    "mapbox-gl": "^2.12.1",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-map-gl": "^7.0.21",
     "typescript": "4.9.5"
   }
 }
