@@ -1,13 +1,13 @@
 
 import {useState} from 'react';
-import {ControlBoxProps} from './data-interfaces';
 import Link from 'next/link'
 import styles from '@/styles/Home.module.css'
-import control from '@/styles/Control.css'
+import CityShow from './city-show.tsx';
+import CityList from './citylist';
 
-const Control = (props:ControlBoxProps) => {
+export default function Control (props:ControlBoxProps) {
 
-  const [hideInfoBox, setHideInfoBox] = useState(false);
+    const [to, setTo] = useState(cities[0]);
 
     return (
         <div id="top-left-container" className={styles.topleft}>
@@ -21,7 +21,20 @@ const Control = (props:ControlBoxProps) => {
             Back
         </p>
         </Link>
+
+        <h2>Cities</h2>
+        <CityList
+            cities={cities}
+            selectedCity={to}
+            onSelect={city => setTo(city)}
+        />
+        <CityShow city={to} />
         </div>
         )
 };
-export default Control;
+
+const cities = [
+    { name: 'Berlin' },
+    { name: 'Paris' },
+    { name: 'Hamburg' }
+];
