@@ -29,7 +29,7 @@ const Page: NextPage = () => {
 export default Page;
 
 const cities = [
-    { name: 'Berlin', path: '@/data/berlin/berlin.json' },
-    { name: 'Paris', path: '@/data/paris/paris.json' },
-    { name: 'Hamburg', path: '@/data/hamburg/hamburg.json' },
+    { name: 'Berlin', path: '/data/berlin/data.json' },
+    { name: 'Paris', path: '/data/paris/data.json' },
+    { name: 'Hamburg', path: '/data/hamburg/data.json' },
 ];

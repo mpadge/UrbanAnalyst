@@ -19,7 +19,7 @@ export default function UTAMap ({city}) {
     console.log('UTAMap: city = ' + city.name)
     console.log('UTAMap: path = ' + city.path)
 
-    const data = require('@/data/berlin/data.json')
+    const data = city.path;
 
     const [viewport, setViewport] = useState({
         width: 400,
