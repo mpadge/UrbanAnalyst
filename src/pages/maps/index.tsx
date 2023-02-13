@@ -14,6 +14,10 @@ const Page: NextPage = ({ citiesData }) => {
     const [idx, setIdx] = useState(0);
     const [cityData, setCityData] = useState(citiesData[idx]);
 
+    const handleDataChange = (idx: number) => {
+        setIdx(idx);
+    }
+
     return (
         <>
         <UTAMap
@@ -23,6 +27,7 @@ const Page: NextPage = ({ citiesData }) => {
         <Control
             idx = {idx}
             citiesData = {citiesData}
+            handleDataChange = {handleDataChange}
         />
         </>
         )

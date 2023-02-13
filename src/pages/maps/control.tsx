@@ -5,7 +5,7 @@ import styles from '@/styles/Home.module.css'
 import CityShow from './city-show.tsx';
 import CityList from './citylist';
 
-export default function Control ({ idx, citiesData }) {
+export default function Control ({ idx, citiesData, handleDataChange }) {
 
     const [cityData, setCityData] = useState(citiesData[idx]);
 
@@ -35,7 +35,8 @@ export default function Control ({ idx, citiesData }) {
         <CityList
             citiesData={citiesData}
             idx={idx}
-            onSelect={city => setCityData(idx)}
+            handleDataChange={handleDataChange}
+            onSelect={city => handleDataChange(idx)}
         />
         <CityShow
             citiesData={citiesData}

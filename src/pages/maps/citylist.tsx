@@ -4,6 +4,7 @@ import {useState} from 'react';
 export default function CityList({
   citiesData,
   idx,
+  handleDataChange,
   onSelect
 }) {
 
@@ -17,9 +18,7 @@ export default function CityList({
             <button onClick={() => {
                 console.log("index change to: " + index);
                 console.log("path should change to: " + citiesData[index].path);
-              onSelect(
-                setIdx(index)
-                );
+                handleDataChange(index)
             }}>
               {city.name}
             </button>
