@@ -28,6 +28,7 @@ export default function UTAMap ({ idx, citiesData }) {
         zoom: 10
     });
 
+
     const layers = [
         new GeoJsonLayer({
             id: 'polygon-layer',
@@ -37,7 +38,8 @@ export default function UTAMap ({ idx, citiesData }) {
             getLineWidth: 10,
             getLineColor: [122, 122, 122],
             getFillColor: d => {
-                const rand = Math.floor (100 * d.properties.var / 6)
+                console.log(d.properties)
+                const rand = Math.floor (100 * d.properties.social_index / 6)
                 const red = paletteInferno.red [rand]
                 const blue = paletteInferno.blue [rand]
                 const green = paletteInferno.green [rand]

@@ -37,7 +37,7 @@ export default Page;
 import fs from 'fs';
 import path from 'path';
 export async function getStaticProps() {
-    const dataDir = path.join(process.cwd(), 'data');
+    const dataDir = path.join(process.cwd(), 'public', 'data');
     const cityNames = fs.readdirSync(dataDir, { withFileTypes: true })
         .filter((item) => item.isDirectory())
             .map((item) => item.name);

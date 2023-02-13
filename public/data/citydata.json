@@ -1,0 +1,16 @@
+{
+    "dataSamples": [
+        { 
+            "name": "Berlin", 
+            "path": "/data/berlin/data.json"
+        },
+        { 
+            "name": "Paris", 
+            "path": "/data/paris/data.json"
+        },
+        { 
+            "name": "Hamburg", 
+            "path": "/data/hamburg/data.json"
+        }
+    ]
+}
