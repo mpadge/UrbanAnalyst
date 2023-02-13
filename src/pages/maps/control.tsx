@@ -11,8 +11,6 @@ export default function Control ({ idx, citiesData, handleIdxChange }) {
 
     const cityNames = citiesData.map((item) => item.name);
 
-    console.log("IDX in Control: " + idx)
-
     return (
         <div id="top-left-container" className={styles.topleft}>
         <h1>UTA</h1>

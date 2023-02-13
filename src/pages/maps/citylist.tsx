@@ -8,8 +8,6 @@ export default function CityList({
   onSelect
 }) {
 
-    console.log("IDX in CityList: " + idx)
-
   return (
     <section className="city-list">
       <ul>

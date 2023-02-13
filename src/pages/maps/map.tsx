@@ -15,7 +15,7 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 
 export default function UTAMap ({ idx, citiesData }) {
 
-    const [mapData, setMapData] = useState(citiesData[idx].path);
+    const mapData = citiesData[idx].path;
 
     console.log('UTAMap: idx = ' + idx)
     console.log('UTAMap: data = ' + mapData)
