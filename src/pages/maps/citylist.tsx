@@ -1,15 +1,25 @@
+
+import {useState} from 'react';
+
 export default function CityList({
-  selectedCity,
-  cities,
+  citiesData,
+  idx,
   onSelect
 }) {
+
+    console.log("IDX in CityList: " + idx)
+
   return (
     <section className="city-list">
       <ul>
-        {cities.map(city =>
+        {citiesData.map((city, index) =>
           <li key={city.path}>
             <button onClick={() => {
-              onSelect(city);
+                console.log("index change to: " + index);
+                console.log("path should change to: " + citiesData[index].path);
+              onSelect(
+                setIdx(index)
+                );
             }}>
               {city.name}
             </button>

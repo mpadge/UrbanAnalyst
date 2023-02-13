@@ -5,13 +5,18 @@ import styles from '@/styles/Home.module.css'
 import CityShow from './city-show.tsx';
 import CityList from './citylist';
 
-export default function Control () {
+export default function Control ({ idx, citiesData }) {
 
-    const [city, setCity] = useState(cities[0]);
+    const [cityData, setCityData] = useState(citiesData[idx]);
 
-    function handleCityChange(city) {
-        setCity(city.target.value);
+    const cityNames = citiesData.map((item) => item.name);
+
+    const reloadCityData = () => {
+        // create a new array for trips so the colours are updated
+        setCityData((prevIdx) => { return prevIdx ? [...prevIdx] : prevIdx; });
     }
+
+    console.log("IDX in Control: " + idx)
 
     return (
         <div id="top-left-container" className={styles.topleft}>
@@ -28,17 +33,14 @@ export default function Control () {
 
         <h2>Cities</h2>
         <CityList
-            cities={cities}
-            selectedCity={city}
-            onSelect={city => setCity(city)}
+            citiesData={citiesData}
+            idx={idx}
+            onSelect={city => setCityData(idx)}
         />
-        <CityShow city={city} />
+        <CityShow
+            citiesData={citiesData}
+            idx={idx}
+        />
         </div>
         )
 };
-
-const cities = [
-    { name: 'Berlin', path: '@/data/berlin/berlin.json' },
-    { name: 'Paris', path: '@/data/paris/paris.json' },
-    { name: 'Hamburg', path: '@/data/hamburg/hamburg.json' },
-];

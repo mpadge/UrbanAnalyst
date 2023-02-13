@@ -14,15 +14,16 @@ const Page: NextPage = ({ citiesData }) => {
     const [idx, setIdx] = useState(0);
     const [cityData, setCityData] = useState(citiesData[idx]);
 
-    const control = <Control />;
-
     return (
         <>
         <UTAMap
             idx = {idx}
             citiesData = {citiesData}
         />
-        {control}
+        <Control
+            idx = {idx}
+            citiesData = {citiesData}
+        />
         </>
         )
 };
