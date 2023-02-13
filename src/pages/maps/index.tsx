@@ -11,18 +11,20 @@ import {paletteInferno} from "./palettes.tsx"
 
 const Page: NextPage = ({ cities, citiesFormatted, cityPaths }) => {
 
-    const [city, setCity] = useState(cities[0]);
-    const [path, setPath] = useState(cityPaths[0]);
+    const [idx, setIdx] = useState(0);
+    const [city, setCity] = useState(cities[idx]);
+    const [path, setPath] = useState(cityPaths[idx]);
 
-    console.log("city path = ", cityPaths[0])
+    console.log("city path = ", cityPaths[idx])
 
     const control = <Control />;
 
     return (
         <>
         <UTAMap
-            city = {city}
-            path = {path}
+            idx = {idx}
+            cities = {cities}
+            cityPaths = {cityPaths}
         />
         {control}
         </>

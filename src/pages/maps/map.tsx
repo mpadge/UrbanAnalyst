@@ -13,12 +13,12 @@ const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 // const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-nolabels-gl-style/style.json';
 const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 
-export default function UTAMap ({ city, path}) {
+export default function UTAMap ({ idx, cities, cityPaths }) {
 
-    console.log('UTAMap: city = ' + city)
-    console.log('UTAMap: path = ' + path)
+    console.log('UTAMap: city = ' + cities[idx])
+    console.log('UTAMap: path = ' + cityPaths[idx])
 
-    const data = path;
+    const data = cityPaths[idx];
 
     const [viewport, setViewport] = useState({
         width: 400,
