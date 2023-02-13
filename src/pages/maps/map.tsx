@@ -23,9 +23,9 @@ export default function UTAMap ({ idx, citiesData }) {
     const [viewport, setViewport] = useState({
         width: 400,
         height: 400,
-        latitude: 52.5,
-        longitude: 13.4,
-        zoom: 10
+        latitude: citiesData[idx].lat,
+        longitude: citiesData[idx].lon,
+        zoom: citiesData[idx].zoom
     });
 
 
@@ -38,7 +38,6 @@ export default function UTAMap ({ idx, citiesData }) {
             getLineWidth: 10,
             getLineColor: [122, 122, 122],
             getFillColor: d => {
-                console.log(d.properties)
                 const rand = Math.floor (100 * d.properties.social_index / 6)
                 const red = paletteInferno.red [rand]
                 const blue = paletteInferno.blue [rand]
