@@ -15,10 +15,10 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 
 export default function UTAMap ({ idx, citiesData }) {
 
-    console.log('UTAMap: city = ' + citiesData[idx].name)
-    console.log('UTAMap: path = ' + citiesData[idx].path)
+    const [mapData, setMapData] = useState(citiesData[idx].path);
 
-    const data = citiesData[idx].path;
+    console.log('UTAMap: idx = ' + idx)
+    console.log('UTAMap: data = ' + mapData)
 
     const [viewport, setViewport] = useState({
         width: 400,
@@ -31,7 +31,7 @@ export default function UTAMap ({ idx, citiesData }) {
     const layers = [
         new GeoJsonLayer({
             id: 'polygon-layer',
-            data,
+            data: mapData,
             filled: true,
             stroked: true,
             getLineWidth: 10,

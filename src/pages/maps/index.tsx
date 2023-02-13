@@ -14,7 +14,7 @@ const Page: NextPage = ({ citiesData }) => {
     const [idx, setIdx] = useState(0);
     const [cityData, setCityData] = useState(citiesData[idx]);
 
-    const handleDataChange = (idx: number) => {
+    const handleIdxChange = (idx: number) => {
         setIdx(idx);
     }
 
@@ -27,7 +27,7 @@ const Page: NextPage = ({ citiesData }) => {
         <Control
             idx = {idx}
             citiesData = {citiesData}
-            handleDataChange = {handleDataChange}
+            handleIdxChange = {handleIdxChange}
         />
         </>
         )
