@@ -7,7 +7,8 @@ import {Map} from "react-map-gl";
 import Control from './control';
 import UTAMap from './map';
 
-import {paletteInferno} from "./palettes.tsx";
+import {paletteInferno} from "./palettes";
+import { CITY_DATA, DEFAULT_MAP_CONFIG } from './citydata';
 
 const Page: NextPage = ({ citiesData }) => {
 
@@ -43,15 +44,15 @@ export async function getStaticProps() {
         .filter((item) => item.isDirectory())
             .map((item) => item.name);
 
-    const viewports = xy;
+    const CityData = CITY_DATA.Data;
 
     const citiesData = cityNames.map((item, index) => ({
         name: item,
         nameformatted: item.charAt(0).toUpperCase() + item.slice(1),
         path: '/data/' + item + '/data.json',
-        lat: xy.ViewPorts[index].initialViewport.latitude,
-        lon: xy.ViewPorts[index].initialViewport.longitude,
-        zoom: xy.ViewPorts[index].initialViewport.zoom
+        lat: CityData[index].initialViewport.latitude,
+        lon: CityData[index].initialViewport.longitude,
+        zoom: CityData[index].initialViewport.zoom
     }));
 
 
@@ -61,33 +62,3 @@ export async function getStaticProps() {
         }
     }
 }
-
-
-const xy = {
-    "ViewPorts": [
-        { 
-            "name": "berlin", 
-            "initialViewport": {
-                "latitude": 52.5,
-                "longitude": 13.4,
-                "zoom": 10
-            }
-        },
-        { 
-            "name": "hamburg", 
-            "initialViewport": {
-                "latitude": 54.5,
-                "longitude": 12.4,
-                "zoom": 11
-            }
-        },
-        { 
-            "name": "paris", 
-            "initialViewport": {
-                "latitude": 52.5,
-                "longitude": 11.4,
-                "zoom": 11
-            }
-        }
-    ]
-};
