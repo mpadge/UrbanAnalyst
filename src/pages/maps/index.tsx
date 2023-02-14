@@ -14,6 +14,13 @@ const Page: NextPage = ({ citiesData }) => {
 
     const [idx, setIdx] = useState(0);
     const [cityData, setCityData] = useState(citiesData[idx]);
+    const [viewport, setViewport] = useState({
+        width: 400,
+        height: 400,
+        latitude: DEFAULT_MAP_CONFIG.initialViewport.latitude,
+        longitude: DEFAULT_MAP_CONFIG.initialViewport.longitude,
+        zoom: DEFAULT_MAP_CONFIG.initialViewport.zoom
+    });
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
