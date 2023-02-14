@@ -23,9 +23,9 @@ export default function UTAMap ({ idx, citiesData }) {
     const [viewport, setViewport] = useState({
         width: 400,
         height: 400,
-        latitude: citiesData[idx].lat,
-        longitude: citiesData[idx].lon,
-        zoom: citiesData[idx].zoom
+        latitude: citiesData[idx].initialViewport.latitude,
+        longitude: citiesData[idx].initialViewport.longitude,
+        zoom: citiesData[idx].initialViewport.zoom
     });
 
 

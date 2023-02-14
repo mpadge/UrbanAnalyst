@@ -11,6 +11,8 @@ export const CITY_DATA = {
     "Data": [
         {
             "name": "berlin",
+            "nameFormatted": "Berlin",
+            "path": "/data/berlin/data.json",
             "initialViewport": {
                 "latitude": 52.5,
                 "longitude": 13.4,
@@ -19,6 +21,8 @@ export const CITY_DATA = {
         },
         {
             "name": "hamburg",
+            "nameFormatted": "Hamburg",
+            "path": "/data/hamburg/data.json",
             "initialViewport": {
                 "latitude": 54.5,
                 "longitude": 12.4,
@@ -27,6 +31,8 @@ export const CITY_DATA = {
         },
         {
             "name": "paris",
+            "nameFormatted": "Paris",
+            "path": "/data/paris/data.json",
             "initialViewport": {
                 "latitude": 52.5,
                 "longitude": 11.4,
