@@ -9,7 +9,7 @@ export interface Viewport {
     latitude: number,
     longitude: number,
     zoom: number
-    maxZoom: number,
+    maxZoom?: number,
     pitch: number,
     bearing: number,
     width?: number,
@@ -51,6 +51,7 @@ export interface CityListProps {
     citiesArray: CityDataProps[],
     viewport: Viewport,
     handleIdxChange: (pIdx: number) => void,
+    handleViewportChange: (pViewport: Viewport) => void
 }
 
 export interface CityShowProps {

@@ -17,17 +17,11 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 export default function UTAMap (props: MapProps) {
 
     const mapPath = props.citiesArray[props.idx].path;
-    const [viewport, setViewport] = useState(props.viewport);
+    const [viewState, setViewState] = useState(props.viewport);
 
     console.log('UTAMap: idx = ' + props.idx)
     console.log('UTAMap: path = ' + mapPath)
-    // console.log('initialViewport lon = ' + initialViewport.longitude)
-    console.log('In Map: viewport lon = ' + viewport.longitude)
     console.log('In Map: props.viewport lon = ' + props.viewport.longitude)
-
-    // const handleViewportChange = (pViewport: any) => {
-    //     setViewport((prevViewport) => { return { ...prevViewport, ...pViewport }; });
-    // }
 
     const layers = [
         new GeoJsonLayer({
@@ -56,7 +50,7 @@ export default function UTAMap (props: MapProps) {
             controller={true}
             layers={layers}
             initialViewState={props.viewport}
-            onViewStateChange={(viewState) => setViewport(viewState.viewState)}
+            // onViewStateChange={(viewState) => setViewState(viewState)}
             onViewportChange={props.handleViewportChange}
         >
         <Map

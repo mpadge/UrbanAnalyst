@@ -15,7 +15,9 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 
     const [idx, setIdx] = useState(0);
     const [cityData, setCityData] = useState(props.citiesArray[idx]);
-    const [viewport, setViewport] = useState(props.citiesArray[idx].initialViewport);
+    const [viewport, setViewport] = useState({...props.citiesArray[idx].initialViewport,
+        pitch: 0,
+        bearing: 0 });
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
