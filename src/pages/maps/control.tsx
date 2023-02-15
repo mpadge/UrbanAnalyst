@@ -4,12 +4,13 @@ import Link from 'next/link'
 import styles from '@/styles/Home.module.css'
 import CityShow from './city-show.tsx';
 import CityList from './citylist';
+import { CityData, ControlProps } from "./interfaces";
 
-export default function Control ({ idx, citiesData, handleIdxChange }) {
+export default function Control (props: { ControlProps }) {
 
-    const [cityData, setCityData] = useState(citiesData[idx]);
+    const [cityData, setCityData] = useState(props.citiesData[props.idx]);
 
-    const cityNames = citiesData.map((item) => item.name);
+    const cityNames = props.citiesData.map((item) => item.name);
 
     return (
         <div id="top-left-container" className={styles.topleft}>
@@ -26,14 +27,14 @@ export default function Control ({ idx, citiesData, handleIdxChange }) {
 
         <h2>Cities</h2>
         <CityList
-            citiesData={citiesData}
-            idx={idx}
-            handleIdxChange={handleIdxChange}
-            onSelect={city => handleIdxChange(idx)}
+            citiesData={props.citiesData}
+            idx={props.idx}
+            handleIdxChange={props.handleIdxChange}
+            onSelect={city => props.handleIdxChange(props.idx)}
         />
         <CityShow
-            citiesData={citiesData}
-            idx={idx}
+            citiesData={props.citiesData}
+            idx={props.idx}
         />
         </div>
         )

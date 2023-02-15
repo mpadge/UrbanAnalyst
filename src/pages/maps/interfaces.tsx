@@ -36,3 +36,9 @@ export interface MapProps {
     citiesData: CityData[],
     initialViewport: Viewport
 }
+
+export interface ControlProps {
+    idx: number,
+    citiesData: CityData[],
+    handleIdxChange: (pIdx: number) => void,
+}
