@@ -31,12 +31,12 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         <>
         <UTAMap
             idx = {idx}
-            citiesData = {props.citiesArray}
+            citiesArray = {props.citiesArray}
             initialViewport = {viewport}
         />
         <Control
             idx = {idx}
-            citiesData = {props.citiesArray}
+            citiesArray = {props.citiesArray}
             handleIdxChange = {handleIdxChange}
         />
         </>
@@ -46,11 +46,11 @@ export default Page;
 
 export async function getStaticProps() {
 
-    const citiesArray = CITY_DATA;
+    const city_data = CITY_DATA;
 
     return {
         props: {
-            citiesArray: citiesArray
+            citiesArray: city_data.citiesArray
         }
     }
 }

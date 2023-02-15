@@ -33,23 +33,23 @@ export interface CitiesDataProps {
 
 export interface MapProps {
     idx: number,
-    citiesData: CitiesDataProps,
+    citiesArray: CityDataProps[],
     initialViewport: PartialViewport
 }
 
 export interface ControlProps {
     idx: number,
-    citiesData: CitiesDataProps,
+    citiesArray: CityDataProps[],
     handleIdxChange: (pIdx: number) => void
 }
 
 export interface CityListProps {
     idx: number,
-    citiesData: CitiesDataProps,
+    citiesArray: CityDataProps[],
     handleIdxChange: (pIdx: number) => void,
 }
 
 export interface CityShowProps {
     idx: number,
-    citiesData: CitiesDataProps,
+    citiesArray: CityDataProps[],
 }

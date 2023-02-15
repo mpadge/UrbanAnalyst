@@ -8,9 +8,9 @@ import { ControlProps } from "./interfaces";
 
 export default function Control (props: ControlProps) {
 
-    const [cityData, setCityData] = useState(props.citiesData.citiesArray[props.idx]);
+    const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
 
-    const cityNames = props.citiesData.citiesArray.map((item) => item.name);
+    const cityNames = props.citiesArray.map((item) => item.name);
 
     return (
         <div id="top-left-container" className={styles.topleft}>
@@ -27,13 +27,13 @@ export default function Control (props: ControlProps) {
 
         <h2>Cities</h2>
         <CityList
-            citiesData={props.citiesData}
+            citiesArray={props.citiesArray}
             idx={props.idx}
             handleIdxChange={props.handleIdxChange}
             // onSelect={city => props.handleIdxChange(props.idx)}
         />
         <CityShow
-            citiesData={props.citiesData}
+            citiesArray={props.citiesArray}
             idx={props.idx}
         />
         </div>
