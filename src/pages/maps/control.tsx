@@ -2,11 +2,11 @@
 import {useState} from 'react';
 import Link from 'next/link'
 import styles from '@/styles/Home.module.css'
-import CityShow from './city-show.tsx';
+import CityShow from './city-show';
 import CityList from './citylist';
 import { CityData, ControlProps } from "./interfaces";
 
-export default function Control (props: { ControlProps }) {
+export default function Control (props: ControlProps) {
 
     const [cityData, setCityData] = useState(props.citiesData[props.idx]);
 

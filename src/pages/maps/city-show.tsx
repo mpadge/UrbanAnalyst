@@ -1,7 +1,8 @@
 
 import { useState } from 'react';
+import { CityData, CityShowProps } from "./interfaces";
 
-export default function CityShow(props: { CityShowProps }) {
+export default function CityShow(props: CityShowProps) {
     const [text, setText] = useState('');
     return (
             <section className="cityshow">

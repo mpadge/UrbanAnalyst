@@ -1,7 +1,8 @@
 
 import {useState} from 'react';
+import { CityData, CityListProps } from "./interfaces";
 
-export default function CityList(props: { CityListProps }) {
+export default function CityList(props: CityListProps) {
 
   return (
     <section className="city-list">
