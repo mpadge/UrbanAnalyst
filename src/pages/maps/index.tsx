@@ -7,9 +7,9 @@ import {Map} from "react-map-gl";
 import Control from './control';
 import UTAMap from './map';
 
-import { paletteInferno } from "./palettes";
-import { CITY_DATA, DEFAULT_MAP_CONFIG } from './citydata';
-import { CityDataProps, CitiesDataProps } from "./interfaces";
+import { paletteInferno } from "@/components/palettes";
+import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/components/citydata';
+import { CityDataProps, CitiesDataProps } from "@/components/interfaces";
 
 const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 

@@ -6,8 +6,8 @@ import {DeckGL} from "@deck.gl/react/typed";
 import {Map} from "react-map-gl";
 import Control from './control'
 
-import {paletteInferno} from "./palettes"
-import { MapProps } from "./interfaces";
+import {paletteInferno} from "@/components/palettes"
+import { MapProps } from "@/components/interfaces";
 
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 
