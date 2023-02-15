@@ -32,6 +32,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         <UTAMap
             idx = {idx}
             citiesData = {props.citiesArray}
+            initialViewport = {viewport}
         />
         <Control
             idx = {idx}

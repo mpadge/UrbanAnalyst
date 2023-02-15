@@ -34,7 +34,7 @@ export interface CitiesDataProps {
 export interface MapProps {
     idx: number,
     citiesData: CitiesDataProps,
-    initialViewport: Viewport
+    initialViewport: PartialViewport
 }
 
 export interface ControlProps {
