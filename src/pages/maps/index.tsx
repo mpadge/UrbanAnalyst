@@ -11,7 +11,7 @@ import { paletteInferno } from "./palettes";
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from './citydata';
 import { CityDataProps, CitiesDataProps } from "./interfaces";
 
-const Page: NextPage = (props: CitiesDataProps) => {
+const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 
     const [idx, setIdx] = useState(0);
     const [cityData, setCityData] = useState(props.citiesData.Data[idx]);
