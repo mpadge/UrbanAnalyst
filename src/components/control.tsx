@@ -12,6 +12,8 @@ export default function Control (props: ControlProps) {
 
     const cityNames = props.citiesArray.map((item) => item.name);
 
+    console.log("---->Control: viewport lon = " + props.viewport.longitude)
+
     return (
         <div id="top-left-container" className={styles.topleft}>
         <h1>UTA</h1>
@@ -29,7 +31,9 @@ export default function Control (props: ControlProps) {
         <CityList
             citiesArray={props.citiesArray}
             idx={props.idx}
+            viewport = {props.viewport}
             handleIdxChange={props.handleIdxChange}
+            handleViewportChange={props.handleViewportChange}
             // onSelect={city => props.handleIdxChange(props.idx)}
         />
         <CityShow

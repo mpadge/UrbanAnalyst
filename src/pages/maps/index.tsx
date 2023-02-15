@@ -9,26 +9,38 @@ import UTAMap from '@/components/map';
 
 import { paletteInferno } from "@/components/palettes";
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/components/citydata';
-import { CityDataProps, CitiesDataProps } from "@/components/interfaces";
+import { CityDataProps, CitiesDataProps, Viewport } from "@/components/interfaces";
 
 const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 
     const [idx, setIdx] = useState(0);
     const [cityData, setCityData] = useState(props.citiesArray[idx]);
+    const [viewport, setViewport] = useState(props.citiesArray[idx].initialViewport);
+
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
     }
+    const handleViewportChange = (pViewport: any) => {
+        //setViewport((prevViewport) => { return { ...prevViewport, ...pViewport }; });
+        setViewport(pViewport);
+    }
+
+    console.log('In index: viewport lon = ' + viewport.longitude);
 
     return (
         <>
         <UTAMap
             idx = {idx}
             citiesArray = {props.citiesArray}
+            viewport = {viewport}
+            handleViewportChange = {handleViewportChange}
         />
         <Control
             idx = {idx}
             citiesArray = {props.citiesArray}
+            viewport = {viewport}
             handleIdxChange = {handleIdxChange}
+            handleViewportChange = {handleViewportChange}
         />
         </>
         )

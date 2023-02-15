@@ -11,6 +11,7 @@ export default function CityList(props: CityListProps) {
           <li key={city.path}>
             <button onClick={() => {
                 props.handleIdxChange(index);
+                props.handleViewportChange(props.citiesArray[index].initialViewport);
             }}>
               {city.name}
             </button>
