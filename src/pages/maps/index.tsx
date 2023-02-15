@@ -4,7 +4,7 @@ import {useState} from "react";
 import {GeoJsonLayer} from "@deck.gl/layers/typed";
 import {DeckGL} from "@deck.gl/react/typed";
 import {Map} from "react-map-gl";
-import Control from './control';
+import Control from '@/components/control';
 import UTAMap from './map';
 
 import { paletteInferno } from "@/components/palettes";

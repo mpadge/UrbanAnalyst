@@ -1,6 +1,6 @@
 
 import {useState} from 'react';
-import { CityListProps } from "@/components/interfaces";
+import { CityListProps } from "./interfaces";
 
 export default function CityList(props: CityListProps) {
 
