@@ -1,4 +1,5 @@
 
+import Head from 'next/head'
 import {NextPage} from "next";
 import {useState} from "react";
 import {GeoJsonLayer} from "@deck.gl/layers/typed";
@@ -31,6 +32,12 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 
     return (
         <>
+        <Head>
+            <title>UTA Maps</title>
+            <meta name="description" content="Maps for Urban Transport Analyst" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="icon" href="/favicon.ico" />
+        </Head>
         <UTAMap
             idx = {idx}
             citiesArray = {props.citiesArray}
