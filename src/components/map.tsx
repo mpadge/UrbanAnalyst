@@ -51,7 +51,7 @@ export default function UTAMap (props: MapProps) {
             layers={layers}
             initialViewState={props.viewState}
             // onViewStateChange={(viewState) => setViewState(viewState)}
-            onViewportChange={props.handleViewStateChange}
+            // onViewStateChange={props.handleViewStateChange}
         >
         <Map
             mapStyle={MAP_STYLE}
