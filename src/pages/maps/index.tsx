@@ -5,7 +5,7 @@ import {GeoJsonLayer} from "@deck.gl/layers/typed";
 import {DeckGL} from "@deck.gl/react/typed";
 import {Map} from "react-map-gl";
 import Control from '@/components/control';
-import UTAMap from './map';
+import UTAMap from '@/components/map';
 
 import { paletteInferno } from "@/components/palettes";
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/components/citydata';
