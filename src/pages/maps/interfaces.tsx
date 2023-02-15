@@ -48,3 +48,8 @@ export interface CityListProps {
     citiesData: CityData[],
     handleIdxChange: (pIdx: number) => void,
 }
+
+export interface CityShowProps {
+    idx: number,
+    citiesData: CityData[]
+}

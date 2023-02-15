@@ -1,13 +1,13 @@
 
 import { useState } from 'react';
 
-export default function CityShow({ citiesData, idx }) {
+export default function CityShow(props: { CityShowProps }) {
     const [text, setText] = useState('');
     return (
             <section className="cityshow">
             <textarea
             value={text}
-            placeholder={'Chosen ' + citiesData[idx].path}
+            placeholder={'Chosen ' + props.citiesData[props.idx].path}
             onChange={e => setText(e.target.value)}
             />
             </section>
