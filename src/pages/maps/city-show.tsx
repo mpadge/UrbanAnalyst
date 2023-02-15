@@ -8,7 +8,7 @@ export default function CityShow(props: CityShowProps) {
             <section className="cityshow">
             <textarea
             value={text}
-            placeholder={'Chosen ' + props.citiesData.City[props.idx].path}
+            placeholder={'Chosen ' + props.citiesData.citiesArray[props.idx].path}
             onChange={e => setText(e.target.value)}
             />
             </section>
