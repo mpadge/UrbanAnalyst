@@ -15,14 +15,6 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 
     const [idx, setIdx] = useState(0);
     const [cityData, setCityData] = useState(props.citiesArray[idx]);
-    const [viewport, setViewport] = useState({
-        width: 400,
-        height: 400,
-        latitude: DEFAULT_MAP_CONFIG.initialViewport.latitude,
-        longitude: DEFAULT_MAP_CONFIG.initialViewport.longitude,
-        zoom: DEFAULT_MAP_CONFIG.initialViewport.zoom
-    });
-
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
     }
@@ -32,7 +24,6 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         <UTAMap
             idx = {idx}
             citiesArray = {props.citiesArray}
-            initialViewport = {viewport}
         />
         <Control
             idx = {idx}

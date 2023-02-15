@@ -17,7 +17,8 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 export default function UTAMap (props: MapProps) {
 
     const mapPath = props.citiesArray[props.idx].path;
-    const viewport = props.citiesArray[props.idx].initialViewport;
+    const initialViewport = props.citiesArray[props.idx].initialViewport;
+    const [viewport, setViewport] = useState(initialViewport);
 
     console.log('UTAMap: idx = ' + props.idx)
     console.log('UTAMap: path = ' + mapPath)
@@ -49,7 +50,7 @@ export default function UTAMap (props: MapProps) {
             controller={true}
             layers={layers}
             viewState={viewport}
-            //onViewStateChange={(viewState) => setViewport(viewState.viewState)}
+            onViewStateChange={(viewState) => setViewport(viewState.viewState)}
         >
         <Map
             mapStyle={MAP_STYLE}
