@@ -7,7 +7,7 @@ export default function CityList(props: CityListProps) {
   return (
     <section className="city-list">
       <ul>
-        {props.citiesData.map((city, index) =>
+        {props.citiesData.Data.map((city, index) =>
           <li key={city.path}>
             <button onClick={() => {
                 props.handleIdxChange(index);

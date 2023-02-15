@@ -14,7 +14,7 @@ import { CityData, CitiesData } from "./interfaces";
 const Page: NextPage = (props: { citiesData }) => {
 
     const [idx, setIdx] = useState(0);
-    const [cityData, setCityData] = useState(props.citiesData[idx]);
+    const [cityData, setCityData] = useState(props.citiesData.Data[idx]);
     const [viewport, setViewport] = useState({
         width: 400,
         height: 400,
@@ -45,7 +45,7 @@ export default Page;
 
 export async function getStaticProps() {
 
-    const citiesData = CITY_DATA.Data;
+    const citiesData = CITY_DATA;
 
     return {
         props: {

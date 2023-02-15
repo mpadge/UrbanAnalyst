@@ -27,29 +27,29 @@ export interface CityData {
     }
 }
 
-export interface CitiesData {
+export interface citiesData {
     Data: CityData[]
 }
 
 export interface MapProps {
     idx: number,
-    citiesData: CityData[],
+    citiesData: citiesData,
     initialViewport: Viewport
 }
 
 export interface ControlProps {
     idx: number,
-    citiesData: CityData[],
+    citiesData: citiesData,
     handleIdxChange: (pIdx: number) => void
 }
 
 export interface CityListProps {
     idx: number,
-    citiesData: CityData[],
+    citiesData: citiesData,
     handleIdxChange: (pIdx: number) => void,
 }
 
 export interface CityShowProps {
     idx: number,
-    citiesData: CityData[]
+    citiesData: citiesData,
 }
