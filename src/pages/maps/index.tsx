@@ -14,7 +14,7 @@ import { CityDataProps, CitiesDataProps } from "./interfaces";
 const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 
     const [idx, setIdx] = useState(0);
-    const [cityData, setCityData] = useState(props.citiesData.Data[idx]);
+    const [cityData, setCityData] = useState(props.citiesArray[idx]);
     const [viewport, setViewport] = useState({
         width: 400,
         height: 400,
@@ -31,11 +31,11 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         <>
         <UTAMap
             idx = {idx}
-            citiesData = {props.citiesData}
+            citiesData = {props.citiesArray}
         />
         <Control
             idx = {idx}
-            citiesData = {props.citiesData}
+            citiesData = {props.citiesArray}
             handleIdxChange = {handleIdxChange}
         />
         </>
@@ -45,11 +45,11 @@ export default Page;
 
 export async function getStaticProps() {
 
-    const citiesData = CITY_DATA;
+    const citiesArray = CITY_DATA;
 
     return {
         props: {
-            citiesData: citiesData
+            citiesArray: citiesArray
         }
     }
 }

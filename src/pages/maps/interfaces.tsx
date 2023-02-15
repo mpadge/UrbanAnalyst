@@ -28,7 +28,7 @@ export interface CityDataProps {
 }
 
 export interface CitiesDataProps {
-    Data: CityDataProps[]
+    citiesArray: CityDataProps[]
 }
 
 export interface MapProps {
