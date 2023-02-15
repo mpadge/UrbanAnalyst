@@ -31,7 +31,7 @@ export default function UTAMap (props: MapProps) {
             getLineWidth: 10,
             getLineColor: [122, 122, 122],
             getFillColor: d => {
-                const rand = Math.floor (100 * d.properties.social_index / 6)
+                const rand = Math.floor (100 * d.properties?.social_index / 6)
                 const red = paletteInferno.red [rand]
                 const blue = paletteInferno.blue [rand]
                 const green = paletteInferno.green [rand]
