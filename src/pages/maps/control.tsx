@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styles from '@/styles/Home.module.css'
 import CityShow from './city-show';
 import CityList from './citylist';
-import { CityData, ControlProps } from "./interfaces";
+import { ControlProps } from "./interfaces";
 
 export default function Control (props: ControlProps) {
 

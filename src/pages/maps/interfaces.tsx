@@ -16,7 +16,7 @@ export interface Viewport {
     height?: number
 }
 
-export interface CityData {
+export interface CityDataProps {
     name: string,
     nameFormatted: string,
     path: string,
@@ -27,29 +27,29 @@ export interface CityData {
     }
 }
 
-export interface citiesData {
-    Data: CityData[]
+export interface CitiesDataProps {
+    Data: CityDataProps[]
 }
 
 export interface MapProps {
     idx: number,
-    citiesData: citiesData,
+    citiesData: CitiesDataProps,
     initialViewport: Viewport
 }
 
 export interface ControlProps {
     idx: number,
-    citiesData: citiesData,
+    citiesData: CitiesDataProps,
     handleIdxChange: (pIdx: number) => void
 }
 
 export interface CityListProps {
     idx: number,
-    citiesData: citiesData,
+    citiesData: CitiesDataProps,
     handleIdxChange: (pIdx: number) => void,
 }
 
 export interface CityShowProps {
     idx: number,
-    citiesData: citiesData,
+    citiesData: CitiesDataProps,
 }

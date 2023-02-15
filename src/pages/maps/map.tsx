@@ -7,7 +7,7 @@ import {Map} from "react-map-gl";
 import Control from './control'
 
 import {paletteInferno} from "./palettes.tsx"
-import { CityData, MapProps } from "./interfaces";
+import { MapProps } from "./interfaces";
 
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 

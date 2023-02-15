@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { CityData, CityShowProps } from "./interfaces";
+import { CityShowProps } from "./interfaces";
 
 export default function CityShow(props: CityShowProps) {
     const [text, setText] = useState('');
