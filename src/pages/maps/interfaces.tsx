@@ -40,5 +40,11 @@ export interface MapProps {
 export interface ControlProps {
     idx: number,
     citiesData: CityData[],
+    handleIdxChange: (pIdx: number) => void
+}
+
+export interface CityListProps {
+    idx: number,
+    citiesData: CityData[],
     handleIdxChange: (pIdx: number) => void,
 }
