@@ -12,7 +12,7 @@ export default function Control (props: ControlProps) {
 
     const cityNames = props.citiesArray.map((item) => item.name);
 
-    console.log("---->Control: viewport lon = " + props.viewport.longitude)
+    console.log("---->Control: ViewState lon = " + props.viewState.longitude)
 
     return (
         <div id="top-left-container" className={styles.topleft}>
@@ -31,9 +31,9 @@ export default function Control (props: ControlProps) {
         <CityList
             citiesArray={props.citiesArray}
             idx={props.idx}
-            viewport = {props.viewport}
+            viewState = {props.viewState}
             handleIdxChange={props.handleIdxChange}
-            handleViewportChange={props.handleViewportChange}
+            handleViewStateChange={props.handleViewStateChange}
             // onSelect={city => props.handleIdxChange(props.idx)}
         />
         <CityShow

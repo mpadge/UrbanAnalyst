@@ -1,11 +1,11 @@
 
-export interface PartialViewport {
+export interface PartialViewState {
     latitude: number,
     longitude: number,
     zoom: number
 }
 
-export interface Viewport {
+export interface ViewState {
     latitude: number,
     longitude: number,
     zoom: number
@@ -20,7 +20,7 @@ export interface CityDataProps {
     name: string,
     nameFormatted: string,
     path: string,
-    initialViewport: {
+    initialViewState: {
         latitude: number,
         longitude: number,
         zoom: number
@@ -33,25 +33,25 @@ export interface CitiesDataProps {
 
 export interface MapProps {
     idx: number,
-    viewport: Viewport,
+    viewState: ViewState,
     citiesArray: CityDataProps[],
-    handleViewportChange: (pViewport: Viewport) => void
+    handleViewStateChange: (pViewState: ViewState) => void
 }
 
 export interface ControlProps {
     idx: number,
     citiesArray: CityDataProps[],
-    viewport: Viewport
+    viewState: ViewState
     handleIdxChange: (pIdx: number) => void
-    handleViewportChange: (pViewport: Viewport) => void
+    handleViewStateChange: (pViewState: ViewState) => void
 }
 
 export interface CityListProps {
     idx: number,
     citiesArray: CityDataProps[],
-    viewport: Viewport,
+    viewState: ViewState,
     handleIdxChange: (pIdx: number) => void,
-    handleViewportChange: (pViewport: Viewport) => void
+    handleViewStateChange: (pViewState: ViewState) => void
 }
 
 export interface CityShowProps {

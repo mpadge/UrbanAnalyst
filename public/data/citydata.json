@@ -3,7 +3,7 @@
         { 
             "name": "Berlin", 
             "path": "/data/berlin/data.json",
-            "initialViewport": {
+            "initialViewState": {
                 "latitude": 52.5,
                 "longitude": 13.4,
                 "zoom": 11
@@ -12,7 +12,7 @@
         { 
             "name": "Paris", 
             "path": "/data/paris/data.json",
-            "initialViewport": {
+            "initialViewState": {
                 "latitude": 52.5,
                 "longitude": 11.4,
                 "zoom": 11
@@ -21,7 +21,7 @@
         { 
             "name": "Hamburg", 
             "path": "/data/hamburg/data.json",
-            "initialViewport": {
+            "initialViewState": {
                 "latitude": 54.5,
                 "longitude": 12.4,
                 "zoom": 11

@@ -9,40 +9,40 @@ import UTAMap from '@/components/map';
 
 import { paletteInferno } from "@/components/palettes";
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/components/citydata';
-import { CityDataProps, CitiesDataProps, Viewport } from "@/components/interfaces";
+import { CityDataProps, CitiesDataProps, ViewState } from "@/components/interfaces";
 
 const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 
     const [idx, setIdx] = useState(0);
     const [cityData, setCityData] = useState(props.citiesArray[idx]);
-    const [viewport, setViewport] = useState({...props.citiesArray[idx].initialViewport,
+    const [viewState, setViewState] = useState({...props.citiesArray[idx].initialViewState,
         pitch: 0,
         bearing: 0 });
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
     }
-    const handleViewportChange = (pViewport: any) => {
-        //setViewport((prevViewport) => { return { ...prevViewport, ...pViewport }; });
-        setViewport(pViewport);
+    const handleViewStateChange = (pViewState: any) => {
+        setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
+        //setViewState(pViewState);
     }
 
-    console.log('In index: viewport lon = ' + viewport.longitude);
+    console.log('In index: ViewState lon = ' + viewState.longitude);
 
     return (
         <>
         <UTAMap
             idx = {idx}
             citiesArray = {props.citiesArray}
-            viewport = {viewport}
-            handleViewportChange = {handleViewportChange}
+            viewState = {viewState}
+            handleViewStateChange = {handleViewStateChange}
         />
         <Control
             idx = {idx}
             citiesArray = {props.citiesArray}
-            viewport = {viewport}
+            viewState = {viewState}
             handleIdxChange = {handleIdxChange}
-            handleViewportChange = {handleViewportChange}
+            handleViewStateChange = {handleViewStateChange}
         />
         </>
         )
