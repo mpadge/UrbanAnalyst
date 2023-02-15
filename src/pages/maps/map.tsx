@@ -16,8 +16,8 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 
 export default function UTAMap (props: { MapProps }) {
 
-    const mapPath = props.citiesData.Data[props.idx].path;
-    const viewport = props.citiesData.Data[props.idx].initialViewport;
+    const mapPath = props.citiesData.City[props.idx].path;
+    const viewport = props.citiesData.City[props.idx].initialViewport;
 
     console.log('UTAMap: idx = ' + props.idx)
     console.log('UTAMap: path = ' + mapPath)

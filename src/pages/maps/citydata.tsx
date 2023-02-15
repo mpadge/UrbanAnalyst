@@ -41,5 +41,5 @@ const paris = {
 }
 
 export const CITY_DATA = {
-    "Data": [berlin, hamburg, paris]
+    "City": [berlin, hamburg, paris]
 };

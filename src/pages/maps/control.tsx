@@ -8,9 +8,9 @@ import { ControlProps } from "./interfaces";
 
 export default function Control (props: ControlProps) {
 
-    const [cityData, setCityData] = useState(props.citiesData.Data[props.idx]);
+    const [cityData, setCityData] = useState(props.citiesData.City[props.idx]);
 
-    const cityNames = props.citiesData.Data.map((item) => item.name);
+    const cityNames = props.citiesData.City.map((item) => item.name);
 
     return (
         <div id="top-left-container" className={styles.topleft}>
