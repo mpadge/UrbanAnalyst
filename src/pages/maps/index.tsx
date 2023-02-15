@@ -7,13 +7,14 @@ import {Map} from "react-map-gl";
 import Control from './control';
 import UTAMap from './map';
 
-import {paletteInferno} from "./palettes";
+import { paletteInferno } from "./palettes";
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from './citydata';
+import { CityData, CitiesData } from "./interfaces";
 
-const Page: NextPage = ({ citiesData }) => {
+const Page: NextPage = (props: { citiesData }) => {
 
     const [idx, setIdx] = useState(0);
-    const [cityData, setCityData] = useState(citiesData[idx]);
+    const [cityData, setCityData] = useState(props.citiesData[idx]);
     const [viewport, setViewport] = useState({
         width: 400,
         height: 400,
@@ -30,11 +31,11 @@ const Page: NextPage = ({ citiesData }) => {
         <>
         <UTAMap
             idx = {idx}
-            citiesData = {citiesData}
+            citiesData = {props.citiesData}
         />
         <Control
             idx = {idx}
-            citiesData = {citiesData}
+            citiesData = {props.citiesData}
             handleIdxChange = {handleIdxChange}
         />
         </>

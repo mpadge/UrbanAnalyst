@@ -7,18 +7,19 @@ import {Map} from "react-map-gl";
 import Control from './control'
 
 import {paletteInferno} from "./palettes.tsx"
+import { CityData, MapProps } from "./interfaces";
 
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 
 // const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-nolabels-gl-style/style.json';
 const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 
-export default function UTAMap ({ idx, citiesData }) {
+export default function UTAMap (props: { MapProps }) {
 
-    const mapPath = citiesData[idx].path;
-    const viewport = citiesData[idx].initialViewport;
+    const mapPath = props.citiesData[props.idx].path;
+    const viewport = props.citiesData[props.idx].initialViewport;
 
-    console.log('UTAMap: idx = ' + idx)
+    console.log('UTAMap: idx = ' + props.idx)
     console.log('UTAMap: path = ' + mapPath)
 
     const layers = [
