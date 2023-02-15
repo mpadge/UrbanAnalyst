@@ -9,9 +9,9 @@ import UTAMap from './map';
 
 import { paletteInferno } from "./palettes";
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from './citydata';
-import { CityData, CitiesData } from "./interfaces";
+import { CityData, citiesData } from "./interfaces";
 
-const Page: NextPage = (props: { citiesData }) => {
+const Page: NextPage = (props: citiesData) => {
 
     const [idx, setIdx] = useState(0);
     const [cityData, setCityData] = useState(props.citiesData.Data[idx]);

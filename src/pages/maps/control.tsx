@@ -30,7 +30,7 @@ export default function Control (props: ControlProps) {
             citiesData={props.citiesData}
             idx={props.idx}
             handleIdxChange={props.handleIdxChange}
-            onSelect={city => props.handleIdxChange(props.idx)}
+            // onSelect={city => props.handleIdxChange(props.idx)}
         />
         <CityShow
             citiesData={props.citiesData}
