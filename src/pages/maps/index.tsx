@@ -4,6 +4,7 @@ import {NextPage} from "next";
 import {useState} from "react";
 import {GeoJsonLayer} from "@deck.gl/layers/typed";
 import {DeckGL} from "@deck.gl/react/typed";
+import {FlyToInterpolator} from "@deck.gl/core/typed";
 import {Map} from "react-map-gl";
 import Control from '@/components/control';
 import UTAMap from '@/components/map';
@@ -16,9 +17,13 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 
     const [idx, setIdx] = useState(0);
     const [cityData, setCityData] = useState(props.citiesArray[idx]);
-    const [viewState, setViewState] = useState({...props.citiesArray[idx].initialViewState,
+    const [viewState, setViewState] = useState({
+        ...props.citiesArray[idx].initialViewState,
         pitch: 0,
-        bearing: 0 });
+        bearing: 0,
+        transitionDuration: 2000,
+        transitionInterpolator: new FlyToInterpolator()
+    });
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);

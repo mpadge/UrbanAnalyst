@@ -3,6 +3,7 @@ import {NextPage} from "next";
 import {useState} from "react";
 import {GeoJsonLayer} from "@deck.gl/layers/typed";
 import {DeckGL} from "@deck.gl/react/typed";
+import {FlyToInterpolator} from "@deck.gl/core/typed";
 import {Map} from "react-map-gl";
 import Control from '@/components/control'
 
@@ -17,7 +18,11 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 export default function UTAMap (props: MapProps) {
 
     const mapPath = props.citiesArray[props.idx].path;
-    const [viewState, setViewState] = useState(props.viewState);
+    const [viewState, setViewState] = useState({
+        ...props.viewState,
+        transitionDuration: 2000,
+        transitionInterpolator: new FlyToInterpolator()
+    });
 
     console.log('UTAMap: idx = ' + props.idx)
     console.log('UTAMap: path = ' + mapPath)
