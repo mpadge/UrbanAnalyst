@@ -24,9 +24,8 @@ export default function UTAMap (props: MapProps) {
         transitionInterpolator: new FlyToInterpolator()
     });
 
-    console.log('UTAMap: idx = ' + props.idx)
-    console.log('UTAMap: path = ' + mapPath)
-    console.log('In Map: props.viewState lon = ' + props.viewState.longitude)
+    // console.log('UTAMap: idx = ' + props.idx)
+    // console.log('UTAMap: path = ' + mapPath)
 
     const layers = [
         new GeoJsonLayer({
