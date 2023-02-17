@@ -20,7 +20,6 @@ export default function LayerList(props: LayerListProps) {
     const handleChange = (selectedOption: any) => {
         setSelected(selectedOption);
         props.handleLayerChange(selectedOption.value);
-        console.log("LAYER value = " + selectedOption.value + " and prop.layer = " + props.layer)
     };
 
   return (
