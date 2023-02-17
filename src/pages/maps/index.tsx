@@ -24,7 +24,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         transitionDuration: 2000,
         transitionInterpolator: new FlyToInterpolator()
     });
-    const [layerState, setLayerState] = useState([]);
+    const [layer, setLayer] = useState("social_index");
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
@@ -33,8 +33,8 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
         //setViewState(pViewState);
     }
-    const handleLayerChange = (layer: any) => {
-        setLayerState(layer);
+    const handleLayerChange = (layer: string) => {
+        setLayer(layer);
     }
 
     console.log('In index: ViewState lon = ' + viewState.longitude);
@@ -49,12 +49,15 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         </Head>
         <UTAMap
             idx = {idx}
+            layer = {layer}
             citiesArray = {props.citiesArray}
             viewState = {viewState}
             handleViewStateChange = {handleViewStateChange}
+            handleLayerChange = {handleLayerChange}
         />
         <Control
             idx = {idx}
+            layer = {layer}
             citiesArray = {props.citiesArray}
             viewState = {viewState}
             handleIdxChange = {handleIdxChange}

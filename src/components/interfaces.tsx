@@ -33,13 +33,16 @@ export interface CitiesDataProps {
 
 export interface MapProps {
     idx: number,
+    layer: string,
     viewState: ViewState,
     citiesArray: CityDataProps[],
     handleViewStateChange: (pViewState: ViewState) => void
+    handleLayerChange: (layer: string) => void
 }
 
 export interface ControlProps {
     idx: number,
+    layer: string,
     citiesArray: CityDataProps[],
     viewState: ViewState
     handleIdxChange: (pIdx: number) => void
@@ -56,7 +59,6 @@ export interface CityListProps {
 }
 
 export interface LayerListProps {
-    name: string[],
-    nameFormatted: string[],
+    layer: string,
     handleLayerChange: (layer: string) => void
 }

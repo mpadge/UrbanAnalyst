@@ -19,7 +19,7 @@ export default function LayerList(props: LayerListProps) {
 
     const handleChange = (selectedOption: any) => {
         setSelected(selectedOption);
-        console.log("SELECTOR (value, index) = (" + selectedOption.label + ", " + selectedOption.value + ")")
+        console.log("SELECTOR value = (" + selectedOption.value)
         props.handleLayerChange(selectedOption.value);
     };
 

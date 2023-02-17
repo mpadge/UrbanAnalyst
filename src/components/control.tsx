@@ -36,6 +36,7 @@ export default function Control (props: ControlProps) {
         />
         <h2>Layer</h2>
         <LayerList
+            layer = {props.layer}
             handleLayerChange = {props.handleLayerChange}
         />
         </div>
