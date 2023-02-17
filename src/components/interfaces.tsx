@@ -53,8 +53,3 @@ export interface CityListProps {
     handleIdxChange: (pIdx: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void
 }
-
-export interface CityShowProps {
-    idx: number,
-    citiesArray: CityDataProps[],
-}
