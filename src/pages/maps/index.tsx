@@ -24,6 +24,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         transitionDuration: 2000,
         transitionInterpolator: new FlyToInterpolator()
     });
+    const [layerState, setLayerState] = useState([]);
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
@@ -31,6 +32,9 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     const handleViewStateChange = (pViewState: any) => {
         setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
         //setViewState(pViewState);
+    }
+    const handleLayerChange = (layer: any) => {
+        setLayerState(layer);
     }
 
     console.log('In index: ViewState lon = ' + viewState.longitude);
@@ -55,6 +59,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             viewState = {viewState}
             handleIdxChange = {handleIdxChange}
             handleViewStateChange = {handleViewStateChange}
+            handleLayerChange = {handleLayerChange}
         />
         </>
         )

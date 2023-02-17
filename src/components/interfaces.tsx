@@ -44,6 +44,7 @@ export interface ControlProps {
     viewState: ViewState
     handleIdxChange: (pIdx: number) => void
     handleViewStateChange: (pViewState: ViewState) => void
+    handleLayerChange: (layer: string) => void
 }
 
 export interface CityListProps {
@@ -52,4 +53,10 @@ export interface CityListProps {
     viewState: ViewState,
     handleIdxChange: (pIdx: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void
+}
+
+export interface LayerListProps {
+    name: string[],
+    nameFormatted: string[],
+    handleLayerChange: (layer: string) => void
 }

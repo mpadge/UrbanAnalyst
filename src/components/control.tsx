@@ -3,6 +3,7 @@ import {useState} from 'react';
 import Link from 'next/link'
 import styles from '@/styles/Home.module.css'
 import CityList from '@/components/citylist';
+import LayerList from '@/components/layerlist';
 import { ControlProps } from "./interfaces";
 
 export default function Control (props: ControlProps) {
@@ -32,6 +33,10 @@ export default function Control (props: ControlProps) {
             handleIdxChange={props.handleIdxChange}
             handleViewStateChange={props.handleViewStateChange}
             // onSelect={city => props.handleIdxChange(props.idx)}
+        />
+        <h2>Layer</h2>
+        <LayerList
+            handleLayerChange = {props.handleLayerChange}
         />
         </div>
         )
