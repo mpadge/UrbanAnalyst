@@ -15,7 +15,6 @@
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
     "d3": "^7.8.2",
-    "d3-svg-legend": "^2.25.6",
     "deck.gl": "^8.8.23",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",

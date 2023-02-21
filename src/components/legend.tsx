@@ -32,38 +32,59 @@ export default function Legend (props: LegendProps) {
         layer_max = props.citiesArray[props.idx].dataRanges.uta_rel[1];
     }
 
+    layer_min = 10;
+    layer_max = 80;
+
     const svgRef = React.useRef<SVGSVGElement>(null);
 
     useEffect(() => {
-        var quantize = d3.scaleLinear()
-            .domain([ layer_min, layer_max ])
-            .range(d3.schemeSet1);
-            //.range([
-            //    "rgb(62, 102, 9)",
-            //    "rgb(145, 104, 37)",
-            //    "rgb(219, 59, 79)",
-            //    "rgb(252, 9, 164)",
-            //    "rgb(252, 164, 255)"
-            //]);
-            //.range(d3.range(9).map(function(i) {
-            //    return "q" + i + "-9"; }));
+
+        const tickSize = 6;
+        const width = 320;
+        const height = 44 + tickSize;
+        const marginTop = 18;
+        const marginRight = 20;
+        const marginBottom = 16 + tickSize;
+        const marginLeft = 0;
+        const ticks = width / 64;
+
+        const color = d3.scaleOrdinal(["<10", "10-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "≥80"], d3.schemeSpectral[10]);
+
+        const data = [10, 20, 30, 40, 50, 60, 70, 80];
+
+        var y = d3.scaleBand()
+            .domain(data)
+            .rangeRound([marginLeft, width - marginRight]);
 
         const svg = d3.select(svgRef.current);
 
         svg.append("g")
-            .attr("class", "legendLinear")
-            .attr("transform", "translate(2,20)");
+            .selectAll("rect")
+            .data(data)
+            .join("rect")
+                .attr("x", y)
+                .attr("y", marginTop)
+                .attr("width", Math.max(0, y.bandwidth() - 1))
+                .attr("height", height - marginTop - marginBottom)
+                .attr("fill", color);
 
-        var legend = d3legend.legendColor()
-            .labelFormat(d3.format(".2f"))
-            .useClass(true)
-            .title(this_layer)
-            .titleWidth(100)
-            .shapePadding(0)
-            .scale(quantize);
 
-        svg.select(".legendLinear")
-            .call(legend);
+      svg.append("g")
+          .attr("transform", `translate(0,${height - marginBottom})`)
+          .call(d3.axisBottom(y)
+            .ticks(ticks, typeof tickFormat === "string" ? tickFormat : undefined)
+            .tickFormat(typeof tickFormat === "function" ? tickFormat : undefined)
+            .tickSize(tickSize))
+            //.tickValues(tickValues))
+          .call(g => g.select(".domain").remove())
+          .call(g => g.append("text")
+            .attr("x", marginLeft)
+            .attr("y", marginTop + marginBottom - height - 6)
+            .attr("fill", "currentColor")
+            .attr("text-anchor", "start")
+            .attr("font-weight", "bold")
+            .attr("class", "title")
+            .text(this_layer));
 
     }, [svgRef, this_layer, layer_min, layer_max])
 
