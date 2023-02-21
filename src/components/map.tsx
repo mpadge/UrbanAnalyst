@@ -25,7 +25,9 @@ export default function UTAMap (props: MapProps) {
     });
 
     const this_layer: string = props.layer;
-    console.log("In MAP: layer = " + this_layer)
+    const layer_min: number = props.citiesArray[props.idx].dataRanges?.[this_layer][0];
+    const layer_max: number = props.citiesArray[props.idx].dataRanges?.[this_layer][1];
+    //console.log("In MAP: layer = " + this_layer + " [" + layer_min + ", " + layer_max + "]")
 
     const layers = [
         new GeoJsonLayer({
@@ -36,10 +38,11 @@ export default function UTAMap (props: MapProps) {
             getLineWidth: 10,
             getLineColor: [122, 122, 122],
             getFillColor: d => {
-                const rand = Math.floor (100 * d.properties?.[this_layer] / 6)
-                const red = paletteInferno.red [rand]
-                const blue = paletteInferno.blue [rand]
-                const green = paletteInferno.green [rand]
+                const layer_val = Math.floor (100 * (d.properties?.[this_layer] - layer_min) / (layer_max - layer_min));
+                const val = Math.max (0, Math.min (100, layer_val));
+                const red = paletteInferno.red [val]
+                const blue = paletteInferno.blue [val]
+                const green = paletteInferno.green [val]
                 return [red, blue, green, 150]
                 },
             updateTriggers: {
