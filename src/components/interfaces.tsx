@@ -24,7 +24,7 @@ export interface CityDataProps {
         latitude: number,
         longitude: number,
         zoom: number
-    }
+    },
     dataRanges: {
         social_index: number[],
         transport_rel: number[],

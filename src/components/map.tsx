@@ -25,8 +25,24 @@ export default function UTAMap (props: MapProps) {
     });
 
     const this_layer: string = props.layer;
-    const layer_min: number = props.citiesArray[props.idx].dataRanges?.[this_layer][0];
-    const layer_max: number = props.citiesArray[props.idx].dataRanges?.[this_layer][1];
+    var layer_min: number = 0;
+    var layer_max: number = 100;
+    if (this_layer == "social_index") {
+        layer_min = props.citiesArray[props.idx].dataRanges.social_index[0];
+        layer_max = props.citiesArray[props.idx].dataRanges.social_index[1];
+    } else if (this_layer == "transport_abs") {
+        layer_min = props.citiesArray[props.idx].dataRanges.transport_abs[0];
+        layer_max = props.citiesArray[props.idx].dataRanges.transport_abs[1];
+    } else if (this_layer == "transport_rel") {
+        layer_min = props.citiesArray[props.idx].dataRanges.transport_rel[0];
+        layer_max = props.citiesArray[props.idx].dataRanges.transport_rel[1];
+    } else if (this_layer == "uta_abs") {
+        layer_min = props.citiesArray[props.idx].dataRanges.uta_abs[0];
+        layer_max = props.citiesArray[props.idx].dataRanges.uta_abs[1];
+    } else if (this_layer == "uta_rel") {
+        layer_min = props.citiesArray[props.idx].dataRanges.uta_rel[0];
+        layer_max = props.citiesArray[props.idx].dataRanges.uta_rel[1];
+    }
     //console.log("In MAP: layer = " + this_layer + " [" + layer_min + ", " + layer_max + "]")
 
     const layers = [
