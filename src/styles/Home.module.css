@@ -40,10 +40,10 @@
   align-items: center;
   margin: 20px;
   z-index: 10;
-  position: absolute;
+  position: relative;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  bottom: 0;
-  right: 0;
+  top: 10%;
+  left: 85%;
 }
 
 
