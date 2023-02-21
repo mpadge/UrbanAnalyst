@@ -69,3 +69,9 @@ export interface LayerListProps {
     layer: string,
     handleLayerChange: (layer: string) => void
 }
+
+export interface LegendProps {
+    idx: number,
+    layer: string,
+    citiesArray: CityDataProps[]
+}

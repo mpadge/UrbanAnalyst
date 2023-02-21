@@ -34,6 +34,33 @@
   margin-bottom: 0.7rem;
 }
 
+.bottomright {
+  display: inherit;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  z-index: 10;
+  position: absolute;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  bottom: 0;
+  right: 0;
+}
+
+
+.bottomright p {
+  position: relative;
+  margin: 0;
+  padding: 1rem;
+  background-color: rgba(var(--callout-rgb), 0.5);
+  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
+  border-radius: var(--border-radius);
+}
+
+.bottomright h2 {
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+}
+
 .description {
   display: inherit;
   justify-content: inherit;

@@ -7,6 +7,7 @@ import {DeckGL} from "@deck.gl/react/typed";
 import {FlyToInterpolator} from "@deck.gl/core/typed";
 import {Map} from "react-map-gl";
 import Control from '@/components/control';
+import Legend from '@/components/legend';
 import UTAMap from '@/components/map';
 
 import { paletteInferno } from "@/components/palettes";
@@ -63,6 +64,11 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             handleIdxChange = {handleIdxChange}
             handleViewStateChange = {handleViewStateChange}
             handleLayerChange = {handleLayerChange}
+        />
+        <Legend
+            idx = {idx}
+            layer = {layer}
+            citiesArray = {props.citiesArray}
         />
         </>
         )
