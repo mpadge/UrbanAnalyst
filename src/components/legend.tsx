@@ -42,7 +42,7 @@ export default function Legend (props: LegendProps) {
 
     const svgRef = React.useRef<SVGSVGElement>(null);
 
-    function update(svg, data, layer_name) {
+    function update(svg: any, data: any, layer_name: string) {
 
         svg.selectAll("rect").remove();
         svg.selectAll("text").remove();
@@ -69,7 +69,7 @@ export default function Legend (props: LegendProps) {
             .data(data);
 
         rect.join(
-            enter =>
+            (enter: any) =>
                 enter
                     .append("rect")
                     .transition(t)
@@ -78,7 +78,7 @@ export default function Legend (props: LegendProps) {
                     .attr("width", Math.max(0, y.bandwidth() - 1))
                     .attr("height", height - marginTop - marginBottom)
                     .attr("fill", Color),
-            update =>
+            (update: any) =>
                 update
                     .append("rect")
                     .transition(t)
@@ -87,7 +87,7 @@ export default function Legend (props: LegendProps) {
                     .attr("width", Math.max(0, y.bandwidth() - 1))
                     .attr("height", height - marginTop - marginBottom)
                     .attr("fill", Color),
-            exit =>
+            (exit: any) =>
                 exit
                     .append("rect")
                     .transition(t)
@@ -98,17 +98,17 @@ export default function Legend (props: LegendProps) {
             .attr("transform", `translate(0,${height - marginBottom})`);
 
         tick.join(
-            enter =>
+            (enter: any) =>
                 enter
                     .call(d3.axisBottom(y)
                         .tickSize(tickSize)),
-            update =>
+            (update: any) =>
                 update
                     .transition(t)
                     .attr("transform", `translate(0,${height - marginBottom})`)
                     .call(d3.axisBottom(y)
                         .tickSize(tickSize)),
-            exit =>
+            (exit: any) =>
                 exit
                     .remove()
                 );
@@ -120,7 +120,7 @@ export default function Legend (props: LegendProps) {
             .attr("transform", function (d) { return "translate(0, 0);" });
 
         textUpdate.select("text")
-            .transition(t)
+            //.transition(t)
             .attr("x", marginLeft - 20)
             .attr("y", marginTop + marginBottom - height - 14)
             .attr("fill", "currentColor")
