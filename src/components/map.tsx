@@ -62,7 +62,6 @@ export default function UTAMap (props: MapProps) {
             getLineColor: [122, 122, 122],
             getFillColor: d => {
                 var layerval = Math.max (layer_min, Math.min (layer_max, d.properties?.[this_layer]));
-                console.log(layerval)
                 if (isNaN(layerval)) {
                     layerval = layer_min
                 }
