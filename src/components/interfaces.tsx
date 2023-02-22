@@ -31,6 +31,13 @@ export interface CityDataProps {
         transport_abs: number[],
         uta_rel: number[],
         uta_abs: number[]
+    },
+    dataIntervals: {
+        social_index: number[],
+        transport_rel: number[],
+        transport_abs: number[],
+        uta_rel: number[],
+        uta_abs: number[]
     }
 }
 
