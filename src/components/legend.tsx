@@ -43,7 +43,7 @@ export default function Legend (props: LegendProps) {
 
     const svgRef = React.useRef<SVGSVGElement>(null);
 
-    function update(data, layer_name) {
+    function update(svg, data, layer_name) {
 
         const tickSize = 6;
         const width = 320;
@@ -54,18 +54,13 @@ export default function Legend (props: LegendProps) {
         const marginLeft = 0;
         const ticks = width / 64;
 
-        var y = d3.scaleBand()
-        .domain(data)
-        .rangeRound([marginLeft, width - marginRight]);
+        const y = d3.scaleBand()
+            .domain(data)
+            .rangeRound([marginLeft, width - marginRight]);
 
         var t = d3.transition()
-        .duration(750);
+            .duration(750);
 
-        const svg = d3.select(svgRef.current);
-
-        function key(data) {
-            data
-        }
 
         var rect = svg.append("g")
             .selectAll("rect")
@@ -103,25 +98,23 @@ export default function Legend (props: LegendProps) {
         addticks.join(
             enter =>
                 enter
-                    .call(d3.axisBottom(y)
-                        .ticks(ticks, typeof tickFormat === "string" ? tickFormat : undefined)
-                        .tickFormat(typeof tickFormat === "function" ? tickFormat : undefined)
-                        .tickSize(tickSize))
-                    //.tickValues(tickValues))
-                    .call(g => g.select(".domain").remove()),
+                    .attr("class", "enter")
+                    .call(d3.axisBottom(d3.scaleBand()
+                            .domain(data)
+                            .rangeRound([marginLeft, width - marginRight]))
+                        .tickSize(tickSize)),
             update =>
                 update
-                    .call(d3.axisBottom(y)
-                            .ticks(ticks, typeof tickFormat === "string" ? tickFormat : undefined)
-                            .tickFormat(typeof tickFormat === "function" ? tickFormat : undefined)
-                            .tickSize(tickSize))
-                    //.tickValues(tickValues))
-                    .call(g => g.select(".domain").remove()),
+                    .attr("class", "update")
+                    .transition(t)
+                    .call(d3.axisBottom(d3.scaleBand()
+                            .domain(data)
+                            .rangeRound([marginLeft, width - marginRight]))
+                        .tickSize(tickSize)),
             exit =>
                 exit
-                .call(d3.axisBottom(y)
-                        .tickSize(0))
-                .style("fill-opacity", 1e-6)
+                    .attr("class", "exit")
+                    .remove()
                 );
 
         var text = svg.append("g")
@@ -143,9 +136,9 @@ export default function Legend (props: LegendProps) {
 
     useEffect(() => {
 
-            const svg = d3.select(svgRef.current);
+            var svg = d3.select(svgRef.current);
 
-            update(legend_values, props.layer)
+            update(svg, legend_values, props.layer)
 
     }, [svgRef, legend_values, props.layer])
 
