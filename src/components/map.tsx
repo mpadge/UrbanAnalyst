@@ -63,8 +63,10 @@ export default function UTAMap (props: MapProps) {
             getFillColor: d => {
                 var layerval = Math.max (layer_min, Math.min (layer_max, d.properties?.[this_layer]));
                 if (isNaN(layerval)) {
-                    layerval = layer_min
+                    layerval = layer_min;
                 }
+                // Invert the palette:
+                layerval = layer_min + (layer_max - layerval);
                 const layerarr = d3.color(myColor(layerval));
                 return [layerarr.r, layerarr.g, layerarr.b]
                 },
