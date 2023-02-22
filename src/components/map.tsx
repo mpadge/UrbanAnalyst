@@ -5,6 +5,8 @@ import {GeoJsonLayer} from "@deck.gl/layers/typed";
 import {DeckGL} from "@deck.gl/react/typed";
 import {FlyToInterpolator} from "@deck.gl/core/typed";
 import {Map} from "react-map-gl";
+import * as d3 from 'd3';
+import 'd3-scale-chromatic';
 import Control from '@/components/control'
 
 import {paletteInferno} from "@/components/palettes"
@@ -43,7 +45,13 @@ export default function UTAMap (props: MapProps) {
         layer_min = props.citiesArray[props.idx].dataRanges.uta_rel[0];
         layer_max = props.citiesArray[props.idx].dataRanges.uta_rel[1];
     }
-    //console.log("In MAP: layer = " + this_layer + " [" + layer_min + ", " + layer_max + "]")
+
+    // palettes:
+    // https://github.com/d3/d3-scale-chromatic
+    var myColor = d3.scaleSequential().domain([ layer_min, layer_max ])
+        //.interpolator(d3.interpolateMagma)
+        //.interpolator(d3.interpolateCividis)
+        .interpolator(d3.interpolateViridis)
 
     const layers = [
         new GeoJsonLayer({
@@ -54,12 +62,13 @@ export default function UTAMap (props: MapProps) {
             getLineWidth: 10,
             getLineColor: [122, 122, 122],
             getFillColor: d => {
-                const layer_val = Math.floor (100 * (d.properties?.[this_layer] - layer_min) / (layer_max - layer_min));
-                const val = Math.max (0, Math.min (100, layer_val));
-                const red = paletteInferno.red [val]
-                const blue = paletteInferno.blue [val]
-                const green = paletteInferno.green [val]
-                return [red, blue, green, 150]
+                var layerval = Math.max (layer_min, Math.min (layer_max, d.properties?.[this_layer]));
+                console.log(layerval)
+                if (isNaN(layerval)) {
+                    layerval = layer_min
+                }
+                const layerarr = d3.color(myColor(layerval));
+                return [layerarr.r, layerarr.g, layerarr.b]
                 },
             updateTriggers: {
                 getFillColor: [this_layer]
