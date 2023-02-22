@@ -43,105 +43,111 @@ export default function Legend (props: LegendProps) {
 
     const svgRef = React.useRef<SVGSVGElement>(null);
 
-    useEffect(() => {
+    function update(data, layer_name) {
 
-            const tickSize = 6;
-            const width = 320;
-            const height = 44 + tickSize;
-            const marginTop = 18;
-            const marginRight = 20;
-            const marginBottom = 16 + tickSize;
-            const marginLeft = 0;
-            const ticks = width / 64;
+        const tickSize = 6;
+        const width = 320;
+        const height = 44 + tickSize;
+        const marginTop = 18;
+        const marginRight = 20;
+        const marginBottom = 16 + tickSize;
+        const marginLeft = 0;
+        const ticks = width / 64;
 
-            var y = d3.scaleBand()
-            .domain(legend_values)
-            .rangeRound([marginLeft, width - marginRight]);
+        var y = d3.scaleBand()
+        .domain(data)
+        .rangeRound([marginLeft, width - marginRight]);
 
-            var t = d3.transition()
-            .duration(750);
+        var t = d3.transition()
+        .duration(750);
 
-            const svg = d3.select(svgRef.current);
+        const svg = d3.select(svgRef.current);
 
-            function key(legend_values) {
-                legend_values
-            }
+        function key(data) {
+            data
+        }
 
-            var rect = svg.append("g")
-                .selectAll("rect")
-                .data(legend_values);
+        var rect = svg.append("g")
+            .selectAll("rect")
+            .data(data);
 
-            rect.join(
-                enter =>
-                    enter
-                        .append("rect")
-                        .transition(t)
-                        .attr("x", y)
-                        .attr("y", marginTop)
-                        .attr("width", Math.max(0, y.bandwidth() - 1))
-                        .attr("height", height - marginTop - marginBottom)
-                        .attr("fill", Color),
-                update =>
-                    update
-                        .append("rect")
-                        .transition(t)
-                        .attr("x", y)
-                        .attr("y", marginTop)
-                        .attr("width", Math.max(0, y.bandwidth() - 1))
-                        .attr("height", height - marginTop - marginBottom)
-                        .attr("fill", Color),
-                exit =>
-                    exit
-                        .append("rect")
-                        .transition(t)
-                        .remove()
-                    );
+        rect.join(
+            enter =>
+                enter
+                    .append("rect")
+                    .transition(t)
+                    .attr("x", y)
+                    .attr("y", marginTop)
+                    .attr("width", Math.max(0, y.bandwidth() - 1))
+                    .attr("height", height - marginTop - marginBottom)
+                    .attr("fill", Color),
+            update =>
+                update
+                    .append("rect")
+                    .transition(t)
+                    .attr("x", y)
+                    .attr("y", marginTop)
+                    .attr("width", Math.max(0, y.bandwidth() - 1))
+                    .attr("height", height - marginTop - marginBottom)
+                    .attr("fill", Color),
+            exit =>
+                exit
+                    .append("rect")
+                    .transition(t)
+                    .remove()
+                );
 
-            var addticks = svg.append("g")
-                .attr("transform", `translate(0,${height - marginBottom})`);
+        var addticks = svg.append("g")
+            .attr("transform", `translate(0,${height - marginBottom})`);
 
-            addticks.join(
-                enter =>
-                    enter
-                        .call(d3.axisBottom(y)
+        addticks.join(
+            enter =>
+                enter
+                    .call(d3.axisBottom(y)
+                        .ticks(ticks, typeof tickFormat === "string" ? tickFormat : undefined)
+                        .tickFormat(typeof tickFormat === "function" ? tickFormat : undefined)
+                        .tickSize(tickSize))
+                    //.tickValues(tickValues))
+                    .call(g => g.select(".domain").remove()),
+            update =>
+                update
+                    .call(d3.axisBottom(y)
                             .ticks(ticks, typeof tickFormat === "string" ? tickFormat : undefined)
                             .tickFormat(typeof tickFormat === "function" ? tickFormat : undefined)
                             .tickSize(tickSize))
-                        //.tickValues(tickValues))
-                        .call(g => g.select(".domain").remove()),
-                update =>
-                    update
-                        .call(d3.axisBottom(y)
-                                .ticks(ticks, typeof tickFormat === "string" ? tickFormat : undefined)
-                                .tickFormat(typeof tickFormat === "function" ? tickFormat : undefined)
-                                .tickSize(tickSize))
-                        //.tickValues(tickValues))
-                        .call(g => g.select(".domain").remove()),
-                exit =>
-                    exit
-                    .call(d3.axisBottom(y)
-                            .tickSize(0))
-                    .style("fill-opacity", 1e-6)
-                    );
+                    //.tickValues(tickValues))
+                    .call(g => g.select(".domain").remove()),
+            exit =>
+                exit
+                .call(d3.axisBottom(y)
+                        .tickSize(0))
+                .style("fill-opacity", 1e-6)
+                );
 
-            var text = svg.append("g")
-                .attr("transform", `translate(0,${height - marginBottom})`);
+        var text = svg.append("g")
+            .attr("transform", `translate(0,${height - marginBottom})`);
 
-            var textUpdate = d3.transition(text)
-                .attr("transform", function (d) { return "translate(0, 0);" });
+        var textUpdate = d3.transition(text)
+            .attr("transform", function (d) { return "translate(0, 0);" });
 
-            textUpdate.select("text")
-                .transition(t)
-                .attr("x", marginLeft - 20)
-                .attr("y", marginTop + marginBottom - height - 14)
-                .attr("fill", "currentColor")
-                .attr("text-anchor", "start")
-                .attr("font-weight", "bold")
-                .attr("font-size", "16px")
-                .text(props.layer);
+        textUpdate.select("text")
+            .transition(t)
+            .attr("x", marginLeft - 20)
+            .attr("y", marginTop + marginBottom - height - 14)
+            .attr("fill", "currentColor")
+            .attr("text-anchor", "start")
+            .attr("font-weight", "bold")
+            .attr("font-size", "16px")
+            .text(layer_name);
+    }
 
+    useEffect(() => {
 
-    }, [svgRef, props.layer, layer_min, layer_max])
+            const svg = d3.select(svgRef.current);
+
+            update(legend_values, props.layer)
+
+    }, [svgRef, legend_values, props.layer])
 
     return (
             <div id="bottom-right-container" className={styles.bottomright}>
