@@ -14,34 +14,34 @@ export default function Legend (props: LegendProps) {
 
     var layer_min: number = 0;
     var layer_max: number = 100;
-    var legend_vales: number[];
+    var legend_values: number[];
     if (props.layer == "social_index") {
         layer_min = props.citiesArray[props.idx].dataRanges.social_index[0];
         layer_max = props.citiesArray[props.idx].dataRanges.social_index[1];
-        legend_vales = props.citiesArray[props.idx].dataIntervals.social_index;
+        legend_values = props.citiesArray[props.idx].dataIntervals.social_index;
     } else if (props.layer == "transport_abs") {
         layer_min = props.citiesArray[props.idx].dataRanges.transport_abs[0];
         layer_max = props.citiesArray[props.idx].dataRanges.transport_abs[1];
-        legend_vales = props.citiesArray[props.idx].dataIntervals.transport_abs;
+        legend_values = props.citiesArray[props.idx].dataIntervals.transport_abs;
     } else if (props.layer == "transport_rel") {
         layer_min = props.citiesArray[props.idx].dataRanges.transport_rel[0];
         layer_max = props.citiesArray[props.idx].dataRanges.transport_rel[1];
-        legend_vales = props.citiesArray[props.idx].dataIntervals.transport_rel;
+        legend_values = props.citiesArray[props.idx].dataIntervals.transport_rel;
     } else if (props.layer == "uta_abs") {
         layer_min = props.citiesArray[props.idx].dataRanges.uta_abs[0];
         layer_max = props.citiesArray[props.idx].dataRanges.uta_abs[1];
-        legend_vales = props.citiesArray[props.idx].dataIntervals.uta_abs;
+        legend_values = props.citiesArray[props.idx].dataIntervals.uta_abs;
     } else if (props.layer == "uta_rel") {
         layer_min = props.citiesArray[props.idx].dataRanges.uta_rel[0];
         layer_max = props.citiesArray[props.idx].dataRanges.uta_rel[1];
-        legend_vales = props.citiesArray[props.idx].dataIntervals.uta_rel;
+        legend_values = props.citiesArray[props.idx].dataIntervals.uta_rel;
     }
 
     // palette has to match one in map.tsx!
     var Color = d3.scaleSequential().domain([ layer_min, layer_max ])
         .interpolator(d3.interpolateViridis)
 
-        const svgRef = React.useRef<SVGSVGElement>(null);
+    const svgRef = React.useRef<SVGSVGElement>(null);
 
     useEffect(() => {
 
@@ -55,7 +55,7 @@ export default function Legend (props: LegendProps) {
             const ticks = width / 64;
 
             var y = d3.scaleBand()
-            .domain(legend_vales)
+            .domain(legend_values)
             .rangeRound([marginLeft, width - marginRight]);
 
             var t = d3.transition()
@@ -63,9 +63,10 @@ export default function Legend (props: LegendProps) {
 
             const svg = d3.select(svgRef.current);
 
+
             var rect = svg.append("g")
                 .selectAll("rect")
-                .data(legend_vales);
+                .data(legend_values);
 
             rect.join(
                 enter =>
