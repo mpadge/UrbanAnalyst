@@ -37,8 +37,6 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         setLayer(layer);
     }
 
-    console.log('In index: ViewState lon = ' + viewState.longitude);
-
     return (
         <>
         <Head>
