@@ -45,6 +45,10 @@ export default function Legend (props: LegendProps) {
 
     function update(svg, data, layer_name) {
 
+        svg.selectAll("rect").remove();
+        svg.selectAll("text").remove();
+        svg.selectAll("line").remove();
+
         const tickSize = 6;
         const width = 320;
         const height = 44 + tickSize;
@@ -52,7 +56,7 @@ export default function Legend (props: LegendProps) {
         const marginRight = 20;
         const marginBottom = 16 + tickSize;
         const marginLeft = 0;
-        const ticks = width / 64;
+        // const ticks = width / 64;
 
         var t = d3.transition()
             .duration(750);
@@ -91,24 +95,22 @@ export default function Legend (props: LegendProps) {
                     .remove()
                 );
 
-        var addticks = svg.append("g")
+        var tick = svg.append("g")
             .attr("transform", `translate(0,${height - marginBottom})`);
 
-        addticks.join(
+        tick.join(
             enter =>
                 enter
-                    .attr("class", "enter")
                     .call(d3.axisBottom(y)
                         .tickSize(tickSize)),
             update =>
                 update
-                    .attr("class", "update")
                     .transition(t)
+                    .attr("transform", `translate(0,${height - marginBottom})`)
                     .call(d3.axisBottom(y)
                         .tickSize(tickSize)),
             exit =>
                 exit
-                    .attr("class", "exit")
                     .remove()
                 );
 
