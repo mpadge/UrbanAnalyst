@@ -9,7 +9,6 @@ import * as d3 from 'd3';
 import 'd3-scale-chromatic';
 import Control from '@/components/control'
 
-import {paletteInferno} from "@/components/palettes"
 import { MapProps } from "@/components/interfaces";
 
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN

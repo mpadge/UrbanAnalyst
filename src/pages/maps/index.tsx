@@ -10,7 +10,6 @@ import Control from '@/components/control';
 import Legend from '@/components/legend';
 import UTAMap from '@/components/map';
 
-import { paletteInferno } from "@/components/palettes";
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/components/citydata';
 import { CityDataProps, CitiesDataProps, ViewState } from "@/components/interfaces";
 
