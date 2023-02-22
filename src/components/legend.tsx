@@ -54,13 +54,12 @@ export default function Legend (props: LegendProps) {
         const marginLeft = 0;
         const ticks = width / 64;
 
-        const y = d3.scaleBand()
-            .domain(data)
-            .rangeRound([marginLeft, width - marginRight]);
-
         var t = d3.transition()
             .duration(750);
 
+        var y = d3.scaleBand()
+            .domain(data)
+            .rangeRound([marginLeft, width - marginRight]);
 
         var rect = svg.append("g")
             .selectAll("rect")
@@ -99,17 +98,13 @@ export default function Legend (props: LegendProps) {
             enter =>
                 enter
                     .attr("class", "enter")
-                    .call(d3.axisBottom(d3.scaleBand()
-                            .domain(data)
-                            .rangeRound([marginLeft, width - marginRight]))
+                    .call(d3.axisBottom(y)
                         .tickSize(tickSize)),
             update =>
                 update
                     .attr("class", "update")
                     .transition(t)
-                    .call(d3.axisBottom(d3.scaleBand()
-                            .domain(data)
-                            .rangeRound([marginLeft, width - marginRight]))
+                    .call(d3.axisBottom(y)
                         .tickSize(tickSize)),
             exit =>
                 exit
@@ -136,9 +131,9 @@ export default function Legend (props: LegendProps) {
 
     useEffect(() => {
 
-            var svg = d3.select(svgRef.current);
+        var svg = d3.select(svgRef.current);
 
-            update(svg, legend_values, props.layer)
+        update(svg, legend_values, props.layer)
 
     }, [svgRef, legend_values, props.layer])
 
