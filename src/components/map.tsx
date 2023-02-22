@@ -67,8 +67,14 @@ export default function UTAMap (props: MapProps) {
                 }
                 // Invert the palette:
                 layerval = layer_min + (layer_max - layerval);
-                const layerarr = d3.color(Color(layerval));
-                return [layerarr.r, layerarr.g, layerarr.b]
+                const layerarr: any = d3.color(Color(layerval));
+                var red = 0, green = 0, blue = 0;
+                if (layerarr) {
+                    red = layerarr.r;
+                    green = layerarr.g;
+                    blue = layerarr.b;
+                }
+                return [red, green, blue]
                 },
             updateTriggers: {
                 getFillColor: [this_layer]

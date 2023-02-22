@@ -11,38 +11,7 @@ export default function Legend (props: LegendProps) {
 
     const cityNames = props.citiesArray.map((item) => item.name);
 
-    var layer_min: number = 0;
-    var layer_max: number = 100;
-    var legend_values: number[];
-    if (props.layer == "social_index") {
-        layer_min = props.citiesArray[props.idx].dataRanges.social_index[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.social_index[1];
-        legend_values = props.citiesArray[props.idx].dataIntervals.social_index;
-    } else if (props.layer == "transport_abs") {
-        layer_min = props.citiesArray[props.idx].dataRanges.transport_abs[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.transport_abs[1];
-        legend_values = props.citiesArray[props.idx].dataIntervals.transport_abs;
-    } else if (props.layer == "transport_rel") {
-        layer_min = props.citiesArray[props.idx].dataRanges.transport_rel[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.transport_rel[1];
-        legend_values = props.citiesArray[props.idx].dataIntervals.transport_rel;
-    } else if (props.layer == "uta_abs") {
-        layer_min = props.citiesArray[props.idx].dataRanges.uta_abs[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.uta_abs[1];
-        legend_values = props.citiesArray[props.idx].dataIntervals.uta_abs;
-    } else if (props.layer == "uta_rel") {
-        layer_min = props.citiesArray[props.idx].dataRanges.uta_rel[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.uta_rel[1];
-        legend_values = props.citiesArray[props.idx].dataIntervals.uta_rel;
-    }
-
-    // palette has to match one in map.tsx!
-    var Color = d3.scaleSequential().domain([ layer_min, layer_max ])
-        .interpolator(d3.interpolateViridis)
-
-    const svgRef = React.useRef<SVGSVGElement>(null);
-
-    function update(svg: any, data: any, layer_name: string) {
+    function update(svg: any, legend_values: any, layer_name: string, Color: any) {
 
         svg.selectAll("rect").remove();
         svg.selectAll("text").remove();
@@ -61,12 +30,12 @@ export default function Legend (props: LegendProps) {
             .duration(750);
 
         var y = d3.scaleBand()
-            .domain(data)
+            .domain(legend_values)
             .rangeRound([marginLeft, width - marginRight]);
 
         var rect = svg.append("g")
             .selectAll("rect")
-            .data(data);
+            .data(legend_values);
 
         rect.join(
             (enter: any) =>
@@ -130,13 +99,29 @@ export default function Legend (props: LegendProps) {
             .text(layer_name);
     }
 
+    const svgRef = React.useRef<SVGSVGElement>(null);
+
     useEffect(() => {
 
         var svg = d3.select(svgRef.current);
 
-        update(svg, legend_values, props.layer)
+        const dataRanges: any = props.citiesArray[props.idx].dataRanges;
+        const layerRange = dataRanges[props.layer];
+        const layer_min = layerRange[0];
+        const layer_max = layerRange[1];
+        //const layer_min: number = props.citiesArray[props.idx].dataRanges[props.layer][0];
+        //const layer_max: number = props.citiesArray[props.idx].dataRanges[props.layer][1];
+        const dataIntervals: any = props.citiesArray[props.idx].dataIntervals;
+        const legend_values: number = dataIntervals[props.layer];
 
-    }, [svgRef, legend_values, props.layer])
+        // palette has to match one in map.tsx!
+        var Color = d3.scaleSequential().domain([ layer_min, layer_max ])
+            .interpolator(d3.interpolateViridis)
+
+
+        update(svg, legend_values, props.layer, Color)
+
+    }, [svgRef, props])
 
     return (
             <div id="bottom-right-container" className={styles.bottomright}>
