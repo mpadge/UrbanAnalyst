@@ -59,35 +59,100 @@ export default function Legend (props: LegendProps) {
             .domain(legend_vales)
             .rangeRound([marginLeft, width - marginRight]);
 
+        var t = d3.transition()
+            .duration(750);
+
         const svg = d3.select(svgRef.current);
 
-        svg.append("g")
+        var rect = svg.append("g")
             .selectAll("rect")
-            .data(legend_vales)
-            .join("rect")
-                .attr("x", y)
-                .attr("y", marginTop)
-                .attr("width", Math.max(0, y.bandwidth() - 1))
-                .attr("height", height - marginTop - marginBottom)
-                .attr("fill", Color);
+            .data(legend_vales);
 
+        rect.join(
+            enter =>
+                enter
+                    .append("rect")
+                    .transition(t)
+                    .attr("x", y)
+                    .attr("y", marginTop)
+                    .attr("width", Math.max(0, y.bandwidth() - 1))
+                    .attr("height", height - marginTop - marginBottom)
+                    .attr("fill", Color),
+            update =>
+                update
+                    .append("rect")
+                    .transition(t)
+                    .attr("x", y)
+                    .attr("y", marginTop)
+                    .attr("width", Math.max(0, y.bandwidth() - 1))
+                    .attr("height", height - marginTop - marginBottom)
+                    .attr("fill", Color),
+            exit =>
+                exit
+                    .append("rect")
+                    .transition(t)
+                    .remove()
+        );
 
-      svg.append("g")
-          .attr("transform", `translate(0,${height - marginBottom})`)
-          .call(d3.axisBottom(y)
-            .ticks(ticks, typeof tickFormat === "string" ? tickFormat : undefined)
-            .tickFormat(typeof tickFormat === "function" ? tickFormat : undefined)
-            .tickSize(tickSize))
-            //.tickValues(tickValues))
-          .call(g => g.select(".domain").remove())
-          .call(g => g.append("text")
-            .attr("x", marginLeft)
-            .attr("y", marginTop + marginBottom - height - 6)
-            .attr("fill", "currentColor")
-            .attr("text-anchor", "start")
-            .attr("font-weight", "bold")
-            .attr("class", "title")
-            .text(this_layer));
+      var addticks = svg.append("g")
+          .attr("transform", `translate(0,${height - marginBottom})`);
+
+        addticks.join(
+            enter =>
+                enter
+                  .call(d3.axisBottom(y)
+                    .ticks(ticks, typeof tickFormat === "string" ? tickFormat : undefined)
+                    .tickFormat(typeof tickFormat === "function" ? tickFormat : undefined)
+                    .tickSize(tickSize))
+                    //.tickValues(tickValues))
+                  .call(g => g.select(".domain").remove()),
+            update =>
+                update
+                  .call(d3.axisBottom(y)
+                    .ticks(ticks, typeof tickFormat === "string" ? tickFormat : undefined)
+                    .tickFormat(typeof tickFormat === "function" ? tickFormat : undefined)
+                    .tickSize(tickSize))
+                    //.tickValues(tickValues))
+                  .call(g => g.select(".domain").remove()),
+            exit =>
+                exit
+                    .call(d3.axisBottom(y)
+                    .tickSize(0))
+                    .style("fill-opacity", 1e-6)
+        );
+
+        var text = svg.append("g")
+            .attr("transform", `translate(0,${height - marginBottom})`)
+            .call(g => g.append("text")
+                .attr("x", marginLeft)
+                .attr("fill", "currentColor")
+                .attr("text-anchor", "start")
+                .attr("font-weight", "bold"));
+
+        text.join(
+            enter =>
+                enter
+                    .call(g => g.append("text")
+                        .transition(t)
+                        .attr("class", "enter")
+                        .attr("y", marginTop + marginBottom - height - 6)
+                        .text(this_layer)),
+            update =>
+                update
+                    .call(g => g.append("text")
+                        .transition(t)
+                        .attr("class", "update")
+                        .attr("y", marginTop + marginBottom - height - 6)
+                        .text(this_layer)),
+            exit =>
+                exit
+                    .call(g => g.remove())
+                    .attr("class", "exit")
+                    .transition(t)
+                    .style("fill-opacity", 1e-6)
+                    .text(null)
+                    .remove()
+        );
 
     }, [svgRef, this_layer, layer_min, layer_max])
 
