@@ -47,7 +47,7 @@ export default function UTAMap (props: MapProps) {
 
     // palettes:
     // https://github.com/d3/d3-scale-chromatic
-    var myColor = d3.scaleSequential().domain([ layer_min, layer_max ])
+    var Color = d3.scaleSequential().domain([ layer_min, layer_max ])
         //.interpolator(d3.interpolateMagma)
         //.interpolator(d3.interpolateCividis)
         .interpolator(d3.interpolateViridis)
@@ -67,7 +67,7 @@ export default function UTAMap (props: MapProps) {
                 }
                 // Invert the palette:
                 layerval = layer_min + (layer_max - layerval);
-                const layerarr = d3.color(myColor(layerval));
+                const layerarr = d3.color(Color(layerval));
                 return [layerarr.r, layerarr.g, layerarr.b]
                 },
             updateTriggers: {

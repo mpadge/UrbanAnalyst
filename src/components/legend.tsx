@@ -15,25 +15,32 @@ export default function Legend (props: LegendProps) {
     const this_layer: string = props.layer;
     var layer_min: number = 0;
     var layer_max: number = 100;
+    var legend_vales: number[];
     if (this_layer == "social_index") {
         layer_min = props.citiesArray[props.idx].dataRanges.social_index[0];
         layer_max = props.citiesArray[props.idx].dataRanges.social_index[1];
+        legend_vales = props.citiesArray[props.idx].dataIntervals.social_index;
     } else if (this_layer == "transport_abs") {
         layer_min = props.citiesArray[props.idx].dataRanges.transport_abs[0];
         layer_max = props.citiesArray[props.idx].dataRanges.transport_abs[1];
+        legend_vales = props.citiesArray[props.idx].dataIntervals.transport_abs;
     } else if (this_layer == "transport_rel") {
         layer_min = props.citiesArray[props.idx].dataRanges.transport_rel[0];
         layer_max = props.citiesArray[props.idx].dataRanges.transport_rel[1];
+        legend_vales = props.citiesArray[props.idx].dataIntervals.transport_rel;
     } else if (this_layer == "uta_abs") {
         layer_min = props.citiesArray[props.idx].dataRanges.uta_abs[0];
         layer_max = props.citiesArray[props.idx].dataRanges.uta_abs[1];
+        legend_vales = props.citiesArray[props.idx].dataIntervals.uta_abs;
     } else if (this_layer == "uta_rel") {
         layer_min = props.citiesArray[props.idx].dataRanges.uta_rel[0];
         layer_max = props.citiesArray[props.idx].dataRanges.uta_rel[1];
+        legend_vales = props.citiesArray[props.idx].dataIntervals.uta_rel;
     }
 
-    layer_min = 10;
-    layer_max = 80;
+    // palette has to match one in map.tsx!
+    var Color = d3.scaleSequential().domain([ layer_min, layer_max ])
+        .interpolator(d3.interpolateViridis)
 
     const svgRef = React.useRef<SVGSVGElement>(null);
 
@@ -48,25 +55,21 @@ export default function Legend (props: LegendProps) {
         const marginLeft = 0;
         const ticks = width / 64;
 
-        const color = d3.scaleOrdinal(["<10", "10-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "≥80"], d3.schemeSpectral[10]);
-
-        const data = [10, 20, 30, 40, 50, 60, 70, 80];
-
         var y = d3.scaleBand()
-            .domain(data)
+            .domain(legend_vales)
             .rangeRound([marginLeft, width - marginRight]);
 
         const svg = d3.select(svgRef.current);
 
         svg.append("g")
             .selectAll("rect")
-            .data(data)
+            .data(legend_vales)
             .join("rect")
                 .attr("x", y)
                 .attr("y", marginTop)
                 .attr("width", Math.max(0, y.bandwidth() - 1))
                 .attr("height", height - marginTop - marginBottom)
-                .attr("fill", color);
+                .attr("fill", Color);
 
 
       svg.append("g")
