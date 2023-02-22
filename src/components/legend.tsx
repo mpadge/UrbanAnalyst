@@ -63,6 +63,9 @@ export default function Legend (props: LegendProps) {
 
             const svg = d3.select(svgRef.current);
 
+            function key(legend_values) {
+                legend_values
+            }
 
             var rect = svg.append("g")
                 .selectAll("rect")
@@ -122,37 +125,21 @@ export default function Legend (props: LegendProps) {
                     );
 
             var text = svg.append("g")
-                .attr("transform", `translate(0,${height - marginBottom})`)
-                .call(g => g.append("text")
-                        .attr("x", marginLeft)
-                        .attr("fill", "currentColor")
-                        .attr("text-anchor", "start")
-                        .attr("font-weight", "bold"));
+                .attr("transform", `translate(0,${height - marginBottom})`);
 
-            text.join(
-                enter =>
-                    enter
-                        .call(g => g.append("text")
-                            .transition(t)
-                            .attr("class", "enter")
-                            .attr("y", marginTop + marginBottom - height - 6)
-                            .text(props.layer)),
-                update =>
-                    update
-                        .call(g => g.append("text")
-                            .transition(t)
-                            .attr("class", "update")
-                            .attr("y", marginTop + marginBottom - height - 6)
-                            .text(props.layer)),
-                exit =>
-                    exit
-                        .call(g => g.remove())
-                        .attr("class", "exit")
-                        .transition(t)
-                        .style("fill-opacity", 1e-6)
-                        .text(null)
-                        .remove()
-                        );
+            var textUpdate = d3.transition(text)
+                .attr("transform", function (d) { return "translate(0, 0);" });
+
+            textUpdate.select("text")
+                .transition(t)
+                .attr("x", marginLeft - 20)
+                .attr("y", marginTop + marginBottom - height - 14)
+                .attr("fill", "currentColor")
+                .attr("text-anchor", "start")
+                .attr("font-weight", "bold")
+                .attr("font-size", "16px")
+                .text(props.layer);
+
 
     }, [svgRef, props.layer, layer_min, layer_max])
 
