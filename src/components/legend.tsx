@@ -1,7 +1,6 @@
 
 import React, {useState, useEffect} from 'react';
 import * as d3 from 'd3';
-import * as d3legend from 'd3-svg-legend';
 import Link from 'next/link'
 import styles from '@/styles/Home.module.css'
 import { LegendProps } from "./interfaces";
