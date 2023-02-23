@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import styles from '@/styles/Home.module.css'
+import { OpacitySliderProps } from "./interfaces";
 
 export default function OpacitySlider (props: OpacitySliderProps) {
 
@@ -9,7 +10,7 @@ export default function OpacitySlider (props: OpacitySliderProps) {
     <input
         className="opacitySlider"
         type="range"
-        onChange={(event) => props.handleAlphaChange(event.target.value)}
+        onChange={(event) => props.handleAlphaChange(Number(event.target.value))}
         min={0}
         max={1}
         step={0.1}

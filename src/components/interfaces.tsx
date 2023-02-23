@@ -51,7 +51,7 @@ export interface MapProps {
     alpha: number,
     viewState: ViewState,
     citiesArray: CityDataProps[],
-    handleAlphaChange = (pAlpha: number) => void,
+    handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void
 }
@@ -63,7 +63,7 @@ export interface ControlProps {
     citiesArray: CityDataProps[],
     viewState: ViewState,
     handleIdxChange: (pIdx: number) => void,
-    handleAlphaChange = (pAlpha: number) => void,
+    handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void
 }
@@ -90,5 +90,5 @@ export interface LegendProps {
 
 export interface OpacitySliderProps {
     alpha: number,
-    handleAlphaChange = (pAlpha: number) => void
+    handleAlphaChange: (pAlpha: number) => void
 }
