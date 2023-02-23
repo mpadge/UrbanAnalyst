@@ -11,7 +11,7 @@ export default function Legend (props: LegendProps) {
 
     const cityNames = props.citiesArray.map((item) => item.name);
 
-    function update(svg: any, legend_values: any, layer_name: string, Color: any) {
+    function update(svg: any, legend_values: any, layer_name: string, Color: any, alpha: number) {
 
         svg.selectAll("rect").remove();
         svg.selectAll("text").remove();
@@ -46,7 +46,8 @@ export default function Legend (props: LegendProps) {
                     .attr("y", marginTop)
                     .attr("width", Math.max(0, y.bandwidth() - 1))
                     .attr("height", height - marginTop - marginBottom)
-                    .attr("fill", Color),
+                    .attr("fill", Color)
+                    .attr("opacity", 1 - alpha),
             (update: any) =>
                 update
                     .append("rect")
@@ -55,7 +56,8 @@ export default function Legend (props: LegendProps) {
                     .attr("y", marginTop)
                     .attr("width", Math.max(0, y.bandwidth() - 1))
                     .attr("height", height - marginTop - marginBottom)
-                    .attr("fill", Color),
+                    .attr("fill", Color)
+                    .attr("opacity", 1 - alpha),
             (exit: any) =>
                 exit
                     .append("rect")
@@ -89,7 +91,6 @@ export default function Legend (props: LegendProps) {
             .attr("transform", function (d) { return "translate(0, 0);" });
 
         textUpdate.select("text")
-            //.transition(t)
             .attr("x", marginLeft - 20)
             .attr("y", marginTop + marginBottom - height - 14)
             .attr("fill", "currentColor")
@@ -119,7 +120,7 @@ export default function Legend (props: LegendProps) {
         var Color = d3.scaleSequential().domain([ layer_max, layer_min ])
             .interpolator(d3.interpolateViridis)
 
-        update(svg, legend_values, props.layer, Color)
+        update(svg, legend_values, props.layer, Color, props.alpha)
 
     }, [svgRef, props])
 

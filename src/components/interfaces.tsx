@@ -84,6 +84,7 @@ export interface LayerListProps {
 export interface LegendProps {
     idx: number,
     layer: string,
+    alpha: number,
     citiesArray: CityDataProps[]
 }
 
