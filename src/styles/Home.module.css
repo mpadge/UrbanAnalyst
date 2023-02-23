@@ -204,6 +204,35 @@
   background-clip: content-box;
 }
 
+.opacitySlider {
+    width: 100%;
+    height: 30px;
+    background: #eee;
+    opacity: 0.5;
+    outline: none;
+    transition: 0.3s;
+}
+
+.opacitySlider:hover {
+    opacity: 1;
+}
+
+.opacitySlider::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 30px;
+    height: 30px;
+    background: #4caf50;
+    cursor: pointer;
+}
+
+.opacitySlider::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+    background: #4caf50;
+    cursor: pointer;
+}
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {

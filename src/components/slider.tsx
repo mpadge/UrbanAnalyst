@@ -6,11 +6,12 @@ export default function OpacitySlider (props: OpacitySliderProps) {
     return (
     <section className="slider">
     <input
+        className="opacitySlider"
         type='range'
         onChange={props.handleAlphaChange}
         min={0}
-        max={1}
-        step={0.1}
+        max={100}
+        step={1}
         value={props.alpha}
     ></input>
     </section>
