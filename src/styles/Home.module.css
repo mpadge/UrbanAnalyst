@@ -43,7 +43,7 @@
   position: relative;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   top: 0;
-  left: 80%;
+  left: 10%;
 }
 
 .bottomright p {
@@ -331,19 +331,12 @@
     z-index: 1;
   }
 
-  .bottomright {
-    left: 20%;
-  }
-
 }
 
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {
     grid-template-columns: repeat(2, 50%);
-  }
-  .bottomright {
-    left: 50%;
   }
 
 }
