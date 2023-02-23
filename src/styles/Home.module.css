@@ -42,10 +42,9 @@
   z-index: 10;
   position: relative;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  top: 10%;
+  top: 0;
   left: 80%;
 }
-
 
 .bottomright p {
   position: relative;
@@ -302,6 +301,11 @@
     );
     z-index: 1;
   }
+
+  .bottomright {
+    left: 50%;
+  }
+
 }
 
 /* Tablet and Smaller Desktop */
@@ -309,6 +313,10 @@
   .grid {
     grid-template-columns: repeat(2, 50%);
   }
+  .bottomright {
+    left: 50%;
+  }
+
 }
 
 @media (prefers-color-scheme: dark) {
