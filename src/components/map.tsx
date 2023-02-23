@@ -76,6 +76,7 @@ export default function UTAMap (props: MapProps) {
                 }
                 return [red, green, blue]
                 },
+            opacity: 1 - props.alpha,
             updateTriggers: {
                 getFillColor: [this_layer]
             }

@@ -52,8 +52,10 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         <UTAMap
             idx = {idx}
             layer = {layer}
+            alpha = {alpha}
             citiesArray = {props.citiesArray}
             viewState = {viewState}
+            handleAlphaChange = {handleAlphaChange}
             handleViewStateChange = {handleViewStateChange}
             handleLayerChange = {handleLayerChange}
         />

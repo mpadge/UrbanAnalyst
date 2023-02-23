@@ -48,8 +48,10 @@ export interface CitiesDataProps {
 export interface MapProps {
     idx: number,
     layer: string,
+    alpha: number,
     viewState: ViewState,
     citiesArray: CityDataProps[],
+    handleAlphaChange = (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void
 }
