@@ -114,10 +114,10 @@ export default function Legend (props: LegendProps) {
         const dataIntervals: any = props.citiesArray[props.idx].dataIntervals;
         const legend_values: number = dataIntervals[props.layer];
 
-        // palette has to match one in map.tsx!
-        var Color = d3.scaleSequential().domain([ layer_min, layer_max ])
+        // palette has to match one in map.tsx, which is also reversed, so
+        // domain is [max, min].
+        var Color = d3.scaleSequential().domain([ layer_max, layer_min ])
             .interpolator(d3.interpolateViridis)
-
 
         update(svg, legend_values, props.layer, Color)
 
