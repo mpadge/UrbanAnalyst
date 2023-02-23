@@ -4,6 +4,7 @@ import Link from 'next/link'
 import styles from '@/styles/Home.module.css'
 import CityList from '@/components/citylist';
 import LayerList from '@/components/layerlist';
+import OpacitySlider from '@/components/slider';
 import { ControlProps } from "./interfaces";
 
 export default function Control (props: ControlProps) {
@@ -38,6 +39,11 @@ export default function Control (props: ControlProps) {
         <LayerList
             layer = {props.layer}
             handleLayerChange = {props.handleLayerChange}
+        />
+        <h2>Opacity</h2>
+        <OpacitySlider
+            alpha = {props.alpha}
+            handleAlphaChange={props.handleAlphaChange}
         />
         </div>
         )

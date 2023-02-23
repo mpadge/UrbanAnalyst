@@ -25,9 +25,13 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         transitionInterpolator: new FlyToInterpolator()
     });
     const [layer, setLayer] = useState("social_index");
+    const [alpha, setAlpha] = useState(0.5);
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
+    }
+    const handleAlphaChange = (alpha: number) => {
+        setAlpha(alpha);
     }
     const handleViewStateChange = (pViewState: any) => {
         setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
@@ -56,9 +60,11 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         <Control
             idx = {idx}
             layer = {layer}
+            alpha = {alpha}
             citiesArray = {props.citiesArray}
             viewState = {viewState}
             handleIdxChange = {handleIdxChange}
+            handleAlphaChange = {handleAlphaChange}
             handleViewStateChange = {handleViewStateChange}
             handleLayerChange = {handleLayerChange}
         />
