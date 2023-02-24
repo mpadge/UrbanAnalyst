@@ -101,34 +101,35 @@ export default function Stats (props: StatsProps) {
 
     useEffect(() => {
 
-        var svg = d3.select(svgRef.current);
-
-        // Need to resize the svg to current window size:
-        var margin = {top: 80, right: 30, bottom: 100, left: 60};
-        var width = 700;
-        var height = 500;
         if (size.width !== null && size.height !== null) {
-            width = size.width - margin.left - margin.right;
-            height = size.height - margin.top - margin.bottom;
+
+            var svg = d3.select(svgRef.current);
+
+            // Need to resize the svg to current window size:
+            var margin = {top: 80, right: 30, bottom: 100, left: 60};
+
+            const width = size.width - margin.left - margin.right;
+            const height = size.height - margin.top - margin.bottom;
+
+            svg.attr("width", width)
+                .attr("height", height);
+                //.attr("transform", "translate(" + margin.left + "," - margin.top + ")");
+
+            const cityNames = props.citiesArray.map((item) => item.name);
+
+            //const x = props.citiesArray.map(city => (city.statistics.uta_rel[0]));
+            //const x = props.citiesArray.map(city => (city.statistics.uta_rel[1]));
+
+            // These are single values only:
+            //const sd_uta2trans_abs = props.citiesArray.map(city => (city.statistics.sd_uta2trans_abs));
+            const yvals = props.citiesArray.map(city => (city.statistics.sd_uta2trans_rel));
+            const data = props.citiesArray.map((city, index) => ({
+                city: city.name,
+                value: city.statistics.sd_uta2trans_rel
+            }));
+
+            update(svg, data, width, height, margin);
         }
-        svg.attr("width", width)
-            .attr("height", height);
-            //.attr("transform", "translate(" + margin.left + "," - margin.top + ")");
-
-        const cityNames = props.citiesArray.map((item) => item.name);
-
-        //const x = props.citiesArray.map(city => (city.statistics.uta_rel[0]));
-        //const x = props.citiesArray.map(city => (city.statistics.uta_rel[1]));
-
-        // These are single values only:
-        //const sd_uta2trans_abs = props.citiesArray.map(city => (city.statistics.sd_uta2trans_abs));
-        const yvals = props.citiesArray.map(city => (city.statistics.sd_uta2trans_rel));
-        const data = props.citiesArray.map((city, index) => ({
-            city: city.name,
-            value: city.statistics.sd_uta2trans_rel
-        }));
-
-        update(svg, data, width, height, margin);
 
     }, [svgRef, props, size])
 
