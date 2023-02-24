@@ -1,7 +1,7 @@
 
 import {useState} from 'react';
 import Link from 'next/link'
-import styles from '@/styles/Home.module.css'
+import styles from '@/styles/controls.module.css';
 import CityList from '@/components/maps/citylist';
 import LayerList from '@/components/maps/layerlist';
 import OpacitySlider from '@/components/maps/slider';
@@ -14,7 +14,7 @@ export default function Control (props: ControlProps) {
     const cityNames = props.citiesArray.map((item) => item.name);
 
     return (
-        <div id="top-left-container" className={styles.topleft}>
+        <div id="top-left-container" className={styles.controls}>
         <h2>UTA</h2>
 
         <h3>City</h3>
