@@ -7,60 +7,6 @@
   min-height: 100vh;
 }
 
-.topright90 {
-  display: inherit;
-  justify-content: center;
-  align-items: center;
-  margin: 20px;
-  z-index: 10;
-  position: absolute;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  top: 0;
-  left: 90%;
-}
-
-
-.topright90 p {
-  position: relative;
-  margin: 0;
-  padding: 1rem;
-  background-color: rgba(var(--card-rgb), 0.5);
-  border: 1px solid rgba(var(--card-border-rgb), 0.3);
-  border-radius: var(--border-radius);
-}
-
-.topright90 h2 {
-  font-weight: 600;
-  margin-bottom: 0.7rem;
-}
-
-.topright80 {
-  display: inherit;
-  justify-content: center;
-  align-items: center;
-  margin: 20px;
-  z-index: 10;
-  position: absolute;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  top: 0;
-  left: 85%;
-}
-
-
-.topright80 p {
-  position: relative;
-  margin: 0;
-  padding: 1rem;
-  background-color: rgba(var(--card-rgb), 0.5);
-  border: 1px solid rgba(var(--card-border-rgb), 0.3);
-  border-radius: var(--border-radius);
-}
-
-.topright80 h2 {
-  font-weight: 600;
-  margin-bottom: 0.7rem;
-}
-
 .description {
   display: inherit;
   justify-content: inherit;
@@ -303,10 +249,6 @@
     z-index: 1;
   }
 
-  .topright80 {
-      left: 70%;
-  }
-
 }
 
 /* Tablet and Smaller Desktop */
@@ -314,15 +256,6 @@
   .grid {
     grid-template-columns: repeat(2, 50%);
   }
-
-  .topright90 {
-      left: 85%;
-  }
-
-  .topright80 {
-      left: 75%;
-  }
-
 }
 
 @media (prefers-color-scheme: dark) {
