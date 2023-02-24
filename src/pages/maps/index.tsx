@@ -48,7 +48,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             <title>UTA Maps</title>
             <meta name="description" content="Maps for Urban Transport Analyst" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link rel="icon" href="/favicon.ico" />
+            <link rel="icon" href="/uta.ico" />
         </Head>
         <UTAMap
             idx = {idx}
