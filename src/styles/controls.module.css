@@ -35,9 +35,17 @@
   margin-left: 12px;
 }
 
+.listSelect {
+    width: 90%;
+    align: center;
+    margin-left: 10px;
+}
+
 .opacitySlider {
-    width: 100%;
+    width: 90%;
     height: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
     border-radius: 10%;
     background: #eee;
     background-image: linear-gradient(#6a6ad4, #33c7ff);
@@ -76,6 +84,8 @@
     box-shadow: none;
     border: none;
     background: transparent;
+    margin-left: 10px;
+    margin-bottom: 20px;
 }
 
 .opacitySlider::-moz-slider-runnable-track {
@@ -83,5 +93,7 @@
     box-shadow: none;
     border: none;
     background: transparent;
+    margin-left: 10px;
+    margin-bottom: 20px;
 }
 

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 
 import { LayerListProps } from "./interfaces";
+import styles from '@/styles/controls.module.css';
 
 export default function LayerList(props: LayerListProps) {
 
@@ -23,7 +24,7 @@ export default function LayerList(props: LayerListProps) {
     };
 
   return (
-    <section className="layer-list">
+    <section className={styles.listSelect}>
         <Select
             options={options}
             defaultValue={options[0]}

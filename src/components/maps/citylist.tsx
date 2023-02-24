@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 
 import { CityListProps } from "./interfaces";
+import styles from '@/styles/controls.module.css';
 
 export default function CityList(props: CityListProps) {
 
@@ -26,7 +27,7 @@ export default function CityList(props: CityListProps) {
     };
 
   return (
-    <section className="city-list">
+    <section className={styles.listSelect}>
         <Select
             options={options}
             defaultValue={options[0]}
