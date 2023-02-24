@@ -6,12 +6,12 @@ import {GeoJsonLayer} from "@deck.gl/layers/typed";
 import {DeckGL} from "@deck.gl/react/typed";
 import {FlyToInterpolator} from "@deck.gl/core/typed";
 import {Map} from "react-map-gl";
-import Control from '@/components/control';
-import Legend from '@/components/legend';
-import UTAMap from '@/components/map';
+import Control from '@/components/maps/control';
+import Legend from '@/components/maps/legend';
+import UTAMap from '@/components/maps/map';
 
-import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/components/citydata';
-import { CityDataProps, CitiesDataProps, ViewState } from "@/components/interfaces";
+import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/components/maps/citydata';
+import { CityDataProps, CitiesDataProps, ViewState } from "@/components/maps/interfaces";
 
 const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 

@@ -7,9 +7,9 @@ import {FlyToInterpolator} from "@deck.gl/core/typed";
 import {Map} from "react-map-gl";
 import * as d3 from 'd3';
 import 'd3-scale-chromatic';
-import Control from '@/components/control'
+import Control from '@/components/maps/control'
 
-import { MapProps } from "@/components/interfaces";
+import { MapProps } from "@/components/maps/interfaces";
 
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 

@@ -2,9 +2,9 @@
 import {useState} from 'react';
 import Link from 'next/link'
 import styles from '@/styles/Home.module.css'
-import CityList from '@/components/citylist';
-import LayerList from '@/components/layerlist';
-import OpacitySlider from '@/components/slider';
+import CityList from '@/components/maps/citylist';
+import LayerList from '@/components/maps/layerlist';
+import OpacitySlider from '@/components/maps/slider';
 import { ControlProps } from "./interfaces";
 
 export default function Control (props: ControlProps) {
