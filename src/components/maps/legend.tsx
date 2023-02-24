@@ -43,7 +43,7 @@ export default function Legend (props: LegendProps) {
                     .append("rect")
                     .transition(t)
                     .attr("x", y)
-                    .attr("y", marginTop)
+                    .attr("y", marginTop + 5)
                     .attr("width", Math.max(0, y.bandwidth() - 1))
                     .attr("height", height - marginTop - marginBottom)
                     .attr("fill", Color)
@@ -53,7 +53,7 @@ export default function Legend (props: LegendProps) {
                     .append("rect")
                     .transition(t)
                     .attr("x", y)
-                    .attr("y", marginTop)
+                    .attr("y", marginTop + 5)
                     .attr("width", Math.max(0, y.bandwidth() - 1))
                     .attr("height", height - marginTop - marginBottom)
                     .attr("fill", Color)
@@ -66,17 +66,18 @@ export default function Legend (props: LegendProps) {
                 );
 
         var tick = svg.append("g")
-            .attr("transform", `translate(0,${height - marginBottom})`);
+            .attr("transform", `translate(0,${height - marginBottom + 5})`);
 
         tick.join(
             (enter: any) =>
                 enter
+                    .attr("transform", `translate(0,${height - marginBottom + 5})`)
                     .call(d3.axisBottom(y)
                         .tickSize(tickSize)),
             (update: any) =>
                 update
                     .transition(t)
-                    .attr("transform", `translate(0,${height - marginBottom})`)
+                    .attr("transform", `translate(0,${height - marginBottom + 5})`)
                     .call(d3.axisBottom(y)
                         .tickSize(tickSize)),
             (exit: any) =>
@@ -85,14 +86,14 @@ export default function Legend (props: LegendProps) {
                 );
 
         var text = svg.append("g")
-            .attr("transform", `translate(0,${height - marginBottom})`);
+            .attr("transform", `translate(0,${height - marginBottom + 5})`);
 
         var textUpdate = d3.transition(text)
             .attr("transform", function (d) { return "translate(0, 0);" });
 
         textUpdate.select("text")
             .attr("x", marginLeft - 20)
-            .attr("y", marginTop + marginBottom - height - 14)
+            .attr("y", marginTop + marginBottom - height - 20)
             .attr("fill", "currentColor")
             .attr("text-anchor", "start")
             .attr("font-weight", "bold")
@@ -125,7 +126,7 @@ export default function Legend (props: LegendProps) {
     }, [svgRef, props])
 
     return (
-            <div id="bottom-right-container" className={styles.bottomright}>
+            <div id="bottom-right-container" className={styles.maplegend}>
             <svg ref={svgRef} />
 
             </div>
