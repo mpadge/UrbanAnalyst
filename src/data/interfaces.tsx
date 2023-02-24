@@ -101,3 +101,8 @@ export interface OpacitySliderProps {
     alpha: number,
     handleAlphaChange: (pAlpha: number) => void
 }
+
+export interface StatsProps {
+    idx: number,
+    citiesArray: CityDataProps[]
+}

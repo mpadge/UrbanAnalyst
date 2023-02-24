@@ -3,6 +3,7 @@ import Head from 'next/head'
 import {NextPage} from "next";
 import {useState} from "react";
 import Buttons from '@/components/stats/buttons';
+import Stats from '@/components/stats/stats';
 import styles from '@/styles/Home.module.css'
 
 import { CITY_DATA } from '@/data/citydata';
@@ -26,6 +27,10 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             <link rel="icon" href="/uta.ico" />
         </Head>
         <main className={styles.main}>
+            <Stats
+                idx = {idx}
+                citiesArray = {props.citiesArray}
+            />
             <Buttons />
         </main>
         </>

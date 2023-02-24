@@ -70,7 +70,21 @@ export default function Home() {
               Maps <span>-&gt;</span>
             </h2>
             <p className={inter.className}>
-              Find in-depth information about Maps!
+              Interactive Urban Transport Analyst Maps
+            </p>
+          </Link>
+
+
+          <Link
+            href="/stats"
+            className={styles.card}
+            rel="noopener noreferrer"
+          >
+            <h2 className={inter.className}>
+              Statistics <span>-&gt;</span>
+            </h2>
+            <p className={inter.className}>
+              Statistical summaries of UTA Cities
             </p>
           </Link>
 
