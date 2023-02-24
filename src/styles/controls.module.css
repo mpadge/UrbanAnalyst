@@ -35,6 +35,10 @@
   margin-left: 12px;
 }
 
+.hide {
+    display: none;
+}
+
 .listSelect {
     width: 90%;
     align: center;

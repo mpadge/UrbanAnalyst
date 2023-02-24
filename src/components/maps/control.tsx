@@ -13,29 +13,55 @@ export default function Control (props: ControlProps) {
 
     const cityNames = props.citiesArray.map((item) => item.name);
 
-    return (
-        <div id="top-left-container" className={styles.controls}>
-        <h2>UTA</h2>
+    const [hideControls, setHideControls] = useState(false);
+    const handleControlsVisibility = (pHideControls: boolean) => {
+        setHideControls(pHideControls);
+    }
 
-        <h3>City</h3>
-        <CityList
-            citiesArray={props.citiesArray}
-            idx={props.idx}
-            viewState = {props.viewState}
-            handleIdxChange={props.handleIdxChange}
-            handleViewStateChange={props.handleViewStateChange}
-            // onSelect={city => props.handleIdxChange(props.idx)}
-        />
-        <h3>Layer</h3>
-        <LayerList
-            layer = {props.layer}
-            handleLayerChange = {props.handleLayerChange}
-        />
-        <h3>Opacity</h3>
-        <OpacitySlider
-            alpha = {props.alpha}
-            handleAlphaChange={props.handleAlphaChange}
-        />
+    return (
+        <>
+        <div id="top-left-container" className={styles.controls}>
+            <div id="divinfo" style={{display: hideControls?"none":""}}>
+
+            <button
+                id="btnHideControls"
+                className="btn-transparent right-align"
+                onClick={() => handleControlsVisibility(true)}
+            >
+                X
+            </button>
+
+
+            <h2>UTA</h2>
+
+            <h3>City</h3>
+            <CityList
+                citiesArray={props.citiesArray}
+                idx={props.idx}
+                viewState = {props.viewState}
+                handleIdxChange={props.handleIdxChange}
+                handleViewStateChange={props.handleViewStateChange}
+                // onSelect={city => props.handleIdxChange(props.idx)}
+            />
+            <h3>Layer</h3>
+            <LayerList
+                layer = {props.layer}
+                handleLayerChange = {props.handleLayerChange}
+            />
+            <h3>Opacity</h3>
+            <OpacitySlider
+                alpha = {props.alpha}
+                handleAlphaChange={props.handleAlphaChange}
+            />
+            </div>
+
+            <button
+                id="btnShowControls"
+                style={{display:hideControls?"":"none"}}
+                onClick={() => handleControlsVisibility(false)}
+            >Show Controls</button>
+
         </div>
+        </>
         )
 };
