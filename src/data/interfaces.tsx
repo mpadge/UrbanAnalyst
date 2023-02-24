@@ -38,6 +38,15 @@ export interface CityDataProps {
         transport_abs: number[],
         uta_rel: number[],
         uta_abs: number[]
+    },
+    statistics: {
+        social_index: number[],
+        transport_rel: number[],
+        transport_abs: number[],
+        uta_rel: number[],
+        uta_abs: number[],
+        sd_uta2trans_rel: number,
+        sd_uta2trans_abs: number
     }
 }
 

@@ -29,6 +29,15 @@ const berlin = {
         "transport_abs": [39, 40, 41, 42, 43, 44],
         "uta_rel": [1.06, 1.1, 1.14, 1.18, 1.22],
         "uta_abs": [39.5, 40, 40.5, 41, 41.5, 42, 42.5]
+    },
+    "statistics": {
+        "social_index": [1.65, 1],
+        "transport_rel": [1.14, 0.17],
+        "transport_abs": [41.21, 1.83],
+        "uta_rel": [1.13, 0.1],
+        "uta_abs": [41.19, 1.24],
+        "sd_uta2trans_rel": 0.59,
+        "sd_uta2trans_abs": 0.68
     }
 }
 
@@ -54,6 +63,15 @@ const hamburg = {
         "transport_abs": [36, 37, 38, 39, 40, 41],
         "uta_rel": [0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5],
         "uta_abs": [37, 38, 39, 40, 41]
+    },
+    "statistics": {
+        "social_index": [5.27, 2.33],
+        "transport_rel": [1.22, 0.29],
+        "transport_abs": [39.37, 1.77],
+        "uta_rel": [1.16, 0.39],
+        "uta_abs": [39.3, 2.11],
+        "sd_uta2trans_rel": 1.32,
+        "sd_uta2trans_abs": 1.19
     }
 }
 
@@ -79,6 +97,15 @@ const paris = {
         "transport_abs": [36, 37, 38, 39, 40, 41, 42, 43],
         "uta_rel": [-1, -0.5, 0, 0.5, 1, 1.5, 2, 2.5],
         "uta_abs": [30, 35, 40, 45, 50, 55]
+    },
+    "statistics": {
+        "social_index": [13.83, 6.29],
+        "transport_rel": [1.06, 0.21],
+        "transport_abs": [40, 1.69],
+        "uta_rel": [0.79, 0.86],
+        "uta_abs": [39.67, 5.18],
+        "sd_uta2trans_rel": 4.02,
+        "sd_uta2trans_abs": 3.06
     }
 }
 
