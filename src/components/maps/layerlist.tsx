@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 
-import { LayerListProps } from "./interfaces";
+import { LayerListProps } from "@/data/interfaces";
 import styles from '@/styles/controls.module.css';
 
 export default function LayerList(props: LayerListProps) {

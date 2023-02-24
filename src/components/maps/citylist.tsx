@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 
-import { CityListProps } from "./interfaces";
+import { CityListProps } from "@/data/interfaces";
 import styles from '@/styles/controls.module.css';
 
 export default function CityList(props: CityListProps) {

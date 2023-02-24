@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import styles from '@/styles/controls.module.css';
-import { OpacitySliderProps } from "./interfaces";
+import { OpacitySliderProps } from "@/data/interfaces";
 
 export default function OpacitySlider (props: OpacitySliderProps) {
 

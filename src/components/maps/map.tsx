@@ -9,7 +9,7 @@ import * as d3 from 'd3';
 import 'd3-scale-chromatic';
 import Control from '@/components/maps/control'
 
-import { MapProps } from "@/components/maps/interfaces";
+import { MapProps } from "@/data/interfaces";
 
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 

@@ -5,7 +5,7 @@ import styles from '@/styles/controls.module.css';
 import CityList from '@/components/maps/citylist';
 import LayerList from '@/components/maps/layerlist';
 import OpacitySlider from '@/components/maps/slider';
-import { ControlProps } from "./interfaces";
+import { ControlProps } from "@/data/interfaces";
 
 export default function Control (props: ControlProps) {
 
