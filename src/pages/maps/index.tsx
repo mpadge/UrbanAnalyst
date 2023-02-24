@@ -9,6 +9,7 @@ import {Map} from "react-map-gl";
 import Control from '@/components/maps/control';
 import Legend from '@/components/maps/legend';
 import UTAMap from '@/components/maps/map';
+import Buttons from '@/components/maps/buttons';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/components/maps/citydata';
 import { CityDataProps, CitiesDataProps, ViewState } from "@/components/maps/interfaces";
@@ -76,6 +77,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             alpha = {alpha}
             citiesArray = {props.citiesArray}
         />
+        <Buttons />
         </>
         )
 };

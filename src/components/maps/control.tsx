@@ -15,18 +15,9 @@ export default function Control (props: ControlProps) {
 
     return (
         <div id="top-left-container" className={styles.topleft}>
-        <h1>UTA</h1>
-        <Link
-            href="/"
-            className={styles.card}
-            rel="noopener noreferrer"
-        >
-        <p>
-            Back
-        </p>
-        </Link>
+        <h2>UTA</h2>
 
-        <h2>City</h2>
+        <h3>City</h3>
         <CityList
             citiesArray={props.citiesArray}
             idx={props.idx}
@@ -35,12 +26,12 @@ export default function Control (props: ControlProps) {
             handleViewStateChange={props.handleViewStateChange}
             // onSelect={city => props.handleIdxChange(props.idx)}
         />
-        <h2>Layer</h2>
+        <h3>Layer</h3>
         <LayerList
             layer = {props.layer}
             handleLayerChange = {props.handleLayerChange}
         />
-        <h2>Opacity</h2>
+        <h3>Opacity</h3>
         <OpacitySlider
             alpha = {props.alpha}
             handleAlphaChange={props.handleAlphaChange}
