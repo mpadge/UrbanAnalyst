@@ -39,14 +39,9 @@ export default function Home() {
         </div>
 
         <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/uta.svg"
-            alt="UTA Logo"
-            width={180}
-            height={37}
-            priority
-          />
+          <p className="text-center">
+          An open source platform for analysing and comparing urban transport systems across the world.
+          </p>
         </div>
 
         <div className={styles.grid}>
