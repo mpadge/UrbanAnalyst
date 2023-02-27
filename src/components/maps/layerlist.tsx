@@ -9,10 +9,10 @@ export default function LayerList(props: LayerListProps) {
 
     const options = [
         { value: 'social_index', label: 'Social' },
-        { value: 'transport_abs', label: 'Transport (Abs)' },
-        { value: 'transport_rel', label: 'Transport (Rel)' },
-        { value: 'uta_abs', label: 'UTA Index (Abs)' },
-        { value: 'uta_rel', label: 'UTA Index (Rel)' }
+        { value: 'transport_abs', label: 'Transport Abs' },
+        { value: 'transport_rel', label: 'Transport Rel' },
+        { value: 'uta_abs', label: 'Combined Abs' },
+        { value: 'uta_rel', label: 'Combined Rel' }
     ]
 
     const [isSearchable, setIsSearchable] = useState(true);
