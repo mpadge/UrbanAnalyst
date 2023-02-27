@@ -41,7 +41,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(25%, auto));
+  grid-template-columns: repeat(2, minmax(50%, auto));
   width: var(--max-width);
   max-width: 100%;
 }
@@ -67,9 +67,9 @@
 .card p {
   margin: 0;
   opacity: 0.6;
-  font-size: 0.9rem;
+  font-size: 1.5rem;
   line-height: 1.5;
-  max-width: 30ch;
+  max-width: 300ch;
 }
 
 .centerBig {
@@ -97,6 +97,22 @@
 
 .centerMed p {
     margin-bottom: 20px;
+}
+
+.cardText {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 0.5rem 0;
+  font-size: 1.5rem;
+  font-family: sans-serif;
+  font-weight: 300;
+  text-align: left;
+}
+
+.cardText p {
+    margin-bottom: 160px;
 }
 
 
