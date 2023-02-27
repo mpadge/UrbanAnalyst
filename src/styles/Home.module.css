@@ -72,7 +72,7 @@
   max-width: 30ch;
 }
 
-.center {
+.centerBig {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,6 +81,22 @@
   font-size: 4rem;
   font-family: var(--font-mono);
   text-align: center;
+}
+
+.centerMed {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 4rem 0;
+  font-size: 2rem;
+  font-family: sans-serif;
+  font-weight: 300;
+  text-align: center;
+}
+
+.centerMed p {
+    margin-bottom: 20px;
 }
 
 

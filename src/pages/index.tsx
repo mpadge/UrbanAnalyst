@@ -38,9 +38,28 @@ export default function Home() {
           </div>
         </div>
 
-        <div className={styles.center}>
+        <div className={styles.centerBig}>
           <p className="text-center">
           An open source platform for analysing and comparing urban transport systems across the world.
+          </p>
+        </div>
+
+        <div className={styles.centerMed}>
+          <p className="text-center">
+          Urban Transport Analyst provides interactive maps of urban transport
+          systems, and relationships of these transport systems to
+          socio-demographic conditions.  UTA also provides statistical summaries
+          of all cities, including representation in the "UTA Index", which
+          captures the extent to which transport systems effectively
+          counter-balance socio-demographic disadvantage.
+          </p>
+
+          <p className="text-center">
+          For all maps and statistical summaries, lower values are always
+          better. Transport statistics are based on times needed to travel a
+          given distance, so lower values reflect faster transport.
+          Socio-demographic statistics are metrics of social disadvantage such
+          as unemployment, for which again lower values are better.
           </p>
         </div>
 
