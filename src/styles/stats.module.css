@@ -25,3 +25,31 @@
   font-weight: 600;
   margin-bottom: 0.7rem;
 }
+
+.statstext {
+  display: inherit;
+  justify-content: center;
+  align-items: top;
+  margin: 20px;
+  z-index: 10;
+  position: absolute;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  height: 100%;
+  width: 80%;
+  top: 0%;
+  left: 0%;
+}
+
+.statstext p {
+  position: absolute;
+  margin: 0;
+  padding: 1rem;
+  background-color: rgba(var(--callout-rgb), 0.5);
+  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
+  border-radius: var(--border-radius);
+}
+
+.statstext h2 {
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+}

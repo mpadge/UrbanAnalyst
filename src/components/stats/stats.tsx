@@ -200,6 +200,17 @@ export default function Stats (props: StatsProps) {
 
 
     return (
+            <>
+            <div id="stats-text" className={styles.statstext}>
+            <p>
+            <i>UTA Index Relative</i> - The combination of multi-modal travel
+            times relative to equivalent automobile times, and the social index
+            transformed to the same scale. Values less than one indicate that
+            relative travel times effectively counteract socio-demographic
+            disadvantage, while values greater than one indicate that lack of
+            transport provision exacerbates social inequality.
+            </p>
+            </div>
             <div id="stats-container" className={styles.statsplot}>
                 <svg width={width} height={height}>
                 <Group
@@ -213,5 +224,6 @@ export default function Stats (props: StatsProps) {
                 </Group>
                 </svg>
             </div>
+            </>
            )
 };
