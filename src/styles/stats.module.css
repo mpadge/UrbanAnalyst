@@ -1,10 +1,17 @@
+.statspage {
+  display: inline;
+  align-items: center;
+  justify-content: center;
+}
+
 .statsplot {
   display: inherit;
   justify-content: center;
+  align: center;
   align-items: center;
   margin: 20px;
   z-index: 10;
-  position: absolute;
+  position: relative;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   height: 100%;
   width: 100%;

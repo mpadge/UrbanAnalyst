@@ -1,5 +1,5 @@
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import Link from 'next/link'
 import styled from 'styled-components';
@@ -104,7 +104,7 @@ export default function Stats (props: StatsProps) {
     const defaultHeight = 700;
     var widthTemp = defaultWidth;
     var heightTemp = defaultHeight;
-    const margin = { top: 50, right: 95, bottom: 60, left: 50 };
+    const margin = { top: 150, right: 95, bottom: 60, left: 50 };
     if (size.width !== null) {
         widthTemp = Math.min(widthTemp, size.width)
     }
@@ -198,9 +198,11 @@ export default function Stats (props: StatsProps) {
 
     }, [data, innerHeight, xScale, yScale]);
 
+    const inputRef = useRef()
 
     return (
             <>
+            <div id="stats-page" className={styles.statspage}>
             <div id="stats-text" className={styles.statstext}>
             <p>
             <i>UTA Index Relative</i> - The combination of multi-modal travel
@@ -211,7 +213,7 @@ export default function Stats (props: StatsProps) {
             transport provision exacerbates social inequality.
             </p>
             </div>
-            <div id="stats-container" className={styles.statsplot}>
+            <div id="stats-container" className={styles.statsplot} >
                 <svg width={width} height={height}>
                 <Group
                   x={width / 2}
@@ -223,6 +225,7 @@ export default function Stats (props: StatsProps) {
                     <GroupedText ref={textRef} />
                 </Group>
                 </svg>
+            </div>
             </div>
             </>
            )
