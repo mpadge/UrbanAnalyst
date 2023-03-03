@@ -8,14 +8,17 @@ import { StatsProps } from "@/data/interfaces";
 
 const GroupedBars = styled.g`
   rect {
-    fill: #ec008b;
+    fill: #008bec;
     transition: all 0.2s;
 
     &:hover {
-      fill: #e46aa7;
+      fill: #00a7e4;
     }
   }
 `;
+
+// fill: #ec008b;
+// fill: #e46aa7;
 
 const GroupedText = styled.g`
   text {
@@ -25,6 +28,20 @@ const GroupedText = styled.g`
 
 export const Group = styled.g`
   transform: ${props => `translate(${props.right}px, ${props.top}px)`};
+`;
+
+const Axis = styled.g`
+  transform: ${props =>
+    props.axisType === 'yAxis' && `translate(0, ${props.innerHeight}px)`};
+
+  path,
+  line {
+    stroke: #dcdbdb;
+  }
+
+  text {
+    font-size: 1.4rem;
+  }
 `;
 
 function useWindowSize() {
@@ -85,8 +102,16 @@ export default function Stats (props: StatsProps) {
     const innerWidth = width - margin.right - margin.left;
     const innerHeight = height - margin.top - margin.bottom;
 
+    const xAxisPadding = 10;
+    const yAxisPadding = 10;
+    const yTickSize = 0;
+
     const barsRef = React.useRef<SVGSVGElement>(null);
     const textRef = React.useRef<SVGSVGElement>(null);
+    const xAxisRef = React.useRef<SVGSVGElement>(null);
+    const yAxisRef = React.useRef<SVGSVGElement>(null);
+
+    const xAixsTickFormat = number => d3.format('.2s')(number);
 
     useEffect(() => {
 
@@ -95,6 +120,22 @@ export default function Stats (props: StatsProps) {
 
         handleDrawBars(bars);
         handleDrawText(text);
+
+        const xGroup = d3.select(xAxisRef.current);
+        const yGroup = d3.select(yAxisRef.current);
+
+        const xAxis = d3.axisBottom(xScale)
+            .tickSize(-innerHeight)
+            .tickPadding(xAxisPadding);
+        const yAxis = d3.axisLeft(yScale)
+            .tickSize(yTickSize)
+            .tickPadding(yAxisPadding);
+
+        xAxis.tickFormat(xAixsTickFormat);
+
+        xGroup.call(yAxis);
+        yGroup.call(xAxis);
+
     }, [data]);
 
     // var t = d3.transition()
@@ -126,22 +167,20 @@ export default function Stats (props: StatsProps) {
           .attr('width', d => xScale(xValue(d)));
     };
 
-  const handleDrawText = bars => {
-    bars
-      .selectAll('text')
-      .data(data)
-      .join('text')
-      .attr('y', d => yScale(yValue(d)) + yScale.bandwidth() / 1.5)
-      //.text(d => d3.format(d.statistics[thisvar][barData.indx]))
-      //.text(d => d.statistics[thisvar][barData.indx])
-      .text(d => d.city)
-      .attr('x', d => xScale(xValue(d)) + 5)
-      .attr('fill-opacity', 0.8)
-      .transition()
-      .delay(0)
-      .duration(750)
-      .attr('fill-opacity', 0.8);
-  };
+    const handleDrawText = bars => {
+        bars
+            .selectAll('text')
+            .data(data)
+            .join('text')
+            .attr('y', d => yScale(yValue(d)) + yScale.bandwidth() / 1.5)
+            .text(d => d.city)
+            .attr('x', d => xScale(xValue(d)) + 5)
+            .attr('fill-opacity', 0.8)
+            .transition()
+            .delay(0)
+            .duration(750)
+            .attr('fill-opacity', 0.8);
+    };
 
 
     return (
@@ -152,6 +191,7 @@ export default function Stats (props: StatsProps) {
                   y={height / 2}
                   right={margin.right}
                   top={margin.top}>
+                    <Axis ref={yAxisRef} axisType="yAxis" innerHeight={innerHeight} />
                     <GroupedBars ref={barsRef} />
                     <GroupedText ref={textRef} />
                 </Group>
