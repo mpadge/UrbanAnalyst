@@ -124,7 +124,56 @@ export default function Stats (props: StatsProps) {
 
     const xAixsTickFormat:any = (number: any) => d3.format('.2s')(number);
 
+    // var t = d3.transition()
+    //     .duration(750);
+
+    // X-axis:
+    const xValue = (d: any) => d.value;
+    const xScale = d3.scaleLinear()
+        .domain([0, d3.max(data, xValue)])
+        .range([0, innerWidth])
+        .nice();
+
+    // Y-axis
+    const yValue = (d: any) => d.city;
+    const yScale = d3.scaleBand()
+        .domain(data.map(yValue))
+        .range([0, innerHeight])
+        .padding(0.2);
+
     useEffect(() => {
+
+        const handleDrawBars = (bars: any) => {
+            bars
+              .selectAll('rect')
+              .data(data)
+              .join('rect')
+              .attr('height', yScale.bandwidth())
+              .attr('y', (d: any) => yScale(yValue(d)))
+              .transition()
+              .duration(750)
+              .attr('width', (d: any) => xScale(xValue(d)));
+        };
+
+        const handleDrawText = (bars: any) => {
+            const ret = bars
+                .selectAll('text')
+                .data(data)
+                .join('text')
+                .attr('y', (d: any) => {
+                    const ysc: any = yScale ? yScale(yValue(d)) : 0
+                    return ysc + yScale.bandwidth() / 1.5
+                    })
+                .text((d: any) => d.city)
+                .attr('x', (d: any) => xScale(xValue(d)) + 5)
+                .attr('fill-opacity', 0.8)
+                .transition()
+                .delay(0)
+                .duration(750)
+                .attr('fill-opacity', 0.8);
+
+            return ret;
+        };
 
         const bars = d3.select(barsRef.current as any);
         const text = d3.select(textRef.current as any);
@@ -147,56 +196,7 @@ export default function Stats (props: StatsProps) {
         xGroup.call(yAxis);
         yGroup.call(xAxis);
 
-    }, [data]);
-
-    // var t = d3.transition()
-    //     .duration(750);
-
-    // X-axis:
-    const xValue = (d: any) => d.value;
-    const xScale = d3.scaleLinear()
-        .domain([0, d3.max(data, xValue)])
-        .range([0, innerWidth])
-        .nice();
-
-    // Y-axis
-    const yValue = (d: any) => d.city;
-    const yScale = d3.scaleBand()
-        .domain(data.map(yValue))
-        .range([0, innerHeight])
-        .padding(0.2);
-
-    const handleDrawBars = (bars: any) => {
-        bars
-          .selectAll('rect')
-          .data(data)
-          .join('rect')
-          .attr('height', yScale.bandwidth())
-          .attr('y', (d: any) => yScale(yValue(d)))
-          .transition()
-          .duration(750)
-          .attr('width', (d: any) => xScale(xValue(d)));
-    };
-
-    const handleDrawText = (bars: any) => {
-        const ret = bars
-            .selectAll('text')
-            .data(data)
-            .join('text')
-            .attr('y', (d: any) => {
-                const ysc: any = yScale ? yScale(yValue(d)) : 0
-                return ysc + yScale.bandwidth() / 1.5
-                })
-            .text((d: any) => d.city)
-            .attr('x', (d: any) => xScale(xValue(d)) + 5)
-            .attr('fill-opacity', 0.8)
-            .transition()
-            .delay(0)
-            .duration(750)
-            .attr('fill-opacity', 0.8);
-
-        return ret;
-    };
+    }, [data, innerHeight, xScale, yScale]);
 
 
     return (
