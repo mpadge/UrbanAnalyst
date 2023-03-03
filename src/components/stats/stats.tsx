@@ -26,12 +26,22 @@ const GroupedText = styled.g`
   }
 `;
 
+interface GroupProps {
+    right: number,
+    top: number
+}
+
 export const Group = styled.g`
-  transform: ${props => `translate(${props.right}px, ${props.top}px)`};
+  transform: ${(props: GroupProps) => `translate(${props.right}px, ${props.top}px)`};
 `;
 
+interface AxisProps {
+    axisType: string,
+    innerHeight?: number
+}
+
 const Axis = styled.g`
-  transform: ${props =>
+  transform: ${(props: AxisProps) =>
     props.axisType === 'yAxis' && `translate(0, ${props.innerHeight}px)`};
 
   path,
@@ -43,6 +53,7 @@ const Axis = styled.g`
     font-size: 1.4rem;
   }
 `;
+
 
 function useWindowSize() {
 
@@ -111,18 +122,18 @@ export default function Stats (props: StatsProps) {
     const xAxisRef = React.useRef<SVGSVGElement>(null);
     const yAxisRef = React.useRef<SVGSVGElement>(null);
 
-    const xAixsTickFormat = number => d3.format('.2s')(number);
+    const xAixsTickFormat:any = (number: any) => d3.format('.2s')(number);
 
     useEffect(() => {
 
-        const bars = d3.select(barsRef.current);
-        const text = d3.select(textRef.current);
+        const bars = d3.select(barsRef.current as any);
+        const text = d3.select(textRef.current as any);
 
         handleDrawBars(bars);
         handleDrawText(text);
 
-        const xGroup = d3.select(xAxisRef.current);
-        const yGroup = d3.select(yAxisRef.current);
+        const xGroup: any = d3.select(xAxisRef.current as any);
+        const yGroup: any = d3.select(yAxisRef.current as any);
 
         const xAxis = d3.axisBottom(xScale)
             .tickSize(-innerHeight)
@@ -142,44 +153,49 @@ export default function Stats (props: StatsProps) {
     //     .duration(750);
 
     // X-axis:
-    const xValue = d => d.value;
+    const xValue = (d: any) => d.value;
     const xScale = d3.scaleLinear()
         .domain([0, d3.max(data, xValue)])
         .range([0, innerWidth])
         .nice();
 
     // Y-axis
-    const yValue = d => d.city;
+    const yValue = (d: any) => d.city;
     const yScale = d3.scaleBand()
         .domain(data.map(yValue))
         .range([0, innerHeight])
         .padding(0.2);
 
-    const handleDrawBars = bars => {
+    const handleDrawBars = (bars: any) => {
         bars
           .selectAll('rect')
           .data(data)
           .join('rect')
           .attr('height', yScale.bandwidth())
-          .attr('y', d => yScale(yValue(d)))
+          .attr('y', (d: any) => yScale(yValue(d)))
           .transition()
           .duration(750)
-          .attr('width', d => xScale(xValue(d)));
+          .attr('width', (d: any) => xScale(xValue(d)));
     };
 
-    const handleDrawText = bars => {
-        bars
+    const handleDrawText = (bars: any) => {
+        const ret = bars
             .selectAll('text')
             .data(data)
             .join('text')
-            .attr('y', d => yScale(yValue(d)) + yScale.bandwidth() / 1.5)
-            .text(d => d.city)
-            .attr('x', d => xScale(xValue(d)) + 5)
+            .attr('y', (d: any) => {
+                const ysc: any = yScale ? yScale(yValue(d)) : 0
+                return ysc + yScale.bandwidth() / 1.5
+                })
+            .text((d: any) => d.city)
+            .attr('x', (d: any) => xScale(xValue(d)) + 5)
             .attr('fill-opacity', 0.8)
             .transition()
             .delay(0)
             .duration(750)
             .attr('fill-opacity', 0.8);
+
+        return ret;
     };
 
 
