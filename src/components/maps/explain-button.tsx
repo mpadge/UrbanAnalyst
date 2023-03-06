@@ -10,7 +10,7 @@ export default function ExplainButton (props: ExplainButtonProps) {
     <button
         className={styles.explainbutton}
         type="button"
-        onClick={props.handleExplainChange}
+        onClick={() => props.handleExplainChange(props.explain)}
     >Explain Layer</button>
     </section>
     )

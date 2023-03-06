@@ -47,7 +47,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     }
 
     // click event to close Explain text:
-    const handleClick = (e) => {
+    const handleClick = (e: any) => {
         if (explain) {
             setExplain(false);
         }
