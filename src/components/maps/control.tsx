@@ -67,7 +67,10 @@ export default function Control (props: ControlProps) {
             >Show Controls</button>
 
         </div>
-        <ExplainLayer explain = {props.explain} />
+        <ExplainLayer
+            layer = {props.layer}
+            explain = {props.explain}
+        />
         </>
         )
 };

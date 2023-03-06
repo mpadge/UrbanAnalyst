@@ -114,5 +114,6 @@ export interface ExplainButtonProps {
     handleExplainChange: (explain: boolean) => void
 }
 export interface ExplainProps {
-    explain: boolean
+    explain: boolean,
+    layer: string
 }
