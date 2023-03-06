@@ -68,8 +68,10 @@ export default function Control (props: ControlProps) {
 
         </div>
         <ExplainLayer
+            idx={props.idx}
             layer = {props.layer}
             explain = {props.explain}
+            citiesArray={props.citiesArray}
         />
         </>
         )

@@ -20,7 +20,13 @@ const LAYER_TEXT: LayerTextProps = {
 
 export default function ExplainButton (props: ExplainProps) {
 
-    const layer_text: string = LAYER_TEXT[props.layer as keyof LayerTextProps];
+    var layer_text_temp: string;
+    if (props.layer == "social_index") {
+        layer_text_temp = props.citiesArray[props.idx].social_index;
+    } else {
+        layer_text_temp = LAYER_TEXT[props.layer as keyof LayerTextProps];
+    }
+    const layer_text: string = layer_text_temp;
 
     return (
         <div id="explain-layer" className={styles.explaintext}>

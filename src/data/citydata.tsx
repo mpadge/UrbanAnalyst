@@ -11,6 +11,7 @@ const berlin = {
     "name": "berlin",
     "nameFormatted": "Berlin",
     "path": "/data/berlin/data.json",
+    "social_index": "Overall Social Inequality Index (2022), from https://fbinter.stadt-berlin.de/fb/index.jsp. High values represent high social inequality.",
     "initialViewState": {
         "latitude": 52.5,
         "longitude": 13.4,
@@ -45,6 +46,7 @@ const hamburg = {
     "name": "hamburg",
     "nameFormatted": "Hamburg",
     "path": "/data/hamburg/data.json",
+    "social_index": "Social Monitoring 'Integrated Urban Development' Overall Index, from https://www.metaver.de/trefferanzeige?docuuid=9499E840-3B3C-415A-8F35-856AEE649BCA",
     "initialViewState": {
         "latitude": 53.57,
         "longitude": 10.02,
@@ -79,6 +81,7 @@ const paris = {
     "name": "paris",
     "nameFormatted": "Paris",
     "path": "/data/paris/data.json",
+    "social_index": "Rates of unemployment, from https://opendata.apur.org/datasets/Apur::recensement-iris-emploi/",
     "initialViewState": {
         "latitude": 48.85,
         "longitude": 2.39,

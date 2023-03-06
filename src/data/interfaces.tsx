@@ -20,6 +20,7 @@ export interface CityDataProps {
     name: string,
     nameFormatted: string,
     path: string,
+    social_index: string,
     initialViewState: {
         latitude: number,
         longitude: number,
@@ -114,6 +115,8 @@ export interface ExplainButtonProps {
     handleExplainChange: (explain: boolean) => void
 }
 export interface ExplainProps {
+    idx: number,
+    layer: string,
     explain: boolean,
-    layer: string
+    citiesArray: CityDataProps[]
 }
