@@ -39,7 +39,7 @@ interface AxisProps {
 
 const Axis = styled.g`
   transform: ${(props: AxisProps) =>
-    props.axisType === 'yAxis' && `translate(0, ${props.innerHeight}px)`};
+    props.axisType === 'xAxis' && `translate(0, ${props.innerHeight}px)`};
 
   path,
   line {
@@ -116,7 +116,6 @@ export default function Stats (props: StatsProps) {
 
     const svgRef = React.useRef<SVGSVGElement>(null);
     const xAxisRef = React.useRef<SVGSVGElement>(null);
-    const yAxisRef = React.useRef<SVGSVGElement>(null);
 
     const xAixsTickFormat:any = (number: any) => d3.format('.2s')(number);
 
@@ -177,19 +176,14 @@ export default function Stats (props: StatsProps) {
         handleDrawText(svg);
 
         const xGroup: any = d3.select(xAxisRef.current as any);
-        const yGroup: any = d3.select(yAxisRef.current as any);
 
         const xAxis = d3.axisBottom(xScale)
             .tickSize(-innerHeight)
             .tickPadding(xAxisPadding);
-        const yAxis = d3.axisLeft(yScale)
-            .tickSize(yTickSize)
-            .tickPadding(yAxisPadding);
 
         xAxis.tickFormat(xAixsTickFormat);
 
-        xGroup.call(yAxis);
-        yGroup.call(xAxis);
+        xGroup.call(xAxis);
 
     }, [data, innerHeight, xScale, yScale]);
 
@@ -215,7 +209,7 @@ export default function Stats (props: StatsProps) {
                   y={height / 2}
                   right={margin.right}
                   top={margin.top}>
-                    <Axis ref={yAxisRef} axisType="yAxis" innerHeight={innerHeight} />
+                    <Axis ref={xAxisRef} axisType="xAxis" innerHeight={innerHeight} />
                     <GroupedBars ref={svgRef} />
                 </Group>
                 </svg>
