@@ -101,7 +101,7 @@ export default function Stats (props: StatsProps) {
     const defaultHeight = 700;
     var widthTemp = defaultWidth;
     var heightTemp = defaultHeight;
-    const margin = { top: 150, right: 95, bottom: 60, left: 50 };
+    const margin = { top: 50, right: 95, bottom: 60, left: 50 };
     if (size.width !== null) {
         widthTemp = Math.min(widthTemp, size.width)
     }
@@ -192,28 +192,36 @@ export default function Stats (props: StatsProps) {
     return (
             <>
             <div id="stats-page" className={styles.statspage}>
-            <div id="stats-text" className={styles.statstext}>
-            <p>
-            <i>UTA Index Relative</i> - The combination of multi-modal travel
-            times relative to equivalent automobile times, and the social index
-            transformed to the same scale. Values less than one indicate that
-            relative travel times effectively counteract socio-demographic
-            disadvantage, while values greater than one indicate that lack of
-            transport provision exacerbates social inequality.
-            </p>
-            </div>
-            <div id="stats-container" className={styles.statsplot} >
-                <svg width={width} height={height}>
-                <Group
-                  x={width / 2}
-                  y={height / 2}
-                  right={margin.right}
-                  top={margin.top}>
-                    <Axis ref={xAxisRef} axisType="xAxis" innerHeight={innerHeight} />
-                    <GroupedBars ref={svgRef} />
-                </Group>
-                </svg>
-            </div>
+
+                <div id="stats-heading" className={styles.statsheading}>
+                    <p> <i>UTA Index Relative</i> </p>
+                </div>
+
+                <div id="stats-container" className={styles.statsplot} >
+                    <svg width={width} height={height}>
+                    <Group
+                      x={width / 2}
+                      y={height / 2}
+                      right={margin.right}
+                      top={margin.top}>
+                        <Axis ref={xAxisRef} axisType="xAxis" innerHeight={innerHeight} />
+                        <GroupedBars ref={svgRef} />
+                    </Group>
+                    </svg>
+                </div>
+
+                <div id="stats-text" className={styles.statstext}>
+                    <p>
+                    The combination of multi-modal travel times relative to
+                    equivalent automobile times, and the social index
+                    transformed to the same scale. Values less than one indicate
+                    that relative travel times effectively counteract
+                    socio-demographic disadvantage, while values greater than
+                    one indicate that lack of transport provision exacerbates
+                    social inequality.
+                    </p>
+                </div>
+
             </div>
             </>
            )
