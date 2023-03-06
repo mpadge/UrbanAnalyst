@@ -106,7 +106,6 @@
   justify-content: center;
   align-items: center;
   margin: 20px;
-  z-index: 10;
   position: relative;
   background-color: rgba(78, 153, 234, 0.5);
   border: 1px solid rgba(172, 175, 176, 0.3);
