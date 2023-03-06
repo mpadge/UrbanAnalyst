@@ -69,12 +69,14 @@ export interface ControlProps {
     idx: number,
     layer: string,
     alpha: number,
+    explain: any,
     citiesArray: CityDataProps[],
     viewState: ViewState,
     handleIdxChange: (pIdx: number) => void,
     handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
-    handleLayerChange: (layer: string) => void
+    handleLayerChange: (layer: string) => void,
+    handleExplainChange: (explain: any) => void
 }
 
 export interface CityListProps {
@@ -105,4 +107,12 @@ export interface OpacitySliderProps {
 export interface StatsProps {
     idx: number,
     citiesArray: CityDataProps[]
+}
+
+export interface ExplainButtonProps {
+    explain: boolean,
+    handleExplainChange: (explain: boolean) => void
+}
+export interface ExplainProps {
+    explain: boolean
 }

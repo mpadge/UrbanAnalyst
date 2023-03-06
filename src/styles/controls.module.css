@@ -101,3 +101,75 @@
     margin-bottom: 20px;
 }
 
+.explainbutton {
+  display: inherit;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  z-index: 10;
+  position: relative;
+  background-color: rgba(78, 153, 234, 0.5);
+  border: 1px solid rgba(172, 175, 176, 0.3);
+  border-radius: 12px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  left: 0%;
+  width: 70%;
+}
+
+
+.explainbutton p {
+  position: relative;
+  margin: 0;
+  padding: 1rem;
+}
+
+.explainbutton h2 {
+  font-weight: 600;
+  margin-top: 0.7rem;
+  margin-bottom: 0.7rem;
+  margin-left: 12px;
+}
+
+.explainbutton h3 {
+  font-weight: 400;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 12px;
+}
+
+.explaintext {
+  display: inherit;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  z-index: 10;
+  position: relative;
+  background-color: rgba(238, 240, 241, 0.5);
+  border: 1px solid rgba(172, 175, 176, 0.3);
+  border-radius: 12px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  left: 10%;
+  width: 70%;
+}
+
+
+.explaintext p {
+  position: relative;
+  margin: 0;
+  padding: 1rem;
+}
+
+.explaintext h2 {
+  font-weight: 600;
+  margin-top: 0.7rem;
+  margin-bottom: 0.7rem;
+  margin-left: 12px;
+}
+
+.explaintext h3 {
+  font-weight: 400;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 12px;
+}
+

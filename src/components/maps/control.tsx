@@ -5,6 +5,8 @@ import styles from '@/styles/controls.module.css';
 import CityList from '@/components/maps/citylist';
 import LayerList from '@/components/maps/layerlist';
 import OpacitySlider from '@/components/maps/slider';
+import ExplainButton from '@/components/maps/explain-button';
+import ExplainLayer from '@/components/maps/explain-layer';
 import { ControlProps } from "@/data/interfaces";
 
 export default function Control (props: ControlProps) {
@@ -53,6 +55,9 @@ export default function Control (props: ControlProps) {
                 alpha = {props.alpha}
                 handleAlphaChange={props.handleAlphaChange}
             />
+            <ExplainButton
+                explain = {props.explain}
+                handleExplainChange = {props.handleExplainChange} />
             </div>
 
             <button
@@ -62,6 +67,7 @@ export default function Control (props: ControlProps) {
             >Show Controls</button>
 
         </div>
+        <ExplainLayer explain = {props.explain} />
         </>
         )
 };

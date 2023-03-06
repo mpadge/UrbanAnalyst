@@ -27,6 +27,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     });
     const [layer, setLayer] = useState("social_index");
     const [alpha, setAlpha] = useState(0.5);
+    const [explain, setExplain] = useState(false);
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
@@ -41,6 +42,16 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     const handleLayerChange = (layer: string) => {
         setLayer(layer);
     }
+    const handleExplainChange = (e: any) => {
+        setExplain(!explain);
+    }
+
+    // click event to close Explain text:
+    const handleClick = (e) => {
+        if (explain) {
+            setExplain(false);
+        }
+    }
 
     return (
         <>
@@ -50,6 +61,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" href="/uta.ico" />
         </Head>
+        <div onClick={(e) => handleClick(e)}>
         <UTAMap
             idx = {idx}
             layer = {layer}
@@ -64,12 +76,14 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             idx = {idx}
             layer = {layer}
             alpha = {alpha}
+            explain = {explain}
             citiesArray = {props.citiesArray}
             viewState = {viewState}
             handleIdxChange = {handleIdxChange}
             handleAlphaChange = {handleAlphaChange}
             handleViewStateChange = {handleViewStateChange}
             handleLayerChange = {handleLayerChange}
+            handleExplainChange = {handleExplainChange}
         />
         <Legend
             idx = {idx}
@@ -78,6 +92,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             citiesArray = {props.citiesArray}
         />
         <Buttons />
+        </div>
         </>
         )
 };
