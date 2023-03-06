@@ -15,16 +15,13 @@ const GroupedBars = styled.g`
       fill: #00a7e4;
     }
   }
-`;
-
-// fill: #ec008b;
-// fill: #e46aa7;
-
-const GroupedText = styled.g`
   text {
     font-size: 1.2rem;
   }
 `;
+
+// fill: #ec008b;
+// fill: #e46aa7;
 
 interface GroupProps {
     right: number,
@@ -117,8 +114,7 @@ export default function Stats (props: StatsProps) {
     const yAxisPadding = 10;
     const yTickSize = 0;
 
-    const barsRef = React.useRef<SVGSVGElement>(null);
-    const textRef = React.useRef<SVGSVGElement>(null);
+    const svgRef = React.useRef<SVGSVGElement>(null);
     const xAxisRef = React.useRef<SVGSVGElement>(null);
     const yAxisRef = React.useRef<SVGSVGElement>(null);
 
@@ -143,8 +139,8 @@ export default function Stats (props: StatsProps) {
 
     useEffect(() => {
 
-        const handleDrawBars = (bars: any) => {
-            bars
+        const handleDrawBars = (svg: any) => {
+            svg
               .selectAll('rect')
               .data(data)
               .join('rect')
@@ -155,8 +151,8 @@ export default function Stats (props: StatsProps) {
               .attr('width', (d: any) => xScale(xValue(d)));
         };
 
-        const handleDrawText = (bars: any) => {
-            const ret = bars
+        const handleDrawText = (svg: any) => {
+            const ret = svg
                 .selectAll('text')
                 .data(data)
                 .join('text')
@@ -175,11 +171,10 @@ export default function Stats (props: StatsProps) {
             return ret;
         };
 
-        const bars = d3.select(barsRef.current as any);
-        const text = d3.select(textRef.current as any);
+        const svg = d3.select(svgRef.current as any);
 
-        handleDrawBars(bars);
-        handleDrawText(text);
+        handleDrawBars(svg);
+        handleDrawText(svg);
 
         const xGroup: any = d3.select(xAxisRef.current as any);
         const yGroup: any = d3.select(yAxisRef.current as any);
@@ -221,8 +216,7 @@ export default function Stats (props: StatsProps) {
                   right={margin.right}
                   top={margin.top}>
                     <Axis ref={yAxisRef} axisType="yAxis" innerHeight={innerHeight} />
-                    <GroupedBars ref={barsRef} />
-                    <GroupedText ref={textRef} />
+                    <GroupedBars ref={svgRef} />
                 </Group>
                 </svg>
             </div>
