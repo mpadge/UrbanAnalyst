@@ -10,6 +10,7 @@ import Control from '@/components/maps/control';
 import Legend from '@/components/maps/legend';
 import UTAMap from '@/components/maps/map';
 import Buttons from '@/components/maps/buttons';
+import styles from '@/styles/maps.module.css';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
 import { CityDataProps, CitiesDataProps, ViewState } from "@/data/interfaces";
@@ -53,6 +54,14 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         }
     }
 
+    var layer_temp: string = layer;
+    if (layer == "uta_rel") {
+        layer_temp = "combined_rel";
+    } else if (layer == "uta_abs") {
+        layer_temp = "combined_abs";
+    }
+    const layer_text = layer_temp;
+
     return (
         <>
         <Head>
@@ -62,6 +71,11 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             <link rel="icon" href="/uta.ico" />
         </Head>
         <div onClick={(e) => handleClick(e)}>
+        <div id="divinfo" style={{display: explain?"none":""}} >
+            <div id="stats-heading" className={styles.mapsheading}>
+                <p> {layer_text} </p>
+            </div>
+        </div>
         <UTAMap
             idx = {idx}
             layer = {layer}

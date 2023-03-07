@@ -1,0 +1,26 @@
+.mapsheading {
+  justify-content: center;
+  align: center;
+  text-align: center;
+  margin: 15px;
+  z-index: 10;
+  position: fixed;
+  font-family: sans-serif;
+  width: 250px;
+  top: 1%;
+  left: 50%;
+  margin-left: -125px;
+}
+
+.mapsheading p {
+  margin: 0;
+  padding: 1rem;
+  background-color: rgba(var(--callout-rgb), 0.5);
+  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
+  border-radius: var(--border-radius);
+}
+
+.mapsheading h2 {
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+}
