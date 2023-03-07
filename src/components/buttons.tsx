@@ -20,7 +20,7 @@ export default function Buttons () {
 
             <div id="sstats-button">
                 <Link
-                    href="/maps"
+                    href="/stats"
                     className={styles.card}
                     rel="noopener noreferrer"
                 >
