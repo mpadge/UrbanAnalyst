@@ -1,11 +1,11 @@
 
 .topright90 {
-  display: inherit;
+  display: flex;
   justify-content: center;
   align-items: center;
   margin: 20px;
   z-index: 10;
-  position: absolute;
+  position: fixed;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   top: 0;
   left: 90%;
@@ -13,8 +13,6 @@
 
 
 .topright90 p {
-  position: relative;
-  margin: 0;
   padding: 1rem;
   background-color: rgba(var(--card-rgb), 0.5);
   border: 1px solid rgba(var(--card-border-rgb), 0.3);
@@ -27,12 +25,12 @@
 }
 
 .topright80 {
-  display: inherit;
+  display: flex;
   justify-content: center;
   align-items: center;
   margin: 20px;
   z-index: 10;
-  position: absolute;
+  position: fixed;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   top: 0;
   left: 85%;
@@ -40,8 +38,6 @@
 
 
 .topright80 p {
-  position: relative;
-  margin: 0;
   padding: 1rem;
   background-color: rgba(var(--card-rgb), 0.5);
   border: 1px solid rgba(var(--card-border-rgb), 0.3);
