@@ -29,8 +29,8 @@ export default function ExplainButton (props: ExplainProps) {
     const layer_text: string = layer_text_temp;
 
     return (
-        <div id="explain-layer" className={styles.explaintext}>
-            <div id="divinfo" style={{display: props.explain?"":"none"}} >
+        <div id="divinfo" style={{display: props.explain?"":"none"}} >
+            <div id="explain-layer" className={styles.explaintext}>
                 <p>{layer_text} </p>
                 <p>(Click anywhere to close.)</p>
             </div>
