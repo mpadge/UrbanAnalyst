@@ -1,50 +1,28 @@
 
-.topright90 {
+.buttons {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
   z-index: 10;
   position: fixed;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  top: 0;
-  left: 90%;
+  min-height: 100vh;
+  gap: 20px;
+  top: 20px;
+  right: 20px;
 }
 
 
-.topright90 p {
+.buttons p {
+  display: inherit;
   padding: 1rem;
   background-color: rgba(var(--card-rgb), 0.5);
   border: 1px solid rgba(var(--card-border-rgb), 0.3);
   border-radius: var(--border-radius);
 }
 
-.topright90 h2 {
-  font-weight: 600;
-  margin-bottom: 0.7rem;
-}
-
-.topright80 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px;
-  z-index: 10;
-  position: fixed;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  top: 0;
-  left: 85%;
-}
-
-
-.topright80 p {
-  padding: 1rem;
-  background-color: rgba(var(--card-rgb), 0.5);
-  border: 1px solid rgba(var(--card-border-rgb), 0.3);
-  border-radius: var(--border-radius);
-}
-
-.topright80 h2 {
+.buttons h2 {
   font-weight: 600;
   margin-bottom: 0.7rem;
 }
@@ -52,7 +30,7 @@
 
 /* Mobile */
 @media (max-width: 700px) {
-  .topright80 {
+  .buttons {
       left: 70%;
   }
 
@@ -60,12 +38,7 @@
 
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
-  .topright90 {
+  .buttons {
       left: 85%;
   }
-
-  .topright80 {
-      left: 75%;
-  }
-
 }
