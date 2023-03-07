@@ -139,6 +139,7 @@
   display: inherit;
   justify-content: center;
   align-items: center;
+  text-align: center;
   margin: 20px;
   z-index: 10;
   position: relative;
