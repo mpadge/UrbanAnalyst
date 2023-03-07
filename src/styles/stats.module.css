@@ -34,21 +34,18 @@
 }
 
 .statsheading {
-  display: inherit;
   justify-content: center;
-  align-items: top;
-  margin: 20px;
+  align: center;
+  text-align: center;
+  margin: 15px;
   z-index: 10;
-  position: absolute;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  height: 100%;
-  width: 80%;
-  top: 0%;
-  left: 0%;
+  position: fixed;
+  font-family: sans-serif;
+  width: 250px;
+  top: 1%;
 }
 
 .statsheading p {
-  position: absolute;
   margin: 0;
   padding: 1rem;
   background-color: rgba(var(--callout-rgb), 0.5);

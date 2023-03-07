@@ -194,7 +194,7 @@ export default function Stats (props: StatsProps) {
             <div id="stats-page" className={styles.statspage}>
 
                 <div id="stats-heading" className={styles.statsheading}>
-                    <p> <i>UTA Index Relative</i> </p>
+                    <p> UTA Index Relative </p>
                 </div>
 
                 <div id="stats-container" className={styles.statsplot} >
