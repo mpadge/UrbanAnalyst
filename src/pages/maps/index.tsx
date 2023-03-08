@@ -9,11 +9,16 @@ import {Map} from "react-map-gl";
 import Control from '@/components/maps/control';
 import Legend from '@/components/maps/legend';
 import UTAMap from '@/components/maps/map';
-import Buttons from '@/components/maps/buttons';
+import Buttons from '@/components//buttons';
 import styles from '@/styles/maps.module.css';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
 import { CityDataProps, CitiesDataProps, ViewState } from "@/data/interfaces";
+
+const buttonProps = {
+    first: "home",
+    second: "stats"
+}
 
 const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 
@@ -105,7 +110,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             alpha = {alpha}
             citiesArray = {props.citiesArray}
         />
-        <Buttons />
+        <Buttons props={buttonProps} />
         </div>
         </>
         )

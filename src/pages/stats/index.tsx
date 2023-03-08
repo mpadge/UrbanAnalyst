@@ -2,12 +2,17 @@
 import Head from 'next/head'
 import {NextPage} from "next";
 import {useState} from "react";
-import Buttons from '@/components/stats/buttons';
+import Buttons from '@/components//buttons';
 import Stats from '@/components/stats/stats';
 import styles from '@/styles/Home.module.css'
 
 import { CITY_DATA } from '@/data/citydata';
 import { CityDataProps, CitiesDataProps, ViewState } from "@/data/interfaces";
+
+const buttonProps = {
+    first: "home",
+    second: "maps"
+}
 
 const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 
@@ -31,7 +36,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
                 idx = {idx}
                 citiesArray = {props.citiesArray}
             />
-            <Buttons />
+            <Buttons props={buttonProps} />
         </main>
         </>
         )

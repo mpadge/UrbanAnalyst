@@ -7,6 +7,11 @@ import Buttons from '@/components/buttons'
 
 const inter = Inter({ subsets: ['latin'] })
 
+const buttonProps = {
+    first: "maps",
+    second: "stats"
+}
+
 export default function Home() {
     return (
         <>
@@ -17,7 +22,7 @@ export default function Home() {
             <link rel="icon" href="/uta.ico" />
         </Head>
         <main className={styles.main}>
-            <Buttons />
+            <Buttons props={buttonProps} />
             <div className={styles.description}>
                 <p>
                     <a
