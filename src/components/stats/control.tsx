@@ -3,8 +3,8 @@ import {useState} from 'react';
 import Link from 'next/link'
 import styles from '@/styles/controls.module.css';
 import LayerList from '@/components/stats/layerlist';
-import ExplainButton from '@/components/maps/explain-button';
-import ExplainLayer from '@/components/maps/explain-layer';
+import ExplainButton from '@/components/stats/explain-button';
+import ExplainLayer from '@/components/stats/explain-layer';
 import { StatsControlProps } from "@/data/interfaces";
 
 export default function Control (props: StatsControlProps) {

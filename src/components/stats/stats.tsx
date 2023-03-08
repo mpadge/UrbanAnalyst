@@ -200,12 +200,28 @@ export default function Stats (props: StatsProps) {
 
     const inputRef = useRef()
 
+    var heading: string = "";
+    if (props.layer == 'sd_uta2trans_rel') {
+        heading = 'UTA Rel';
+    } else if (props.layer == 'sd_uta2trans_abs') {
+        heading = 'UTA Abs';
+    } else if (props.layer == 'transport_abs') {
+        heading = 'Transport Abs';
+    } else if (props.layer == 'transport_rel') {
+        heading = 'Transport Rel';
+    } else if (props.layer == 'uta_abs') {
+        heading = 'Combined Abs';
+    } else if (props.layer == 'uta_rel') {
+        heading = 'Combined Rel';
+    }
+    const heading_txt = heading;
+
     return (
             <>
             <div id="stats-page" className={styles.statspage}>
 
                 <div id="stats-heading" className={styles.statsheading}>
-                    <p> UTA Index Relative </p>
+                    <p> {heading_txt} </p>
                 </div>
 
                 <div id="stats-container" className={styles.statsplot} >
@@ -219,18 +235,6 @@ export default function Stats (props: StatsProps) {
                         <GroupedBars ref={svgRef} />
                     </Group>
                     </svg>
-                </div>
-
-                <div id="stats-text" className={styles.statstext}>
-                    <p>
-                    The combination of multi-modal travel times relative to
-                    equivalent automobile times, and the social index
-                    transformed to the same scale. Values less than one indicate
-                    that relative travel times effectively counteract
-                    socio-demographic disadvantage, while values greater than
-                    one indicate that lack of transport provision exacerbates
-                    social inequality.
-                    </p>
                 </div>
 
             </div>
