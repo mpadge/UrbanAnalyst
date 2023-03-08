@@ -2,11 +2,7 @@
 import {useState} from 'react';
 import Link from 'next/link'
 import styles from '@/styles/buttons.module.css';
-
-interface ButtonProps {
-    first: string,
-    second: string
-}
+import { ButtonProps } from '@/data/interfaces';
 
 function capitaliseFirst(s: string) {
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -22,15 +18,15 @@ export default function Buttons (props: ButtonProps) {
         }
     }
 
-    const firstHref = getHref(props.props.first);
-    const First = capitaliseFirst(props.props.first);
-    const secondHref = getHref(props.props.second);
-    const Second = capitaliseFirst(props.props.second);
+    const firstHref = getHref(props.buttons.first);
+    const First = capitaliseFirst(props.buttons.first);
+    const secondHref = getHref(props.buttons.second);
+    const Second = capitaliseFirst(props.buttons.second);
 
     return (
         <>
         <div id="top-right-container" className={styles.buttons}>
-            <div id="maps-button">
+            <div id="first-button">
                 <Link
                     href={firstHref}
                     className={styles.card}
@@ -40,7 +36,7 @@ export default function Buttons (props: ButtonProps) {
                 </Link>
             </div>
 
-            <div id="sstats-button">
+            <div id="second-button">
                 <Link
                     href={secondHref}
                     className={styles.card}

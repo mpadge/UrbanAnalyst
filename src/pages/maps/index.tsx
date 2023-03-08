@@ -110,7 +110,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             alpha = {alpha}
             citiesArray = {props.citiesArray}
         />
-        <Buttons props={buttonProps} />
+        <Buttons buttons={buttonProps} />
         </div>
         </>
         )

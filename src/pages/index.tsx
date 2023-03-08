@@ -4,15 +4,17 @@ import Link from 'next/link'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import Buttons from '@/components/buttons'
+import { ButtonProps} from '@/data/interfaces';
 
 const inter = Inter({ subsets: ['latin'] })
 
-const buttonProps = {
-    first: "maps",
-    second: "stats"
-}
-
 export default function Home() {
+
+    const buttons = {
+        first: "maps",
+        second: "stats"
+    }
+
     return (
         <>
         <Head>
@@ -22,7 +24,7 @@ export default function Home() {
             <link rel="icon" href="/uta.ico" />
         </Head>
         <main className={styles.main}>
-            <Buttons props={buttonProps} />
+            <Buttons buttons={buttons} />
             <div className={styles.description}>
                 <p>
                     <a

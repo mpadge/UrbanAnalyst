@@ -9,11 +9,6 @@ import styles from '@/styles/Home.module.css'
 import { CITY_DATA } from '@/data/citydata';
 import { CityDataProps, CitiesDataProps, ViewState } from "@/data/interfaces";
 
-const buttonProps = {
-    first: "home",
-    second: "maps"
-}
-
 const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 
     const [idx, setIdx] = useState(0);
@@ -21,6 +16,11 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
+    }
+
+    const buttons = {
+        first: "home",
+        second: "maps"
     }
 
     return (
@@ -36,7 +36,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
                 idx = {idx}
                 citiesArray = {props.citiesArray}
             />
-            <Buttons props={buttonProps} />
+            <Buttons buttons={buttons} />
         </main>
         </>
         )

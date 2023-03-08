@@ -120,3 +120,10 @@ export interface ExplainProps {
     explain: boolean,
     citiesArray: CityDataProps[]
 }
+
+export interface ButtonProps {
+    buttons: {
+        first: string,
+        second: string
+    }
+}
