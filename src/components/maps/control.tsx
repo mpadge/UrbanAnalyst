@@ -5,8 +5,8 @@ import styles from '@/styles/controls.module.css';
 import CityList from '@/components/maps/citylist';
 import LayerList from '@/components/maps/layerlist';
 import OpacitySlider from '@/components/maps/slider';
-import ExplainButton from '@/components/maps/explain-button';
-import ExplainLayer from '@/components/maps/explain-layer';
+import ExplainButton from '@/components/controls/explain-button';
+import ExplainLayer from '@/components/controls/explain-layer';
 import { MapsControlProps } from "@/data/interfaces";
 
 export default function Control (props: MapsControlProps) {
