@@ -46,8 +46,8 @@ export interface CityDataProps {
         transport_abs: number[],
         uta_rel: number[],
         uta_abs: number[],
-        sd_uta2trans_rel: number,
-        sd_uta2trans_abs: number
+        sd_uta2trans_rel: number[],
+        sd_uta2trans_abs: number[]
     }
 }
 
@@ -76,6 +76,15 @@ export interface ControlProps {
     handleIdxChange: (pIdx: number) => void,
     handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
+    handleLayerChange: (layer: string) => void,
+    handleExplainChange: (explain: any) => void
+}
+
+export interface StatsControlProps {
+    idx: number,
+    layer: string,
+    explain: any,
+    citiesArray: CityDataProps[],
     handleLayerChange: (layer: string) => void,
     handleExplainChange: (explain: any) => void
 }
