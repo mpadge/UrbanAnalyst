@@ -7,9 +7,9 @@ import LayerList from '@/components/maps/layerlist';
 import OpacitySlider from '@/components/maps/slider';
 import ExplainButton from '@/components/maps/explain-button';
 import ExplainLayer from '@/components/maps/explain-layer';
-import { ControlProps } from "@/data/interfaces";
+import { MapsControlProps } from "@/data/interfaces";
 
-export default function Control (props: ControlProps) {
+export default function Control (props: MapsControlProps) {
 
     const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
 

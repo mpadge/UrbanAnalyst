@@ -66,7 +66,7 @@ export interface MapProps {
     handleLayerChange: (layer: string) => void
 }
 
-export interface ControlProps {
+export interface MapsControlProps {
     idx: number,
     layer: string,
     alpha: number,
