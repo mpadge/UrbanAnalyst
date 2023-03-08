@@ -5,22 +5,22 @@
 }
 
 .statsplot {
-  display: inherit;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  align: center;
+  align: top;
   align-items: center;
   margin: 20px;
   z-index: 10;
-  position: relative;
+  position: absolute;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   height: 100%;
-  width: 100%;
+  width: 80%;
   top: 0%;
-  left: 0%;
+  left: 10%;
 }
 
 .statsplot p {
-  position: absolute;
   margin: 0;
   padding: 1rem;
   background-color: rgba(var(--callout-rgb), 0.5);
