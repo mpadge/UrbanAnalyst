@@ -13,9 +13,13 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 
     const [idx, setIdx] = useState(0);
     const [cityData, setCityData] = useState(props.citiesArray[idx]);
+    const [layer, setLayer] = useState("sd_uta2trans_abs");
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
+    }
+    const handleLayerChange = (layer: string) => {
+        setLayer(layer);
     }
 
     const buttons = {
@@ -34,6 +38,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         <main className={styles.main}>
             <Stats
                 idx = {idx}
+                layer = {layer}
                 citiesArray = {props.citiesArray}
             />
             <Buttons buttons={buttons} />

@@ -6,6 +6,17 @@ import styled from 'styled-components';
 import styles from '@/styles/stats.module.css';
 import { StatsProps } from "@/data/interfaces";
 
+interface CityStatsProps {
+    social_index: number[],
+    transport_rel: number[],
+    transport_abs: number[],
+    uta_rel: number[],
+    uta_abs: number[],
+    sd_uta2trans_rel: number,
+    sd_uta2trans_abs: number
+}
+
+
 const GroupedBars = styled.g`
   rect {
     fill: #008bec;
@@ -92,7 +103,7 @@ export default function Stats (props: StatsProps) {
 
     const data = props.citiesArray.map((city, index) => ({
         city: city.name,
-        value: city.statistics.sd_uta2trans_rel
+        value: city.statistics[props.layer as keyof CityStatsProps]
     }));
 
     const size = useWindowSize();
