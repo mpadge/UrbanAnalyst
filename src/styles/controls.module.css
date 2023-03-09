@@ -12,6 +12,7 @@
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   top: 0;
   left: 0;
+  width: 10dvw;
 }
 
 
@@ -43,6 +44,7 @@
     width: 90%;
     align: center;
     margin-left: 10px;
+    width: 8dvw;
 }
 
 .opacitySlider {
