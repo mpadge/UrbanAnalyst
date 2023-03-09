@@ -128,11 +128,17 @@ export default function Stats (props: StatsProps) {
     const svgRef = React.useRef<SVGSVGElement>(null);
     const xAxisRef = React.useRef<SVGSVGElement>(null);
 
+    var xMinTemp: number = 0;
+    if (props.layer == 'transport_abs' || props.layer == 'uta_abs') {
+        xMinTemp = 35;
+    }
+    const xMin = xMinTemp;
+
     // X-axis:
     const xValue = (d: any) => d.value;
     const xScale = d3.scaleLinear()
-        .domain([0, d3.max(data, xValue)])
-        .range([0, innerWidth])
+        .domain([xMin, d3.max(data, xValue)])
+        .range([xMin, innerWidth])
         .nice();
 
     // Y-axis
@@ -183,7 +189,7 @@ export default function Stats (props: StatsProps) {
 
         const xGroup: any = d3.select(xAxisRef.current as any);
 
-        const nTicks = (innerWidth < 700) ? 5 : 10;
+        const nTicks = (innerWidth < 700 || xMin > 0) ? 5 : 10;
 
         const xAxis = d3.axisBottom(xScale)
             .tickSize(-innerHeight)
@@ -192,7 +198,7 @@ export default function Stats (props: StatsProps) {
 
         xGroup.call(xAxis);
 
-    }, [data, innerHeight, innerWidth, xScale, yScale]);
+    }, [data, innerHeight, innerWidth, xScale, yScale, xMin]);
 
     const inputRef = useRef()
 
