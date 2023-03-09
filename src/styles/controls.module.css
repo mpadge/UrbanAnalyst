@@ -212,3 +212,24 @@
   margin-left: 12px;
 }
 
+/* Tablet and Smaller Desktop */
+@media (min-width: 701px) and (max-width: 1120px) {
+    .controls {
+        width: 20dvw;
+    }
+    .listSelect {
+        margin-left: 5px;
+        width: 16dvw;
+    }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+    .controls {
+        width: 50dvw;
+    }
+    .listSelect {
+        margin-left: 5px;
+        width: 40dvw;
+    }
+}
