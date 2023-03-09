@@ -15,7 +15,6 @@
 
 
 .buttons p {
-  display: inherit;
   padding: 1rem;
   background-color: rgba(var(--card-rgb), 0.5);
   border: 1px solid rgba(var(--card-border-rgb), 0.3);
@@ -31,7 +30,7 @@
 /* Mobile */
 @media (max-width: 700px) {
   .buttons {
-      left: 70%;
+      right: 10dvw;
   }
 
 }
@@ -39,6 +38,6 @@
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .buttons {
-      left: 85%;
+      right: 10dvw;
   }
 }
