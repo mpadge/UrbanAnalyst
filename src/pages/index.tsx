@@ -83,7 +83,7 @@ export default function Home() {
                     <p className={styles.cardText}>
                         Interactive maps of all cities analysed to date. Transport values
                         are derived for every street intersection in a city by calculating
-                        fastest times taken to travel to every other point in the city using
+                        times taken to travel to every other point in the city using
                         specified single or multiple modes of transport, and calculating the
                         average time needed to travel 10km from each point.
                     </p>
@@ -102,8 +102,9 @@ export default function Home() {
                         The statistics, or &quot;stats&quot;, section shows average values for every
                         UTA city for each variable shown in the maps. This enables the
                         overall values for any city to be compared with values for all other
-                        cities.
-                    </p>
+                        cities. The "UTA Index" measures the extent to which
+                        transport exacerbates (high values) or counteracts (low
+                        values) social inequality.  </p>
                 </Link>
 
             </div>
