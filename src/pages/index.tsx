@@ -47,7 +47,7 @@ export default function Home() {
 
             <div className={styles.centerBig}>
                 <p className="text-center">
-                    An open source platform for analysing and comparing urban transport systems across the world.
+                    Open source analyses of urban transport systems across the world.
                 </p>
             </div>
 
