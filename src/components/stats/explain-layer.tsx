@@ -31,7 +31,6 @@ export default function ExplainButton (props: ExplainProps) {
         <div id="divinfo" style={{display: props.explain?"":"none"}} >
             <div id="explain-layer" className={styles.explaintext}>
                 <p>{layer_text} </p>
-                <p>(Click anywhere to close.)</p>
             </div>
         </div>
     )

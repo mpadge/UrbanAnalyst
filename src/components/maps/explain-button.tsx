@@ -8,7 +8,7 @@ export default function ExplainButton (props: ExplainButtonProps) {
     return (
     <section className="button">
     <button
-        className={styles.explainbutton}
+        className={styles.explainbuttonOff}
         type="button"
         onClick={() => props.handleExplainChange(props.explain)}
     >Explain Layer</button>
