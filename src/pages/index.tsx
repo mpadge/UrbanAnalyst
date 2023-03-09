@@ -102,7 +102,7 @@ export default function Home() {
                         The statistics, or &quot;stats&quot;, section shows average values for every
                         UTA city for each variable shown in the maps. This enables the
                         overall values for any city to be compared with values for all other
-                        cities. The "UTA Index" measures the extent to which
+                        cities. The &quot;UTA Index&quot; measures the extent to which
                         transport exacerbates (high values) or counteracts (low
                         values) social inequality.  </p>
                 </Link>
