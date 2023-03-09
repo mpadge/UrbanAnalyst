@@ -23,8 +23,8 @@ export default function Home() {
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" href="/uta.ico" />
         </Head>
+        <Buttons buttons={buttons} />
         <main className={styles.main}>
-            <Buttons buttons={buttons} />
             <div className={styles.description}>
                 <p>
                     <a
