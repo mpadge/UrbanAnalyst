@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from '@/styles/controls.module.css';
+import styles from '@/styles/stats.module.css';
 import { ExplainProps } from "@/data/interfaces";
 
 interface LayerTextProps {
@@ -29,7 +29,7 @@ export default function ExplainButton (props: ExplainProps) {
 
     return (
         <div id="divinfo" style={{display: props.explain?"":"none"}} >
-            <div id="explain-layer" className={styles.explaintext}>
+            <div id="explain-layer" className={styles.statstext}>
                 <p>{layer_text} </p>
             </div>
         </div>

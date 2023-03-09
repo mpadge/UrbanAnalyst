@@ -118,7 +118,7 @@ export default function Stats (props: StatsProps) {
     }
     const width = widthTemp;
     const height = heightTemp;
-    const innerWidth = width - margin.right - margin.left;
+    const innerWidth = width - margin.right - 2 * margin.left;
     const innerHeight = height - margin.top - margin.bottom;
 
     const xAxisPadding = 10;
@@ -213,11 +213,8 @@ export default function Stats (props: StatsProps) {
             <>
             <div id="stats-page" className={styles.statspage}>
 
-                <div id="stats-heading" className={styles.statsheading}>
-                    <p> {heading_txt} </p>
-                </div>
-
                 <div id="stats-container" className={styles.statsplot} >
+                    <h2> {heading_txt} </h2>
                     <svg width={width} height={height}>
                     <Group
                       x={width / 2}
