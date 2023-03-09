@@ -52,13 +52,6 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         setExplain(!explain);
     }
 
-    // click event to close Explain text:
-    const handleClick = (e: any) => {
-        if (explain) {
-            setExplain(false);
-        }
-    }
-
     var layer_temp: string = layer;
     if (layer == "uta_rel") {
         layer_temp = "combined_rel";
@@ -75,7 +68,6 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" href="/uta.ico" />
         </Head>
-        <div onClick={(e) => handleClick(e)}>
         <div id="divinfo" style={{display: explain?"none":""}} >
             <div id="stats-heading" className={styles.mapsheading}>
                 <p> {layer_text} </p>
@@ -111,7 +103,6 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             citiesArray = {props.citiesArray}
         />
         <Buttons buttons={buttonProps} />
-        </div>
         </>
         )
 };

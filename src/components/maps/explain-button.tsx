@@ -5,13 +5,22 @@ import { ExplainButtonProps } from "@/data/interfaces";
 
 export default function ExplainButton (props: ExplainButtonProps) {
 
+    var buttonStyleTemp: any = styles.explainbuttonOff;
+    var buttonTextTemp: string = "Explain Layer";
+    if (props.explain) {
+        buttonStyleTemp = styles.explainbuttonOn;
+        buttonTextTemp = "Close Text";
+    }
+    const buttonStyle = buttonStyleTemp;
+    const buttonText = buttonTextTemp;
+
     return (
     <section className="button">
     <button
-        className={styles.explainbuttonOff}
+        className={buttonStyle}
         type="button"
         onClick={() => props.handleExplainChange(props.explain)}
-    >Explain Layer</button>
+    >{buttonText}</button>
     </section>
     )
 }
