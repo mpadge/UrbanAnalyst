@@ -198,17 +198,17 @@ export default function Stats (props: StatsProps) {
 
     var heading: string = "";
     if (props.layer == 'sd_uta2trans_rel') {
-        heading = 'UTA Rel';
+        heading = 'UTA Relative';
     } else if (props.layer == 'sd_uta2trans_abs') {
-        heading = 'UTA Abs';
+        heading = 'UTA Absolute';
     } else if (props.layer == 'transport_abs') {
-        heading = 'Transport Abs';
+        heading = 'Transport Absolute';
     } else if (props.layer == 'transport_rel') {
-        heading = 'Transport Rel';
+        heading = 'Transport Relative';
     } else if (props.layer == 'uta_abs') {
-        heading = 'Combined Abs';
+        heading = 'Combined Absolute';
     } else if (props.layer == 'uta_rel') {
-        heading = 'Combined Rel';
+        heading = 'Combined Relative';
     }
     const heading_txt = heading;
 
