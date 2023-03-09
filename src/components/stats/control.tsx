@@ -1,6 +1,7 @@
 
 import {useState} from 'react';
 import Link from 'next/link'
+import Image from 'next/image'
 import styles from '@/styles/controls.module.css';
 import LayerList from '@/components/stats/layerlist';
 import ExplainButton from '@/components/stats/explain-button';
@@ -31,8 +32,15 @@ export default function Control (props: StatsControlProps) {
                 X
             </button>
 
-
-            <h2>UTA</h2>
+            <h3>
+            <Image
+            src="/uta.svg"
+            alt="UTA Logo"
+            // className={styles.vercelLogo}
+            width={100}
+            height={50}
+            />
+            </h3>
 
             <h3>Layer</h3>
             <LayerList

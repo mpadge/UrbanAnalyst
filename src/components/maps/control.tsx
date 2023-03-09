@@ -1,6 +1,7 @@
 
 import {useState} from 'react';
 import Link from 'next/link'
+import Image from 'next/image'
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/maps/citylist';
 import LayerList from '@/components/maps/layerlist';
@@ -33,10 +34,16 @@ export default function Control (props: MapsControlProps) {
                 X
             </button>
 
+            <p>
+            <Image
+            src="/uta.svg"
+            alt="UTA Logo"
+            // className={styles.vercelLogo}
+            width={100}
+            height={50}
+            />
+            </p>
 
-            <h2>UTA</h2>
-
-            <h3>City</h3>
             <CityList
                 citiesArray={props.citiesArray}
                 idx={props.idx}
