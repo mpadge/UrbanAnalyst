@@ -183,13 +183,16 @@ export default function Stats (props: StatsProps) {
 
         const xGroup: any = d3.select(xAxisRef.current as any);
 
+        const nTicks = (innerWidth < 700) ? 5 : 10;
+
         const xAxis = d3.axisBottom(xScale)
             .tickSize(-innerHeight)
+            .ticks(nTicks)
             .tickPadding(xAxisPadding);
 
         xGroup.call(xAxis);
 
-    }, [data, innerHeight, xScale, yScale]);
+    }, [data, innerHeight, innerWidth, xScale, yScale]);
 
     const inputRef = useRef()
 
