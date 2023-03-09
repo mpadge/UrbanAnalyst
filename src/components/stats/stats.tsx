@@ -128,11 +128,6 @@ export default function Stats (props: StatsProps) {
     const svgRef = React.useRef<SVGSVGElement>(null);
     const xAxisRef = React.useRef<SVGSVGElement>(null);
 
-    const xAixsTickFormat:any = (number: any) => d3.format('.2s')(number);
-
-    // var t = d3.transition()
-    //     .duration(750);
-
     // X-axis:
     const xValue = (d: any) => d.value;
     const xScale = d3.scaleLinear()
@@ -191,8 +186,6 @@ export default function Stats (props: StatsProps) {
         const xAxis = d3.axisBottom(xScale)
             .tickSize(-innerHeight)
             .tickPadding(xAxisPadding);
-
-        xAxis.tickFormat(xAixsTickFormat);
 
         xGroup.call(xAxis);
 
