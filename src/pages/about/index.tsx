@@ -48,7 +48,7 @@ export default function Home() {
 
             <div className={styles.centerBig}>
                 <p className="text-center">
-                    Urban transport analyst
+                    Urban Transport Analyst
                 </p>
             </div>
 
@@ -89,7 +89,7 @@ export default function Home() {
                     >
                     &quot;UrbanAnalyst&quot;
                     </a>
-                    and &nbsp;
+                    &nbsp; and &nbsp;
                     <a
                     href="https://github.com/atfutures"
                     target="_blank"
