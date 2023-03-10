@@ -1,4 +1,4 @@
-Source code for [Urban Transport Analyst](https://urbananalyst.vercel.app) site.
+Source code for [Urban Transport Analyst](https://urbananalyst.city) site.
 
 ## What's this built from?
 
