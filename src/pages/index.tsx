@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
-import Buttons from '@/components/buttons'
+import Buttons from '@/components/buttons2'
 import { ButtonProps} from '@/data/interfaces';
 
 const inter = Inter({ subsets: ['latin'] })

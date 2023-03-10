@@ -134,6 +134,7 @@ export interface ExplainProps {
 export interface ButtonProps {
     buttons: {
         first: string,
-        second: string
+        second: string,
+        third?: string
     }
 }

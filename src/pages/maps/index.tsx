@@ -9,7 +9,7 @@ import {Map} from "react-map-gl";
 import Control from '@/components/maps/control';
 import Legend from '@/components/maps/legend';
 import UTAMap from '@/components/maps/map';
-import Buttons from '@/components//buttons';
+import Buttons from '@/components/buttons2';
 import styles from '@/styles/maps.module.css';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';

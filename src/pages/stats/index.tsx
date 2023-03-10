@@ -3,7 +3,7 @@ import Head from 'next/head'
 import {NextPage} from "next";
 import {useState} from "react";
 import Control from '@/components/stats/control';
-import Buttons from '@/components//buttons';
+import Buttons from '@/components/buttons2';
 import Stats from '@/components/stats/stats';
 import styles from '@/styles/Home.module.css'
 
