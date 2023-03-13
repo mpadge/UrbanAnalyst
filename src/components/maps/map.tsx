@@ -98,7 +98,6 @@ export default function UTAMap (props: MapProps) {
         <Map
             mapStyle={MAP_STYLE}
             mapboxAccessToken={MapboxAccessToken}
-            touchZoom={true}
         >
         </Map>
         </DeckGL>
