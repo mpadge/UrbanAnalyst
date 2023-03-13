@@ -98,6 +98,7 @@ export default function UTAMap (props: MapProps) {
         <Map
             mapStyle={MAP_STYLE}
             mapboxAccessToken={MapboxAccessToken}
+            cooperativeGestures={true}
         >
         </Map>
         </DeckGL>

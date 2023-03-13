@@ -66,12 +66,17 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     }
     const layer_text = layer_temp;
 
+    // meta viewport from:
+    // https://docs.mapbox.com/mapbox-gl-js/example/disable-scroll-zoom/
+
     return (
         <>
         <Head>
             <title>UTA Maps</title>
             <meta name="description" content="Maps for Urban Transport Analyst" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta name="viewport"
+                content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <link rel="icon" href="/uta.ico" />
         </Head>
         <div id="divinfo" style={{display: explain?"none":""}} >
