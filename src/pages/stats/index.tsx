@@ -48,6 +48,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             <Stats
                 idx = {idx}
                 layer = {layer}
+                sortOpt = {sortOpt}
                 citiesArray = {props.citiesArray}
             />
             <Control

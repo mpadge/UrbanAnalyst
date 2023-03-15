@@ -124,6 +124,7 @@ export interface OpacitySliderProps {
 export interface StatsProps {
     idx: number,
     layer: string,
+    sortOpt: string,
     citiesArray: CityDataProps[]
 }
 

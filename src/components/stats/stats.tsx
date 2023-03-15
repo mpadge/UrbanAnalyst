@@ -125,6 +125,13 @@ export default function Stats (props: StatsProps) {
         city: city.name,
         value: city.statistics[props.layer as keyof CityStatsProps][0]
     }));
+    if (props.sortOpt === 'increasing') {
+        data.sort((a, b) => d3.ascending(a.value, b.value));
+    } else if (props.sortOpt === 'decreasing') {
+        data.sort((a, b) => d3.descending(a.value, b.value));
+    } else if (props.sortOpt === 'alphabetic') {
+        data.sort((a, b) => d3.ascending(a.city, b.city));
+    }
 
     const size = useWindowSize();
 
