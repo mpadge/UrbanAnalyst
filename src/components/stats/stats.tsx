@@ -97,6 +97,26 @@ function useWindowSize() {
     return windowSize;
 }
 
+function StatsHeadingText (layer: string) {
+
+    var heading: string = "";
+    if (layer == 'sd_uta2trans_rel') {
+        heading = 'UTA Relative';
+    } else if (layer == 'sd_uta2trans_abs') {
+        heading = 'UTA Absolute';
+    } else if (layer == 'transport_abs') {
+        heading = 'Transport Absolute';
+    } else if (layer == 'transport_rel') {
+        heading = 'Transport Relative';
+    } else if (layer == 'uta_abs') {
+        heading = 'Combined Absolute';
+    } else if (layer == 'uta_rel') {
+        heading = 'Combined Relative';
+    }
+
+    return heading;
+}
+
 export default function Stats (props: StatsProps) {
 
     const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
@@ -202,28 +222,14 @@ export default function Stats (props: StatsProps) {
 
     const inputRef = useRef()
 
-    var heading: string = "";
-    if (props.layer == 'sd_uta2trans_rel') {
-        heading = 'UTA Relative';
-    } else if (props.layer == 'sd_uta2trans_abs') {
-        heading = 'UTA Absolute';
-    } else if (props.layer == 'transport_abs') {
-        heading = 'Transport Absolute';
-    } else if (props.layer == 'transport_rel') {
-        heading = 'Transport Relative';
-    } else if (props.layer == 'uta_abs') {
-        heading = 'Combined Absolute';
-    } else if (props.layer == 'uta_rel') {
-        heading = 'Combined Relative';
-    }
-    const heading_txt = heading;
+    const heading = StatsHeadingText (props.layer);
 
     return (
             <>
             <div id="stats-page" className={styles.statspage}>
 
                 <div id="stats-container" className={styles.statsplot} >
-                    <h2> {heading_txt} </h2>
+                    <h2> {heading} </h2>
                     <svg width={width} height={height}>
                     <Group
                       x={width / 2}
