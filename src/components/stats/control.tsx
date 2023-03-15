@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styles from '@/styles/controls.module.css';
 import LayerList from '@/components/stats/layerlist';
+import SortOrderList from '@/components/stats/sortOrderList';
 import ExplainButton from '@/components/stats/explain-button';
 import ExplainLayer from '@/components/stats/explain-layer';
 import { StatsControlProps } from "@/data/interfaces";
@@ -46,6 +47,11 @@ export default function Control (props: StatsControlProps) {
             <LayerList
                 layer = {props.layer}
                 handleLayerChange = {props.handleLayerChange}
+            />
+            <h3>Sort Order</h3>
+            <SortOrderList
+                sortOpt = {props.sortOpt}
+                handleSortChange = {props.handleSortChange}
             />
             <ExplainButton
                 explain = {props.explain}

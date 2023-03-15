@@ -84,8 +84,10 @@ export interface StatsControlProps {
     idx: number,
     layer: string,
     explain: any,
+    sortOpt: string,
     citiesArray: CityDataProps[],
     handleLayerChange: (layer: string) => void,
+    handleSortChange: (sortOpt: string) => void,
     handleExplainChange: (explain: any) => void
 }
 
@@ -100,6 +102,11 @@ export interface CityListProps {
 export interface LayerListProps {
     layer: string,
     handleLayerChange: (layer: string) => void
+}
+
+export interface SortOrderListProps {
+    sortOpt: string,
+    handleSortChange: (sortOpt: string) => void
 }
 
 export interface LegendProps {

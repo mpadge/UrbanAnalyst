@@ -16,6 +16,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     const [cityData, setCityData] = useState(props.citiesArray[idx]);
     const [layer, setLayer] = useState("sd_uta2trans_rel"); // options[0] in layerlist.tsx
     const [explain, setExplain] = useState(false);
+    const [sortOpt, setSortOpt] = useState("increasing");
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
@@ -25,6 +26,9 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     }
     const handleExplainChange = (e: any) => {
         setExplain(!explain);
+    }
+    const handleSortChange = (sortOpt: string) => {
+        setSortOpt (sortOpt)
     }
 
     const buttons = {
@@ -50,8 +54,10 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
                 idx = {idx}
                 layer = {layer}
                 explain = {explain}
+                sortOpt = {sortOpt}
                 citiesArray = {props.citiesArray}
                 handleLayerChange = {handleLayerChange}
+                handleSortChange = {handleSortChange}
                 handleExplainChange = {handleExplainChange}
             />
             <Buttons buttons={buttons} />
