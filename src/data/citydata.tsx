@@ -77,6 +77,41 @@ const hamburg = {
     }
 }
 
+const mannheim = {
+    "name": "mannheim",
+    "nameFormatted": "Mannheim",
+    "path": "/data/mannheim/data.json",
+    "social_index": "Rates of unemployment, from https://www.gis-mannheim.de/mannheim/",
+    "initialViewState": {
+        "latitude": 49.49,
+        "longitude": 8.50,
+        "zoom": 10
+    },
+    "dataRanges": {
+        "social_index": [2.10000, 12.10000],
+        "transport_rel": [1.67870, 2.77000],
+        "transport_abs": [40.38067, 44.37934],
+        "uta_rel": [1.53000, 2.97000],
+        "uta_abs": [40.62375, 45.20000]
+    },
+    "dataIntervals": {
+        "social_index": [11.6, 11.7, 11.8, 11.9, 12],
+        "transport_rel": [1.95, 2, 2.05, 2.1, 2.15, 2.2, 2.25, 2.3, 2.35],
+        "transport_abs": [42, 42.2, 42.4, 42.6, 42.8, 43, 43.2],
+        "uta_rel": [1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4],
+        "uta_abs": [41.6, 42, 42.4, 42.8, 43.2]
+    },
+    "statistics": {
+        "social_index": [5.12, 2.92],
+        "transport_rel": [2.17, 0.38],
+        "transport_abs": [42.52, 0.97],
+        "uta_rel": [2.09, 0.46],
+        "uta_abs": [42.5, 1.43],
+        "sd_uta2trans_rel": [1.22],
+        "sd_uta2trans_abs": [1.48]
+    }
+}
+
 const paris = {
     "name": "paris",
     "nameFormatted": "Paris",
@@ -113,5 +148,5 @@ const paris = {
 }
 
 export const CITY_DATA = {
-    "citiesArray": [berlin, hamburg, paris]
+    "citiesArray": [berlin, hamburg, mannheim, paris]
 };
