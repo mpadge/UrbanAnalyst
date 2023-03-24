@@ -159,7 +159,7 @@ export default function Stats (props: StatsProps) {
     const xAxisRef = React.useRef<SVGSVGElement>(null);
 
     var xMinTemp: number = 0;
-    if (props.layer == 'transport_abs' || props.layer == 'uta_abs') {
+    if ((props.layer == 'transport_abs' || props.layer == 'uta_abs') && props.meanVals) {
         xMinTemp = 35;
     }
     const xMin = xMinTemp;
