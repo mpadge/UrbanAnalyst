@@ -5,7 +5,7 @@ import styles from '@/styles/controls.module.css';
 export default function MeanAvgButtons(props: MeanAvgProps) {
 
     return (
-        <section className="radioButtons">
+        <section className={styles.radioButtons}>
             <label className={styles.radioButton}>
                 <input
                     type="radio"
