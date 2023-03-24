@@ -127,6 +127,7 @@ export default function Stats (props: StatsProps) {
         city: city.name,
         value: city.statistics[props.layer as keyof CityStatsProps][meanValIndex]
     }));
+
     if (props.sortOpt === 'increasing') {
         data.sort((a, b) => d3.ascending(a.value, b.value));
     } else if (props.sortOpt === 'decreasing') {

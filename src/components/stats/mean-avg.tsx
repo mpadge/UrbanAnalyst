@@ -3,7 +3,7 @@ import { MeanAvgProps } from "@/data/interfaces";
 import styles from '@/styles/controls.module.css';
 
 export default function MeanAvgButtons(props: MeanAvgProps) {
-    console.log("meanVals = " + props.meanVals)
+
     return (
         <section className="radioButtons">
             <label className={styles.radioButton}>
