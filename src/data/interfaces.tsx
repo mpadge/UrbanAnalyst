@@ -149,3 +149,8 @@ export interface ButtonProps {
         third?: string
     }
 }
+
+export interface MeanAvgProps {
+    meanVals: boolean,
+    handleMeanChange: (mn: boolean) => void
+}

@@ -31,8 +31,8 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     const handleSortChange = (sortOpt: string) => {
         setSortOpt (sortOpt)
     }
-    const handleMeanChange = (mn: boolean) => {
-        setMeanVals(!mn);
+    const handleMeanChange = (e: any) => {
+        setMeanVals(!meanVals);
     }
 
     const buttons = {

@@ -50,6 +50,8 @@ export default function Control (props: StatsControlProps) {
                 handleLayerChange = {props.handleLayerChange}
             />
             <MeanAvgButtons
+                meanVals = {props.meanVals}
+                handleMeanChange = {props.handleMeanChange}
             />
             <h3>Sort Order</h3>
             <SortOrderList
