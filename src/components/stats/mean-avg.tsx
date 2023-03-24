@@ -13,7 +13,7 @@ export default function MeanAvgButtons(props: MeanAvgProps) {
                     value="Average"
                     id="average"
                     checked={props.meanVals}
-                    onChange={props.handleMeanChange}
+                    onChange={() => props.handleMeanChange(props.meanVals)}
                 />
                 Average
             </label>
@@ -26,7 +26,7 @@ export default function MeanAvgButtons(props: MeanAvgProps) {
                     value="Variation"
                     id="variation"
                     checked={!props.meanVals}
-                    onChange={props.handleMeanChange}
+                    onChange={() => props.handleMeanChange(props.meanVals)}
                 />
                 Variation
             </label>
