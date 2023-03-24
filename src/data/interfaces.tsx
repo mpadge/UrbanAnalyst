@@ -83,10 +83,12 @@ export interface MapsControlProps {
 export interface StatsControlProps {
     idx: number,
     layer: string,
+    meanVals: boolean,
     explain: any,
     sortOpt: string,
     citiesArray: CityDataProps[],
     handleLayerChange: (layer: string) => void,
+    handleMeanChange: (meanVals: boolean) => void,
     handleSortChange: (sortOpt: string) => void,
     handleExplainChange: (explain: any) => void
 }
@@ -124,6 +126,7 @@ export interface OpacitySliderProps {
 export interface StatsProps {
     idx: number,
     layer: string,
+    meanVals: boolean,
     sortOpt: string,
     citiesArray: CityDataProps[]
 }
