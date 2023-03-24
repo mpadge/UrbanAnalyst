@@ -7,6 +7,7 @@ import LayerList from '@/components/stats/layerlist';
 import SortOrderList from '@/components/stats/sortOrderList';
 import ExplainButton from '@/components/stats/explain-button';
 import ExplainLayer from '@/components/stats/explain-layer';
+import MeanAvgButtons from '@/components/stats/mean-avg';
 import { StatsControlProps } from "@/data/interfaces";
 
 export default function Control (props: StatsControlProps) {
@@ -47,6 +48,8 @@ export default function Control (props: StatsControlProps) {
             <LayerList
                 layer = {props.layer}
                 handleLayerChange = {props.handleLayerChange}
+            />
+            <MeanAvgButtons
             />
             <h3>Sort Order</h3>
             <SortOrderList
