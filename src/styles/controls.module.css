@@ -212,6 +212,25 @@
   margin-left: 12px;
 }
 
+.radioButton {
+  align: center;
+  font-family: sans-serif;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.radioButton label {
+  align: center;
+  font-family: sans-serif;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
     .controls {

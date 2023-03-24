@@ -121,10 +121,13 @@ export default function Stats (props: StatsProps) {
 
     const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
 
+    const meanValIndex = props.meanVals ? 0 : 1;
+
     const data = props.citiesArray.map((city, index) => ({
         city: city.name,
-        value: city.statistics[props.layer as keyof CityStatsProps][0]
+        value: city.statistics[props.layer as keyof CityStatsProps][meanValIndex]
     }));
+
     if (props.sortOpt === 'increasing') {
         data.sort((a, b) => d3.ascending(a.value, b.value));
     } else if (props.sortOpt === 'decreasing') {
@@ -156,7 +159,7 @@ export default function Stats (props: StatsProps) {
     const xAxisRef = React.useRef<SVGSVGElement>(null);
 
     var xMinTemp: number = 0;
-    if (props.layer == 'transport_abs' || props.layer == 'uta_abs') {
+    if ((props.layer == 'transport_abs' || props.layer == 'uta_abs') && props.meanVals) {
         xMinTemp = 35;
     }
     const xMin = xMinTemp;
