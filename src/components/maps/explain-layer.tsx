@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from '@/styles/controls.module.css';
-import { ExplainProps } from "@/data/interfaces";
+import { MapsExplainProps } from "@/data/interfaces";
 
 interface LayerTextProps {
     social_index: string,
@@ -18,7 +18,7 @@ const LAYER_TEXT: LayerTextProps = {
     "uta_rel": "The combination of multi-modal travel times relative to equivalent automobile times, and the social index transformed to the same scale, so that values of one reflect average social disadvantage and multi-modal travel times the same as equivalent automobile times. Low values reflect low socio-demographic disadvantage, and public transport times being comparable with, or better than, equivalent automobile travel times."
 }
 
-export default function ExplainButton (props: ExplainProps) {
+export default function ExplainButton (props: MapsExplainProps) {
 
     var layer_text_temp: string;
     if (props.layer == "social_index") {
