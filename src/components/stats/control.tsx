@@ -74,6 +74,7 @@ export default function Control (props: StatsControlProps) {
             idx={props.idx}
             layer = {props.layer}
             explain = {props.explain}
+            meanVals = {props.meanVals}
             citiesArray={props.citiesArray}
         />
         </>
