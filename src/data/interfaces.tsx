@@ -135,10 +135,19 @@ export interface ExplainButtonProps {
     explain: boolean,
     handleExplainChange: (explain: boolean) => void
 }
-export interface ExplainProps {
+export interface MapsExplainProps {
     idx: number,
     layer: string,
     explain: boolean,
+    meanVals: boolean,
+    citiesArray: CityDataProps[]
+}
+
+export interface StatsExplainProps {
+    idx: number,
+    layer: string,
+    explain: boolean,
+    meanVals: boolean,
     citiesArray: CityDataProps[]
 }
 
