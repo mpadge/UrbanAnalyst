@@ -11,7 +11,7 @@ import ExplainLayer from '@/components/maps/explain-layer';
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
 
-export interface MapsControlProps {
+interface MapsControlProps {
     idx: number,
     layer: string,
     alpha: number,

@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import styles from '@/styles/controls.module.css';
-import { MapsExplainProps } from "@/data/interfaces";
+import { CityDataProps } from "@/data/interfaces";
+
+interface MapsExplainProps {
+    idx: number,
+    layer: string,
+    explain: boolean,
+    meanVals: boolean,
+    citiesArray: CityDataProps[]
+}
 
 interface LayerTextProps {
     social_index: string,

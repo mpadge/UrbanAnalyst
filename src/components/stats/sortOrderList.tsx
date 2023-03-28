@@ -2,8 +2,12 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 
-import { SortOrderListProps } from "@/data/interfaces";
 import styles from '@/styles/controls.module.css';
+
+interface SortOrderListProps {
+    sortOpt: string,
+    handleSortChange: (sortOpt: string) => void
+}
 
 export default function SortOrderList(props: SortOrderListProps) {
 

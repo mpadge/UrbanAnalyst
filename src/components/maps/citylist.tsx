@@ -2,8 +2,16 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 
-import { CityListProps } from "@/data/interfaces";
+import { ViewState, CityDataProps } from "@/data/interfaces";
 import styles from '@/styles/controls.module.css';
+
+interface CityListProps {
+    idx: number,
+    citiesArray: CityDataProps[],
+    viewState: ViewState,
+    handleIdxChange: (pIdx: number) => void,
+    handleViewStateChange: (pViewState: ViewState) => void
+}
 
 export default function CityList(props: CityListProps) {
 

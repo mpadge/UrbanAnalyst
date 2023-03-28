@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import styles from '@/styles/stats.module.css';
-import { StatsExplainProps } from "@/data/interfaces";
+import { CityDataProps } from "@/data/interfaces";
+
+interface StatsExplainProps {
+    idx: number,
+    layer: string,
+    explain: boolean,
+    meanVals: boolean,
+    citiesArray: CityDataProps[]
+}
 
 interface LayerTextProps {
     social_index: string[],
