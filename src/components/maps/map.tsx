@@ -7,14 +7,27 @@ import {FlyToInterpolator} from "@deck.gl/core/typed";
 import {Map} from "react-map-gl";
 import * as d3 from 'd3';
 import 'd3-scale-chromatic';
+
 import Control from '@/components/maps/control'
 
-import { MapProps } from "@/data/interfaces";
+import { ViewState, CityDataProps } from "@/data/interfaces";
 
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 
 // const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-nolabels-gl-style/style.json';
 const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
+
+interface MapProps {
+    idx: number,
+    layer: string,
+    alpha: number,
+    viewState: ViewState,
+    citiesArray: CityDataProps[],
+    handleAlphaChange: (pAlpha: number) => void,
+    handleViewStateChange: (pViewState: ViewState) => void,
+    handleLayerChange: (layer: string) => void
+}
+
 
 export default function UTAMap (props: MapProps) {
 

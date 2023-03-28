@@ -4,7 +4,15 @@ import * as d3 from 'd3';
 import Link from 'next/link'
 import styled from 'styled-components';
 import styles from '@/styles/stats.module.css';
-import { StatsProps } from "@/data/interfaces";
+import { CityDataProps } from "@/data/interfaces";
+
+interface StatsProps {
+    idx: number,
+    layer: string,
+    meanVals: boolean,
+    sortOpt: string,
+    citiesArray: CityDataProps[]
+}
 
 interface CityStatsProps {
     social_index: number[],

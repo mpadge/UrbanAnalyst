@@ -3,7 +3,14 @@ import React, {useState, useEffect} from 'react';
 import * as d3 from 'd3';
 import Link from 'next/link'
 import styles from '@/styles/legend.module.css';
-import { LegendProps } from "@/data/interfaces";
+import { CityDataProps } from "@/data/interfaces";
+
+interface LegendProps {
+    idx: number,
+    layer: string,
+    alpha: number,
+    citiesArray: CityDataProps[]
+}
 
 export default function Legend (props: LegendProps) {
 
