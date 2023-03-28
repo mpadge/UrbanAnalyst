@@ -49,33 +49,6 @@ export interface CitiesDataProps {
     citiesArray: CityDataProps[]
 }
 
-export interface MapsControlProps {
-    idx: number,
-    layer: string,
-    alpha: number,
-    explain: any,
-    citiesArray: CityDataProps[],
-    viewState: ViewState,
-    handleIdxChange: (pIdx: number) => void,
-    handleAlphaChange: (pAlpha: number) => void,
-    handleViewStateChange: (pViewState: ViewState) => void,
-    handleLayerChange: (layer: string) => void,
-    handleExplainChange: (explain: any) => void
-}
-
-export interface StatsControlProps {
-    idx: number,
-    layer: string,
-    meanVals: boolean,
-    explain: any,
-    sortOpt: string,
-    citiesArray: CityDataProps[],
-    handleLayerChange: (layer: string) => void,
-    handleMeanChange: (meanVals: boolean) => void,
-    handleSortChange: (sortOpt: string) => void,
-    handleExplainChange: (explain: any) => void
-}
-
 export interface CityListProps {
     idx: number,
     citiesArray: CityDataProps[],

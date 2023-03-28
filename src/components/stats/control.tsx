@@ -8,7 +8,22 @@ import SortOrderList from '@/components/stats/sortOrderList';
 import ExplainButton from '@/components/stats/explain-button';
 import ExplainLayer from '@/components/stats/explain-layer';
 import MeanAvgButtons from '@/components/stats/mean-avg';
-import { StatsControlProps } from "@/data/interfaces";
+
+import { CityDataProps } from "@/data/interfaces";
+
+export interface StatsControlProps {
+    idx: number,
+    layer: string,
+    meanVals: boolean,
+    explain: any,
+    sortOpt: string,
+    citiesArray: CityDataProps[],
+    handleLayerChange: (layer: string) => void,
+    handleMeanChange: (meanVals: boolean) => void,
+    handleSortChange: (sortOpt: string) => void,
+    handleExplainChange: (explain: any) => void
+}
+
 
 export default function Control (props: StatsControlProps) {
 
