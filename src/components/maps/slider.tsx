@@ -1,7 +1,11 @@
 
 import { useState } from 'react';
 import styles from '@/styles/controls.module.css';
-import { OpacitySliderProps } from "@/data/interfaces";
+
+interface OpacitySliderProps {
+    alpha: number,
+    handleAlphaChange: (pAlpha: number) => void
+}
 
 export default function OpacitySlider (props: OpacitySliderProps) {
 
