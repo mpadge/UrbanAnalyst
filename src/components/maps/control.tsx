@@ -8,7 +8,22 @@ import LayerList from '@/components/maps/layerlist';
 import OpacitySlider from '@/components/maps/slider';
 import ExplainButton from '@/components/maps/explain-button';
 import ExplainLayer from '@/components/maps/explain-layer';
-import { MapsControlProps } from "@/data/interfaces";
+
+import { ViewState, CityDataProps } from "@/data/interfaces";
+
+interface MapsControlProps {
+    idx: number,
+    layer: string,
+    alpha: number,
+    explain: any,
+    citiesArray: CityDataProps[],
+    viewState: ViewState,
+    handleIdxChange: (pIdx: number) => void,
+    handleAlphaChange: (pAlpha: number) => void,
+    handleViewStateChange: (pViewState: ViewState) => void,
+    handleLayerChange: (layer: string) => void,
+    handleExplainChange: (explain: any) => void
+}
 
 export default function Control (props: MapsControlProps) {
 

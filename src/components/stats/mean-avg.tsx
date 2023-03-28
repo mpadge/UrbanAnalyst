@@ -1,6 +1,10 @@
 
-import { MeanAvgProps } from "@/data/interfaces";
 import styles from '@/styles/controls.module.css';
+
+interface MeanAvgProps {
+    meanVals: boolean,
+    handleMeanChange: (mn: boolean) => void
+}
 
 export default function MeanAvgButtons(props: MeanAvgProps) {
 

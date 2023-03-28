@@ -1,10 +1,4 @@
 
-export interface PartialViewState {
-    latitude: number,
-    longitude: number,
-    zoom: number
-}
-
 export interface ViewState {
     latitude: number,
     longitude: number,
@@ -55,100 +49,14 @@ export interface CitiesDataProps {
     citiesArray: CityDataProps[]
 }
 
-export interface MapProps {
-    idx: number,
-    layer: string,
-    alpha: number,
-    viewState: ViewState,
-    citiesArray: CityDataProps[],
-    handleAlphaChange: (pAlpha: number) => void,
-    handleViewStateChange: (pViewState: ViewState) => void,
-    handleLayerChange: (layer: string) => void
-}
-
-export interface MapsControlProps {
-    idx: number,
-    layer: string,
-    alpha: number,
-    explain: any,
-    citiesArray: CityDataProps[],
-    viewState: ViewState,
-    handleIdxChange: (pIdx: number) => void,
-    handleAlphaChange: (pAlpha: number) => void,
-    handleViewStateChange: (pViewState: ViewState) => void,
-    handleLayerChange: (layer: string) => void,
-    handleExplainChange: (explain: any) => void
-}
-
-export interface StatsControlProps {
-    idx: number,
-    layer: string,
-    meanVals: boolean,
-    explain: any,
-    sortOpt: string,
-    citiesArray: CityDataProps[],
-    handleLayerChange: (layer: string) => void,
-    handleMeanChange: (meanVals: boolean) => void,
-    handleSortChange: (sortOpt: string) => void,
-    handleExplainChange: (explain: any) => void
-}
-
-export interface CityListProps {
-    idx: number,
-    citiesArray: CityDataProps[],
-    viewState: ViewState,
-    handleIdxChange: (pIdx: number) => void,
-    handleViewStateChange: (pViewState: ViewState) => void
-}
-
 export interface LayerListProps {
     layer: string,
     handleLayerChange: (layer: string) => void
 }
 
-export interface SortOrderListProps {
-    sortOpt: string,
-    handleSortChange: (sortOpt: string) => void
-}
-
-export interface LegendProps {
-    idx: number,
-    layer: string,
-    alpha: number,
-    citiesArray: CityDataProps[]
-}
-
-export interface OpacitySliderProps {
-    alpha: number,
-    handleAlphaChange: (pAlpha: number) => void
-}
-
-export interface StatsProps {
-    idx: number,
-    layer: string,
-    meanVals: boolean,
-    sortOpt: string,
-    citiesArray: CityDataProps[]
-}
-
 export interface ExplainButtonProps {
     explain: boolean,
     handleExplainChange: (explain: boolean) => void
-}
-export interface MapsExplainProps {
-    idx: number,
-    layer: string,
-    explain: boolean,
-    meanVals: boolean,
-    citiesArray: CityDataProps[]
-}
-
-export interface StatsExplainProps {
-    idx: number,
-    layer: string,
-    explain: boolean,
-    meanVals: boolean,
-    citiesArray: CityDataProps[]
 }
 
 export interface ButtonProps {
@@ -156,10 +64,6 @@ export interface ButtonProps {
         first: string,
         second: string,
         third?: string
+        fourth?: string
     }
-}
-
-export interface MeanAvgProps {
-    meanVals: boolean,
-    handleMeanChange: (mn: boolean) => void
 }
