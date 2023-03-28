@@ -8,7 +8,7 @@ import Stats from '@/components/stats/stats';
 import styles from '@/styles/Home.module.css'
 
 import { CITY_DATA } from '@/data/citydata';
-import { CityDataProps, CitiesDataProps, ViewState } from "@/data/interfaces";
+import { CityDataProps, CitiesDataProps } from "@/data/interfaces";
 
 const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 

@@ -1,10 +1,4 @@
 
-export interface PartialViewState {
-    latitude: number,
-    longitude: number,
-    zoom: number
-}
-
 export interface ViewState {
     latitude: number,
     longitude: number,
@@ -156,6 +150,7 @@ export interface ButtonProps {
         first: string,
         second: string,
         third?: string
+        fourth?: string
     }
 }
 
