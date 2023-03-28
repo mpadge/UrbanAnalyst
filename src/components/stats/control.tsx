@@ -11,7 +11,7 @@ import MeanAvgButtons from '@/components/stats/mean-avg';
 
 import { CityDataProps } from "@/data/interfaces";
 
-export interface StatsControlProps {
+interface StatsControlProps {
     idx: number,
     layer: string,
     meanVals: boolean,

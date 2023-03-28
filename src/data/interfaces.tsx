@@ -49,62 +49,14 @@ export interface CitiesDataProps {
     citiesArray: CityDataProps[]
 }
 
-export interface CityListProps {
-    idx: number,
-    citiesArray: CityDataProps[],
-    viewState: ViewState,
-    handleIdxChange: (pIdx: number) => void,
-    handleViewStateChange: (pViewState: ViewState) => void
-}
-
 export interface LayerListProps {
     layer: string,
     handleLayerChange: (layer: string) => void
 }
 
-export interface SortOrderListProps {
-    sortOpt: string,
-    handleSortChange: (sortOpt: string) => void
-}
-
-export interface LegendProps {
-    idx: number,
-    layer: string,
-    alpha: number,
-    citiesArray: CityDataProps[]
-}
-
-export interface OpacitySliderProps {
-    alpha: number,
-    handleAlphaChange: (pAlpha: number) => void
-}
-
-export interface StatsProps {
-    idx: number,
-    layer: string,
-    meanVals: boolean,
-    sortOpt: string,
-    citiesArray: CityDataProps[]
-}
-
 export interface ExplainButtonProps {
     explain: boolean,
     handleExplainChange: (explain: boolean) => void
-}
-export interface MapsExplainProps {
-    idx: number,
-    layer: string,
-    explain: boolean,
-    meanVals: boolean,
-    citiesArray: CityDataProps[]
-}
-
-export interface StatsExplainProps {
-    idx: number,
-    layer: string,
-    explain: boolean,
-    meanVals: boolean,
-    citiesArray: CityDataProps[]
 }
 
 export interface ButtonProps {
@@ -114,9 +66,4 @@ export interface ButtonProps {
         third?: string
         fourth?: string
     }
-}
-
-export interface MeanAvgProps {
-    meanVals: boolean,
-    handleMeanChange: (mn: boolean) => void
 }
