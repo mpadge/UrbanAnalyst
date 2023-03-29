@@ -54,11 +54,12 @@ export default function Home() {
 
             <div className={styles.centerMed}>
                 <p className="text-center">
-                    Urban Transport Analyst provides interactive maps of urban transport
-                    systems, and relationships of these transport systems to
-                    socio-demographic conditions.  UTA also provides statistical summaries
-                    of all cities, including representation in the &quot;UTA Index&quot;, which
-                    captures the extent to which transport systems effectively
+                    Urban Transport Analyst provides interactive maps of the
+                    properties of urban transport systems, and relationships of
+                    these properties to socio-demographic conditions.  UTA also
+                    provides statistical summaries of all cities, including
+                    representation in the &quot;UTA Index&quot;, which captures
+                    the extent to which transport systems effectively
                     counter-balance socio-demographic disadvantage.
                 </p>
 
@@ -82,11 +83,12 @@ export default function Home() {
                         Maps <span>-&gt;</span>
                     </h2>
                     <p className={styles.cardText}>
-                        Interactive maps of all cities analysed to date. Transport values
-                        are derived for every street intersection in a city by calculating
-                        times taken to travel to every other point in the city using
-                        specified single or multiple modes of transport, and calculating the
-                        average time needed to travel 10km from each point.
+                        Interactive maps of all cities analysed to date.
+                        Transport systems are summarised in terms of times taken
+                        to cover distances of 10km, with values derived for
+                        every street intersection in a city by calculating times
+                        taken to travel to every other point in the city using
+                        specified single or multiple modes of transport.
                     </p>
                 </Link>
 
