@@ -61,8 +61,9 @@ export default function Home() {
             <div className={styles.centerSmall}>
                 <p className="text-center">
                     Urban Transport Analyst is a platform for interactive
-                    visualisation of urban transport systems, and their
-                    relationship to socio-demographic conditions.
+                    visualisation of the properties of urban transport systems,
+                    and relationships of these properties to socio-demographic
+                    conditions.
                 </p>
             </div>
 
@@ -76,8 +77,9 @@ export default function Home() {
                 <p className="text-center">
                     Socio-demographic data are provided by each city. These data
                     differ between cities, but always quantify some aspects of
-                    social inequality or disadvantage, with values given within
-                    defined spatial polygons.
+                    social inequality or disadvantage, such as unemployment or
+                    measures of deprivation. Values are defined within series of  
+                    spatial polygons as provided by the cities.
                 </p>
                 <p className="text-center">
                     Transport data are derived using UTA&#39;s own open-source
