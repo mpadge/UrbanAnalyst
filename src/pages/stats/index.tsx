@@ -14,7 +14,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 
     const [idx, setIdx] = useState(0);
     const [cityData, setCityData] = useState(props.citiesArray[idx]);
-    const [layer, setLayer] = useState("sd_uta2trans_rel"); // options[0] in layerlist.tsx
+    const [layer, setLayer] = useState("social_index"); // options[0] in layerlist.tsx
     const [explain, setExplain] = useState(false);
     const [sortOpt, setSortOpt] = useState("increasing");
     const [meanVals, setMeanVals] = useState(true);

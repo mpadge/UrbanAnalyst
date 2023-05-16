@@ -8,12 +8,16 @@ import styles from '@/styles/controls.module.css';
 export default function LayerList(props: LayerListProps) {
 
     const options = [
-        { value: 'sd_uta2trans_rel', label: 'UTA Rel' },
-        { value: 'sd_uta2trans_abs', label: 'UTA Abs' },
-        { value: 'transport_abs', label: 'Transport Abs' },
-        { value: 'transport_rel', label: 'Transport Rel' },
-        { value: 'uta_abs', label: 'Combined Abs' },
-        { value: 'uta_rel', label: 'Combined Rel' }
+        { value: "social_index", label: "Social" },
+        { value: "times_rel", label: "Transport Rel." },
+        { value: "times_abs", label: "Transport Abs." },
+        { value: "transfers", label: "Num. Transfers" },
+        { value: "intervals", label: "Transp. Interval" },
+        { value: "popdens", label: "Population" },
+        { value: "school_dist", label: "School Dist." },
+        { value: "bike_index", label: "Bicycle Index" },
+        { value: "natural", label: "Nature Index" },
+        { value: "parking", label: "Parking" }
     ]
 
     const [isSearchable, setIsSearchable] = useState(true);

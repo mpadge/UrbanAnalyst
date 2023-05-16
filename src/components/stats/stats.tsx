@@ -16,12 +16,15 @@ interface StatsProps {
 
 interface CityStatsProps {
     social_index: number[],
-    transport_rel: number[],
-    transport_abs: number[],
-    uta_rel: number[],
-    uta_abs: number[],
-    sd_uta2trans_rel: number[],
-    sd_uta2trans_abs: number[]
+    times_rel: number[],
+    times_abs: number[],
+    transfers: number[],
+    intervals: number[],
+    popdens: number[],
+    school_dist: number[],
+    bike_index: number[],
+    natural: number[],
+    parking: number[]
 }
 
 
@@ -108,18 +111,27 @@ function useWindowSize() {
 function StatsHeadingText (layer: string) {
 
     var heading: string = "";
-    if (layer == 'sd_uta2trans_rel') {
-        heading = 'UTA Relative';
-    } else if (layer == 'sd_uta2trans_abs') {
-        heading = 'UTA Absolute';
-    } else if (layer == 'transport_abs') {
-        heading = 'Transport Absolute';
-    } else if (layer == 'transport_rel') {
-        heading = 'Transport Relative';
-    } else if (layer == 'uta_abs') {
-        heading = 'Combined Absolute';
-    } else if (layer == 'uta_rel') {
-        heading = 'Combined Relative';
+
+    if (layer == "social_index") {
+        heading = "Social Index";
+    } else if (layer == "times_rel") {
+        heading = "Transport Relative";
+    } else if (layer == "times_abs") {
+        heading = "Transport Absolute";
+    } else if (layer == "transfers") {
+        heading = "Num. Transfers";
+    } else if (layer == "intervals") {
+        heading = "Transport Interval";
+    } else if (layer == "popdens") {
+        heading = "Population";
+    } else if (layer == "school_dist") {
+        heading = "Schhol Distance";
+    } else if (layer == "bike_index") {
+        heading = "Bicycle Index";
+    } else if (layer == "natural") {
+        heading = "Nature Index";
+    } else if (layer == "parking") {
+        heading = "Parking";
     }
 
     return heading;
@@ -133,7 +145,7 @@ export default function Stats (props: StatsProps) {
 
     const data = props.citiesArray.map((city, index) => ({
         city: city.name,
-        value: city.statistics[props.layer as keyof CityStatsProps][meanValIndex]
+        value: city.stats_single[props.layer as keyof CityStatsProps][meanValIndex]
     }));
 
     if (props.sortOpt === 'increasing') {
@@ -167,7 +179,7 @@ export default function Stats (props: StatsProps) {
     const xAxisRef = React.useRef<SVGSVGElement>(null);
 
     var xMinTemp: number = 0;
-    if ((props.layer == 'transport_abs' || props.layer == 'uta_abs') && props.meanVals) {
+    if (props.layer == 'times_abs' && props.meanVals) {
         xMinTemp = 35;
     }
     const xMin = xMinTemp;

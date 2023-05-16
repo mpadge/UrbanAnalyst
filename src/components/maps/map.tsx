@@ -44,18 +44,33 @@ export default function UTAMap (props: MapProps) {
     if (this_layer == "social_index") {
         layer_min = props.citiesArray[props.idx].dataRanges.social_index[0];
         layer_max = props.citiesArray[props.idx].dataRanges.social_index[1];
-    } else if (this_layer == "transport_abs") {
-        layer_min = props.citiesArray[props.idx].dataRanges.transport_abs[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.transport_abs[1];
-    } else if (this_layer == "transport_rel") {
-        layer_min = props.citiesArray[props.idx].dataRanges.transport_rel[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.transport_rel[1];
-    } else if (this_layer == "uta_abs") {
-        layer_min = props.citiesArray[props.idx].dataRanges.uta_abs[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.uta_abs[1];
-    } else if (this_layer == "uta_rel") {
-        layer_min = props.citiesArray[props.idx].dataRanges.uta_rel[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.uta_rel[1];
+    } else if (this_layer == "times_abs") {
+        layer_min = props.citiesArray[props.idx].dataRanges.times_abs[0];
+        layer_max = props.citiesArray[props.idx].dataRanges.times_abs[1];
+    } else if (this_layer == "times_rel") {
+        layer_min = props.citiesArray[props.idx].dataRanges.times_rel[0];
+        layer_max = props.citiesArray[props.idx].dataRanges.times_rel[1];
+    } else if (this_layer == "transfers") {
+        layer_min = props.citiesArray[props.idx].dataRanges.transfers[0];
+        layer_max = props.citiesArray[props.idx].dataRanges.transfers[1];
+    } else if (this_layer == "intervals") {
+        layer_min = props.citiesArray[props.idx].dataRanges.intervals[0];
+        layer_max = props.citiesArray[props.idx].dataRanges.intervals[1];
+    } else if (this_layer == "popdens") {
+        layer_min = props.citiesArray[props.idx].dataRanges.popdens[0];
+        layer_max = props.citiesArray[props.idx].dataRanges.popdens[1];
+    } else if (this_layer == "school_dist") {
+        layer_min = props.citiesArray[props.idx].dataRanges.school_dist[0];
+        layer_max = props.citiesArray[props.idx].dataRanges.school_dist[1];
+    } else if (this_layer == "bike_index") {
+        layer_min = props.citiesArray[props.idx].dataRanges.bike_index[0];
+        layer_max = props.citiesArray[props.idx].dataRanges.bike_index[1];
+    } else if (this_layer == "natural") {
+        layer_min = props.citiesArray[props.idx].dataRanges.natural[0];
+        layer_max = props.citiesArray[props.idx].dataRanges.natural[1];
+    } else if (this_layer == "parking") {
+        layer_min = props.citiesArray[props.idx].dataRanges.parking[0];
+        layer_max = props.citiesArray[props.idx].dataRanges.parking[1];
     }
 
     // palettes:
