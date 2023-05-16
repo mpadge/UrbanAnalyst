@@ -53,17 +53,29 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     }
 
     var layer_temp: string = layer;
+
     if (layer == "social_index") {
-        layer_temp = "Social Index";
-    } else if (layer == "transport_abs") {
-        layer_temp = 'Transport Absolute';
-    } else if (layer == "transport_rel") {
-        layer_temp = 'Transport Relative';
-    } else if (layer == "uta_abs") {
-        layer_temp = 'Combined Absolute';
-    } else if (layer == "uta_rel") {
-        layer_temp = 'Combined Relative';
+        layer_temp = "Social";
+    } else if (layer == "times_rel") {
+        layer_temp = "Transport Rel.";
+    } else if (layer == "times_abs") {
+        layer_temp = "Transport Abs.";
+    } else if (layer == "transfers") {
+        layer_temp = "Num. Transfers";
+    } else if (layer == "intervals") {
+        layer_temp = "Transp. Interval";
+    } else if (layer == "popdens") {
+        layer_temp = "Population";
+    } else if (layer == "school_dist") {
+        layer_temp = "Schhol Dist.";
+    } else if (layer == "bike_index") {
+        layer_temp = "Bicycle Index";
+    } else if (layer == "natural") {
+        layer_temp = "Nature Index";
+    } else if (layer == "parking") {
+        layer_temp = "Parking";
     }
+
     const layer_text = layer_temp;
 
     // meta viewport from:
