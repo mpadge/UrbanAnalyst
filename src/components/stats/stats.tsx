@@ -125,7 +125,7 @@ function StatsHeadingText (layer: string) {
     } else if (layer == "popdens") {
         heading = "Population";
     } else if (layer == "school_dist") {
-        heading = "Schhol Distance";
+        heading = "School Distance";
     } else if (layer == "bike_index") {
         heading = "Bicycle Index";
     } else if (layer == "natural") {
