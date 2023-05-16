@@ -38,16 +38,16 @@ const LAYER_TEXT: LayerTextProps = {
         "Variation in the ratio of absolute travel times for any combinations of walking, cycling, and public transport to times for equivalent journeys taken solely with private automobile. Lower values imply lower variation across a city in the ratios of multi-modal versus private automobile travel times."
     ],
     "transfers": [
-        "Num. Transfers"
+        "Number of Transfers per 10km of travel."
     ],
     "intervals": [
-        "Transp. Interval"
+        "Interval between public transport services (in minutes)."
     ],
     "popdens": [
-        "Population"
+        "Population density"
     ],
     "school_dist": [
-        "School Dist."
+        "Distance to nearest school (in metres)"
     ],
     "bike_index": [
         "Bicycle Index"
@@ -56,7 +56,7 @@ const LAYER_TEXT: LayerTextProps = {
         "Nature Index"
     ],
     "parking": [
-        "Parking"
+        "Parking index"
     ]
 }
 

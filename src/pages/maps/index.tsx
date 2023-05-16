@@ -67,7 +67,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     } else if (layer == "popdens") {
         layer_temp = "Population";
     } else if (layer == "school_dist") {
-        layer_temp = "Schhol Dist.";
+        layer_temp = "School Dist.";
     } else if (layer == "bike_index") {
         layer_temp = "Bicycle Index";
     } else if (layer == "natural") {
