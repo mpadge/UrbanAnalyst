@@ -20,6 +20,7 @@ interface CityStatsProps {
     times_abs: number[],
     transfers: number[],
     intervals: number[],
+    transport: number[],
     popdens: number[],
     school_dist: number[],
     bike_index: number[],
@@ -122,6 +123,8 @@ function StatsHeadingText (layer: string) {
         heading = "Num. Transfers";
     } else if (layer == "intervals") {
         heading = "Transport Interval";
+    } else if (layer == "transport") {
+        heading = "Transport Combined";
     } else if (layer == "popdens") {
         heading = "Population";
     } else if (layer == "school_dist") {

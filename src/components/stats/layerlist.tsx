@@ -13,6 +13,7 @@ export default function LayerList(props: LayerListProps) {
         { value: "times_abs", label: "Transport Abs." },
         { value: "transfers", label: "Num. Transfers" },
         { value: "intervals", label: "Transp. Interval" },
+        { value: "transport", label: "Transport Combined" },
         { value: "popdens", label: "Population" },
         { value: "school_dist", label: "School Dist." },
         { value: "bike_index", label: "Bicycle Index" },

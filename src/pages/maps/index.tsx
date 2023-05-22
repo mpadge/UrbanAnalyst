@@ -64,6 +64,8 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         layer_temp = "Num. Transfers";
     } else if (layer == "intervals") {
         layer_temp = "Transp. Interval";
+    } else if (layer == "transport") {
+        layer_temp = "Transport Combined";
     } else if (layer == "popdens") {
         layer_temp = "Population";
     } else if (layer == "school_dist") {

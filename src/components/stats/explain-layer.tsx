@@ -16,6 +16,7 @@ interface LayerTextProps {
     times_rel: string[],
     transfers: string[],
     intervals: string[],
+    transport: string[],
     popdens: string[],
     school_dist: string[],
     bike_index: string[],
@@ -42,6 +43,9 @@ const LAYER_TEXT: LayerTextProps = {
     ],
     "intervals": [
         "Interval between public transport services (in minutes)."
+    ],
+    "transport": [
+        "Combined measure of tranpsport time times number of transfers times intervals between services."
     ],
     "popdens": [
         "Population density"

@@ -56,6 +56,9 @@ export default function UTAMap (props: MapProps) {
     } else if (this_layer == "intervals") {
         layer_min = props.citiesArray[props.idx].dataRanges.intervals[0];
         layer_max = props.citiesArray[props.idx].dataRanges.intervals[1];
+    } else if (this_layer == "transport") {
+        layer_min = props.citiesArray[props.idx].dataRanges.transport[0];
+        layer_max = props.citiesArray[props.idx].dataRanges.transport[1];
     } else if (this_layer == "popdens") {
         layer_min = props.citiesArray[props.idx].dataRanges.popdens[0];
         layer_max = props.citiesArray[props.idx].dataRanges.popdens[1];
