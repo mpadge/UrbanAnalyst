@@ -54,7 +54,7 @@ const berlin = {
         "school_dist": [2.18, 1.34],
         "bike_index": [0.19, 0.03],
         "natural": [0.12, 0.09],
-        "parking": [1, 1]
+        "parking": [1.32, 1.86]
     },
     "stats_paired": {
         "intervals.bike_index": 1.87,
@@ -162,7 +162,7 @@ const hamburg = {
         "school_dist": [2.05, 1.32],
         "bike_index": [0.22, 0.03],
         "natural": [0.11, 0.07],
-        "parking": [1.01, 1.01]
+        "parking": [2.5, 3.63]
     },
     "stats_paired": {
         "intervals.bike_index": -11.7,
@@ -270,7 +270,7 @@ const mannheim = {
         "school_dist": [3.07, 1.53],
         "bike_index": [0.22, 0.03],
         "natural": [0.08, 0.07],
-        "parking": [1.01, 1.02]
+        "parking": [4.64, 6.58]
     },
     "stats_paired": {
         "transport.bike_index": 9.41,
@@ -378,7 +378,7 @@ const paris = {
         "school_dist": [1.53, 1.17],
         "bike_index": [0.24, 0.04],
         "natural": [0.07, 0.07],
-        "parking": [1, 1.01]
+        "parking": [1.55, 2.54]
     },
     "stats_paired": {
         "transport.natural": -2.46,
