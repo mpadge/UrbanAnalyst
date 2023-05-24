@@ -20,6 +20,37 @@ const buttonProps = {
     second: "stats"
 }
 
+function getLayerTextFromLayer(layer: string): string {
+
+    var layer_temp: string = "";
+
+    if (layer == "social_index") {
+        layer_temp = "Social";
+    } else if (layer == "times_rel") {
+        layer_temp = "Transport Rel.";
+    } else if (layer == "times_abs") {
+        layer_temp = "Transport Abs.";
+    } else if (layer == "transfers") {
+        layer_temp = "Num. Transfers";
+    } else if (layer == "intervals") {
+        layer_temp = "Transp. Interval";
+    } else if (layer == "transport") {
+        layer_temp = "Transport Combined";
+    } else if (layer == "popdens") {
+        layer_temp = "Population";
+    } else if (layer == "school_dist") {
+        layer_temp = "School Dist.";
+    } else if (layer == "bike_index") {
+        layer_temp = "Bicycle Index";
+    } else if (layer == "natural") {
+        layer_temp = "Nature Index";
+    } else if (layer == "parking") {
+        layer_temp = "Parking";
+    }
+
+    return layer_temp;
+}
+
 const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 
     const [idx, setIdx] = useState(0);
@@ -52,33 +83,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         setExplain(!explain);
     }
 
-    var layer_temp: string = layer;
-
-    if (layer == "social_index") {
-        layer_temp = "Social";
-    } else if (layer == "times_rel") {
-        layer_temp = "Transport Rel.";
-    } else if (layer == "times_abs") {
-        layer_temp = "Transport Abs.";
-    } else if (layer == "transfers") {
-        layer_temp = "Num. Transfers";
-    } else if (layer == "intervals") {
-        layer_temp = "Transp. Interval";
-    } else if (layer == "transport") {
-        layer_temp = "Transport Combined";
-    } else if (layer == "popdens") {
-        layer_temp = "Population";
-    } else if (layer == "school_dist") {
-        layer_temp = "School Dist.";
-    } else if (layer == "bike_index") {
-        layer_temp = "Bicycle Index";
-    } else if (layer == "natural") {
-        layer_temp = "Nature Index";
-    } else if (layer == "parking") {
-        layer_temp = "Parking";
-    }
-
-    const layer_text = layer_temp;
+    const layer_text = getLayerTextFromLayer(layer);
 
     // meta viewport from:
     // https://docs.mapbox.com/mapbox-gl-js/example/disable-scroll-zoom/
