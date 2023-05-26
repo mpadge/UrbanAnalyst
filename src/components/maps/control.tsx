@@ -16,6 +16,7 @@ interface MapsControlProps {
     idx: number,
     numLayers: string,
     layer: string,
+    layer2: string,
     alpha: number,
     explain: any,
     citiesArray: CityDataProps[],
@@ -25,6 +26,7 @@ interface MapsControlProps {
     handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void,
+    handleLayer2Change: (layer: string) => void,
     handleExplainChange: (explain: any) => void
 }
 
@@ -42,11 +44,6 @@ export default function Control (props: MapsControlProps) {
 
     const [numParams, setNumParams] = useState("Single");
     const categoryOptions = ["Single", "Paired"];
-
-    const [layer2, setLayer2] = useState("social_index");
-    const handleLayer2Change = (layer2: string) => {
-        setLayer2(layer2);
-    }
 
     return (
         <>
@@ -104,8 +101,8 @@ export default function Control (props: MapsControlProps) {
 
             {numParams == "Paired"  &&
                 <LayerList
-                    layer = {layer2}
-                    handleLayerChange = {handleLayer2Change}
+                    layer = {props.layer2}
+                    handleLayerChange = {props.handleLayer2Change}
                 />
             }
 

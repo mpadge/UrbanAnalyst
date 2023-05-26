@@ -20,12 +20,14 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 interface MapProps {
     idx: number,
     layer: string,
+    layer2: string,
     alpha: number,
     viewState: ViewState,
     citiesArray: CityDataProps[],
     handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void
+    handleLayer2Change: (layer2: string) => void
 }
 
 

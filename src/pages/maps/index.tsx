@@ -63,6 +63,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         transitionInterpolator: new FlyToInterpolator()
     });
     const [layer, setLayer] = useState("social_index");
+    const [layer2, setLayer2] = useState("social_index");
     const [alpha, setAlpha] = useState(0.5);
     const [explain, setExplain] = useState(false);
     const [numLayers, setNumLayers] = useState("Single");
@@ -79,6 +80,9 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     }
     const handleLayerChange = (layer: string) => {
         setLayer(layer);
+    }
+    const handleLayer2Change = (layer2: string) => {
+        setLayer2(layer2);
     }
     const handleExplainChange = (e: any) => {
         setExplain(!explain);
@@ -111,17 +115,20 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         <UTAMap
             idx = {idx}
             layer = {layer}
+            layer2 = {layer2}
             alpha = {alpha}
             citiesArray = {props.citiesArray}
             viewState = {viewState}
             handleAlphaChange = {handleAlphaChange}
             handleViewStateChange = {handleViewStateChange}
             handleLayerChange = {handleLayerChange}
+            handleLayer2Change = {handleLayer2Change}
         />
         <Control
             idx = {idx}
             numLayers = {numLayers}
             layer = {layer}
+            layer2 = {layer2}
             alpha = {alpha}
             explain = {explain}
             citiesArray = {props.citiesArray}
@@ -131,6 +138,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             handleAlphaChange = {handleAlphaChange}
             handleViewStateChange = {handleViewStateChange}
             handleLayerChange = {handleLayerChange}
+            handleLayer2Change = {handleLayer2Change}
             handleExplainChange = {handleExplainChange}
         />
         <Legend
