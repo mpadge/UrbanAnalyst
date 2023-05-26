@@ -81,8 +81,8 @@ export default function Control (props: MapsControlProps) {
                     key={category}
                     type="button"
                     style={{
-                        backgroundColor: category === props.numLayers ? "white" : "",
-                        color: category === props.numLayers ? "black" : "",
+                        backgroundColor: category === props.numLayers ? "" : "white" ,
+                        color: category === props.numLayers ? "" : "black"
                     }}
                     //className={styles.buttonGroup}
                     onClick={(event) => { 
