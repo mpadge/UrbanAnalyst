@@ -21,17 +21,7 @@ export interface CityDataProps {
         zoom: number
     },
     dataRanges: {
-        social_index: number[],
-        times_rel: number[],
-        times_abs: number[],
-        transfers: number[],
-        intervals: number[],
-        transport: number[],
-        popdens: number[],
-        school_dist: number[],
-        bike_index: number[],
-        natural: number[],
-        parking: number[]
+        [key: string]: number[]
     },
     dataIntervals: {
         social_index: number[],
