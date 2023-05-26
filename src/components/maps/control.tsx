@@ -14,9 +14,10 @@ import { ViewState, CityDataProps } from "@/data/interfaces";
 
 interface MapsControlProps {
     idx: number,
-    numLayers: string,
     layer: string,
     layer2: string,
+    numLayers: string,
+    numLayersOptions: string[],
     alpha: number,
     explain: any,
     citiesArray: CityDataProps[],
@@ -41,9 +42,6 @@ export default function Control (props: MapsControlProps) {
     const handleControlsVisibility = (pHideControls: boolean) => {
         setHideControls(pHideControls);
     }
-
-    const [numParams, setNumParams] = useState("Single");
-    const categoryOptions = ["Single", "Paired"];
 
     return (
         <>
@@ -78,17 +76,17 @@ export default function Control (props: MapsControlProps) {
             />
 
             <h3>Layer</h3>
-            {categoryOptions.map((category: string) => (
+            {props.numLayersOptions.map((category: string) => (
                 <button
                     key={category}
                     type="button"
                     style={{
-                        backgroundColor: category === numParams ? "white" : "",
-                        color: category === numParams ? "black" : "",
+                        backgroundColor: category === props.numLayers ? "white" : "",
+                        color: category === props.numLayers ? "black" : "",
                     }}
                     //className={styles.buttonGroup}
                     onClick={(event) => { 
-                        setNumParams(category) 
+                        props.handleNumLayersChange(category);
                     }}
                 >
                 {category}
@@ -99,7 +97,7 @@ export default function Control (props: MapsControlProps) {
                 handleLayerChange = {props.handleLayerChange}
             />
 
-            {numParams == "Paired"  &&
+            {props.numLayers == "Paired"  &&
                 <LayerList
                     layer = {props.layer2}
                     handleLayerChange = {props.handleLayer2Change}
