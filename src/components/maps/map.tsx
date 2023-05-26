@@ -21,6 +21,7 @@ interface MapProps {
     idx: number,
     layer: string,
     layer2: string,
+    numLayers: string,
     alpha: number,
     viewState: ViewState,
     citiesArray: CityDataProps[],
@@ -34,6 +35,7 @@ interface MapProps {
 export default function UTAMap (props: MapProps) {
 
     const mapPath = props.citiesArray[props.idx].path;
+
     const [viewState, setViewState] = useState({
         ...props.viewState,
         transitionDuration: 2000,
@@ -41,42 +43,8 @@ export default function UTAMap (props: MapProps) {
     });
 
     const this_layer: string = props.layer;
-    var layer_min: number = 0;
-    var layer_max: number = 100;
-    if (this_layer == "social_index") {
-        layer_min = props.citiesArray[props.idx].dataRanges.social_index[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.social_index[1];
-    } else if (this_layer == "times_abs") {
-        layer_min = props.citiesArray[props.idx].dataRanges.times_abs[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.times_abs[1];
-    } else if (this_layer == "times_rel") {
-        layer_min = props.citiesArray[props.idx].dataRanges.times_rel[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.times_rel[1];
-    } else if (this_layer == "transfers") {
-        layer_min = props.citiesArray[props.idx].dataRanges.transfers[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.transfers[1];
-    } else if (this_layer == "intervals") {
-        layer_min = props.citiesArray[props.idx].dataRanges.intervals[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.intervals[1];
-    } else if (this_layer == "transport") {
-        layer_min = props.citiesArray[props.idx].dataRanges.transport[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.transport[1];
-    } else if (this_layer == "popdens") {
-        layer_min = props.citiesArray[props.idx].dataRanges.popdens[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.popdens[1];
-    } else if (this_layer == "school_dist") {
-        layer_min = props.citiesArray[props.idx].dataRanges.school_dist[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.school_dist[1];
-    } else if (this_layer == "bike_index") {
-        layer_min = props.citiesArray[props.idx].dataRanges.bike_index[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.bike_index[1];
-    } else if (this_layer == "natural") {
-        layer_min = props.citiesArray[props.idx].dataRanges.natural[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.natural[1];
-    } else if (this_layer == "parking") {
-        layer_min = props.citiesArray[props.idx].dataRanges.parking[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.parking[1];
-    }
+    const layer_min = props.citiesArray[props.idx].dataRanges[this_layer][0];
+    const layer_max = props.citiesArray[props.idx].dataRanges[this_layer][1];
 
     // palettes:
     // https://github.com/d3/d3-scale-chromatic
