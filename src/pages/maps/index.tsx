@@ -65,6 +65,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     const [layer, setLayer] = useState("social_index");
     const [alpha, setAlpha] = useState(0.5);
     const [explain, setExplain] = useState(false);
+    const [numLayers, setNumLayers] = useState("Single");
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
@@ -81,6 +82,10 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     }
     const handleExplainChange = (e: any) => {
         setExplain(!explain);
+    }
+    const handleNumLayersChange = (numLayers: string) => {
+        console.log("num layers = " + numLayers);
+        setNumLayers(numLayers);
     }
 
     const layer_text = getLayerTextFromLayer(layer);
@@ -115,12 +120,14 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         />
         <Control
             idx = {idx}
+            numLayers = {numLayers}
             layer = {layer}
             alpha = {alpha}
             explain = {explain}
             citiesArray = {props.citiesArray}
             viewState = {viewState}
             handleIdxChange = {handleIdxChange}
+            handleNumLayersChange = {handleNumLayersChange}
             handleAlphaChange = {handleAlphaChange}
             handleViewStateChange = {handleViewStateChange}
             handleLayerChange = {handleLayerChange}

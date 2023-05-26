@@ -1,7 +1,8 @@
 
-import {useState} from 'react';
+import {useState, useRef} from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
+
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/maps/citylist';
 import LayerList from '@/components/maps/layerlist';
@@ -13,17 +14,20 @@ import { ViewState, CityDataProps } from "@/data/interfaces";
 
 interface MapsControlProps {
     idx: number,
+    numLayers: string,
     layer: string,
     alpha: number,
     explain: any,
     citiesArray: CityDataProps[],
     viewState: ViewState,
     handleIdxChange: (pIdx: number) => void,
+    handleNumLayersChange: (numLayers: string) => void,
     handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void,
     handleExplainChange: (explain: any) => void
 }
+
 
 export default function Control (props: MapsControlProps) {
 
@@ -34,6 +38,14 @@ export default function Control (props: MapsControlProps) {
     const [hideControls, setHideControls] = useState(false);
     const handleControlsVisibility = (pHideControls: boolean) => {
         setHideControls(pHideControls);
+    }
+
+    const [numParams, setNumParams] = useState("Single");
+    const categoryOptions = ["Single", "Paired"];
+
+    const [layer2, setLayer2] = useState("social_index");
+    const handleLayer2Change = (layer2: string) => {
+        setLayer2(layer2);
     }
 
     return (
@@ -67,16 +79,42 @@ export default function Control (props: MapsControlProps) {
                 handleViewStateChange={props.handleViewStateChange}
                 // onSelect={city => props.handleIdxChange(props.idx)}
             />
+
             <h3>Layer</h3>
+            {categoryOptions.map((category: string) => (
+                <button
+                    key={category}
+                    type="button"
+                    style={{
+                        backgroundColor: category === numParams ? "white" : "",
+                        color: category === numParams ? "black" : "",
+                    }}
+                    //className={styles.buttonGroup}
+                    onClick={(event) => { 
+                        setNumParams(category) 
+                    }}
+                >
+                {category}
+                </button>
+            ))}
             <LayerList
                 layer = {props.layer}
                 handleLayerChange = {props.handleLayerChange}
             />
+
+            {numParams == "Paired"  &&
+                <LayerList
+                    layer = {layer2}
+                    handleLayerChange = {handleLayer2Change}
+                />
+            }
+
             <h3>Opacity</h3>
             <OpacitySlider
                 alpha = {props.alpha}
                 handleAlphaChange={props.handleAlphaChange}
             />
+
             <ExplainButton
                 explain = {props.explain}
                 handleExplainChange = {props.handleExplainChange} />
