@@ -43,8 +43,8 @@ export default function UTAMap (props: MapProps) {
     });
 
     const this_layer: string = props.layer;
-    const layer_min = props.citiesArray[props.idx].dataRanges[this_layer][0];
-    const layer_max = props.citiesArray[props.idx].dataRanges[this_layer][1];
+    const layer_min = props.citiesArray[props.idx].dataRanges[this_layer as string][0];
+    const layer_max = props.citiesArray[props.idx].dataRanges[this_layer as string][1];
 
     // palettes:
     // https://github.com/d3/d3-scale-chromatic
