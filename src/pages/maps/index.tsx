@@ -67,6 +67,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     const [alpha, setAlpha] = useState(0.5);
     const [explain, setExplain] = useState(false);
     const [numLayers, setNumLayers] = useState("Single");
+    const numLayersOptions = ["Single", "Paired"];
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
@@ -126,9 +127,10 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         />
         <Control
             idx = {idx}
-            numLayers = {numLayers}
             layer = {layer}
             layer2 = {layer2}
+            numLayers = {numLayers}
+            numLayersOptions = {numLayersOptions}
             alpha = {alpha}
             explain = {explain}
             citiesArray = {props.citiesArray}
