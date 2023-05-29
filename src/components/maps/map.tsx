@@ -43,7 +43,7 @@ export default function UTAMap (props: MapProps) {
         transitionInterpolator: new FlyToInterpolator()
     });
 
-    const this_layer: string = props.layer;
+    // const this_layer: string = props.layer;
 
     const layer1: string = props.layer.replace("\_", "").replace("index", "");
     const layer2: string = props.layer2.replace("\_", "").replace("index", "");
@@ -55,18 +55,16 @@ export default function UTAMap (props: MapProps) {
         layer1 + "_" + layer2 : layer2 + "_" + layer1;
     const dual_layers: boolean = paired_keys.includes(these_layers);
 
-    console.log("LAYER: " + these_layers + "; " + this_layer);
+    const this_layer: string = props.numLayers == "Paired" && dual_layers ?
+        these_layers : props.layer;
 
-    //console.log (paired_keys);
+    console.log("LAYER: " + these_layers + "; " + this_layer);
     console.log("THIS: " + these_layers + " - " + paired_keys.includes(these_layers));
 
-    const layer_min = props.citiesArray[props.idx].dataRanges[this_layer as string][0];
-    const layer_max = props.citiesArray[props.idx].dataRanges[this_layer as string][1];
-
-    const layer_min2 = props.numLayers == "Paired" && dual_layers ?
+    const layer_min = props.numLayers == "Paired" && dual_layers ?
             props.citiesArray[props.idx].dataIntervalsPaired[these_layers as string][0] :
         props.citiesArray[props.idx].dataRanges[this_layer as string][0];
-    const layer_max2 = props.numLayers == "Paired" && dual_layers ?
+    const layer_max = props.numLayers == "Paired" && dual_layers ?
             props.citiesArray[props.idx].dataIntervalsPaired[these_layers as string][1] :
         props.citiesArray[props.idx].dataRanges[this_layer as string][1];
 
@@ -77,7 +75,10 @@ export default function UTAMap (props: MapProps) {
         //.interpolator(d3.interpolateCividis)
         .interpolator(d3.interpolateViridis)
 
-    const mapPath = mapPath1;
+    // const mapPath = mapPath1;
+    const mapPath: string = props.numLayers == "Paired" && dual_layers ? mapPath2 : mapPath1;
+
+    console.log("MAP = " + mapPath + " with LAYER = " + this_layer);
 
     const layers = [
         new GeoJsonLayer({
