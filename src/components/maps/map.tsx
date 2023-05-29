@@ -43,13 +43,10 @@ export default function UTAMap (props: MapProps) {
         transitionInterpolator: new FlyToInterpolator()
     });
 
-    // const this_layer: string = props.layer;
-
     const layer1: string = props.layer.replace("\_", "").replace("index", "");
     const layer2: string = props.layer2.replace("\_", "").replace("index", "");
     const paired_keys = Object.keys(props.citiesArray[props.idx].dataIntervalsPaired);
 
-    //const these_layers: string = layer1 + "_" + layer2;
     const these_layers =
         paired_keys.includes(layer1 + "_" + layer2) ?
         layer1 + "_" + layer2 : layer2 + "_" + layer1;
