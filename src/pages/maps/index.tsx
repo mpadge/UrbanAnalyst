@@ -63,7 +63,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         transitionInterpolator: new FlyToInterpolator()
     });
     const [layer, setLayer] = useState("social_index");
-    const [layer2, setLayer2] = useState("social");
+    const [layer2, setLayer2] = useState("");
     const [alpha, setAlpha] = useState(0.5);
     const [explain, setExplain] = useState(false);
     const [numLayers, setNumLayers] = useState("Single");
