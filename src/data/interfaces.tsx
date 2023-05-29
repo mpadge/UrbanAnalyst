@@ -36,6 +36,12 @@ export interface CityDataProps {
         natural: number[],
         parking: number[]
     },
+    dataRangesPaired: {
+        [key: string]: number[]
+    },
+    dataIntervalsPaired: {
+        [key: string]: number[]
+    },
     stats_single: {
         social_index: number[],
         times_rel: number[],
