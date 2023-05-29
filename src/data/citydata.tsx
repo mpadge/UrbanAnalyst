@@ -894,7 +894,6 @@ const paris = {
         "schooldist_natural": 0
     }
 }
-}
 
 export const CITY_DATA = {
     "citiesArray": [berlin, hamburg, mannheim, paris]
