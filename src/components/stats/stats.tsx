@@ -115,27 +115,27 @@ function StatsHeadingText (layer: string) {
 
     var heading: string = "";
 
-    if (layer == "social_index") {
+    if (layer.replace("\_", "").substring(0,6) === "social") {
         heading = "Social Index";
-    } else if (layer == "times_rel") {
+    } else if (layer.replace("\_", "") === "timesrel") {
         heading = "Transport Relative";
-    } else if (layer == "times_abs") {
+    } else if (layer.replace("\_", "") === "timesabs") {
         heading = "Transport Absolute";
-    } else if (layer == "transfers") {
+    } else if (layer === "transfers") {
         heading = "Num. Transfers";
-    } else if (layer == "intervals") {
+    } else if (layer === "intervals") {
         heading = "Transport Interval";
-    } else if (layer == "transport") {
+    } else if (layer === "transport") {
         heading = "Transport Combined";
-    } else if (layer == "popdens") {
+    } else if (layer === "popdens") {
         heading = "Population";
-    } else if (layer == "school_dist") {
+    } else if (layer.replace("\_", "") === "schooldist") {
         heading = "School Distance";
-    } else if (layer == "bike_index") {
+    } else if (layer.replace("\_", "").substring(0,3) === "bike") {
         heading = "Bicycle Index";
-    } else if (layer == "natural") {
+    } else if (layer === "natural") {
         heading = "Nature Index";
-    } else if (layer == "parking") {
+    } else if (layer === "parking") {
         heading = "Parking";
     }
 
@@ -272,7 +272,9 @@ export default function Stats (props: StatsProps) {
 
     const inputRef = useRef()
 
-    const heading = StatsHeadingText (props.layer);
+    const heading: string = props.numLayers == "Paired" && dual_layers ?
+        StatsHeadingText(layer1) + " & " + StatsHeadingText(layer2) :
+        StatsHeadingText(props.layer);
 
     return (
             <>
