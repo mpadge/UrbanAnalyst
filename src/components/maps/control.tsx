@@ -6,6 +6,7 @@ import Image from 'next/image'
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/maps/citylist';
 import LayerList from '@/components/maps/layerlist';
+import SelectNumLayers from '@/components/maps/num_layers';
 import OpacitySlider from '@/components/maps/slider';
 import ExplainButton from '@/components/maps/explain-button';
 import ExplainLayer from '@/components/maps/explain-layer';
@@ -76,22 +77,11 @@ export default function Control (props: MapsControlProps) {
             />
 
             <h3>Layer</h3>
-            {props.numLayersOptions.map((category: string) => (
-                <button
-                    key={category}
-                    type="button"
-                    style={{
-                        backgroundColor: category === props.numLayers ? "" : "white" ,
-                        color: category === props.numLayers ? "" : "black"
-                    }}
-                    //className={styles.buttonGroup}
-                    onClick={(event) => { 
-                        props.handleNumLayersChange(category);
-                    }}
-                >
-                {category}
-                </button>
-            ))}
+            <SelectNumLayers
+                numLayers = {props.numLayers}
+                numLayersOptions = {props.numLayersOptions}
+                handleNumLayersChange = {props.handleNumLayersChange}
+            />
             <LayerList
                 layer = {props.layer}
                 handleLayerChange = {props.handleLayerChange}
