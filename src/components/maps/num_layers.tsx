@@ -8,7 +8,7 @@ import styles from '@/styles/controls.module.css';
 export default function SelectNumLayers(props: NumLayersProps) {
 
     return (
-            <section >
+            <section className={styles.numLayersSelect}>
             {props.numLayersOptions.map((category: string) => (
                 <button
                     key={category}
