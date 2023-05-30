@@ -148,9 +148,23 @@ export default function Stats (props: StatsProps) {
 
     const meanValIndex = props.meanVals ? 0 : 1;
 
+    const layer1: string = props.layer.replace("\_", "").replace("index", "");
+    const layer2: string = props.layer2.replace("\_", "").replace("index", "");
+    const paired_keys = Object.keys(props.citiesArray[props.idx].dataIntervalsPaired);
+
+    const these_layers =
+        paired_keys.includes(layer1 + "_" + layer2) ?
+        layer1 + "_" + layer2 : layer2 + "_" + layer1;
+    const dual_layers: boolean = paired_keys.includes(these_layers);
+
+    const this_layer: string = props.numLayers == "Paired" && dual_layers ?
+        these_layers : props.layer;
+
     const data = props.citiesArray.map((city, index) => ({
         city: city.name,
-        value: city.stats_single[props.layer as keyof CityStatsProps][meanValIndex]
+        value: props.numLayers == "Paired" && dual_layers ?
+            city.stats_paired[this_layer as string] :
+            city.stats_single[this_layer as string][meanValIndex]
     }));
 
     if (props.sortOpt === 'increasing') {
@@ -160,6 +174,22 @@ export default function Stats (props: StatsProps) {
     } else if (props.sortOpt === 'alphabetic') {
         data.sort((a, b) => d3.ascending(a.city, b.city));
     }
+
+console.log("LAYER: " + props.layer);
+    var xMinTemp = data.map((item) => item.value).reduce((a, b) => Math.min(a, b));
+    const xMax = data.map((item) => item.value).reduce((a, b) => Math.max(a, b));
+    // const xMin = xMax - 2 * xMinTemp;
+
+    if (props.numLayers === "Single") {
+        if (props.meanVals && props.layer === 'times_abs') {
+            xMinTemp = 35;
+        } else if (props.layer == "natural") {
+            xMinTemp = 0;
+        } else if (props.layer == "bike_index") {
+            xMinTemp = 0.1;
+        }
+    }
+    const xMin = xMinTemp;
 
     const size = useWindowSize();
 
@@ -182,12 +212,6 @@ export default function Stats (props: StatsProps) {
 
     const svgRef = React.useRef<SVGSVGElement>(null);
     const xAxisRef = React.useRef<SVGSVGElement>(null);
-
-    var xMinTemp: number = 0;
-    if (props.layer == 'times_abs' && props.meanVals) {
-        xMinTemp = 35;
-    }
-    const xMin = xMinTemp;
 
     // X-axis:
     const xValue = (d: any) => d.value;
