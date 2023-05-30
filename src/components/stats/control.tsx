@@ -14,11 +14,16 @@ import { CityDataProps } from "@/data/interfaces";
 interface StatsControlProps {
     idx: number,
     layer: string,
+    layer2: string,
+    numLayers: string,
+    numLayersOptions: string[],
     meanVals: boolean,
     explain: any,
     sortOpt: string,
     citiesArray: CityDataProps[],
     handleLayerChange: (layer: string) => void,
+    handleLayer2Change: (layer2: string) => void,
+    handleNumLayersChange: (numLayers: string) => void,
     handleMeanChange: (meanVals: boolean) => void,
     handleSortChange: (sortOpt: string) => void,
     handleExplainChange: (explain: any) => void

@@ -9,6 +9,8 @@ import { CityDataProps } from "@/data/interfaces";
 interface StatsProps {
     idx: number,
     layer: string,
+    layer2: string,
+    numLayers: string,
     meanVals: boolean,
     sortOpt: string,
     citiesArray: CityDataProps[]

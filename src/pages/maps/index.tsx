@@ -89,7 +89,6 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         setExplain(!explain);
     }
     const handleNumLayersChange = (numLayers: string) => {
-        console.log("num layers = " + numLayers);
         setNumLayers(numLayers);
     }
 
