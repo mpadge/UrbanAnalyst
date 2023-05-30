@@ -175,21 +175,12 @@ export default function Stats (props: StatsProps) {
         data.sort((a, b) => d3.ascending(a.city, b.city));
     }
 
-console.log("LAYER: " + props.layer);
-    var xMinTemp = data.map((item) => item.value).reduce((a, b) => Math.min(a, b));
+    // Set lower limit at fixed proportion (>= 1) of total range:
+    const rangeExpand = 1.5;
+    const xMinActual = data.map((item) => item.value).reduce((a, b) => Math.min(a, b));
     const xMax = data.map((item) => item.value).reduce((a, b) => Math.max(a, b));
-    // const xMin = xMax - 2 * xMinTemp;
-
-    if (props.numLayers === "Single") {
-        if (props.meanVals && props.layer === 'times_abs') {
-            xMinTemp = 35;
-        } else if (props.layer == "natural") {
-            xMinTemp = 0;
-        } else if (props.layer == "bike_index") {
-            xMinTemp = 0.1;
-        }
-    }
-    const xMin = xMinTemp;
+    const xRange = xMax - xMinActual;
+    const xMin = xMax - rangeExpand * xRange;
 
     const size = useWindowSize();
 
