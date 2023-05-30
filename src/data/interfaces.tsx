@@ -123,6 +123,12 @@ export interface LayerListProps {
     handleLayerChange: (layer: string) => void
 }
 
+export interface NumLayersProps {
+    numLayers: string,
+    numLayersOptions: string[],
+    handleNumLayersChange: (layer: string) => void
+}
+
 export interface ExplainButtonProps {
     explain: boolean,
     handleExplainChange: (explain: boolean) => void
