@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styles from '@/styles/controls.module.css';
 import LayerList from '@/components/stats/layerlist';
+import SelectNumLayers from '@/components/stats/num_layers';
 import SortOrderList from '@/components/stats/sortOrderList';
 import ExplainButton from '@/components/stats/explain-button';
 import ExplainLayer from '@/components/stats/explain-layer';
@@ -65,10 +66,22 @@ export default function Control (props: StatsControlProps) {
             </h3>
 
             <h3>Layer</h3>
+            <SelectNumLayers
+                numLayers = {props.numLayers}
+                numLayersOptions = {props.numLayersOptions}
+                handleNumLayersChange = {props.handleNumLayersChange}
+            />
             <LayerList
                 layer = {props.layer}
                 handleLayerChange = {props.handleLayerChange}
             />
+            {props.numLayers == "Paired"  &&
+                <LayerList
+                    layer = {props.layer2}
+                    handleLayerChange = {props.handleLayer2Change}
+                />
+            }
+
             <MeanAvgButtons
                 meanVals = {props.meanVals}
                 handleMeanChange = {props.handleMeanChange}
