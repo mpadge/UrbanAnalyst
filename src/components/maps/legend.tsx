@@ -8,6 +8,8 @@ import { CityDataProps } from "@/data/interfaces";
 interface LegendProps {
     idx: number,
     layer: string,
+    layer2: string,
+    numLayers: string,
     alpha: number,
     citiesArray: CityDataProps[]
 }
@@ -114,21 +116,36 @@ export default function Legend (props: LegendProps) {
 
         var svg = d3.select(svgRef.current);
 
-        const dataRanges: any = props.citiesArray[props.idx].dataRanges;
-        const layerRange = dataRanges[props.layer];
+        const layer1: string = props.layer.replace("\_", "").replace("index", "");
+        const layer2: string = props.layer2.replace("\_", "").replace("index", "");
+        const paired_keys = Object.keys(props.citiesArray[props.idx].dataIntervalsPaired);
+
+        const these_layers =
+            paired_keys.includes(layer1 + "_" + layer2) ?
+            layer1 + "_" + layer2 : layer2 + "_" + layer1;
+        const dual_layers: boolean = paired_keys.includes(these_layers);
+
+        const this_layer: string = props.numLayers == "Paired" && dual_layers ?
+            these_layers : props.layer;
+
+        const dataRanges: any = props.numLayers === "Paired" && dual_layers ?
+            props.citiesArray[props.idx].dataRangesPaired :
+            props.citiesArray[props.idx].dataRanges;
+        const layerRange = dataRanges[this_layer];
         const layer_min = layerRange[0];
         const layer_max = layerRange[1];
-        //const layer_min: number = props.citiesArray[props.idx].dataRanges[props.layer][0];
-        //const layer_max: number = props.citiesArray[props.idx].dataRanges[props.layer][1];
-        const dataIntervals: any = props.citiesArray[props.idx].dataIntervals;
-        const legend_values: number = dataIntervals[props.layer];
+
+        const dataIntervals: any = props.numLayers === "Paired" && dual_layers ?
+            props.citiesArray[props.idx].dataIntervalsPaired :
+            props.citiesArray[props.idx].dataIntervals;
+        const legend_values: number[] = dataIntervals[this_layer];
 
         // palette has to match one in map.tsx, which is also reversed, so
         // domain is [max, min].
         var Color = d3.scaleSequential().domain([ layer_max, layer_min ])
             .interpolator(d3.interpolateViridis)
 
-        update(svg, legend_values, props.layer, Color, props.alpha)
+        update(svg, legend_values, this_layer, Color, props.alpha)
 
     }, [svgRef, props])
 

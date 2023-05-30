@@ -147,6 +147,8 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         <Legend
             idx = {idx}
             layer = {layer}
+            layer2 = {layer2}
+            numLayers = {numLayers}
             alpha = {alpha}
             citiesArray = {props.citiesArray}
         />
