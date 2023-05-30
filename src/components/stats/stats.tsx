@@ -131,7 +131,7 @@ function StatsHeadingText (layer: string) {
         heading = "Population";
     } else if (layer.replace("\_", "") === "schooldist") {
         heading = "School Distance";
-    } else if (layer.replace("\_", "").substring(0,3) === "bike") {
+    } else if (layer.replace("\_", "").substring(0,4) === "bike") {
         heading = "Bicycle Index";
     } else if (layer === "natural") {
         heading = "Nature Index";
