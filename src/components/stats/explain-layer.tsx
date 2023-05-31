@@ -6,6 +6,8 @@ import { GetLayerText } from "@/components/explain-layer";
 interface StatsExplainProps {
     idx: number,
     layer: string,
+    layer2: string,
+    numLayers: string,
     explain: boolean,
     meanVals: boolean,
     citiesArray: CityDataProps[]
@@ -16,7 +18,7 @@ export default function ExplainButton (props: StatsExplainProps) {
     const meanVarIndex = props.meanVals ? 0 : 1;
     const layer_text = props.layer == "social_index" ?
         "No social index statistics are displayer" :
-        GetLayerText(props.layer, meanVarIndex);
+        GetLayerText(props.layer, props.layer2, props.numLayers, meanVarIndex);
 
     return (
         <div id="divinfo" style={{display: props.explain?"":"none"}} >
