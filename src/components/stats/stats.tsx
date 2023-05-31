@@ -246,10 +246,6 @@ export default function Stats (props: StatsProps) {
         PageHeadingText(layer1) + " & " + PageHeadingText(layer2) :
         PageHeadingText(props.layer);
 
-    console.log("LAYER: " + props.layer + " -> HEADING = " + heading);
-    console.log("LAYER1: " + layer1 + ", LAYER2: " + layer2 + "; HD1: " +
-        PageHeadingText(layer1) + ", HD2: " + PageHeadingText(layer2));
-
     return (
             <>
             <div id="stats-page" className={styles.statspage}>

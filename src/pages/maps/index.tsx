@@ -62,7 +62,23 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         setNumLayers(numLayers);
     }
 
-    const layer_text = PageHeadingText(layer);
+    const paired_keys = Object.keys(props.citiesArray[idx].dataIntervalsPaired);
+    const layer1: string = layer.replace("\_", "").replace("index", "");
+    const layer2fmt: string = layer2.replace("\_", "").replace("index", "");
+    const these_layers =
+        paired_keys.includes(layer1 + "_" + layer2fmt) ?
+        layer1 + "_" + layer2fmt : layer2fmt + "_" + layer1;
+    const dual_layers: boolean = paired_keys.includes(these_layers);
+    const this_layer: string = numLayers == "Paired" && dual_layers ?
+        these_layers : layer;
+
+    const heading: string = numLayers == "Paired" && dual_layers ?
+        PageHeadingText(layer1) + " & " + PageHeadingText(layer2) :
+        PageHeadingText(layer1);
+
+    // console.log("LAYER1: " + layer1 + ", LAYER2: " + layer2fmt + "; HD1: " +
+    //     PageHeadingText(layer1) + ", HD2: " + PageHeadingText(layer2fmt) +
+    //     " -> " + heading);
 
     // meta viewport from:
     // https://docs.mapbox.com/mapbox-gl-js/example/disable-scroll-zoom/
@@ -79,7 +95,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         </Head>
         <div id="divinfo" style={{display: explain?"none":""}} >
             <div id="stats-heading" className={styles.mapsheading}>
-                <p> {layer_text} </p>
+                <p> {heading} </p>
             </div>
         </div>
         <UTAMap
