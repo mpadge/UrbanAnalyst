@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styles from '@/styles/controls.module.css';
 import LayerList from '@/components/stats/layerlist';
+import SelectNumLayers from '@/components/stats/num_layers';
 import SortOrderList from '@/components/stats/sortOrderList';
 import ExplainButton from '@/components/stats/explain-button';
 import ExplainLayer from '@/components/stats/explain-layer';
@@ -14,11 +15,16 @@ import { CityDataProps } from "@/data/interfaces";
 interface StatsControlProps {
     idx: number,
     layer: string,
+    layer2: string,
+    numLayers: string,
+    numLayersOptions: string[],
     meanVals: boolean,
     explain: any,
     sortOpt: string,
     citiesArray: CityDataProps[],
     handleLayerChange: (layer: string) => void,
+    handleLayer2Change: (layer2: string) => void,
+    handleNumLayersChange: (numLayers: string) => void,
     handleMeanChange: (meanVals: boolean) => void,
     handleSortChange: (sortOpt: string) => void,
     handleExplainChange: (explain: any) => void
@@ -60,10 +66,22 @@ export default function Control (props: StatsControlProps) {
             </h3>
 
             <h3>Layer</h3>
+            <SelectNumLayers
+                numLayers = {props.numLayers}
+                numLayersOptions = {props.numLayersOptions}
+                handleNumLayersChange = {props.handleNumLayersChange}
+            />
             <LayerList
                 layer = {props.layer}
                 handleLayerChange = {props.handleLayerChange}
             />
+            {props.numLayers == "Paired"  &&
+                <LayerList
+                    layer = {props.layer2}
+                    handleLayerChange = {props.handleLayer2Change}
+                />
+            }
+
             <MeanAvgButtons
                 meanVals = {props.meanVals}
                 handleMeanChange = {props.handleMeanChange}
@@ -88,6 +106,8 @@ export default function Control (props: StatsControlProps) {
         <ExplainLayer
             idx={props.idx}
             layer = {props.layer}
+            layer2 = {props.layer2}
+            numLayers = {props.numLayers}
             explain = {props.explain}
             meanVals = {props.meanVals}
             citiesArray={props.citiesArray}

@@ -21,27 +21,22 @@ export interface CityDataProps {
         zoom: number
     },
     dataRanges: {
-        social_index: number[],
-        transport_rel: number[],
-        transport_abs: number[],
-        uta_rel: number[],
-        uta_abs: number[]
+        [key: string]: number[]
     },
     dataIntervals: {
-        social_index: number[],
-        transport_rel: number[],
-        transport_abs: number[],
-        uta_rel: number[],
-        uta_abs: number[]
+        [key: string]: number[]
     },
-    statistics: {
-        social_index: number[],
-        transport_rel: number[],
-        transport_abs: number[],
-        uta_rel: number[],
-        uta_abs: number[],
-        sd_uta2trans_rel: number[],
-        sd_uta2trans_abs: number[]
+    dataRangesPaired: {
+        [key: string]: number[]
+    },
+    dataIntervalsPaired: {
+        [key: string]: number[]
+    },
+    stats_single: {
+        [key: string]: number[]
+    },
+    stats_paired: {
+        [key: string]: number
     }
 }
 
@@ -52,6 +47,12 @@ export interface CitiesDataProps {
 export interface LayerListProps {
     layer: string,
     handleLayerChange: (layer: string) => void
+}
+
+export interface NumLayersProps {
+    numLayers: string,
+    numLayersOptions: string[],
+    handleNumLayersChange: (layer: string) => void
 }
 
 export interface ExplainButtonProps {

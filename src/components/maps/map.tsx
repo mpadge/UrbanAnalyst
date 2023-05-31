@@ -20,43 +20,47 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 interface MapProps {
     idx: number,
     layer: string,
+    layer2: string,
+    numLayers: string,
     alpha: number,
     viewState: ViewState,
     citiesArray: CityDataProps[],
     handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void
+    handleLayer2Change: (layer2: string) => void
 }
 
 
 export default function UTAMap (props: MapProps) {
 
-    const mapPath = props.citiesArray[props.idx].path;
+    const mapPath1 = props.citiesArray[props.idx].path;
+    const mapPath2 = mapPath1.replace("data\.json", "data2.json");
+
     const [viewState, setViewState] = useState({
         ...props.viewState,
         transitionDuration: 2000,
         transitionInterpolator: new FlyToInterpolator()
     });
 
-    const this_layer: string = props.layer;
-    var layer_min: number = 0;
-    var layer_max: number = 100;
-    if (this_layer == "social_index") {
-        layer_min = props.citiesArray[props.idx].dataRanges.social_index[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.social_index[1];
-    } else if (this_layer == "transport_abs") {
-        layer_min = props.citiesArray[props.idx].dataRanges.transport_abs[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.transport_abs[1];
-    } else if (this_layer == "transport_rel") {
-        layer_min = props.citiesArray[props.idx].dataRanges.transport_rel[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.transport_rel[1];
-    } else if (this_layer == "uta_abs") {
-        layer_min = props.citiesArray[props.idx].dataRanges.uta_abs[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.uta_abs[1];
-    } else if (this_layer == "uta_rel") {
-        layer_min = props.citiesArray[props.idx].dataRanges.uta_rel[0];
-        layer_max = props.citiesArray[props.idx].dataRanges.uta_rel[1];
-    }
+    const layer1: string = props.layer.replace("\_", "").replace("index", "");
+    const layer2: string = props.layer2.replace("\_", "").replace("index", "");
+    const paired_keys = Object.keys(props.citiesArray[props.idx].dataIntervalsPaired);
+
+    const these_layers =
+        paired_keys.includes(layer1 + "_" + layer2) ?
+        layer1 + "_" + layer2 : layer2 + "_" + layer1;
+    const dual_layers: boolean = paired_keys.includes(these_layers);
+
+    const this_layer: string = props.numLayers == "Paired" && dual_layers ?
+        these_layers : props.layer;
+
+    const layer_min = props.numLayers == "Paired" && dual_layers ?
+            props.citiesArray[props.idx].dataIntervalsPaired[these_layers as string][0] :
+        props.citiesArray[props.idx].dataRanges[this_layer as string][0];
+    const layer_max = props.numLayers == "Paired" && dual_layers ?
+            props.citiesArray[props.idx].dataIntervalsPaired[these_layers as string][1] :
+        props.citiesArray[props.idx].dataRanges[this_layer as string][1];
 
     // palettes:
     // https://github.com/d3/d3-scale-chromatic
@@ -64,6 +68,8 @@ export default function UTAMap (props: MapProps) {
         //.interpolator(d3.interpolateMagma)
         //.interpolator(d3.interpolateCividis)
         .interpolator(d3.interpolateViridis)
+
+    const mapPath: string = props.numLayers == "Paired" && dual_layers ? mapPath2 : mapPath1;
 
     const layers = [
         new GeoJsonLayer({

@@ -14,7 +14,12 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
 
     const [idx, setIdx] = useState(0);
     const [cityData, setCityData] = useState(props.citiesArray[idx]);
-    const [layer, setLayer] = useState("sd_uta2trans_rel"); // options[0] in layerlist.tsx
+
+    const [layer, setLayer] = useState("social_index"); // options[0] in layerlist.tsx
+    const [layer2, setLayer2] = useState("");
+    const [numLayers, setNumLayers] = useState("Single");
+    const numLayersOptions = ["Single", "Paired"];
+
     const [explain, setExplain] = useState(false);
     const [sortOpt, setSortOpt] = useState("increasing");
     const [meanVals, setMeanVals] = useState(true);
@@ -24,6 +29,12 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     }
     const handleLayerChange = (layer: string) => {
         setLayer(layer);
+    }
+    const handleLayer2Change = (layer2: string) => {
+        setLayer2(layer2);
+    }
+    const handleNumLayersChange = (numLayers: string) => {
+        setNumLayers(numLayers);
     }
     const handleExplainChange = (e: any) => {
         setExplain(!explain);
@@ -52,6 +63,8 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             <Stats
                 idx = {idx}
                 layer = {layer}
+                layer2 = {layer2}
+                numLayers = {numLayers}
                 meanVals = {meanVals}
                 sortOpt = {sortOpt}
                 citiesArray = {props.citiesArray}
@@ -59,11 +72,16 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             <Control
                 idx = {idx}
                 layer = {layer}
+                layer2 = {layer2}
+                numLayers = {numLayers}
+                numLayersOptions = {numLayersOptions}
                 meanVals = {meanVals}
                 explain = {explain}
                 sortOpt = {sortOpt}
                 citiesArray = {props.citiesArray}
                 handleLayerChange = {handleLayerChange}
+                handleLayer2Change = {handleLayer2Change}
+                handleNumLayersChange = {handleNumLayersChange}
                 handleMeanChange = {handleMeanChange}
                 handleSortChange = {handleSortChange}
                 handleExplainChange = {handleExplainChange}
