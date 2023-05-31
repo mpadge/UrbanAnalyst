@@ -3,6 +3,10 @@ export default function PageHeadingText (layer: string) {
 
     var heading: string = "";
 
+    if (!layer) {
+        return heading;
+    }
+
     if (layer.replace("\_", "").substring(0,6) === "social") {
         heading = "Social Index";
     } else if (layer.replace("\_", "") === "timesrel") {
