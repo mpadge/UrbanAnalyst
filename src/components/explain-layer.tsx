@@ -55,166 +55,166 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Social index (rescaled to average of one) times absolute travel times"
         ],
         "timesrel_transfers": [
-            "Explanatory Text"
+            "Relative travel times multiplied by numbers of transfers."
         ],
         "timesrel_intervals": [
-            "Explanatory Text"
+            "Relative travel times multiplied by intervals between consecutive services."
         ],
         "timesrel_transport": [
-            "Explanatory Text"
+            "Relative travel times multiplied by compound transport index. These values will generally not mean anything."
         ],
         "timesrel_popdens": [
-            "Explanatory Text"
+            "Relative travel times multiplied by population densities.."
         ],
         "timesrel_schooldist": [
-            "Explanatory Text"
+            "Relative travel times multiplied by distances to nearest schools."
         ],
         "timesrel_bike": [
-            "Explanatory Text"
+            "Relative travel times multiplied by bicycle index."
         ],
         "timesrel_natural": [
-            "Explanatory Text"
+            "Relative travel times multiplied by index of accessibility to natural spaces."
         ],
         "timesrel_parking": [
-            "Explanatory Text"
+            "Relative travel times multiplied by parking index."
         ],
         "timesrel_social": [
-            "Explanatory Text"
+            "Relative travel times multiplied by social index (rescaled to average of one)."
         ],
         "timesabs_transfers": [
-            "Explanatory Text"
+            "Absoulte travel times multiplied by numbers of transfers."
         ],
         "timesabs_intervals": [
-            "Explanatory Text"
+            "Absoulte travel times multiplied by intervals between consecutive services."
         ],
         "timesabs_transport": [
-            "Explanatory Text"
+            "Absoulte travel times multiplied by compound transport index. These values will generally not mean anything."
         ],
         "timesabs_popdens": [
-            "Explanatory Text"
+            "Absoulte travel times multiplied by population densities.."
         ],
         "timesabs_schooldist": [
-            "Explanatory Text"
+            "Absoulte travel times multiplied by distances to nearest schools."
         ],
         "timesabs_bike": [
-            "Explanatory Text"
+            "Absoulte travel times multiplied by bicycle index."
         ],
         "timesabs_natural": [
-            "Explanatory Text"
+            "Absoulte travel times multiplied by index of accessibility to natural spaces."
         ],
         "timesabs_parking": [
-            "Explanatory Text"
+            "Absoulte travel times multiplied by parking index."
         ],
         "timesabs_social": [
-            "Explanatory Text"
+            "Absoulte travel times multiplied by social index (rescaled to average of one)."
         ],
         "transfers_intervals": [
-            "Explanatory Text"
+            "Numbers of transfers multiplied by intervals between consecutive services."
         ],
         "transfers_transport": [
-            "Explanatory Text"
+            "Numbers of transfers multiplied by compound transport index. These values will generally not mean anything."
         ],
         "transfers_popdens": [
-            "Explanatory Text"
+            "Numbers of transfers multiplied by population densities.."
         ],
         "transfers_schooldist": [
-            "Explanatory Text"
+            "Numbers of transfers multiplied by distances to nearest schools."
         ],
         "transfers_bike": [
-            "Explanatory Text"
+            "Numbers of transfers multiplied by bicycle index."
         ],
         "transfers_natural": [
-            "Explanatory Text"
+            "Numbers of transfers multiplied by index of accessibility to natural spaces."
         ],
         "transfers_parking": [
-            "Explanatory Text"
+            "Numbers of transfers multiplied by parking index."
         ],
         "transfers_social": [
-            "Explanatory Text"
+            "Numbers of transfers multiplied by social index (rescaled to average of one)."
         ],
         "intervals_transport": [
-            "Explanatory Text"
+            "Transport intervals multiplied by compound transport index. These values will generally not mean anything."
         ],
         "intervals_popdens": [
-            "Explanatory Text"
+            "Transport intervals multiplied by population densities.."
         ],
         "intervals_schooldist": [
-            "Explanatory Text"
+            "Transport intervals multiplied by distances to nearest schools."
         ],
         "intervals_bike": [
-            "Explanatory Text"
+            "Transport intervals multiplied by bicycle index."
         ],
         "intervals_natural": [
-            "Explanatory Text"
+            "Transport intervals multiplied by index of accessibility to natural spaces."
         ],
         "intervals_parking": [
-            "Explanatory Text"
+            "Transport intervals multiplied by parking index."
         ],
         "intervals_social": [
-            "Explanatory Text"
+            "Transport intervals multiplied by social index (rescaled to average of one)."
         ],
         "transport_popdens": [
-            "Explanatory Text"
+            "Compound transport index multiplied by population densities.."
         ],
         "transport_schooldist": [
-            "Explanatory Text"
+            "Compound transport index multiplied by distances to nearest schools."
         ],
         "transport_bike": [
-            "Explanatory Text"
+            "Compound transport index multiplied by bicycle index."
         ],
         "transport_natural": [
-            "Explanatory Text"
+            "Compound transport index multiplied by index of accessibility to natural spaces."
         ],
         "transport_parking": [
-            "Explanatory Text"
+            "Compound transport index multiplied by parking index."
         ],
         "transport_social": [
-            "Explanatory Text"
+            "Compound transport index multiplied by social index (rescaled to average of one)."
         ],
         "popdens_schooldist": [
-            "Explanatory Text"
+            "Population density multiplied by distances to nearest schools."
         ],
         "popdens_bike": [
-            "Explanatory Text"
+            "Population density multiplied by bicycle index."
         ],
         "popdens_natural": [
-            "Explanatory Text"
+            "Population density multiplied by index of accessibility to natural spaces."
         ],
         "popdens_parking": [
-            "Explanatory Text"
+            "Population density multiplied by parking index."
         ],
         "popdens_social": [
-            "Explanatory Text"
+            "Population density multiplied by social index (rescaled to average of one)."
         ],
         "schooldist_bike": [
-            "Explanatory Text"
+            "Distance to nearest school multiplied by bicycle index."
         ],
         "schooldist_natural": [
-            "Explanatory Text"
+            "Distance to nearest school multiplied by index of accessibility to natural spaces."
         ],
         "schooldist_parking": [
-            "Explanatory Text"
+            "Distance to nearest school multiplied by parking index."
         ],
         "schooldist_social": [
-            "Explanatory Text"
+            "Distance to nearest school multiplied by social index (rescaled to average of one)."
         ],
         "bike_natural": [
-            "Explanatory Text"
+            "Bicycle infrastructure index multiplied by index of accessibility to natural spaces."
         ],
         "bike_parking": [
-            "Explanatory Text"
+            "Bicycle infrastructure index multiplied by parking index."
         ],
         "bike_social": [
-            "Explanatory Text"
+            "Bicycle infrastructure index multiplied by social index (rescaled to average of one)."
         ],
         "natural_parking": [
-            "Explanatory Text"
+            "Index of access to natural spaces multiplied by parking index."
         ],
         "natural_social": [
-            "Explanatory Text"
+            "Index of access to natural spaces multiplied by social index (rescaled to average of one)."
         ],
         "parking_social": [
-            "Explanatory Text"
+            "Parking index multiplied by social index (rescaled to average of one)."
         ]
     };
 
