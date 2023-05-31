@@ -55,9 +55,6 @@ export default function UTAMap (props: MapProps) {
     const this_layer: string = props.numLayers == "Paired" && dual_layers ?
         these_layers : props.layer;
 
-    console.log("LAYER: " + these_layers + "; " + this_layer);
-    console.log("THIS: " + these_layers + " - " + paired_keys.includes(these_layers));
-
     const layer_min = props.numLayers == "Paired" && dual_layers ?
             props.citiesArray[props.idx].dataIntervalsPaired[these_layers as string][0] :
         props.citiesArray[props.idx].dataRanges[this_layer as string][0];
@@ -72,10 +69,7 @@ export default function UTAMap (props: MapProps) {
         //.interpolator(d3.interpolateCividis)
         .interpolator(d3.interpolateViridis)
 
-    // const mapPath = mapPath1;
     const mapPath: string = props.numLayers == "Paired" && dual_layers ? mapPath2 : mapPath1;
-
-    console.log("MAP = " + mapPath + " with LAYER = " + this_layer);
 
     const layers = [
         new GeoJsonLayer({
