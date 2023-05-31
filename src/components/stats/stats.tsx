@@ -5,7 +5,7 @@ import Link from 'next/link'
 import styled from 'styled-components';
 import styles from '@/styles/stats.module.css';
 import { CityDataProps } from "@/data/interfaces";
-import StatsHeadingText from "@/components/heading_text";
+import PageHeadingText from "@/components/heading_text";
 
 interface StatsProps {
     idx: number,
@@ -243,8 +243,12 @@ export default function Stats (props: StatsProps) {
     const inputRef = useRef()
 
     const heading: string = props.numLayers == "Paired" && dual_layers ?
-        StatsHeadingText(layer1) + " & " + StatsHeadingText(layer2) :
-        StatsHeadingText(props.layer);
+        PageHeadingText(layer1) + " & " + PageHeadingText(layer2) :
+        PageHeadingText(props.layer);
+
+    console.log("LAYER: " + props.layer + " -> HEADING = " + heading);
+    console.log("LAYER1: " + layer1 + ", LAYER2: " + layer2 + "; HD1: " +
+        PageHeadingText(layer1) + ", HD2: " + PageHeadingText(layer2));
 
     return (
             <>

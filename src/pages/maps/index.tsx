@@ -10,6 +10,7 @@ import Control from '@/components/maps/control';
 import Legend from '@/components/maps/legend';
 import UTAMap from '@/components/maps/map';
 import Buttons from '@/components/buttons2';
+import PageHeadingText from "@/components/heading_text";
 import styles from '@/styles/maps.module.css';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
@@ -18,37 +19,6 @@ import { CityDataProps, CitiesDataProps, ViewState } from "@/data/interfaces";
 const buttonProps = {
     first: "home",
     second: "stats"
-}
-
-function getLayerTextFromLayer(layer: string): string {
-
-    var layer_temp: string = "";
-
-    if (layer == "social_index") {
-        layer_temp = "Social";
-    } else if (layer == "times_rel") {
-        layer_temp = "Transport Rel.";
-    } else if (layer == "times_abs") {
-        layer_temp = "Transport Abs.";
-    } else if (layer == "transfers") {
-        layer_temp = "Num. Transfers";
-    } else if (layer == "intervals") {
-        layer_temp = "Transp. Interval";
-    } else if (layer == "transport") {
-        layer_temp = "Transport Combined";
-    } else if (layer == "popdens") {
-        layer_temp = "Population";
-    } else if (layer == "school_dist") {
-        layer_temp = "School Dist.";
-    } else if (layer == "bike_index") {
-        layer_temp = "Bicycle Index";
-    } else if (layer == "natural") {
-        layer_temp = "Nature Index";
-    } else if (layer == "parking") {
-        layer_temp = "Parking";
-    }
-
-    return layer_temp;
 }
 
 const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
@@ -92,7 +62,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         setNumLayers(numLayers);
     }
 
-    const layer_text = getLayerTextFromLayer(layer);
+    const layer_text = PageHeadingText(layer);
 
     // meta viewport from:
     // https://docs.mapbox.com/mapbox-gl-js/example/disable-scroll-zoom/

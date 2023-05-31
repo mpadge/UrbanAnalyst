@@ -1,5 +1,5 @@
 
-export default function StatsHeadingText (layer: string) {
+export default function PageHeadingText (layer: string) {
 
     var heading: string = "";
 
