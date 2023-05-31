@@ -4,11 +4,14 @@ interface LayerTextProps {
 }
 
 
-export function GetLayerText(layer: string, layer2: string, numLayers: string, meanVarIndex: number): string {
+export function GetLayerText(layer: string, layer2: string, numLayers: string, meanVarIndex: number, paired_keys: string[]): string {
 
-    const lyr1 = layer.replace("\n", "").replace("index", "");
-    const lyr2 = layer2.replace("\n", "").replace("index", "");
-    const this_layer = numLayers == "Single" ? lyr1 : lyr1 + "_" + lyr2;
+    const lyr1 = layer.replace("\_", "").replace("index", "");
+    const lyr2 = layer2.replace("\_", "").replace("index", "");
+
+    const these_layers = paired_keys.includes(lyr1 + "_" + lyr2) ?
+        lyr1 + "_" + lyr2 : lyr2 + "_" + lyr1;
+    const this_layer = numLayers == "Single" ? lyr1 : these_layers;
 
     const LAYER_TEXT: LayerTextProps = {
 
@@ -46,10 +49,179 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
         ],
         "parking": [
             "Parking index"
+        ],
+
+        "social_timesabs": [
+            "Social index (rescaled to average of one) times absolute travel times"
+        ],
+        "timesrel_transfers": [
+            "Explanatory Text"
+        ],
+        "timesrel_intervals": [
+            "Explanatory Text"
+        ],
+        "timesrel_transport": [
+            "Explanatory Text"
+        ],
+        "timesrel_popdens": [
+            "Explanatory Text"
+        ],
+        "timesrel_schooldist": [
+            "Explanatory Text"
+        ],
+        "timesrel_bike": [
+            "Explanatory Text"
+        ],
+        "timesrel_natural": [
+            "Explanatory Text"
+        ],
+        "timesrel_parking": [
+            "Explanatory Text"
+        ],
+        "timesrel_social": [
+            "Explanatory Text"
+        ],
+        "timesabs_transfers": [
+            "Explanatory Text"
+        ],
+        "timesabs_intervals": [
+            "Explanatory Text"
+        ],
+        "timesabs_transport": [
+            "Explanatory Text"
+        ],
+        "timesabs_popdens": [
+            "Explanatory Text"
+        ],
+        "timesabs_schooldist": [
+            "Explanatory Text"
+        ],
+        "timesabs_bike": [
+            "Explanatory Text"
+        ],
+        "timesabs_natural": [
+            "Explanatory Text"
+        ],
+        "timesabs_parking": [
+            "Explanatory Text"
+        ],
+        "timesabs_social": [
+            "Explanatory Text"
+        ],
+        "transfers_intervals": [
+            "Explanatory Text"
+        ],
+        "transfers_transport": [
+            "Explanatory Text"
+        ],
+        "transfers_popdens": [
+            "Explanatory Text"
+        ],
+        "transfers_schooldist": [
+            "Explanatory Text"
+        ],
+        "transfers_bike": [
+            "Explanatory Text"
+        ],
+        "transfers_natural": [
+            "Explanatory Text"
+        ],
+        "transfers_parking": [
+            "Explanatory Text"
+        ],
+        "transfers_social": [
+            "Explanatory Text"
+        ],
+        "intervals_transport": [
+            "Explanatory Text"
+        ],
+        "intervals_popdens": [
+            "Explanatory Text"
+        ],
+        "intervals_schooldist": [
+            "Explanatory Text"
+        ],
+        "intervals_bike": [
+            "Explanatory Text"
+        ],
+        "intervals_natural": [
+            "Explanatory Text"
+        ],
+        "intervals_parking": [
+            "Explanatory Text"
+        ],
+        "intervals_social": [
+            "Explanatory Text"
+        ],
+        "transport_popdens": [
+            "Explanatory Text"
+        ],
+        "transport_schooldist": [
+            "Explanatory Text"
+        ],
+        "transport_bike": [
+            "Explanatory Text"
+        ],
+        "transport_natural": [
+            "Explanatory Text"
+        ],
+        "transport_parking": [
+            "Explanatory Text"
+        ],
+        "transport_social": [
+            "Explanatory Text"
+        ],
+        "popdens_schooldist": [
+            "Explanatory Text"
+        ],
+        "popdens_bike": [
+            "Explanatory Text"
+        ],
+        "popdens_natural": [
+            "Explanatory Text"
+        ],
+        "popdens_parking": [
+            "Explanatory Text"
+        ],
+        "popdens_social": [
+            "Explanatory Text"
+        ],
+        "schooldist_bike": [
+            "Explanatory Text"
+        ],
+        "schooldist_natural": [
+            "Explanatory Text"
+        ],
+        "schooldist_parking": [
+            "Explanatory Text"
+        ],
+        "schooldist_social": [
+            "Explanatory Text"
+        ],
+        "bike_natural": [
+            "Explanatory Text"
+        ],
+        "bike_parking": [
+            "Explanatory Text"
+        ],
+        "bike_social": [
+            "Explanatory Text"
+        ],
+        "natural_parking": [
+            "Explanatory Text"
+        ],
+        "natural_social": [
+            "Explanatory Text"
+        ],
+        "parking_social": [
+            "Explanatory Text"
         ]
     };
 
-    const lt: string = meanVarIndex ? LAYER_TEXT[layer][meanVarIndex] : LAYER_TEXT[layer][0];
+    var layer_text: string = "";
+    if (Object.keys(LAYER_TEXT).includes(this_layer)) {
+        layer_text = meanVarIndex ? LAYER_TEXT[this_layer][meanVarIndex] : LAYER_TEXT[this_layer][0];
+    }
 
-    return lt;
+    return layer_text;
 }
