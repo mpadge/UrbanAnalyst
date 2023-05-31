@@ -115,6 +115,8 @@ export default function Control (props: MapsControlProps) {
         <ExplainLayer
             idx={props.idx}
             layer = {props.layer}
+            layer2 = {props.layer2}
+            numLayers = {props.numLayers}
             explain = {props.explain}
             meanVals = {true}
             citiesArray={props.citiesArray}
