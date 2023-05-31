@@ -55,20 +55,18 @@ export default function Home() {
             <div className={styles.centerMed}>
                 <p className="text-center">
                     Urban Transport Analyst provides interactive maps of the
-                    properties of urban transport systems, and relationships of
-                    these properties to socio-demographic conditions.  UTA also
-                    provides statistical summaries of all cities, including
-                    representation in the &quot;UTA Index&quot;, which captures
-                    the extent to which transport systems effectively
-                    counter-balance socio-demographic disadvantage.
+                    properties of cities including of their transport systems
+                    and socio-demographic conditions.  UTA also provides
+                    statistical summaries of all cities.
                 </p>
 
                 <p className="text-center">
-                    For all maps and statistical summaries, lower values are always
-                    better. Transport statistics are based on times needed to travel a
-                    given distance, so lower values reflect faster transport.
-                    Socio-demographic statistics are metrics of social disadvantage such
-                    as unemployment, for which again lower values are better.
+                    Both maps and statistics may be examined for single
+                    variables, or for pairwise combinations of variables. These
+                    pairwise combinations provide insight into relationships
+                    bewteen different properties of cities, such as between the
+                    various metrics of transport provision and socio-demographic
+                    inequality.
                 </p>
             </div>
 
@@ -83,12 +81,10 @@ export default function Home() {
                         Maps <span>-&gt;</span>
                     </h2>
                     <p className={styles.cardText}>
-                        Interactive maps of all cities analysed to date.
-                        Transport systems are summarised in terms of times taken
-                        to cover distances of 10km, with values derived for
-                        every street intersection in a city by calculating times
-                        taken to travel to every other point in the city using
-                        specified single or multiple modes of transport.
+                        Interactive maps of all cities analysed to date. Most
+                        variables are displayed such the lower values reflect
+                        better conditions, such as shorter travel times or lower
+                        rates of unemployment.
                     </p>
                 </Link>
 
