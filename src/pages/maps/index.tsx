@@ -10,6 +10,7 @@ import Control from '@/components/maps/control';
 import Legend from '@/components/maps/legend';
 import UTAMap from '@/components/maps/map';
 import Buttons from '@/components/buttons2';
+import { HeadingTextOneLayer, HeadingText } from "@/components/heading_text";
 import styles from '@/styles/maps.module.css';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
@@ -32,8 +33,11 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         transitionInterpolator: new FlyToInterpolator()
     });
     const [layer, setLayer] = useState("social_index");
+    const [layer2, setLayer2] = useState("");
     const [alpha, setAlpha] = useState(0.5);
     const [explain, setExplain] = useState(false);
+    const [numLayers, setNumLayers] = useState("Single");
+    const numLayersOptions = ["Single", "Paired"];
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
@@ -48,23 +52,17 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     const handleLayerChange = (layer: string) => {
         setLayer(layer);
     }
+    const handleLayer2Change = (layer2: string) => {
+        setLayer2(layer2);
+    }
     const handleExplainChange = (e: any) => {
         setExplain(!explain);
     }
-
-    var layer_temp: string = layer;
-    if (layer == "social_index") {
-        layer_temp = "Social Index";
-    } else if (layer == "transport_abs") {
-        layer_temp = 'Transport Absolute';
-    } else if (layer == "transport_rel") {
-        layer_temp = 'Transport Relative';
-    } else if (layer == "uta_abs") {
-        layer_temp = 'Combined Absolute';
-    } else if (layer == "uta_rel") {
-        layer_temp = 'Combined Relative';
+    const handleNumLayersChange = (numLayers: string) => {
+        setNumLayers(numLayers);
     }
-    const layer_text = layer_temp;
+
+    const heading: string = HeadingText(layer, layer2, numLayers, props.citiesArray);
 
     // meta viewport from:
     // https://docs.mapbox.com/mapbox-gl-js/example/disable-scroll-zoom/
@@ -81,35 +79,45 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         </Head>
         <div id="divinfo" style={{display: explain?"none":""}} >
             <div id="stats-heading" className={styles.mapsheading}>
-                <p> {layer_text} </p>
+                <p> {heading} </p>
             </div>
         </div>
         <UTAMap
             idx = {idx}
             layer = {layer}
+            layer2 = {layer2}
+            numLayers = {numLayers}
             alpha = {alpha}
             citiesArray = {props.citiesArray}
             viewState = {viewState}
             handleAlphaChange = {handleAlphaChange}
             handleViewStateChange = {handleViewStateChange}
             handleLayerChange = {handleLayerChange}
+            handleLayer2Change = {handleLayer2Change}
         />
         <Control
             idx = {idx}
             layer = {layer}
+            layer2 = {layer2}
+            numLayers = {numLayers}
+            numLayersOptions = {numLayersOptions}
             alpha = {alpha}
             explain = {explain}
             citiesArray = {props.citiesArray}
             viewState = {viewState}
             handleIdxChange = {handleIdxChange}
+            handleNumLayersChange = {handleNumLayersChange}
             handleAlphaChange = {handleAlphaChange}
             handleViewStateChange = {handleViewStateChange}
             handleLayerChange = {handleLayerChange}
+            handleLayer2Change = {handleLayer2Change}
             handleExplainChange = {handleExplainChange}
         />
         <Legend
             idx = {idx}
             layer = {layer}
+            layer2 = {layer2}
+            numLayers = {numLayers}
             alpha = {alpha}
             citiesArray = {props.citiesArray}
         />

@@ -1,10 +1,12 @@
 
-import {useState} from 'react';
+import {useState, useRef} from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
+
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/maps/citylist';
 import LayerList from '@/components/maps/layerlist';
+import SelectNumLayers from '@/components/maps/num_layers';
 import OpacitySlider from '@/components/maps/slider';
 import ExplainButton from '@/components/maps/explain-button';
 import ExplainLayer from '@/components/maps/explain-layer';
@@ -14,16 +16,22 @@ import { ViewState, CityDataProps } from "@/data/interfaces";
 interface MapsControlProps {
     idx: number,
     layer: string,
+    layer2: string,
+    numLayers: string,
+    numLayersOptions: string[],
     alpha: number,
     explain: any,
     citiesArray: CityDataProps[],
     viewState: ViewState,
     handleIdxChange: (pIdx: number) => void,
+    handleNumLayersChange: (numLayers: string) => void,
     handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void,
+    handleLayer2Change: (layer: string) => void,
     handleExplainChange: (explain: any) => void
 }
+
 
 export default function Control (props: MapsControlProps) {
 
@@ -67,16 +75,31 @@ export default function Control (props: MapsControlProps) {
                 handleViewStateChange={props.handleViewStateChange}
                 // onSelect={city => props.handleIdxChange(props.idx)}
             />
+
             <h3>Layer</h3>
+            <SelectNumLayers
+                numLayers = {props.numLayers}
+                numLayersOptions = {props.numLayersOptions}
+                handleNumLayersChange = {props.handleNumLayersChange}
+            />
             <LayerList
                 layer = {props.layer}
                 handleLayerChange = {props.handleLayerChange}
             />
+
+            {props.numLayers == "Paired"  &&
+                <LayerList
+                    layer = {props.layer2}
+                    handleLayerChange = {props.handleLayer2Change}
+                />
+            }
+
             <h3>Opacity</h3>
             <OpacitySlider
                 alpha = {props.alpha}
                 handleAlphaChange={props.handleAlphaChange}
             />
+
             <ExplainButton
                 explain = {props.explain}
                 handleExplainChange = {props.handleExplainChange} />
@@ -92,6 +115,8 @@ export default function Control (props: MapsControlProps) {
         <ExplainLayer
             idx={props.idx}
             layer = {props.layer}
+            layer2 = {props.layer2}
+            numLayers = {props.numLayers}
             explain = {props.explain}
             meanVals = {true}
             citiesArray={props.citiesArray}

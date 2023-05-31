@@ -5,10 +5,13 @@ import Link from 'next/link'
 import styled from 'styled-components';
 import styles from '@/styles/stats.module.css';
 import { CityDataProps } from "@/data/interfaces";
+import { HeadingTextOneLayer } from "@/components/heading_text";
 
 interface StatsProps {
     idx: number,
     layer: string,
+    layer2: string,
+    numLayers: string,
     meanVals: boolean,
     sortOpt: string,
     citiesArray: CityDataProps[]
@@ -16,12 +19,16 @@ interface StatsProps {
 
 interface CityStatsProps {
     social_index: number[],
-    transport_rel: number[],
-    transport_abs: number[],
-    uta_rel: number[],
-    uta_abs: number[],
-    sd_uta2trans_rel: number[],
-    sd_uta2trans_abs: number[]
+    times_rel: number[],
+    times_abs: number[],
+    transfers: number[],
+    intervals: number[],
+    transport: number[],
+    popdens: number[],
+    school_dist: number[],
+    bike_index: number[],
+    natural: number[],
+    parking: number[]
 }
 
 
@@ -105,35 +112,29 @@ function useWindowSize() {
     return windowSize;
 }
 
-function StatsHeadingText (layer: string) {
-
-    var heading: string = "";
-    if (layer == 'sd_uta2trans_rel') {
-        heading = 'UTA Relative';
-    } else if (layer == 'sd_uta2trans_abs') {
-        heading = 'UTA Absolute';
-    } else if (layer == 'transport_abs') {
-        heading = 'Transport Absolute';
-    } else if (layer == 'transport_rel') {
-        heading = 'Transport Relative';
-    } else if (layer == 'uta_abs') {
-        heading = 'Combined Absolute';
-    } else if (layer == 'uta_rel') {
-        heading = 'Combined Relative';
-    }
-
-    return heading;
-}
-
 export default function Stats (props: StatsProps) {
 
     const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
 
     const meanValIndex = props.meanVals ? 0 : 1;
 
+    const layer1: string = props.layer.replace("\_", "").replace("index", "");
+    const layer2: string = props.layer2.replace("\_", "").replace("index", "");
+    const paired_keys = Object.keys(props.citiesArray[props.idx].dataIntervalsPaired);
+
+    const these_layers =
+        paired_keys.includes(layer1 + "_" + layer2) ?
+        layer1 + "_" + layer2 : layer2 + "_" + layer1;
+    const dual_layers: boolean = paired_keys.includes(these_layers);
+
+    const this_layer: string = props.numLayers == "Paired" && dual_layers ?
+        these_layers : props.layer;
+
     const data = props.citiesArray.map((city, index) => ({
         city: city.name,
-        value: city.statistics[props.layer as keyof CityStatsProps][meanValIndex]
+        value: props.numLayers == "Paired" && dual_layers ?
+            city.stats_paired[this_layer as string] :
+            city.stats_single[this_layer as string][meanValIndex]
     }));
 
     if (props.sortOpt === 'increasing') {
@@ -143,6 +144,13 @@ export default function Stats (props: StatsProps) {
     } else if (props.sortOpt === 'alphabetic') {
         data.sort((a, b) => d3.ascending(a.city, b.city));
     }
+
+    // Set lower limit at fixed proportion (>= 1) of total range:
+    const rangeExpand = 1.5;
+    const xMinActual = data.map((item) => item.value).reduce((a, b) => Math.min(a, b));
+    const xMax = data.map((item) => item.value).reduce((a, b) => Math.max(a, b));
+    const xRange = xMax - xMinActual;
+    const xMin = xMax - rangeExpand * xRange;
 
     const size = useWindowSize();
 
@@ -165,12 +173,6 @@ export default function Stats (props: StatsProps) {
 
     const svgRef = React.useRef<SVGSVGElement>(null);
     const xAxisRef = React.useRef<SVGSVGElement>(null);
-
-    var xMinTemp: number = 0;
-    if ((props.layer == 'transport_abs' || props.layer == 'uta_abs') && props.meanVals) {
-        xMinTemp = 35;
-    }
-    const xMin = xMinTemp;
 
     // X-axis:
     const xValue = (d: any) => d.value;
@@ -240,7 +242,9 @@ export default function Stats (props: StatsProps) {
 
     const inputRef = useRef()
 
-    const heading = StatsHeadingText (props.layer);
+    const heading: string = props.numLayers == "Paired" && dual_layers ?
+        HeadingTextOneLayer(layer1) + " & " + HeadingTextOneLayer(layer2) :
+        HeadingTextOneLayer(props.layer);
 
     return (
             <>
