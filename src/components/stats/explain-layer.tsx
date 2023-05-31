@@ -16,9 +16,10 @@ interface StatsExplainProps {
 export default function ExplainButton (props: StatsExplainProps) {
 
     const meanVarIndex = props.meanVals ? 0 : 1;
+    const paired_keys = Object.keys(props.citiesArray[props.idx].dataIntervalsPaired);
     const layer_text = props.layer == "social_index" ?
         "No social index statistics are displayer" :
-        GetLayerText(props.layer, props.layer2, props.numLayers, meanVarIndex);
+        GetLayerText(props.layer, props.layer2, props.numLayers, meanVarIndex, paired_keys);
 
     return (
         <div id="divinfo" style={{display: props.explain?"":"none"}} >
