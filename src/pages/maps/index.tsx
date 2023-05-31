@@ -10,7 +10,7 @@ import Control from '@/components/maps/control';
 import Legend from '@/components/maps/legend';
 import UTAMap from '@/components/maps/map';
 import Buttons from '@/components/buttons2';
-import PageHeadingText from "@/components/heading_text";
+import { HeadingTextOneLayer, HeadingText } from "@/components/heading_text";
 import styles from '@/styles/maps.module.css';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
@@ -62,23 +62,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         setNumLayers(numLayers);
     }
 
-    const paired_keys = Object.keys(props.citiesArray[idx].dataIntervalsPaired);
-    const layer1: string = layer.replace("\_", "").replace("index", "");
-    const layer2fmt: string = layer2.replace("\_", "").replace("index", "");
-    const these_layers =
-        paired_keys.includes(layer1 + "_" + layer2fmt) ?
-        layer1 + "_" + layer2fmt : layer2fmt + "_" + layer1;
-    const dual_layers: boolean = paired_keys.includes(these_layers);
-    const this_layer: string = numLayers == "Paired" && dual_layers ?
-        these_layers : layer;
-
-    const heading: string = numLayers == "Paired" && dual_layers ?
-        PageHeadingText(layer1) + " & " + PageHeadingText(layer2) :
-        PageHeadingText(layer1);
-
-    // console.log("LAYER1: " + layer1 + ", LAYER2: " + layer2fmt + "; HD1: " +
-    //     PageHeadingText(layer1) + ", HD2: " + PageHeadingText(layer2fmt) +
-    //     " -> " + heading);
+    const heading: string = HeadingText(layer, layer2, numLayers, props.citiesArray);
 
     // meta viewport from:
     // https://docs.mapbox.com/mapbox-gl-js/example/disable-scroll-zoom/
