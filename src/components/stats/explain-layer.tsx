@@ -17,9 +17,19 @@ export default function ExplainButton (props: StatsExplainProps) {
 
     const meanVarIndex = props.meanVals ? 0 : 1;
     const paired_keys = Object.keys(props.citiesArray[props.idx].dataIntervalsPaired);
-    const layer_text = props.layer == "social_index" ?
-        "No social index statistics are displayer" :
-        GetLayerText(props.layer, props.layer2, props.numLayers, meanVarIndex, paired_keys);
+
+    const layer1: string = props.layer.replace("\_", "").replace("index", "");
+    const layer2: string = props.layer2.replace("\_", "").replace("index", "");
+    const these_layers =
+        paired_keys.includes(layer1 + "_" + layer2) ?
+        layer1 + "_" + layer2 : layer2 + "_" + layer1;
+    const dual_layers: boolean = paired_keys.includes(these_layers);
+    const layer_temp = GetLayerText(props.layer, props.layer2, props.numLayers, meanVarIndex, paired_keys);
+
+    // But set layer text to city data "social_index" field if that single layer
+    // is selected:
+    const layer_text = !dual_layers && props.layer == "social_index" ?
+        "Social indices are not comparable between different cities" : layer_temp;
 
     return (
         <div id="divinfo" style={{display: props.explain?"":"none"}} >
