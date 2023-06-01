@@ -17,11 +17,17 @@ export default function ExplainButton (props: MapsExplainProps) {
 
     const meanVarIndex = 0;
     const paired_keys: string[] = Object.keys(props.citiesArray[props.idx].dataIntervalsPaired);
+
+    const layer1: string = props.layer.replace("\_", "").replace("index", "");
+    const layer2: string = props.layer2.replace("\_", "").replace("index", "");
+    const these_layers =
+        paired_keys.includes(layer1 + "_" + layer2) ?
+        layer1 + "_" + layer2 : layer2 + "_" + layer1;
+    const dual_layers: boolean = paired_keys.includes(these_layers);
     const layer_temp = GetLayerText(props.layer, props.layer2, props.numLayers, meanVarIndex, paired_keys);
     // But set layer text to city data "social_index" field if that single layer
     // is selected:
-    const layer_is_paired: boolean = paired_keys.includes(layer_temp);
-    const layer_text = !layer_is_paired && props.layer == "social_index" ?
+    const layer_text = !dual_layers && props.layer == "social_index" ?
         props.citiesArray[props.idx].social_index : layer_temp;
 
     return (
