@@ -4,6 +4,7 @@ interface LayerTextProps {
 }
 
 
+// Explanatory text for all individual layers plus combined layers for maps
 export function GetLayerText(layer: string, layer2: string, numLayers: string, meanVarIndex: number, paired_keys: string[]): string {
 
     const lyr1 = layer.replace("\_", "").replace("index", "");
@@ -70,10 +71,10 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Relative travel times multiplied by bicycle index. Lower values reflect fast transport relative to equivalent automobile times couplied with good provision of bicycle infrastructure."
         ],
         "timesrel_natural": [
-            "Relative travel times multiplied by index of accessibility to natural spaces. Lower values reflect fast transport relative to equivalent automobile times couplied with good access to natural spaces."
+            "Relative travel times multiplied by index of accessibility to natural spaces. Lower values reflect fast transport relative to equivalent automobile times coupled with good access to natural spaces."
         ],
         "timesrel_parking": [
-            "Relative travel times multiplied by parking index. Lower values reflect fast transport relative to equivalent automobile times couplied with lower availability of auotmobile parking spaces."
+            "Relative travel times multiplied by parking index. Lower values reflect fast transport relative to equivalent automobile times coupled with lower availability of automobile parking spaces."
         ],
         "timesrel_social": [
             "Relative travel times multiplied by social index (rescaled to average of one). Lower values reflect lower travel times (faster transport), combined with advantageous social conditions."
@@ -94,13 +95,13 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Absolute travel times multiplied by distances to nearest schools Lower values reflect fast transport coupled with short distances to schools."
         ],
         "timesabs_bike": [
-            "Absolute travel times multiplied by bicycle index. Lower values reflect fast transport couplied with good provision of bicycle infrastructure."
+            "Absolute travel times multiplied by bicycle index. Lower values reflect fast transport coupled with good provision of bicycle infrastructure."
         ],
         "timesabs_natural": [
-            "Absolute travel times multiplied by index of accessibility to natural spaces. Lower values reflect fast transport couplied with good access to natural spaces."
+            "Absolute travel times multiplied by index of accessibility to natural spaces. Lower values reflect fast transport coupled with good access to natural spaces."
         ],
         "timesabs_parking": [
-            "Absolute travel times multiplied by parking index. Lower values reflect fast transport couplied with lower availability of auotmobile parking spaces."
+            "Absolute travel times multiplied by parking index. Lower values reflect fast transport coupled with lower availability of automobile parking spaces."
         ],
         "timesabs_social": [
             "Social index (rescaled to average of one) times absolute travel times. Lower values reflect lower travel times (faster transport), combined with advantageous social conditions."
@@ -115,7 +116,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Numbers of transfers multiplied by population densities. Low values represent transport services requiring fewer transfers coupled with low population density."
         ],
         "transfers_schooldist": [
-            "Numbers of transfers multiplied by distances to nearest schools. Low values represent trasport services requiring fewer transfers coupled with short distances to schools."
+            "Numbers of transfers multiplied by distances to nearest schools. Low values represent transport services requiring fewer transfers coupled with short distances to schools."
         ],
         "transfers_bike": [
             "Numbers of transfers multiplied by bicycle index. Low values represent transport services requiring fewer transfers coupled with good provision of bicycle infrastructure."
@@ -124,7 +125,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Numbers of transfers multiplied by index of accessibility to natural spaces. Low values represent transport services requiring fewer transfers coupled with good access to natural spaces."
         ],
         "transfers_parking": [
-            "Numbers of transfers multiplied by parking index. Low values represent transport services requiring fewer transfers coupled with lower availability of auotmobile parking spaces."
+            "Numbers of transfers multiplied by parking index. Low values represent transport services requiring fewer transfers coupled with lower availability of automobile parking spaces."
         ],
         "transfers_social": [
             "Numbers of transfers multiplied by social index (rescaled to average of one). Low values represent transport services requiring fewer transfers coupled with advantageous social conditions."
@@ -145,7 +146,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Transport intervals multiplied by index of accessibility to natural spaces. Low values represent transport with shorter intervals between consecutive services coupled with good access to natural spaces."
         ],
         "intervals_parking": [
-            "Transport intervals multiplied by parking index. Low values represent transport with shorter intervals between consecutive services coupled with lower availability of auotmobile parking spaces."
+            "Transport intervals multiplied by parking index. Low values represent transport with shorter intervals between consecutive services coupled with lower availability of automobile parking spaces."
         ],
         "intervals_social": [
             "Transport intervals multiplied by social index (rescaled to average of one). Low values represent transport with shorter intervals between consecutive services coupled with advantageous social conditions."
@@ -163,7 +164,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Compound transport index multiplied by index of accessibility to natural spaces. Low values represent overall good provision of public transport coupled with good access to natural spaces."
         ],
         "transport_parking": [
-            "Compound transport index multiplied by parking index. Low values represent overall good provision of public transport coupled with lower availability of auotmobile parking spaces."
+            "Compound transport index multiplied by parking index. Low values represent overall good provision of public transport coupled with lower availability of automobile parking spaces."
         ],
         "transport_social": [
             "Compound transport index multiplied by social index (rescaled to average of one). Low values represent overall good provision of public transport coupled with advantageous social conditions."
@@ -178,7 +179,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Population density multiplied by index of accessibility to natural spaces. Low values represent low population density coupled with good access to natural spaces."
         ],
         "popdens_parking": [
-            "Population density multiplied by parking index. Low values represent low population density coupled with lower availability of auotmobile parking spaces."
+            "Population density multiplied by parking index. Low values represent low population density coupled with lower availability of automobile parking spaces."
         ],
         "popdens_social": [
             "Population density multiplied by social index (rescaled to average of one). Low values represent low population density coupled with advantageous social conditions."
@@ -190,7 +191,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Distance to nearest school multiplied by index of accessibility to natural spaces. Low values shorter distances to schools coupled with good access to natural spaces."
         ],
         "schooldist_parking": [
-            "Distance to nearest school multiplied by parking index. Low values shorter distances to schools coupled with lower availability of auotmobile parking spaces."
+            "Distance to nearest school multiplied by parking index. Low values shorter distances to schools coupled with lower availability of automobile parking spaces."
         ],
         "schooldist_social": [
             "Distance to nearest school multiplied by social index (rescaled to average of one). Low values shorter distances to schools coupled with advantageous social conditions."
@@ -199,19 +200,203 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Bicycle infrastructure index multiplied by index of accessibility to natural spaces. Low values reflect good access to natural spaces coupled with good provision of bicycle infrastructure."
         ],
         "bike_parking": [
-            "Bicycle infrastructure index multiplied by parking index. Low values reflect lower availability of auotmobile parking spaces coupled with good provision of bicycle infrastructure."
+            "Bicycle infrastructure index multiplied by parking index. Low values reflect lower availability of automobile parking spaces coupled with good provision of bicycle infrastructure."
         ],
         "bike_social": [
             "Bicycle infrastructure index multiplied by social index (rescaled to average of one). Low values reflect good provision of bicycle infrastructure coupled with advantageous social conditions."
         ],
         "natural_parking": [
-            "Index of access to natural spaces multiplied by parking index. Low values reflect good access to natural spaces coupled with lower availability of auotmobile parking spaces."
+            "Index of access to natural spaces multiplied by parking index. Low values reflect good access to natural spaces coupled with lower availability of automobile parking spaces."
         ],
         "natural_social": [
             "Index of access to natural spaces multiplied by social index (rescaled to average of one). Low values reflect good access to natural spaces coupled with advantageous social conditions."
         ],
         "parking_social": [
-            "Parking index multiplied by social index (rescaled to average of one). Low values reflect lower availability of auotmobile parking spaces coupled with advantageous social conditions"
+            "Parking index multiplied by social index (rescaled to average of one). Low values reflect lower availability of automobile parking spaces coupled with advantageous social conditions"
+        ]
+    };
+
+    var layer_text: string = "";
+    if (Object.keys(LAYER_TEXT).includes(this_layer)) {
+        layer_text = meanVarIndex ? LAYER_TEXT[this_layer][meanVarIndex] : LAYER_TEXT[this_layer][0];
+    }
+
+    return layer_text;
+}
+
+// Explanatory text for paired stats layers
+export function GetLayerTextStats(layer: string, layer2: string, numLayers: string, meanVarIndex: number, paired_keys: string[]): string {
+
+    const lyr1 = layer.replace("\_", "").replace("index", "");
+    const lyr2 = layer2.replace("\_", "").replace("index", "");
+
+    const these_layers = paired_keys.includes(lyr1 + "_" + lyr2) ?
+        lyr1 + "_" + lyr2 : lyr2 + "_" + lyr1;
+    const this_layer = numLayers == "Single" ? lyr1 : these_layers;
+
+    const LAYER_TEXT: LayerTextProps = {
+
+        "timesrel_transfers": [
+            "Strength of relationship between relative travel times and by numbers of transfers. Higher (positive) values represent cities for which lower travel times (faster transport) are strongly related to fewer numbers of transfers. Lower (negative) values represent faster transport being related to higher numbers of transfers."
+        ],
+        "timesrel_intervals": [
+            "Strength of relationship between relative travel times and intervals between consecutive services. Higher (positive) values represent cities for which lower travel times (faster transport) are strongly related to shorter intervals between consecutive services."
+        ],
+        "timesrel_transport": [
+            "Strength of relationship between relative travel times and compound transport index. The combined index already includes relative transport times, and these values will generally not mean anything."
+        ],
+        "timesrel_popdens": [
+            "Strength of relationship between relative travel times and population densities. Lower (negative) values indicate cities with strong relationships between fast relative transport and higher population densities."
+        ],
+        "timesrel_schooldist": [
+            "Strength of relationship between relative travel times and distances to nearest schools. Higher (positive) values represent cities with strong relationships between fast transport relative to equivalent automobile times and short distances to schools."
+        ],
+        "timesrel_bike": [
+            "Strength of relationship between relative travel times bicycle index. Higher (positive) values reflect fast transport relative to equivalent automobile times coupled with good provision of bicycle infrastructure."
+        ],
+        "timesrel_natural": [
+            "Strength of relationship between relative travel times and index of accessibility to natural spaces. Higher (positive) values reflect fast transport relative to equivalent automobile times coupled with good access to natural spaces."
+        ],
+        "timesrel_parking": [
+            "Strength of relationship between relative travel times and parking index. Lower (negative) values reflect fast transport relative to equivalent automobile times coupled with higher availability of automobile parking spaces."
+        ],
+        "timesrel_social": [
+            "Strength of relationship between relative travel times and social index. Higher (positive) values reflect lower travel times (faster transport), combined with advantageous social conditions. Lower (negative) values reflect faster relative transport being more strongly associated with disadvantageous social conditions."
+        ],
+        "timesabs_transfers": [
+            "Strength of relationship between absolute travel times and numbers of transfers. Higher (positive) values represent lower travel times (faster transport) combined with fewer numbers of transfers."
+        ],
+        "timesabs_intervals": [
+            "Strength of relationship between absolute travel times and intervals between consecutive services. Higher (positive) values represent lower travel times (faster transport) combined with shorter intervals between consecutive services."
+        ],
+        "timesabs_transport": [
+            "Strength of relationship between absolute travel times and compound transport index. The combined index already includes absolute transport times, and these values will generally not mean anything."
+        ],
+        "timesabs_popdens": [
+            "Strength of relationship between absolute travel times and population densities. Lower (negative) values indicate cities in which fast transport is more strongly related to higher population densities."
+        ],
+        "timesabs_schooldist": [
+            "Strength of relationship between absolute travel times and distances to nearest schools. Higher (positive) values reflect stronger relationships between fast transport and short distances to schools."
+        ],
+        "timesabs_bike": [
+            "Strength of relationship between absolute travel times and bicycle index. Higher (positive) values reflect stronger relationship between fast transport and good provision of bicycle infrastructure."
+        ],
+        "timesabs_natural": [
+            "Strength of relationship between absolute travel times and index of accessibility to natural spaces. Higher (positive) values reflect strong relationship between fast transport and access to natural spaces. Lower (negative) values indicate that good access to natural spaces is related to slower transport times."
+        ],
+        "timesabs_parking": [
+            "Strength of relationship between absolute travel times and parking index. Lower (negative) values represent cities in which fast transport is coupled with higher availability of automobile parking spaces."
+        ],
+        "timesabs_social": [
+            "Strength of relationship between social index times absolute travel times. Positive (higher) values represent cities in which lower travel times (faster transport) are strongly coupled with advantageous social conditions. Lower (negative) values represent a stronger relationship between fast transport and disadvantageous social conditions."
+        ],
+        "transfers_intervals": [
+            "Strength of relationship between numbers of transfers and intervals between consecutive services. Lower values represent cities for which short intervals between consecutive transport services are strongly coupled with fewer transfers within journeys."
+        ],
+        "transfers_transport": [
+            "Strength of relationship between numbers of transfers and compound transport index. Numbers of transfers are already included in the compound transport index, and these values will generally not mean anything."
+        ],
+        "transfers_popdens": [
+            "Strength of relationship between numbers of transfers and population densities. Low (negative)values represent cities in which transport services requiring fewer transfers are coupled with high population density. High (positive) values reflect fewer transfers being more strongly related to lower population densities."
+        ],
+        "transfers_schooldist": [
+            "Strength of relationship between numbers of transfers and distances to nearest schools. Higher (positive) values represent transport services requiring fewer transfers coupled with short distances to schools."
+        ],
+        "transfers_bike": [
+            "Strength of relationship between numbers of transfers and bicycle index. Higher (positive) values represent transport services requiring fewer transfers coupled with good provision of bicycle infrastructure. Lower (negative) values imply good provision of bicycle infrastructure being coupled with greater numbers of transfers."
+        ],
+        "transfers_natural": [
+            "Strength of relationship between numbers of transfers and index of accessibility to natural spaces. High (positive) values represent transport services requiring fewer transfers coupled with good access to natural spaces."
+        ],
+        "transfers_parking": [
+            "Strength of relationship between numbers of transfers and parking index. Low (negative) values represent transport services requiring fewer transfers coupled with higher availability of automobile parking spaces."
+        ],
+        "transfers_social": [
+            "Strength of relationship between numbers of transfers and social index. Higher (positive) values represent transport services requiring fewer transfers being coupled with advantageous social conditions."
+        ],
+        "intervals_transport": [
+            "Strength of relationship between transport intervals and compound transport index. Transport intervals are already included in the compound transport index, and these values will generally not mean anything."
+        ],
+        "intervals_popdens": [
+            "Strength of relationship between transport intervals and population densities. Low (negative) values represent transport with shorter intervals between consecutive services coupled with high population density."
+        ],
+        "intervals_schooldist": [
+            "Strength of relationship between transport intervals and distances to nearest schools. High (positive) values represent transport with shorter intervals between consecutive services coupled with shorter distances to schools."
+        ],
+        "intervals_bike": [
+            "Strength of relationship between transport intervals and bicycle index. High (positive) values represent transport with shorter intervals between consecutive services coupled with good provision of bicycle infrastructure."
+        ],
+        "intervals_natural": [
+            "Strength of relationship between transport intervals and index of accessibility to natural spaces. High (positive) values represent transport with shorter intervals between consecutive services coupled with good access to natural spaces."
+        ],
+        "intervals_parking": [
+            "Strength of relationship between transport intervals and parking index. Low (negative) values represent transport with shorter intervals between consecutive services coupled with higher availability of automobile parking spaces."
+        ],
+        "intervals_social": [
+            "Strength of relationship between transport intervals and social index. Higher (positive) values represent transport with shorter intervals between consecutive services coupled with advantageous social conditions."
+        ],
+        "transport_popdens": [
+            "Strength of relationship between compound transport index and population densities. Lower (negative) values represent a strong coupling between overall good provision of public transport and high population density."
+        ],
+        "transport_schooldist": [
+            "Strength of relationship between compound transport index and distances to nearest schools. High (positive) values represent overall good provision of public transport coupled with short distances to schools."
+        ],
+        "transport_bike": [
+            "Strength of relationship between compound transport index and bicycle index. High (positive) values represent overall good provision of public transport coupled with good provision of bicycle infrastructure."
+        ],
+        "transport_natural": [
+            "Strength of relationship between compound transport index and index of accessibility to natural spaces. High (positive) values represent overall good provision of public transport coupled with good access to natural spaces."
+        ],
+        "transport_parking": [
+            "Strength of relationship between compound transport index and parking index. Lower (negative) values represent overall good provision of public transport coupled with higher availability of automobile parking spaces."
+        ],
+        "transport_social": [
+            "Strength of relationship between compound transport index and social index. Lower (negative) values represent overall good provision of public transport coupled with generally less advantageous social conditions."
+        ],
+        "popdens_schooldist": [
+            "Strength of relationship between population density and distances to nearest schools. Lower (negative) values represent shorter distances to schools being more strongly coupled with higher population densities."
+        ],
+        "popdens_bike": [
+            "Strength of relationship between population density and bicycle index. Lower (negative) values represent high population density coupled with good provision of bicycle infrastructure."
+        ],
+        "popdens_natural": [
+            "Strength of relationship between population density and index of accessibility to natural spaces. Lower (negative) values represent high population density coupled with good access to natural spaces."
+        ],
+        "popdens_parking": [
+            "Strength of relationship between population density and parking index. Lower (negative) values represent low population density coupled with higher availability of automobile parking spaces."
+        ],
+        "popdens_social": [
+            "Strength of relationship between population density and social index. Higher (positive) values represent cities for which low population densities are coupled with advantageous social conditions."
+        ],
+        "schooldist_bike": [
+            "Strength of relationship between distance to nearest school and bicycle index. Higher (positive) values represent cities for which shorter distances to schools are coupled with good provision of bicycle infrastructure."
+        ],
+        "schooldist_natural": [
+            "Strength of relationship between distance to nearest school and index of accessibility to natural spaces. Higher (positive) values represent cities for which shorter distances to schools are coupled with good access to natural spaces."
+        ],
+        "schooldist_parking": [
+            "Strength of relationship between distance to nearest school and parking index. Higher (positive) values indicate cities for which shorter distances to schools are coupled with lower availability of automobile parking spaces."
+        ],
+        "schooldist_social": [
+            "Strength of relationship between distance to nearest school and social index. Lower (negative) values indicate cities for which shorter distances to schools are coupled with disadvantageous social conditions."
+        ],
+        "bike_natural": [
+            "Strength of relationship between bicycle infrastructure index and index of accessibility to natural spaces. Higher (positive) values represent cities in which good access to natural spaces is coupled with good provision of bicycle infrastructure."
+        ],
+        "bike_parking": [
+            "Strength of relationship between bicycle infrastructure index and parking index. High (positive) values represent cities in which higher availability of automobile parking spaces is coupled with good provision of bicycle infrastructure."
+        ],
+        "bike_social": [
+            "Strength of relationship between bicycle infrastructure index and social index. Higher (positive) values represent cities in which good provision of bicycle infrastructure is coupled with advantageous social conditions."
+        ],
+        "natural_parking": [
+            "Strength of relationship between index of access to natural spaces and parking index. Higher (positive) values represent cities in which good access to natural spaces is coupled with lower availability of automobile parking spaces."
+        ],
+        "natural_social": [
+            "Strength of relationship between index of access to natural spaces and social index. Higher (positive) values reflect good access to natural spaces being more strongly coupled with disadvantageous social conditions."
+        ],
+        "parking_social": [
+            "Strength of relationship between parking index and social index. Lower (negative) values represent cities in which lower availability of automobile parking spaces is coupled with advantageous social conditions"
         ]
     };
 
