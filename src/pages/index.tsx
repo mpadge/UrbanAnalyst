@@ -62,11 +62,12 @@ export default function Home() {
 
                 <p className="text-center">
                     Both maps and statistics may be examined for single
-                    variables, or for pairwise combinations of variables. These
-                    pairwise combinations provide insight into relationships
-                    bewteen different properties of cities, such as between the
-                    various metrics of transport provision and socio-demographic
-                    inequality.
+                    variables, or for pairwise combinations of variables. Lower
+                    values for all variables are always better, such as travel
+                    times or rates of unemployment.  Pairwise combinations
+                    provide insight into relationships bewteen different
+                    properties of cities, such as between the various metrics of
+                    transport provision and socio-demographic inequality.
                 </p>
             </div>
 
