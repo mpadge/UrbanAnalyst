@@ -229,7 +229,7 @@ export default function Stats (props: StatsProps) {
 
         const xGroup: any = d3.select(xAxisRef.current as any);
 
-        const nTicks = (innerWidth < 700 || xMin > 0) ? 5 : 10;
+        const nTicks = (innerWidth < 700 || xMin > 0) ? 4 : 8;
 
         const xAxis = d3.axisBottom(xScale)
             .tickSize(-innerHeight)
