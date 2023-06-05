@@ -131,7 +131,7 @@ export default function Stats (props: StatsProps) {
         these_layers : props.layer;
 
     const data = props.citiesArray.map((city, index) => ({
-        city: city.name,
+        city: city.nameFormatted,
         value: props.numLayers == "Paired" && dual_layers ?
             city.stats_paired[this_layer as string] :
             city.stats_single[this_layer as string][meanValIndex]
