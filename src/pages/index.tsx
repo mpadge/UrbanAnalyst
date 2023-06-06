@@ -171,9 +171,10 @@ export default function Home() {
                     href="https://github.com/mpadge/UrbanAnalyst/issues"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >&nbsp;the GitHub repository of this site
+                    >
+                    &nbsp;the GitHub repository of this site
                     </Link>
-                    requesting the addition of a particular city.
+                    &nbsp;requesting the addition of a particular city.
                 </p>
             </div>
 
