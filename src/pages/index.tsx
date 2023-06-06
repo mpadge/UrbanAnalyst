@@ -116,15 +116,64 @@ export default function Home() {
                 </p>
             </div>
 
-            <div className={styles.centerMed}>
+            <div className={styles.centerNormal}>
                 <p className="text-center">
-                    Full details are provided in
+                    Values for most statistics are derived for every street
+                    intersection within each city. Travel times are measured to
+                    all other intersections using every available mode of
+                    transport, and all possible combinations of these. Full
+                    details are provided in
+                    <Link className = {styles.textLink}
+                    href="https://UrbanAnalyst.github.io/docs"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >&nbsp;the documentation pages
+                    </Link>. Statistics for each intersection are then
+                    aggregated within each city polygon, weighted by population
+                    densities.
+                </p>
+
+                <p className="text-center">
+                    Results for each city involve millions of public transport
+                    routing calculations, and generally billions of routing
+                    calculations through street networks. For example, results
+                    for Berlin are derived from around 170 million public
+                    transport routing calculations, and 170 billion street
+                    network routing calculations. These are calculated using
+                    Urban Analyst&apos;s own open-source software described in
                     <Link className = {styles.textLink}
                     href="https://UrbanAnalyst.github.io/docs"
                     target="_blank"
                     rel="noopener noreferrer"
                     >&nbsp;the documentation pages
                     </Link>.
+                </p>
+            </div>
+
+            <div className={styles.centerBig}>
+                <p className="text-center">
+                    How can I add a city?
+                </p>
+            </div>
+
+            <div className={styles.centerNormal}>
+                <p className="text-center">
+                    Urban Analyst has received additional funding from the
+                    German Government&apos;s
+                    <Link className = {styles.textLink}
+                    href="https://prototypefund.de"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >&nbsp;prototype fund
+                    </Link>, which will include some funding for adding cities.
+                    The current recommended way is to open an issue on
+                    <Link className = {styles.textLink}
+                    href="https://github.com/mpadge/UrbanAnalyst/issues"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >&nbsp;the GitHub repository of this site
+                    </Link>
+                    requesting the addition of a particular city.
                 </p>
             </div>
 
