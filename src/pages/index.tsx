@@ -110,6 +110,24 @@ export default function Home() {
 
             </div>
 
+            <div className={styles.centerBig}>
+                <p className="text-center">
+                    How does it work?
+                </p>
+            </div>
+
+            <div className={styles.centerMed}>
+                <p className="text-center">
+                    Full details are provided in
+                    <Link className = {styles.textLink}
+                    href="https://UrbanAnalyst.github.io/docs"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >&nbsp;the documentation pages
+                    </Link>.
+                </p>
+            </div>
+
         </main>
     </>
     )
