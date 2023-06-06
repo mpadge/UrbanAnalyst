@@ -54,10 +54,10 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     return (
         <>
         <Head>
-            <title>UTA Stats</title>
-            <meta name="description" content="Stats for Urban Transport Analyst" />
+            <title>UA Stats</title>
+            <meta name="description" content="Stats for Urban Analyst" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link rel="icon" href="/uta.ico" />
+            <link rel="icon" href="/ua.ico" />
         </Head>
         <main className={styles.main}>
             <Stats

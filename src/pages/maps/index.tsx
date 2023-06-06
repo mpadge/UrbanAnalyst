@@ -70,12 +70,12 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
     return (
         <>
         <Head>
-            <title>UTA Maps</title>
-            <meta name="description" content="Maps for Urban Transport Analyst" />
+            <title>UA Maps</title>
+            <meta name="description" content="Maps for Urban Analyst" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <meta name="viewport"
                 content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-            <link rel="icon" href="/uta.ico" />
+            <link rel="icon" href="/ua.ico" />
         </Head>
         <div id="divinfo" style={{display: explain?"none":""}} >
             <div id="stats-heading" className={styles.mapsheading}>
