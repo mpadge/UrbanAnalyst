@@ -48,7 +48,7 @@ export default function Home() {
 
             <div className={styles.centerBig}>
                 <p className="text-center">
-                    Open source analyses of urban transport systems across the world.
+                    Open source analyses of cities.
                 </p>
             </div>
 
@@ -56,7 +56,7 @@ export default function Home() {
                 <p className="text-center">
                     Urban Analyst provides interactive maps of the
                     properties of cities including of their transport systems
-                    and socio-demographic conditions.  UA also provides
+                    and socio-demographic conditions, as well as
                     statistical summaries of all cities.
                 </p>
 
