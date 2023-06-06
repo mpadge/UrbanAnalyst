@@ -82,23 +82,23 @@ export default function Home() {
                     spatial polygons as provided by the cities.
                 </p>
                 <p className="text-center">
-                    Transport data are derived using UTA&#39;s own open-source
+                    Transport data are derived using UA&#39;s own open-source
                     routing software, primarily on GitHub at &nbsp;
-                    <a
+                    <Link
                     href="https://github.com/UrbanAnalyst"
                     target="_blank"
                     rel="noopener noreferrer"
                     >
                     &quot;UrbanAnalyst&quot;
-                    </a>
+                    </Link>
                     &nbsp; and &nbsp;
-                    <a
+                    <Link
                     href="https://github.com/atfutures"
                     target="_blank"
                     rel="noopener noreferrer"
                     >
                     &quot;atfutures&quot;
-                    </a>
+                    </Link>
                     . This software enables very efficient calculations of
                     multi-modal travel times between every single pair of street
                     intersections within a city. Results are then aggregated
@@ -116,13 +116,13 @@ export default function Home() {
 
             <div className={styles.centerSmall}>
                 <p className="text-center">
-                    <a
+                    <Link
                     href="https://github.com/mpadge"
                     target="_blank"
                     rel="noopener noreferrer"
                     >
                     Mark Padgham
-                    </a>
+                    </Link>
                     , along with all of the other contributors to the software linked to above.
                 </p>
             </div>
@@ -136,21 +136,22 @@ export default function Home() {
             <div className={styles.centerSmall}>
                 <p className="text-center">
                     The German Government &nbsp;
-                    <a
+                    <Link
                     href="https://prototypefund.de"
                     target="_blank"
                     rel="noopener noreferrer"
                     >
                     prototypefund
-                    </a>
+                    </Link>
                     , as part of their &nbsp;
-                    <a
+                    <Link
                     href="https://prototypefund.de/project/urban-transport-analyst-uta/"
                     target="_blank"
                     rel="noopener noreferrer"
                     >
-                    twelfth funding round.
-                    </a>
+                    twelfth funding round
+                    </Link>
+                    , and upcoming fourteenth funding round (from September 2023).
                 </p>
             </div>
         </main>
