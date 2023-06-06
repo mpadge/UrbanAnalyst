@@ -48,16 +48,19 @@ export default function Home() {
 
             <div className={styles.centerBig}>
                 <p className="text-center">
-                    Open source analyses of cities.
+                    Analyse and compare cities across the world.
                 </p>
             </div>
 
             <div className={styles.centerMed}>
                 <p className="text-center">
-                    Urban Analyst provides interactive maps of the
-                    properties of cities including of their transport systems
-                    and socio-demographic conditions, as well as
-                    statistical summaries of all cities.
+                    Urban Analyst provides interactive maps of the properties of
+                    cities including of their transport systems and
+                    socio-demographic conditions, as well as statistical
+                    summaries of all cities. Values for each city are aggregated
+                    from billions of individual routing queries, providing
+                    extraordinary insight into how people move throughout
+                    cities.
                 </p>
 
                 <p className="text-center">
@@ -106,6 +109,7 @@ export default function Home() {
                 </Link>
 
             </div>
+
         </main>
     </>
     )

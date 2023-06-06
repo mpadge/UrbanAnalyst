@@ -77,10 +77,15 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 4rem 0;
+  padding: 1rem 0;
   font-size: 4rem;
   font-family: var(--font-mono);
   text-align: center;
+}
+
+.centerBig p {
+    margin-top: 50px;
+    margin-bottom: 1px;
 }
 
 .centerMed {
@@ -88,7 +93,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 4rem 0;
+  padding: 1rem 0;
   font-size: 2rem;
   font-family: sans-serif;
   font-weight: 300;
@@ -96,7 +101,7 @@
 }
 
 .centerMed p {
-    margin-bottom: 20px;
+    margin: 20px;
 }
 
 .cardText {
