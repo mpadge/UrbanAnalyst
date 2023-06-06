@@ -7,6 +7,10 @@
   min-height: 100vh;
 }
 
+.textLink {
+    color: #3383ff;
+}
+
 .description {
   display: inherit;
   justify-content: left;
