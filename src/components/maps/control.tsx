@@ -59,8 +59,8 @@ export default function Control (props: MapsControlProps) {
 
             <p>
             <Image
-            src="/uta.svg"
-            alt="UTA Logo"
+            src="/ua.svg"
+            alt="UA Logo"
             // className={styles.vercelLogo}
             width={100}
             height={50}

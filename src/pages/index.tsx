@@ -19,10 +19,10 @@ export default function Home() {
     return (
         <>
         <Head>
-            <title>UTA</title>
-            <meta name="description" content="Urban Transport Analyses for the world" />
+            <title>UA</title>
+            <meta name="description" content="Urban Analyses for the world" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link rel="icon" href="/uta.ico" />
+            <link rel="icon" href="/ua.ico" />
         </Head>
         <Buttons buttons={buttons} />
         <main className={styles.main}>
@@ -33,10 +33,10 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     >
-                        Urban Transport Analyst
+                        Urban Analyst
                         <Image
-                        src="/uta.svg"
-                        alt="UTA Logo"
+                        src="/ua.svg"
+                        alt="UA Logo"
                         className={styles.vercelLogo}
                         width={100}
                         height={50}
@@ -54,9 +54,9 @@ export default function Home() {
 
             <div className={styles.centerMed}>
                 <p className="text-center">
-                    Urban Transport Analyst provides interactive maps of the
+                    Urban Analyst provides interactive maps of the
                     properties of cities including of their transport systems
-                    and socio-demographic conditions.  UTA also provides
+                    and socio-demographic conditions.  UA also provides
                     statistical summaries of all cities.
                 </p>
 
@@ -100,7 +100,7 @@ export default function Home() {
                     </h2>
                     <p className={styles.cardText}>
                         The statistics, or &quot;stats&quot;, section shows average values for every
-                        UTA city for each variable shown in the maps. This enables the
+                        UA city for each variable shown in the maps. This enables the
                         overall values for any city to be compared with values for all other
                         cities.  </p>
                 </Link>

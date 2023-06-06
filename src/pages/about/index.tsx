@@ -19,10 +19,10 @@ export default function Home() {
     return (
         <>
         <Head>
-            <title>UTA</title>
-            <meta name="description" content="Urban Transport Analyses for the world" />
+            <title>UA</title>
+            <meta name="description" content="Urban Analyses for the world" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link rel="icon" href="/uta.ico" />
+            <link rel="icon" href="/ua.ico" />
         </Head>
         <Buttons buttons={buttons} />
         <main className={styles.main}>
@@ -33,10 +33,10 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     >
-                        Urban Transport Analyst
+                        Urban Analyst
                         <Image
-                        src="/uta.svg"
-                        alt="UTA Logo"
+                        src="/ua.svg"
+                        alt="UA Logo"
                         className={styles.vercelLogo}
                         width={100}
                         height={50}
@@ -48,7 +48,7 @@ export default function Home() {
 
             <div className={styles.centerBig}>
                 <p className="text-center">
-                    Urban Transport Analyst
+                    Urban Analyst
                 </p>
             </div>
 
@@ -60,7 +60,7 @@ export default function Home() {
 
             <div className={styles.centerSmall}>
                 <p className="text-center">
-                    Urban Transport Analyst is a platform for interactive
+                    Urban Analyst is a platform for interactive
                     visualisation of the properties of urban transport systems,
                     and relationships of these properties to socio-demographic
                     conditions.
