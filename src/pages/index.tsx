@@ -123,12 +123,12 @@ export default function Home() {
                     all other intersections using every available mode of
                     transport, and all possible combinations of these. Full
                     details are provided in
-                    <Link className = {styles.textLink}
+                    <a className = {styles.textLink}
                     href="https://UrbanAnalyst.github.io/docs"
                     target="_blank"
                     rel="noopener noreferrer"
                     >&nbsp;the documentation pages
-                    </Link>. Statistics for each intersection are then
+                    </a>. Statistics for each intersection are then
                     aggregated within each city polygon, weighted by population
                     densities.
                 </p>
@@ -141,12 +141,12 @@ export default function Home() {
                     transport routing calculations, and 170 billion street
                     network routing calculations. These are calculated using
                     Urban Analyst&apos;s own open-source software described in
-                    <Link className = {styles.textLink}
+                    <a className = {styles.textLink}
                     href="https://UrbanAnalyst.github.io/docs"
                     target="_blank"
                     rel="noopener noreferrer"
                     >&nbsp;the documentation pages
-                    </Link>.
+                    </a>.
                 </p>
             </div>
 
@@ -160,20 +160,20 @@ export default function Home() {
                 <p className="text-center">
                     Urban Analyst has received additional funding from the
                     German Government&apos;s
-                    <Link className = {styles.textLink}
+                    <a className = {styles.textLink}
                     href="https://prototypefund.de"
                     target="_blank"
                     rel="noopener noreferrer"
                     >&nbsp;prototype fund
-                    </Link>, which will include some funding for adding cities.
+                    </a>, which will include some funding for adding cities.
                     The current recommended way is to open an issue on
-                    <Link className = {styles.textLink}
+                    <a className = {styles.textLink}
                     href="https://github.com/mpadge/UrbanAnalyst/issues"
                     target="_blank"
                     rel="noopener noreferrer"
                     >
                     &nbsp;the GitHub repository of this site
-                    </Link>
+                    </a>
                     &nbsp;requesting the addition of a particular city.
                 </p>
             </div>
