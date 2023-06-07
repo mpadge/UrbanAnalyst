@@ -125,8 +125,6 @@ export default function Home() {
                     details are provided in
                     <a className = {styles.textLink}
                     href="https://UrbanAnalyst.github.io/docs"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     >&nbsp;the documentation pages
                     </a>. Statistics for each intersection are then
                     aggregated within each city polygon, weighted by population
@@ -143,8 +141,6 @@ export default function Home() {
                     Urban Analyst&apos;s own open-source software described in
                     <a className = {styles.textLink}
                     href="https://UrbanAnalyst.github.io/docs"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     >&nbsp;the documentation pages
                     </a>.
                 </p>
