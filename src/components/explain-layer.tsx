@@ -28,10 +28,10 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Variation in the ratio of absolute travel times for any combinations of walking, cycling, and public transport to times for equivalent journeys taken solely with private automobile. Lower values imply lower variation across a city in the ratios of multi-modal versus private automobile travel times."
         ],
         "transfers": [
-            "Numbers of transfers for the public transport section of multi-modal journeys per 10km of travel. Values are averaged for each point of origin over all possible journeys out to 10km, with values within polygons being averages over all points or origin with each polygon. Values are weighted by local population densities, so represent average numbers of transfers per person within each polygon."
+            "Numbers of transfers for the public transport section of multi-modal journeys per 10km of travel. Values are averaged for each point of origin over all possible journeys out to 10km. Values are also weighted by local population densities, so represent average numbers of transfers per person within each polygon."
         ],
         "intervals": [
-            "Intervals (in minutes) between public the fastest public transport trip and the subsequent equivalent trips (which may be slower than the first trip). Intervals are averaged for each point of origin over all possible journeys out to 10km, with values within polygons being averages over all points or origin with each polygon. Values are weighted by local population densities, so represent average intervals per person within each polygon. This provides a direct measure of the frequency of public transport services."
+            "Intervals (in minutes) between the fastest public transport trip and the subsequent equivalent trips (which may be slower than the first trip). Intervals are averaged for each point of origin over all possible journeys out to 10km. Values are also weighted by local population densities, so represent average intervals per person. This provides a direct measure of the frequency of public transport services."
         ],
         "transport": [
             "Combined measure of transport time times number of transfers times intervals between services. Values may be directly compared between different locations, and different cities. Lower values indicate public transport that is fast, frequent, and requires few transfers."
@@ -40,7 +40,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Population density, in units of thousands of people per square kilometre."
         ],
         "schooldist": [
-            "Average distance to nearest school (in kilometres). Single values are calculated for every street junction as the distance to the nearest school. Values for each polygon are then averaged over these single distances for every street junction within the polygon, weighted by population density so that final values are average distance per person."
+            "Average distance to nearest school (in kilometres). Single values are calculated for every street junction as the distance to the nearest school. Values are also weighted by population density so that final values are average distance per person."
         ],
         "bike": [
             "Bicycle Index, with lower values indicating more or better bicycle infrastructure. The index is measured as one minus the proportion of all journeys from each street junction out to a distance of 5km travelling along dedicated bicycle infrastructure. Values of zero imply all journeys on dedicated bicycle ways, while values of one imply all journeys directly alongside automobiles, with no bicycle infrastructure at all. Unlike static aggregations of lengths of dedicated bicycle infrastructure, this index provides direct insight into the proportions of all journeys actually spent cycling along appropriate infrastructure."
