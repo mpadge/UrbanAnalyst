@@ -156,13 +156,13 @@ export default function Home() {
 
             <div className={styles.centerNormal}>
                 <p className="text-center">
-                    There is no "best" city. Any such judgements can only be
-                    made in terms of single variables. Urban Analyst measures
-                    and compares a range of variables, and relationships between
-                    these. Each city may be better in some regards, worse in
-                    others. Urban Analyst makes differences between cities
-                    visible, and allows different cities to be compared in a
-                    variety of ways.
+                    There is no &ldquo;best&rdquo; city. Any such judgements can
+                    only be made in terms of single variables. Urban Analyst
+                    measures and compares a range of variables, and
+                    relationships between these. Each city may be better in some
+                    regards, worse in others. Urban Analyst makes differences
+                    between cities visible, and allows different cities to be
+                    compared in a variety of ways.
                 </p>
             </div>
 
