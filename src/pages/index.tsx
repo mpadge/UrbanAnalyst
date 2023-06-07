@@ -126,9 +126,9 @@ export default function Home() {
                     <a className = {styles.textLink}
                     href="https://UrbanAnalyst.github.io/docs"
                     >&nbsp;the documentation pages
-                    </a>. Statistics for each intersection are then
-                    aggregated within each city polygon, weighted by population
-                    densities.
+                    </a>. Statistics for each intersection are weighted by
+                    population densities, and aggregated within each city
+                    polygon for maps, or across entire cities for statistics.
                 </p>
 
                 <p className="text-center">
@@ -142,13 +142,33 @@ export default function Home() {
                     <a className = {styles.textLink}
                     href="https://UrbanAnalyst.github.io/docs"
                     >&nbsp;the documentation pages
-                    </a>.
+                    </a>. These enormous numbers of calculations enable Urban
+                    Analyst to provide uniquely powerful insight into how people
+                    move throughout cities.
                 </p>
             </div>
 
             <div className={styles.centerBig}>
                 <p className="text-center">
-                    How can I add a city?
+                    What is the best city?
+                </p>
+            </div>
+
+            <div className={styles.centerNormal}>
+                <p className="text-center">
+                    There is no "best" city. Any such judgements can only be
+                    made in terms of single variables. Urban Analyst measures
+                    and compares a range of variables, and relationships between
+                    these. Each city may be better in some regards, worse in
+                    others. Urban Analyst makes differences between cities
+                    visible, and allows different cities to be compared in a
+                    variety of ways.
+                </p>
+            </div>
+
+            <div className={styles.centerBig}>
+                <p className="text-center">
+                    How can cities be added?
                 </p>
             </div>
 
