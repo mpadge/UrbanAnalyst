@@ -60,53 +60,22 @@ export default function Home() {
 
             <div className={styles.centerSmall}>
                 <p className="text-center">
-                    Urban Analyst is a platform for interactive
-                    visualisation of the properties of urban transport systems,
-                    and relationships of these properties to socio-demographic
-                    conditions.
-                </p>
-            </div>
-
-            <div className={styles.leftMed}>
-                <p className="text-center">
-                    Where do the values come from?
-                </p>
-            </div>
-
-            <div className={styles.centerSmall}>
-                <p className="text-center">
-                    Socio-demographic data are provided by each city. These data
-                    differ between cities, but always quantify some aspects of
-                    social inequality or disadvantage, such as unemployment or
-                    measures of deprivation. Values are defined within series of  
-                    spatial polygons as provided by the cities.
-                </p>
-                <p className="text-center">
-                    Transport data are derived using UA&#39;s own open-source
-                    routing software, primarily on GitHub at &nbsp;
+                    Urban Analyst is a platform for interactive visualisation of
+                    the properties of cities, including transport systems and
+                    socio-demographic conditions.  The platform offers a
+                    &ldquo;Maps&rdquo; view, to enable various properties of
+                    individual cities to be visualised as interactive maps, and
+                    a &ldquo;Stats&rdquo;, or statistics, view that compares the
+                    properties of different cities in terms of each variable
+                    measured by Urban Analyst. Full details are provided&nbsp;
                     <a
-                    href="https://github.com/UrbanAnalyst"
-                    target="_blank"
+                    href="https://UrbanAnalyst.github.io/docs"
                     rel="noopener noreferrer"
                     >
-                    &quot;UrbanAnalyst&quot;
-                    </a>
-                    &nbsp; and &nbsp;
-                    <a
-                    href="https://github.com/atfutures"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >
-                    &quot;atfutures&quot;
-                    </a>
-                    . This software enables very efficient calculations of
-                    multi-modal travel times between every single pair of street
-                    intersections within a city. Results are then aggregated
-                    into the polygons which define the socio-demographic data.
-
+                    in the documentation
+                    </a>.
                 </p>
             </div>
-
 
             <div className={styles.leftMed}>
                 <p className="text-center">
