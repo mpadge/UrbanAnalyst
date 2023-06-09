@@ -52,6 +52,9 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Parking index, as a (logarithmically) re-scaled measure of numbers of parking spaces per unit building volume. Lower values imply fewer available parking spaces for a given volume of building. Values for each street junction within a polygon are averaged across all nearby parking spaces, inversely weighted by distance. Each point is the described by a single measure of average number of nearby spaces per volume of nearby buildings. Final values are then population-density average values of these, as a measure of average parking availability per person."
         ],
 
+        "timesrel_timesabs": [
+            "Multiple of relative and absolute travel times. These two variables are generally strongly related, and this statistic should be interpreted with caution. Lower values represent faster travel both in absolute terms, and relativve to equivalent travel times in private automobiles."
+        ],
         "timesrel_transfers": [
             "Relative travel times multiplied by numbers of transfers. Lower values represent lower travel times (faster transport) combined with fewer numbers of transfers."
         ],
@@ -77,7 +80,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Relative travel times multiplied by parking index. Lower values reflect fast transport relative to equivalent automobile times coupled with lower availability of automobile parking spaces."
         ],
         "timesrel_social": [
-            "Relative travel times multiplied by social index (rescaled to average of one). Lower values reflect lower travel times (faster transport), combined with advantageous social conditions."
+            "Relative travel times multiplied by social index (rescaled to average of one). Lower values reflect lower multi-modal travel times (faster transport) compared with equivalent automobile times, combined with advantageous social conditions."
         ],
         "timesabs_transfers": [
             "Absolute travel times multiplied by numbers of transfers. Lower values represent lower travel times (faster transport) combined with fewer numbers of transfers."
@@ -104,7 +107,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Absolute travel times multiplied by parking index. Lower values reflect fast transport coupled with lower availability of automobile parking spaces."
         ],
         "timesabs_social": [
-            "Social index (rescaled to average of one) times absolute travel times. Lower values reflect lower travel times (faster transport), combined with advantageous social conditions."
+            "Social index (rescaled to average of one) times absolute travel times. Lower values reflect lower multi-modal travel times (faster transport), combined with advantageous social conditions."
         ],
         "transfers_intervals": [
             "Numbers of transfers multiplied by intervals between consecutive services. Lower values represent short intervals between consecutive transport services combined with fewer transfers within journeys."
@@ -194,7 +197,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Distance to nearest school multiplied by parking index. Low values shorter distances to schools coupled with lower availability of automobile parking spaces."
         ],
         "schooldist_social": [
-            "Distance to nearest school multiplied by social index (rescaled to average of one). Low values shorter distances to schools coupled with advantageous social conditions."
+            "Distance to nearest school multiplied by social index (rescaled to average of one). Low values indicate shorter distances to schools coupled with advantageous social conditions."
         ],
         "bike_natural": [
             "Bicycle infrastructure index multiplied by index of accessibility to natural spaces. Low values reflect good access to natural spaces coupled with good provision of bicycle infrastructure."
