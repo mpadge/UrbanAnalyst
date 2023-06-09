@@ -212,8 +212,11 @@
 
 /* Mobile */
 @media (max-width: 700px) {
+  .main {
+    padding: 2rem;
+  }
   .content {
-    padding: 4rem;
+    padding: 2rem;
   }
 
   .grid {
@@ -238,6 +241,15 @@
   .center::before {
     transform: none;
     height: 300px;
+  }
+
+  .centerMed {
+    padding: 0.5rem 0;
+    font-size: 1.5rem;
+}
+
+  .centerMed p {
+    margin: 0.5px;
   }
 
   .description {
