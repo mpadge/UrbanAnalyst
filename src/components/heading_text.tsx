@@ -21,7 +21,7 @@ export function HeadingTextOneLayer (layer: string) {
     } else if (layer === "transport") {
         heading = "Transport Combined";
     } else if (layer === "popdens") {
-        heading = "Population";
+        heading = "Population Density";
     } else if (layer.replace("\_", "") === "schooldist") {
         heading = "School Distance";
     } else if (layer.replace("\_", "").substring(0,4) === "bike") {
