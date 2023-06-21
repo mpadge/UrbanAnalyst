@@ -142,8 +142,10 @@ export default function Legend (props: LegendProps) {
 
         // palette has to match one in map.tsx, which is also reversed, so
         // domain is [max, min].
-        var Color = d3.scaleSequential().domain([ layer_max, layer_min ])
+        var Color = d3.scaleSequential()
+            .domain([ layer_max, layer_min ])
             .interpolator(d3.interpolateViridis)
+            .nice();
 
         update(svg, legend_values, this_layer, Color, props.alpha)
 
