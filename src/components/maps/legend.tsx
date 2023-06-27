@@ -38,7 +38,7 @@ export default function Legend (props: LegendProps) {
         var t = d3.transition()
             .duration(750);
 
-        var y = d3.scaleBand()
+        var scaleband = d3.scaleBand()
             .domain(legend_values)
             .rangeRound([marginLeft, width - marginRight]);
 
@@ -51,9 +51,9 @@ export default function Legend (props: LegendProps) {
                 enter
                     .append("rect")
                     .transition(t)
-                    .attr("x", y)
+                    .attr("x", scaleband)
                     .attr("y", marginTop + 5)
-                    .attr("width", Math.max(0, y.bandwidth() - 1))
+                    .attr("width", Math.max(0, scaleband.bandwidth() - 1))
                     .attr("height", height - marginTop - marginBottom)
                     .attr("fill", Color)
                     .attr("opacity", 1 - alpha),
@@ -61,9 +61,9 @@ export default function Legend (props: LegendProps) {
                 update
                     .append("rect")
                     .transition(t)
-                    .attr("x", y)
+                    .attr("x", scaleband)
                     .attr("y", marginTop + 5)
-                    .attr("width", Math.max(0, y.bandwidth() - 1))
+                    .attr("width", Math.max(0, scaleband.bandwidth() - 1))
                     .attr("height", height - marginTop - marginBottom)
                     .attr("fill", Color)
                     .attr("opacity", 1 - alpha),
@@ -81,13 +81,13 @@ export default function Legend (props: LegendProps) {
             (enter: any) =>
                 enter
                     .attr("transform", `translate(0,${height - marginBottom + 5})`)
-                    .call(d3.axisBottom(y)
+                    .call(d3.axisBottom(scaleband)
                         .tickSize(tickSize)),
             (update: any) =>
                 update
                     .transition(t)
                     .attr("transform", `translate(0,${height - marginBottom + 5})`)
-                    .call(d3.axisBottom(y)
+                    .call(d3.axisBottom(scaleband)
                         .tickSize(tickSize)),
             (exit: any) =>
                 exit
