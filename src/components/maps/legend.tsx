@@ -20,7 +20,7 @@ export default function Legend (props: LegendProps) {
 
     const cityNames = props.citiesArray.map((item) => item.name);
 
-    function update(svg: any, layerRange: any, layer_name: string, Color: any, alpha: number) {
+    function update(svg: any, layerRange: any, layer_name: string, alpha: number) {
 
         svg.selectAll("rect").remove();
         svg.selectAll("text").remove();
@@ -45,8 +45,13 @@ export default function Legend (props: LegendProps) {
             .nice();
         var scaleticks = scaleband.ticks(nticksin);
         const nticks = scaleticks.length;
-        console.log("TICKS = " + scaleticks + " (" + nticks + ")")
         const bandwidth = 300 / nticks;
+
+        // palette has to match one in map.tsx, which is also reversed, so
+        // domain is [max, min].
+        var Color = d3.scaleSequential()
+            .domain([layerRange[1], layerRange[0]])
+            .interpolator(d3.interpolateViridis);
 
         var rect = svg.append("g")
             .selectAll("rect")
@@ -138,16 +143,8 @@ export default function Legend (props: LegendProps) {
             props.citiesArray[props.idx].dataRangesPaired :
             props.citiesArray[props.idx].dataRanges;
         const layerRange = dataRanges[this_layer];
-        const layer_min = layerRange[0];
-        const layer_max = layerRange[1];
 
-        // palette has to match one in map.tsx, which is also reversed, so
-        // domain is [max, min].
-        var Color = d3.scaleSequential()
-            .domain([ layer_max, layer_min ])
-            .interpolator(d3.interpolateViridis);
-
-        update(svg, layerRange, this_layer, Color, props.alpha)
+        update(svg, layerRange, this_layer, props.alpha)
 
     }, [svgRef, props])
 
