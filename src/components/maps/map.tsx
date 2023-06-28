@@ -45,7 +45,7 @@ export default function UTAMap (props: MapProps) {
 
     const layer1: string = props.layer.replace("\_", "").replace("index", "");
     const layer2: string = props.layer2.replace("\_", "").replace("index", "");
-    const paired_keys = Object.keys(props.citiesArray[props.idx].dataIntervalsPaired);
+    const paired_keys = Object.keys(props.citiesArray[props.idx].dataRangesPaired);
 
     const these_layers =
         paired_keys.includes(layer1 + "_" + layer2) ?
@@ -56,10 +56,10 @@ export default function UTAMap (props: MapProps) {
         these_layers : props.layer;
 
     const layer_min = props.numLayers == "Paired" && dual_layers ?
-            props.citiesArray[props.idx].dataIntervalsPaired[these_layers as string][0] :
+            props.citiesArray[props.idx].dataRangesPaired[these_layers as string][0] :
         props.citiesArray[props.idx].dataRanges[this_layer as string][0];
     const layer_max = props.numLayers == "Paired" && dual_layers ?
-            props.citiesArray[props.idx].dataIntervalsPaired[these_layers as string][1] :
+            props.citiesArray[props.idx].dataRangesPaired[these_layers as string][1] :
         props.citiesArray[props.idx].dataRanges[this_layer as string][1];
 
     // palettes:

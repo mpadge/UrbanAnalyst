@@ -40,7 +40,7 @@ export function HeadingTextOneLayer (layer: string) {
 // lines.
 export function HeadingText (layer: string, layer2: string, numLayers: string, citiesArray: CityDataProps[]) {
 
-    const paired_keys = Object.keys(citiesArray[0].dataIntervalsPaired);
+    const paired_keys = Object.keys(citiesArray[0].dataRangesPaired);
     const layer1: string = layer.replace("\_", "").replace("index", "");
     const layer2fmt: string = layer2.replace("\_", "").replace("index", "");
     const these_layers =
