@@ -14,19 +14,6 @@ interface LegendProps {
     citiesArray: CityDataProps[]
 }
 
-function ramp(color, n = 256) {
-    const canvas = document.createElement("canvas");
-    canvas.width = n;
-    canvas.height = 1;
-    const context = canvas.getContext("2d");
-    for (let i = 0; i < n; ++i) {
-        context.fillStyle = color(i / (n - 1));
-        context.fillRect(i, 0, 1, 1);
-    }
-    return canvas;
-}
-
-
 export default function Legend (props: LegendProps) {
 
     const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
@@ -53,11 +40,10 @@ export default function Legend (props: LegendProps) {
         const nticksin = 5;
         var scaleband = d3.scaleLinear()
             .domain([layerRange[0], layerRange[1]])
-            .rangeRound([marginLeft, width - marginRight])
-            .nice();
-        var scaleticks = scaleband.ticks(nticksin);
+            .rangeRound([marginLeft, width - marginRight]);
+        var scaleticks = scaleband.nice().ticks(nticksin);
         const nticks = scaleticks.length;
-        const bandwidth = 300 / nticks;
+        const bandwidth = Math.floor(width / nticks);
 
         // palette has to match one in map.tsx, which is also reversed,
         // so domain is [max, min].
@@ -76,7 +62,7 @@ export default function Legend (props: LegendProps) {
                     .transition(t)
                     .attr("x", scaleband)
                     .attr("y", marginTop + 5)
-                    .attr("width", bandwidth + 10)
+                    .attr("width", bandwidth)
                     .attr("height", height - marginTop - marginBottom)
                     .attr("fill", Color)
                     .attr("opacity", 1 - alpha),
