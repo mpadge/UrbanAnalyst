@@ -20,7 +20,7 @@ export default function Legend (props: LegendProps) {
 
     const cityNames = props.citiesArray.map((item) => item.name);
 
-    function update(svg: any, legend_values: any, layer_name: string, Color: any, alpha: number) {
+    function update(svg: any, layerRange: any, layer_name: string, Color: any, alpha: number) {
 
         svg.selectAll("rect").remove();
         svg.selectAll("text").remove();
@@ -38,13 +38,19 @@ export default function Legend (props: LegendProps) {
         var t = d3.transition()
             .duration(750);
 
-        var scaleband = d3.scaleBand()
-            .domain(legend_values)
-            .rangeRound([marginLeft, width - marginRight]);
+        const nticksin = 5;
+        var scaleband = d3.scaleLinear()
+            .domain([layerRange[0], layerRange[1]])
+            .rangeRound([marginLeft, width - marginRight])
+            .nice();
+        var scaleticks = scaleband.ticks(nticksin);
+        const nticks = scaleticks.length;
+        console.log("TICKS = " + scaleticks + " (" + nticks + ")")
+        const bandwidth = 300 / nticks;
 
         var rect = svg.append("g")
             .selectAll("rect")
-            .data(legend_values);
+            .data(scaleticks);
 
         rect.join(
             (enter: any) =>
@@ -53,7 +59,7 @@ export default function Legend (props: LegendProps) {
                     .transition(t)
                     .attr("x", scaleband)
                     .attr("y", marginTop + 5)
-                    .attr("width", Math.max(0, scaleband.bandwidth() - 1))
+                    .attr("width", bandwidth + 10)
                     .attr("height", height - marginTop - marginBottom)
                     .attr("fill", Color)
                     .attr("opacity", 1 - alpha),
@@ -63,7 +69,7 @@ export default function Legend (props: LegendProps) {
                     .transition(t)
                     .attr("x", scaleband)
                     .attr("y", marginTop + 5)
-                    .attr("width", Math.max(0, scaleband.bandwidth() - 1))
+                    .attr("width", bandwidth)
                     .attr("height", height - marginTop - marginBottom)
                     .attr("fill", Color)
                     .attr("opacity", 1 - alpha),
@@ -118,7 +124,7 @@ export default function Legend (props: LegendProps) {
 
         const layer1: string = props.layer.replace("\_", "").replace("index", "");
         const layer2: string = props.layer2.replace("\_", "").replace("index", "");
-        const paired_keys = Object.keys(props.citiesArray[props.idx].dataIntervalsPaired);
+        const paired_keys = Object.keys(props.citiesArray[props.idx].dataRangesPaired);
 
         const these_layers =
             paired_keys.includes(layer1 + "_" + layer2) ?
@@ -135,11 +141,6 @@ export default function Legend (props: LegendProps) {
         const layer_min = layerRange[0];
         const layer_max = layerRange[1];
 
-        const dataIntervals: any = props.numLayers === "Paired" && dual_layers ?
-            props.citiesArray[props.idx].dataIntervalsPaired :
-            props.citiesArray[props.idx].dataIntervals;
-        const legend_values: number[] = dataIntervals[this_layer];
-
         // palette has to match one in map.tsx, which is also reversed, so
         // domain is [max, min].
         var Color = d3.scaleSequential()
@@ -147,7 +148,7 @@ export default function Legend (props: LegendProps) {
             .interpolator(d3.interpolateViridis)
             .nice();
 
-        update(svg, legend_values, this_layer, Color, props.alpha)
+        update(svg, layerRange, this_layer, Color, props.alpha)
 
     }, [svgRef, props])
 
