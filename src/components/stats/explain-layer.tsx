@@ -16,7 +16,7 @@ interface StatsExplainProps {
 export default function ExplainButton (props: StatsExplainProps) {
 
     const meanVarIndex = props.meanVals ? 0 : 1;
-    const paired_keys = Object.keys(props.citiesArray[props.idx].dataIntervalsPaired);
+    const paired_keys = Object.keys(props.citiesArray[props.idx].dataRangesPaired);
 
     const layer1: string = props.layer.replace("\_", "").replace("index", "");
     const layer2: string = props.layer2.replace("\_", "").replace("index", "");
