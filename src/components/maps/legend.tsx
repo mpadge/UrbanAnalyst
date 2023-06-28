@@ -14,6 +14,19 @@ interface LegendProps {
     citiesArray: CityDataProps[]
 }
 
+function ramp(color, n = 256) {
+    const canvas = document.createElement("canvas");
+    canvas.width = n;
+    canvas.height = 1;
+    const context = canvas.getContext("2d");
+    for (let i = 0; i < n; ++i) {
+        context.fillStyle = color(i / (n - 1));
+        context.fillRect(i, 0, 1, 1);
+    }
+    return canvas;
+}
+
+
 export default function Legend (props: LegendProps) {
 
     const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
@@ -33,7 +46,6 @@ export default function Legend (props: LegendProps) {
         const marginRight = 20;
         const marginBottom = 16 + tickSize;
         const marginLeft = 0;
-        // const ticks = width / 64;
 
         var t = d3.transition()
             .duration(750);
@@ -93,14 +105,14 @@ export default function Legend (props: LegendProps) {
                 enter
                     .attr("transform", `translate(0,${height - marginBottom + 5})`)
                     .call(d3.axisBottom(scaleband)
-                        .ticks(nticksin)
+                        .ticks(nticks)
                         .tickSize(tickSize)),
             (update: any) =>
                 update
                     .transition(t)
                     .attr("transform", `translate(0,${height - marginBottom + 5})`)
                     .call(d3.axisBottom(scaleband)
-                        .ticks(nticksin)
+                        .ticks(nticks)
                         .tickSize(tickSize)),
             (exit: any) =>
                 exit
