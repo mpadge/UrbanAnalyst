@@ -47,8 +47,8 @@ export default function Legend (props: LegendProps) {
         const nticks = scaleticks.length;
         const bandwidth = 300 / nticks;
 
-        // palette has to match one in map.tsx, which is also reversed, so
-        // domain is [max, min].
+        // palette has to match one in map.tsx, which is also reversed,
+        // so domain is [max, min].
         var Color = d3.scaleSequential()
             .domain([layerRange[1], layerRange[0]])
             .interpolator(d3.interpolateViridis);
@@ -93,12 +93,14 @@ export default function Legend (props: LegendProps) {
                 enter
                     .attr("transform", `translate(0,${height - marginBottom + 5})`)
                     .call(d3.axisBottom(scaleband)
+                        .ticks(nticksin)
                         .tickSize(tickSize)),
             (update: any) =>
                 update
                     .transition(t)
                     .attr("transform", `translate(0,${height - marginBottom + 5})`)
                     .call(d3.axisBottom(scaleband)
+                        .ticks(nticksin)
                         .tickSize(tickSize)),
             (exit: any) =>
                 exit
