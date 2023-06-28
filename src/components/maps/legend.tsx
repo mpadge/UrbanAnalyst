@@ -145,8 +145,7 @@ export default function Legend (props: LegendProps) {
         // domain is [max, min].
         var Color = d3.scaleSequential()
             .domain([ layer_max, layer_min ])
-            .interpolator(d3.interpolateViridis)
-            .nice();
+            .interpolator(d3.interpolateViridis);
 
         update(svg, layerRange, this_layer, Color, props.alpha)
 
