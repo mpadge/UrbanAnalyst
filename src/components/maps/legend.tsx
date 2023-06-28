@@ -45,6 +45,12 @@ export default function Legend (props: LegendProps) {
         const nticks = scaleticks.length;
         const bandwidth = Math.floor(width / nticks);
 
+        const nColors = 50;
+        var scalecolors = scaleband.ticks(nColors)
+
+        const scaleMin = scaleticks[0];
+        const scaleOffset = -(scaleticks[0] - scalecolors[0]) * width / nticks;
+
         // palette has to match one in map.tsx, which is also reversed,
         // so domain is [max, min].
         var Color = d3.scaleSequential()
@@ -53,7 +59,7 @@ export default function Legend (props: LegendProps) {
 
         var rect = svg.append("g")
             .selectAll("rect")
-            .data(scaleticks);
+            .data(scalecolors);
 
         rect.join(
             (enter: any) =>
@@ -84,19 +90,19 @@ export default function Legend (props: LegendProps) {
                 );
 
         var tick = svg.append("g")
-            .attr("transform", `translate(0,${height - marginBottom + 5})`);
+            .attr("transform", `translate(${scaleOffset},${height - marginBottom + 5})`);
 
         tick.join(
             (enter: any) =>
                 enter
-                    .attr("transform", `translate(0,${height - marginBottom + 5})`)
+                    .attr("transform", `translate(${scaleOffset},${height - marginBottom + 5})`)
                     .call(d3.axisBottom(scaleband)
                         .ticks(nticks)
                         .tickSize(tickSize)),
             (update: any) =>
                 update
                     .transition(t)
-                    .attr("transform", `translate(0,${height - marginBottom + 5})`)
+                    .attr("transform", `translate(${scaleOffset},${height - marginBottom + 5})`)
                     .call(d3.axisBottom(scaleband)
                         .ticks(nticks)
                         .tickSize(tickSize)),
@@ -106,13 +112,13 @@ export default function Legend (props: LegendProps) {
                 );
 
         var text = svg.append("g")
-            .attr("transform", `translate(0,${height - marginBottom + 5})`);
+            .attr("transform", `translate(${scaleOffset},${height - marginBottom + 5})`);
 
         var textUpdate = d3.transition(text)
-            .attr("transform", function (d) { return "translate(0, 0);" });
+            .attr("transform", function (d) { return "translate(" + scaleOffset + ", 0);" });
 
         textUpdate.select("text")
-            .attr("x", marginLeft - 20)
+            .attr("x", marginLeft)
             .attr("y", marginTop + marginBottom - height - 20)
             .attr("fill", "currentColor")
             .attr("text-anchor", "start")
