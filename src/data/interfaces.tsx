@@ -23,13 +23,7 @@ export interface CityDataProps {
     dataRanges: {
         [key: string]: number[]
     },
-    dataIntervals: {
-        [key: string]: number[]
-    },
     dataRangesPaired: {
-        [key: string]: number[]
-    },
-    dataIntervalsPaired: {
         [key: string]: number[]
     },
     stats_single: {

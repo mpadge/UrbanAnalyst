@@ -16,7 +16,7 @@ interface MapsExplainProps {
 export default function ExplainButton (props: MapsExplainProps) {
 
     const meanVarIndex = 0;
-    const paired_keys: string[] = Object.keys(props.citiesArray[props.idx].dataIntervalsPaired);
+    const paired_keys: string[] = Object.keys(props.citiesArray[props.idx].dataRangesPaired);
 
     const layer1: string = props.layer.replace("\_", "").replace("index", "");
     const layer2: string = props.layer2.replace("\_", "").replace("index", "");
