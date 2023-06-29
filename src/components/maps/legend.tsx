@@ -37,20 +37,34 @@ export default function Legend (props: LegendProps) {
         var t = d3.transition()
             .duration(750);
 
+        // scaleband controls the ticks, which can be on linear or log scales:
+        const log_scale = layer_name == "school_dist" || layer_name == "intervals";
+        const scale_min = log_scale ? Math.pow(10, layerRange[0]) : layerRange[0];
+        const scale_max = log_scale ? Math.pow(10, layerRange[1]) : layerRange[1];
+
+        var scaleband = log_scale ?
+            d3.scaleLog()
+                .domain([scale_min, scale_max])
+                .rangeRound([marginLeft, width - marginRight]) :
+            d3.scaleLinear()
+                .domain([scale_min, scale_max])
+                .rangeRound([marginLeft, width - marginRight]);
+
         const nticksin = 5;
-        var scaleband = d3.scaleLinear()
-            .domain([layerRange[0], layerRange[1]])
-            .rangeRound([marginLeft, width - marginRight]);
         const nticks = scaleband.ticks(nticksin).length;
         const bandwidth = Math.floor(width / nticks);
 
         const nColors = 50;
-        var scalecolors = scaleband.ticks(nColors)
+        var scalebandColors = d3.scaleLinear()
+            .domain([layerRange[0], layerRange[1]])
+            .rangeRound([marginLeft, width - marginRight]);
+        var scalecolors = scalebandColors.ticks(nColors)
 
         let tickAdjust = (g: any) => g.selectAll(".tick line").attr("y1", marginTop + marginBottom - height);
 
-        // palette has to match one in map.tsx, which is also reversed,
-        // so domain is [max, min].
+        // Colours are then independent of scaleband, and always on linear
+        // (sequential) scales. Note that palette has to match one in map.tsx,
+        // which is also reversed, so domain is [max, min].
         var Color = d3.scaleSequential()
             .domain([layerRange[1], layerRange[0]])
             .interpolator(d3.interpolateViridis);
@@ -60,7 +74,7 @@ export default function Legend (props: LegendProps) {
             .selectAll("rect")
             .data(scalecolors)
             .join("rect")
-                .attr("x", scaleband)
+                .attr("x", scalebandColors)
                 .attr("y", marginTop + 5)
                 .attr("width", bandwidth)
                 .attr("height", height - marginTop - marginBottom)

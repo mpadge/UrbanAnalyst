@@ -40,7 +40,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Population density, in units of thousands of people per square kilometre."
         ],
         "schooldist": [
-            "Average distance to nearest school (in kilometres). Single values are calculated for every street junction as the distance to the nearest school. Values are also weighted by population density so that final values are average distance per person."
+            "Average distance to nearest school (in metres). Single values are calculated for every street junction as the distance to the nearest school. Values are also weighted by population density so that final values are average distance per person."
         ],
         "bike": [
             "Bicycle Index, with lower values indicating more or better bicycle infrastructure. The index is measured as one minus the proportion of all journeys from each street junction out to a distance of 5km travelling along dedicated bicycle infrastructure. Values of zero imply all journeys on dedicated bicycle ways, while values of one imply all journeys directly alongside automobiles, with no bicycle infrastructure at all. Unlike static aggregations of lengths of dedicated bicycle infrastructure, this index provides direct insight into the proportions of all journeys actually spent cycling along appropriate infrastructure."
