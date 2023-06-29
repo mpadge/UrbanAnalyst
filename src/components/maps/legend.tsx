@@ -58,7 +58,7 @@ export default function Legend (props: LegendProps) {
             .interpolator(d3.interpolateViridis);
 
         var rect = svg.append("g")
-            .call(g => g.select(".domain").remove())
+            .call((g: any) => g.select(".domain").remove())
             .selectAll("rect")
             .data(scalecolors)
             .join("rect")
@@ -78,8 +78,8 @@ export default function Legend (props: LegendProps) {
                     .tickSize(tickSize));
 
         var text = svg.append("g")
-            .call(g => g.select(".domain").remove())
-            .call(g => g.append("text")
+            .call((g: any) => g.select(".domain").remove())
+            .call((g: any) => g.append("text")
                 .attr("transform", `translate(0,${height - marginBottom + 5})`)
                 .attr("x", marginLeft + 20)
                 .attr("y", marginTop + marginBottom - height - 10)
