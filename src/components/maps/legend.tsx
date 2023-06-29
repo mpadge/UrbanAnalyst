@@ -48,8 +48,7 @@ export default function Legend (props: LegendProps) {
         const nColors = 50;
         var scalecolors = scaleband.ticks(nColors)
 
-        const scaleMin = scaleticks[0];
-        const scaleOffset = -(scaleticks[0] - scalecolors[0]) * width / (nticks - 1);
+        let tickAdjust = (g: any) => g.selectAll(".tick line").attr("y1", marginTop + marginBottom - height);
 
         // palette has to match one in map.tsx, which is also reversed,
         // so domain is [max, min].
@@ -70,12 +69,14 @@ export default function Legend (props: LegendProps) {
                 .attr("opacity", 1 - alpha);
 
         var tick = svg.append("g")
-            .attr("transform", `translate(${scaleOffset},${height - marginBottom + 5})`)
+            .attr("transform", `translate(0,${height - marginBottom + 5})`)
             .join("tick")
-                .attr("transform", `translate(${scaleOffset},${height - marginBottom + 5})`)
+                .attr("transform", `translate(0,${height - marginBottom + 5})`)
                 .call(d3.axisBottom(scaleband)
                     .ticks(nticksin)
-                    .tickSize(tickSize));
+                    .tickSize(tickSize)
+                    .tickSizeOuter(0))
+                .call(tickAdjust);
 
         var text = svg.append("g")
             .call((g: any) => g.select(".domain").remove())
