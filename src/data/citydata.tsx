@@ -95,7 +95,7 @@ const berlin = {
         "intervals": [6.9, 3.2],
         "transport": [30.08, 10.22],
         "popdens": [2.08, 1.18],
-        "school_dist": [2.18, 1.34],
+        "school_dist": [338, 128],
         "bike_index": [0.81, 0.03],
         "natural": [0.88, 0.09],
         "parking": [1.32, 1.86]
@@ -247,7 +247,7 @@ const hamburg = {
         "intervals": [9.95, 6.87],
         "transport": [21.71, 16.57],
         "popdens": [1.86, 1.07],
-        "school_dist": [2.05, 1.32],
+        "school_dist": [311, 120],
         "bike_index": [0.78, 0.03],
         "natural": [0.89, 0.07],
         "parking": [2.5, 3.63]
@@ -399,7 +399,7 @@ const london = {
         "intervals": [7.54, 4.23],
         "transport": [35.45, 15.61],
         "popdens": [2.67, 1.08],
-        "school_dist": [1.7, 1.22],
+        "school_dist": [231, 85],
         "bike_index": [0.8, 0.04],
         "natural": [0.86, 0.09],
         "parking": [2.49, 4.46]
@@ -551,7 +551,7 @@ const mannheim = {
         "intervals": [13.73, 7.43],
         "transport": [29.55, 15.79],
         "popdens": [2.21, 1.54],
-        "school_dist": [3.07, 1.53],
+        "school_dist": [487, 186],
         "bike_index": [0.78, 0.03],
         "natural": [0.92, 0.07],
         "parking": [4.64, 6.58]
@@ -703,7 +703,7 @@ const muenster = {
         "intervals": [12.82, 7.17],
         "transport": [19.12, 17.38],
         "popdens": [1.61, 1.34],
-        "school_dist": [2.49, 1.38],
+        "school_dist": [396, 140],
         "bike_index": [0.75, 0.03],
         "natural": [0.87, 0.08],
         "parking": [3.29, 5.19]
@@ -855,7 +855,7 @@ const paris = {
         "intervals": [4.89, 2.5],
         "transport": [36.56, 12.31],
         "popdens": [3.16, 1.06],
-        "school_dist": [1.53, 1.17],
+        "school_dist": [186, 67],
         "bike_index": [0.76, 0.04],
         "natural": [0.93, 0.07],
         "parking": [1.55, 2.54]
