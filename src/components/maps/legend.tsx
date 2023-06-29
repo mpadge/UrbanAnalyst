@@ -41,7 +41,7 @@ export default function Legend (props: LegendProps) {
         var scaleband = d3.scaleLinear()
             .domain([layerRange[0], layerRange[1]])
             .rangeRound([marginLeft, width - marginRight]);
-        var scaleticks = scaleband.nice().ticks(nticksin);
+        var scaleticks = scaleband.ticks(nticksin);
         const nticks = scaleticks.length;
         const bandwidth = Math.floor(width / nticks);
 
@@ -49,7 +49,7 @@ export default function Legend (props: LegendProps) {
         var scalecolors = scaleband.ticks(nColors)
 
         const scaleMin = scaleticks[0];
-        const scaleOffset = -(scaleticks[0] - scalecolors[0]) * width / nticks;
+        const scaleOffset = -(scaleticks[0] - scalecolors[0]) * width / (nticks - 1);
 
         // palette has to match one in map.tsx, which is also reversed,
         // so domain is [max, min].
@@ -58,73 +58,36 @@ export default function Legend (props: LegendProps) {
             .interpolator(d3.interpolateViridis);
 
         var rect = svg.append("g")
+            .call(g => g.select(".domain").remove())
             .selectAll("rect")
-            .data(scalecolors);
-
-        rect.join(
-            (enter: any) =>
-                enter
-                    .append("rect")
-                    .transition(t)
-                    .attr("x", scaleband)
-                    .attr("y", marginTop + 5)
-                    .attr("width", bandwidth)
-                    .attr("height", height - marginTop - marginBottom)
-                    .attr("fill", Color)
-                    .attr("opacity", 1 - alpha),
-            (update: any) =>
-                update
-                    .append("rect")
-                    .transition(t)
-                    .attr("x", scaleband)
-                    .attr("y", marginTop + 5)
-                    .attr("width", bandwidth)
-                    .attr("height", height - marginTop - marginBottom)
-                    .attr("fill", Color)
-                    .attr("opacity", 1 - alpha),
-            (exit: any) =>
-                exit
-                    .append("rect")
-                    .transition(t)
-                    .remove()
-                );
+            .data(scalecolors)
+            .join("rect")
+                .attr("x", scaleband)
+                .attr("y", marginTop + 5)
+                .attr("width", bandwidth)
+                .attr("height", height - marginTop - marginBottom)
+                .attr("fill", Color)
+                .attr("opacity", 1 - alpha);
 
         var tick = svg.append("g")
-            .attr("transform", `translate(${scaleOffset},${height - marginBottom + 5})`);
-
-        tick.join(
-            (enter: any) =>
-                enter
-                    .attr("transform", `translate(${scaleOffset},${height - marginBottom + 5})`)
-                    .call(d3.axisBottom(scaleband)
-                        .ticks(nticks)
-                        .tickSize(tickSize)),
-            (update: any) =>
-                update
-                    .transition(t)
-                    .attr("transform", `translate(${scaleOffset},${height - marginBottom + 5})`)
-                    .call(d3.axisBottom(scaleband)
-                        .ticks(nticks)
-                        .tickSize(tickSize)),
-            (exit: any) =>
-                exit
-                    .remove()
-                );
+            .attr("transform", `translate(${scaleOffset},${height - marginBottom + 5})`)
+            .join("tick")
+                .attr("transform", `translate(${scaleOffset},${height - marginBottom + 5})`)
+                .call(d3.axisBottom(scaleband)
+                    .ticks(nticksin)
+                    .tickSize(tickSize));
 
         var text = svg.append("g")
-            .attr("transform", `translate(${scaleOffset},${height - marginBottom + 5})`);
-
-        var textUpdate = d3.transition(text)
-            .attr("transform", function (d) { return "translate(" + scaleOffset + ", 0);" });
-
-        textUpdate.select("text")
-            .attr("x", marginLeft)
-            .attr("y", marginTop + marginBottom - height - 20)
-            .attr("fill", "currentColor")
-            .attr("text-anchor", "start")
-            .attr("font-weight", "bold")
-            .attr("font-size", "16px")
-            .text(layer_name);
+            .call(g => g.select(".domain").remove())
+            .call(g => g.append("text")
+                .attr("transform", `translate(0,${height - marginBottom + 5})`)
+                .attr("x", marginLeft + 20)
+                .attr("y", marginTop + marginBottom - height - 10)
+                .attr("fill", "currentColor")
+                .attr("text-anchor", "start")
+                .attr("font-weight", "bold")
+                .attr("font-size", "16px")
+                .text(layer_name));
     }
 
     const svgRef = React.useRef<SVGSVGElement>(null);
