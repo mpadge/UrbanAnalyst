@@ -41,8 +41,7 @@ export default function Legend (props: LegendProps) {
         var scaleband = d3.scaleLinear()
             .domain([layerRange[0], layerRange[1]])
             .rangeRound([marginLeft, width - marginRight]);
-        var scaleticks = scaleband.ticks(nticksin);
-        const nticks = scaleticks.length;
+        const nticks = scaleband.ticks(nticksin).length;
         const bandwidth = Math.floor(width / nticks);
 
         const nColors = 50;
