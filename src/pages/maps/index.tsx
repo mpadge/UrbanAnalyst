@@ -78,7 +78,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             <link rel="icon" href="/ua.ico" />
         </Head>
         <div id="divinfo" style={{display: explain?"none":""}} >
-            <div id="stats-heading" className={styles.mapsheading}>
+            <div id="maps-heading" className={styles.mapsheading}>
                 <p> {heading} </p>
             </div>
         </div>
