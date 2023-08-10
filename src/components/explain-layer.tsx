@@ -34,7 +34,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Intervals (in minutes) between the fastest public transport trip and the subsequent equivalent trips (which may be slower than the first trip). Intervals are averaged for each point of origin over all possible journeys out to 10km. Values are also weighted by local population densities, so represent average intervals per person. This provides a direct measure of the frequency of public transport services."
         ],
         "transport": [
-            "Combined measure of transport time times number of transfers times intervals between services. Values may be directly compared between different locations, and different cities. Lower values indicate public transport that is fast, frequent, and requires few transfers."
+            "Combined measure of transport time times intervals between services. Values may be directly compared between different locations, and different cities. Lower values indicate public transport that is both fast and frequent."
         ],
         "popdens": [
             "Population density, in units of thousands of people per square kilometre."
