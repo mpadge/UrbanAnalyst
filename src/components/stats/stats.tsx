@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 import * as d3 from 'd3';
 import Link from 'next/link'
 import styled from 'styled-components';
@@ -252,6 +252,7 @@ export default function Stats (props: StatsProps) {
 
                 <div id="stats-container" className={styles.statsplot} >
                     <h2> {heading} </h2>
+                    <Suspense fallback={<div>Loading...</div>}>
                     <svg width={width} height={height}>
                     <Group
                       x={width / 2}
@@ -262,6 +263,7 @@ export default function Stats (props: StatsProps) {
                         <GroupedBars ref={svgRef} />
                     </Group>
                     </svg>
+                    </Suspense>
                 </div>
 
             </div>
