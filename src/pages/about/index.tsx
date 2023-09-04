@@ -104,7 +104,7 @@ export default function Home() {
 
             <div className={styles.centerSmall}>
                 <p className="text-center">
-                    The German Government &nbsp;
+                    The German Government &#8202;
                     <a
                     href="https://prototypefund.de"
                     target="_blank"
@@ -112,15 +112,20 @@ export default function Home() {
                     >
                     prototypefund
                     </a>
-                    , as part of their &nbsp;
+                    , initially as part of their &#8202;
                     <a
                     href="https://prototypefund.de/project/urban-transport-analyst-uta/"
                     target="_blank"
                     rel="noopener noreferrer"
+                    >twelfth funding round</a>
+                    , and currently (until end Feb 2024) as part of the &#8202;
+                    <a
+                    href="https://prototypefund.de/project/urban-analyst/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     >
-                    twelfth funding round
-                    </a>
-                    , and upcoming fourteenth funding round (from September 2023).
+                    fourteenth funding round
+                    </a>.
                 </p>
             </div>
         </main>
