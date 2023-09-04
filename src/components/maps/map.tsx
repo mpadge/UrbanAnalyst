@@ -1,6 +1,6 @@
 
 import {NextPage} from "next";
-import {useState} from "react";
+import {useState, Suspense} from "react";
 import {GeoJsonLayer} from "@deck.gl/layers/typed";
 import {DeckGL} from "@deck.gl/react/typed";
 import {FlyToInterpolator} from "@deck.gl/core/typed";
@@ -105,6 +105,7 @@ export default function UTAMap (props: MapProps) {
     return (
         <>
         {(
+        <Suspense fallback={<p>Loading map ...</p>}>
         <DeckGL
             width={"100vw"}
             height={"100vh"}
@@ -120,6 +121,7 @@ export default function UTAMap (props: MapProps) {
         >
         </Map>
         </DeckGL>
+        </Suspense>
         )}
         </>
         )
