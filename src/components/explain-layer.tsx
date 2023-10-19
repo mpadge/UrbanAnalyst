@@ -247,7 +247,8 @@ export function GetLayerTextStats(layer: string, layer2: string, numLayers: stri
 
     var layer_text: string = "";
     if (Object.keys(LAYER_TEXT).includes(this_layer)) {
-        layer_text = meanVarIndex ? LAYER_TEXT[this_layer][meanVarIndex] : LAYER_TEXT[this_layer][0];
+        // layer_text = meanVarIndex ? LAYER_TEXT[this_layer][meanVarIndex] : LAYER_TEXT[this_layer][0];
+        layer_text = LAYER_TEXT[this_layer][0];
     }
 
     return layer_text;
