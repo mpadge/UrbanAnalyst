@@ -3,6 +3,7 @@ import styles from '@/styles/controls.module.css';
 
 interface MeanAvgProps {
     meanVals: boolean,
+    singleLayer: boolean,
     handleMeanChange: (mn: boolean) => void
 }
 
@@ -16,7 +17,7 @@ export default function MeanAvgButtons(props: MeanAvgProps) {
                     name="meanVar"
                     value="Average"
                     id="average"
-                    checked={props.meanVals}
+                    checked={props.meanVals || !props.singleLayer}
                     onChange={() => props.handleMeanChange(props.meanVals)}
                 />
                 Average
@@ -29,7 +30,7 @@ export default function MeanAvgButtons(props: MeanAvgProps) {
                     name="meanVar"
                     value="Variation"
                     id="variation"
-                    checked={!props.meanVals}
+                    checked={!props.meanVals && props.singleLayer}
                     onChange={() => props.handleMeanChange(props.meanVals)}
                 />
                 Variation
