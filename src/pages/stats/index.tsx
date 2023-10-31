@@ -4,7 +4,7 @@ import {NextPage} from "next";
 import {useState} from "react";
 import Control from '@/components/stats/control';
 import Buttons from '@/components/buttons2';
-import Stats from '@/components/stats/stats';
+import BarChart from '@/components/stats/stats';
 import styles from '@/styles/Home.module.css'
 
 import { CITY_DATA } from '@/data/citydata';
@@ -60,7 +60,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             <link rel="icon" href="/ua.ico" />
         </Head>
         <main className={styles.main}>
-            <Stats
+            <BarChart
                 idx = {idx}
                 layer = {layer}
                 layer2 = {layer2}
