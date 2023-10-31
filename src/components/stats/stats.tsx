@@ -32,20 +32,6 @@ interface CityStatsProps {
 }
 
 
-const GroupedBars = styled.g`
-  rect {
-    fill: #008bec;
-    transition: all 0.2s;
-
-    &:hover {
-      fill: #00a7e4;
-    }
-  }
-  text {
-    font-size: 1.2rem;
-  }
-`;
-
 // fill: #ec008b;
 // fill: #e46aa7;
 
@@ -193,6 +179,8 @@ export default function BarChart (props: StatsProps) {
         const handleDrawBars = (svg: any) => {
             svg
               .selectAll('rect')
+              .classed('fill-blue-700 hover:fill-blue-500', true)
+              .classed('text-xl', true)
               .data(data)
               .join('rect')
               .attr('height', yScale.bandwidth())
@@ -255,12 +243,12 @@ export default function BarChart (props: StatsProps) {
                     <Suspense fallback={<div>Loading...</div>}>
                     <svg width={width} height={height}>
                     <Group
+                      ref={svgRef}
                       x={width / 2}
                       y={height / 2}
                       right={margin.right}
                       top={margin.top}>
                         <Axis ref={xAxisRef} axisType="xAxis" innerHeight={innerHeight} />
-                        <GroupedBars ref={svgRef} />
                     </Group>
                     </svg>
                     </Suspense>
