@@ -112,7 +112,7 @@ function useWindowSize() {
     return windowSize;
 }
 
-export default function Stats (props: StatsProps) {
+export default function BarChart (props: StatsProps) {
 
     const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
 
