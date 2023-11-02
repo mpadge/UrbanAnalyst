@@ -172,11 +172,12 @@ export default function BarChart (props: StatsProps) {
 
         const handleDrawText = (svg: any) => {
             svg
+                .append("g")
                 .selectAll('text')
                 .data(data)
                 .join('text')
                 .attr('class', () => {
-                    return innerWidth < 500 ? 'text-lg font-light' : 'text-2xl font-normal';
+                    return innerWidth < 700 ? 'text-lg font-light' : 'text-2xl font-normal';
                 })
                 .attr('x', (d: any) => xScale(xValue(d)) + 10)
                 .attr('y', (d: any) => {
@@ -189,17 +190,19 @@ export default function BarChart (props: StatsProps) {
 
         const handleDrawXAxis = (svg: any) => {
             svg
+                .append("g")
+                .attr("transform", `translate(0,${innerHeight})`)
                 .call(d3.axisBottom(xScale)
-                    .tickSize(-innerHeight)
+                    .tickSize(-10)
                     .ticks(nTicks)
                     .tickPadding(xAxisPadding));
         }
 
         const nTicks = (innerWidth < 700 || xMin > 0) ? 4 : 8;
 
+        handleDrawXAxis(svg);
         handleDrawBars(svg);
         handleDrawText(svg);
-        // handleDrawXAxis(svg);
 
     }, [data, innerHeight, innerWidth, xScale, yScale, xMin]);
 
