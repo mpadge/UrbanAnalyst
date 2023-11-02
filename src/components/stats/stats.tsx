@@ -215,7 +215,9 @@ export default function BarChart (props: StatsProps) {
                 .style("stroke", "#dcdcdb");
 
             g.selectAll(".tick text")
-                .style("font-size", "20px");
+                .style("font-size", () => {
+                    return innerWidth < 700 ? "12px" : "20px"
+                })
         }
 
         const nTicks = (innerWidth < 700 || xMin > 0) ? 4 : 8;
