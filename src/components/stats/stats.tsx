@@ -156,6 +156,7 @@ export default function BarChart (props: StatsProps) {
     useEffect(() => {
 
         const svg = d3.select(svgRef.current as any);
+        svg.selectAll('*').remove();
 
         const handleDrawBars = (svg: any) => {
             svg
