@@ -158,7 +158,6 @@ export default function BarChart (props: StatsProps) {
     const yTickSize = 0;
 
     const svgRef = React.useRef<SVGSVGElement>(null);
-    const xAxisRef = React.useRef<SVGSVGElement>(null);
 
     // X-axis:
     const xValue = (d: any) => d.value;
@@ -215,8 +214,6 @@ export default function BarChart (props: StatsProps) {
         handleDrawBars(svg);
         handleDrawText(svg);
 
-        const xGroup: any = d3.select(xAxisRef.current as any);
-
         const nTicks = (innerWidth < 700 || xMin > 0) ? 4 : 8;
 
         const xAxis = d3.axisBottom(xScale)
@@ -224,7 +221,7 @@ export default function BarChart (props: StatsProps) {
             .ticks(nTicks)
             .tickPadding(xAxisPadding);
 
-        xGroup.call(xAxis);
+        svg.call(xAxis);
 
     }, [data, innerHeight, innerWidth, xScale, yScale, xMin]);
 
@@ -248,7 +245,7 @@ export default function BarChart (props: StatsProps) {
                       y={height / 2}
                       right={margin.right}
                       top={margin.top}>
-                        <Axis ref={xAxisRef} axisType="xAxis" innerHeight={innerHeight} />
+                        <Axis ref={svgRef} axisType="xAxis" innerHeight={innerHeight} />
                     </Group>
                     </svg>
                     </Suspense>
