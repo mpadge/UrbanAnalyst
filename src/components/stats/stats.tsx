@@ -155,6 +155,8 @@ export default function BarChart (props: StatsProps) {
 
     useEffect(() => {
 
+        const svg = d3.select(svgRef.current as any);
+
         const handleDrawBars = (svg: any) => {
             svg
               .selectAll('rect')
@@ -170,7 +172,7 @@ export default function BarChart (props: StatsProps) {
         };
 
         const handleDrawText = (svg: any) => {
-            const ret = svg
+            svg
                 .selectAll('text')
                 .data(data)
                 .join('text')
@@ -188,11 +190,7 @@ export default function BarChart (props: StatsProps) {
                 .delay(0)
                 .duration(750)
                 .attr('fill-opacity', 0.8);
-
-            return ret;
         };
-
-        const svg = d3.select(svgRef.current as any);
 
         handleDrawBars(svg);
         handleDrawText(svg);
