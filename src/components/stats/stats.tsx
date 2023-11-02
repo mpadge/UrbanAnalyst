@@ -194,9 +194,13 @@ export default function BarChart (props: StatsProps) {
                 .append("g")
                 .attr("transform", `translate(0,${innerHeight})`)
                 .call(d3.axisBottom(xScale)
-                    .tickSize(-10)
+                    .tickSize(-innerHeight)
                     .ticks(nTicks)
-                    .tickPadding(xAxisPadding));
+                    .tickPadding(xAxisPadding))
+                .selectAll(".tick line")
+                .style("stroke", "#dcdcdb")
+                .selectAll(".tick text")
+                .style("font-size", "20px");
         }
 
         const nTicks = (innerWidth < 700 || xMin > 0) ? 4 : 8;
