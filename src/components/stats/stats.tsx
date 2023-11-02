@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import * as d3 from 'd3';
 import Link from 'next/link'
-import styled from 'styled-components';
 import styles from '@/styles/stats.module.css';
 import { CityDataProps } from "@/data/interfaces";
 import { HeadingTextOneLayer } from "@/components/heading_text";
@@ -39,10 +38,6 @@ interface GroupProps {
     right: number,
     top: number
 }
-
-export const Group = styled.g`
-  transform: ${(props: GroupProps) => `translate(${props.right}px, ${props.top}px)`};
-`;
 
 interface AxisProps {
     axisType: string,
@@ -227,13 +222,15 @@ export default function BarChart (props: StatsProps) {
                     <h2> {heading} </h2>
                     <Suspense fallback={<div>Loading...</div>}>
                     <svg width={width} height={height}>
-                    <Group
-                      ref={svgRef}
-                      x={width / 2}
-                      y={height / 2}
-                      right={margin.right}
-                      top={margin.top}>
-                    </Group>
+                    <g
+                        style={{
+                            transform: `translate(${margin.right}px, ${margin.top}px)`
+                        }}
+                        ref={svgRef}
+                        x={width / 2}
+                        y={height / 2}
+                    >
+                    </g>
                     </svg>
                     </Suspense>
                 </div>
