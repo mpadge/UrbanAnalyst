@@ -162,7 +162,7 @@ export default function BarChart (props: StatsProps) {
               .selectAll('rect')
               .data(data)
               .join('rect')
-              .classed('fill-[#008bec] hover:fill-[#00a7e4]', true)
+              .classed('fill-[#008bec] stroke-1 stroke-slate-600 hover:fill-[#00a7e4]', true)
               .attr('height', yScale.bandwidth())
               .attr('y', (d: any) => yScale(yValue(d)))
               .transition()
