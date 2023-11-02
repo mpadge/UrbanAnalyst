@@ -190,16 +190,18 @@ export default function BarChart (props: StatsProps) {
         };
 
         const handleDrawXAxis = (svg: any) => {
-            svg
+            const g = svg
                 .append("g")
                 .attr("transform", `translate(0,${innerHeight})`)
                 .call(d3.axisBottom(xScale)
                     .tickSize(-innerHeight)
                     .ticks(nTicks)
-                    .tickPadding(xAxisPadding))
-                .selectAll(".tick line")
-                .style("stroke", "#dcdcdb")
-                .selectAll(".tick text")
+                    .tickPadding(xAxisPadding));
+
+            g.selectAll(".tick line")
+                .style("stroke", "#dcdcdb");
+
+            g.selectAll(".tick text")
                 .style("font-size", "20px");
         }
 
