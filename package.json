@@ -14,7 +14,6 @@
     "@types/react-dom": "^18.2.7",
     "@vercel/analytics": "^1.0.2",
     "all": "^0.0.0",
-    "autoprefixer": "^10.4.16",
     "d3": "^7.8.5",
     "d3-scale-chromatic": "^3.0.0",
     "deck.gl": "8.8.0",
