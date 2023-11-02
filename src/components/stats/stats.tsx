@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import * as d3 from 'd3';
 import Link from 'next/link'
-import styled from 'styled-components';
 import styles from '@/styles/stats.module.css';
 import { CityDataProps } from "@/data/interfaces";
 import { HeadingTextOneLayer } from "@/components/heading_text";
@@ -32,20 +31,6 @@ interface CityStatsProps {
 }
 
 
-const GroupedBars = styled.g`
-  rect {
-    fill: #008bec;
-    transition: all 0.2s;
-
-    &:hover {
-      fill: #00a7e4;
-    }
-  }
-  text {
-    font-size: 1.2rem;
-  }
-`;
-
 // fill: #ec008b;
 // fill: #e46aa7;
 
@@ -54,29 +39,10 @@ interface GroupProps {
     top: number
 }
 
-export const Group = styled.g`
-  transform: ${(props: GroupProps) => `translate(${props.right}px, ${props.top}px)`};
-`;
-
 interface AxisProps {
     axisType: string,
     innerHeight?: number
 }
-
-const Axis = styled.g`
-  transform: ${(props: AxisProps) =>
-    props.axisType === 'xAxis' && `translate(0, ${props.innerHeight}px)`};
-
-  path,
-  line {
-    stroke: #dcdbdb;
-  }
-
-  text {
-    font-size: 1.4rem;
-  }
-`;
-
 
 function useWindowSize() {
 
@@ -112,7 +78,7 @@ function useWindowSize() {
     return windowSize;
 }
 
-export default function Stats (props: StatsProps) {
+export default function BarChart (props: StatsProps) {
 
     const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
 
@@ -172,12 +138,13 @@ export default function Stats (props: StatsProps) {
     const yTickSize = 0;
 
     const svgRef = React.useRef<SVGSVGElement>(null);
-    const xAxisRef = React.useRef<SVGSVGElement>(null);
 
     // X-axis:
     const xValue = (d: any) => d.value;
+    const expandRHS = 1.05; // Expand right-hand edge beyond max observed value
+    const xMax2 = Math.max(0,xMin) + (xMax - Math.max(0,xMin)) * expandRHS;
     const xScale = d3.scaleLinear()
-        .domain([xMin, d3.max(data, xValue)])
+        .domain([xMin, xMax2])
         .range([xMin, innerWidth])
         .nice();
 
@@ -190,11 +157,15 @@ export default function Stats (props: StatsProps) {
 
     useEffect(() => {
 
+        const svg = d3.select(svgRef.current as any);
+        svg.selectAll('*').remove();
+
         const handleDrawBars = (svg: any) => {
             svg
               .selectAll('rect')
               .data(data)
               .join('rect')
+              .classed('fill-[#008bec] stroke-1 stroke-slate-600 hover:fill-[#00a7e4]', true)
               .attr('height', yScale.bandwidth())
               .attr('y', (d: any) => yScale(yValue(d)))
               .transition()
@@ -203,40 +174,44 @@ export default function Stats (props: StatsProps) {
         };
 
         const handleDrawText = (svg: any) => {
-            const ret = svg
+            svg
+                .append("g")
                 .selectAll('text')
                 .data(data)
                 .join('text')
+                .attr('class', () => {
+                    return innerWidth < 700 ? 'text-lg font-light' : 'text-2xl font-normal';
+                })
+                .attr('x', (d: any) => xScale(xValue(d)) + 10)
                 .attr('y', (d: any) => {
                     const ysc: any = yScale ? yScale(yValue(d)) : 0
                     return ysc + yScale.bandwidth() / 1.5
                     })
-                .text((d: any) => d.city)
-                .attr('x', (d: any) => xScale(xValue(d)) + 5)
                 .attr('fill-opacity', 0.8)
-                .transition()
-                .delay(0)
-                .duration(750)
-                .attr('fill-opacity', 0.8);
-
-            return ret;
+                .text((d: any) => d.city)
         };
 
-        const svg = d3.select(svgRef.current as any);
+        const handleDrawXAxis = (svg: any) => {
+            const g = svg
+                .append("g")
+                .attr("transform", `translate(0,${innerHeight})`)
+                .call(d3.axisBottom(xScale)
+                    .tickSize(-innerHeight)
+                    .ticks(nTicks)
+                    .tickPadding(xAxisPadding));
 
-        handleDrawBars(svg);
-        handleDrawText(svg);
+            g.selectAll(".tick line")
+                .style("stroke", "#dcdcdb");
 
-        const xGroup: any = d3.select(xAxisRef.current as any);
+            g.selectAll(".tick text")
+                .style("font-size", "20px");
+        }
 
         const nTicks = (innerWidth < 700 || xMin > 0) ? 4 : 8;
 
-        const xAxis = d3.axisBottom(xScale)
-            .tickSize(-innerHeight)
-            .ticks(nTicks)
-            .tickPadding(xAxisPadding);
-
-        xGroup.call(xAxis);
+        handleDrawXAxis(svg);
+        handleDrawBars(svg);
+        handleDrawText(svg);
 
     }, [data, innerHeight, innerWidth, xScale, yScale, xMin]);
 
@@ -254,14 +229,15 @@ export default function Stats (props: StatsProps) {
                     <h2> {heading} </h2>
                     <Suspense fallback={<div>Loading...</div>}>
                     <svg width={width} height={height}>
-                    <Group
-                      x={width / 2}
-                      y={height / 2}
-                      right={margin.right}
-                      top={margin.top}>
-                        <Axis ref={xAxisRef} axisType="xAxis" innerHeight={innerHeight} />
-                        <GroupedBars ref={svgRef} />
-                    </Group>
+                    <g
+                        style={{
+                            transform: `translate(${margin.right}px, ${margin.top}px)`
+                        }}
+                        ref={svgRef}
+                        x={width / 2}
+                        y={height / 2}
+                    >
+                    </g>
                     </svg>
                     </Suspense>
                 </div>
