@@ -160,10 +160,9 @@ export default function BarChart (props: StatsProps) {
         const handleDrawBars = (svg: any) => {
             svg
               .selectAll('rect')
-              .classed('fill-blue-700 hover:fill-blue-500', true)
-              .classed('text-xl', true)
               .data(data)
               .join('rect')
+              .classed('fill-[#008bec] hover:fill-[#00a7e4]', true)
               .attr('height', yScale.bandwidth())
               .attr('y', (d: any) => yScale(yValue(d)))
               .transition()
@@ -178,18 +177,13 @@ export default function BarChart (props: StatsProps) {
                 .join('text')
                 .classed('text-xl', true)
                 .classed('font-semibold', true)
-                .classed('translate-x-2', true)
+                .attr('x', (d: any) => xScale(xValue(d)) + 5)
                 .attr('y', (d: any) => {
                     const ysc: any = yScale ? yScale(yValue(d)) : 0
                     return ysc + yScale.bandwidth() / 1.5
                     })
-                .text((d: any) => d.city)
-                .attr('x', (d: any) => xScale(xValue(d)) + 5)
                 .attr('fill-opacity', 0.8)
-                .transition()
-                .delay(0)
-                .duration(750)
-                .attr('fill-opacity', 0.8);
+                .text((d: any) => d.city)
         };
 
         handleDrawBars(svg);
