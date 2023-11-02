@@ -32,7 +32,6 @@
   "devDependencies": {
     "@types/d3": "^7.4.0",
     "@types/node": "^20.5.9",
-    "@types/styled-components": "^5.1.26",
     "eslint-config-next": "^13.4.19"
   }
 }
