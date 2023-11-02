@@ -175,9 +175,10 @@ export default function BarChart (props: StatsProps) {
                 .selectAll('text')
                 .data(data)
                 .join('text')
-                .classed('text-xl', true)
-                .classed('font-semibold', true)
-                .attr('x', (d: any) => xScale(xValue(d)) + 5)
+                .attr('class', () => {
+                    return innerWidth < 500 ? 'text-lg font-light' : 'text-2xl font-normal';
+                })
+                .attr('x', (d: any) => xScale(xValue(d)) + 10)
                 .attr('y', (d: any) => {
                     const ysc: any = yScale ? yScale(yValue(d)) : 0
                     return ysc + yScale.bandwidth() / 1.5
@@ -198,7 +199,7 @@ export default function BarChart (props: StatsProps) {
 
         handleDrawBars(svg);
         handleDrawText(svg);
-        handleDrawXAxis(svg);
+        // handleDrawXAxis(svg);
 
     }, [data, innerHeight, innerWidth, xScale, yScale, xMin]);
 
