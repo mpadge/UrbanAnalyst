@@ -49,21 +49,6 @@ interface AxisProps {
     innerHeight?: number
 }
 
-const Axis = styled.g`
-  transform: ${(props: AxisProps) =>
-    props.axisType === 'xAxis' && `translate(0, ${props.innerHeight}px)`};
-
-  path,
-  line {
-    stroke: #dcdbdb;
-  }
-
-  text {
-    font-size: 1.4rem;
-  }
-`;
-
-
 function useWindowSize() {
 
     interface windowSize {
@@ -194,6 +179,9 @@ export default function BarChart (props: StatsProps) {
                 .selectAll('text')
                 .data(data)
                 .join('text')
+                .classed('text-xl', true)
+                .classed('font-semibold', true)
+                .classed('translate-x-2', true)
                 .attr('y', (d: any) => {
                     const ysc: any = yScale ? yScale(yValue(d)) : 0
                     return ysc + yScale.bandwidth() / 1.5
@@ -245,7 +233,6 @@ export default function BarChart (props: StatsProps) {
                       y={height / 2}
                       right={margin.right}
                       top={margin.top}>
-                        <Axis ref={svgRef} axisType="xAxis" innerHeight={innerHeight} />
                     </Group>
                     </svg>
                     </Suspense>
