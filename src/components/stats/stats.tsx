@@ -141,8 +141,10 @@ export default function BarChart (props: StatsProps) {
 
     // X-axis:
     const xValue = (d: any) => d.value;
+    const expandRHS = 1.05; // Expand right-hand edge beyond max observed value
+    const xMax2 = Math.max(0,xMin) + (xMax - Math.max(0,xMin)) * expandRHS;
     const xScale = d3.scaleLinear()
-        .domain([xMin, d3.max(data, xValue)])
+        .domain([xMin, xMax2])
         .range([xMin, innerWidth])
         .nice();
 
