@@ -162,15 +162,23 @@ export default function BarChart (props: StatsProps) {
 
         const handleDrawBars = (svg: any) => {
             svg
-              .selectAll('rect')
-              .data(data)
-              .join('rect')
-              .classed('fill-[#008bec] stroke-1 stroke-slate-600 hover:fill-[#00a7e4]', true)
-              .attr('height', yScale.bandwidth())
-              .attr('y', (d: any) => yScale(yValue(d)))
-              .transition()
-              .duration(750)
-              .attr('width', (d: any) => xScale(xValue(d)));
+                .selectAll('rect')
+                .data(data)
+                .join('rect')
+                .attr('fill', '#008bec')
+                .attr('stroke-width', 1)
+                .attr('stroke', '#718096')
+                .attr('height', yScale.bandwidth())
+                .attr('y', (d: any) => yScale(yValue(d)))
+                .on('mouseover', function(this: SVGRectElement) {
+                    d3.select(this).style('fill', '#00a7e4');
+                })
+                .on('mouseout', function(this: SVGRectElement) {
+                    d3.select(this).style('fill', '#008bec');
+                })
+                .transition()                .transition()
+                .duration(750)
+                .attr('width', (d: any) => xScale(xValue(d)));
         };
 
         const handleDrawText = (svg: any) => {
@@ -179,8 +187,11 @@ export default function BarChart (props: StatsProps) {
                 .selectAll('text')
                 .data(data)
                 .join('text')
-                .attr('class', () => {
-                    return innerWidth < 700 ? 'text-lg font-light' : 'text-2xl font-normal';
+                .attr('font-size', () => {
+                    return innerWidth < 700 ? '12px' : '20px';
+                })
+                .attr('font-weight', () => {
+                    return innerWidth < 700 ? '300' : '400';
                 })
                 .attr('x', (d: any) => xScale(xValue(d)) + 10)
                 .attr('y', (d: any) => {
