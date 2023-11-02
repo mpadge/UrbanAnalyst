@@ -186,17 +186,19 @@ export default function BarChart (props: StatsProps) {
                 .text((d: any) => d.city)
         };
 
-        handleDrawBars(svg);
-        handleDrawText(svg);
+        const handleDrawXAxis = (svg: any) => {
+            svg
+                .call(d3.axisBottom(xScale)
+                    .tickSize(-innerHeight)
+                    .ticks(nTicks)
+                    .tickPadding(xAxisPadding));
+        }
 
         const nTicks = (innerWidth < 700 || xMin > 0) ? 4 : 8;
 
-        const xAxis = d3.axisBottom(xScale)
-            .tickSize(-innerHeight)
-            .ticks(nTicks)
-            .tickPadding(xAxisPadding);
-
-        svg.call(xAxis);
+        handleDrawBars(svg);
+        handleDrawText(svg);
+        handleDrawXAxis(svg);
 
     }, [data, innerHeight, innerWidth, xScale, yScale, xMin]);
 
