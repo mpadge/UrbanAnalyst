@@ -1,7 +1,8 @@
+"use client"
 
 import Head from 'next/head'
-import {NextPage} from "next";
-import {useState} from "react";
+import Image from 'next/image'
+import { useState } from "react";
 import {GeoJsonLayer} from "@deck.gl/layers/typed";
 import {DeckGL} from "@deck.gl/react/typed";
 import {FlyToInterpolator} from "@deck.gl/core/typed";
@@ -14,19 +15,19 @@ import { HeadingTextOneLayer, HeadingText } from "@/components/heading_text";
 import styles from '@/styles/maps.module.css';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
-import { CityDataProps, CitiesDataProps, ViewState } from "@/data/interfaces";
+import { ViewState } from "@/data/interfaces";
 
 const buttonProps = {
     first: "home",
     second: "stats"
 }
 
-const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
+export default function Home() {
 
     const [idx, setIdx] = useState(0);
-    const [cityData, setCityData] = useState(props.citiesArray[idx]);
+    const [cityData, setCityData] = useState(CITY_DATA.citiesArray[idx]);
     const [viewState, setViewState] = useState({
-        ...props.citiesArray[idx].initialViewState,
+        ...CITY_DATA.citiesArray[idx].initialViewState,
         pitch: 0,
         bearing: 0,
         transitionDuration: 2000,
@@ -62,10 +63,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         setNumLayers(numLayers);
     }
 
-    const heading: string = HeadingText(layer, layer2, numLayers, props.citiesArray);
-
-    // meta viewport from:
-    // https://docs.mapbox.com/mapbox-gl-js/example/disable-scroll-zoom/
+    const heading: string = HeadingText(layer, layer2, numLayers, CITY_DATA.citiesArray);
 
     return (
         <>
@@ -88,7 +86,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             layer2 = {layer2}
             numLayers = {numLayers}
             alpha = {alpha}
-            citiesArray = {props.citiesArray}
+            citiesArray = {CITY_DATA.citiesArray}
             viewState = {viewState}
             handleAlphaChange = {handleAlphaChange}
             handleViewStateChange = {handleViewStateChange}
@@ -103,7 +101,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             numLayersOptions = {numLayersOptions}
             alpha = {alpha}
             explain = {explain}
-            citiesArray = {props.citiesArray}
+            citiesArray = {CITY_DATA.citiesArray}
             viewState = {viewState}
             handleIdxChange = {handleIdxChange}
             handleNumLayersChange = {handleNumLayersChange}
@@ -119,21 +117,9 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             layer2 = {layer2}
             numLayers = {numLayers}
             alpha = {alpha}
-            citiesArray = {props.citiesArray}
+            citiesArray = {CITY_DATA.citiesArray}
         />
         <Buttons buttons={buttonProps} />
         </>
-        )
-};
-export default Page;
-
-export async function getStaticProps() {
-
-    const city_data = CITY_DATA;
-
-    return {
-        props: {
-            citiesArray: city_data.citiesArray
-        }
-    }
+    )
 }

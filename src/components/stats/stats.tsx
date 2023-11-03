@@ -8,7 +8,7 @@ import { HeadingTextOneLayer } from "@/components/heading_text";
 
 interface StatsProps {
     idx: number,
-    layer: string,
+    layer1: string,
     layer2: string,
     numLayers: string,
     meanVals: boolean,
@@ -67,11 +67,11 @@ function useWindowSize() {
                 height: window.innerHeight,
             });
         }
-        
+
         window.addEventListener("resize", handleResize);
-         
+
         handleResize();
-        
+
         return () => window.removeEventListener("resize", handleResize);
     }, []); // Empty array ensures that effect is only run on mount
 
@@ -84,7 +84,7 @@ export default function BarChart (props: StatsProps) {
 
     const meanValIndex = props.meanVals ? 0 : 1;
 
-    const layer1: string = props.layer.replace("\_", "").replace("index", "");
+    const layer1: string = props.layer1.replace("\_", "").replace("index", "");
     const layer2: string = props.layer2.replace("\_", "").replace("index", "");
     const paired_keys = Object.keys(props.citiesArray[props.idx].stats_paired);
 
@@ -94,7 +94,10 @@ export default function BarChart (props: StatsProps) {
     const dual_layers: boolean = paired_keys.includes(these_layers);
 
     const this_layer: string = props.numLayers == "Paired" && dual_layers ?
-        these_layers : props.layer;
+        these_layers : props.layer1;
+
+    console.log("this_layer = " + this_layer + "; props.layer1 = " + props.layer1 +
+        "; these_layers = " + these_layers);
 
     const data = props.citiesArray.map((city, index) => ({
         city: city.nameFormatted,
@@ -232,7 +235,7 @@ export default function BarChart (props: StatsProps) {
 
     const heading: string = props.numLayers == "Paired" && dual_layers ?
         HeadingTextOneLayer(layer1) + " & " + HeadingTextOneLayer(layer2) :
-        HeadingTextOneLayer(props.layer);
+        HeadingTextOneLayer(props.layer1);
 
     return (
             <>

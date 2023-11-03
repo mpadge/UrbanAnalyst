@@ -28,36 +28,194 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Variation in the ratio of absolute travel times for any combinations of walking, cycling, and public transport to times for equivalent journeys taken solely with private automobile. Lower values imply lower variation across a city in the ratios of multi-modal versus private automobile travel times."
         ],
         "transfers": [
-            "Average numbers of transfers for the public transport section of multi-modal journeys per 10km of travel. Values are averaged for each point of origin over all possible journeys out to 10km. Values are also weighted by local population densities, so represent average numbers of transfers per person within each polygon.",
-            "Variation in numbers of transfers for the public transport section of multi-modal journeys per 10km of travel. Values are averaged for each point of origin over all possible journeys out to 10km. Values are also weighted by local population densities, so represent average numbers of transfers per person within each polygon."
+            "Numbers of transfers for the public transport section of multi-modal journeys per 10km of travel. Values are averaged for each point of origin over all possible journeys out to 10km. Values are also weighted by local population densities, so represent average numbers of transfers per person within each polygon."
         ],
         "intervals": [
-            "Average intervals (in minutes) between the fastest public transport trip and the subsequent equivalent trips (which may be slower than the first trip). Intervals are averaged for each point of origin over all possible journeys out to 10km. Values are also weighted by local population densities, so represent average intervals per person. This provides a direct measure of the frequency of public transport services.",
-            "Variation in intervals (in minutes) between the fastest public transport trip and the subsequent equivalent trips (which may be slower than the first trip). Intervals are averaged for each point of origin over all possible journeys out to 10km. Values are also weighted by local population densities, so represent average intervals per person. This provides a direct measure of the frequency of public transport services."
+            "Intervals (in minutes) between the fastest public transport trip and the subsequent equivalent trips (which may be slower than the first trip). Intervals are averaged for each point of origin over all possible journeys out to 10km. Values are also weighted by local population densities, so represent average intervals per person. This provides a direct measure of the frequency of public transport services."
         ],
         "transport": [
-            "Average combined measure of transport time times intervals between services. Values may be directly compared between different locations, and different cities. Lower values indicate public transport that is both fast and frequent.",
-            "Variation in combined measure of transport time times intervals between services. Values may be directly compared between different locations, and different cities. Lower values indicate public transport that is both fast and frequent."
+            "Combined measure of transport time times intervals between services. Values may be directly compared between different locations, and different cities. Lower values indicate public transport that is both fast and frequent."
         ],
         "popdens": [
-            "Average population density, in units of thousands of people per square kilometre.",
-            "Variation in population density, in units of thousands of people per square kilometre."
+            "Population density, in units of thousands of people per square kilometre."
         ],
         "schooldist": [
-            "Average distance to nearest school (in metres). Single values are calculated for every street junction as the distance to the nearest school. Values are also weighted by population density so that final values are average distance per person.",
-            "Variation in distance to nearest school (in metres). Single values are calculated for every street junction as the distance to the nearest school. Values are also weighted by population density so that final values are average distance per person."
+            "Average distance to nearest school (in metres). Single values are calculated for every street junction as the distance to the nearest school. Values are also weighted by population density so that final values are average distance per person."
         ],
         "bike": [
-            "Average bicycle Index, with lower values indicating more or better bicycle infrastructure. The index is measured as one minus the proportion of all journeys from each street junction out to a distance of 5km travelling along dedicated bicycle infrastructure. Values of zero imply all journeys on dedicated bicycle ways, while values of one imply all journeys directly alongside automobiles, with no bicycle infrastructure at all. Unlike static aggregations of lengths of dedicated bicycle infrastructure, this index provides direct insight into the proportions of all journeys actually spent cycling along appropriate infrastructure.",
-            "Variation in bicycle Index, with lower values indicating more or better bicycle infrastructure. The index is measured as one minus the proportion of all journeys from each street junction out to a distance of 5km travelling along dedicated bicycle infrastructure. Values of zero imply all journeys on dedicated bicycle ways, while values of one imply all journeys directly alongside automobiles, with no bicycle infrastructure at all. Unlike static aggregations of lengths of dedicated bicycle infrastructure, this index provides direct insight into the proportions of all journeys actually spent cycling along appropriate infrastructure."
+            "Bicycle Index, with lower values indicating more or better bicycle infrastructure. The index is measured as one minus the proportion of all journeys from each street junction out to a distance of 5km travelling along dedicated bicycle infrastructure. Values of zero imply all journeys on dedicated bicycle ways, while values of one imply all journeys directly alongside automobiles, with no bicycle infrastructure at all. Unlike static aggregations of lengths of dedicated bicycle infrastructure, this index provides direct insight into the proportions of all journeys actually spent cycling along appropriate infrastructure."
         ],
         "natural": [
-            "Average index of accessibility to natural spaces, with lower values indicating greater amounts of natural spaces, greater access to these, or both. The index is measured as one minus the proportion of all walking journeys from each street junction out to a distance of 2km travelling through or alongside natural spaces. Natural spaces include any publicly accessible areas with natural surfaces, as well as all bodies of water with publicly accessible ways along the sides. Unlike static aggregations of areas of natural space, this index provides direct insight into the proportions of all journeys actually spent walking within or alongside natural spaces.",
-            "Variation in index of accessibility to natural spaces, with lower values indicating greater amounts of natural spaces, greater access to these, or both. The index is measured as one minus the proportion of all walking journeys from each street junction out to a distance of 2km travelling through or alongside natural spaces. Natural spaces include any publicly accessible areas with natural surfaces, as well as all bodies of water with publicly accessible ways along the sides. Unlike static aggregations of areas of natural space, this index provides direct insight into the proportions of all journeys actually spent walking within or alongside natural spaces."
+            "Index of accessibility to natural spaces, with lower values indicating greater amounts of natural spaces, greater access to these, or both. The index is measured as one minus the proportion of all walking journeys from each street junction out to a distance of 2km travelling through or alongside natural spaces. Natural spaces include any publicly accessible areas with natural surfaces, as well as all bodies of water with publicly accessible ways along the sides. Unlike static aggregations of areas of natural space, this index provides direct insight into the proportions of all journeys actually spent walking within or alongside natural spaces."
         ],
         "parking": [
-            "Average parking index, as a (logarithmically) re-scaled measure of numbers of parking spaces per unit building volume. Lower values imply fewer available parking spaces for a given volume of building. Values for each street junction within a polygon are averaged across all nearby parking spaces, inversely weighted by distance. Each point is the described by a single measure of average number of nearby spaces per volume of nearby buildings. Final values are then population-density average values of these, as a measure of average parking availability per person.",
-            "Variation in parking index, as a (logarithmically) re-scaled measure of numbers of parking spaces per unit building volume. Lower values imply fewer available parking spaces for a given volume of building. Values for each street junction within a polygon are averaged across all nearby parking spaces, inversely weighted by distance. Each point is the described by a single measure of average number of nearby spaces per volume of nearby buildings. Final values are then population-density average values of these, as a measure of average parking availability per person."
+            "Parking index, as a (logarithmically) re-scaled measure of numbers of parking spaces per unit building volume. Lower values imply fewer available parking spaces for a given volume of building. Values for each street junction within a polygon are averaged across all nearby parking spaces, inversely weighted by distance. Each point is the described by a single measure of average number of nearby spaces per volume of nearby buildings. Final values are then population-density average values of these, as a measure of average parking availability per person."
+        ],
+
+        "timesrel_timesabs": [
+            "Multiple of relative and absolute travel times. These two variables are generally strongly related, and this statistic should be interpreted with caution. Lower values represent faster travel both in absolute terms, and relativve to equivalent travel times in private automobiles."
+        ],
+        "timesrel_transfers": [
+            "Relative travel times multiplied by numbers of transfers. Lower values represent lower travel times (faster transport) combined with fewer numbers of transfers."
+        ],
+        "timesrel_intervals": [
+            "Relative travel times multiplied by intervals between consecutive services. Lower values represent lower travel times (faster transport) combined with shorter intervals between consecutive services."
+        ],
+        "timesrel_transport": [
+            "Relative travel times multiplied by compound transport index. The combined index already includes relative transport times, and these values will generally not mean anything."
+        ],
+        "timesrel_popdens": [
+            "Relative travel times multiplied by population densities. Lower values indicate regions with fast relative transport yet lower population densities."
+        ],
+        "timesrel_schooldist": [
+            "Relative travel times multiplied by distances to nearest schools. Lower values reflect fast transport relative to equivalent automobile times coupled with short distances to schools."
+        ],
+        "timesrel_bike": [
+            "Relative travel times multiplied by bicycle index. Lower values reflect fast transport relative to equivalent automobile times couplied with good provision of bicycle infrastructure."
+        ],
+        "timesrel_natural": [
+            "Relative travel times multiplied by index of accessibility to natural spaces. Lower values reflect fast transport relative to equivalent automobile times coupled with good access to natural spaces."
+        ],
+        "timesrel_parking": [
+            "Relative travel times multiplied by parking index. Lower values reflect fast transport relative to equivalent automobile times coupled with lower availability of automobile parking spaces."
+        ],
+        "timesrel_social": [
+            "Relative travel times multiplied by social index (rescaled to average of one). Lower values reflect lower multi-modal travel times (faster transport) compared with equivalent automobile times, combined with advantageous social conditions."
+        ],
+        "timesabs_transfers": [
+            "Absolute travel times multiplied by numbers of transfers. Lower values represent lower travel times (faster transport) combined with fewer numbers of transfers."
+        ],
+        "timesabs_intervals": [
+            "Absolute travel times multiplied by intervals between consecutive services. Lower values represent lower travel times (faster transport) combined with shorter intervals between consecutive services."
+        ],
+        "timesabs_transport": [
+            "Absolute travel times multiplied by compound transport index. The combined index already includes absolute transport times, and these values will generally not mean anything."
+        ],
+        "timesabs_popdens": [
+            "Absolute travel times multiplied by population densities. Lower values indicate regions with fast transport yet lower population densities."
+        ],
+        "timesabs_schooldist": [
+            "Absolute travel times multiplied by distances to nearest schools Lower values reflect fast transport coupled with short distances to schools."
+        ],
+        "timesabs_bike": [
+            "Absolute travel times multiplied by bicycle index. Lower values reflect fast transport coupled with good provision of bicycle infrastructure."
+        ],
+        "timesabs_natural": [
+            "Absolute travel times multiplied by index of accessibility to natural spaces. Lower values reflect fast transport coupled with good access to natural spaces."
+        ],
+        "timesabs_parking": [
+            "Absolute travel times multiplied by parking index. Lower values reflect fast transport coupled with lower availability of automobile parking spaces."
+        ],
+        "timesabs_social": [
+            "Social index (rescaled to average of one) times absolute travel times. Lower values reflect lower multi-modal travel times (faster transport), combined with advantageous social conditions."
+        ],
+        "transfers_intervals": [
+            "Numbers of transfers multiplied by intervals between consecutive services. Lower values represent short intervals between consecutive transport services combined with fewer transfers within journeys."
+        ],
+        "transfers_transport": [
+            "Numbers of transfers multiplied by compound transport index. Numbers of transfers are already included in the compound transport index, and these values will generally not mean anything."
+        ],
+        "transfers_popdens": [
+            "Numbers of transfers multiplied by population densities. Low values represent transport services requiring fewer transfers coupled with low population density."
+        ],
+        "transfers_schooldist": [
+            "Numbers of transfers multiplied by distances to nearest schools. Low values represent transport services requiring fewer transfers coupled with short distances to schools."
+        ],
+        "transfers_bike": [
+            "Numbers of transfers multiplied by bicycle index. Low values represent transport services requiring fewer transfers coupled with good provision of bicycle infrastructure."
+        ],
+        "transfers_natural": [
+            "Numbers of transfers multiplied by index of accessibility to natural spaces. Low values represent transport services requiring fewer transfers coupled with good access to natural spaces."
+        ],
+        "transfers_parking": [
+            "Numbers of transfers multiplied by parking index. Low values represent transport services requiring fewer transfers coupled with lower availability of automobile parking spaces."
+        ],
+        "transfers_social": [
+            "Numbers of transfers multiplied by social index (rescaled to average of one). Low values represent transport services requiring fewer transfers coupled with advantageous social conditions."
+        ],
+        "intervals_transport": [
+            "Transport intervals multiplied by compound transport index. Transport intervals are already included in the compound transport index, and these values will generally not mean anything."
+        ],
+        "intervals_popdens": [
+            "Transport intervals multiplied by population densities. Low values represent transport with shorter intervals between consecutive services coupled with low population density."
+        ],
+        "intervals_schooldist": [
+            "Transport intervals multiplied by distances to nearest schools. Low values represent transport with shorter intervals between consecutive services coupled with shorter distances to schools."
+        ],
+        "intervals_bike": [
+            "Transport intervals multiplied by bicycle index. Low values represent transport with shorter intervals between consecutive services coupled with good provision of bicycle infrastructure."
+        ],
+        "intervals_natural": [
+            "Transport intervals multiplied by index of accessibility to natural spaces. Low values represent transport with shorter intervals between consecutive services coupled with good access to natural spaces."
+        ],
+        "intervals_parking": [
+            "Transport intervals multiplied by parking index. Low values represent transport with shorter intervals between consecutive services coupled with lower availability of automobile parking spaces."
+        ],
+        "intervals_social": [
+            "Transport intervals multiplied by social index (rescaled to average of one). Low values represent transport with shorter intervals between consecutive services coupled with advantageous social conditions."
+        ],
+        "transport_popdens": [
+            "Compound transport index multiplied by population densities. Low values represent overall good provision of public transport coupled with low population density."
+        ],
+        "transport_schooldist": [
+            "Compound transport index multiplied by distances to nearest schools. Low values represent overall good provision of public transport coupled with short distances to schools."
+        ],
+        "transport_bike": [
+            "Compound transport index multiplied by bicycle index. Low values represent overall good provision of public transport coupled with good provision of bicycle infrastructure."
+        ],
+        "transport_natural": [
+            "Compound transport index multiplied by index of accessibility to natural spaces. Low values represent overall good provision of public transport coupled with good access to natural spaces."
+        ],
+        "transport_parking": [
+            "Compound transport index multiplied by parking index. Low values represent overall good provision of public transport coupled with lower availability of automobile parking spaces."
+        ],
+        "transport_social": [
+            "Compound transport index multiplied by social index (rescaled to average of one). Low values represent overall good provision of public transport coupled with advantageous social conditions."
+        ],
+        "popdens_schooldist": [
+            "Population density multiplied by distances to nearest schools. Low values represent low population density coupled with short distances to schools."
+        ],
+        "popdens_bike": [
+            "Population density multiplied by bicycle index. Low values represent low population density coupled with good provision of bicycle infrastructure."
+        ],
+        "popdens_natural": [
+            "Population density multiplied by index of accessibility to natural spaces. Low values represent low population density coupled with good access to natural spaces."
+        ],
+        "popdens_parking": [
+            "Population density multiplied by parking index. Low values represent low population density coupled with lower availability of automobile parking spaces."
+        ],
+        "popdens_social": [
+            "Population density multiplied by social index (rescaled to average of one). Low values represent low population density coupled with advantageous social conditions."
+        ],
+        "schooldist_bike": [
+            "Distance to nearest school multiplied by bicycle index. Low values shorter distances to schools coupled with good provision of bicycle infrastructure."
+        ],
+        "schooldist_natural": [
+            "Distance to nearest school multiplied by index of accessibility to natural spaces. Low values shorter distances to schools coupled with good access to natural spaces."
+        ],
+        "schooldist_parking": [
+            "Distance to nearest school multiplied by parking index. Low values shorter distances to schools coupled with lower availability of automobile parking spaces."
+        ],
+        "schooldist_social": [
+            "Distance to nearest school multiplied by social index (rescaled to average of one). Low values indicate shorter distances to schools coupled with advantageous social conditions."
+        ],
+        "bike_natural": [
+            "Bicycle infrastructure index multiplied by index of accessibility to natural spaces. Low values reflect good access to natural spaces coupled with good provision of bicycle infrastructure."
+        ],
+        "bike_parking": [
+            "Bicycle infrastructure index multiplied by parking index. Low values reflect lower availability of automobile parking spaces coupled with good provision of bicycle infrastructure."
+        ],
+        "bike_social": [
+            "Bicycle infrastructure index multiplied by social index (rescaled to average of one). Low values reflect good provision of bicycle infrastructure coupled with advantageous social conditions."
+        ],
+        "natural_parking": [
+            "Index of access to natural spaces multiplied by parking index. Low values reflect good access to natural spaces coupled with lower availability of automobile parking spaces."
+        ],
+        "natural_social": [
+            "Index of access to natural spaces multiplied by social index (rescaled to average of one). Low values indicate that good access to natural spaces is coupled with advantageous social conditions."
+        ],
+        "parking_social": [
+            "Parking index multiplied by social index (rescaled to average of one). Low values reflect lower availability of automobile parking spaces coupled with advantageous social conditions"
         ]
     };
 
@@ -247,8 +405,7 @@ export function GetLayerTextStats(layer: string, layer2: string, numLayers: stri
 
     var layer_text: string = "";
     if (Object.keys(LAYER_TEXT).includes(this_layer)) {
-        // layer_text = meanVarIndex ? LAYER_TEXT[this_layer][meanVarIndex] : LAYER_TEXT[this_layer][0];
-        layer_text = LAYER_TEXT[this_layer][0];
+        layer_text = meanVarIndex ? LAYER_TEXT[this_layer][meanVarIndex] : LAYER_TEXT[this_layer][0];
     }
 
     return layer_text;

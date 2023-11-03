@@ -1,3 +1,4 @@
+"use client"
 
 import Head from 'next/head'
 import {NextPage} from "next";
@@ -8,12 +9,16 @@ import BarChart from '@/components/stats/stats';
 import styles from '@/styles/Home.module.css'
 
 import { CITY_DATA } from '@/data/citydata';
-import { CityDataProps, CitiesDataProps } from "@/data/interfaces";
 
-const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
+const buttonProps = {
+    first: "home",
+    second: "maps"
+}
+
+export default function Home() {
 
     const [idx, setIdx] = useState(0);
-    const [cityData, setCityData] = useState(props.citiesArray[idx]);
+    const [cityData, setCityData] = useState(CITY_DATA.citiesArray[idx]);
 
     const [layer, setLayer] = useState("social_index"); // options[0] in layerlist.tsx
     const [layer2, setLayer2] = useState("");
@@ -50,7 +55,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
         first: "home",
         second: "maps"
     }
-
+    
     return (
         <>
         <Head>
@@ -60,14 +65,15 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             <link rel="icon" href="/ua.ico" />
         </Head>
         <main className={styles.main}>
+            
             <BarChart
                 idx = {idx}
-                layer = {layer}
+                layer1 = {layer}
                 layer2 = {layer2}
                 numLayers = {numLayers}
                 meanVals = {meanVals}
                 sortOpt = {sortOpt}
-                citiesArray = {props.citiesArray}
+                citiesArray = {CITY_DATA.citiesArray}
             />
             <Control
                 idx = {idx}
@@ -78,7 +84,7 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
                 meanVals = {meanVals}
                 explain = {explain}
                 sortOpt = {sortOpt}
-                citiesArray = {props.citiesArray}
+                citiesArray = {CITY_DATA.citiesArray}
                 handleLayerChange = {handleLayerChange}
                 handleLayer2Change = {handleLayer2Change}
                 handleNumLayersChange = {handleNumLayersChange}
@@ -89,17 +95,5 @@ const Page: NextPage<CitiesDataProps> = (props: CitiesDataProps) => {
             <Buttons buttons={buttons} />
         </main>
         </>
-        )
-};
-export default Page;
-
-export async function getStaticProps() {
-
-    const city_data = CITY_DATA;
-
-    return {
-        props: {
-            citiesArray: city_data.citiesArray
-        }
-    }
+    )
 }
