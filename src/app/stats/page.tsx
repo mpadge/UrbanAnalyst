@@ -5,8 +5,7 @@ import {NextPage} from "next";
 import {useState} from "react";
 import Control from '@/components/stats/control';
 import Buttons from '@/components/buttons2';
-//import Stats from '@/components/stats/stats';
-import Stats from '@/components/stats/stats';
+import BarChart from '@/components/stats/stats';
 import styles from '@/styles/Home.module.css'
 
 import { CITY_DATA } from '@/data/citydata';
@@ -67,7 +66,7 @@ export default function Home() {
         </Head>
         <main className={styles.main}>
             
-            <Stats
+            <BarChart
                 idx = {idx}
                 layer1 = {layer}
                 layer2 = {layer2}
