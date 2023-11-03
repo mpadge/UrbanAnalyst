@@ -27,7 +27,6 @@ export default function CityList(props: CityListProps) {
 
     const handleChange = (selectedOption: any) => {
         setSelected(selectedOption);
-        console.log("SELECTOR (value, index) = (" + selectedOption.label + ", " + selectedOption.value + ")")
         props.handleIdxChange(selectedOption.index);
         props.handleViewStateChange({...props.citiesArray[selectedOption.index].initialViewState,
                 pitch: 0,
