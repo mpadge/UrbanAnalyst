@@ -96,9 +96,6 @@ export default function BarChart (props: StatsProps) {
     const this_layer: string = props.numLayers == "Paired" && dual_layers ?
         these_layers : props.layer1;
 
-    console.log("this_layer = " + this_layer + "; props.layer1 = " + props.layer1 +
-        "; these_layers = " + these_layers);
-
     const data = props.citiesArray.map((city, index) => ({
         city: city.nameFormatted,
         value: props.numLayers == "Paired" && dual_layers ?
