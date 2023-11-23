@@ -71,7 +71,7 @@ export default function UTAMap (props: MapProps) {
 
     const mapPath: string = props.numLayers == "Paired" && dual_layers ? mapPath2 : mapPath1;
 
-    const [geoJSONcontent, setGeoJSONcontent] = useState(null);
+    const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null);
 
     useEffect(() => {
             fetch(mapPath)
