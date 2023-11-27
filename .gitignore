@@ -38,4 +38,3 @@ next-env.d.ts
 # local files & dirs
 aaa.*
 /logo/
-/wasm
