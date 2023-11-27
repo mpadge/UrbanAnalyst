@@ -1,0 +1,23 @@
+{
+  "name": "uamutations",
+  "collaborators": [
+    "Mark Padgham <mark.padgham@email.com>"
+  ],
+  "description": "Implementation of the mutation algorithm for Urban Analyst.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UrbanAnalyst/uamutations"
+  },
+  "files": [
+    "uamutations_bg.wasm",
+    "uamutations.js",
+    "uamutations.d.ts"
+  ],
+  "module": "uamutations.js",
+  "types": "uamutations.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
