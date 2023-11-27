@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
-    "build:wasm": "wasm-pack build wasm --release --target web",
+    "build:wasm": "wasm-pack build wasm --release --target web --out-dir=../pkg",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
