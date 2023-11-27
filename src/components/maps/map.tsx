@@ -12,6 +12,10 @@ import Control from '@/components/maps/control'
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
 
+import type { InitOutput } from '@/../pkg/uamutations.d.ts';
+import { initSync } from '@/../pkg/uamutations.js';
+import { uamutate } from '@/../pkg/uamutations_bg.wasm';
+
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 
 // const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-nolabels-gl-style/style.json';
@@ -70,6 +74,16 @@ export default function UTAMap (props: MapProps) {
         .interpolator(d3.interpolateViridis)
 
     const mapPath: string = props.numLayers == "Paired" && dual_layers ? mapPath2 : mapPath1;
+
+    let wasmModule: InitOutput;
+    fetch('@/../uamutations_bg.wasm')
+      .then(response => response.arrayBuffer())
+      .then(bytes => {
+        const wasmBinary = new Uint8Array(bytes);
+        wasmModule = initSync(wasmBinary);
+      })
+      .catch(error => console.error('Error fetching wasm binary:', error));
+    // const result = wasmModule.uamutate(a, b, c, d, e, f, g, h, i);
 
     const layers = [
         new GeoJsonLayer({
