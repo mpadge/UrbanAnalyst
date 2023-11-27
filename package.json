@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
-    "build": "cd src/src && npx wasm-pack build --target web --out-dir ../../wasm && cd ../.. && next build",
+    "build:wasm": "wasm-pack build wasm --release --target web",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -17,7 +18,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-map-gl": "^7.1.6",
-    "react-select": "^5.7.7"
+    "react-select": "^5.7.7",
+    "wasm": "file:wasm/pkg"
   },
   "devDependencies": {
     "@types/d3": "^7.4.2",
