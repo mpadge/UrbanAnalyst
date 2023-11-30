@@ -1,10 +1,49 @@
 /* tslint:disable */
 /* eslint-disable */
+/**
+* This is the main function, which reads data from two JSON files, calculates absolute and
+* relative differences between the two sets of data, and writes the results to an output file.
+*
+* # Arguments
+*
+* * `fname1` - Path to local JSON file with data which are to be mutated.
+* * `fname2` - Path to local JSON file with data of mutation target towards which first data are
+* to be mutated.
+* * `varname` - Name of variable in both `fname1` and `fname2` to be mutated.
+* * `varextra` - Extra variables to be considered in the mutation.
+* * `nentries` - The number of entries to be read from the JSON files.
+*
+* # Process
+*
+* 1. Reads the variable specified by `varname` from the files `fname1` and `fname2`.
+* 2. Calculates the absolute and relative differences between the two sets of data.
+* 3. Orders the relative differences in descending order.
+*
+* The following seven vectors of equal length are written to the output file:
+* 1. values: The original values of 'varname' from 'fname1'.
+* 2. dists: The relative degree by which each should be mutated.
+*
+* # Panics
+*
+* This function will panic if the input files cannot be read, or if the output file cannot be written.
+* @param {any} data1
+* @param {any} data2
+* @param {number} varname_ptr
+* @param {number} varname_len
+* @param {number} nentries
+* @returns {number}
+*/
+export function uamutate(data1: any, data2: any, varname_ptr: number, varname_len: number, nentries: number): number;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
+  readonly uamutate: (a: number, b: number, c: number, d: number, e: number, f: number) => void;
+  readonly __wbindgen_malloc: (a: number, b: number) => number;
+  readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
+  readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
+  readonly __wbindgen_exn_store: (a: number) => void;
 }
 
 export type SyncInitInput = BufferSource | WebAssembly.Module;
