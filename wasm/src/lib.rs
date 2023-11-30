@@ -2,12 +2,16 @@
 //! Analyst](https://urbananalyst.city). The algorithm mutates selected properties for one city to
 //! become more like those of another selected city.
 
-use std::fs::File;
-use std::io::BufReader;
+use serde_json::Value;
+use serde_wasm_bindgen::from_value;
+use wasm_bindgen::prelude::*;
+use wasm_bindgen::JsValue;
 
 pub mod calculate_dists;
 pub mod mlr;
 pub mod read_write_file;
+
+static mut RESULT_LEN: usize = 0;
 
 /// This is the main function, which reads data from two JSON files, calculates absolute and
 /// relative differences between the two sets of data, and writes the results to an output file.
@@ -34,15 +38,28 @@ pub mod read_write_file;
 /// # Panics
 ///
 /// This function will panic if the input files cannot be read, or if the output file cannot be written.
+
+#[wasm_bindgen]
 pub fn uamutate(
-    reader1: BufReader<File>,
-    reader2: BufReader<File>,
-    varnames: &Vec<String>,
+    data1: JsValue,
+    data2: JsValue,
+    varname_ptr: *const u8,
+    varname_len: usize,
     nentries: usize,
-) -> Vec<f64> {
+) -> Result<*const f64, JsValue> {
+    let varnames = unsafe { std::str::from_utf8(std::slice::from_raw_parts(varname_ptr, varname_len)).unwrap() };
+    let varnames: Vec<String> = if varnames.is_empty() {
+        Vec::new()
+    } else {
+        varnames.split(',').map(|s| s.to_string()).collect()
+    };
+
+    let json_data1: Value = from_value(data1).map_err(|e| JsValue::from_str(&format!("Error parsing data: {:?}", e)))?;
+    let json_data2: Value = from_value(data2).map_err(|e| JsValue::from_str(&format!("Error parsing data: {:?}", e)))?;
+
     // Read contents of files:
-    let (mut values1, groups1) = read_write_file::readfile(reader1, varnames, nentries);
-    let (values2, _groups2) = read_write_file::readfile(reader2, varnames, nentries);
+    let (mut values1, groups1) = read_write_file::readfile(json_data1, &varnames, nentries);
+    let (values2, _groups2) = read_write_file::readfile(json_data2, &varnames, nentries);
     // Adjust `values1` by removing its dependence on varextra, and replacing with the dependnece
     // of values2 on same variables (but only if `varextra` are specified):
     if values1.nrows() > 1 {
@@ -54,7 +71,20 @@ pub fn uamutate(
     // then the distances by which `values1` need to be moved in the first dimension only to match
     // the closest equivalent values of `values21`.
     let dists = calculate_dists::calculate_dists(&values1, &values2, false);
-    aggregate_to_groups(&dists, &groups1)
+    let result = aggregate_to_groups(&dists, &groups1);
+
+    // Convert to FFI-stable .js form. Can be accessed in js like this:
+    // const wasmModule = ... // Load your wasm module
+    // const ptr = wasmModule.uamutate(...);
+    // const len = wasmModule.get_result_len();
+    // const result = new Float64Array(wasmModule.memory.buffer, ptr, len);
+    let ptr = result.as_ptr();
+    unsafe {
+        RESULT_LEN = result.len();
+    }
+    std::mem::forget(result);
+
+    Ok(ptr)
 }
 
 /// Aggregate distances within the groups defined in the original `groups` vector.
