@@ -98,10 +98,11 @@ export default function UTAMap (props: MapProps) {
 
         return Promise.all([
           fetch(mapPath).then(response => response.json()),
-          fetch(mapPath_target).then(response => response.json())
+          fetch(mapPath_target).then(response => response.json()),
+          Promise.resolve({ ptr1, encodedString1 })
         ]);
       })
-      .then(([data1, data2]) => {
+      .then(([data1, data2, { ptr1, encodedString1 }]) => {
         const result = wasmModule.uamutate(data1, data2, ptr1, encodedString1.length, nentries);
       })
       .catch(error => console.error('Error:', error));
