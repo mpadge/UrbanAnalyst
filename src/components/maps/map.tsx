@@ -76,10 +76,14 @@ export default function UTAMap (props: MapProps) {
     const mapPath: string = props.numLayers == "Paired" && dual_layers ? mapPath2 : mapPath1;
 
     // dummy extra vars for mutation algorithm #49:
-    const mapPath_target = "/data/paris/data.json";
+    const mapPath_source = "/data/berlin/dataraw.json";
+    const mapPath_target = "/data/paris/dataraw.json";
     const extra_var = "social_index";
+    const varsall = ["bike_index", extra_var];
+    const nentries = 1000;
 
     let wasmModule: InitOutput;
+
     fetch('../../../pkg/uamutations_bg.wasm')
       .then(response => response.arrayBuffer())
       .then(bytes => {
@@ -87,30 +91,20 @@ export default function UTAMap (props: MapProps) {
         wasmModule = initSync(wasmBinary);
 
         const textEncoder = new TextEncoder();
-
-        const encodedString1 = textEncoder.encode(mapPath);
+        const encodedString1 = textEncoder.encode(varsall);
         const ptr1: number = (wasmModule as any).__wbindgen_malloc(encodedString1.length);
         const memory1 = new Uint8Array(wasmModule.memory.buffer);
         memory1.set(encodedString1, ptr1);
 
-        const encodedString2 = textEncoder.encode(mapPath_target);
-        const ptr2: number = (wasmModule as any).__wbindgen_malloc(encodedString2.length);
-        const memory2 = new Uint8Array(wasmModule.memory.buffer);
-        memory2.set(encodedString2, ptr2);
-
-        const encodedString3 = textEncoder.encode(this_layer);
-        const ptr3: number = (wasmModule as any).__wbindgen_malloc(encodedString3.length);
-        const memory3 = new Uint8Array(wasmModule.memory.buffer);
-        memory3.set(encodedString3, ptr3);
-
-        const encodedString4 = textEncoder.encode(extra_var);
-        const ptr4: number = (wasmModule as any).__wbindgen_malloc(encodedString4.length);
-        const memory4 = new Uint8Array(wasmModule.memory.buffer);
-        memory4.set(encodedString4, ptr4);
+        return Promise.all([
+          fetch(mapPath).then(response => response.json()),
+          fetch(mapPath_target).then(response => response.json())
+        ]);
       })
-      .catch(error => console.error('Error fetching wasm binary:', error));
-
-    // const result = wasmModule.uamutate(ptr, encodedString.length, c, d, e, f, g, h, i)
+      .then(([data1, data2]) => {
+        const result = wasmModule.uamutate(data1, data2, ptr1, encodedString1.length, nentries);
+      })
+      .catch(error => console.error('Error:', error));
 
     const layers = [
         new GeoJsonLayer({
