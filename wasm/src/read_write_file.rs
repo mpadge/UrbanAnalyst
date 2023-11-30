@@ -1,7 +1,6 @@
 use nalgebra::DMatrix;
 use serde_json::Value;
 use std::fs::File;
-use std::io::BufReader;
 use std::io::Write;
 
 // Define columns to standardise on reading:
@@ -42,13 +41,11 @@ const COLS_TO_STD: [&str; 1] = ["social_index"];
 /// ```
 
 pub fn readfile(
-    reader: BufReader<File>,
+    json_data: Value,
     varnames: &Vec<String>,
     nentries: usize,
 ) -> (DMatrix<f64>, Vec<usize>) {
     assert!(nentries > 0, "nentries must be greater than zero");
-
-    let json: Value = serde_json::from_reader(reader).unwrap();
 
     let mut values = DMatrix::<f64>::zeros(nentries, varnames.len());
     let mut city_group = Vec::new();
@@ -58,7 +55,7 @@ pub fn readfile(
     let mut current_positions = vec![0; varnames.len()];
 
     let mut std_index: Vec<usize> = vec![];
-    if let Value::Array(array) = &json {
+    if let Value::Array(array) = &json_data {
         for item in array {
             if let Value::Object(map) = item {
                 for (i, var) in varnames.iter().enumerate() {
