@@ -2,11 +2,12 @@
 //! Analyst](https://urbananalyst.city). The algorithm mutates selected properties for one city to
 //! become more like those of another selected city.
 
+use std::fs::File;
+use std::io::BufReader;
+
 pub mod calculate_dists;
 pub mod mlr;
 pub mod read_write_file;
-
-static mut RESULT_LEN: usize = 0;
 
 /// This is the main function, which reads data from two JSON files, calculates absolute and
 /// relative differences between the two sets of data, and writes the results to an output file.
@@ -33,38 +34,18 @@ static mut RESULT_LEN: usize = 0;
 /// # Panics
 ///
 /// This function will panic if the input files cannot be read, or if the output file cannot be written.
-
-#[no_mangle]
-pub extern "C" fn uamutate(
-    fname1_ptr: *const u8,
-    fname1_len: usize,
-    fname2_ptr: *const u8,
-    fname2_len: usize,
-    varname_ptr: *const u8,
-    varname_len: usize,
-    varextra_ptr: *const u8, // comma-delimited values
-    varextra_len: usize,
+pub fn uamutate(
+    reader1: BufReader<File>,
+    reader2: BufReader<File>,
+    varnames: &Vec<String>,
     nentries: usize,
-) -> *const f64 {
-    let fname1 = unsafe { std::str::from_utf8(std::slice::from_raw_parts(fname1_ptr, fname1_len)).unwrap() };
-    let fname2 = unsafe { std::str::from_utf8(std::slice::from_raw_parts(fname2_ptr, fname2_len)).unwrap() };
-    let varname = unsafe { std::str::from_utf8(std::slice::from_raw_parts(varname_ptr, varname_len)).unwrap() };
-    let varextra = unsafe { std::str::from_utf8(std::slice::from_raw_parts(varextra_ptr, varextra_len)).unwrap() };
-    let varextra: Vec<String> = if varextra.is_empty() {
-        Vec::new()
-    } else {
-        varextra.split(',').map(|s| s.to_string()).collect()
-    };
-
-    let varsall: Vec<String> = vec![varname.to_string()];
-    let num_varextra = varextra.len();
-    let varsall = [varsall, varextra].concat();
-    let (mut values1, groups1) = read_write_file::readfile(fname1, &varsall, nentries);
-    let (values2, _groups2) = read_write_file::readfile(fname2, &varsall, nentries);
-
-    // Then adjust `values1` by removing its dependence on varextra, and replacing with the
-    // dependnece of values2 on same variables (but only if `varextra` are specified):
-    if num_varextra > 0 {
+) -> Vec<f64> {
+    // Read contents of files:
+    let (mut values1, groups1) = read_write_file::readfile(reader1, varnames, nentries);
+    let (values2, _groups2) = read_write_file::readfile(reader2, varnames, nentries);
+    // Adjust `values1` by removing its dependence on varextra, and replacing with the dependnece
+    // of values2 on same variables (but only if `varextra` are specified):
+    if values1.nrows() > 1 {
         mlr::adj_for_beta(&mut values1, &values2);
     }
 
@@ -73,25 +54,7 @@ pub extern "C" fn uamutate(
     // then the distances by which `values1` need to be moved in the first dimension only to match
     // the closest equivalent values of `values21`.
     let dists = calculate_dists::calculate_dists(&values1, &values2, false);
-    let result = aggregate_to_groups(&dists, &groups1);
-
-    // Convert to FFI-stable .js form. Can be accessed in js like this:
-    // const wasmModule = ... // Load your wasm module
-    // const ptr = wasmModule.uamutate(...);
-    // const len = wasmModule.get_result_len();
-    // const result = new Float64Array(wasmModule.memory.buffer, ptr, len);
-    let ptr = result.as_ptr();
-    unsafe {
-        RESULT_LEN = result.len();
-    }
-    std::mem::forget(result);
-    ptr
-}
-
-
-#[no_mangle]
-pub extern "C" fn get_result_len() -> usize {
-    unsafe { RESULT_LEN }
+    aggregate_to_groups(&dists, &groups1)
 }
 
 /// Aggregate distances within the groups defined in the original `groups` vector.
@@ -137,11 +100,21 @@ mod tests {
         let filename1 = "./test_resources/dat1.json";
         let filename2 = "./test_resources/dat2.json";
         let varname = "bike_index";
-        let varextra: Vec<String> = Vec::new();
+        // let varextra: Vec<String> = Vec::new();
+        let varextra = vec!["natural".to_string(), "social_index".to_string()];
         let nentries = 10;
 
-        // Call the function with the test parameters
-        let sums = uamutate(filename1, filename2, varname, varextra, nentries);
+        let varsall: Vec<String> = vec![varname.to_string()];
+        let varsall = [varsall, varextra].concat();
+        // let (mut values1, groups1) = read_write_file::readfile(filename1, &varsall, nentries);
+        // let (values2, _groups2) = read_write_file::readfile(filename2, &varsall, nentries);
+
+        // let sums = uamutate(&mut values1, groups1, &values2);
+        let file1 = File::open(filename1).unwrap();
+        let reader1 = BufReader::new(file1);
+        let file2 = File::open(filename2).unwrap();
+        let reader2 = BufReader::new(file2);
+        let sums = uamutate(reader1, reader2, &varsall, nentries);
 
         assert!(!sums.is_empty());
     }
