@@ -41,8 +41,8 @@ const COLS_TO_STD: [&str; 1] = ["social_index"];
 /// ```
 
 pub fn readfile(
-    json_data: Value,
-    varnames: &Vec<String>,
+    json_data: &str,
+    varnames: &Vec<&str>,
     nentries: usize,
 ) -> (DMatrix<f64>, Vec<usize>) {
     assert!(nentries > 0, "nentries must be greater than zero");
@@ -55,18 +55,18 @@ pub fn readfile(
     let mut current_positions = vec![0; varnames.len()];
 
     let mut std_index: Vec<usize> = vec![];
-    if let Value::Array(array) = &json_data {
+    let parsed_json: Value = serde_json::from_str(json_data).unwrap();
+    if let Value::Array(array) = parsed_json {
         for item in array {
             if let Value::Object(map) = item {
                 for (i, var) in varnames.iter().enumerate() {
-                    if let Some(Value::Number(number)) = map.get(var.as_str()) {
+                    if let Some(Value::Number(number)) = map.get(*var) {
                         var_exists[i] = true;
-                        if current_positions[i] == 0 && COLS_TO_STD.contains(&var.as_str()) {
+                        if current_positions[i] == 0 && COLS_TO_STD.contains(var) {
                             std_index.push(i);
                         }
                         if let Some(number) = number.as_f64() {
                             if current_positions[i] < nentries {
-                                // values[[i, current_positions[i]]] = number;
                                 values[(current_positions[i], i)] = number;
                                 current_positions[i] += 1;
                             }
@@ -104,6 +104,7 @@ pub fn readfile(
 
     (values, city_group)
 }
+
 
 /// Standarise one column of an array to z-scores. Column in standardised in-place.
 ///
