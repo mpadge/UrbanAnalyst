@@ -19,7 +19,7 @@
     "react-dom": "^18",
     "react-map-gl": "^7.1.6",
     "react-select": "^5.7.7",
-    "wasm": "file:wasm/pkg"
+    "wasm": "file:pkg"
   },
   "devDependencies": {
     "@types/d3": "^7.4.2",
