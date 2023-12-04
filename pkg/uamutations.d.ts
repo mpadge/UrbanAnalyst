@@ -26,24 +26,23 @@
 * # Panics
 *
 * This function will panic if the input files cannot be read, or if the output file cannot be written.
-* @param {any} data1
-* @param {any} data2
-* @param {number} varname_ptr
-* @param {number} varname_len
+* @param {string} json_data1
+* @param {string} json_data2
+* @param {string} varname
 * @param {number} nentries
-* @returns {number}
+* @returns {string}
 */
-export function uamutate(data1: any, data2: any, varname_ptr: number, varname_len: number, nentries: number): number;
+export function uamutate(json_data1: string, json_data2: string, varname: string, nentries: number): string;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly uamutate: (a: number, b: number, c: number, d: number, e: number) => void;
+  readonly uamutate: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number) => void;
+  readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_malloc: (a: number, b: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
-  readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
-  readonly __wbindgen_exn_store: (a: number) => void;
+  readonly __wbindgen_free: (a: number, b: number, c: number) => void;
 }
 
 export type SyncInitInput = BufferSource | WebAssembly.Module;

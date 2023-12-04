@@ -2,16 +2,11 @@
 //! Analyst](https://urbananalyst.city). The algorithm mutates selected properties for one city to
 //! become more like those of another selected city.
 
-use serde_json::Value;
-use serde_wasm_bindgen::from_value;
 use wasm_bindgen::prelude::*;
-use wasm_bindgen::JsValue;
 
 pub mod calculate_dists;
 pub mod mlr;
 pub mod read_write_file;
-
-static mut RESULT_LEN: usize = 0;
 
 /// This is the main function, which reads data from two JSON files, calculates absolute and
 /// relative differences between the two sets of data, and writes the results to an output file.
@@ -41,23 +36,14 @@ static mut RESULT_LEN: usize = 0;
 
 #[wasm_bindgen]
 pub fn uamutate(
-    data1: JsValue,
-    data2: JsValue,
-    varname_ptr: *const u8,
-    varname_len: usize,
+    json_data1: &str,
+    json_data2: &str,
+    varname: &str,
     nentries: usize,
-) -> Result<*const f64, JsValue> {
-    let varnames = unsafe { std::str::from_utf8(std::slice::from_raw_parts(varname_ptr, varname_len)).unwrap() };
-    let varnames: Vec<String> = if varnames.is_empty() {
-        Vec::new()
-    } else {
-        varnames.split(',').map(|s| s.to_string()).collect()
-    };
+) -> String {
+    let varnames: Vec<&str> = varname.split(',').collect();
 
-    let json_data1: Value = from_value(data1).map_err(|e| JsValue::from_str(&format!("Error parsing data: {:?}", e)))?;
-    let json_data2: Value = from_value(data2).map_err(|e| JsValue::from_str(&format!("Error parsing data: {:?}", e)))?;
-
-    // Read contents of files:
+    // Read contents of JSON data:
     let (mut values1, groups1) = read_write_file::readfile(json_data1, &varnames, nentries);
     let (values2, _groups2) = read_write_file::readfile(json_data2, &varnames, nentries);
     // Adjust `values1` by removing its dependence on varextra, and replacing with the dependnece
@@ -73,18 +59,7 @@ pub fn uamutate(
     let dists = calculate_dists::calculate_dists(&values1, &values2, false);
     let result = aggregate_to_groups(&dists, &groups1);
 
-    // Convert to FFI-stable .js form. Can be accessed in js like this:
-    // const wasmModule = ... // Load your wasm module
-    // const ptr = wasmModule.uamutate(...);
-    // const len = wasmModule.get_result_len();
-    // const result = new Float64Array(wasmModule.memory.buffer, ptr, len);
-    let ptr = result.as_ptr();
-    unsafe {
-        RESULT_LEN = result.len();
-    }
-    std::mem::forget(result);
-
-    Ok(ptr)
+    serde_json::to_string(&result).unwrap()
 }
 
 /// Aggregate distances within the groups defined in the original `groups` vector.
