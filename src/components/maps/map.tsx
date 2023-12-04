@@ -71,13 +71,6 @@ export default function UTAMap (props: MapProps) {
 
     const mapPath: string = props.numLayers == "Paired" && dual_layers ? mapPath2 : mapPath1;
 
-    // dummy extra vars for mutation algorithm #49:
-    const mapPath_source = "/data/berlin/dataraw.json";
-    const mapPath_target = "/data/paris/dataraw.json";
-    const extra_var = "social_index";
-    const varsall = ["bike_index", extra_var].join(" ");
-    const nentries = 1000;
-
     const layers = [
         new GeoJsonLayer({
             id: 'polygon-layer',
