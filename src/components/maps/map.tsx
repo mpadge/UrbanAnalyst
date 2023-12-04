@@ -12,10 +12,6 @@ import Control from '@/components/maps/control'
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
 
-import type { InitOutput } from '@/../pkg/uamutations.d.ts';
-import { initSync } from '@/../pkg/uamutations.js';
-import { uamutate } from '@/../pkg/uamutations_bg.wasm';
-
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 
 // const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-nolabels-gl-style/style.json';
@@ -81,31 +77,6 @@ export default function UTAMap (props: MapProps) {
     const extra_var = "social_index";
     const varsall = ["bike_index", extra_var].join(" ");
     const nentries = 1000;
-
-    let wasmModule: InitOutput;
-
-    fetch('../../../pkg/uamutations_bg.wasm')
-      .then(response => response.arrayBuffer())
-      .then(bytes => {
-        const wasmBinary = new Uint8Array(bytes);
-        wasmModule = initSync(wasmBinary);
-
-        const textEncoder = new TextEncoder();
-        const encodedString1 = textEncoder.encode(varsall);
-        const ptr1: number = (wasmModule as any).__wbindgen_malloc(encodedString1.length);
-        const memory1 = new Uint8Array(wasmModule.memory.buffer);
-        memory1.set(encodedString1, ptr1);
-
-        return Promise.all([
-          fetch(mapPath).then(response => response.json()),
-          fetch(mapPath_target).then(response => response.json()),
-          Promise.resolve({ ptr1, encodedString1 })
-        ]);
-      })
-      .then(([data1, data2, { ptr1, encodedString1 }]) => {
-        const result = wasmModule.uamutate(data1, data2, ptr1, encodedString1.length, nentries);
-      })
-      .catch(error => console.error('Error:', error));
 
     const layers = [
         new GeoJsonLayer({
