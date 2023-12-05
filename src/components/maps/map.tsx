@@ -82,7 +82,7 @@ const CalcMutation = dynamic({
                 .catch(error => {
                     console.error('Error fetching wasm module:', error);
                     });
-                }, [data1, data2, varnames, nentries, handleResultChange]);
+                }, [data1, data2, varnames, nentries, bindgenResult, handleResultChange]);
 
             return <div></div>
         }
