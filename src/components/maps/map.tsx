@@ -6,7 +6,9 @@ import { FlyToInterpolator } from "@deck.gl/core/typed";
 import { Map } from "react-map-gl";
 import * as d3 from 'd3';
 import 'd3-scale-chromatic';
+import dynamic from 'next/dynamic'
 
+import * as wasm_js from '@/../pkg/uamutations.js';
 import Control from '@/components/maps/control'
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
@@ -22,14 +24,73 @@ interface MapProps {
     layer2: string,
     numLayers: string,
     alpha: number,
-    viewState: ViewState,
     citiesArray: CityDataProps[],
+    viewState: ViewState,
+    mutate: boolean,
+    mutateTargetCity: string | null,
     handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void
     handleLayer2Change: (layer2: string) => void
+    handleMutateChange: (mutate: boolean) => void
+    handleMutateTargetCityChange: (mutateTargetCity: string) => void
 }
 
+interface MutateProps {
+    filename1: string
+    filename2: string
+    varnames: string[]
+    nentries: number
+    bindgenResult: Object | null
+    handleResultChange: (Object: any) => void
+}
+
+const CalcMutation = dynamic({
+    loader: async () => {
+        const Component = ({ filename1, filename2, varnames, nentries, bindgenResult, handleResultChange }: MutateProps) => {
+            const [data1, setData1] = useState(null);
+            const [data2, setData2] = useState(null);
+
+            useEffect(() => {
+                const loadData = async () => {
+                    const response1 = await fetch(filename1);
+                    const json1 = await response1.json();
+                    setData1(json1);
+
+                    const response2 = await fetch(filename2);
+                    const json2 = await response2.json();
+                    setData2(json2);
+                };
+
+                loadData();
+                }, [filename1, filename2]);
+
+            useEffect(() => {
+                fetch('@/../pkg/uamutations_bg.wasm')
+                .then(response => {
+                    return response.arrayBuffer();
+                    })
+                .then(bytes => {
+                    if (data1 && data2) {
+                        const wasm_binary = wasm_js.initSync(bytes);
+                        const varname = varnames.join(",");
+                        const resultJson = wasm_js.uamutate(JSON.stringify(data1), JSON.stringify(data2), varname, nentries);
+                        const resultObj = JSON.parse(resultJson);
+                        handleResultChange(resultObj);
+                    }
+                    })
+                .catch(error => {
+                    console.error('Error fetching wasm module:', error);
+                    });
+                }, [data1, data2, varnames, nentries, handleResultChange]);
+
+            return <div></div>
+        }
+
+        return Component
+    },
+    ssr: false
+});
 
 export default function UTAMap (props: MapProps) {
 
@@ -71,7 +132,6 @@ export default function UTAMap (props: MapProps) {
     const mapPath: string = props.numLayers == "Paired" && dual_layers ? mapPath2 : mapPath1;
 
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null);
-
     useEffect(() => {
         fetch(mapPath)
             .then(response => response.json())
@@ -80,6 +140,14 @@ export default function UTAMap (props: MapProps) {
                     })
             .catch((error) => console.error('Error:', error));
         }, [mapPath]);
+
+    const [mutationResult, setMutationResult] = useState<any>(null);
+    useEffect(() => {
+        if (mutationResult) {
+            setGeoJSONcontent(mutationResult);
+        }
+    }, [mutationResult]);
+
 
     const layers = [
         new GeoJsonLayer({
