@@ -41,13 +41,14 @@ interface MutateProps {
     filename2: string
     varnames: string[]
     nentries: number
-    bindgenResult: Object | null
+    geoJSONcontent: any
+    setGeoJSONcontent: (Object: any) => void
     handleResultChange: (Object: any) => void
 }
 
 const CalcMutation = dynamic({
     loader: async () => {
-        const Component = ({ filename1, filename2, varnames, nentries, bindgenResult, handleResultChange }: MutateProps) => {
+        const Component = ({ filename1, filename2, varnames, nentries, geoJSONcontent, setGeoJSONcontent, handleResultChange }: MutateProps) => {
             const [data1, setData1] = useState(null);
             const [data2, setData2] = useState(null);
 
@@ -77,12 +78,20 @@ const CalcMutation = dynamic({
                         const resultJson = wasm_js.uamutate(JSON.stringify(data1), JSON.stringify(data2), varname, nentries);
                         const resultObj = JSON.parse(resultJson);
                         handleResultChange(resultObj);
+                        if (geoJSONcontent && geoJSONcontent.feature) {
+                            geoJSONcontent.feature.forEach((feature: any, index: any) => {
+                                if (feature.properties.name === varnames[0]) {
+                                    feature.properties[varnames[index]] = resultObj[index];
+                                }
+                            });
+                        }
+                        setGeoJSONcontent(geoJSONcontent);
                     }
                     })
                 .catch(error => {
                     console.error('Error fetching wasm module:', error);
                     });
-                }, [data1, data2, varnames, nentries, bindgenResult, handleResultChange]);
+                }, [data1, data2, varnames, nentries, geoJSONcontent, setGeoJSONcontent, handleResultChange]);
 
             return <div></div>
         }
@@ -131,7 +140,7 @@ export default function UTAMap (props: MapProps) {
 
     const mapPath: string = props.numLayers == "Paired" && dual_layers ? mapPath2 : mapPath1;
 
-    const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null);
+    const [geoJSONcontent, setGeoJSONcontent] = useState<any | null>(null);
     useEffect(() => {
         fetch(mapPath)
             .then(response => response.json())
