@@ -1,8 +1,8 @@
 "use client"
 
 import Head from 'next/head'
-import {NextPage} from "next";
-import {useState} from "react";
+import { NextPage } from "next";
+import { useState } from "react";
 import Control from '@/components/stats/control';
 import Buttons from '@/components/buttons2';
 import BarChart from '@/components/stats/stats';
