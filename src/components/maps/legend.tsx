@@ -1,5 +1,5 @@
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import * as d3 from 'd3';
 import Link from 'next/link'
 import styles from '@/styles/legend.module.css';
