@@ -63,6 +63,16 @@ export default function Home() {
         setNumLayers(numLayers);
     }
 
+    // Mutation variables
+    const [mutate, setMutate] = useState(false);
+    const handleMutateChange = (mutate: boolean) => {
+        setMutate(mutate);
+    }
+    const [mutateTargetCity, setMutateTargetCity] = useState<string | null>(null);
+    const handleMutateTargetCityChange = (mutateTargetCity: string) => {
+        setMutateTargetCity(mutateTargetCity);
+    }
+
     const heading: string = HeadingText(layer, layer2, numLayers, CITY_DATA.citiesArray);
 
     return (
@@ -88,10 +98,14 @@ export default function Home() {
             alpha = {alpha}
             citiesArray = {CITY_DATA.citiesArray}
             viewState = {viewState}
+            mutate = {mutate}
+            mutateTargetCity = {mutateTargetCity}
             handleAlphaChange = {handleAlphaChange}
             handleViewStateChange = {handleViewStateChange}
             handleLayerChange = {handleLayerChange}
             handleLayer2Change = {handleLayer2Change}
+            handleMutateChange = {handleMutateChange}
+            handleMutateTargetCityChange = {handleMutateTargetCityChange}
         />
         <Control
             idx = {idx}
