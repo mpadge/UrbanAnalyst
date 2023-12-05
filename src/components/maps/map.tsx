@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { useState, Suspense } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
 import { DeckGL } from "@deck.gl/react/typed";
 import { FlyToInterpolator } from "@deck.gl/core/typed";
@@ -70,10 +70,21 @@ export default function UTAMap (props: MapProps) {
 
     const mapPath: string = props.numLayers == "Paired" && dual_layers ? mapPath2 : mapPath1;
 
+    const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null);
+
+    useEffect(() => {
+        fetch(mapPath)
+            .then(response => response.json())
+            .then(data => {
+                    setGeoJSONcontent(data);
+                    })
+            .catch((error) => console.error('Error:', error));
+        }, [mapPath]);
+
     const layers = [
         new GeoJsonLayer({
             id: 'polygon-layer',
-            data: mapPath,
+            data: geoJSONcontent,
             filled: true,
             stroked: true,
             getLineWidth: 10,
