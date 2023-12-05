@@ -3,10 +3,10 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from "react";
-import {GeoJsonLayer} from "@deck.gl/layers/typed";
-import {DeckGL} from "@deck.gl/react/typed";
-import {FlyToInterpolator} from "@deck.gl/core/typed";
-import {Map} from "react-map-gl";
+import { GeoJsonLayer } from "@deck.gl/layers/typed";
+import { DeckGL } from "@deck.gl/react/typed";
+import { FlyToInterpolator } from "@deck.gl/core/typed";
+import { Map } from "react-map-gl";
 import Control from '@/components/maps/control';
 import Legend from '@/components/maps/legend';
 import UTAMap from '@/components/maps/map';
