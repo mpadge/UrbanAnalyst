@@ -1,5 +1,5 @@
 
-import {useState} from 'react';
+import { useState } from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from '@/styles/controls.module.css';
