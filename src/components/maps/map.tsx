@@ -1,10 +1,9 @@
-
-import {NextPage} from "next";
-import {useState, Suspense} from "react";
-import {GeoJsonLayer} from "@deck.gl/layers/typed";
-import {DeckGL} from "@deck.gl/react/typed";
-import {FlyToInterpolator} from "@deck.gl/core/typed";
-import {Map} from "react-map-gl";
+import { NextPage } from "next";
+import { useState, Suspense } from "react";
+import { GeoJsonLayer } from "@deck.gl/layers/typed";
+import { DeckGL } from "@deck.gl/react/typed";
+import { FlyToInterpolator } from "@deck.gl/core/typed";
+import { Map } from "react-map-gl";
 import * as d3 from 'd3';
 import 'd3-scale-chromatic';
 
@@ -106,6 +105,7 @@ export default function UTAMap (props: MapProps) {
         <>
         {(
         <Suspense fallback={<p>Loading map ...</p>}>
+
         <DeckGL
             width={"100vw"}
             height={"100vh"}
