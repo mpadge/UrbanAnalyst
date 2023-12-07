@@ -38,7 +38,7 @@ interface MapProps {
 }
 
 const Mutate = dynamic(() => import('@/components/maps/map-mutate'), {
-    srr: false
+    ssr: false
 });
 
 export default function UTAMap (props: MapProps) {
