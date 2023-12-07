@@ -77,7 +77,7 @@ const MapMutateComponent = (props: MutateProps) => {
                 //     setGeoJSONcontent(geoJSONcontent);
                 }
             } catch (err) {
-                console.error(`Unexpected error in loadWasm. [Message: ${err.message}]`);
+                console.error(`Unexpected error in loadWasm. [Message: ${(err as Error).message}]`);
             }
         };
         loadWasm();
