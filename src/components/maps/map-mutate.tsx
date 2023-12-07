@@ -20,6 +20,7 @@ interface MutateProps {
 const MapMutateComponent = (props: MutateProps) => {
     const [data1, setData1] = useState(null);
     const [data2, setData2] = useState(null);
+    const [wasmModule, setWasmModule] = useState(null);
 
     useEffect(() => {
         const loadData = async () => {
@@ -41,11 +42,28 @@ const MapMutateComponent = (props: MutateProps) => {
                 const response = await fetch('@/../pkg/uamutations_bg.wasm');
                 const wasmModule = await WebAssembly.instantiateStreaming(response);
                 setWasmModule(wasmModule);
-                // if (data1 && data2) {
+                console.log("--------WASM MODULE LOADED--------");
+                if (wasmModule && data1 && data2) {
+                    const varname = props.varnames.join(",");
+                    console.log("--------VARNAME: " + varname);
+                    console.log("--------NENTRIES: " + props.nentries);
+                    let data1js = JSON.stringify(data1);
+                    let data2js = JSON.stringify(data2);
+
+                    const result1 = wasmModule.instance.exports.testtest1(props.nentries);
+                    console.log("--------RESULT1--------");
+                    console.log(result1);
+                    const result2 = wasmModule.instance.exports.testtest2(props.nentries, varname, data1js, data2js);
+                    console.log("--------RESULT2--------");
+                    console.log(result2);
+
+                    //const resultJson = wasmModule.instance.exports.uamutate(data1js, data2js, varname, props.nentries);
+                    // const resultObj = JSON.parse(resultJson);
+                    // console.log(resultObj);
                 //     const wasm_binary = wasm_js.initSync(bytes);
-                //     const varname = props.varnames.join(",");
-                //     const resultJson = wasm_js.uamutate(JSON.stringify(data1), JSON.stringify(data2), props.varname, props.nentries);
-                //     const resultObj = JSON.parse(resultJson);
+                    // const resultJson = wasm_js.uamutate(JSON.stringify(data1), JSON.stringify(data2), props.varname, props.nentries);
+                    // const resultObj = JSON.parse(resultJson);
+                    // console.log(resultObj);
                 //     handleResultChange(resultObj);
                 //     if (geoJSONcontent && geoJSONcontent.feature) {
                 //         geoJSONcontent.feature.forEach((feature: any, index: any) => {
@@ -55,7 +73,7 @@ const MapMutateComponent = (props: MutateProps) => {
                 //         });
                 //     }
                 //     setGeoJSONcontent(geoJSONcontent);
-                // }
+                }
             } catch (err) {
                 console.error(`Unexpected error in loadWasm. [Message: ${err.message}]`);
             }
