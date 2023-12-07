@@ -129,6 +129,11 @@ export default function UTAMap (props: MapProps) {
             })
         ]
 
+    const filename1="/data/berlin/dataraw.json";
+    const filename2="/data/paris/dataraw.json";
+    const varnames = ["bike_index"];
+    const nentries = 1000;
+
     return (
         <>
         {(
@@ -148,6 +153,17 @@ export default function UTAMap (props: MapProps) {
         </DeckGL>
         </Suspense>
         )}
+        <Mutate
+            filename1={filename1}
+            filename2={filename2}
+            varnames={varnames}
+            nentries={nentries}
+            alpha={props.alpha}
+            this_layer={props.this_layer}
+            geoJSONcontent={geoJSONcontent}
+            setGeoJSONcontent={setGeoJSONcontent}
+            handleResultChange={setMutationResult}
+        />
         </>
         )
 };

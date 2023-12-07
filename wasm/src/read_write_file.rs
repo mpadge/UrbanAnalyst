@@ -40,6 +40,27 @@ const COLS_TO_STD: [&str; 1] = ["social_index"];
 /// let (values, groups) = readfile(reader, &varnames, nentries);
 /// ```
 
+pub fn readfile2(
+    json_data: &str,
+    varnames: &Vec<&str>,
+    nentries: usize,
+) -> (DMatrix<f64>, Vec<usize>) {
+    assert!(nentries > 0, "nentries must be greater than zero");
+
+    let mut values = DMatrix::<f64>::zeros(nentries, varnames.len());
+    let city_group = Vec::new();
+    let city_group_col = "index";
+
+    let mut var_exists = vec![false; varnames.len()];
+    let mut current_positions = vec![0; varnames.len()];
+
+    let mut std_index: Vec<usize> = vec![];
+    // let parsed_json: Value = serde_json::from_str(json_data).unwrap();
+
+    (values, city_group)
+}
+
+
 pub fn readfile(
     json_data: &str,
     varnames: &Vec<&str>,

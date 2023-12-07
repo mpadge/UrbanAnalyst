@@ -35,6 +35,29 @@ pub mod read_write_file;
 /// This function will panic if the input files cannot be read, or if the output file cannot be written.
 
 #[wasm_bindgen]
+pub fn testtest1(
+    nentries: usize,
+) -> usize {
+    nentries + 1234
+}
+
+#[wasm_bindgen]
+pub fn testtest2(
+    nentries: usize,
+    varname: &str,
+    json_data1: &str,
+    json_data2: &str,
+) -> usize {
+    let varnames: Vec<&str> = varname.split(',').collect();
+
+    // Read contents of JSON data:
+    let (mut values1, groups1) = read_write_file::readfile2(json_data1, &varnames, nentries);
+    // let (mut values1, groups1) = read_write_file::readfile(json_data1, &varnames, nentries);
+
+    1000 + nentries
+}
+
+#[wasm_bindgen]
 pub fn uamutate(
     json_data1: &str,
     json_data2: &str,
