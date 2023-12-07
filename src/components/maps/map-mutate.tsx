@@ -45,16 +45,17 @@ const MapMutateComponent = (props: MutateProps) => {
                 setWasmModule(wasmModule);
                 console.log("--------WASM MODULE LOADED--------");
                 if (wasmModule && data1 && data2) {
+                    const wasmExports = wasmModule.instance.exports as typeof wasm_js;
                     const varname = props.varnames.join(",");
                     console.log("--------VARNAME: " + varname);
                     console.log("--------NENTRIES: " + props.nentries);
                     let data1js = JSON.stringify(data1);
                     let data2js = JSON.stringify(data2);
 
-                    const result1 = wasmModule.instance.exports.testtest1(props.nentries);
+                    const result1 = wasmExports.testtest1(props.nentries);
                     console.log("--------RESULT1--------");
                     console.log(result1);
-                    const result2 = wasmModule.instance.exports.testtest2(props.nentries, varname, data1js, data2js);
+                    const result2 = wasmExports.testtest2(props.nentries, varname, data1js, data2js);
                     console.log("--------RESULT2--------");
                     console.log(result2);
 
