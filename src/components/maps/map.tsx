@@ -9,6 +9,7 @@ import 'd3-scale-chromatic';
 import dynamic from 'next/dynamic'
 
 import * as wasm_js from '@/../pkg/uamutations.js';
+import MapMutateComponent from '@/components/maps/map-mutate'
 import Control from '@/components/maps/control'
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
@@ -36,69 +37,8 @@ interface MapProps {
     handleMutateTargetCityChange: (mutateTargetCity: string) => void
 }
 
-interface MutateProps {
-    filename1: string
-    filename2: string
-    varnames: string[]
-    nentries: number
-    geoJSONcontent: any
-    setGeoJSONcontent: (Object: any) => void
-    handleResultChange: (Object: any) => void
-}
-
-const CalcMutation = dynamic({
-    loader: async () => {
-        const Component = ({ filename1, filename2, varnames, nentries, geoJSONcontent, setGeoJSONcontent, handleResultChange }: MutateProps) => {
-            const [data1, setData1] = useState(null);
-            const [data2, setData2] = useState(null);
-
-            useEffect(() => {
-                const loadData = async () => {
-                    const response1 = await fetch(filename1);
-                    const json1 = await response1.json();
-                    setData1(json1);
-
-                    const response2 = await fetch(filename2);
-                    const json2 = await response2.json();
-                    setData2(json2);
-                };
-
-                loadData();
-                }, [filename1, filename2]);
-
-            useEffect(() => {
-                fetch('@/../pkg/uamutations_bg.wasm')
-                .then(response => {
-                    return response.arrayBuffer();
-                    })
-                .then(bytes => {
-                    if (data1 && data2) {
-                        const wasm_binary = wasm_js.initSync(bytes);
-                        const varname = varnames.join(",");
-                        const resultJson = wasm_js.uamutate(JSON.stringify(data1), JSON.stringify(data2), varname, nentries);
-                        const resultObj = JSON.parse(resultJson);
-                        handleResultChange(resultObj);
-                        if (geoJSONcontent && geoJSONcontent.feature) {
-                            geoJSONcontent.feature.forEach((feature: any, index: any) => {
-                                if (feature.properties.name === varnames[0]) {
-                                    feature.properties[varnames[index]] = resultObj[index];
-                                }
-                            });
-                        }
-                        setGeoJSONcontent(geoJSONcontent);
-                    }
-                    })
-                .catch(error => {
-                    console.error('Error fetching wasm module:', error);
-                    });
-                }, [data1, data2, varnames, nentries, geoJSONcontent, setGeoJSONcontent, handleResultChange]);
-
-            return <div></div>
-        }
-
-        return Component
-    },
-    ssr: false
+const Mutate = dynamic(() => import('@/components/maps/map-mutate'), {
+    srr: false
 });
 
 export default function UTAMap (props: MapProps) {
@@ -193,15 +133,12 @@ export default function UTAMap (props: MapProps) {
         <>
         {(
         <Suspense fallback={<p>Loading map ...</p>}>
-
         <DeckGL
             width={"100vw"}
             height={"100vh"}
             controller={true}
             layers={layers}
             initialViewState={props.viewState}
-            // onViewStateChange={(viewState) => setViewState(viewState)}
-            // onViewStateChange={props.handleViewStateChange}
         >
         <Map
             mapStyle={MAP_STYLE}
