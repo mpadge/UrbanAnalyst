@@ -21,7 +21,7 @@ interface MutateProps {
 const MapMutateComponent = (props: MutateProps) => {
     const [data1, setData1] = useState(null);
     const [data2, setData2] = useState(null);
-    const [wasmModule, setWasmModule] = useState(null);
+    const [wasmModule, setWasmModule] = useState<WebAssembly.WebAssemblyInstantiatedSource | null>(null);
 
     useEffect(() => {
         const loadData = async () => {
