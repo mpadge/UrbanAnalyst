@@ -160,6 +160,8 @@ export default function UTAMap (props: MapProps) {
             nentries={nentries}
             alpha={props.alpha}
             this_layer={props.this_layer}
+            layer_min={layer_min}
+            layer_max={layer_max}
             geoJSONcontent={geoJSONcontent}
             setGeoJSONcontent={setGeoJSONcontent}
             handleResultChange={setMutationResult}

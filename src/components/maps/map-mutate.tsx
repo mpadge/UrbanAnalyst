@@ -3,18 +3,21 @@ import { useEffect, useState, Suspense } from "react";
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
 import { DeckGL } from "@deck.gl/react/typed";
 import { Map } from "react-map-gl";
+import * as d3 from 'd3';
 
 import * as wasm_js from '@/../pkg/uamutations.js';
 
 interface MutateProps {
-    filename1: string
-    filename2: string
-    varnames: string[]
-    nentries: number
-    alpha: number
-    this_layer: string
-    geoJSONcontent: any
-    setGeoJSONcontent: (Object: any) => void
+    filename1: string,
+    filename2: string,
+    varnames: string[],
+    nentries: number,
+    alpha: number,
+    this_layer: string,
+    layer_min: number,
+    layer_max: number,
+    geoJSONcontent: any,
+    setGeoJSONcontent: (Object: any) => void,
     handleResultChange: (Object: any) => void
 }
 
@@ -83,6 +86,9 @@ const MapMutateComponent = (props: MutateProps) => {
         loadWasm();
     }, [data1, data2, props.varnames, props.nentries, props.geoJSONcontent, props.setGeoJSONcontent, props.handleResultChange]);
 
+    var Color = d3.scaleSequential().domain([ props.layer_min, props.layer_max ])
+        .interpolator(d3.interpolateViridis);
+
     const layers = [
         new GeoJsonLayer({
             id: 'polygon-layer',
@@ -92,12 +98,12 @@ const MapMutateComponent = (props: MutateProps) => {
             getLineWidth: 10,
             getLineColor: [122, 122, 122],
             getFillColor: d => {
-                var layerval = Math.max (layer_min, Math.min (layer_max, d.properties?.[props.this_layer]));
+                var layerval = Math.max (props.layer_min, Math.min (props.layer_max, d.properties?.[props.this_layer]));
                 if (isNaN(layerval)) {
-                    layerval = layer_min;
+                    layerval = props.layer_min;
                 }
                 // Invert the palette:
-                layerval = layer_min + (layer_max - layerval);
+                layerval = props.layer_min + (props.layer_max - layerval);
                 const layerarr: any = d3.color(Color(layerval));
                 var red = 0, green = 0, blue = 0;
                 if (layerarr) {
