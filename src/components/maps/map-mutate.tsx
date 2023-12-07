@@ -6,6 +6,9 @@ import { Map } from "react-map-gl";
 import * as d3 from 'd3';
 
 import * as wasm_js from '@/../pkg/uamutations.js';
+import { ViewState } from "@/data/interfaces";
+
+const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 
 interface MutateProps {
     filename1: string,
@@ -18,7 +21,9 @@ interface MutateProps {
     layer_max: number,
     geoJSONcontent: any,
     setGeoJSONcontent: (Object: any) => void,
-    handleResultChange: (Object: any) => void
+    handleResultChange: (Object: any) => void,
+    viewState: ViewState
+    MAP_STYLE: string
 }
 
 const MapMutateComponent = (props: MutateProps) => {
@@ -132,7 +137,7 @@ const MapMutateComponent = (props: MutateProps) => {
             >
             <Map
                 mapStyle={props.MAP_STYLE}
-                mapboxAccessToken={props.MapboxAccessToken}
+                mapboxAccessToken={MapboxAccessToken}
             >
             </Map>
             </DeckGL>

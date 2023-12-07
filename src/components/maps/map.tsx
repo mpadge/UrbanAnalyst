@@ -165,6 +165,8 @@ export default function UTAMap (props: MapProps) {
             geoJSONcontent={geoJSONcontent}
             setGeoJSONcontent={setGeoJSONcontent}
             handleResultChange={setMutationResult}
+            viewState={props.viewState}
+            MAP_STYLE={MAP_STYLE}
         />
         </>
         )
