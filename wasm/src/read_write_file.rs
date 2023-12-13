@@ -48,14 +48,61 @@ pub fn readfile2(
     assert!(nentries > 0, "nentries must be greater than zero");
 
     let mut values = DMatrix::<f64>::zeros(nentries, varnames.len());
-    let city_group = Vec::new();
+    let mut city_group = Vec::new();
     let city_group_col = "index";
 
     let mut var_exists = vec![false; varnames.len()];
     let mut current_positions = vec![0; varnames.len()];
 
     let mut std_index: Vec<usize> = vec![];
-    // let parsed_json: Value = serde_json::from_str(json_data).unwrap();
+    match serde_json::from_str::<Vec<Value>>(json_data) {
+        Ok(rows) => {
+
+            for row in rows {
+                if let Value::Object(obj) = row {
+                    for (i, var) in varnames.iter().enumerate() {
+                        if let Some(Value::Number(number)) = obj.get(*var) {
+                            var_exists[i] = true;
+                            if current_positions[i] == 0 && COLS_TO_STD.contains(var) {
+                                std_index.push(i);
+                            }
+                            if let Some(number) = number.as_f64() {
+                                if current_positions[i] < nentries {
+                                    values[(current_positions[i], i)] = number;
+                                    current_positions[i] += 1;
+                                }
+                            }
+                        }
+                    }
+                    if let Some(Value::Number(number)) = obj.get(city_group_col) {
+                        if let Some(number) = number.as_f64() {
+                            if city_group.len() < nentries {
+                                city_group.push(number as usize);
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        Err(_e) => {
+            let _ = Vec::<f64>::new();
+        }
+    }
+
+    if !std_index.is_empty() {
+        for i in &std_index {
+            standardise_array(&mut values, *i);
+        }
+    }
+
+    for (i, exists) in var_exists.iter().enumerate() {
+        assert!(
+            *exists,
+            "Variable {} does not exist in the JSON file",
+            varnames[i]
+        );
+    }
 
     (values, city_group)
 }
