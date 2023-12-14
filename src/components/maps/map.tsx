@@ -6,10 +6,7 @@ import { FlyToInterpolator } from "@deck.gl/core/typed";
 import { Map } from "react-map-gl";
 import * as d3 from 'd3';
 import 'd3-scale-chromatic';
-import dynamic from 'next/dynamic'
 
-import * as wasm_js from '@/../pkg/uamutations.js';
-import MapMutateComponent from '@/components/maps/map-mutate'
 import Control from '@/components/maps/control'
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
@@ -27,19 +24,11 @@ interface MapProps {
     alpha: number,
     citiesArray: CityDataProps[],
     viewState: ViewState,
-    mutate: boolean,
-    mutateTargetCity: string | null,
     handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void
     handleLayer2Change: (layer2: string) => void
-    handleMutateChange: (mutate: boolean) => void
-    handleMutateTargetCityChange: (mutateTargetCity: string) => void
 }
-
-const Mutate = dynamic(() => import('@/components/maps/map-mutate'), {
-    ssr: false
-});
 
 export default function UTAMap (props: MapProps) {
 
@@ -80,24 +69,6 @@ export default function UTAMap (props: MapProps) {
 
     const mapPath: string = props.numLayers == "Paired" && dual_layers ? mapPath2 : mapPath1;
 
-    const [geoJSONcontent, setGeoJSONcontent] = useState<any | null>(null);
-    useEffect(() => {
-        fetch(mapPath)
-            .then(response => response.json())
-            .then(data => {
-                    setGeoJSONcontent(data);
-                    })
-            .catch((error) => console.error('Error:', error));
-        }, [mapPath]);
-
-    const [mutationResult, setMutationResult] = useState<any>(null);
-    useEffect(() => {
-        if (mutationResult) {
-            setGeoJSONcontent(mutationResult);
-        }
-    }, [mutationResult]);
-
-
     const layers = [
         new GeoJsonLayer({
             id: 'polygon-layer',
@@ -129,11 +100,6 @@ export default function UTAMap (props: MapProps) {
             })
         ]
 
-    const filename1="/data/berlin/dataraw.json";
-    const filename2="/data/paris/dataraw.json";
-    const varnames = ["bike_index"];
-    const nentries = 1000;
-
     return (
         <>
         {(
@@ -153,21 +119,6 @@ export default function UTAMap (props: MapProps) {
         </DeckGL>
         </Suspense>
         )}
-        <Mutate
-            filename1={filename1}
-            filename2={filename2}
-            varnames={varnames}
-            nentries={nentries}
-            alpha={props.alpha}
-            this_layer={this_layer}
-            layer_min={layer_min}
-            layer_max={layer_max}
-            geoJSONcontent={geoJSONcontent}
-            setGeoJSONcontent={setGeoJSONcontent}
-            handleResultChange={setMutationResult}
-            viewState={props.viewState}
-            MAP_STYLE={MAP_STYLE}
-        />
         </>
         )
 };
