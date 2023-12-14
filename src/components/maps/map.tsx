@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { useEffect, useState, Suspense } from "react";
+import { useState, Suspense } from "react";
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
 import { DeckGL } from "@deck.gl/react/typed";
 import { FlyToInterpolator } from "@deck.gl/core/typed";
@@ -22,13 +22,14 @@ interface MapProps {
     layer2: string,
     numLayers: string,
     alpha: number,
-    citiesArray: CityDataProps[],
     viewState: ViewState,
+    citiesArray: CityDataProps[],
     handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void
     handleLayer2Change: (layer2: string) => void
 }
+
 
 export default function UTAMap (props: MapProps) {
 
@@ -104,12 +105,15 @@ export default function UTAMap (props: MapProps) {
         <>
         {(
         <Suspense fallback={<p>Loading map ...</p>}>
+
         <DeckGL
             width={"100vw"}
             height={"100vh"}
             controller={true}
             layers={layers}
             initialViewState={props.viewState}
+            // onViewStateChange={(viewState) => setViewState(viewState)}
+            // onViewStateChange={props.handleViewStateChange}
         >
         <Map
             mapStyle={MAP_STYLE}
