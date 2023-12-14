@@ -26,6 +26,11 @@
 * # Panics
 *
 * This function will panic if the input files cannot be read, or if the output file cannot be written.
+* @param {number} nentries
+* @returns {number}
+*/
+export function testtest1(nentries: number): number;
+/**
 * @param {string} json_data1
 * @param {string} json_data2
 * @param {string} varname
@@ -38,6 +43,7 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
+  readonly testtest1: (a: number) => number;
   readonly uamutate: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number) => void;
   readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_malloc: (a: number, b: number) => number;
