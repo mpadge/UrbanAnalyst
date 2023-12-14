@@ -63,16 +63,6 @@ export default function Home() {
         setNumLayers(numLayers);
     }
 
-    // Mutation variables
-    const [mutate, setMutate] = useState(false);
-    const handleMutateChange = (mutate: boolean) => {
-        setMutate(mutate);
-    }
-    const [mutateTargetCity, setMutateTargetCity] = useState<string | null>(null);
-    const handleMutateTargetCityChange = (mutateTargetCity: string) => {
-        setMutateTargetCity(mutateTargetCity);
-    }
-
     const heading: string = HeadingText(layer, layer2, numLayers, CITY_DATA.citiesArray);
 
     return (
