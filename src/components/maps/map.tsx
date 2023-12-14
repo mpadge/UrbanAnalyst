@@ -72,7 +72,7 @@ export default function UTAMap (props: MapProps) {
     const layers = [
         new GeoJsonLayer({
             id: 'polygon-layer',
-            data: geoJSONcontent,
+            data: mapPath,
             filled: true,
             stroked: true,
             getLineWidth: 10,
