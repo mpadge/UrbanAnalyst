@@ -35,13 +35,6 @@ pub mod read_write_file;
 /// This function will panic if the input files cannot be read, or if the output file cannot be written.
 
 #[wasm_bindgen]
-pub fn testtest1(
-    nentries: usize,
-) -> usize {
-    nentries + 1234
-}
-
-#[wasm_bindgen]
 pub fn uamutate(
     json_data1: &str,
     json_data2: &str,

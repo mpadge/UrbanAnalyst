@@ -1,39 +1,5 @@
 let wasm;
 
-/**
-* This is the main function, which reads data from two JSON files, calculates absolute and
-* relative differences between the two sets of data, and writes the results to an output file.
-*
-* # Arguments
-*
-* * `fname1` - Path to local JSON file with data which are to be mutated.
-* * `fname2` - Path to local JSON file with data of mutation target towards which first data are
-* to be mutated.
-* * `varname` - Name of variable in both `fname1` and `fname2` to be mutated.
-* * `varextra` - Extra variables to be considered in the mutation.
-* * `nentries` - The number of entries to be read from the JSON files.
-*
-* # Process
-*
-* 1. Reads the variable specified by `varname` from the files `fname1` and `fname2`.
-* 2. Calculates the absolute and relative differences between the two sets of data.
-* 3. Orders the relative differences in descending order.
-*
-* The following seven vectors of equal length are written to the output file:
-* 1. values: The original values of 'varname' from 'fname1'.
-* 2. dists: The relative degree by which each should be mutated.
-*
-* # Panics
-*
-* This function will panic if the input files cannot be read, or if the output file cannot be written.
-* @param {number} nentries
-* @returns {number}
-*/
-export function testtest1(nentries) {
-    const ret = wasm.testtest1(nentries);
-    return ret >>> 0;
-}
-
 let WASM_VECTOR_LEN = 0;
 
 let cachedUint8Memory0 = null;
@@ -116,6 +82,31 @@ function getStringFromWasm0(ptr, len) {
     return cachedTextDecoder.decode(getUint8Memory0().subarray(ptr, ptr + len));
 }
 /**
+* This is the main function, which reads data from two JSON files, calculates absolute and
+* relative differences between the two sets of data, and writes the results to an output file.
+*
+* # Arguments
+*
+* * `fname1` - Path to local JSON file with data which are to be mutated.
+* * `fname2` - Path to local JSON file with data of mutation target towards which first data are
+* to be mutated.
+* * `varname` - Name of variable in both `fname1` and `fname2` to be mutated.
+* * `varextra` - Extra variables to be considered in the mutation.
+* * `nentries` - The number of entries to be read from the JSON files.
+*
+* # Process
+*
+* 1. Reads the variable specified by `varname` from the files `fname1` and `fname2`.
+* 2. Calculates the absolute and relative differences between the two sets of data.
+* 3. Orders the relative differences in descending order.
+*
+* The following seven vectors of equal length are written to the output file:
+* 1. values: The original values of 'varname' from 'fname1'.
+* 2. dists: The relative degree by which each should be mutated.
+*
+* # Panics
+*
+* This function will panic if the input files cannot be read, or if the output file cannot be written.
 * @param {string} json_data1
 * @param {string} json_data2
 * @param {string} varname
