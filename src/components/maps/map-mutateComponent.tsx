@@ -41,10 +41,8 @@ const BindGenComponent = (props: BindGenProps) => {
                 const varname = props.varnames.join(",");
                 const data1js = JSON.stringify(data1);
                 const data2js = JSON.stringify(data2);
-                const resultJson = wasm_js.testtest2(data1js, data2js, varname, props.nentries);
-                // const resultObj = JSON.parse(resultJson);
-                const resultObj = resultJson;
-                console.log("-----resultObj-----", resultObj);
+                const resultJson = wasm_js.uamutate(data1js, data2js, varname, props.nentries);
+                const resultObj = JSON.parse(resultJson);
                 setResult(resultObj);
             }
             })
@@ -56,7 +54,7 @@ const BindGenComponent = (props: BindGenProps) => {
     return (
         <div className={styles.json2}>
             <h1>BindGen2</h1>
-                {result}
+                {result ? result && <pre>{JSON.stringify(result, null, 2)}</pre> : "Loading..."}
         </div>
     )
 }

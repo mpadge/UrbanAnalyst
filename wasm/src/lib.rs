@@ -42,22 +42,6 @@ pub fn testtest1(
 }
 
 #[wasm_bindgen]
-pub fn testtest2(
-    json_data1: &str,
-    json_data2: &str,
-    varname: &str,
-    nentries: usize,
-) -> usize {
-    let varnames: Vec<&str> = varname.split(',').collect();
-
-    // Read contents of JSON data:
-    let (mut values1, groups1) = read_write_file::readfile(json_data1, &varnames, nentries);
-    let (values2, _groups2) = read_write_file::readfile(json_data2, &varnames, nentries);
-
-    values1.nrows()
-}
-
-#[wasm_bindgen]
 pub fn uamutate(
     json_data1: &str,
     json_data2: &str,
