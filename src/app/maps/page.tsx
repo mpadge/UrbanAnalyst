@@ -98,14 +98,10 @@ export default function Home() {
             alpha = {alpha}
             citiesArray = {CITY_DATA.citiesArray}
             viewState = {viewState}
-            mutate = {mutate}
-            mutateTargetCity = {mutateTargetCity}
             handleAlphaChange = {handleAlphaChange}
             handleViewStateChange = {handleViewStateChange}
             handleLayerChange = {handleLayerChange}
             handleLayer2Change = {handleLayer2Change}
-            handleMutateChange = {handleMutateChange}
-            handleMutateTargetCityChange = {handleMutateTargetCityChange}
         />
         <Control
             idx = {idx}
