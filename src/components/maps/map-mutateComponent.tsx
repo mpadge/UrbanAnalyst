@@ -8,7 +8,7 @@ interface BindGenProps {
     filename2: string
     varnames: string[]
     nentries: number
-    mapname: string
+    mapPath: string
 }
 
 // Function used to extract size of JSON object returned from WASM calls. this
@@ -29,7 +29,8 @@ const BindGenComponent = (props: BindGenProps) => {
     const [data2, setData2] = useState(null);
 
     const [result, setResult] = useState<Object | null>(null);
-    const [mapData, setMapData] = useState<Object | null>(null);
+    const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
+
 
     // Effect to load 'dataraw' point-based data for source and target cities,
     // and store as 'data1', 'data2':
@@ -80,11 +81,10 @@ const BindGenComponent = (props: BindGenProps) => {
         fetch(props.mapPath)
         .then(response => response.json())
         .then(data => {
-            setGeoJSONcontent(data);
-            data.features.forEach((feature, index) => {
+            data.features.forEach((feature: any, index: number) => {
                 feature.properties.column_to_replace = result[index];
             });
-            setMapData(data);
+            setGeoJSONcontent(data);
         })
         .catch((error) => console.error('Error:', error));
     }, [result, props.mapPath]);
