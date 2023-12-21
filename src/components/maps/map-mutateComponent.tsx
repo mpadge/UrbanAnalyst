@@ -10,6 +10,19 @@ interface BindGenProps {
     nentries: number
 }
 
+// Function used to extract size of JSON object returned from WASM calls. this
+// is always a simple length = first of the two options, and is used just to
+// assert that that length matches value expected from map data.
+const JSONObjectSize = (obj: any) => {
+    let numItems: number = 0;
+    if (Array.isArray(obj)) {
+        numItems = obj.length;
+    } else if (typeof obj === 'object' && obj !== null) {
+        numItems = Object.keys(obj).length;
+    }
+    return numItems;
+}
+
 const BindGenComponent = (props: BindGenProps) => {
     const [data1, setData1] = useState(null);
     const [data2, setData2] = useState(null);
@@ -30,6 +43,7 @@ const BindGenComponent = (props: BindGenProps) => {
         loadData();
         }, [props.filename1, props.filename2]);
 
+
     useEffect(() => {
         fetch('@/../pkg/uamutations_bg.wasm')
         .then(response => {
@@ -43,6 +57,9 @@ const BindGenComponent = (props: BindGenProps) => {
                 const data2js = JSON.stringify(data2);
                 const resultJson = wasm_js.uamutate(data1js, data2js, varname, props.nentries);
                 const resultObj = JSON.parse(resultJson);
+
+                const numItems = JSONObjectSize(resultObj);
+
                 setResult(resultObj);
             }
             })
