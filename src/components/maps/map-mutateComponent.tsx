@@ -8,6 +8,7 @@ interface BindGenProps {
     filename2: string
     varnames: string[]
     nentries: number
+    mapname: string
 }
 
 // Function used to extract size of JSON object returned from WASM calls. this
@@ -28,7 +29,10 @@ const BindGenComponent = (props: BindGenProps) => {
     const [data2, setData2] = useState(null);
 
     const [result, setResult] = useState<Object | null>(null);
+    const [mapData, setMapData] = useState<Object | null>(null);
 
+    // Effect to load 'dataraw' point-based data for source and target cities,
+    // and store as 'data1', 'data2':
     useEffect(() => {
         const loadData = async () => {
             const response1 = await fetch(props.filename1);
@@ -44,6 +48,8 @@ const BindGenComponent = (props: BindGenProps) => {
         }, [props.filename1, props.filename2]);
 
 
+    // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
+    // vector of aggregaed mean differences in each polygon of source city.
     useEffect(() => {
         fetch('@/../pkg/uamutations_bg.wasm')
         .then(response => {
@@ -67,6 +73,21 @@ const BindGenComponent = (props: BindGenProps) => {
             console.error('Error fetching wasm module:', error);
             });
         }, [data1, data2, props.varnames, props.nentries]);
+
+    // Effect to load map data for source city, and replace specified column
+    // with 'result' from previous effect:
+    useEffect(() => {
+        fetch(props.mapPath)
+        .then(response => response.json())
+        .then(data => {
+            setGeoJSONcontent(data);
+            data.features.forEach((feature, index) => {
+                feature.properties.column_to_replace = result[index];
+            });
+            setMapData(data);
+        })
+        .catch((error) => console.error('Error:', error));
+    }, [result, props.mapPath]);
 
     return (
         <div className={styles.json2}>
