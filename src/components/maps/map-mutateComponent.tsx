@@ -28,7 +28,7 @@ const BindGenComponent = (props: BindGenProps) => {
     const [data1, setData1] = useState(null);
     const [data2, setData2] = useState(null);
 
-    const [result, setResult] = useState<Object | null>(null);
+    const [result, setResult] = useState<number[] | null>(null);
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
 
 
@@ -82,7 +82,9 @@ const BindGenComponent = (props: BindGenProps) => {
         .then(response => response.json())
         .then(data => {
             data.features.forEach((feature: any, index: number) => {
-                feature.properties.column_to_replace = result[index];
+                if (result) {
+                    feature.properties.column_to_replace = result[index];
+                }
             });
             setGeoJSONcontent(data);
         })
