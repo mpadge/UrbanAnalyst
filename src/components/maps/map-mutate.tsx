@@ -10,7 +10,7 @@ interface BindGenProps {
     filename2: string
     varnames: string[]
     nentries: number
-    mapname: string
+    mapPath: string
 }
 
 const WasmBindGenCalc = dynamic(() => Promise.resolve(BindGenComponent), {
