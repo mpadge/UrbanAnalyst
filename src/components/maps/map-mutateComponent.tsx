@@ -2,13 +2,14 @@ import { useEffect, useState} from 'react';
 
 import * as wasm_js from '@/../pkg/uamutations.js';
 import styles from '@/styles/maps.module.css';
+import { ViewState, CityDataProps } from "@/data/interfaces";
 
 interface MutateProps {
-    filename1: string
-    filename2: string
+    idx: number
     varnames: string[]
     nentries: number
     mapPath: string
+    citiesArray: CityDataProps[],
 }
 
 // Function used to extract size of JSON object returned from WASM calls. this
@@ -31,22 +32,24 @@ const MapMutateComponent = (props: MutateProps) => {
     const [result, setResult] = useState<number[] | null>(null);
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
 
+    const mapPath1 = props.citiesArray[props.idx].path.replace("data\.json", "dataraw.json");
+    const mapPath2 = mapPath1.replace(/(\/[^\/]*\/)[^\/]*(\/.*)/, "$1paris$2");
 
     // Effect to load 'dataraw' point-based data for source and target cities,
     // and store as 'data1', 'data2':
     useEffect(() => {
         const loadData = async () => {
-            const response1 = await fetch(props.filename1);
+            const response1 = await fetch(mapPath1);
             const json1 = await response1.json();
             setData1(json1);
 
-            const response2 = await fetch(props.filename2);
+            const response2 = await fetch(mapPath2);
             const json2 = await response2.json();
             setData2(json2);
         };
 
         loadData();
-        }, [props.filename1, props.filename2]);
+        }, [mapPath1, mapPath2]);
 
 
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
