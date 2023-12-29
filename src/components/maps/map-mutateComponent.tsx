@@ -3,7 +3,7 @@ import { useEffect, useState} from 'react';
 import * as wasm_js from '@/../pkg/uamutations.js';
 import styles from '@/styles/maps.module.css';
 
-interface BindGenProps {
+interface MutateProps {
     filename1: string
     filename2: string
     varnames: string[]
@@ -24,7 +24,7 @@ const JSONObjectSize = (obj: any) => {
     return numItems;
 }
 
-const BindGenComponent = (props: BindGenProps) => {
+const BindGenComponent = (props: MutateProps) => {
     const [data1, setData1] = useState(null);
     const [data2, setData2] = useState(null);
 
