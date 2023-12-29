@@ -3,10 +3,10 @@
 
 import dynamic from 'next/dynamic'
 
-import BindGenComponent from '@/components/maps/map-mutateComponent';
+import MapMutateComponent from '@/components/maps/map-mutateComponent';
 
-const WasmBindGenCalc = dynamic(() => Promise.resolve(BindGenComponent), {
+const MapMutateCalculate = dynamic(() => Promise.resolve(MapMutateComponent), {
     ssr: false
 });
 
-export default WasmBindGenCalc;
+export default MapMutateCalculate;

@@ -24,7 +24,7 @@ const JSONObjectSize = (obj: any) => {
     return numItems;
 }
 
-const BindGenComponent = (props: MutateProps) => {
+const MapMutateComponent = (props: MutateProps) => {
     const [data1, setData1] = useState(null);
     const [data2, setData2] = useState(null);
 
@@ -99,4 +99,4 @@ const BindGenComponent = (props: MutateProps) => {
     )
 }
 
-export default BindGenComponent;
+export default MapMutateComponent;
