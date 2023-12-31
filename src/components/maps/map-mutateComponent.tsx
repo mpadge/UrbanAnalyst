@@ -11,6 +11,10 @@ interface MutateProps {
     mapPath: string
     citiesArray: CityDataProps[]
     viewState: ViewState
+    layerMin: number
+    layerMax: number
+    handleLayerMinChange: (layerMin: number) => void
+    handleLayerMaxChange: (layerMin: number) => void
 }
 
 // Function used to extract size of JSON object returned from WASM calls. this
@@ -94,6 +98,17 @@ const MapMutateComponent = (props: MutateProps) => {
         })
         .catch((error) => console.error('Error:', error));
     }, [result, props.mapPath]);
+
+    // Effect to get min + max values of 'result' and store as 'layerMin',
+    // 'layerMax':
+    useEffect(() => {
+        if (result) {
+            const min = Math.min(...result);
+            const max = Math.max(...result);
+            props.handleLayerMinChange(min);
+            props.handleLayerMaxChange(max);
+        }
+    }, [result, props.handleLayerMinChange, props.handleLayerMaxChange]);
 
     return (
         <div className={styles.json2}>
