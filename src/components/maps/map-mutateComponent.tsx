@@ -11,10 +11,10 @@ interface MutateProps {
     mapPath: string
     citiesArray: CityDataProps[]
     viewState: ViewState
-    layerMin: number
-    layerMax: number
-    handleLayerMinChange: (layerMin: number) => void
-    handleLayerMaxChange: (layerMin: number) => void
+    layerMin: number | null
+    layerMax: number | null
+    handleLayerMinChange: (layerMin: number | null) => void
+    handleLayerMaxChange: (layerMin: number | null) => void
 }
 
 // Function used to extract size of JSON object returned from WASM calls. this
