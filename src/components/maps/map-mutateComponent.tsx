@@ -9,7 +9,8 @@ interface MutateProps {
     varnames: string[]
     nentries: number
     mapPath: string
-    citiesArray: CityDataProps[],
+    citiesArray: CityDataProps[]
+    viewState: ViewState
 }
 
 // Function used to extract size of JSON object returned from WASM calls. this
