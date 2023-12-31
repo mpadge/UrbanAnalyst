@@ -28,6 +28,15 @@ export default function Home() {
         transitionInterpolator: new FlyToInterpolator()
     });
 
+    const [layerMin, setLayerMin] = useState<number | null>(null);
+    const [layerMax, setLayerMax] = useState<number | null>(null);
+    const handleLayerMinChange = (layerMin: number) => {
+        setLayerMin(layerMin);
+    }
+    const handleLayerMaxChange = (layerMax: number) => {
+        setLayerMax(layerMax);
+    }
+
     return (
         <>
         <MapMutateCalculate
@@ -37,6 +46,10 @@ export default function Home() {
             mapPath={mapPath}
             citiesArray = {CITY_DATA.citiesArray}
             viewState = {viewState}
+            layerMin={layerMin}
+            layerMax={layerMax}
+            handleLayerMinChange={handleLayerMinChange}
+            handleLayerMaxChange={handleLayerMaxChange}
         />
         </>
     )
