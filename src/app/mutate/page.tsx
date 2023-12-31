@@ -30,10 +30,10 @@ export default function Home() {
 
     const [layerMin, setLayerMin] = useState<number | null>(null);
     const [layerMax, setLayerMax] = useState<number | null>(null);
-    const handleLayerMinChange = (layerMin: number) => {
+    const handleLayerMinChange = (layerMin: number | null) => {
         setLayerMin(layerMin);
     }
-    const handleLayerMaxChange = (layerMax: number) => {
+    const handleLayerMaxChange = (layerMax: number | null) => {
         setLayerMax(layerMax);
     }
 
