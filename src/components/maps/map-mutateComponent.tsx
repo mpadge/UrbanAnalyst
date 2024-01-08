@@ -2,6 +2,8 @@ import { useEffect, useState} from 'react';
 import * as d3 from 'd3';
 import 'd3-scale-chromatic';
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
+import { DeckGL } from "@deck.gl/react/typed";
+import { Map } from "react-map-gl";
 
 import * as wasm_js from '@/../pkg/uamutations.js';
 import styles from '@/styles/maps.module.css';
@@ -20,6 +22,9 @@ interface MutateProps {
     handleLayerMinChange: (layerMin: number) => void
     handleLayerMaxChange: (layerMin: number) => void
 }
+
+const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
+const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 
 // Function used to extract size of JSON object returned from WASM calls. this
 // is always a simple length = first of the two options, and is used just to
@@ -40,7 +45,7 @@ const MapMutateComponent = (props: MutateProps) => {
 
     const [result, setResult] = useState<number[] | null>(null);
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
-    const [layers, setLayers] = useState<any>(null)
+    const [layer, setLayer] = useState<any>(null)
 
     const mapPath1 = props.citiesArray[props.idx].path.replace("data\.json", "dataraw.json");
     const mapPath2 = mapPath1.replace(/(\/[^\/]*\/)[^\/]*(\/.*)/, "$1paris$2");
@@ -116,7 +121,7 @@ const MapMutateComponent = (props: MutateProps) => {
         }
     }, [result, handleLayerMinChange, handleLayerMaxChange]);
 
-    const this_layer = props.varnames[0];
+    const varname = props.varnames[0];
 
     useEffect(() => {
         let Color = d3
@@ -124,7 +129,7 @@ const MapMutateComponent = (props: MutateProps) => {
             .domain([props.layerMin, props.layerMax])
             .interpolator(d3.interpolateViridis);
 
-        const these_layers = [
+        const this_layer = [
             new GeoJsonLayer({
                 id: 'polygon-layer',
                 data: geoJSONcontent,
@@ -133,7 +138,7 @@ const MapMutateComponent = (props: MutateProps) => {
                 getLineWidth: 10,
                 getLineColor: [122, 122, 122],
                 getFillColor: d => {
-                    var layerval = Math.max (props.layerMin, Math.min (props.layerMax, d.properties?.[this_layer]));
+                    var layerval = Math.max (props.layerMin, Math.min (props.layerMax, d.properties?.[varname]));
                     if (isNaN(layerval)) {
                         layerval = props.layerMin;
                     }
@@ -150,19 +155,30 @@ const MapMutateComponent = (props: MutateProps) => {
                     },
                 opacity: 1 - props.alpha,
                 updateTriggers: {
-                    getFillColor: [this_layer]
+                    getFillColor: [varname]
                 }
                 })
             ]
 
-        setLayers(these_layers)
-    }, [props.layerMin, props.layerMax, this_layer, props.alpha, geoJSONcontent]);
+        setLayer(this_layer)
+    }, [props.layerMin, props.layerMax, varname, props.alpha, geoJSONcontent]);
 
     return (
-        <div className={styles.json2}>
-            <h1>Mutate</h1>
-                {result ? result && <pre>{JSON.stringify(result, null, 2)}</pre> : "Loading..."}
-        </div>
+        <>
+        <DeckGL
+            width={"100vw"}
+            height={"100vh"}
+            controller={true}
+            layers={layer}
+            initialViewState={props.viewState}
+        >
+        <Map
+            mapStyle={MAP_STYLE}
+            mapboxAccessToken={MapboxAccessToken}
+        >
+        </Map>
+        </DeckGL>
+        </>
     )
 }
 
