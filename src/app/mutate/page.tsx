@@ -19,6 +19,7 @@ export default function Home() {
     const varnames = ["bike_index", "social_index"];
     const nentries = 1000;
     const mapPath = "/data/berlin/data.json";
+    const alpha = 0.7;
 
     const [viewState, setViewState] = useState({
         ...CITY_DATA.citiesArray[idx].initialViewState,
@@ -28,12 +29,12 @@ export default function Home() {
         transitionInterpolator: new FlyToInterpolator()
     });
 
-    const [layerMin, setLayerMin] = useState<number | null>(null);
-    const [layerMax, setLayerMax] = useState<number | null>(null);
-    const handleLayerMinChange = (layerMin: number | null) => {
+    const [layerMin, setLayerMin] = useState<number>(0);
+    const [layerMax, setLayerMax] = useState<number>(0);
+    const handleLayerMinChange = (layerMin: number) => {
         setLayerMin(layerMin);
     }
-    const handleLayerMaxChange = (layerMax: number | null) => {
+    const handleLayerMaxChange = (layerMax: number) => {
         setLayerMax(layerMax);
     }
 
@@ -46,6 +47,7 @@ export default function Home() {
             mapPath={mapPath}
             citiesArray = {CITY_DATA.citiesArray}
             viewState = {viewState}
+            alpha = {alpha}
             layerMin={layerMin}
             layerMax={layerMax}
             handleLayerMinChange={handleLayerMinChange}
