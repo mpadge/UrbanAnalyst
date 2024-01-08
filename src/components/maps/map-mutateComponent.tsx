@@ -113,12 +113,10 @@ const MapMutateComponent = (props: MutateProps) => {
     // 'layerMax':
     const { handleLayerMinChange, handleLayerMaxChange } = props;
     useEffect(() => {
-        if (result) {
-            const min = Math.min(...result);
-            const max = Math.max(...result);
-            handleLayerMinChange(min);
-            handleLayerMaxChange(max);
-        }
+        const min = Math.min(...result);
+        const max = Math.max(...result);
+        handleLayerMinChange(min);
+        handleLayerMaxChange(max);
     }, [result, handleLayerMinChange, handleLayerMaxChange]);
 
     const varname = props.varnames[0];
