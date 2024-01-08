@@ -24,16 +24,3 @@
   font-weight: 600;
   margin-bottom: 0.7rem;
 }
-
-.json2 {
-  display: inherit;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-  z-index: 10;
-  position: absolute;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  top: 0px;
-  left: 36dvw;
-  width: 15dvw;
-}
