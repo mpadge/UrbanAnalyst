@@ -60,7 +60,7 @@ pub fn uamutate(
     // Then calculate successive differences between the two sets of values, where `false` is for
     // the `absolute` parameter, so that differences are calculated relative to values1. These are
     // then the distances by which `values1` need to be moved in the first dimension only to match
-    // the closest equivalent values of `values22`.
+    // the closest equivalent values of `values2`.
     let dists = calculate_dists::calculate_dists(&values1, &values2, false);
     let result = aggregate_to_groups(&dists, &groups1);
 
