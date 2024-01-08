@@ -112,7 +112,7 @@ const MapMutateComponent = (props: MutateProps) => {
 
     return (
         <div className={styles.json2}>
-            <h1>BindGen2</h1>
+            <h1>Mutate</h1>
                 {result ? result && <pre>{JSON.stringify(result, null, 2)}</pre> : "Loading..."}
         </div>
     )
