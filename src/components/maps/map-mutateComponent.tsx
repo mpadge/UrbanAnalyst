@@ -14,10 +14,11 @@ interface MutateProps {
     mapPath: string
     citiesArray: CityDataProps[]
     viewState: ViewState
-    layerMin: number | null
-    layerMax: number | null
-    handleLayerMinChange: (layerMin: number | null) => void
-    handleLayerMaxChange: (layerMin: number | null) => void
+    alpha: number
+    layerMin: number
+    layerMax: number
+    handleLayerMinChange: (layerMin: number) => void
+    handleLayerMaxChange: (layerMin: number) => void
 }
 
 // Function used to extract size of JSON object returned from WASM calls. this
@@ -39,6 +40,7 @@ const MapMutateComponent = (props: MutateProps) => {
 
     const [result, setResult] = useState<number[] | null>(null);
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
+    const [layers, setLayers] = useState<any>(null)
 
     const mapPath1 = props.citiesArray[props.idx].path.replace("data\.json", "dataraw.json");
     const mapPath2 = mapPath1.replace(/(\/[^\/]*\/)[^\/]*(\/.*)/, "$1paris$2");
@@ -104,50 +106,57 @@ const MapMutateComponent = (props: MutateProps) => {
 
     // Effect to get min + max values of 'result' and store as 'layerMin',
     // 'layerMax':
+    const { handleLayerMinChange, handleLayerMaxChange } = props;
     useEffect(() => {
         if (result) {
             const min = Math.min(...result);
             const max = Math.max(...result);
-            props.handleLayerMinChange(min);
-            props.handleLayerMaxChange(max);
+            handleLayerMinChange(min);
+            handleLayerMaxChange(max);
         }
-    }, [result, props.handleLayerMinChange, props.handleLayerMaxChange]);
-
-    var Color = d3.scaleSequential().domain([ props.layerMin, props.layerMax ])
-        .interpolator(d3.interpolateViridis)
+    }, [result, handleLayerMinChange, handleLayerMaxChange]);
 
     const this_layer = props.varnames[0];
 
-    const layers = [
-        new GeoJsonLayer({
-            id: 'polygon-layer',
-            data: geoJSONcontent,
-            filled: true,
-            stroked: true,
-            getLineWidth: 10,
-            getLineColor: [122, 122, 122],
-            getFillColor: d => {
-                var layerval = Math.max (layer_min, Math.min (layer_max, d.properties?.[this_layer]));
-                if (isNaN(layerval)) {
-                    layerval = layer_min;
+    useEffect(() => {
+        let Color = d3
+            .scaleSequential()
+            .domain([props.layerMin, props.layerMax])
+            .interpolator(d3.interpolateViridis);
+
+        const these_layers = [
+            new GeoJsonLayer({
+                id: 'polygon-layer',
+                data: geoJSONcontent,
+                filled: true,
+                stroked: true,
+                getLineWidth: 10,
+                getLineColor: [122, 122, 122],
+                getFillColor: d => {
+                    var layerval = Math.max (props.layerMin, Math.min (props.layerMax, d.properties?.[this_layer]));
+                    if (isNaN(layerval)) {
+                        layerval = props.layerMin;
+                    }
+                    // Invert the palette:
+                    layerval = props.layerMin + (props.layerMax - layerval);
+                    const layerarr: any = d3.color(Color(layerval));
+                    var red = 0, green = 0, blue = 0;
+                    if (layerarr) {
+                        red = layerarr.r;
+                        green = layerarr.g;
+                        blue = layerarr.b;
+                    }
+                    return [red, green, blue]
+                    },
+                opacity: 1 - props.alpha,
+                updateTriggers: {
+                    getFillColor: [this_layer]
                 }
-                // Invert the palette:
-                layerval = layer_min + (layer_max - layerval);
-                const layerarr: any = d3.color(Color(layerval));
-                var red = 0, green = 0, blue = 0;
-                if (layerarr) {
-                    red = layerarr.r;
-                    green = layerarr.g;
-                    blue = layerarr.b;
-                }
-                return [red, green, blue]
-                },
-            opacity: 1 - props.alpha,
-            updateTriggers: {
-                getFillColor: [this_layer]
-            }
-            })
-        ]
+                })
+            ]
+
+        setLayers(these_layers)
+    }, [props.layerMin, props.layerMax, this_layer, props.alpha, geoJSONcontent]);
 
     return (
         <div className={styles.json2}>
