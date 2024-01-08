@@ -1,4 +1,7 @@
 import { useEffect, useState} from 'react';
+import * as d3 from 'd3';
+import 'd3-scale-chromatic';
+import { GeoJsonLayer } from "@deck.gl/layers/typed";
 
 import * as wasm_js from '@/../pkg/uamutations.js';
 import styles from '@/styles/maps.module.css';
@@ -109,6 +112,42 @@ const MapMutateComponent = (props: MutateProps) => {
             props.handleLayerMaxChange(max);
         }
     }, [result, props.handleLayerMinChange, props.handleLayerMaxChange]);
+
+    var Color = d3.scaleSequential().domain([ props.layerMin, props.layerMax ])
+        .interpolator(d3.interpolateViridis)
+
+    const this_layer = props.varnames[0];
+
+    const layers = [
+        new GeoJsonLayer({
+            id: 'polygon-layer',
+            data: geoJSONcontent,
+            filled: true,
+            stroked: true,
+            getLineWidth: 10,
+            getLineColor: [122, 122, 122],
+            getFillColor: d => {
+                var layerval = Math.max (layer_min, Math.min (layer_max, d.properties?.[this_layer]));
+                if (isNaN(layerval)) {
+                    layerval = layer_min;
+                }
+                // Invert the palette:
+                layerval = layer_min + (layer_max - layerval);
+                const layerarr: any = d3.color(Color(layerval));
+                var red = 0, green = 0, blue = 0;
+                if (layerarr) {
+                    red = layerarr.r;
+                    green = layerarr.g;
+                    blue = layerarr.b;
+                }
+                return [red, green, blue]
+                },
+            opacity: 1 - props.alpha,
+            updateTriggers: {
+                getFillColor: [this_layer]
+            }
+            })
+        ]
 
     return (
         <div className={styles.json2}>
