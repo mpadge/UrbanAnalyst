@@ -95,31 +95,32 @@ const MapMutateComponent = (props: MutateProps) => {
 
     // Effect to load map data for source city, and replace specified column
     // with 'result' from previous effect:
+    const varname = props.varnames[0];
     useEffect(() => {
         fetch(props.mapPath)
         .then(response => response.json())
         .then(data => {
             data.features.forEach((feature: any, index: number) => {
-                if (result) {
-                    feature.properties.column_to_replace = result[index];
+                if (result) { // needed here because 'result' can still be null
+                    feature.properties[varname] = result[index];
                 }
             });
             setGeoJSONcontent(data);
         })
         .catch((error) => console.error('Error:', error));
-    }, [result, props.mapPath]);
+    }, [props.mapPath, result, varname]);
 
     // Effect to get min + max values of 'result' and store as 'layerMin',
     // 'layerMax':
     const { handleLayerMinChange, handleLayerMaxChange } = props;
     useEffect(() => {
-        const min = Math.min(...result);
-        const max = Math.max(...result);
-        handleLayerMinChange(min);
-        handleLayerMaxChange(max);
+        if (result) {
+            const min = Math.min(...result);
+            const max = Math.max(...result);
+            handleLayerMinChange(min);
+            handleLayerMaxChange(max);
+        }
     }, [result, handleLayerMinChange, handleLayerMaxChange]);
-
-    const varname = props.varnames[0];
 
     useEffect(() => {
         let Color = d3
