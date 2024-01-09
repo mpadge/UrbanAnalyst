@@ -59,25 +59,25 @@ async function getSymmetricKey() {
 }
 
 async function sendEncryptedData() {
-   const path = '/data/test.aes';
-   const encryptedData = await fetch(path);
-   const ivPath = '/data/iv.txt';
-   const ivResponse = await fetch(ivPath);
-   const iv = await ivResponse.text().then(text => text.trim());
+    const path = '/data/test.aes';
+    const encryptedData = await fetch(path);
+    const ivPath = '/data/iv.txt';
+    const ivResponse = await fetch(ivPath);
+    const iv = await ivResponse.text().then(text => text.trim());
 
-   const response = await fetch('/api', {
-       method: 'POST',
-       headers: {
-           'Content-Type': 'application/octet-stream',
-           'X-IV': iv
-       },
-       body: encryptedData.arrayBuffer(),
-   });
-   if (!response.ok) {
-       throw new Error(`HTTP error! status: ${response.status}`);
-   }
-   const decryptedData = await response.text();
-   console.log("Decrypted Data: ", decryptedData);
+    const response = await fetch('/api', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/octet-stream',
+            'X-IV': iv
+        },
+        body: encryptedData.arrayBuffer(),
+    });
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const decryptedData = await response.text();
+    console.log("Decrypted Data: ", decryptedData);
 }
 
 const MapMutateComponent = (props: MutateProps) => {
