@@ -9,8 +9,6 @@ import * as wasm_js from '@/../pkg/uamutations.js';
 import styles from '@/styles/maps.module.css';
 import { ViewState, CityDataProps } from "@/data/interfaces";
 
-import { loadTestData } from "@/components/maps/test";
-
 interface MutateProps {
     idx: number
     varnames: string[]
@@ -61,6 +59,7 @@ async function getSymmetricKey() {
 async function sendEncryptedData() {
     const path = '/data/test.aes';
     const encryptedData = await fetch(path);
+    const arrayBuffer = await encryptedData.arrayBuffer();
     const ivPath = '/data/iv.txt';
     const ivResponse = await fetch(ivPath);
     const iv = await ivResponse.text().then(text => text.trim());
@@ -71,7 +70,7 @@ async function sendEncryptedData() {
             'Content-Type': 'application/octet-stream',
             'X-IV': iv
         },
-        body: encryptedData.arrayBuffer(),
+        body: arrayBuffer,
     });
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
