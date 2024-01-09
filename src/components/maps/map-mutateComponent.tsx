@@ -73,19 +73,19 @@ async function getTestAes() {
 }
 
 async function sendEncryptedData() {
-   const encryptedData = await getTestAes();
-   const response = await fetch('/api', {
-       method: 'POST',
-       headers: {
-           'Content-Type': 'application/octet-stream'
-       },
-       body: encryptedData
-   });
-   if (!response.ok) {
-       throw new Error(`HTTP error! status: ${response.status}`);
-   }
-   const decryptedData = await response.text();
-   console.log("Decrypted Data: ", decryptedData);
+    const encryptedData = await getTestAes();
+    const response = await fetch('/api', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/octet-stream'
+        },
+        body: encryptedData
+    });
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const decryptedData = await response.text();
+    console.log("Decrypted Data: ", decryptedData);
 }
 
 const MapMutateComponent = (props: MutateProps) => {
