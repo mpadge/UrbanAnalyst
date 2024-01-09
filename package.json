@@ -11,6 +11,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "crypto": "^1.0.1",
     "d3": "^7.8.5",
     "deck.gl": "^8.9.30",
     "mapbox-gl": "^2.15.0",
