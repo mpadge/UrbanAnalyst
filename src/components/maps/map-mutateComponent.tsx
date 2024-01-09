@@ -58,34 +58,26 @@ async function getSymmetricKey() {
     return encryptedSymmetricKeyBuffer;
 }
 
-async function getTestTxt() {
-    const a = '/data/test.txt';
-    const b = await fetch(a);
-
-    return b.text();
-}
-
-async function getTestAes() {
-    const a = '/data/test.aes';
-    const b = await fetch(a);
-
-    return b.arrayBuffer();
-}
-
 async function sendEncryptedData() {
-    const encryptedData = await getTestAes();
-    const response = await fetch('/api', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/octet-stream'
-        },
-        body: encryptedData
-    });
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const decryptedData = await response.text();
-    console.log("Decrypted Data: ", decryptedData);
+   const path = '/data/test.aes';
+   const encryptedData = await fetch(path);
+   const ivPath = '/data/iv.txt';
+   const ivResponse = await fetch(ivPath);
+   const iv = await ivResponse.text().then(text => text.trim());
+
+   const response = await fetch('/api', {
+       method: 'POST',
+       headers: {
+           'Content-Type': 'application/octet-stream',
+           'X-IV': iv
+       },
+       body: encryptedData.arrayBuffer(),
+   });
+   if (!response.ok) {
+       throw new Error(`HTTP error! status: ${response.status}`);
+   }
+   const decryptedData = await response.text();
+   console.log("Decrypted Data: ", decryptedData);
 }
 
 const MapMutateComponent = (props: MutateProps) => {
@@ -112,14 +104,6 @@ const MapMutateComponent = (props: MutateProps) => {
             const response2 = await fetch(mapPath2);
             const json2 = await response2.json();
             setData2(json2);
-
-            const tmp = await getTestData();
-            console.log("----RES: ", tmp);
-            setRes(tmp);
-
-            const tmp2 = await getTestTxt();
-            console.log("----RES2: ", tmp2);
-            const tmp3 = await getTestAes();
 
             const keyBuffer = getSymmetricKey();
             await sendEncryptedData();
