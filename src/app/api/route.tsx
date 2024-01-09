@@ -27,6 +27,8 @@ export async function POST(request) {
            return;
        }
 
+       const iv = Buffer.from(request.headers.get('X-IV'), 'hex');
+
        // Get encrypted data from request body and convert to a Buffer
        const reader = request.body.getReader();
        let chunks = [];
@@ -37,12 +39,11 @@ export async function POST(request) {
        }
        const encryptedData = Buffer.concat(chunks);
 
-       const decipher = crypto.createDecipheriv('aes-256-cbc', symKeyBuffer, Buffer.alloc(16));
-
+       const decipher = crypto.createDecipheriv('aes-256-cbc', symKeyBuffer, iv);
+       decipher.setAutoPadding(false);
        let decryptedData = decipher.update(encryptedData, 'hex', 'utf8');
        decryptedData += decipher.final('utf8');
 
-       let decryptedData2 = "Message message";
-       resolve(new Response(decryptedData2));
+       resolve(new Response(decryptedData));
    });
 }
