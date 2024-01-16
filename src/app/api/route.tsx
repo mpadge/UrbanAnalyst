@@ -12,8 +12,8 @@ export async function POST(request: any): Promise<Response> {
        }
 
        var algorithm = 'aes-128-cbc';
-       var clearEncoding = 'buffer';
-       var cipherEncoding = 'binary';
+       var clearEncoding: crypto.BinaryToTextEncoding = 'binary';
+       var cipherEncoding: crypto.BinaryToTextEncoding = 'binary';
        var iv = Buffer.from(request.headers.get('X-IV'), 'hex');
 
        const arrayBuffer = await request.arrayBuffer();
@@ -21,8 +21,8 @@ export async function POST(request: any): Promise<Response> {
 
        var decipher = crypto.createDecipheriv(algorithm, symKeyBuffer, iv);
        var decryptedData = [];
-       decryptedData.push(decipher.update(encryptedData, cipherEncoding, clearEncoding));
-       decryptedData.push(decipher.final(clearEncoding));
+       decryptedData.push(decipher.update(encryptedData as any, cipherEncoding, clearEncoding));
+       decryptedData.push(decipher.final());
 
        const decryptedString = decryptedData.join('');
 
