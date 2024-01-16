@@ -14,7 +14,7 @@ interface MutateProps {
     varnames: string[]
     nentries: number
     mapPath: string
-    citiesArray: CityDataProps[]
+    city: string
     viewState: ViewState
     alpha: number
     layerMin: number
@@ -39,6 +39,33 @@ const JSONObjectSize = (obj: any) => {
     return numItems;
 }
 
+async function getEncryptedData(city: string) {
+
+    const path = '/data/' + city + '/dataraw.enc';
+    const encryptedData = await fetch(path);
+    const arrayBuffer = await encryptedData.arrayBuffer();
+
+    const ivPath = '/data/' + city + '/iv.txt';
+    const ivResponse = await fetch(ivPath);
+    const iv = await ivResponse.text().then(text => text.trim());
+
+    const response = await fetch('/decrypt', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/octet-stream',
+            'X-IV': iv
+        },
+        body: arrayBuffer,
+    });
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const decryptedData = await response.text();
+
+    return decryptedData;
+}
+
 const MapMutateComponent = (props: MutateProps) => {
     const [data1, setData1] = useState(null);
     const [data2, setData2] = useState(null);
@@ -47,25 +74,24 @@ const MapMutateComponent = (props: MutateProps) => {
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
     const [layer, setLayer] = useState<any>(null)
 
-    const mapPath1 = props.citiesArray[props.idx].path.replace("data\.json", "dataraw.json");
+    const mapPath1 = '/data/' + props.city + '/dataraw.json';
     const mapPath2 = mapPath1.replace(/(\/[^\/]*\/)[^\/]*(\/.*)/, "$1paris$2");
 
     // Effect to load 'dataraw' point-based data for source and target cities,
     // and store as 'data1', 'data2':
     useEffect(() => {
         const loadData = async () => {
-            const response1 = await fetch(mapPath1);
-            const json1 = await response1.json();
+            const data1 = await getEncryptedData(props.city);
+            const json1 = JSON.parse(data1);
             setData1(json1);
 
-            const response2 = await fetch(mapPath2);
-            const json2 = await response2.json();
+            const data2 = await getEncryptedData('paris');
+            const json2 = JSON.parse(data2);
             setData2(json2);
         };
 
         loadData();
-        }, [mapPath1, mapPath2]);
-
+        }, [props.city]);
 
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
     // vector of aggregaed mean differences in each polygon of source city.
