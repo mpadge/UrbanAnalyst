@@ -63,7 +63,6 @@ async function getEncryptedData() {
             'X-IV': iv
         },
         body: arrayBuffer,
-        bodyParser: false,
     });
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
