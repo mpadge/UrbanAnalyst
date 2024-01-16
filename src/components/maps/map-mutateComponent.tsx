@@ -48,7 +48,7 @@ async function getEncryptedData() {
     const ivResponse = await fetch(ivPath);
     const iv = await ivResponse.text().then(text => text.trim());
 
-    const response = await fetch('/api', {
+    const response = await fetch('/decrypt', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/octet-stream',
