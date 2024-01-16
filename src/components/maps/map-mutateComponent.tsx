@@ -14,7 +14,7 @@ interface MutateProps {
     varnames: string[]
     nentries: number
     mapPath: string
-    citiesArray: CityDataProps[]
+    city: string
     viewState: ViewState
     alpha: number
     layerMin: number
@@ -39,12 +39,13 @@ const JSONObjectSize = (obj: any) => {
     return numItems;
 }
 
-async function getEncryptedData() {
-    const path = '/data/test.aes';
+async function getEncryptedData(city: string) {
+
+    const path = '/data/' + city + '/dataraw.enc';
     const encryptedData = await fetch(path);
     const arrayBuffer = await encryptedData.arrayBuffer();
 
-    const ivPath = '/data/iv.txt';
+    const ivPath = '/data/' + city + '/iv.txt';
     const ivResponse = await fetch(ivPath);
     const iv = await ivResponse.text().then(text => text.trim());
 
@@ -73,7 +74,7 @@ const MapMutateComponent = (props: MutateProps) => {
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
     const [layer, setLayer] = useState<any>(null)
 
-    const mapPath1 = props.citiesArray[props.idx].path.replace("data\.json", "dataraw.json");
+    const mapPath1 = '/data/' + props.city + '/dataraw.json';
     const mapPath2 = mapPath1.replace(/(\/[^\/]*\/)[^\/]*(\/.*)/, "$1paris$2");
 
     // Effect to load 'dataraw' point-based data for source and target cities,
@@ -88,7 +89,7 @@ const MapMutateComponent = (props: MutateProps) => {
             const json2 = await response2.json();
             setData2(json2);
 
-            const decryptedData = await getEncryptedData();
+            const decryptedData = await getEncryptedData('berlin');
             console.log("Decrypted Data: ", decryptedData);
         };
 
