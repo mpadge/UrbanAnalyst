@@ -19,10 +19,10 @@ export async function POST(request: any): Promise<Response> {
        const arrayBuffer = await request.arrayBuffer();
        const encryptedData = Buffer.from(arrayBuffer, 'binary');
 
-       var decipher1 = crypto.createDecipheriv(algorithm, symKeyBuffer, iv);
+       var decipher = crypto.createDecipheriv(algorithm, symKeyBuffer, iv);
        var decryptedData = [];
-       decryptedData.push(decipher1.update(encryptedData, cipherEncoding, clearEncoding));
-       decryptedData.push(decipher1.final(clearEncoding));
+       decryptedData.push(decipher.update(encryptedData, cipherEncoding, clearEncoding));
+       decryptedData.push(decipher.final(clearEncoding));
 
        const decryptedString = decryptedData.join('');
 
