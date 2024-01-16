@@ -4,7 +4,7 @@ function getSymmetricKey(): crypto.CipherKey {
     const symKeyBase64: string = process.env.SYMMETRIC_KEY || '';
 
     const symKeyBuffer = Buffer.from(symKeyBase64, 'base64');
-    if (symKeyBuffer.length !== 16) {
+    if (symKeyBuffer.length !== 32) {
         throw new Error('Invalid key length: ' + symKeyBuffer.length);
     }
 
@@ -16,7 +16,7 @@ export async function POST(request: any): Promise<Response> {
 
        const key = getSymmetricKey();
 
-       const algorithm = 'aes-128-cbc';
+       const algorithm = 'aes-256-cbc';
        const clearEncoding: crypto.BinaryToTextEncoding = 'binary';
        const cipherEncoding: crypto.BinaryToTextEncoding = 'binary';
        const iv = Buffer.from(request.headers.get('X-IV'), 'hex');
