@@ -13,3 +13,6 @@ dev:
 
 build:
 	yarn build
+
+iv:
+	@openssl rand -hex 16 > public/data/iv.txt
