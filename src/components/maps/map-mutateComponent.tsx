@@ -47,10 +47,11 @@ async function getSymmetricKey() {
     return encryptedSymmetricKeyBuffer;
 }
 
-async function sendEncryptedData() {
+async function getEncryptedData() {
     const path = '/data/test.aes';
     const encryptedData = await fetch(path);
     const arrayBuffer = await encryptedData.arrayBuffer();
+
     const ivPath = '/data/iv.txt';
     const ivResponse = await fetch(ivPath);
     const iv = await ivResponse.text().then(text => text.trim());
@@ -62,12 +63,16 @@ async function sendEncryptedData() {
             'X-IV': iv
         },
         body: arrayBuffer,
+        bodyParser: false,
     });
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
     }
+
     const decryptedData = await response.text();
     console.log("Decrypted Data: ", decryptedData);
+
+    return decryptedData;
 }
 
 const MapMutateComponent = (props: MutateProps) => {
@@ -96,7 +101,7 @@ const MapMutateComponent = (props: MutateProps) => {
             setData2(json2);
 
             const keyBuffer = getSymmetricKey();
-            await sendEncryptedData();
+            await getEncryptedData();
         };
 
         loadData();
