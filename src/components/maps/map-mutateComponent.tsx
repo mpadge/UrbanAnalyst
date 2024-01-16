@@ -66,8 +66,6 @@ async function getEncryptedData() {
 }
 
 const MapMutateComponent = (props: MutateProps) => {
-    const [res, setRes] = useState(null);
-
     const [data1, setData1] = useState(null);
     const [data2, setData2] = useState(null);
 
