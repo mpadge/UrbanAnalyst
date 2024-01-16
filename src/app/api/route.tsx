@@ -1,48 +1,31 @@
 import * as crypto from 'crypto';
 
-function rsaKey(): crypto.KeyObject {
-   const key: string = process.env.RSA_PRIVATE_KEY || '';
-   const keycrypt = crypto.createPrivateKey(key);
-   return keycrypt;
-}
-
-export async function GET(request: any): Promise<Response> {
-   return new Promise((resolve, reject) => {
-       const rsakey = rsaKey();
-       const symKey = process.env.SYMMETRIC_KEY;
-
-       resolve(new Response("Hi there!"));
-   });
-}
-
 export async function POST(request: any): Promise<Response> {
    return new Promise(async (resolve, reject) => {
-       const rsakey = rsaKey();
+
        const symKeyBase64: string = process.env.SYMMETRIC_KEY || '';
 
        const symKeyBuffer = Buffer.from(symKeyBase64, 'base64');
-       if (symKeyBuffer.length !== 32) {
-           reject(new Error('Invalid key length'));
+       if (symKeyBuffer.length !== 16) {
+           reject(new Error('Invalid key length: ' + symKeyBuffer.length));
            return;
        }
 
-       const iv = Buffer.from(request.headers.get('X-IV'), 'hex');
+       var algorithm = 'aes-128-cbc';
+       var clearEncoding = 'buffer';
+       var cipherEncoding = 'binary';
+       var iv = Buffer.from(request.headers.get('X-IV'), 'hex');
 
-       // Get encrypted data from request body and convert to a Buffer
-       const reader = request.body.getReader();
-       let chunks = [];
-       while (true) {
-           const { done, value } = await reader.read();
-           if (done) break;
-           chunks.push(value);
-       }
-       const encryptedData = Buffer.concat(chunks);
+       const arrayBuffer = await request.arrayBuffer();
+       const encryptedData = Buffer.from(arrayBuffer, 'binary');
 
-       const decipher = crypto.createDecipheriv('aes-256-cbc', symKeyBuffer, iv);
-       decipher.setAutoPadding(false);
-       let decryptedData = decipher.update(encryptedData.toString('base64'), 'base64');
-       decryptedData = Buffer.concat([Buffer.from(decryptedData), Buffer.from(decipher.final())]);
+       var decipher1 = crypto.createDecipheriv(algorithm, symKeyBuffer, iv);
+       var decryptedData = [];
+       decryptedData.push(decipher1.update(encryptedData, cipherEncoding, clearEncoding));
+       decryptedData.push(decipher1.final(clearEncoding));
 
-       resolve(new Response(decryptedData));
+       const decryptedString = decryptedData.join('');
+
+       resolve(new Response(decryptedString, { headers: { 'Content-Type': 'text/plain' } }));
    });
 }
