@@ -81,20 +81,17 @@ const MapMutateComponent = (props: MutateProps) => {
     // and store as 'data1', 'data2':
     useEffect(() => {
         const loadData = async () => {
-            const response1 = await fetch(mapPath1);
-            const json1 = await response1.json();
+            const data1 = await getEncryptedData(props.city);
+            const json1 = JSON.parse(data1);
             setData1(json1);
 
-            const response2 = await fetch(mapPath2);
-            const json2 = await response2.json();
+            const data2 = await getEncryptedData('paris');
+            const json2 = JSON.parse(data2);
             setData2(json2);
-
-            const decryptedData = await getEncryptedData('berlin');
-            console.log("Decrypted Data: ", decryptedData);
         };
 
         loadData();
-        }, [mapPath1, mapPath2]);
+        }, [props.city]);
 
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
     // vector of aggregaed mean differences in each polygon of source city.
