@@ -39,15 +39,6 @@ const JSONObjectSize = (obj: any) => {
     return numItems;
 }
 
-async function getTestData() {
-    const res = await fetch("/api");
-    if (!res.ok) {
-        throw new Error("Failed to fetch data");
-    }
-    const data = await res.text();
-    return data;
-}
-
 async function getSymmetricKey() {
     const keyPath = 'data/encrypted_symmetric_key.bin';
     const encryptedSymmetricKey = await fetch(keyPath);
