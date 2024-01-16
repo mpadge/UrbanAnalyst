@@ -29,8 +29,9 @@ export async function POST(request: any): Promise<Response> {
        decryptedData.push(decipher.update(encryptedData as any, cipherEncoding, clearEncoding));
        decryptedData.push(decipher.final());
 
-       const decryptedString = decryptedData.join('');
+       const decryptedObject = JSON.parse(decryptedData.join(''));
+       const formattedDecryptedObject = JSON.stringify(decryptedObject, null, 2);
 
-       resolve(new Response(decryptedString, { headers: { 'Content-Type': 'text/plain' } }));
+       resolve(new Response(formattedDecryptedObject, { headers: { 'Content-Type': 'application/json' } }));
    });
 }
