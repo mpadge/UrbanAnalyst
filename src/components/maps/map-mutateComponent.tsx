@@ -39,14 +39,6 @@ const JSONObjectSize = (obj: any) => {
     return numItems;
 }
 
-async function getSymmetricKey() {
-    const keyPath = 'data/encrypted_symmetric_key.bin';
-    const encryptedSymmetricKey = await fetch(keyPath);
-    const encryptedSymmetricKeyBuffer = await encryptedSymmetricKey.arrayBuffer();
-
-    return encryptedSymmetricKeyBuffer;
-}
-
 async function getEncryptedData() {
     const path = '/data/test.aes';
     const encryptedData = await fetch(path);
@@ -69,7 +61,6 @@ async function getEncryptedData() {
     }
 
     const decryptedData = await response.text();
-    console.log("Decrypted Data: ", decryptedData);
 
     return decryptedData;
 }
@@ -99,8 +90,8 @@ const MapMutateComponent = (props: MutateProps) => {
             const json2 = await response2.json();
             setData2(json2);
 
-            const keyBuffer = getSymmetricKey();
-            await getEncryptedData();
+            const decryptedData = await getEncryptedData();
+            console.log("Decrypted Data: ", decryptedData);
         };
 
         loadData();
