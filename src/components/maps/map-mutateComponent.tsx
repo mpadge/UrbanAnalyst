@@ -8,6 +8,7 @@ import { Map } from "react-map-gl";
 import * as wasm_js from '@/../pkg/uamutations.js';
 import styles from '@/styles/maps.module.css';
 import { ViewState, CityDataProps } from "@/data/interfaces";
+import FetchData from '@/components/maps/map-mutateFetch';
 
 interface MutateProps {
     idx: number
@@ -39,33 +40,6 @@ const JSONObjectSize = (obj: any) => {
     return numItems;
 }
 
-async function getEncryptedData(city: string) {
-
-    const path = '/data/' + city + '/dataraw.enc';
-    const encryptedData = await fetch(path);
-    const arrayBuffer = await encryptedData.arrayBuffer();
-
-    const ivPath = '/data/' + city + '/iv.txt';
-    const ivResponse = await fetch(ivPath);
-    const iv = await ivResponse.text().then(text => text.trim());
-
-    const response = await fetch('/decrypt', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/octet-stream',
-            'X-IV': iv
-        },
-        body: arrayBuffer,
-    });
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const decryptedData = await response.text();
-
-    return decryptedData;
-}
-
 const MapMutateComponent = (props: MutateProps) => {
     const [data1, setData1] = useState(null);
     const [data2, setData2] = useState(null);
@@ -81,13 +55,11 @@ const MapMutateComponent = (props: MutateProps) => {
     // and store as 'data1', 'data2':
     useEffect(() => {
         const loadData = async () => {
-            const data1 = await getEncryptedData(props.city);
-            const json1 = JSON.parse(data1);
-            setData1(json1);
+            const data1 = await FetchData(props.city);
+            setData1(data1);
 
-            const data2 = await getEncryptedData('paris');
-            const json2 = JSON.parse(data2);
-            setData2(json2);
+            const data2 = await FetchData('paris');
+            setData2(data2);
         };
 
         loadData();
