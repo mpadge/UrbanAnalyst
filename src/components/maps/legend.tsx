@@ -119,7 +119,7 @@ export default function Legend (props: LegendProps) {
             layer1 + "_" + layer2 : layer2 + "_" + layer1;
         const dual_layers: boolean = paired_keys.includes(these_layers);
 
-        const this_layer: string = props.numLayers == "Paired" && dual_layers ?
+        const this_layer: string = props.numLayers === "Paired" && dual_layers ?
             these_layers : props.layer;
 
         const dataRanges: any = props.numLayers === "Paired" && dual_layers ?
