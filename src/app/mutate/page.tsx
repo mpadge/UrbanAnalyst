@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useState} from 'react';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 import Control from '@/components/maps/control';
-import Legend from '@/components/maps/legend';
+import LegendMutate from '@/components/maps/legend-mutate';
 
 // import UTAMap from '@/components/maps/map';
 import MapMutateCalculate from '@/components/maps/map-mutate';
@@ -20,6 +20,8 @@ export default function Home() {
     const nentries = 1000;
     const mapPath = "/data/berlin/data.json";
     const alpha = 0.7;
+
+    const layer_name = varnames[0];
 
     const [viewState, setViewState] = useState({
         ...CITY_DATA.citiesArray[idx].initialViewState,
@@ -37,6 +39,7 @@ export default function Home() {
     const handleLayerMaxChange = (layerMax: number) => {
         setLayerMax(layerMax);
     }
+    const [layerName, setLayerName] = useState<string>("social_index");
 
     return (
         <>
@@ -52,6 +55,12 @@ export default function Home() {
             layerMax={layerMax}
             handleLayerMinChange={handleLayerMinChange}
             handleLayerMaxChange={handleLayerMaxChange}
+        />
+        <LegendMutate
+            layerMin={layerMin}
+            layerMax={layerMax}
+            alpha={alpha}
+            layer_name={layer_name}
         />
         </>
     )
