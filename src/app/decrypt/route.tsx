@@ -1,5 +1,12 @@
 import * as crypto from 'crypto';
 
+// https://nextjs.org/docs/messages/api-routes-response-size-limit:
+export const config = {
+    api: {
+        responseLimit: false,
+    },
+}
+
 function getSymmetricKey(): crypto.CipherKey {
     const symKeyBase64: string = process.env.SYMMETRIC_KEY || '';
 
