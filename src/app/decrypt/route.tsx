@@ -10,7 +10,7 @@ export async function GET(request: NextRequest): Promise<Response> {
         cache: 'no-store',
         headers: {
             'Content-Type': 'application/json',
-            'authorization': `token ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`
+            'authorization': `token ${process.env.GITHUB_TOKEN}`
             }
             });
     const data = await response.json();
