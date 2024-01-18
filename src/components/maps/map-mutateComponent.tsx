@@ -8,7 +8,6 @@ import { Map } from "react-map-gl";
 import * as wasm_js from '@/../pkg/uamutations.js';
 import styles from '@/styles/maps.module.css';
 import { ViewState, CityDataProps } from "@/data/interfaces";
-import { GET } from '@/components/maps/map-mutateFetch';
 
 interface MutateProps {
     idx: number
@@ -40,6 +39,27 @@ const JSONObjectSize = (obj: any) => {
     return numItems;
 }
 
+async function getEncryptedData(city: string) {
+
+    const path = '/data/' + city + '/dataraw.enc';
+    const encryptedData = await fetch(path);
+    const arrayBuffer = await encryptedData.arrayBuffer();
+
+    const ivPath = '/data/' + city + '/iv.txt';
+    const ivResponse = await fetch(ivPath);
+    const iv = await ivResponse.text().then(text => text.trim());
+
+    const response = await fetch(`/decrypt?city=${city}`);
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("-----back in calling fn for city: " + city + "-----")
+    console.log(data)
+
+    return data;
+}
+
 const MapMutateComponent = (props: MutateProps) => {
     const [data1, setData1] = useState(null);
     const [data2, setData2] = useState(null);
@@ -55,16 +75,14 @@ const MapMutateComponent = (props: MutateProps) => {
     // and store as 'data1', 'data2':
     useEffect(() => {
         const loadData = async () => {
-            const city1: string = props.city;
-            const data1 = await GET(city1);
-            console.log("-----data1-----")
-            console.log(data1)
+            const data1 = await getEncryptedData(props.city);
             setData1(data1);
+            // const json1 = JSON.parse(data1);
+            // setData1(json1);
 
-            const city2: string = 'paris';
-            const data2 = await GET(city2);
-            console.log("-----data2-----")
-            console.log(data2)
+            const data2 = await getEncryptedData('paris');
+            // const json2 = JSON.parse(data2);
+            // setData2(json2);
             setData2(data2);
         };
 
