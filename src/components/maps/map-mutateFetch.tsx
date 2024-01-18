@@ -5,6 +5,7 @@ import { useEffect, useState} from 'react';
 export async function GET(city: string) {
     const url = `https://raw.githubusercontent.com/UrbanAnalyst/CityDataPrivate/main/${city}/dataraw.json`;
     const response = await fetch(url, {
+        method: 'GET',
         cache: 'no-store',
         headers: {
             Authorization: `token ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`
