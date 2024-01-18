@@ -8,7 +8,7 @@ import { Map } from "react-map-gl";
 import * as wasm_js from '@/../pkg/uamutations.js';
 import styles from '@/styles/maps.module.css';
 import { ViewState, CityDataProps } from "@/data/interfaces";
-import FetchData from '@/components/maps/map-mutateFetch';
+import { FetchData } from '@/components/maps/map-mutateFetch';
 
 interface MutateProps {
     idx: number
