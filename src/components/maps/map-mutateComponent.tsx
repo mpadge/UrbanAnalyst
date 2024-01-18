@@ -85,13 +85,13 @@ const MapMutateComponent = (props: MutateProps) => {
             let varnames_plus_index = [...props.varnames];
             varnames_plus_index.push('index');
 
-            const dataObjects1 = [];
+            const dataObjects1: any = [];
             for (const varname of varnames_plus_index) {
                 const data1 = await getEncryptedData(props.city, varname);
                 const json = JSON.parse(data1);
-                json.forEach((row, index) => {
+                json.forEach((row: { [key: string]: unknown }, index: number) => {``
                     if (index >= dataObjects1.length) {
-                        const newRow = {};
+                        const newRow: { [key: string]: unknown } = {};
                         newRow[varname] = row[varname];
                         dataObjects1.push(newRow);
                     } else {
@@ -102,13 +102,13 @@ const MapMutateComponent = (props: MutateProps) => {
             setData1(dataObjects1);
 
             const city2 = 'paris';
-            const dataObjects2 = [];
+            const dataObjects2: any = [];
             for (const varname of varnames_plus_index) {
                 const data2 = await getEncryptedData(city2, varname);
                 const json = JSON.parse(data2);
-                json.forEach((row, index) => {
+                json.forEach((row: { [key: string]: unknown }, index: number) => {``
                     if (index >= dataObjects2.length) {
-                        const newRow = {};
+                        const newRow: { [key: string]: unknown } = {};
                         newRow[varname] = row[varname];
                         dataObjects2.push(newRow);
                     } else {
@@ -120,7 +120,7 @@ const MapMutateComponent = (props: MutateProps) => {
         };
 
         loadData();
-        }, [props.city]);
+        }, [props.city, props.varnames]);
 
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
     // vector of aggregaed mean differences in each polygon of source city.

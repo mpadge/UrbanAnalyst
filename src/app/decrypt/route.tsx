@@ -20,7 +20,7 @@ export async function POST(request: any): Promise<Response> {
        const clearEncoding: crypto.BinaryToTextEncoding = 'binary';
        const cipherEncoding: crypto.BinaryToTextEncoding = 'binary';
        const iv = Buffer.from(request.headers.get('X-IV'), 'hex');
-       const varname = Buffer.from(request.headers.get('X-VARNAME'), 'utf8');
+       const varname = Buffer.from(request.headers.get('X-VARNAME'), 'utf8').toString();
 
        const arrayBuffer = await request.arrayBuffer();
        const encryptedData = Buffer.from(arrayBuffer, 'binary');
@@ -31,7 +31,7 @@ export async function POST(request: any): Promise<Response> {
        decryptedData.push(decipher.final());
 
        const decryptedObject = JSON.parse(decryptedData.join(''));
-       const filteredDecryptedObject = decryptedObject.map(item => ({ [varname]: item[varname] }));
+       const filteredDecryptedObject = decryptedObject.map((item: { [key: string]: unknown }) => ({ [varname]: item[varname] }));
        const formattedDecryptedObject = JSON.stringify(filteredDecryptedObject, null, 2);
 
        resolve(new Response(formattedDecryptedObject, { headers: { 'Content-Type': 'application/json' } }));
