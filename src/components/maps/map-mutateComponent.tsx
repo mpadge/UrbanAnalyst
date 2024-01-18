@@ -54,8 +54,6 @@ async function getEncryptedData(city: string) {
         throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log("-----back in calling fn for city: " + city + "-----")
-    console.log(data)
 
     return data;
 }

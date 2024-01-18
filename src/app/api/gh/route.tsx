@@ -14,8 +14,6 @@ export async function GET(request: NextRequest): Promise<Response> {
             }
             });
     const data = await response.json();
-    console.log("-----in GET-----");
-    console.log(data);
 
     return Response.json(data);
 }
