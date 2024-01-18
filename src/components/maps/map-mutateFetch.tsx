@@ -11,6 +11,8 @@ export default async function FetchData(city: string) {
         }
     });
     const data = await response.json();
+    console.log("-----data in fetch: -----")
+    console.log(data)
 
     return data;
 };
