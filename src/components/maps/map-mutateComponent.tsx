@@ -49,7 +49,7 @@ async function getEncryptedData(city: string) {
     const ivResponse = await fetch(ivPath);
     const iv = await ivResponse.text().then(text => text.trim());
 
-    const response = await fetch(`/decrypt?city=${city}`);
+    const response = await fetch(`/api/gh?city=${city}`);
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
     }
