@@ -39,7 +39,7 @@ const JSONObjectSize = (obj: any) => {
     return numItems;
 }
 
-async function getEncryptedData(city: string) {
+async function getEncryptedData(city: string, varname: string) {
 
     const path = '/data/' + city + '/dataraw.enc';
     const encryptedData = await fetch(path);
@@ -53,7 +53,8 @@ async function getEncryptedData(city: string) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/octet-stream',
-            'X-IV': iv
+            'X-IV': iv,
+            'X-VARNAME': varname
         },
         body: arrayBuffer,
     });
@@ -81,13 +82,41 @@ const MapMutateComponent = (props: MutateProps) => {
     // and store as 'data1', 'data2':
     useEffect(() => {
         const loadData = async () => {
-            const data1 = await getEncryptedData(props.city);
-            const json1 = JSON.parse(data1);
-            setData1(json1);
+            let varnames_plus_index = [...props.varnames];
+            varnames_plus_index.push('index');
 
-            const data2 = await getEncryptedData('paris');
-            const json2 = JSON.parse(data2);
-            setData2(json2);
+            const dataObjects1 = [];
+            for (const varname of varnames_plus_index) {
+                const data1 = await getEncryptedData(props.city, varname);
+                const json = JSON.parse(data1);
+                json.forEach((row, index) => {
+                    if (index >= dataObjects1.length) {
+                        const newRow = {};
+                        newRow[varname] = row[varname];
+                        dataObjects1.push(newRow);
+                    } else {
+                        dataObjects1[index][varname] = row[varname];
+                    }
+                });
+            }
+            setData1(dataObjects1);
+
+            const city2 = 'paris';
+            const dataObjects2 = [];
+            for (const varname of varnames_plus_index) {
+                const data2 = await getEncryptedData(city2, varname);
+                const json = JSON.parse(data2);
+                json.forEach((row, index) => {
+                    if (index >= dataObjects2.length) {
+                        const newRow = {};
+                        newRow[varname] = row[varname];
+                        dataObjects2.push(newRow);
+                    } else {
+                        dataObjects2[index][varname] = row[varname];
+                    }
+                });
+            }
+            setData2(dataObjects2);
         };
 
         loadData();
@@ -104,6 +133,7 @@ const MapMutateComponent = (props: MutateProps) => {
             if (data1 && data2) {
                 const wasm_binary = wasm_js.initSync(bytes);
                 const varname = props.varnames.join(",");
+                console.log("-----varname to WASM = " + varname);
                 const data1js = JSON.stringify(data1);
                 const data2js = JSON.stringify(data2);
                 const resultJson = wasm_js.uamutate(data1js, data2js, varname, props.nentries);
