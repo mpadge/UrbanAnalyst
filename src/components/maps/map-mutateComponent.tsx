@@ -39,31 +39,15 @@ const JSONObjectSize = (obj: any) => {
     return numItems;
 }
 
-async function getEncryptedData(city: string) {
+async function getGHData(city: string) {
 
-    const path = '/data/' + city + '/dataraw.enc';
-    const encryptedData = await fetch(path);
-    const arrayBuffer = await encryptedData.arrayBuffer();
-
-    const ivPath = '/data/' + city + '/iv.txt';
-    const ivResponse = await fetch(ivPath);
-    const iv = await ivResponse.text().then(text => text.trim());
-
-    const response = await fetch('/decrypt', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/octet-stream',
-            'X-IV': iv
-        },
-        body: arrayBuffer,
-    });
+    const response = await fetch(`/api/gh?city=${city}`);
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
     }
+    const data = await response.json();
 
-    const decryptedData = await response.text();
-
-    return decryptedData;
+    return data;
 }
 
 const MapMutateComponent = (props: MutateProps) => {
@@ -81,13 +65,11 @@ const MapMutateComponent = (props: MutateProps) => {
     // and store as 'data1', 'data2':
     useEffect(() => {
         const loadData = async () => {
-            const data1 = await getEncryptedData(props.city);
-            const json1 = JSON.parse(data1);
-            setData1(json1);
+            const data1 = await getGHData(props.city);
+            setData1(data1);
 
-            const data2 = await getEncryptedData('paris');
-            const json2 = JSON.parse(data2);
-            setData2(json2);
+            const data2 = await getGHData('paris');
+            setData2(data2);
         };
 
         loadData();
