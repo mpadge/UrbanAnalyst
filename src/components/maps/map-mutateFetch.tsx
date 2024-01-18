@@ -2,11 +2,6 @@
 
 import { useEffect, useState} from 'react';
 
-interface FetchProps {
-    varnames: string[]
-    city: string
-}
-
 export default async function FetchData(city: string) {
     const url = `https://raw.githubusercontent.com/UrbanAnalyst/CityDataPrivate/main/${city}/dataraw.json`;
     const response = await fetch(url, {
