@@ -57,14 +57,10 @@ const MapMutateComponent = (props: MutateProps) => {
         const loadData = async () => {
             const city1: string = props.city;
             const data1 = await FetchData(city1);
-            console.log("------data1------");
-            console.log(data1);
             setData1(data1);
 
             const city2: string = 'paris';
             const data2 = await FetchData(city2);
-            console.log("------data2------");
-            console.log(data2);
             setData2(data2);
         };
 
