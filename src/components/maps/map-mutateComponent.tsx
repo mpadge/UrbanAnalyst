@@ -8,7 +8,7 @@ import { Map } from "react-map-gl";
 import * as wasm_js from '@/../pkg/uamutations.js';
 import styles from '@/styles/maps.module.css';
 import { ViewState, CityDataProps } from "@/data/interfaces";
-import { FetchData } from '@/components/maps/map-mutateFetch';
+import { GET } from '@/components/maps/map-mutateFetch';
 
 interface MutateProps {
     idx: number
@@ -56,13 +56,13 @@ const MapMutateComponent = (props: MutateProps) => {
     useEffect(() => {
         const loadData = async () => {
             const city1: string = props.city;
-            const data1 = await FetchData(city1);
+            const data1 = await GET(city1);
             console.log("-----data1-----")
             console.log(data1)
             setData1(data1);
 
             const city2: string = 'paris';
-            const data2 = await FetchData(city2);
+            const data2 = await GET(city2);
             console.log("-----data2-----")
             console.log(data2)
             setData2(data2);
