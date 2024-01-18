@@ -15,9 +15,9 @@
     "d3": "^7.8.5",
     "deck.gl": "^8.9.30",
     "mapbox-gl": "^2.15.0",
-    "next": "13.5.6",
-    "react": "^18",
-    "react-dom": "^18",
+    "next": "^14.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-map-gl": "^7.1.6",
     "react-select": "^5.7.7",
     "wasm": "file:pkg"
@@ -29,7 +29,7 @@
     "@types/react-dom": "^18.2.14",
     "autoprefixer": "^10",
     "eslint": "^8",
-    "eslint-config-next": "13.5.6",
+    "eslint-config-next": "^14.0.4",
     "postcss": "^8",
     "typescript": "^5",
     "wasm-pack": "^0.12.1"
