@@ -1,12 +1,23 @@
-import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import type { Metadata, Viewport } from 'next';
 import { Inter } from "next/font/google"
 import styles from '@/styles/about.module.css'
 import Buttons from '@/components/buttons3'
 import { ButtonProps } from '@/data/interfaces';
 
 const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+    title: 'UA',
+    description: 'Urban Analyses for the world',
+    icons: '/ua.ico',
+}
+
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1.0,
+}
 
 export default function Home() {
 
@@ -18,12 +29,6 @@ export default function Home() {
 
     return (
         <>
-        <Head>
-            <title>UA</title>
-            <meta name="description" content="Urban Analyses for the world" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link rel="icon" href="/ua.ico" />
-        </Head>
         <Buttons buttons={buttons} />
         <main className={styles.main}>
             <div className={styles.description}>
