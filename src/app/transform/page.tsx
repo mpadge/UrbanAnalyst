@@ -5,10 +5,10 @@ import Image from 'next/image'
 import { useState} from 'react';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 import Control from '@/components/maps/control';
-import LegendMutate from '@/components/maps/legend-mutate';
+import LegendTransform from '@/components/maps/legend-transform';
 
 // import UTAMap from '@/components/maps/map';
-import MapMutateCalculate from '@/components/maps/map-mutate';
+import MapTransformCalculate from '@/components/maps/map-transform';
 import styles from '@/styles/maps.module.css';
 import { CITY_DATA } from '@/data/citydata';
 import { ViewState } from "@/data/interfaces";
@@ -43,7 +43,7 @@ export default function Home() {
 
     return (
         <>
-        <MapMutateCalculate
+        <MapTransformCalculate
             idx={idx}
             varnames={varnames}
             nentries={nentries}
@@ -56,7 +56,7 @@ export default function Home() {
             handleLayerMinChange={handleLayerMinChange}
             handleLayerMaxChange={handleLayerMaxChange}
         />
-        <LegendMutate
+        <LegendTransform
             layerMin={layerMin}
             layerMax={layerMax}
             alpha={alpha}

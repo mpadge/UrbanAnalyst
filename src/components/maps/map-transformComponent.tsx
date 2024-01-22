@@ -9,7 +9,7 @@ import * as wasm_js from '@/../pkg/uamutations.js';
 import styles from '@/styles/maps.module.css';
 import { ViewState, CityDataProps } from "@/data/interfaces";
 
-interface MutateProps {
+interface TransformProps {
     idx: number
     varnames: string[]
     nentries: number
@@ -50,7 +50,7 @@ async function getGHData(city: string) {
     return data;
 }
 
-const MapMutateComponent = (props: MutateProps) => {
+const MapTransformComponent = (props: TransformProps) => {
     const [data1, setData1] = useState(null);
     const [data2, setData2] = useState(null);
 
@@ -189,4 +189,4 @@ const MapMutateComponent = (props: MutateProps) => {
     )
 }
 
-export default MapMutateComponent;
+export default MapTransformComponent;
