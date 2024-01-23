@@ -62,9 +62,6 @@ const MapTransformComponent = (props: TransformProps) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [calculating, setCalculating] = useState<boolean>(false);
 
-    const mapPath1 = '/data/' + props.city + '/dataraw.json';
-    const mapPath2 = mapPath1.replace(/(\/[^\/]*\/)[^\/]*(\/.*)/, "$1paris$2");
-
     // Effect to load 'dataraw' point-based data for source and target cities,
     // and store as 'data1', 'data2':
     useEffect(() => {
