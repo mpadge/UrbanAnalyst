@@ -8,6 +8,7 @@ import { Map } from "react-map-gl";
 import * as wasm_js from '@/../pkg/uamutations.js';
 import styles from '@/styles/maps.module.css';
 import { ViewState, CityDataProps } from "@/data/interfaces";
+import TransformMsgs from '@/components/maps/transform-msgs';
 
 interface TransformProps {
     idx: number
@@ -57,6 +58,9 @@ const MapTransformComponent = (props: TransformProps) => {
     const [result, setResult] = useState<number[] | null>(null);
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
     const [layer, setLayer] = useState<any>(null)
+
+    const [loading, setLoading] = useState<boolean>(true);
+    const [calculating, setCalculating] = useState<boolean>(false);
 
     const mapPath1 = '/data/' + props.city + '/dataraw.json';
     const mapPath2 = mapPath1.replace(/(\/[^\/]*\/)[^\/]*(\/.*)/, "$1paris$2");
@@ -170,8 +174,23 @@ const MapTransformComponent = (props: TransformProps) => {
         setLayer(this_layer)
     }, [props.layerMin, props.layerMax, varname, props.alpha, geoJSONcontent]);
 
+    useEffect(() => {
+        if (data1 && data2) {
+            setLoading(false);
+            setCalculating(true);
+        }
+    }, [data1, data2]);
+
+    useEffect(() => {
+        if (layer) {
+            setCalculating(false);
+        }
+    }, [layer]);
+
     return (
         <>
+        {loading ? <TransformMsgs msg='Loading ...' /> :
+            calculating ? <TransformMsgs msg='Calculating ...' /> : null}
         <DeckGL
             width={"100vw"}
             height={"100vh"}
