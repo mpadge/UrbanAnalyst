@@ -17,6 +17,7 @@ import { ViewState } from "@/data/interfaces";
 export default function MapTransformPage() {
 
     const [idx, setIdx] = useState(0);
+    const [idx2, setIdx2] = useState(1); // Target City
     const [cityData, setCityData] = useState(CITY_DATA.citiesArray[idx]);
     const [viewState, setViewState] = useState({
         ...CITY_DATA.citiesArray[idx].initialViewState,
@@ -30,6 +31,9 @@ export default function MapTransformPage() {
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
+    }
+    const handleIdx2Change = (idx2: number) => {
+        setIdx2(idx2);
     }
     const handleAlphaChange = (alpha: number) => {
         setAlpha(alpha);
@@ -74,12 +78,14 @@ export default function MapTransformPage() {
         />
         <Control
             idx={idx}
+            idx2={idx2}
             varnames={varnames}
             city={CITY_DATA.citiesArray[idx].name}
             alpha={alpha}
             citiesArray={CITY_DATA.citiesArray}
             viewState={viewState}
             handleIdxChange={handleIdxChange}
+            handleIdx2Change={handleIdx2Change}
             handleAlphaChange={handleAlphaChange}
             handleViewStateChange={handleViewStateChange}
             handleLayerChange={handleLayerChange}
