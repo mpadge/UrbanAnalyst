@@ -48,7 +48,6 @@ export default function MapTransformPage() {
 
     const varnames = ["bike_index", "social_index"];
     const nentries = 1000;
-    const mapPath = "/data/berlin/data.json";
 
     const layer_name = varnames[0];
 
