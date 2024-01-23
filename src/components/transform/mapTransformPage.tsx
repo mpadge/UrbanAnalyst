@@ -40,7 +40,6 @@ export default function MapTransformPage() {
     }
     const handleViewStateChange = (pViewState: any) => {
         setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
-        //setViewState(pViewState);
     }
     const handleLayerChange = (layer: string) => {
         setLayer(layer);
