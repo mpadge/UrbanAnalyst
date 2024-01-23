@@ -2,7 +2,10 @@
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import * as d3 from 'd3';
 import Link from 'next/link'
+
 import styles from '@/styles/stats.module.css';
+import useWindowSize from '@/components/window-size';
+
 import { CityDataProps } from "@/data/interfaces";
 import { HeadingTextOneLayer } from "@/components/heading_text";
 
@@ -42,40 +45,6 @@ interface GroupProps {
 interface AxisProps {
     axisType: string,
     innerHeight?: number
-}
-
-function useWindowSize() {
-
-    interface windowSize {
-        width: number;
-        height: number;
-    }
-
-    const [windowSize, setWindowSize] = useState<{width: number | null, height: number | null}>({
-        width: null,
-        height: null,
-    });
-
-    function isNumber(x: any): x is number {
-        return typeof x === "number";
-    }
-
-    useEffect(() => {
-        function handleResize() {
-            setWindowSize({
-                width: window.innerWidth,
-                height: window.innerHeight,
-            });
-        }
-
-        window.addEventListener("resize", handleResize);
-
-        handleResize();
-
-        return () => window.removeEventListener("resize", handleResize);
-    }, []); // Empty array ensures that effect is only run on mount
-
-    return windowSize;
 }
 
 export default function BarChart (props: StatsProps) {
