@@ -64,9 +64,11 @@ export default function MapTransformPage() {
         <>
         <MapTransformCalculate
             idx={idx}
+            idx2={idx2}
             varnames={varnames}
             nentries={nentries}
             city = {CITY_DATA.citiesArray[idx].name}
+            targetCity = {CITY_DATA.citiesArray[idx2].name}
             viewState = {viewState}
             alpha = {alpha}
             layerMin={layerMin}

@@ -12,9 +12,11 @@ import TransformMsgs from '@/components/transform/transform-msgs';
 
 interface TransformProps {
     idx: number
+    idx2: number
     varnames: string[]
     nentries: number
     city: string
+    targetCity: string
     viewState: ViewState
     alpha: number
     layerMin: number
@@ -61,12 +63,10 @@ const MapTransformComponent = (props: TransformProps) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [calculating, setCalculating] = useState<boolean>(false);
 
-    const [mapPath, setMapPath] = useState<string>("");
-
+    const [mapPathSource, setMapPathSource] = useState<string>("");
     useEffect(() => {
-        const mapPath = "/data/" + props.city + "/data.json";
-        console.log("-------mapPath: " + mapPath);
-        setMapPath(mapPath);
+        const mapPathSource = "/data/" + props.city + "/data.json";
+        setMapPathSource(mapPathSource);
     }, [props.city]);
 
     // Effect to load 'dataraw' point-based data for source and target cities,
@@ -76,12 +76,12 @@ const MapTransformComponent = (props: TransformProps) => {
             const data1 = await getGHData(props.city);
             setData1(data1);
 
-            const data2 = await getGHData('paris');
+            const data2 = await getGHData(props.targetCity);
             setData2(data2);
         };
 
         loadData();
-        }, [props.city]);
+        }, [props.city, props.targetCity]);
 
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
     // vector of aggregaed mean differences in each polygon of source city.
@@ -113,7 +113,7 @@ const MapTransformComponent = (props: TransformProps) => {
     // with 'result' from previous effect:
     const varname = props.varnames[0];
     useEffect(() => {
-        fetch(mapPath)
+        fetch(mapPathSource)
         .then(response => response.json())
         .then(data => {
             data.features.forEach((feature: any, index: number) => {
@@ -124,7 +124,7 @@ const MapTransformComponent = (props: TransformProps) => {
             setGeoJSONcontent(data);
         })
         .catch((error) => console.error('Error:', error));
-    }, [mapPath, result, varname]);
+    }, [mapPathSource, result, varname]);
 
     // Effect to get min + max values of 'result' and store as 'layerMin',
     // 'layerMax':
