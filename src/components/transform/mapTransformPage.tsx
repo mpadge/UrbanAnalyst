@@ -64,7 +64,6 @@ export default function MapTransformPage() {
             idx={idx}
             varnames={varnames}
             nentries={nentries}
-            mapPath={mapPath}
             city = {CITY_DATA.citiesArray[idx].name}
             viewState = {viewState}
             alpha = {alpha}

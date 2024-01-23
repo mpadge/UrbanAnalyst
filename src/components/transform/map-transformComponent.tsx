@@ -14,7 +14,6 @@ interface TransformProps {
     idx: number
     varnames: string[]
     nentries: number
-    mapPath: string
     city: string
     viewState: ViewState
     alpha: number
@@ -62,6 +61,14 @@ const MapTransformComponent = (props: TransformProps) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [calculating, setCalculating] = useState<boolean>(false);
 
+    const [mapPath, setMapPath] = useState<string>("");
+
+    useEffect(() => {
+        const mapPath = "/data/" + props.city + "/data.json";
+        console.log("-------mapPath: " + mapPath);
+        setMapPath(mapPath);
+    }, [props.city]);
+
     // Effect to load 'dataraw' point-based data for source and target cities,
     // and store as 'data1', 'data2':
     useEffect(() => {
@@ -106,7 +113,7 @@ const MapTransformComponent = (props: TransformProps) => {
     // with 'result' from previous effect:
     const varname = props.varnames[0];
     useEffect(() => {
-        fetch(props.mapPath)
+        fetch(mapPath)
         .then(response => response.json())
         .then(data => {
             data.features.forEach((feature: any, index: number) => {
@@ -117,7 +124,7 @@ const MapTransformComponent = (props: TransformProps) => {
             setGeoJSONcontent(data);
         })
         .catch((error) => console.error('Error:', error));
-    }, [props.mapPath, result, varname]);
+    }, [mapPath, result, varname]);
 
     // Effect to get min + max values of 'result' and store as 'layerMin',
     // 'layerMax':
