@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useState} from 'react';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 
-import Control from '@/components/maps/control';
+import Control from '@/components/transform/control';
 import LegendTransform from '@/components/transform/legend-transform';
 
 // import UTAMap from '@/components/maps/map';
@@ -71,6 +71,18 @@ export default function MapTransformPage() {
             layerMax={layerMax}
             handleLayerMinChange={handleLayerMinChange}
             handleLayerMaxChange={handleLayerMaxChange}
+        />
+        <Control
+            idx={idx}
+            varnames={varnames}
+            city={CITY_DATA.citiesArray[idx].name}
+            alpha={alpha}
+            citiesArray={CITY_DATA.citiesArray}
+            viewState={viewState}
+            handleIdxChange={handleIdxChange}
+            handleAlphaChange={handleAlphaChange}
+            handleViewStateChange={handleViewStateChange}
+            handleLayerChange={handleLayerChange}
         />
         <LegendTransform
             layerMin={layerMin}
