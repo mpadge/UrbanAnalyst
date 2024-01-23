@@ -6,10 +6,10 @@ import { useState} from 'react';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 
 import Control from '@/components/maps/control';
-import LegendTransform from '@/components/maps/legend-transform';
+import LegendTransform from '@/components/transform/legend-transform';
 
 // import UTAMap from '@/components/maps/map';
-import MapTransformCalculate from '@/components/maps/map-transform';
+import MapTransformCalculate from '@/components/transform/map-transform';
 import styles from '@/styles/maps.module.css';
 import { CITY_DATA } from '@/data/citydata';
 import { ViewState } from "@/data/interfaces";

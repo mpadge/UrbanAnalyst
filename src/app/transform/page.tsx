@@ -15,7 +15,7 @@ export const viewport: Viewport = {
     userScalable: false,
 }
 
-import MapTransformPage from '@/components/maps/mapTransformPage';
+import MapTransformPage from '@/components/transform/mapTransformPage';
 
 export default function Home() {
 

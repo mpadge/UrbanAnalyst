@@ -3,7 +3,7 @@
 
 import dynamic from 'next/dynamic'
 
-import MapTransformComponent from '@/components/maps/map-transformComponent';
+import MapTransformComponent from '@/components/transform/map-transformComponent';
 
 const MapTransformCalculate = dynamic(() => Promise.resolve(MapTransformComponent), {
     ssr: false

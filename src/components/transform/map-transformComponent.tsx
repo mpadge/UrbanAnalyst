@@ -8,7 +8,7 @@ import { Map } from "react-map-gl";
 import * as wasm_js from '@/../pkg/uamutations.js';
 import styles from '@/styles/maps.module.css';
 import { ViewState, CityDataProps } from "@/data/interfaces";
-import TransformMsgs from '@/components/maps/transform-msgs';
+import TransformMsgs from '@/components/transform/transform-msgs';
 
 interface TransformProps {
     idx: number
