@@ -14,7 +14,7 @@ import styles from '@/styles/maps.module.css';
 import { CITY_DATA } from '@/data/citydata';
 import { ViewState } from "@/data/interfaces";
 
-export default function MapTransformPage() {
+export default function TransformPage() {
 
     const [idx, setIdx] = useState(0);
     const [idx2, setIdx2] = useState(1); // Target City

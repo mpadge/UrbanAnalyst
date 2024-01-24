@@ -15,13 +15,13 @@ export const viewport: Viewport = {
     userScalable: false,
 }
 
-import MapTransformPage from '@/components/transform/mapTransformPage';
+import TransformPage from '@/components/transform/TransformPage';
 
 export default function Home() {
 
     return (
         <>
-        <MapTransformPage />
+        <TransformPage />
         </>
     )
 }
