@@ -1,7 +1,5 @@
 "use client"
 
-import Image from 'next/image'
-
 import { useState} from 'react';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 
@@ -10,7 +8,6 @@ import Legend from '@/components/transform/legend';
 
 // import UTAMap from '@/components/maps/map';
 import MapTransformDynamic from '@/components/transform/TransformPageDynamic';
-import styles from '@/styles/maps.module.css';
 import { CITY_DATA } from '@/data/citydata';
 import { ViewState } from "@/data/interfaces";
 

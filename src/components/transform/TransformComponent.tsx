@@ -1,13 +1,8 @@
 import { useEffect, useState} from 'react';
-import * as d3 from 'd3';
-import 'd3-scale-chromatic';
-import { GeoJsonLayer } from "@deck.gl/layers/typed";
 import { DeckGL } from "@deck.gl/react/typed";
 import { Map } from "react-map-gl";
 
-import * as wasm_js from '@/../pkg/uamutations.js';
-import styles from '@/styles/maps.module.css';
-import { ViewState, CityDataProps } from "@/data/interfaces";
+import { ViewState } from "@/data/interfaces";
 import TransformMsgs from '@/components/transform/PageMessages';
 import { loadDataFunction } from '@/components/transform/LoadData';
 import { transformDataFunction } from '@/components/transform/CallTransform';
