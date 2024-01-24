@@ -34,24 +34,21 @@ const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 
 const TransformComponent = (props: TransformProps) => {
+    const [mapPathSource, setMapPathSource] = useState<string>("");
     const [data1, setData1] = useState<number | null>(null);
     const [data2, setData2] = useState<number | null>(null);
-
     const [result, setResult] = useState<number[] | null>(null);
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
     const [layer, setLayer] = useState<any>(null)
-
     const [loading, setLoading] = useState<boolean>(true);
     const [calculating, setCalculating] = useState<boolean>(false);
 
-    const [mapPathSource, setMapPathSource] = useState<string>("");
     useEffect(() => {
         const mapPathSource = "/data/" + props.city + "/data.json";
         setMapPathSource(mapPathSource);
     }, [props.city]);
 
-    // Effect to load 'dataraw' point-based data for source and target cities,
-    // and store as 'data1', 'data2':
+    // Effect to load 'dataraw' point-based data for source and target cities.
     useEffect(() => {
         const handleData1Change = (data: number | null) => {
             setData1(data);
@@ -63,7 +60,9 @@ const TransformComponent = (props: TransformProps) => {
         }, [props.city, props.targetCity, setData1, setData2]);
 
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
-    // vector of aggregaed mean differences in each polygon of source city.
+    // vector of aggregaed mean differences in each polygon of source city. This
+    // vector is stored in the column of 'result' corresponding to
+    // 'props.varnames[0]'.
     useEffect(() => {
         const handleResultChange = (result: any) => {
             setResult(result);
@@ -88,8 +87,6 @@ const TransformComponent = (props: TransformProps) => {
         .catch((error) => console.error('Error:', error));
     }, [mapPathSource, result, varname]);
 
-    // Effect to get min + max values of 'result' and store as 'layerMin',
-    // 'layerMax':
     const { handleLayerMinChange, handleLayerMaxChange } = props;
     useEffect(() => {
         if (result) {
