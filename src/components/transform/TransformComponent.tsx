@@ -9,6 +9,7 @@ import * as wasm_js from '@/../pkg/uamutations.js';
 import styles from '@/styles/maps.module.css';
 import { ViewState, CityDataProps } from "@/data/interfaces";
 import TransformMsgs from '@/components/transform/PageMessages';
+import { loadDataFunction } from '@/components/transform/LoadData';
 
 interface TransformProps {
     idx: number
@@ -43,20 +44,9 @@ const JSONObjectSize = (obj: any) => {
     return numItems;
 }
 
-async function getGHData(city: string) {
-
-    const response = await fetch(`/api/gh?city=${city}`);
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-
-    return data;
-}
-
 const TransformComponent = (props: TransformProps) => {
-    const [data1, setData1] = useState(null);
-    const [data2, setData2] = useState(null);
+    const [data1, setData1] = useState<number | null>(null);
+    const [data2, setData2] = useState<number | null>(null);
 
     const [result, setResult] = useState<number[] | null>(null);
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
@@ -74,16 +64,14 @@ const TransformComponent = (props: TransformProps) => {
     // Effect to load 'dataraw' point-based data for source and target cities,
     // and store as 'data1', 'data2':
     useEffect(() => {
-        const loadData = async () => {
-            const data1 = await getGHData(props.city);
-            setData1(data1);
-
-            const data2 = await getGHData(props.targetCity);
-            setData2(data2);
-        };
-
-        loadData();
-        }, [props.city, props.targetCity]);
+        const handleData1Change = (data: number | null) => {
+            setData1(data);
+        }
+        const handleData2Change = (data: number | null) => {
+            setData2(data);
+        }
+        loadDataFunction(props.city, props.targetCity, handleData1Change, handleData2Change);
+        }, [props.city, props.targetCity, setData1, setData2]);
 
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
     // vector of aggregaed mean differences in each polygon of source city.
