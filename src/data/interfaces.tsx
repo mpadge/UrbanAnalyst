@@ -54,6 +54,11 @@ export interface ExplainButtonProps {
     handleExplainChange: (explain: boolean) => void
 }
 
+export interface CalculateButtonProps {
+    calculate: boolean,
+    handleCalculateChange: (calculate: boolean) => void
+}
+
 export interface ButtonProps {
     buttons: {
         first: string,

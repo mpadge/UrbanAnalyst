@@ -60,12 +60,18 @@ export default function MapTransformPage() {
     }
     const [layerName, setLayerName] = useState<string>("bike_index");
 
+    const [calculate, setCalculate] = useState<boolean>(false);
+    const handleCalculateChange = (calculate: boolean) => {
+        setCalculate(calculate);
+    }
+
     return (
         <>
         <MapTransformCalculate
             idx={idx}
             idx2={idx2}
             varnames={varnames}
+            calculate={calculate}
             nentries={nentries}
             city = {CITY_DATA.citiesArray[idx].name}
             targetCity = {CITY_DATA.citiesArray[idx2].name}
@@ -75,11 +81,13 @@ export default function MapTransformPage() {
             layerMax={layerMax}
             handleLayerMinChange={handleLayerMinChange}
             handleLayerMaxChange={handleLayerMaxChange}
+            handleCalculateChange={handleCalculateChange}
         />
         <Control
             idx={idx}
             idx2={idx2}
             varnames={varnames}
+            calculate={calculate}
             alpha={alpha}
             citiesArray={CITY_DATA.citiesArray}
             viewState={viewState}
@@ -88,6 +96,7 @@ export default function MapTransformPage() {
             handleAlphaChange={handleAlphaChange}
             handleViewStateChange={handleViewStateChange}
             handleLayerChange={handleLayerChange}
+            handleCalculateChange={handleCalculateChange}
         />
         <LegendTransform
             layerMin={layerMin}

@@ -14,6 +14,7 @@ interface TransformProps {
     idx: number
     idx2: number
     varnames: string[]
+    calculate: boolean,
     nentries: number
     city: string
     targetCity: string
@@ -23,6 +24,7 @@ interface TransformProps {
     layerMax: number
     handleLayerMinChange: (layerMin: number) => void
     handleLayerMaxChange: (layerMin: number) => void
+    handleCalculateChange: (calculate: boolean) => void
 }
 
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN

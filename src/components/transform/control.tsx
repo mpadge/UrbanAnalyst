@@ -9,13 +9,15 @@ import TargetCityList from '@/components/transform/citylist';
 import LayerList from '@/components/maps/layerlist';
 import SelectNumLayers from '@/components/maps/num_layers';
 import OpacitySlider from '@/components/maps/slider';
+import CalculateButton from '@/components/transform/calculate-button';
 
-import { ViewState, CityDataProps } from "@/data/interfaces";
+import { ViewState, CityDataProps, CalculateButtonProps } from "@/data/interfaces";
 
 interface TransformControlProps {
     idx: number,
     idx2: number,
     varnames: string[]
+    calculate: boolean,
     alpha: number,
     citiesArray: CityDataProps[],
     viewState: ViewState,
@@ -24,6 +26,7 @@ interface TransformControlProps {
     handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void,
+    handleCalculateChange: (calculate: boolean) => void
 }
 
 
@@ -94,6 +97,11 @@ export default function Control (props: TransformControlProps) {
                 handleAlphaChange={props.handleAlphaChange}
             />
             </div>
+
+            <CalculateButton 
+                calculate={props.calculate}
+                handleCalculateChange={props.handleCalculateChange}
+            />
 
             <button
                 id="btnShowControls"
