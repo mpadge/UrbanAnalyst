@@ -5,8 +5,8 @@ import dynamic from 'next/dynamic'
 
 import MapTransformComponent from '@/components/transform/map-transformComponent';
 
-const MapTransformCalculate = dynamic(() => Promise.resolve(MapTransformComponent), {
+const MapTransformDynamic = dynamic(() => Promise.resolve(MapTransformComponent), {
     ssr: false
 });
 
-export default MapTransformCalculate;
+export default MapTransformDynamic;

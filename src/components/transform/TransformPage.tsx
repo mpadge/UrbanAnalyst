@@ -9,7 +9,7 @@ import Control from '@/components/transform/control';
 import LegendTransform from '@/components/transform/legend-transform';
 
 // import UTAMap from '@/components/maps/map';
-import MapTransformCalculate from '@/components/transform/map-transform';
+import MapTransformDynamic from '@/components/transform/TransformPageDynamic';
 import styles from '@/styles/maps.module.css';
 import { CITY_DATA } from '@/data/citydata';
 import { ViewState } from "@/data/interfaces";
@@ -67,7 +67,7 @@ export default function TransformPage() {
 
     return (
         <>
-        <MapTransformCalculate
+        <MapTransformDynamic
             idx={idx}
             idx2={idx2}
             varnames={varnames}
