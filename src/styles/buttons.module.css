@@ -7,7 +7,6 @@
   z-index: 10;
   position: fixed;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  min-height: 100vh;
   gap: 20px;
   top: 20px;
   right: 5dvw;
