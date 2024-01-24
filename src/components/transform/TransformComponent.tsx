@@ -11,6 +11,7 @@ import { ViewState, CityDataProps } from "@/data/interfaces";
 import TransformMsgs from '@/components/transform/PageMessages';
 import { loadDataFunction } from '@/components/transform/LoadData';
 import { transformDataFunction } from '@/components/transform/CallTransform';
+import { getGeoJsonLayer } from '@/components/transform/GeoJsonLayer';
 
 interface TransformProps {
     idx: number
@@ -100,43 +101,10 @@ const TransformComponent = (props: TransformProps) => {
     }, [result, handleLayerMinChange, handleLayerMaxChange]);
 
     useEffect(() => {
-        let Color = d3
-            .scaleSequential()
-            .domain([props.layerMin, props.layerMax])
-            .interpolator(d3.interpolateViridis);
-
-        const this_layer = [
-            new GeoJsonLayer({
-                id: 'polygon-layer',
-                data: geoJSONcontent,
-                filled: true,
-                stroked: true,
-                getLineWidth: 10,
-                getLineColor: [122, 122, 122],
-                getFillColor: d => {
-                    var layerval = Math.max (props.layerMin, Math.min (props.layerMax, d.properties?.[varname]));
-                    if (isNaN(layerval)) {
-                        layerval = props.layerMin;
-                    }
-                    // Invert the palette:
-                    layerval = props.layerMin + (props.layerMax - layerval);
-                    const layerarr: any = d3.color(Color(layerval));
-                    var red = 0, green = 0, blue = 0;
-                    if (layerarr) {
-                        red = layerarr.r;
-                        green = layerarr.g;
-                        blue = layerarr.b;
-                    }
-                    return [red, green, blue]
-                    },
-                opacity: 1 - props.alpha,
-                updateTriggers: {
-                    getFillColor: [varname]
-                }
-                })
-            ]
-
-        setLayer(this_layer)
+        const handleLayerChange = (layer: any) => {
+            setLayer(layer);
+        }
+        getGeoJsonLayer(geoJSONcontent, props.layerMin, props.layerMax, varname, props.alpha, handleLayerChange);
     }, [props.layerMin, props.layerMax, varname, props.alpha, geoJSONcontent]);
 
     useEffect(() => {
