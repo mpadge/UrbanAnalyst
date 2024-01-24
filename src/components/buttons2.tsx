@@ -32,7 +32,7 @@ export default function Buttons (props: ButtonProps) {
                     className={styles.card}
                     rel="noopener noreferrer"
                 >
-                <p> {First} </p>
+                <span> {First} </span>
                 </Link>
             </div>
 
@@ -42,7 +42,7 @@ export default function Buttons (props: ButtonProps) {
                     className={styles.card}
                     rel="noopener noreferrer"
                 >
-                <p> {Second} </p>
+                <span> {Second} </span>
                 </Link>
             </div>
         </div>
