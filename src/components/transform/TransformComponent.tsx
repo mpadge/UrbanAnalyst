@@ -10,6 +10,7 @@ import styles from '@/styles/maps.module.css';
 import { ViewState, CityDataProps } from "@/data/interfaces";
 import TransformMsgs from '@/components/transform/PageMessages';
 import { loadDataFunction } from '@/components/transform/LoadData';
+import { transformDataFunction } from '@/components/transform/CallTransform';
 
 interface TransformProps {
     idx: number
@@ -30,19 +31,6 @@ interface TransformProps {
 
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
-
-// Function used to extract size of JSON object returned from WASM calls. this
-// is always a simple length = first of the two options, and is used just to
-// assert that that length matches value expected from map data.
-const JSONObjectSize = (obj: any) => {
-    let numItems: number = 0;
-    if (Array.isArray(obj)) {
-        numItems = obj.length;
-    } else if (typeof obj === 'object' && obj !== null) {
-        numItems = Object.keys(obj).length;
-    }
-    return numItems;
-}
 
 const TransformComponent = (props: TransformProps) => {
     const [data1, setData1] = useState<number | null>(null);
@@ -76,28 +64,11 @@ const TransformComponent = (props: TransformProps) => {
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
     // vector of aggregaed mean differences in each polygon of source city.
     useEffect(() => {
-        fetch('@/../pkg/uamutations_bg.wasm')
-        .then(response => {
-            return response.arrayBuffer();
-            })
-        .then(bytes => {
-            if (data1 && data2) {
-                const wasm_binary = wasm_js.initSync(bytes);
-                const varname = props.varnames.join(",");
-                const data1js = JSON.stringify(data1);
-                const data2js = JSON.stringify(data2);
-                const resultJson = wasm_js.uamutate(data1js, data2js, varname, props.nentries);
-                const resultObj = JSON.parse(resultJson);
-
-                const numItems = JSONObjectSize(resultObj);
-
-                setResult(resultObj);
-            }
-            })
-        .catch(error => {
-            console.error('Error fetching wasm module:', error);
-            });
-        }, [data1, data2, props.varnames, props.nentries]);
+        const handleResultChange = (result: any) => {
+            setResult(result);
+        }
+        transformDataFunction(data1, data2, props.varnames, props.nentries, handleResultChange);
+        }, [data1, data2, props.varnames, props.nentries, setResult]);
 
     // Effect to load map data for source city, and replace specified column
     // with 'result' from previous effect:
