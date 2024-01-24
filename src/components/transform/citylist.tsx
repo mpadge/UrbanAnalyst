@@ -31,7 +31,7 @@ export default function TargetCityList(props: CityListProps) {
     <section className={styles.listSelect}>
         <Select
             options={options}
-            defaultValue={options[0]}
+            defaultValue={options[props.idx]}
             name="CitySelector"
             isSearchable={isSearchable}
             onChange = {handleChange}
