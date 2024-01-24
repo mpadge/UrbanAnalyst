@@ -6,7 +6,7 @@ import { useState} from 'react';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 
 import Control from '@/components/transform/control';
-import LegendTransform from '@/components/transform/legend-transform';
+import Legend from '@/components/transform/legend';
 
 // import UTAMap from '@/components/maps/map';
 import MapTransformDynamic from '@/components/transform/TransformPageDynamic';
@@ -98,7 +98,7 @@ export default function TransformPage() {
             handleLayerChange={handleLayerChange}
             handleCalculateChange={handleCalculateChange}
         />
-        <LegendTransform
+        <Legend
             layerMin={layerMin}
             layerMax={layerMax}
             alpha={alpha}

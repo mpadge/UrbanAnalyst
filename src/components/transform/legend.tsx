@@ -12,7 +12,7 @@ interface LegendProps {
     layer_name: string
 }
 
-export default function LegendTransform (props: LegendProps) {
+export default function Legend (props: LegendProps) {
 
     function update(svg: any, layerRange: any, layer_name: string, alpha: number) {
 
