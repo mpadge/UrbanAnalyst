@@ -46,7 +46,7 @@ export default function MapTransformPage() {
     }
 
     const varnames = ["bike_index", "social_index"];
-    const nentries = process.env.NEXT_PUBLIC_NUM_TRANSFORM_SAMPLES;
+    const nentries = Number(process.env.NEXT_PUBLIC_NUM_TRANSFORM_SAMPLES) || 1000;
 
     const layer_name = varnames[0];
 
