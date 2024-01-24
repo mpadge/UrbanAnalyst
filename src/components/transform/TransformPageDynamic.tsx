@@ -3,10 +3,10 @@
 
 import dynamic from 'next/dynamic'
 
-import MapTransformComponent from '@/components/transform/map-transformComponent';
+import TransformComponent from '@/components/transform/TransformComponent';
 
-const MapTransformDynamic = dynamic(() => Promise.resolve(MapTransformComponent), {
+const TransformDynamic = dynamic(() => Promise.resolve(TransformComponent), {
     ssr: false
 });
 
-export default MapTransformDynamic;
+export default TransformDynamic;

@@ -54,7 +54,7 @@ async function getGHData(city: string) {
     return data;
 }
 
-const MapTransformComponent = (props: TransformProps) => {
+const TransformComponent = (props: TransformProps) => {
     const [data1, setData1] = useState(null);
     const [data2, setData2] = useState(null);
 
@@ -214,4 +214,4 @@ const MapTransformComponent = (props: TransformProps) => {
     )
 }
 
-export default MapTransformComponent;
+export default TransformComponent;
