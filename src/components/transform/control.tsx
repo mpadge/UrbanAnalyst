@@ -16,7 +16,6 @@ interface TransformControlProps {
     idx: number,
     idx2: number,
     varnames: string[]
-    city: string
     alpha: number,
     citiesArray: CityDataProps[],
     viewState: ViewState,
