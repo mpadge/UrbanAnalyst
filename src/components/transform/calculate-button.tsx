@@ -19,7 +19,7 @@ export default function CalculateButton (props: CalculateButtonProps) {
     <button
         className={buttonStyle}
         type="button"
-        onClick={() => props.handleCalculateChange(props.calculate)}
+        onClick={() => props.setCalculate(!props.calculate)}
     >{buttonText}</button>
     </section>
     )

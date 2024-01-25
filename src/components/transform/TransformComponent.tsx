@@ -21,7 +21,7 @@ interface TransformProps {
     layerMax: number
     handleLayerMinChange: (layerMin: number) => void
     handleLayerMaxChange: (layerMin: number) => void
-    handleCalculateChange: (calculate: boolean) => void
+    setCalculate: (calculate: boolean) => void
 }
 
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
@@ -37,6 +37,7 @@ const TransformComponent = (props: TransformProps) => {
     const [layer, setLayer] = useState<any>(null)
     const [loading, setLoading] = useState<boolean>(true);
     const [calculating, setCalculating] = useState<boolean>(false);
+    const [calculated, setCalculated] = useState<boolean>(true);
 
     useEffect(() => {
         const mapPathSource = "/data/" + props.city + "/data.json";
