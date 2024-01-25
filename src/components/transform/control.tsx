@@ -5,6 +5,7 @@ import Image from 'next/image'
 
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/maps/citylist';
+import LayersList from '@/components/transform/layerslist';
 import TargetCityList from '@/components/transform/citylist';
 import LayerList from '@/components/maps/layerlist';
 import SelectNumLayers from '@/components/maps/num_layers';
@@ -28,6 +29,7 @@ interface TransformControlProps {
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void,
     handleCalculateChange: (calculate: boolean) => void
+    handleVarnamesChange: (varnames: string[]) => void
 }
 
 
@@ -85,6 +87,13 @@ export default function Control (props: TransformControlProps) {
             <LayerList
                 layer = {props.layer}
                 handleLayerChange = {props.handleLayerChange}
+            />
+
+            <h3>Variables</h3>
+            <LayersList
+                layer = {props.layer}
+                layers = {props.varnames}
+                handleLayersChange = {props.handleVarnamesChange}
             />
 
             <h3>Opacity</h3>

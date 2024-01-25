@@ -28,6 +28,7 @@ export default function TransformPage() {
     const [layerMin, setLayerMin] = useState<number>(0);
     const [layerMax, setLayerMax] = useState<number>(0);
     const [calculate, setCalculate] = useState<boolean>(true);
+    const [varnames, setVarnames] = useState<string[]>(["social_index"]);
 
     // -------- handlers for state variables --------
     const handleIdxChange = (idx: number) => {
@@ -54,9 +55,9 @@ export default function TransformPage() {
     const handleCalculateChange = (calculate: boolean) => {
         setCalculate(calculate);
     }
-
-    // -------- Temporary constants until control fully implemented:
-    const varnames = ["social_index"];
+    const handleVarnamesChange = (varnames: string[]) => {
+        setVarnames(varnames);
+    }
 
     return (
         <>
@@ -91,6 +92,7 @@ export default function TransformPage() {
             handleViewStateChange={handleViewStateChange}
             handleLayerChange={handleLayerChange}
             handleCalculateChange={handleCalculateChange}
+            handleVarnamesChange={handleVarnamesChange}
         />
         <Legend
             layerMin={layerMin}

@@ -43,6 +43,12 @@ export interface LayerListProps {
     handleLayerChange: (layer: string) => void
 }
 
+export interface LayersListProps {
+    layer: string,
+    layers: string[],
+    handleLayersChange: (layers: string[]) => void
+}
+
 export interface NumLayersProps {
     numLayers: string,
     numLayersOptions: string[],
