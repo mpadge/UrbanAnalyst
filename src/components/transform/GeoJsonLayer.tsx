@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import 'd3-scale-chromatic';
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
 
-export async function getGeoJsonLayer(geoJSONcontent: any, layerMin: number, layerMax: number, varname: string, alpha: number, handleLayerChange: (layer: any) => void) {
+export async function getGeoJsonLayer(geoJSONcontent: any, layerMin: number, layerMax: number, varname: string, alpha: number, setGeoJsonLayer: (layer: any) => void) {
     
         let Color = d3
             .scaleSequential()
@@ -40,5 +40,5 @@ export async function getGeoJsonLayer(geoJSONcontent: any, layerMin: number, lay
                 })
             ]
 
-        handleLayerChange(this_layer)
+        setGeoJsonLayer(this_layer)
 }

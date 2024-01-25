@@ -34,7 +34,7 @@ const TransformComponent = (props: TransformProps) => {
     const [data2, setData2] = useState<number | null>(null);
     const [result, setResult] = useState<number[] | null>(null);
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
-    const [layer, setLayer] = useState<any>(null)
+    const [geoJsonLayer, setGeoJsonLayer] = useState<any>(null)
     const [loading, setLoading] = useState<boolean>(true);
     const [calculating, setCalculating] = useState<boolean>(false);
     const [calculated, setCalculated] = useState<boolean>(true);
@@ -86,7 +86,7 @@ const TransformComponent = (props: TransformProps) => {
     }, [result, handleLayerMinChange, handleLayerMaxChange]);
 
     useEffect(() => {
-        getGeoJsonLayer(geoJSONcontent, props.layerMin, props.layerMax, varname, props.alpha, setLayer);
+        getGeoJsonLayer(geoJSONcontent, props.layerMin, props.layerMax, varname, props.alpha, setGeoJsonLayer);
     }, [props.layerMin, props.layerMax, varname, props.alpha, geoJSONcontent]);
 
     useEffect(() => {
@@ -98,11 +98,11 @@ const TransformComponent = (props: TransformProps) => {
 
     const { handleCalculateChange } = props;
     useEffect(() => {
-        if (layer) {
+        if (geoJsonLayer) {
             setCalculating(false);
             handleCalculateChange(false);
         }
-    }, [layer, setCalculating, handleCalculateChange]);
+    }, [geoJsonLayer, setCalculating, handleCalculateChange]);
 
     return (
         <>
@@ -112,7 +112,7 @@ const TransformComponent = (props: TransformProps) => {
             width={"100vw"}
             height={"100vh"}
             controller={true}
-            layers={layer}
+            layers={geoJsonLayer}
             initialViewState={props.viewState}
         >
         <Map
