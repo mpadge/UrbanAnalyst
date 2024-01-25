@@ -5,6 +5,11 @@ import Select from 'react-select';
 import { LayersListProps } from "@/data/interfaces";
 import styles from '@/styles/controls.module.css';
 
+interface OptionType {
+    value: string;
+    label: string;
+}
+
 export default function LayersList(props: LayersListProps) {
 
     const options = useMemo (() => [
@@ -33,17 +38,29 @@ export default function LayersList(props: LayersListProps) {
         props.handleLayersChange(selectedOption.value);
     };
 
+    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+
+    const handleOptionChange = (selectedOptions: any) => {
+        setSelectedOptions(selectedOptions.map((option: OptionType) => option.value));
+        props.handleLayersChange(selectedOptions.map((option: OptionType) => option.value));
+    };
+
     return (
         <section className={styles.listSelect}>
-        <Select
-            options={reducedOptions}
-            defaultValue={reducedOptions[0]}
-            name="LayerSelector"
-            //isClearable={isClearable}
-            isSearchable={isSearchable}
-            onChange = {handleChange}
-        />
+            <Select
+                options={reducedOptions}
+                isMulti
+                closeMenuOnSelect={false}
+                hideSelectedOptions={false}
+                name="LayersSelector"
+                formatOptionLabel={(option, { context }) => (
+                    <div>
+                        <input type="checkbox" checked={context === 'menu'} readOnly />
+                        {option.label}
+                    </div>
+                )}
+                onChange={handleOptionChange}
+            />
         </section>
     );
 }
-
