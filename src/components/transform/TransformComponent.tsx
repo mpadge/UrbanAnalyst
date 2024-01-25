@@ -28,6 +28,7 @@ const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 
 const TransformComponent = (props: TransformProps) => {
+    // -------- state variables --------
     const [mapPathSource, setMapPathSource] = useState<string>("");
     const [data1, setData1] = useState<number | null>(null);
     const [data2, setData2] = useState<number | null>(null);
@@ -44,13 +45,7 @@ const TransformComponent = (props: TransformProps) => {
 
     // Effect to load 'dataraw' point-based data for source and target cities.
     useEffect(() => {
-        const handleData1Change = (data: number | null) => {
-            setData1(data);
-        }
-        const handleData2Change = (data: number | null) => {
-            setData2(data);
-        }
-        loadDataFunction(props.city, props.targetCity, handleData1Change, handleData2Change);
+        loadDataFunction(props.city, props.targetCity, setData1, setData2);
         }, [props.city, props.targetCity, setData1, setData2]);
 
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
@@ -58,10 +53,7 @@ const TransformComponent = (props: TransformProps) => {
     // vector is stored in the column of 'result' corresponding to
     // 'props.varnames[0]'.
     useEffect(() => {
-        const handleResultChange = (result: any) => {
-            setResult(result);
-        }
-        transformDataFunction(data1, data2, props.varnames, handleResultChange);
+        transformDataFunction(data1, data2, props.varnames, setResult);
         }, [data1, data2, props.varnames, setResult]);
 
     // Effect to load map data for source city, and replace specified column
@@ -81,21 +73,17 @@ const TransformComponent = (props: TransformProps) => {
         .catch((error) => console.error('Error:', error));
     }, [mapPathSource, result, varname]);
 
-    const { handleLayerMinChange, handleLayerMaxChange } = props;
     useEffect(() => {
         if (result) {
             const min = Math.min(...result);
             const max = Math.max(...result);
-            handleLayerMinChange(min);
-            handleLayerMaxChange(max);
+            props.handleLayerMinChange(min);
+            props.handleLayerMaxChange(max);
         }
-    }, [result, handleLayerMinChange, handleLayerMaxChange]);
+    }, [result, props.handleLayerMinChange, props.handleLayerMaxChange]);
 
     useEffect(() => {
-        const handleLayerChange = (layer: any) => {
-            setLayer(layer);
-        }
-        getGeoJsonLayer(geoJSONcontent, props.layerMin, props.layerMax, varname, props.alpha, handleLayerChange);
+        getGeoJsonLayer(geoJSONcontent, props.layerMin, props.layerMax, varname, props.alpha, setLayer);
     }, [props.layerMin, props.layerMax, varname, props.alpha, geoJSONcontent]);
 
     useEffect(() => {
