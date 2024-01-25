@@ -13,9 +13,10 @@ import { ViewState } from "@/data/interfaces";
 
 export default function TransformPage() {
 
+    // -------- state variables --------
+    // With change handlers:
     const [idx, setIdx] = useState(0);
     const [idx2, setIdx2] = useState(1); // Target City
-    const [cityData, setCityData] = useState(CITY_DATA.citiesArray[idx]);
     const [viewState, setViewState] = useState({
         ...CITY_DATA.citiesArray[idx].initialViewState,
         pitch: 0,
@@ -25,15 +26,20 @@ export default function TransformPage() {
     });
     const [layer, setLayer] = useState("social_index");
     const [alpha, setAlpha] = useState(0.5);
+    const [layerMin, setLayerMin] = useState<number>(0);
+    const [layerMax, setLayerMax] = useState<number>(0);
+    const [calculate, setCalculate] = useState<boolean>(false);
 
+    // Without change handlers:
+    const [cityData, setCityData] = useState(CITY_DATA.citiesArray[idx]);
+    const [layerName, setLayerName] = useState<string>("bike_index");
+
+    // -------- handlers for state variables --------
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
     }
     const handleIdx2Change = (idx2: number) => {
         setIdx2(idx2);
-    }
-    const handleAlphaChange = (alpha: number) => {
-        setAlpha(alpha);
     }
     const handleViewStateChange = (pViewState: any) => {
         setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
@@ -41,26 +47,23 @@ export default function TransformPage() {
     const handleLayerChange = (layer: string) => {
         setLayer(layer);
     }
-
-    const varnames = ["bike_index", "social_index"];
-    const nentries = Number(process.env.NEXT_PUBLIC_NUM_TRANSFORM_SAMPLES) || 1000;
-
-    const layer_name = varnames[0];
-
-    const [layerMin, setLayerMin] = useState<number>(0);
-    const [layerMax, setLayerMax] = useState<number>(0);
+    const handleAlphaChange = (alpha: number) => {
+        setAlpha(alpha);
+    }
     const handleLayerMinChange = (layerMin: number) => {
         setLayerMin(layerMin);
     }
     const handleLayerMaxChange = (layerMax: number) => {
         setLayerMax(layerMax);
     }
-    const [layerName, setLayerName] = useState<string>("bike_index");
-
-    const [calculate, setCalculate] = useState<boolean>(false);
     const handleCalculateChange = (calculate: boolean) => {
         setCalculate(calculate);
     }
+
+    // -------- Temporary constants until control fully implemented:
+    const varnames = ["bike_index", "social_index"];
+    const nentries = Number(process.env.NEXT_PUBLIC_NUM_TRANSFORM_SAMPLES) || 1000;
+    const layer_name = varnames[0];
 
     return (
         <>
