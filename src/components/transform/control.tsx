@@ -100,7 +100,7 @@ export default function Control (props: TransformControlProps) {
 
             <CalculateButton 
                 calculate={props.calculate}
-                setCalculate={props.setCalculate}
+                handleCalculateChange={props.handleCalculateChange}
             />
 
             <button

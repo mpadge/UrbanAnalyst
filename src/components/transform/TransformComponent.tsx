@@ -21,7 +21,7 @@ interface TransformProps {
     layerMax: number
     handleLayerMinChange: (layerMin: number) => void
     handleLayerMaxChange: (layerMin: number) => void
-    setCalculate: (calculate: boolean) => void
+    handleCalculateChange: (calculate: boolean) => void
 }
 
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
@@ -74,14 +74,15 @@ const TransformComponent = (props: TransformProps) => {
         .catch((error) => console.error('Error:', error));
     }, [mapPathSource, result, varname]);
 
+    const { handleLayerMinChange, handleLayerMaxChange } = props;
     useEffect(() => {
         if (result) {
             const min = Math.min(...result);
             const max = Math.max(...result);
-            props.handleLayerMinChange(min);
-            props.handleLayerMaxChange(max);
+            handleLayerMinChange(min);
+            handleLayerMaxChange(max);
         }
-    }, [result, props.handleLayerMinChange, props.handleLayerMaxChange]);
+    }, [result, handleLayerMinChange, handleLayerMaxChange]);
 
     useEffect(() => {
         getGeoJsonLayer(geoJSONcontent, props.layerMin, props.layerMax, varname, props.alpha, setLayer);
@@ -92,13 +93,13 @@ const TransformComponent = (props: TransformProps) => {
             setLoading(false);
             setCalculating(true);
         }
-    }, [data1, data2]);
+    }, [data1, data2, setLoading, setCalculating]);
 
     useEffect(() => {
         if (layer) {
             setCalculating(false);
         }
-    }, [layer]);
+    }, [layer, setCalculating]);
 
     return (
         <>

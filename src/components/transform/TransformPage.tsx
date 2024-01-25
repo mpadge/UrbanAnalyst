@@ -56,6 +56,9 @@ export default function TransformPage() {
     const handleLayerMaxChange = (layerMax: number) => {
         setLayerMax(layerMax);
     }
+    const handleCalculateChange = (calculate: boolean) => {
+        setCalculate(calculate);
+    }
 
     // -------- Temporary constants until control fully implemented:
     const varnames = ["bike_index", "social_index"];
@@ -76,7 +79,7 @@ export default function TransformPage() {
             layerMax={layerMax}
             handleLayerMinChange={handleLayerMinChange}
             handleLayerMaxChange={handleLayerMaxChange}
-            setCalculate={setCalculate}
+            handleCalculateChange={handleCalculateChange}
         />
         <Control
             idx={idx}
@@ -91,7 +94,7 @@ export default function TransformPage() {
             handleAlphaChange={handleAlphaChange}
             handleViewStateChange={handleViewStateChange}
             handleLayerChange={handleLayerChange}
-            setCalculate={setCalculate}
+            handleCalculateChange={handleCalculateChange}
         />
         <Legend
             layerMin={layerMin}
