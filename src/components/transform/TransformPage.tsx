@@ -28,7 +28,9 @@ export default function TransformPage() {
     const [alpha, setAlpha] = useState(0.5);
     const [layerMin, setLayerMin] = useState<number>(0);
     const [layerMax, setLayerMax] = useState<number>(0);
-    const [calculate, setCalculate] = useState<boolean>(false);
+
+    // calculate controls the button of the same name:
+    const [calculate, setCalculate] = useState<boolean>(true);
 
     // Without change handlers:
     const [cityData, setCityData] = useState(CITY_DATA.citiesArray[idx]);
