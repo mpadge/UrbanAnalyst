@@ -13,7 +13,6 @@ interface TransformProps {
     idx2: number
     varnames: string[]
     calculate: boolean,
-    nentries: number
     city: string
     targetCity: string
     viewState: ViewState
@@ -29,6 +28,7 @@ const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 
 const TransformComponent = (props: TransformProps) => {
+    // -------- state variables --------
     const [mapPathSource, setMapPathSource] = useState<string>("");
     const [data1, setData1] = useState<number | null>(null);
     const [data2, setData2] = useState<number | null>(null);
@@ -37,6 +37,7 @@ const TransformComponent = (props: TransformProps) => {
     const [layer, setLayer] = useState<any>(null)
     const [loading, setLoading] = useState<boolean>(true);
     const [calculating, setCalculating] = useState<boolean>(false);
+    const [calculated, setCalculated] = useState<boolean>(true);
 
     useEffect(() => {
         const mapPathSource = "/data/" + props.city + "/data.json";
@@ -45,25 +46,17 @@ const TransformComponent = (props: TransformProps) => {
 
     // Effect to load 'dataraw' point-based data for source and target cities.
     useEffect(() => {
-        const handleData1Change = (data: number | null) => {
-            setData1(data);
-        }
-        const handleData2Change = (data: number | null) => {
-            setData2(data);
-        }
-        loadDataFunction(props.city, props.targetCity, handleData1Change, handleData2Change);
-        }, [props.city, props.targetCity, setData1, setData2]);
+        if (!props.calculate) return;
+        loadDataFunction(props.city, props.targetCity, setData1, setData2);
+        }, [props.calculate, props.city, props.targetCity, setData1, setData2]);
 
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
     // vector of aggregaed mean differences in each polygon of source city. This
     // vector is stored in the column of 'result' corresponding to
     // 'props.varnames[0]'.
     useEffect(() => {
-        const handleResultChange = (result: any) => {
-            setResult(result);
-        }
-        transformDataFunction(data1, data2, props.varnames, props.nentries, handleResultChange);
-        }, [data1, data2, props.varnames, props.nentries, setResult]);
+        transformDataFunction(data1, data2, props.varnames, setResult);
+        }, [data1, data2, props.varnames, setResult]);
 
     // Effect to load map data for source city, and replace specified column
     // with 'result' from previous effect:
@@ -93,10 +86,7 @@ const TransformComponent = (props: TransformProps) => {
     }, [result, handleLayerMinChange, handleLayerMaxChange]);
 
     useEffect(() => {
-        const handleLayerChange = (layer: any) => {
-            setLayer(layer);
-        }
-        getGeoJsonLayer(geoJSONcontent, props.layerMin, props.layerMax, varname, props.alpha, handleLayerChange);
+        getGeoJsonLayer(geoJSONcontent, props.layerMin, props.layerMax, varname, props.alpha, setLayer);
     }, [props.layerMin, props.layerMax, varname, props.alpha, geoJSONcontent]);
 
     useEffect(() => {
@@ -104,13 +94,15 @@ const TransformComponent = (props: TransformProps) => {
             setLoading(false);
             setCalculating(true);
         }
-    }, [data1, data2]);
+    }, [data1, data2, setLoading, setCalculating]);
 
+    const { handleCalculateChange } = props;
     useEffect(() => {
         if (layer) {
             setCalculating(false);
+            handleCalculateChange(false);
         }
-    }, [layer]);
+    }, [layer, setCalculating, handleCalculateChange]);
 
     return (
         <>

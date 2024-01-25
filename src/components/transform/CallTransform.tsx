@@ -1,5 +1,7 @@
 import * as wasm_js from '@/../pkg/uamutations.js';
 
+const nentries = Number(process.env.NEXT_PUBLIC_NUM_TRANSFORM_SAMPLES) || 1000;
+
 // Function used to extract size of JSON object returned from WASM calls. this
 // is always a simple length = first of the two options, and is used just to
 // assert that that length matches value expected from map data.
@@ -13,7 +15,7 @@ const JSONObjectSize = (obj: any) => {
     return numItems;
 }
 
-export async function transformDataFunction(data1: number | null, data2: number | null, varnames: string[], nentries: number, handleResultChange: (data: any) => void) {
+export async function transformDataFunction(data1: number | null, data2: number | null, varnames: string[], handleResultChange: (data: any) => void) {
     fetch('@/../pkg/uamutations_bg.wasm')
         .then(response => {
             return response.arrayBuffer();

@@ -28,7 +28,9 @@ export default function TransformPage() {
     const [alpha, setAlpha] = useState(0.5);
     const [layerMin, setLayerMin] = useState<number>(0);
     const [layerMax, setLayerMax] = useState<number>(0);
-    const [calculate, setCalculate] = useState<boolean>(false);
+
+    // calculate controls the button of the same name:
+    const [calculate, setCalculate] = useState<boolean>(true);
 
     // Without change handlers:
     const [cityData, setCityData] = useState(CITY_DATA.citiesArray[idx]);
@@ -62,7 +64,6 @@ export default function TransformPage() {
 
     // -------- Temporary constants until control fully implemented:
     const varnames = ["bike_index", "social_index"];
-    const nentries = Number(process.env.NEXT_PUBLIC_NUM_TRANSFORM_SAMPLES) || 1000;
     const layer_name = varnames[0];
 
     return (
@@ -72,7 +73,6 @@ export default function TransformPage() {
             idx2={idx2}
             varnames={varnames}
             calculate={calculate}
-            nentries={nentries}
             city = {CITY_DATA.citiesArray[idx].name}
             targetCity = {CITY_DATA.citiesArray[idx2].name}
             viewState = {viewState}
