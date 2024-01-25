@@ -16,6 +16,7 @@ import { ViewState, CityDataProps, CalculateButtonProps } from "@/data/interface
 interface TransformControlProps {
     idx: number,
     idx2: number,
+    layer: string
     varnames: string[]
     calculate: boolean,
     alpha: number,
@@ -40,11 +41,6 @@ export default function Control (props: TransformControlProps) {
     const handleControlsVisibility = (pHideControls: boolean) => {
         setHideControls(pHideControls);
     }
-
-    const [layer, setLayer] = useState("social_index");
-    useEffect(() => {
-        setLayer(props.varnames[0]);
-    }, [props.varnames]);
 
     return (
         <>
@@ -87,7 +83,7 @@ export default function Control (props: TransformControlProps) {
 
             <h3>Layer</h3>
             <LayerList
-                layer = {layer}
+                layer = {props.layer}
                 handleLayerChange = {props.handleLayerChange}
             />
 

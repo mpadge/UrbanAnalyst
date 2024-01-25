@@ -62,13 +62,14 @@ export default function TransformPage() {
     }
 
     // -------- Temporary constants until control fully implemented:
-    const varnames = ["bike_index", "social_index"];
+    const varnames = ["social_index"];
 
     return (
         <>
         <MapTransformDynamic
             idx={idx}
             idx2={idx2}
+            layer={layer}
             varnames={varnames}
             calculate={calculate}
             city = {CITY_DATA.citiesArray[idx].name}
@@ -84,6 +85,7 @@ export default function TransformPage() {
         <Control
             idx={idx}
             idx2={idx2}
+            layer={layer}
             varnames={varnames}
             calculate={calculate}
             alpha={alpha}

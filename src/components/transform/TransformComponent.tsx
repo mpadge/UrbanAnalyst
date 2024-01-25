@@ -11,6 +11,7 @@ import { getGeoJsonLayer } from '@/components/transform/GeoJsonLayer';
 interface TransformProps {
     idx: number
     idx2: number
+    layer: string
     varnames: string[]
     calculate: boolean,
     city: string
@@ -53,27 +54,27 @@ const TransformComponent = (props: TransformProps) => {
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
     // vector of aggregaed mean differences in each polygon of source city. This
     // vector is stored in the column of 'result' corresponding to
-    // 'props.varnames[0]'.
+    // 'varnames[0]'.
     useEffect(() => {
-        transformDataFunction(data1, data2, props.varnames, setResult);
-        }, [data1, data2, props.varnames, setResult]);
+        const varnames: string[] = [props.layer, ...props.varnames];
+        transformDataFunction(data1, data2, varnames, setResult);
+        }, [data1, data2, props.layer, props.varnames, setResult]);
 
     // Effect to load map data for source city, and replace specified column
     // with 'result' from previous effect:
-    const varname = props.varnames[0];
     useEffect(() => {
         fetch(mapPathSource)
         .then(response => response.json())
         .then(data => {
             data.features.forEach((feature: any, index: number) => {
                 if (result) { // needed here because 'result' can still be null
-                    feature.properties[varname] = result[index];
+                    feature.properties[props.layer] = result[index];
                 }
             });
             setGeoJSONcontent(data);
         })
         .catch((error) => console.error('Error:', error));
-    }, [mapPathSource, result, varname]);
+    }, [mapPathSource, result, props.layer]);
 
     const { handleLayerMinChange, handleLayerMaxChange } = props;
     useEffect(() => {
@@ -86,8 +87,8 @@ const TransformComponent = (props: TransformProps) => {
     }, [result, handleLayerMinChange, handleLayerMaxChange]);
 
     useEffect(() => {
-        getGeoJsonLayer(geoJSONcontent, props.layerMin, props.layerMax, varname, props.alpha, setGeoJsonLayer);
-    }, [props.layerMin, props.layerMax, varname, props.alpha, geoJSONcontent]);
+        getGeoJsonLayer(geoJSONcontent, props.layerMin, props.layerMax, props.layer, props.alpha, setGeoJsonLayer);
+    }, [props.layerMin, props.layerMax, props.layer, props.alpha, geoJSONcontent]);
 
     useEffect(() => {
         if (data1 && data2) {
