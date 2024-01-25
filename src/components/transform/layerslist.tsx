@@ -23,7 +23,7 @@ export default function LayersList(props: LayersListProps) {
 
     const reducedOptions = useMemo(() => {
         return options.filter(option => option.value !== props.layer);
-    }, [props.layer]);
+    }, [options, props.layer, ]);
 
     const [isSearchable, setIsSearchable] = useState(true);
     const [selected, setSelected] = useState(null);
