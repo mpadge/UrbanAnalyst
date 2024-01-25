@@ -1,22 +1,20 @@
 "use client"
 
-import Image from 'next/image'
-
 import { useState} from 'react';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 
-import Control from '@/components/maps/control';
-import LegendTransform from '@/components/transform/legend-transform';
+import Control from '@/components/transform/control';
+import Legend from '@/components/transform/legend';
 
 // import UTAMap from '@/components/maps/map';
-import MapTransformCalculate from '@/components/transform/map-transform';
-import styles from '@/styles/maps.module.css';
+import MapTransformDynamic from '@/components/transform/TransformPageDynamic';
 import { CITY_DATA } from '@/data/citydata';
 import { ViewState } from "@/data/interfaces";
 
-export default function MapTransformPage() {
+export default function TransformPage() {
 
     const [idx, setIdx] = useState(0);
+    const [idx2, setIdx2] = useState(1); // Target City
     const [cityData, setCityData] = useState(CITY_DATA.citiesArray[idx]);
     const [viewState, setViewState] = useState({
         ...CITY_DATA.citiesArray[idx].initialViewState,
@@ -31,20 +29,21 @@ export default function MapTransformPage() {
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
     }
+    const handleIdx2Change = (idx2: number) => {
+        setIdx2(idx2);
+    }
     const handleAlphaChange = (alpha: number) => {
         setAlpha(alpha);
     }
     const handleViewStateChange = (pViewState: any) => {
         setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
-        //setViewState(pViewState);
     }
     const handleLayerChange = (layer: string) => {
         setLayer(layer);
     }
 
     const varnames = ["bike_index", "social_index"];
-    const nentries = 1000;
-    const mapPath = "/data/berlin/data.json";
+    const nentries = Number(process.env.NEXT_PUBLIC_NUM_TRANSFORM_SAMPLES) || 1000;
 
     const layer_name = varnames[0];
 
@@ -58,21 +57,45 @@ export default function MapTransformPage() {
     }
     const [layerName, setLayerName] = useState<string>("bike_index");
 
+    const [calculate, setCalculate] = useState<boolean>(false);
+    const handleCalculateChange = (calculate: boolean) => {
+        setCalculate(calculate);
+    }
+
     return (
         <>
-        <MapTransformCalculate
+        <MapTransformDynamic
             idx={idx}
+            idx2={idx2}
             varnames={varnames}
+            calculate={calculate}
             nentries={nentries}
             city = {CITY_DATA.citiesArray[idx].name}
+            targetCity = {CITY_DATA.citiesArray[idx2].name}
             viewState = {viewState}
             alpha = {alpha}
             layerMin={layerMin}
             layerMax={layerMax}
             handleLayerMinChange={handleLayerMinChange}
             handleLayerMaxChange={handleLayerMaxChange}
+            handleCalculateChange={handleCalculateChange}
         />
-        <LegendTransform
+        <Control
+            idx={idx}
+            idx2={idx2}
+            varnames={varnames}
+            calculate={calculate}
+            alpha={alpha}
+            citiesArray={CITY_DATA.citiesArray}
+            viewState={viewState}
+            handleIdxChange={handleIdxChange}
+            handleIdx2Change={handleIdx2Change}
+            handleAlphaChange={handleAlphaChange}
+            handleViewStateChange={handleViewStateChange}
+            handleLayerChange={handleLayerChange}
+            handleCalculateChange={handleCalculateChange}
+        />
+        <Legend
             layerMin={layerMin}
             layerMax={layerMax}
             alpha={alpha}
