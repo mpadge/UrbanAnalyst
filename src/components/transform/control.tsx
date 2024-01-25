@@ -89,7 +89,7 @@ export default function Control (props: TransformControlProps) {
                 handleLayerChange = {props.handleLayerChange}
             />
 
-            <h3>Layers</h3>
+            <h3>Variables</h3>
             <LayersList
                 layer = {props.layer}
                 layers = {props.varnames}

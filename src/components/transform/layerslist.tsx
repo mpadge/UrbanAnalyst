@@ -21,6 +21,10 @@ export default function LayersList(props: LayersListProps) {
         { value: "parking", label: "Parking" }
     ], []);
 
+    const reducedOptions = useMemo(() => {
+        return options.filter(option => option.value !== props.layer);
+    }, [props.layer]);
+
     const [isSearchable, setIsSearchable] = useState(true);
     const [selected, setSelected] = useState(null);
 
@@ -29,21 +33,11 @@ export default function LayersList(props: LayersListProps) {
         props.handleLayersChange(selectedOption.value);
     };
 
-    const findMatchingOption = useCallback(() => {
-        return options.find(option => option.value === props.layer);
-    }, [options, props.layer]);
-
-    const [matchingOption, setMatchingOption] = useState(findMatchingOption());
-    useEffect(() => {
-        const this_option = findMatchingOption();
-        setMatchingOption(this_option);
-    }, [props.layer, findMatchingOption]);
-
     return (
         <section className={styles.listSelect}>
         <Select
-            options={options}
-            defaultValue={matchingOption}
+            options={reducedOptions}
+            defaultValue={reducedOptions[0]}
             name="LayerSelector"
             //isClearable={isClearable}
             isSearchable={isSearchable}
