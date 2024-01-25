@@ -57,7 +57,7 @@ export default function TransformPage() {
         setLayerMax(layerMax);
     }
     const handleCalculateChange = (calculate: boolean) => {
-        setCalculate(calculate);
+        setCalculate(!calculate); // false is reset in 'TransformComponent'
     }
 
     // -------- Temporary constants until control fully implemented:

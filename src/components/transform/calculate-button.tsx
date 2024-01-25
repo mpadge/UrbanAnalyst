@@ -5,8 +5,14 @@ import { CalculateButtonProps } from "@/data/interfaces";
 
 export default function CalculateButton (props: CalculateButtonProps) {
 
-    var buttonStyle: any = styles.explainbuttonOff;
-    var buttonText: string = "Calculate";
+    var buttonStyleTemp: any = styles.explainbuttonOff;
+    var buttonTextTemp: string = "Calculate";
+    if (props.calculate) {
+        buttonStyleTemp = styles.explainbuttonOn;
+        buttonTextTemp = "Calculating ...";
+    }
+    const buttonStyle = buttonStyleTemp;
+    const buttonText = buttonTextTemp;
 
     return (
     <section className="button">
