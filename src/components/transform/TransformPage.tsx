@@ -24,7 +24,7 @@ export default function TransformPage() {
         transitionDuration: 2000,
         transitionInterpolator: new FlyToInterpolator()
     });
-    const [layer, setLayer] = useState("social_index");
+    const [layer, setLayer] = useState("bike_index");
     const [alpha, setAlpha] = useState(0.5);
     const [layerMin, setLayerMin] = useState<number>(0);
     const [layerMax, setLayerMax] = useState<number>(0);
@@ -34,7 +34,6 @@ export default function TransformPage() {
 
     // Without change handlers:
     const [cityData, setCityData] = useState(CITY_DATA.citiesArray[idx]);
-    const [layerName, setLayerName] = useState<string>("bike_index");
 
     // -------- handlers for state variables --------
     const handleIdxChange = (idx: number) => {
@@ -64,7 +63,6 @@ export default function TransformPage() {
 
     // -------- Temporary constants until control fully implemented:
     const varnames = ["bike_index", "social_index"];
-    const layer_name = varnames[0];
 
     return (
         <>
@@ -102,7 +100,7 @@ export default function TransformPage() {
             layerMin={layerMin}
             layerMax={layerMax}
             alpha={alpha}
-            layer_name={layer_name}
+            layer_name={layer}
         />
         </>
     )
