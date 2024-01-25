@@ -14,7 +14,6 @@ import { ViewState } from "@/data/interfaces";
 export default function TransformPage() {
 
     // -------- state variables --------
-    // With change handlers:
     const [idx, setIdx] = useState(0);
     const [idx2, setIdx2] = useState(1); // Target City
     const [viewState, setViewState] = useState({
@@ -28,12 +27,7 @@ export default function TransformPage() {
     const [alpha, setAlpha] = useState(0.5);
     const [layerMin, setLayerMin] = useState<number>(0);
     const [layerMax, setLayerMax] = useState<number>(0);
-
-    // calculate controls the button of the same name:
     const [calculate, setCalculate] = useState<boolean>(true);
-
-    // Without change handlers:
-    const [cityData, setCityData] = useState(CITY_DATA.citiesArray[idx]);
 
     // -------- handlers for state variables --------
     const handleIdxChange = (idx: number) => {
