@@ -62,7 +62,6 @@ export default function TransformPage() {
 
     // -------- Temporary constants until control fully implemented:
     const varnames = ["bike_index", "social_index"];
-    const nentries = Number(process.env.NEXT_PUBLIC_NUM_TRANSFORM_SAMPLES) || 1000;
     const layer_name = varnames[0];
 
     return (
@@ -72,7 +71,6 @@ export default function TransformPage() {
             idx2={idx2}
             varnames={varnames}
             calculate={calculate}
-            nentries={nentries}
             city = {CITY_DATA.citiesArray[idx].name}
             targetCity = {CITY_DATA.citiesArray[idx2].name}
             viewState = {viewState}

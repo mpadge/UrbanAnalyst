@@ -13,7 +13,6 @@ interface TransformProps {
     idx2: number
     varnames: string[]
     calculate: boolean,
-    nentries: number
     city: string
     targetCity: string
     viewState: ViewState
@@ -62,8 +61,8 @@ const TransformComponent = (props: TransformProps) => {
         const handleResultChange = (result: any) => {
             setResult(result);
         }
-        transformDataFunction(data1, data2, props.varnames, props.nentries, handleResultChange);
-        }, [data1, data2, props.varnames, props.nentries, setResult]);
+        transformDataFunction(data1, data2, props.varnames, handleResultChange);
+        }, [data1, data2, props.varnames, setResult]);
 
     // Effect to load map data for source city, and replace specified column
     // with 'result' from previous effect:
