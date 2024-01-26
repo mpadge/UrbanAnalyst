@@ -55,7 +55,7 @@ export default function LayersList(props: LayersListProps) {
                 name="LayersSelector"
                 formatOptionLabel={(option, { context }) => (
                     <div>
-                        <input type="checkbox" checked={context === 'menu'} readOnly />
+                        <input type="checkbox" checked={context === 'value'} readOnly />
                         {option.label}
                     </div>
                 )}
