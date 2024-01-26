@@ -28,7 +28,7 @@ export default function TransformPage() {
     const [layerMin, setLayerMin] = useState<number>(0);
     const [layerMax, setLayerMax] = useState<number>(0);
     const [calculate, setCalculate] = useState<boolean>(true);
-    const [varnames, setVarnames] = useState<string[]>(["social_index"]);
+    const [varnames, setVarnames] = useState<string[]>([]);
 
     // -------- handlers for state variables --------
     const handleIdxChange = (idx: number) => {

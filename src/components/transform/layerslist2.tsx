@@ -30,31 +30,24 @@ export default function LayersList2(props: LayersListProps) {
         return options.filter(option => option.value !== props.layer);
     }, [options, props.layer, ]);
 
-    const [isSearchable, setIsSearchable] = useState(true);
-    const [selected, setSelected] = useState(null);
-
-    const handleChange = (selectedOption: any) => {
-        setSelected(selectedOption);
-        props.handleLayersChange(selectedOption.value);
-    };
-
-    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+    const [selectedOptions, setSelectedOptions] = useState<string[]>(props.varnames);
 
     const handleOptionChange = (selectedOptions: any) => {
         setSelectedOptions(selectedOptions.map((option: OptionType) => option.value));
-        props.handleLayersChange(selectedOptions.map((option: OptionType) => option.value));
+        props.handleVarnamesChange(selectedOptions.map((option: OptionType) => option.value));
     };
 
     const handleCheckboxChange = (option: OptionType, isChecked: boolean) => {
-        if (isChecked) {
-            // Add the checked option to the selectedOptions array
-            setSelectedOptions([...selectedOptions, option.value]);
-        } else {
-            // Remove the unchecked option from the selectedOptions array
-            setSelectedOptions(selectedOptions.filter((selectedValue) => selectedValue !== option.value));
-        }
-        // Update the parent component's state
-        props.handleLayersChange(selectedOptions);
+        setSelectedOptions((currentSelectedOptions) => {
+            let newSelectedOptions;
+            if (isChecked) {
+                newSelectedOptions = [...currentSelectedOptions, option.value];
+            } else {
+                newSelectedOptions = currentSelectedOptions.filter((selectedValue) => selectedValue !== option.value);
+            }
+            props.handleVarnamesChange(newSelectedOptions);
+            return newSelectedOptions;
+        });
     };
 
     return (

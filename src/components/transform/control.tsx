@@ -5,7 +5,6 @@ import Image from 'next/image'
 
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/maps/citylist';
-import LayersList from '@/components/transform/layerslist';
 import LayersList2 from '@/components/transform/layerslist2';
 import TargetCityList from '@/components/transform/citylist';
 import LayerList from '@/components/maps/layerlist';
@@ -96,12 +95,6 @@ export default function Control (props: TransformControlProps) {
                     handleLayerChange = {props.handleLayerChange}
                 />
 
-                <h3>Variables</h3>
-                <LayersList
-                    layer = {props.layer}
-                    layers = {props.varnames}
-                    handleLayersChange = {props.handleVarnamesChange}
-                />
                 <LayersButton
                     showLayersDialog={showLayersDialog}
                     handleLayersDialogVisibility={handleLayersDialogVisibility}
@@ -129,8 +122,8 @@ export default function Control (props: TransformControlProps) {
         <div id="layerlist-container" className={styles.layerlist} style={{display: showLayersDialog?"":"none"}}>
             <LayersList2
                 layer = {props.layer}
-                layers = {props.varnames}
-                handleLayersChange = {props.handleVarnamesChange}
+                varnames = {props.varnames}
+                handleVarnamesChange = {props.handleVarnamesChange}
             />
         </div>
         </>
