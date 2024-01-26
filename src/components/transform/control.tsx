@@ -6,6 +6,7 @@ import Image from 'next/image'
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/maps/citylist';
 import LayersList from '@/components/transform/layerslist';
+import LayersList2 from '@/components/transform/layerslist2';
 import TargetCityList from '@/components/transform/citylist';
 import LayerList from '@/components/maps/layerlist';
 import SelectNumLayers from '@/components/maps/num_layers';
@@ -114,6 +115,13 @@ export default function Control (props: TransformControlProps) {
                 onClick={() => handleControlsVisibility(false)}
             >Show Controls</button>
 
+        </div>
+        <div id="layerlist-container" className={styles.layerlist}>
+            <LayersList2
+                layer = {props.layer}
+                layers = {props.varnames}
+                handleLayersChange = {props.handleVarnamesChange}
+            />
         </div>
         </>
         )
