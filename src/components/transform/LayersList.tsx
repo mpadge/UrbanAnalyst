@@ -30,37 +30,41 @@ export default function LayersList(props: LayersListProps) {
         return options.filter(option => option.value !== props.layer);
     }, [options, props.layer, ]);
 
-    const [isSearchable, setIsSearchable] = useState(true);
-    const [selected, setSelected] = useState(null);
-
-    const handleChange = (selectedOption: any) => {
-        setSelected(selectedOption);
-        props.handleLayersChange(selectedOption.value);
-    };
-
-    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+    const [selectedOptions, setSelectedOptions] = useState<string[]>(props.varnames);
 
     const handleOptionChange = (selectedOptions: any) => {
         setSelectedOptions(selectedOptions.map((option: OptionType) => option.value));
-        props.handleLayersChange(selectedOptions.map((option: OptionType) => option.value));
+        props.handleVarnamesChange(selectedOptions.map((option: OptionType) => option.value));
+    };
+
+    const handleCheckboxChange = (option: OptionType, isChecked: boolean) => {
+        setSelectedOptions((currentSelectedOptions) => {
+            let newSelectedOptions;
+            if (isChecked) {
+                newSelectedOptions = [...currentSelectedOptions, option.value];
+            } else {
+                newSelectedOptions = currentSelectedOptions.filter((selectedValue) => selectedValue !== option.value);
+            }
+            props.handleVarnamesChange(newSelectedOptions);
+            return newSelectedOptions;
+        });
     };
 
     return (
-        <section className={styles.listSelect}>
-            <Select
-                options={reducedOptions}
-                isMulti
-                closeMenuOnSelect={false}
-                hideSelectedOptions={false}
-                name="LayersSelector"
-                formatOptionLabel={(option, { context }) => (
-                    <div>
-                        <input type="checkbox" checked={context === 'value'} readOnly />
+        <div>
+            {reducedOptions.map((option) => (
+                <div key={option.value}>
+                    <label>
+                        <input
+                            type="checkbox"
+                            value={option.value}
+                            checked={selectedOptions.includes(option.value)}
+                            onChange={(e) => handleCheckboxChange(option, e.target.checked)}
+                        />
                         {option.label}
-                    </div>
-                )}
-                onChange={handleOptionChange}
-            />
-        </section>
+                    </label>
+                </div>
+            ))}
+        </div>
     );
 }

@@ -1,15 +1,16 @@
 
-import { useEffect, useState, useRef } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
 
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/maps/citylist';
-import LayersList from '@/components/transform/layerslist';
+import LayersList from '@/components/transform/LayersList';
 import TargetCityList from '@/components/transform/citylist';
 import LayerList from '@/components/maps/layerlist';
 import SelectNumLayers from '@/components/maps/num_layers';
 import OpacitySlider from '@/components/maps/slider';
+import LayersButton from '@/components/transform/layers-button';
 import CalculateButton from '@/components/transform/calculate-button';
 
 import { ViewState, CityDataProps, CalculateButtonProps } from "@/data/interfaces";
@@ -38,6 +39,11 @@ export default function Control (props: TransformControlProps) {
     const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
 
     const cityNames = props.citiesArray.map((item) => item.name);
+
+    const [showLayersDialog, setShowLayerssDialog] = useState(false);
+    const handleLayersDialogVisibility = useCallback((showLayersDialog: boolean) => {
+        setShowLayerssDialog(showLayersDialog => !showLayersDialog);
+    }, []);
 
     const [hideControls, setHideControls] = useState(false);
     const handleControlsVisibility = (pHideControls: boolean) => {
@@ -89,11 +95,9 @@ export default function Control (props: TransformControlProps) {
                     handleLayerChange = {props.handleLayerChange}
                 />
 
-                <h3>Variables</h3>
-                <LayersList
-                    layer = {props.layer}
-                    layers = {props.varnames}
-                    handleLayersChange = {props.handleVarnamesChange}
+                <LayersButton
+                    showLayersDialog={showLayersDialog}
+                    handleLayersDialogVisibility={handleLayersDialogVisibility}
                 />
 
                 <h3>Opacity</h3>
@@ -114,6 +118,19 @@ export default function Control (props: TransformControlProps) {
                 onClick={() => handleControlsVisibility(false)}
             >Show Controls</button>
 
+        </div>
+        <div
+            id="layerlist-container"
+            className={styles.layerlist}
+            style={{display: showLayersDialog?"":"none"}}
+        >
+        <p>
+            <LayersList
+                layer = {props.layer}
+                varnames = {props.varnames}
+                handleVarnamesChange = {props.handleVarnamesChange}
+            />
+        </p>
         </div>
         </>
         )

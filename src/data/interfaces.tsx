@@ -45,8 +45,8 @@ export interface LayerListProps {
 
 export interface LayersListProps {
     layer: string,
-    layers: string[],
-    handleLayersChange: (layers: string[]) => void
+    varnames: string[],
+    handleVarnamesChange: (varnames: string[]) => void
 }
 
 export interface NumLayersProps {
@@ -63,6 +63,11 @@ export interface ExplainButtonProps {
 export interface CalculateButtonProps {
     calculate: boolean,
     handleCalculateChange: (calculate: boolean) => void
+}
+
+export interface LayersButtonProps {
+    showLayersDialog: boolean,
+    handleLayersDialogVisibility: (showLayersDialog: boolean) => void
 }
 
 export interface ButtonProps {
