@@ -49,64 +49,64 @@ export default function Control (props: TransformControlProps) {
         <div id="top-left-container" className={styles.controls}>
             <div id="divinfo" style={{display: hideControls?"none":""}}>
 
-            <button
-                id="btnHideControls"
-                className="btn-transparent right-align"
-                onClick={() => handleControlsVisibility(true)}
-            >
-                X
-            </button>
+                <button
+                    id="btnHideControls"
+                    className="btn-transparent right-align"
+                    onClick={() => handleControlsVisibility(true)}
+                >
+                    X
+                </button>
 
-            <p>
-            <Image
-            src="/ua.svg"
-            alt="UA Logo"
-            // className={styles.vercelLogo}
-            width={100}
-            height={50}
-            />
-            </p>
+                <p>
+                <Image
+                src="/ua.svg"
+                alt="UA Logo"
+                // className={styles.vercelLogo}
+                width={100}
+                height={50}
+                />
+                </p>
 
-            <h3>City</h3>
-            <CityList
-                citiesArray={props.citiesArray}
-                idx={props.idx}
-                viewState = {props.viewState}
-                handleIdxChange={props.handleIdxChange}
-                handleViewStateChange={props.handleViewStateChange}
-            />
+                <h3>City</h3>
+                <CityList
+                    citiesArray={props.citiesArray}
+                    idx={props.idx}
+                    viewState = {props.viewState}
+                    handleIdxChange={props.handleIdxChange}
+                    handleViewStateChange={props.handleViewStateChange}
+                />
 
-            <h3>Target City</h3>
-            <TargetCityList
-                citiesArray={props.citiesArray}
-                idx={props.idx2}
-                handleIdxChange={props.handleIdx2Change}
-            />
+                <h3>Target City</h3>
+                <TargetCityList
+                    citiesArray={props.citiesArray}
+                    idx={props.idx2}
+                    handleIdxChange={props.handleIdx2Change}
+                />
 
-            <h3>Layer</h3>
-            <LayerList
-                layer = {props.layer}
-                handleLayerChange = {props.handleLayerChange}
-            />
+                <h3>Layer</h3>
+                <LayerList
+                    layer = {props.layer}
+                    handleLayerChange = {props.handleLayerChange}
+                />
 
-            <h3>Variables</h3>
-            <LayersList
-                layer = {props.layer}
-                layers = {props.varnames}
-                handleLayersChange = {props.handleVarnamesChange}
-            />
+                <h3>Variables</h3>
+                <LayersList
+                    layer = {props.layer}
+                    layers = {props.varnames}
+                    handleLayersChange = {props.handleVarnamesChange}
+                />
 
-            <h3>Opacity</h3>
-            <OpacitySlider
-                alpha = {props.alpha}
-                handleAlphaChange={props.handleAlphaChange}
-            />
+                <h3>Opacity</h3>
+                <OpacitySlider
+                    alpha = {props.alpha}
+                    handleAlphaChange={props.handleAlphaChange}
+                />
+
+                <CalculateButton
+                    calculate={props.calculate}
+                    handleCalculateChange={props.handleCalculateChange}
+                />
             </div>
-
-            <CalculateButton 
-                calculate={props.calculate}
-                handleCalculateChange={props.handleCalculateChange}
-            />
 
             <button
                 id="btnShowControls"
