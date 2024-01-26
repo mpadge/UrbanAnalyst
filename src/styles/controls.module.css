@@ -245,8 +245,6 @@
 
 .layerlist {
   display: inherit;
-  justify-content: center;
-  align-items: center;
   margin: 20px;
   z-index: 10;
   position: absolute;
@@ -260,22 +258,22 @@
   width: 10dvw;
 }
 
+.layerlist div {
+    text-align: left;
+}
 
 .layerlist p {
   position: relative;
   margin: 0;
+  margin-top: 10px;
   padding: 0rem;
   text-align: center;
 }
 
-.layerlist h3 {
-  font-weight: 400;
-  font-size: 14px;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  margin-left: 12px;
+.layerlist input {
+    margin-left: 20px;
+    margin-bottom: 10px;
 }
-
 
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
@@ -310,4 +308,24 @@
         margin-left: 5px;
         width: 40dvw;
     }
+
+    .layerlist {
+      margin: 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      top: 20;
+      left: 10dvw;
+      width: 80dvw;
+    }
+    .layerlist h3 {
+      font-weight: 250;
+      font-size: 12px;
+      margin-top: 0.1rem;
+      margin-bottom: 0.1rem;
+      margin-left: 8px;
+    }
+    .layerslist input {
+        margin-bottom: 10px;
+    }
+
 }

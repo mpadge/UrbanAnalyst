@@ -124,11 +124,13 @@ export default function Control (props: TransformControlProps) {
             className={styles.layerlist}
             style={{display: showLayersDialog?"":"none"}}
         >
+        <p>
             <LayersList
                 layer = {props.layer}
                 varnames = {props.varnames}
                 handleVarnamesChange = {props.handleVarnamesChange}
             />
+        </p>
         </div>
         </>
         )
