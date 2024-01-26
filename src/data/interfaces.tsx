@@ -65,6 +65,11 @@ export interface CalculateButtonProps {
     handleCalculateChange: (calculate: boolean) => void
 }
 
+export interface LayersButtonProps {
+    showLayersDialog: boolean,
+    handleLayersDialogVisibility: (showLayersDialog: boolean) => void
+}
+
 export interface ButtonProps {
     buttons: {
         first: string,

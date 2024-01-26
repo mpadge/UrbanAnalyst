@@ -11,6 +11,7 @@ import TargetCityList from '@/components/transform/citylist';
 import LayerList from '@/components/maps/layerlist';
 import SelectNumLayers from '@/components/maps/num_layers';
 import OpacitySlider from '@/components/maps/slider';
+import LayersButton from '@/components/transform/layers-button';
 import CalculateButton from '@/components/transform/calculate-button';
 
 import { ViewState, CityDataProps, CalculateButtonProps } from "@/data/interfaces";
@@ -39,6 +40,11 @@ export default function Control (props: TransformControlProps) {
     const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
 
     const cityNames = props.citiesArray.map((item) => item.name);
+
+    const [showLayersDialog, setShowLayerssDialog] = useState(false);
+    const handleLayersDialogVisibility = (showLayerssDialog: boolean) => {
+        setShowLayerssDialog(!showLayersDialog);
+    }
 
     const [hideControls, setHideControls] = useState(false);
     const handleControlsVisibility = (pHideControls: boolean) => {
@@ -96,6 +102,10 @@ export default function Control (props: TransformControlProps) {
                     layers = {props.varnames}
                     handleLayersChange = {props.handleVarnamesChange}
                 />
+                <LayersButton
+                    showLayersDialog={showLayersDialog}
+                    handleLayersDialogVisibility={handleLayersDialogVisibility}
+                />
 
                 <h3>Opacity</h3>
                 <OpacitySlider
@@ -116,7 +126,7 @@ export default function Control (props: TransformControlProps) {
             >Show Controls</button>
 
         </div>
-        <div id="layerlist-container" className={styles.layerlist}>
+        <div id="layerlist-container" className={styles.layerlist} style={{display: showLayersDialog?"":"none"}}>
             <LayersList2
                 layer = {props.layer}
                 layers = {props.varnames}
