@@ -20,7 +20,8 @@
 .controls p {
   position: relative;
   margin: 0;
-  padding: 1rem;
+  padding: 0rem;
+  text-align: center;
 }
 
 .controls h2 {
