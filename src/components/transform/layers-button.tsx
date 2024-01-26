@@ -1,5 +1,4 @@
 
-import { useState } from 'react';
 import styles from '@/styles/controls.module.css';
 import { LayersButtonProps } from "@/data/interfaces";
 

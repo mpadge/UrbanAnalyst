@@ -1,6 +1,5 @@
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import Select from 'react-select';
+import React, { useMemo, useState } from 'react';
 
 import { LayersListProps } from "@/data/interfaces";
 import styles from '@/styles/controls.module.css';
