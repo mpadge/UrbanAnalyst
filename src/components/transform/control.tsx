@@ -1,5 +1,5 @@
 
-import { useEffect, useState, useRef } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -41,14 +41,32 @@ export default function Control (props: TransformControlProps) {
     const cityNames = props.citiesArray.map((item) => item.name);
 
     const [showLayersDialog, setShowLayerssDialog] = useState(false);
-    const handleLayersDialogVisibility = (showLayerssDialog: boolean) => {
-        setShowLayerssDialog(!showLayersDialog);
-    }
+    const handleLayersDialogVisibility = useCallback((showLayersDialog: boolean) => {
+        setShowLayerssDialog(showLayersDialog => !showLayersDialog);
+    }, []);
 
     const [hideControls, setHideControls] = useState(false);
     const handleControlsVisibility = (pHideControls: boolean) => {
         setHideControls(pHideControls);
     }
+
+    // Event listener to enable LayersDialog to be closed by clicking outside it:
+    const dialogContainerRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        function handleClickOutside(event: globalThis.MouseEvent) {
+            const target = event.target as Node;
+            if (dialogContainerRef.current && !dialogContainerRef.current.contains(target)) {
+                if (showLayersDialog) {
+                    handleLayersDialogVisibility(false);
+                }
+            }
+        }
+
+        document.addEventListener('click', (event: globalThis.MouseEvent) => handleClickOutside(event));
+        return () => {
+            document.removeEventListener('click', (event: globalThis.MouseEvent) => handleClickOutside(event));
+        };
+    }, [showLayersDialog, handleLayersDialogVisibility]);
 
     return (
         <>
@@ -98,6 +116,7 @@ export default function Control (props: TransformControlProps) {
                 <LayersButton
                     showLayersDialog={showLayersDialog}
                     handleLayersDialogVisibility={handleLayersDialogVisibility}
+                    dialogContainerRef={dialogContainerRef}
                 />
 
                 <h3>Opacity</h3>
@@ -119,7 +138,12 @@ export default function Control (props: TransformControlProps) {
             >Show Controls</button>
 
         </div>
-        <div id="layerlist-container" className={styles.layerlist} style={{display: showLayersDialog?"":"none"}}>
+        <div
+            id="layerlist-container"
+            className={styles.layerlist}
+            style={{display: showLayersDialog?"":"none"}}
+            ref={dialogContainerRef}
+        >
             <LayersList
                 layer = {props.layer}
                 varnames = {props.varnames}

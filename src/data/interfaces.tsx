@@ -68,6 +68,7 @@ export interface CalculateButtonProps {
 export interface LayersButtonProps {
     showLayersDialog: boolean,
     handleLayersDialogVisibility: (showLayersDialog: boolean) => void
+    dialogContainerRef: any
 }
 
 export interface ButtonProps {
