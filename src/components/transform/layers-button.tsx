@@ -9,7 +9,7 @@ export default function LayersButton (props: LayersButtonProps) {
     var buttonTextTemp: string = "Extra Layers";
     if (props.showLayersDialog) {
         buttonStyleTemp = styles.explainbuttonOn;
-        buttonTextTemp = "Close";
+        buttonTextTemp = "Close Layers";
     }
     const buttonStyle = buttonStyleTemp;
     const buttonText = buttonTextTemp;
@@ -17,11 +17,11 @@ export default function LayersButton (props: LayersButtonProps) {
     const toggleDialog = (event: React.MouseEvent) => {
         event.preventDefault();
         event.stopPropagation();
-        props.handleLayersDialogVisibility(props.showLayersDialog);
+        props.handleLayersDialogVisibility(props.showLayersDialog)
     }
 
     return (
-    <section className="button" ref={props.dialogContainerRef}>
+    <section className="button">
     <button
         className={buttonStyle}
         type="button"

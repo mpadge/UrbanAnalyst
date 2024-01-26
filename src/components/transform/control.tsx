@@ -50,24 +50,6 @@ export default function Control (props: TransformControlProps) {
         setHideControls(pHideControls);
     }
 
-    // Event listener to enable LayersDialog to be closed by clicking outside it:
-    const dialogContainerRef = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-        function handleClickOutside(event: globalThis.MouseEvent) {
-            const target = event.target as Node;
-            if (dialogContainerRef.current && !dialogContainerRef.current.contains(target)) {
-                if (showLayersDialog) {
-                    handleLayersDialogVisibility(false);
-                }
-            }
-        }
-
-        document.addEventListener('click', (event: globalThis.MouseEvent) => handleClickOutside(event));
-        return () => {
-            document.removeEventListener('click', (event: globalThis.MouseEvent) => handleClickOutside(event));
-        };
-    }, [showLayersDialog, handleLayersDialogVisibility]);
-
     return (
         <>
         <div id="top-left-container" className={styles.controls}>
@@ -116,7 +98,6 @@ export default function Control (props: TransformControlProps) {
                 <LayersButton
                     showLayersDialog={showLayersDialog}
                     handleLayersDialogVisibility={handleLayersDialogVisibility}
-                    dialogContainerRef={dialogContainerRef}
                 />
 
                 <h3>Opacity</h3>
@@ -142,7 +123,6 @@ export default function Control (props: TransformControlProps) {
             id="layerlist-container"
             className={styles.layerlist}
             style={{display: showLayersDialog?"":"none"}}
-            ref={dialogContainerRef}
         >
             <LayersList
                 layer = {props.layer}
