@@ -10,7 +10,7 @@ interface OptionType {
     label: string;
 }
 
-export default function LayersList2(props: LayersListProps) {
+export default function LayersList(props: LayersListProps) {
 
     const options = useMemo (() => [
         { value: "social_index", label: "Social" },
