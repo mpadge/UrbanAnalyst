@@ -10,6 +10,7 @@
   border: 1px solid rgba(172, 175, 176, 0.3);
   border-radius: 12px;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 14px;
   top: 0;
   left: 0;
   width: 10dvw;
@@ -24,6 +25,7 @@
 
 .controls h2 {
   font-weight: 600;
+  font-size: 16px;
   margin-top: 0.7rem;
   margin-bottom: 0.7rem;
   margin-left: 12px;
@@ -31,6 +33,7 @@
 
 .controls h3 {
   font-weight: 400;
+  font-size: 14px;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   margin-left: 12px;
@@ -259,6 +262,11 @@
 @media (max-width: 700px) {
     .controls {
         width: 50dvw;
+        font-size: 12px;
+    }
+    .controls h2 {
+      font-weight: 400;
+      font-size: 12px;
     }
     .listSelect {
         margin-left: 5px;
