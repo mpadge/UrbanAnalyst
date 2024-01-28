@@ -68,15 +68,6 @@ export default function Home() {
                     cities.
                 </p>
 
-                <p className="text-center">
-                    Both maps and statistics may be examined for single
-                    variables, or for pairwise combinations of variables. Lower
-                    values for all variables are always better, such as travel
-                    times or rates of unemployment.  Pairwise combinations
-                    provide insight into relationships bewteen different
-                    properties of cities, such as between the various metrics of
-                    transport provision and socio-demographic inequality.
-                </p>
             </div>
 
             <div className={styles.grid}>
@@ -90,10 +81,7 @@ export default function Home() {
                         Maps <span>-&gt;</span>
                     </h2>
                     <p className={styles.cardText}>
-                        Interactive maps of all cities analysed to date. Most
-                        variables are displayed such the lower values reflect
-                        better conditions, such as shorter travel times or lower
-                        rates of unemployment.
+                        Interactive maps of all cities analysed to date.
                     </p>
                 </Link>
 
@@ -107,10 +95,9 @@ export default function Home() {
                         Statistics <span>-&gt;</span>
                     </h2>
                     <p className={styles.cardText}>
-                        The statistics, or &quot;stats&quot;, section shows average values for every
-                        UA city for each variable shown in the maps. This enables the
-                        overall values for any city to be compared with values for all other
-                        cities.  </p>
+                        Compare statistics for every UA city for each variable
+                        shown in the maps.
+                    </p>
                 </Link>
 
             </div>
@@ -131,25 +118,19 @@ export default function Home() {
                     <a className = {styles.textLink}
                     href="https://UrbanAnalyst.github.io/docs"
                     >&nbsp;the documentation pages
-                    </a>. Statistics for each intersection are weighted by
-                    population densities, and aggregated within each city
-                    polygon for maps, or across entire cities for statistics.
+                    </a>.
                 </p>
 
                 <p className="text-center">
                     Results for each city involve millions of public transport
                     routing calculations, and generally billions of routing
-                    calculations through street networks. For example, results
-                    for Berlin are derived from around 170 million public
-                    transport routing calculations, and 170 billion street
-                    network routing calculations. These are calculated using
-                    Urban Analyst&apos;s own open-source software described in
-                    <a className = {styles.textLink}
-                    href="https://UrbanAnalyst.github.io/docs"
-                    >&nbsp;the documentation pages
-                    </a>. These enormous numbers of calculations enable Urban
-                    Analyst to provide uniquely powerful insight into how people
-                    move throughout cities.
+                    calculations through street networks.  These are calculated
+                    using Urban Analyst&apos;s own open-source software
+                    described in <a className = {styles.textLink}
+                    href="https://UrbanAnalyst.github.io/docs" >&nbsp;the
+                    documentation pages </a>. These enormous numbers of
+                    calculations enable Urban Analyst to provide uniquely
+                    powerful insight into how people move throughout cities.
                 </p>
             </div>
 
