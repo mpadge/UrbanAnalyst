@@ -95,8 +95,7 @@ export default function Home() {
                         Statistics <span>-&gt;</span>
                     </h2>
                     <p className={styles.cardText}>
-                        Compare statistics for every UA city for each variable
-                        shown in the maps.
+                        Compare statistics for every UA city.
                     </p>
                 </Link>
 
