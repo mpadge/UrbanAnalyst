@@ -56,7 +56,7 @@ pub struct OrderingIndex {
 /// let result = calculate_dists(&values1, &values2, false);
 /// assert_eq!(result, vec![1.0, 0.5, 0.75, 0.8]);
 /// ```
-pub fn calculate_dists(values1: &DMatrix<f64>, values2: &DMatrix<f64>, absolute: bool) -> Vec<f64> {
+pub fn calculate_dists(values1: &DMatrix<f64>, values2: &DMatrix<f64>) -> DMatrix<f64> {
     assert!(!values1.is_empty(), "values1 must not be empty");
     assert_eq!(
         values1.shape(),
@@ -80,20 +80,31 @@ pub fn calculate_dists(values1: &DMatrix<f64>, values2: &DMatrix<f64>, absolute:
     values2_sorted.sort_by(|a, b| a.partial_cmp(b).unwrap());
 
     // Calculate conseqcutive differences between the two vectors:
-    let differences: Vec<f64> = values1_sorted
+    let differences_abs: Vec<f64> = values1_sorted
         .iter()
         .zip(values2_sorted.iter())
-        .map(|(&a, &b)| if absolute { b - a } else { (b - a) / a })
+        .map(|(&a, &b)| b - a)
+        .collect();
+    let differences_rel: Vec<f64> = values1_sorted
+        .iter()
+        .zip(values2_sorted.iter())
+        .map(|(&a, &b)| (b - a) / a)
         .collect();
     // And re-order those differences according to sorting_order.index_reorder, so they align with
     // the original order of `values1`:
-    let differences: Vec<f64> = sorting_order
+    let differences_abs: Vec<f64> = sorting_order
         .index_reorder
         .iter()
-        .map(|&i| differences[i])
+        .map(|&i| differences_abs[i])
+        .collect();
+    let differences_rel: Vec<f64> = sorting_order
+        .index_reorder
+        .iter()
+        .map(|&i| differences_rel[i])
         .collect();
 
-    differences
+    let differences = DMatrix::from_row_slice(differences_abs.len(), 2, &[differences_abs, differences_rel].concat());
+    return differences;
 }
 
 /// Returns a vector of indices that would sort the input vector in ascending or descending order.
