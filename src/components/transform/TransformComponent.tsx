@@ -2,7 +2,7 @@ import { useEffect, useState} from 'react';
 import { DeckGL } from "@deck.gl/react/typed";
 import { Map } from "react-map-gl";
 
-import { ViewState } from "@/data/interfaces";
+import { ViewState, CityDataProps } from "@/data/interfaces";
 import TransformMsgs from '@/components/transform/PageMessages';
 import { loadDataFunction } from '@/components/transform/LoadData';
 import { transformDataFunction } from '@/components/transform/CallTransform';
@@ -14,6 +14,7 @@ interface TransformProps {
     layer: string
     varnames: string[]
     calculate: boolean,
+    citiesArray: CityDataProps[],
     city: string
     targetCity: string
     viewState: ViewState
@@ -81,13 +82,20 @@ const TransformComponent = (props: TransformProps) => {
     const { handleLayerMinChange, handleLayerMaxChange } = props;
     useEffect(() => {
         if (result) {
-            const filteredResult = result.filter(value => value !== 0);
-            const min = Math.min(...filteredResult);
-            const max = Math.max(...filteredResult);
+            var min: number;
+            var max: number;
+            if (props.outputLayer === "original") {
+                // Get data ranges from original CITY_DATA array:
+                min = props.citiesArray[props.idx].dataRanges[props.layer as string][0];
+                max = props.citiesArray[props.idx].dataRanges[props.layer as string][1];
+            } else {
+                min = Math.min(...result);
+                max = Math.max(...result);
+            }
             handleLayerMinChange(min);
             handleLayerMaxChange(max);
         }
-    }, [result, handleLayerMinChange, handleLayerMaxChange]);
+    }, [result, props.citiesArray, props.idx, props.layer, props.outputLayer, handleLayerMinChange, handleLayerMaxChange]);
 
     useEffect(() => {
         getGeoJsonLayer(geoJSONcontent, props.layerMin, props.layerMax, props.layer, props.alpha, setGeoJsonLayer);

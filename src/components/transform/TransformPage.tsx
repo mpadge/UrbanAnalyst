@@ -71,6 +71,7 @@ export default function TransformPage() {
             layer={layer}
             varnames={varnames}
             calculate={calculate}
+            citiesArray = {CITY_DATA.citiesArray}
             city = {CITY_DATA.citiesArray[idx].name}
             targetCity = {CITY_DATA.citiesArray[idx2].name}
             viewState = {viewState}
