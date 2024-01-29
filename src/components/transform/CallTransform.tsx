@@ -15,7 +15,7 @@ const JSONObjectSize = (obj: any) => {
     return numItems;
 }
 
-export async function transformDataFunction(data1: number | null, data2: number | null, varnames: string[], setResult: (data: any) => void) {
+export async function transformDataFunction(data1: number | null, data2: number | null, varnames: string[], outputLayer: string, setResult: (data: any) => void) {
     fetch('@/../pkg/uamutations_bg.wasm')
         .then(response => {
             return response.arrayBuffer();
