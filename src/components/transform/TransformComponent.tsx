@@ -20,9 +20,11 @@ interface TransformProps {
     alpha: number
     layerMin: number
     layerMax: number
+    outputLayer: string
     handleLayerMinChange: (layerMin: number) => void
     handleLayerMaxChange: (layerMin: number) => void
     handleCalculateChange: (calculate: boolean) => void
+    handleOutputLayerChange: (outputLayer: string) => void
 }
 
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
@@ -57,8 +59,8 @@ const TransformComponent = (props: TransformProps) => {
     // 'varnames[0]'.
     useEffect(() => {
         const varnames: string[] = [props.layer, ...props.varnames];
-        transformDataFunction(data1, data2, varnames, setResult);
-        }, [data1, data2, props.layer, props.varnames, setResult]);
+        transformDataFunction(data1, data2, varnames, props.outputLayer, setResult);
+        }, [data1, data2, props.layer, props.varnames, props.outputLayer, setResult]);
 
     // Effect to load map data for source city, and replace specified column
     // with 'result' from previous effect:

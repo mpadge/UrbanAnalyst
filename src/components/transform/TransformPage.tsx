@@ -29,6 +29,7 @@ export default function TransformPage() {
     const [layerMax, setLayerMax] = useState<number>(0);
     const [calculate, setCalculate] = useState<boolean>(true);
     const [varnames, setVarnames] = useState<string[]>([]);
+    const [outputLayer, setOutputLayer] = useState<string>("relative");
 
     // -------- handlers for state variables --------
     const handleIdxChange = (idx: number) => {
@@ -58,6 +59,9 @@ export default function TransformPage() {
     const handleVarnamesChange = (varnames: string[]) => {
         setVarnames(varnames);
     }
+    const handleOutputLayerChange = (outputLayer: string) => {
+        setOutputLayer(outputLayer);
+    }
 
     return (
         <>
@@ -73,9 +77,11 @@ export default function TransformPage() {
             alpha = {alpha}
             layerMin={layerMin}
             layerMax={layerMax}
+            outputLayer={outputLayer}
             handleLayerMinChange={handleLayerMinChange}
             handleLayerMaxChange={handleLayerMaxChange}
             handleCalculateChange={handleCalculateChange}
+            handleOutputLayerChange={handleOutputLayerChange}
         />
         <Control
             idx={idx}
@@ -86,6 +92,7 @@ export default function TransformPage() {
             alpha={alpha}
             citiesArray={CITY_DATA.citiesArray}
             viewState={viewState}
+            outputLayer={outputLayer}
             handleIdxChange={handleIdxChange}
             handleIdx2Change={handleIdx2Change}
             handleAlphaChange={handleAlphaChange}
@@ -93,6 +100,7 @@ export default function TransformPage() {
             handleLayerChange={handleLayerChange}
             handleCalculateChange={handleCalculateChange}
             handleVarnamesChange={handleVarnamesChange}
+            handleOutputLayerChange={handleOutputLayerChange}
         />
         <Legend
             layerMin={layerMin}
