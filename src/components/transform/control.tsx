@@ -12,6 +12,7 @@ import SelectNumLayers from '@/components/maps/num_layers';
 import OpacitySlider from '@/components/maps/slider';
 import LayersButton from '@/components/transform/layers-button';
 import CalculateButton from '@/components/transform/calculate-button';
+import OutputLayers from '@/components/transform/outputLayers';
 
 import { ViewState, CityDataProps, CalculateButtonProps } from "@/data/interfaces";
 
@@ -112,7 +113,13 @@ export default function Control (props: TransformControlProps) {
                     calculate={props.calculate}
                     handleCalculateChange={props.handleCalculateChange}
                 />
-            </div>
+                <h3>Output Layer</h3>
+                <OutputLayers
+                    outputLayer = {props.outputLayer}
+                    handleOutputLayerChange={props.handleOutputLayerChange}
+                />
+
+           </div>
 
             <button
                 id="btnShowControls"
