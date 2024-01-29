@@ -32,12 +32,25 @@ export async function transformDataFunction(data1: number | null, data2: number 
                 // const numItems = JSONObjectSize(resultObj);
 
                 type Row = number[];
-                // const vals_orig = resultObj.map((row: Row) => row[0]);
-                // const vals_trans = resultObj.map((row: Row) => row[1]);
-                // const diff_abs = resultObj.map((row: Row) => row[2]);
-                const diff_rel = resultObj.map((row: Row) => row[3]);
 
-                setResult(diff_rel);
+                let outputCol;
+                switch (outputLayer) {
+                    case 'original':
+                        outputCol = resultObj.map((row: Row) => row[0]);
+                        break;
+                    case 'transformed':
+                        outputCol = resultObj.map((row: Row) => row[1]);
+                        break;
+                    case 'absolute':
+                        outputCol = resultObj.map((row: Row) => row[2]);
+                        break;
+                    case 'relative':
+                        outputCol = resultObj.map((row: Row) => row[3]);
+                        break;
+                    default:
+                        throw new Error(`Invalid output layer: `);
+                }
+                setResult(outputCol);
             }
         })
         .catch(error => {

@@ -29,7 +29,7 @@ export default function TransformPage() {
     const [layerMax, setLayerMax] = useState<number>(0);
     const [calculate, setCalculate] = useState<boolean>(true);
     const [varnames, setVarnames] = useState<string[]>([]);
-    const [outputLayer, setOutputLayer] = useState<string>("original");
+    const [outputLayer, setOutputLayer] = useState<string>("relative");
 
     // -------- handlers for state variables --------
     const handleIdxChange = (idx: number) => {
