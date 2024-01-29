@@ -81,8 +81,9 @@ const TransformComponent = (props: TransformProps) => {
     const { handleLayerMinChange, handleLayerMaxChange } = props;
     useEffect(() => {
         if (result) {
-            const min = Math.min(...result);
-            const max = Math.max(...result);
+            const filteredResult = result.filter(value => value !== 0);
+            const min = Math.min(...filteredResult);
+            const max = Math.max(...filteredResult);
             handleLayerMinChange(min);
             handleLayerMaxChange(max);
         }
