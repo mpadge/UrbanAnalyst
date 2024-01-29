@@ -3,6 +3,7 @@
 //! become more like those of another selected city.
 
 use wasm_bindgen::prelude::*;
+use nalgebra::DMatrix;
 
 pub mod calculate_dists;
 pub mod mlr;
@@ -57,17 +58,66 @@ pub fn uamutate(
         mlr::adj_for_beta(&mut values1, &values2);
     }
 
-    // Then calculate successive differences between the two sets of values, where `false` is for
-    // the `absolute` parameter, so that differences are calculated relative to values1. These are
-    // then the distances by which `values1` need to be moved in the first dimension only to match
-    // the closest equivalent values of `values2`.
-    let dists = calculate_dists::calculate_dists(&values1, &values2, false);
-    let result = aggregate_to_groups(&dists, &groups1);
+    // Then calculate successive differences between the two sets of values. These are the
+    // distances by which `values1` need to be moved in the first dimension only to match the
+    // closest equivalent values of `values2`.
+    let dists = calculate_dists::calculate_dists(&values1, &values2);
+    let result = aggregate_to_groups(&values1, &dists, &groups1);
 
-    serde_json::to_string(&result).unwrap()
+    let result_array: Vec<Vec<f64>> = result.row_iter().map(|row| row.iter().cloned().collect()).collect();
+    return serde_json::to_string(&result_array).unwrap();
 }
 
-/// Aggregate distances within the groups defined in the original `groups` vector.
+/// Loop over all columns of the `dists` `DMatrix` object, and aggregate groups for each column.
+///
+/// # Arguments
+///
+/// * `values1` - The original values used as references for the distances; aggregated versions of
+/// these are also returned.
+/// * `dists` - A matrix of distances between entries in `values1` and closest values in `values2`.
+/// * `groups` - A vector of same length as `dists`, with 1-based indices of group numbers. There
+/// will generally be far fewer unique groups as there are entries in `dists`.
+///
+/// # Returns
+///
+/// A `DMatrix` object with numbers of rows equal to number of distinct groups in the input data
+/// 'index' column, with each value quantifying the mean distance to the nearest points in the
+/// target distribution. This return object has four columns:
+/// 1. The original value
+/// 2. The mutated value
+/// 3. The absolute difference between mutate and original values
+/// 4. The relative difference between mutate and original values
+fn aggregate_to_groups(values1: &DMatrix<f64>, dists: &DMatrix<f64>, groups: &[usize]) -> DMatrix<f64> {
+    let mut result = DMatrix::zeros(groups.len(), dists.ncols() + 2);
+
+    // Aggregate original values first:
+    let values1_first_col: Vec<f64> = values1.column(0).iter().cloned().collect();
+    let mean_dist = aggregate_to_groups_single_col(&values1_first_col, &groups);
+    for (i, &value) in mean_dist.iter().enumerate() {
+        result[(i, 0)] = value;
+    }
+
+    // Then generate absolute transformed value from original value plus  absolute distance:
+    let dists_abs: Vec<f64> = dists.column(0).iter().cloned().collect();
+    let values1_transformed: Vec<f64> = values1_first_col.iter().zip(dists_abs.iter()).map(|(&a, &b)| a + b).collect();
+    for (i, &value) in values1_transformed.iter().enumerate() {
+        result[(i, 1)] = value;
+    }
+
+    // Then both absolute and relative distances:
+    for col in 0..dists.ncols() {
+        let dists_col: Vec<f64> = dists.column(col).iter().cloned().collect();
+        let mean_dist = aggregate_to_groups_single_col(&dists_col, &groups);
+        for (i, &value) in mean_dist.iter().enumerate() {
+            result[(i, col + 2)] = value;
+        }
+    }
+
+    result
+}
+
+/// Aggregate a single column of distances within the groups defined in the original `groups`
+/// vector.
 ///
 /// # Arguments
 ///
@@ -78,7 +128,7 @@ pub fn uamutate(
 /// # Returns
 ///
 /// A vector of mean distances within each group to the nearest points in the target distribution.
-fn aggregate_to_groups(dists: &[f64], groups: &[usize]) -> Vec<f64> {
+fn aggregate_to_groups_single_col(dists: &[f64], groups: &[usize]) -> Vec<f64> {
     let groups_out: Vec<_> = groups.to_vec();
     let max_group = *groups_out.iter().max().unwrap();
     let mut counts = vec![0u32; max_group + 1];

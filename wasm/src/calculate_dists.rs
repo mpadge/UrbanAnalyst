@@ -49,14 +49,17 @@ pub struct OrderingIndex {
 /// let values2 = vec![7.0, 9.0, 3.0, 2.0];
 /// let values2 = DMatrix::from_vec(4, 1, values2);
 /// let result = calculate_dists(&values1, &values2, true);
-/// // For each values1, result will be (v2 - v1) for closest values2. So closest value to v1[3] =
-/// // 4, for example, is v2 = 3, and (v2 - v1) = 3 - 4 = -1. Or v1[4] = 5, with closest of 3, and
-/// // 3 - 5 = -2.
-/// assert_eq!(result, vec![1.0, 1.0, 3.0, 4.0]);
-/// let result = calculate_dists(&values1, &values2, false);
-/// assert_eq!(result, vec![1.0, 0.5, 0.75, 0.8]);
+/// // The first column of `result` contains the minimal absolute differences. Paired sequences are
+/// // (1, 2), (2, 3), (4, 7), (5, 9), with differences of (1, 1, 3, 4).
+/// let res_col0 = result.column(0).iter().cloned().collect::<Vec<f64>>();
+/// let res0 = vec![1.0, 1.0, 3.0, 4.0];
+/// assert_eq!(res_col0, res0);
+/// // The second column then holds differences relative to the initial values:
+/// let res_col1 = result.column(1).iter().cloned().collect::<Vec<f64>>();
+/// let res1 = vec![1.0, 0.5, 0.75, 0.8];
+/// assert_eq!(res_col1, res1);
 /// ```
-pub fn calculate_dists(values1: &DMatrix<f64>, values2: &DMatrix<f64>, absolute: bool) -> Vec<f64> {
+pub fn calculate_dists(values1: &DMatrix<f64>, values2: &DMatrix<f64>) -> DMatrix<f64> {
     assert!(!values1.is_empty(), "values1 must not be empty");
     assert_eq!(
         values1.shape(),
@@ -80,20 +83,35 @@ pub fn calculate_dists(values1: &DMatrix<f64>, values2: &DMatrix<f64>, absolute:
     values2_sorted.sort_by(|a, b| a.partial_cmp(b).unwrap());
 
     // Calculate conseqcutive differences between the two vectors:
-    let differences: Vec<f64> = values1_sorted
+    let differences_abs: Vec<f64> = values1_sorted
         .iter()
         .zip(values2_sorted.iter())
-        .map(|(&a, &b)| if absolute { b - a } else { (b - a) / a })
+        .map(|(&a, &b)| b - a)
+        .collect();
+    let differences_rel: Vec<f64> = values1_sorted
+        .iter()
+        .zip(values2_sorted.iter())
+        .map(|(&a, &b)| (b - a) / a)
         .collect();
     // And re-order those differences according to sorting_order.index_reorder, so they align with
     // the original order of `values1`:
-    let differences: Vec<f64> = sorting_order
+    let differences_abs: Vec<f64> = sorting_order
         .index_reorder
         .iter()
-        .map(|&i| differences[i])
+        .map(|&i| differences_abs[i])
+        .collect();
+    let differences_rel: Vec<f64> = sorting_order
+        .index_reorder
+        .iter()
+        .map(|&i| differences_rel[i])
         .collect();
 
-    differences
+    DMatrix::from_row_slice(
+        2,
+        differences_abs.len(),
+        &[differences_abs, differences_rel].concat(),
+    )
+    .transpose()
 }
 
 /// Returns a vector of indices that would sort the input vector in ascending or descending order.
@@ -171,24 +189,22 @@ mod tests {
     }
 
     #[test]
-    fn test_calculate_dists_absolute() {
+    fn test_calculate_dists() {
         // Note that 2.0 is closest to 2.0, but is matched to 3.0 because of sequential and unique
         // matching.
         let values1 = vec![1.0, 2.0, 4.0, 5.0];
         let values2 = vec![7.0, 9.0, 3.0, 2.0];
         let values1 = DMatrix::from_vec(4, 1, values1);
         let values2 = DMatrix::from_vec(4, 1, values2);
-        let result = calculate_dists(&values1, &values2, true);
-        assert_eq!(result, vec![1.0, 1.0, 3.0, 4.0]);
-    }
-
-    #[test]
-    fn test_calculate_dists_relative() {
-        let values1 = vec![1.0, 2.0, 4.0, 5.0];
-        let values2 = vec![7.0, 9.0, 3.0, 2.0];
-        let values1 = DMatrix::from_vec(4, 1, values1);
-        let values2 = DMatrix::from_vec(4, 1, values2);
-        let result = calculate_dists(&values1, &values2, false);
-        assert_eq!(result, vec![1.0, 0.5, 0.75, 0.8]);
+        let result = calculate_dists(&values1, &values2);
+        assert_eq!(result.ncols(), 2, "Result should have 2 columns");
+        // First col has absolute differences:
+        let res_col0 = result.column(0).iter().cloned().collect::<Vec<f64>>();
+        let res0 = vec![1.0, 1.0, 3.0, 4.0];
+        assert_eq!(res_col0, res0);
+        // Second column holds differences relative to the initial values:
+        let res_col1 = result.column(1).iter().cloned().collect::<Vec<f64>>();
+        let res1 = vec![1.0, 0.5, 0.75, 0.8];
+        assert_eq!(res_col1, res1);
     }
 }

@@ -15,7 +15,7 @@ const JSONObjectSize = (obj: any) => {
     return numItems;
 }
 
-export async function transformDataFunction(data1: number | null, data2: number | null, varnames: string[], handleResultChange: (data: any) => void) {
+export async function transformDataFunction(data1: number | null, data2: number | null, varnames: string[], setResult: (data: any) => void) {
     fetch('@/../pkg/uamutations_bg.wasm')
         .then(response => {
             return response.arrayBuffer();
@@ -29,9 +29,15 @@ export async function transformDataFunction(data1: number | null, data2: number 
                 const resultJson = wasm_js.uamutate(data1js, data2js, varname, nentries);
                 const resultObj = JSON.parse(resultJson);
 
-                const numItems = JSONObjectSize(resultObj);
+                // const numItems = JSONObjectSize(resultObj);
 
-                handleResultChange(resultObj);
+                type Row = number[];
+                // const vals_orig = resultObj.map((row: Row) => row[0]);
+                // const vals_trans = resultObj.map((row: Row) => row[1]);
+                // const diff_abs = resultObj.map((row: Row) => row[2]);
+                const diff_rel = resultObj.map((row: Row) => row[3]);
+
+                setResult(diff_rel);
             }
         })
         .catch(error => {
