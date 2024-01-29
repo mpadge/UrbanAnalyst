@@ -80,8 +80,13 @@ pub fn uamutate(
 ///
 /// # Returns
 ///
-/// A vector of length equal to number of distinct groups in the input data 'index' column, with
-/// each value quantifying the mean distance to the nearest points in the target distribution.
+/// A `DMatrix` object with numbers of rows equal to number of distinct groups in the input data
+/// 'index' column, with each value quantifying the mean distance to the nearest points in the
+/// target distribution. This return object has four columns:
+/// 1. The original value
+/// 2. The mutated value
+/// 3. The absolute difference between mutate and original values
+/// 4. The relative difference between mutate and original values
 fn aggregate_to_groups(values1: &DMatrix<f64>, dists: &DMatrix<f64>, groups: &[usize]) -> DMatrix<f64> {
     let mut result = DMatrix::zeros(groups.len(), dists.ncols() + 2);
 
