@@ -13,6 +13,11 @@
 * * `varextra` - Extra variables to be considered in the mutation.
 * * `nentries` - The number of entries to be read from the JSON files.
 *
+* # Returns
+*
+* A vector of length equal to number of distinct groups in the input data 'index' column, with
+* each value quantifying the mean distance to the nearest points in the target distribution.
+*
 * # Process
 *
 * 1. Reads the variable specified by `varname` from the files `fname1` and `fname2`.
