@@ -20,9 +20,11 @@ interface TransformProps {
     alpha: number
     layerMin: number
     layerMax: number
+    outputLayer: string
     handleLayerMinChange: (layerMin: number) => void
     handleLayerMaxChange: (layerMin: number) => void
     handleCalculateChange: (calculate: boolean) => void
+    handleOutputLayerChange: (outputLayer: string) => void
 }
 
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN

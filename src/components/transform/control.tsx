@@ -24,6 +24,7 @@ interface TransformControlProps {
     alpha: number,
     citiesArray: CityDataProps[],
     viewState: ViewState,
+    outputLayer: string
     handleIdxChange: (pIdx: number) => void,
     handleIdx2Change: (pIdx2: number) => void,
     handleAlphaChange: (pAlpha: number) => void,
@@ -31,6 +32,7 @@ interface TransformControlProps {
     handleLayerChange: (layer: string) => void,
     handleCalculateChange: (calculate: boolean) => void
     handleVarnamesChange: (varnames: string[]) => void
+    handleOutputLayerChange: (outputLayer: string) => void
 }
 
 
