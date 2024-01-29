@@ -31,10 +31,11 @@ export async function transformDataFunction(data1: number | null, data2: number 
 
                 // const numItems = JSONObjectSize(resultObj);
 
-                // const vals_orig = resultObj.map(row => row[0]);
-                // const vals_trans = resultObj.map(row => row[1]);
-                // const diff_abs = resultObj.map(row => row[2]);
-                const diff_rel = resultObj.map(row => row[3]);
+                type Row = number[];
+                // const vals_orig = resultObj.map((row: Row) => row[0]);
+                // const vals_trans = resultObj.map((row: Row) => row[1]);
+                // const diff_abs = resultObj.map((row: Row) => row[2]);
+                const diff_rel = resultObj.map((row: Row) => row[3]);
 
                 setResult(diff_rel);
             }
