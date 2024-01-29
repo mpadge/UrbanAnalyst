@@ -29,9 +29,14 @@ export async function transformDataFunction(data1: number | null, data2: number 
                 const resultJson = wasm_js.uamutate(data1js, data2js, varname, nentries);
                 const resultObj = JSON.parse(resultJson);
 
-                const numItems = JSONObjectSize(resultObj);
+                // const numItems = JSONObjectSize(resultObj);
 
-                setResult(resultObj);
+                // const vals_orig = resultObj.map(row => row[0]);
+                // const vals_trans = resultObj.map(row => row[1]);
+                // const diff_abs = resultObj.map(row => row[2]);
+                const diff_rel = resultObj.map(row => row[3]);
+
+                setResult(diff_rel);
             }
         })
         .catch(error => {
