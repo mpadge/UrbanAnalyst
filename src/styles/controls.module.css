@@ -263,6 +263,8 @@
   margin-top: 10px;
   padding: 0rem;
   text-align: left;
+  white-space: nowrap;
+  overflow: auto;
 }
 
 .layerlist input {
@@ -282,6 +284,25 @@
     .numLayersSelect {
         margin-left: 5px;
         width: 16dvw;
+    }
+    .layerlist {
+      margin: 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      top: 20;
+      left: 10dvw;
+      width: 20dvw;
+      white-space: nowrap;
+      overflow: auto;
+    }
+    .layerlist div {
+      margin: 0;
+      margin-top: 6px;
+      padding: 0rem;
+      text-align: left;
+    }
+    .layerslist input {
+        margin-bottom: 10px;
     }
 }
 
@@ -309,8 +330,10 @@
       border-radius: 10px;
       font-size: 12px;
       top: 20;
-      left: 10dvw;
-      width: 80dvw;
+      left: 20dvw;
+      min-width: 60dvw;
+      white-space: nowrap;
+      overflow: auto;
     }
     .layerlist div {
       margin: 0;
@@ -326,7 +349,7 @@
       margin-left: 8px;
     }
     .layerslist input {
-        margin-bottom: 10px;
+      margin-bottom: 10px;
     }
 
 }
