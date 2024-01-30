@@ -88,6 +88,12 @@ const TransformComponent = (props: TransformProps) => {
                 // Get data ranges from original CITY_DATA array:
                 min = props.citiesArray[props.idx].dataRanges[props.layer as string][0];
                 max = props.citiesArray[props.idx].dataRanges[props.layer as string][1];
+                // And then implement transformations from wasm/src/transform:
+                if (props.layer === "bike_index" || props.layer === "nature_index") {
+                    const tmp = 1.0 - min;
+                    min = 1.0 - max;
+                    max = tmp;
+                }
             } else {
                 min = Math.min(...result);
                 max = Math.max(...result);
