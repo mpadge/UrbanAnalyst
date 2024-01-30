@@ -52,6 +52,58 @@ export default function Control (props: TransformControlProps) {
     const handleControlsVisibility = (pHideControls: boolean) => {
         setHideControls(pHideControls);
     }
+    const [defaultVarnames, setDefaultVarnames] = useState(props.varnames);
+
+    // Effect to set default "Extra layers" as all those with better values:
+    useEffect(() => {
+        const source_city_values = Object.entries(props.citiesArray[props.idx].stats_single);
+        const source_city_mean_all = source_city_values.map(([key, value]) => ({
+            name: key,
+            value: value[0]
+        }));
+        const target_city_values = Object.entries(props.citiesArray[props.idx2].stats_single);
+        const target_city_mean_all = target_city_values.map(([key, value]) => ({
+            name: key,
+            value: value[0]
+        }));
+        const source_city_mean = source_city_mean_all.filter(entry => entry.name !== props.layer);
+        const target_city_mean = target_city_mean_all.filter(entry => entry.name !== props.layer);
+
+        // Directions of comparison for each variable. If 'lower', then lower
+        // values are better.
+        const comparisons = [
+            { name: "social_index", lower: true },
+            { name: "times_rel", lower: true},
+            { name: "times_abs", lower: true},
+            { name: "transfers", lower: true},
+            { name: "intervals", lower: true},
+            { name: "transport", lower: true},
+            { name: "popdens", lower: true},
+            { name: "school_dist", lower: true},
+            { name: "bike_index", lower: true},
+            { name: "natural", lower: true},
+            { name: "parking", lower: true},
+        ];
+        let varnames: string[] = [];
+        comparisons.forEach(comparison => {
+            const sourceEntry = source_city_mean.find(entry => entry.name === comparison.name);
+            const targetEntry = target_city_mean.find(entry => entry.name === comparison.name);
+
+            if (sourceEntry && targetEntry) {
+                if ((comparison.lower && targetEntry.value < sourceEntry.value) ||
+                    (!comparison.lower && targetEntry.value > sourceEntry.value)) {
+                    varnames.push(comparison.name);
+                }
+            }
+        });
+        setDefaultVarnames(varnames);
+
+    }, [props.idx, props.idx2, props.layer, props.citiesArray]);
+
+    const { handleVarnamesChange } = props;
+    useEffect(() => {
+        handleVarnamesChange(defaultVarnames);
+    }, [defaultVarnames, handleVarnamesChange]);
 
     return (
         <>
