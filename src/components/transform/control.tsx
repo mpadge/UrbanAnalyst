@@ -6,7 +6,7 @@ import Image from 'next/image'
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/maps/citylist';
 import LayersList from '@/components/transform/LayersList';
-import TargetCityList from '@/components/transform/citylist';
+import TargetCityList from '@/components/transform/targetCityList';
 import LayerList from '@/components/maps/layerlist';
 import SelectNumLayers from '@/components/maps/num_layers';
 import OpacitySlider from '@/components/maps/slider';
