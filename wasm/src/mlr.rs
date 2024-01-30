@@ -99,7 +99,13 @@ pub fn adj_for_beta(values1: &mut DMatrix<f64>, values2: &DMatrix<f64>) {
 
     let sum1: DVector<f64> = product1.column_sum();
     let sum2: DVector<f64> = product2.column_sum();
-    let first_column = values1.column(0).clone_owned() + sum2 - sum1.clone();
+    // Adjust so that mean effect of sum2 - sum1 is zero:
+    let sum_sum1: f64 = sum1.iter().sum();
+    let mean_sum1 = sum_sum1 / sum1.len() as f64;
+    let sum_sum2: f64 = sum2.iter().sum();
+    let mean_sum2 = sum_sum2 / sum2.len() as f64;
+    let adjusted_sum2: DVector<f64> = sum2.map(|x| x + mean_sum1 - mean_sum2);
+    let first_column = values1.column(0).clone_owned() + adjusted_sum2 - sum1.clone();
 
     values1.set_column(0, &first_column);
 }
