@@ -92,31 +92,59 @@ pub fn uamutate(
 /// 2. The mutated value
 /// 3. The absolute difference between mutate and original values
 /// 4. The relative difference between mutate and original values
-fn aggregate_to_groups(values1: &DMatrix<f64>, dists: &DMatrix<f64>, groups: &[usize]) -> DMatrix<f64> {
-    let mut result = DMatrix::zeros(groups.len(), dists.ncols() + 2);
+fn aggregate_to_groups(
+    values1: &DMatrix<f64>,
+    dists: &DMatrix<f64>,
+    groups: &[usize],
+) -> DMatrix<f64> {
+    assert!(dists.ncols() == 2, "dists must have two columns");
+    assert!(
+        dists.nrows() == values1.nrows(),
+        "dists must have same number of rows as values1"
+    );
+    assert!(
+        groups.len() == values1.nrows(),
+        "groups must have same length as values1"
+    );
 
     // Aggregate original values first:
     let values1_first_col: Vec<f64> = values1.column(0).iter().cloned().collect();
-    let mean_dist = aggregate_to_groups_single_col(&values1_first_col, &groups);
-    for (i, &value) in mean_dist.iter().enumerate() {
-        result[(i, 0)] = value;
-    }
+    let values1_aggregated = aggregate_to_groups_single_col(&values1_first_col, groups);
 
-    // Then generate absolute transformed value from original value plus  absolute distance:
+    // Then generate absolute transformed value from original value plus absolute distance:
     let dists_abs: Vec<f64> = dists.column(0).iter().cloned().collect();
-    let values1_transformed: Vec<f64> = values1_first_col.iter().zip(dists_abs.iter()).map(|(&a, &b)| a + b).collect();
-    for (i, &value) in values1_transformed.iter().enumerate() {
-        result[(i, 1)] = value;
-    }
+    let values1_transformed: Vec<f64> = values1_first_col
+        .iter()
+        .zip(dists_abs.iter())
+        .map(|(&a, &b)| a + b)
+        .collect();
+    // And aggregate those into groups:
+    let values1_transformed_aggregated =
+        aggregate_to_groups_single_col(&values1_transformed, groups);
+    assert!(
+        values1_transformed_aggregated.len() == values1_aggregated.len(),
+        "values1_aggregated and values1_transformed_aggregated have different lengths"
+    );
 
-    // Then both absolute and relative distances:
-    for col in 0..dists.ncols() {
-        let dists_col: Vec<f64> = dists.column(col).iter().cloned().collect();
-        let mean_dist = aggregate_to_groups_single_col(&dists_col, &groups);
-        for (i, &value) in mean_dist.iter().enumerate() {
-            result[(i, col + 2)] = value;
-        }
-    }
+    let dists_abs_aggregated = aggregate_to_groups_single_col(&dists_abs, groups);
+    assert!(
+        dists_abs_aggregated.len() == values1_aggregated.len(),
+        "values1_aggregated and dists_abs_aggregated have different lengths"
+    );
+    let dists_rel: Vec<f64> = dists.column(1).iter().cloned().collect();
+    let dists_rel_aggregated = aggregate_to_groups_single_col(&dists_rel, groups);
+    assert!(
+        dists_rel_aggregated.len() == values1_aggregated.len(),
+        "values1_aggregated and dists_rel_aggregated have different lengths"
+    );
+
+    let mut result = DMatrix::zeros(values1_aggregated.len(), 4);
+    result.column_mut(0).copy_from_slice(&values1_aggregated);
+    result
+        .column_mut(1)
+        .copy_from_slice(&values1_transformed_aggregated);
+    result.column_mut(2).copy_from_slice(&dists_abs_aggregated);
+    result.column_mut(3).copy_from_slice(&dists_rel_aggregated);
 
     result
 }
