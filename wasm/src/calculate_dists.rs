@@ -48,7 +48,7 @@ pub struct OrderingIndex {
 /// let values1 = DMatrix::from_vec(4, 1, values1);
 /// let values2 = vec![7.0, 9.0, 3.0, 2.0];
 /// let values2 = DMatrix::from_vec(4, 1, values2);
-/// let result = calculate_dists(&values1, &values2, true);
+/// let result = calculate_dists(&values1, &values2);
 /// // The first column of `result` contains the minimal absolute differences. Paired sequences are
 /// // (1, 2), (2, 3), (4, 7), (5, 9), with differences of (1, 1, 3, 4).
 /// let res_col0 = result.column(0).iter().cloned().collect::<Vec<f64>>();
