@@ -87,9 +87,9 @@ export default function Control (props: TransformControlProps) {
 
                 <h3>Target City</h3>
                 <TargetCityList
+                    idx2={props.idx2}
                     citiesArray={props.citiesArray}
-                    idx={props.idx2}
-                    handleIdxChange={props.handleIdx2Change}
+                    handleIdx2Change={props.handleIdx2Change}
                 />
 
                 <h3>Layer</h3>

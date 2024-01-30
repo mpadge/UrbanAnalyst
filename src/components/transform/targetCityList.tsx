@@ -6,9 +6,9 @@ import { CityDataProps } from "@/data/interfaces";
 import styles from '@/styles/controls.module.css';
 
 interface CityListProps {
-    idx: number,
+    idx2: number,
     citiesArray: CityDataProps[],
-    handleIdxChange: (pIdx: number) => void,
+    handleIdx2Change: (Idx2: number) => void,
 }
 
 export default function TargetCityList(props: CityListProps) {
@@ -24,14 +24,14 @@ export default function TargetCityList(props: CityListProps) {
 
     const handleChange = (selectedOption: any) => {
         setSelected(selectedOption);
-        props.handleIdxChange(selectedOption.index);
+        props.handleIdx2Change(selectedOption.index);
     };
 
   return (
     <section className={styles.listSelect}>
         <Select
             options={options}
-            defaultValue={options[props.idx]}
+            defaultValue={options[props.idx2]}
             name="CitySelector"
             isSearchable={isSearchable}
             onChange = {handleChange}
