@@ -1,5 +1,5 @@
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { LayersListProps } from "@/data/interfaces";
 import styles from '@/styles/controls.module.css';
@@ -30,6 +30,11 @@ export default function LayersList(props: LayersListProps) {
     }, [options, props.layer, ]);
 
     const [selectedOptions, setSelectedOptions] = useState<string[]>(props.varnames);
+
+    // Pre-select default varnames passed from 'control.tsx':
+    const selectVarnames = useEffect(() => {
+        setSelectedOptions(props.varnames);
+    }, [props.varnames, setSelectedOptions]);
 
     const handleOptionChange = (selectedOptions: any) => {
         setSelectedOptions(selectedOptions.map((option: OptionType) => option.value));
