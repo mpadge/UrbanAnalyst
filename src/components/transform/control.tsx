@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import styles from '@/styles/controls.module.css';
-import CityList from '@/components/maps/citylist';
+import CityList from '@/components/transform/cityList';
 import LayersList from '@/components/transform/LayersList';
 import TargetCityList from '@/components/transform/targetCityList';
 import LayerList from '@/components/maps/layerlist';
