@@ -1,8 +1,8 @@
+import localFont from 'next/font/local'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import '@/styles/globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const junctionFont = localFont({ src: './junction-light.woff' })
 
 export const metadata: Metadata = {
   title: 'UA',
@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={junctionFont.className}>{children}</body>
     </html>
   )
 }

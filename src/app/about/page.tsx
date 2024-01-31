@@ -1,12 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Metadata, Viewport } from 'next';
-import { Inter } from "next/font/google"
+
 import styles from '@/styles/about.module.css'
 import Buttons from '@/components/buttons3'
 import { ButtonProps } from '@/data/interfaces';
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
     title: 'UA',

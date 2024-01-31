@@ -19,7 +19,6 @@
   max-width: var(--max-width);
   width: 100%;
   z-index: 2;
-  font-family: var(--font-mono);
 }
 
 .description a {
@@ -40,7 +39,6 @@
 
 .code {
   font-weight: 700;
-  font-family: var(--font-mono);
 }
 
 .grid {
@@ -83,7 +81,6 @@
   position: relative;
   padding: 1rem 0;
   font-size: 4rem;
-  font-family: var(--font-mono);
   text-align: center;
 }
 
@@ -99,8 +96,6 @@
   position: relative;
   padding: 1rem 0;
   font-size: 2rem;
-  font-family: sans-serif;
-  font-weight: 300;
   text-align: center;
 }
 
@@ -115,7 +110,6 @@
   position: relative;
   padding: 1rem 0;
   font-size: 1.5rem;
-  font-family: sans-serif;
   font-weight: 300;
   text-align: center;
 }
@@ -131,7 +125,6 @@
   position: relative;
   padding: 0.5rem 0;
   font-size: 1.5rem;
-  font-family: sans-serif;
   font-weight: 300;
   text-align: left;
 }

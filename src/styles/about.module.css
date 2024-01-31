@@ -12,7 +12,6 @@
   font-size: 0.85rem;
   width: auto;
   z-index: 2;
-  font-family: var(--font-mono);
 }
 
 .description a {
@@ -35,7 +34,6 @@
   position: relative;
   padding: 4rem 0;
   font-size: 4rem;
-  font-family: var(--font-mono);
   text-align: center;
 }
 
@@ -44,7 +42,6 @@
   text-align: left;
   padding: 4rem 0;
   font-size: 2rem;
-  font-family: sans-serif;
   font-weight: 300;
   padding: 1rem;
   margin-left: 10%;
@@ -60,7 +57,6 @@
     margin-top: 0;
     padding: 0.5rem 0;
     font-size: 1.2rem;
-    font-family: sans-serif;
     font-weight: 300;
 }
 

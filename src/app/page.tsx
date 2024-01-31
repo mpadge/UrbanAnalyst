@@ -1,12 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Metadata, Viewport } from 'next';
-import { Inter } from "next/font/google"
+
 import styles from '@/styles/Home.module.css'
 import Buttons from '@/components/buttons3'
 import { ButtonProps } from '@/data/interfaces';
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
     title: 'UA',
@@ -53,7 +51,7 @@ export default function Home() {
 
             <div className={styles.centerBig}>
                 <p className="text-center">
-                    Analyse and compare cities across the world.
+                    Urban Analyst
                 </p>
             </div>
 
@@ -67,7 +65,6 @@ export default function Home() {
                     extraordinary insight into how people move throughout
                     cities.
                 </p>
-
             </div>
 
             <div className={styles.grid}>
@@ -77,7 +74,7 @@ export default function Home() {
                 className={styles.card}
                 rel="noopener noreferrer"
                 >
-                    <h2 className={inter.className}>
+                    <h2>
                         Maps <span>-&gt;</span>
                     </h2>
                     <p className={styles.cardText}>
@@ -91,7 +88,7 @@ export default function Home() {
                 className={styles.card}
                 rel="noopener noreferrer"
                 >
-                    <h2 className={inter.className}>
+                    <h2>
                         Statistics <span>-&gt;</span>
                     </h2>
                     <p className={styles.cardText}>
