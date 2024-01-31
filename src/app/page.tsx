@@ -76,7 +76,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 >
                     <h2>
-                        Maps <span>-&gt;</span>
+                        Maps <span>&#8628;</span>
                     </h2>
                     <p className={styles.cardText}>
                         Interactive maps of all cities analysed to date.
@@ -90,7 +90,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 >
                     <h2>
-                        Statistics <span>-&gt;</span>
+                        Statistics <span>&#8628;</span>
                     </h2>
                     <p className={styles.cardText}>
                         Compare statistics for every UA city.
@@ -103,7 +103,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 >
                     <h2>
-                        Transform <span>-&gt;</span>
+                        Transform <span>&#8628;</span>
                     </h2>
                     <p className={styles.cardText}>
                         Transform any city to be like any other
