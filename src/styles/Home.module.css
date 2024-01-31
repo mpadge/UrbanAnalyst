@@ -43,7 +43,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(50%, auto));
+  grid-template-columns: repeat(3, minmax(33%, auto));
   width: var(--max-width);
   max-width: 100%;
 }

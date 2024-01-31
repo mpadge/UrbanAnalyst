@@ -97,6 +97,19 @@ export default function Home() {
                     </p>
                 </Link>
 
+                <Link
+                href="/transform"
+                className={styles.card}
+                rel="noopener noreferrer"
+                >
+                    <h2>
+                        Transform <span>-&gt;</span>
+                    </h2>
+                    <p className={styles.cardText}>
+                        Transform any city to be like any other
+                    </p>
+                </Link>
+
             </div>
 
             <div className={styles.centerBig}>
