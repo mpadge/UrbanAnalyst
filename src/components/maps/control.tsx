@@ -2,6 +2,7 @@
 import { useState, useRef } from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
+import localFont from 'next/font/local'
 
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/maps/citylist';
@@ -12,6 +13,8 @@ import ExplainButton from '@/components/maps/explain-button';
 import ExplainLayer from '@/components/maps/explain-layer';
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
+
+const junctionFont = localFont({ src: '../../app/junction-regular.woff' })
 
 interface MapsControlProps {
     idx: number,
@@ -46,7 +49,7 @@ export default function Control (props: MapsControlProps) {
 
     return (
         <>
-        <div id="top-left-container" className={styles.controls}>
+        <div id="top-left-container" className={`${styles.controls} ${junctionFont.className}`}>
             <div id="divinfo" style={{display: hideControls?"none":""}}>
 
             <button

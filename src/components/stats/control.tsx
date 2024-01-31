@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
+import localFont from 'next/font/local'
+
 import styles from '@/styles/controls.module.css';
 import LayerList from '@/components/stats/layerlist';
 import SelectNumLayers from '@/components/stats/num_layers';
@@ -11,6 +13,8 @@ import ExplainLayer from '@/components/stats/explain-layer';
 import MeanAvgButtons from '@/components/stats/mean-avg';
 
 import { CityDataProps } from "@/data/interfaces";
+
+const junctionFont = localFont({ src: '../../app/junction-regular.woff' })
 
 interface StatsControlProps {
     idx: number,
@@ -44,7 +48,7 @@ export default function Control (props: StatsControlProps) {
 
     return (
         <>
-        <div id="top-left-container" className={styles.controls}>
+        <div id="top-left-container" className={`${styles.controls} ${junctionFont.className}`}>
             <div id="divinfo" style={{display: hideControls?"none":""}}>
 
             <button

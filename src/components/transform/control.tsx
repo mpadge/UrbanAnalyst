@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useState, useRef } from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
+import localFont from 'next/font/local'
 
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/transform/cityList';
@@ -15,6 +16,8 @@ import CalculateButton from '@/components/transform/calculate-button';
 import OutputLayers from '@/components/transform/outputLayers';
 
 import { ViewState, CityDataProps, CalculateButtonProps } from "@/data/interfaces";
+
+const junctionFont = localFont({ src: '../../app/junction-regular.woff' })
 
 interface TransformControlProps {
     idx: number,
@@ -109,7 +112,7 @@ export default function Control (props: TransformControlProps) {
 
     return (
         <>
-        <div id="top-left-container" className={styles.controls}>
+        <div id="top-left-container" className={`${styles.controls} ${junctionFont.className}`}>
             <div id="divinfo" style={{display: hideControls?"none":""}}>
 
                 <button
