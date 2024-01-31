@@ -3,7 +3,7 @@ import Link from 'next/link'
 import type { Metadata, Viewport } from 'next';
 
 import styles from '@/styles/Home.module.css'
-import Buttons from '@/components/buttons3'
+import Buttons from '@/components/buttons4'
 import { ButtonProps } from '@/data/interfaces';
 
 export const metadata: Metadata = {
@@ -22,7 +22,8 @@ export default function Home() {
     const buttons = {
         first: "maps",
         second: "stats",
-        third: "about"
+        third: "transform",
+        fourth: "about"
     }
 
     return (

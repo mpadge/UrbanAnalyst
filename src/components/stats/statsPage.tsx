@@ -3,7 +3,7 @@
 import { NextPage } from "next";
 import { useState } from "react";
 import Control from '@/components/stats/control';
-import Buttons from '@/components/buttons2';
+import Buttons from '@/components/buttons3';
 import BarChart from '@/components/stats/stats';
 import styles from '@/styles/Home.module.css'
 
@@ -11,7 +11,8 @@ import { CITY_DATA } from '@/data/citydata';
 
 const buttonProps = {
     first: "home",
-    second: "maps"
+    second: "maps",
+    third: "transform"
 }
 
 export default function Home() {
@@ -50,11 +51,6 @@ export default function Home() {
         setMeanVals(!meanVals);
     }
 
-    const buttons = {
-        first: "home",
-        second: "maps"
-    }
-
     return (
         <>
         <main className={styles.main}>
@@ -85,7 +81,7 @@ export default function Home() {
                 handleSortChange = {handleSortChange}
                 handleExplainChange = {handleExplainChange}
             />
-            <Buttons buttons={buttons} />
+            <Buttons buttons={buttonProps} />
         </main>
         </>
     )

@@ -5,11 +5,18 @@ import { FlyToInterpolator } from "@deck.gl/core/typed";
 
 import Control from '@/components/transform/control';
 import Legend from '@/components/transform/legend';
+import Buttons from '@/components/buttons3';
 
 // import UTAMap from '@/components/maps/map';
 import MapTransformDynamic from '@/components/transform/TransformPageDynamic';
 import { CITY_DATA } from '@/data/citydata';
 import { ViewState } from "@/data/interfaces";
+
+const buttonProps = {
+    first: "home",
+    second: "maps",
+    third: "stats"
+}
 
 export default function TransformPage() {
 
@@ -65,6 +72,7 @@ export default function TransformPage() {
 
     return (
         <>
+        <Buttons buttons={buttonProps} />
         <MapTransformDynamic
             idx={idx}
             idx2={idx2}

@@ -11,7 +11,7 @@ import { Map } from "react-map-gl";
 import Control from '@/components/maps/control';
 import Legend from '@/components/maps/legend';
 import UTAMap from '@/components/maps/map';
-import Buttons from '@/components/buttons2';
+import Buttons from '@/components/buttons3';
 import { HeadingTextOneLayer, HeadingText } from "@/components/heading_text";
 import styles from '@/styles/maps.module.css';
 
@@ -20,7 +20,8 @@ import { ViewState } from "@/data/interfaces";
 
 const buttonProps = {
     first: "home",
-    second: "stats"
+    second: "stats",
+    third: "transform"
 }
 
 export default function MapPage() {
