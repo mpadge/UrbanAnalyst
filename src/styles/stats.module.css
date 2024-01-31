@@ -13,7 +13,6 @@
   margin: 20px;
   z-index: 10;
   position: absolute;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   height: 100%;
   width: 80%;
   top: 0%;
@@ -48,7 +47,6 @@
   top: 15%;
   left: 12dvw; /* control box is 10dvw wide */
   z-index: 10;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   height: 100%;
   width: 70%;
 }

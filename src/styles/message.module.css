@@ -6,7 +6,6 @@
   z-index: 9999;
   position: relative;
   height: 100vh;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-size: 4rem;
   background-color: rgba(var(--callout-rgb), 0.5);
   border: 0px solid rgba(var(--callout-border-rgb), 0.3);

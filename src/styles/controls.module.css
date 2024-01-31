@@ -9,7 +9,6 @@
   background-color: rgba(238, 240, 241, 0.5);
   border: 1px solid rgba(172, 175, 176, 0.3);
   border-radius: 12px;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-size: 14px;
   top: 0;
   left: 0;
@@ -125,7 +124,6 @@
   background-color: rgba(78, 153, 234, 0.5);
   border: 1px solid rgba(172, 175, 176, 0.3);
   border-radius: 12px;
-  font-family: sans-serif;
   width: 70%;
   padding: 2px;
   box-shadow: 2px 1px 1px black;
@@ -161,7 +159,6 @@
   background-color: rgba(78, 153, 234, 0.5);
   border: 1px solid rgba(172, 175, 176, 0.3);
   border-radius: 12px;
-  font-family: sans-serif;
   width: 70%;
   padding: 2px;
   opacity: 0.6;
@@ -199,7 +196,6 @@
   background-color: rgba(238, 240, 241, 0.95);
   border: 1px solid rgba(172, 175, 176, 0.9);
   border-radius: 12px;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   left: 10%;
   width: 70%;
 }
@@ -227,20 +223,17 @@
 
 .radioButtons {
   align: center;
-  font-family: sans-serif;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
 .radioButton {
   align: center;
-  font-family: sans-serif;
   margin-left: 15px;
 }
 
 .radioButton label {
   align: center;
-  font-family: sans-serif;
 }
 
 .layerlist {
@@ -251,7 +244,6 @@
   background-color: rgba(238, 240, 241, 0.5);
   border: 1px solid rgba(172, 175, 176, 0.3);
   border-radius: 12px;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-size: 14px;
   top: 20;
   left: 10dvw;
