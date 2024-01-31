@@ -3,7 +3,7 @@
 import { NextPage } from "next";
 import { useState } from "react";
 import Control from '@/components/stats/control';
-import Buttons from '@/components/buttons2';
+import Buttons from '@/components/buttons3';
 import BarChart from '@/components/stats/stats';
 import styles from '@/styles/Home.module.css'
 
