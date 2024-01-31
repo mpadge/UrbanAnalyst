@@ -55,8 +55,13 @@ export default function Control (props: TransformControlProps) {
     const [defaultVarnames, setDefaultVarnames] = useState(props.varnames);
 
     // Effect to set default "Extra layers" as all those with better values:
+    const [initialSetDefaultValues, setInitialSetDefaultValues] = useState(true);
+    const { handleVarnamesChange } = props;
     useEffect(() => {
-        const source_city_values = Object.entries(props.citiesArray[props.idx].stats_single);
+        if (!initialSetDefaultValues) { return; }
+
+        const source_city_values =
+            Object.entries(props.citiesArray[props.idx].stats_single);
         const source_city_mean_all = source_city_values.map(([key, value]) => ({
             name: key,
             value: value[0]
@@ -97,13 +102,10 @@ export default function Control (props: TransformControlProps) {
             }
         });
         setDefaultVarnames(varnames);
+        handleVarnamesChange(varnames);
+        setInitialSetDefaultValues(false);
 
-    }, [props.idx, props.idx2, props.layer, props.citiesArray]);
-
-    const { handleVarnamesChange } = props;
-    useEffect(() => {
-        handleVarnamesChange(defaultVarnames);
-    }, [defaultVarnames, handleVarnamesChange]);
+    }, [props.idx, props.idx2, props.layer, props.citiesArray, initialSetDefaultValues, handleVarnamesChange]);
 
     return (
         <>
