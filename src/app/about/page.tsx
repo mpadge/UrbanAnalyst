@@ -22,7 +22,8 @@ export default function Home() {
     const buttons = {
         first: "home",
         second: "maps",
-        third: "stats"
+        third: "stats",
+        fourth: "transform"
     }
 
     return (

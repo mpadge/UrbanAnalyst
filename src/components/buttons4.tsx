@@ -24,6 +24,8 @@ export default function Buttons (props: ButtonProps) {
     const Second = capitaliseFirst(props.buttons.second);
     const thirdHref = props.buttons.third == null ? "/" : getHref(props.buttons.third);
     const Third = props.buttons.third == null ? "" : capitaliseFirst(props.buttons.third);
+    const fourthHref = props.buttons.fourth == null ? "/" : getHref(props.buttons.fourth);
+    const Fourth = props.buttons.fourth == null ? "" : capitaliseFirst(props.buttons.fourth);
 
     return (
         <>
@@ -55,6 +57,16 @@ export default function Buttons (props: ButtonProps) {
                     rel="noopener noreferrer"
                 >
                 <span> {Third} </span>
+                </Link>
+            </div>
+
+            <div id="fourth-button">
+                <Link
+                    href={fourthHref}
+                    className={styles.card}
+                    rel="noopener noreferrer"
+                >
+                <span> {Fourth} </span>
                 </Link>
             </div>
         </div>

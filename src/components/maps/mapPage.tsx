@@ -20,7 +20,8 @@ import { ViewState } from "@/data/interfaces";
 
 const buttonProps = {
     first: "home",
-    second: "stats"
+    second: "stats",
+    third: "transform"
 }
 
 export default function MapPage() {
