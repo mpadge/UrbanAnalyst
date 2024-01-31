@@ -95,7 +95,7 @@ const TransformComponent = (props: TransformProps) => {
                     max = tmp;
                 }
             } else {
-                min = Math.min(...result);
+                min = Math.min(...result.filter(value => value !== 0));
                 max = Math.max(...result);
             }
             handleLayerMinChange(min);
