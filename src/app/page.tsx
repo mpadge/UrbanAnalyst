@@ -63,10 +63,9 @@ export default function Home() {
                     socio-demographic conditions, as well as statistical
                     summaries of all cities. Values for each city are aggregated
                     from billions of individual routing queries, providing
-                    extraordinary insight into how people move throughout
-                    cities.
-                </p>
-            </div>
+                    extraordinary insight into how people dynamically interact
+                    with their cities.
+                </p> </div>
 
             <div className={styles.grid}>
 
@@ -119,17 +118,6 @@ export default function Home() {
             </div>
 
             <div className={styles.centerNormal}>
-                <p className="text-center">
-                    Values for most statistics are derived for every street
-                    intersection within each city. Travel times are measured to
-                    all other intersections using every available mode of
-                    transport, and all possible combinations of these. Full
-                    details are provided in
-                    <a className = {styles.textLink}
-                    href="https://UrbanAnalyst.github.io/docs"
-                    >&nbsp;the documentation pages
-                    </a>.
-                </p>
 
                 <p className="text-center">
                     Results for each city involve millions of public transport
