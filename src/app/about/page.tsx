@@ -96,7 +96,13 @@ export default function Home() {
                     >
                     Mark Padgham
                     </a>
-                    , along with all of the other contributors to the software linked to above.
+                    , along with all of the other contributors to the
+                    <a
+                    href="https://github.com/UrbanAnalyst"
+                    rel="noopener noreferrer"
+                    >
+                    &nbsp;open-source software which drives it.
+                    </a>.
                 </p>
             </div>
 
