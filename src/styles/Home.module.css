@@ -12,26 +12,19 @@
 }
 
 .description {
-  display: inherit;
+  display: relative;
   justify-content: left;
   align-items: left;
-  font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 100%;
-  z-index: 2;
-}
-
-.description a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
+  font-size: 16px;
 }
 
 .description p {
-  position: relative;
-  margin: 0;
+  position: absolute;
+  top: 20px;
+  left: 10%;
+  margin-top: 20px;
   padding: 1rem;
+  width: auto;
   background-color: rgba(var(--callout-rgb), 0.5);
   border: 1px solid rgba(var(--callout-border-rgb), 0.3);
   border-radius: var(--border-radius);
@@ -210,6 +203,9 @@
   }
   .content {
     padding: 2rem;
+  }
+  .description {
+    display: none;
   }
 
   .grid {

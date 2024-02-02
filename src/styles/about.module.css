@@ -12,23 +12,19 @@
 }
 
 .description {
-  display: inherit;
+  display: relative;
   justify-content: left;
   align-items: left;
-  font-size: 0.85rem;
-  width: auto;
-  z-index: 2;
-}
-
-.description a {
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
+  font-size: 16px;
 }
 
 .description p {
-  margin: 0;
+  position: absolute;
+  top: 20px;
+  left: 10%;
+  margin-top: 20px;
   padding: 1rem;
+  width: auto;
   background-color: rgba(var(--callout-rgb), 0.5);
   border: 1px solid rgba(var(--callout-border-rgb), 0.3);
   border-radius: var(--border-radius);
@@ -92,10 +88,13 @@
 
 /* Mobile */
 @media (max-width: 700px) {
+  .description {
+    display: none;
+  }
+
   .center {
     padding: 8rem 0 6rem;
   }
-
   .center::before {
     transform: none;
     height: 300px;
