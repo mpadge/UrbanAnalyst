@@ -5,6 +5,12 @@
   min-height: 100vh;
 }
 
+.main ol {
+    margin-left: 50px;
+    text-align: left;
+    list-style-type: decimal;
+}
+
 .description {
   display: inherit;
   justify-content: left;
@@ -72,6 +78,16 @@
 
 .centerSmall a {
     color: rgb(30, 144, 255);
+}
+
+.centerSmall ol {
+    list-style-position: outside;
+    list-style-type: decimal;
+    align-items: center;
+    width: 60%;
+    margin-left: 21%;
+    margin-bottom: 10px;
+    text-align: left;
 }
 
 /* Mobile */

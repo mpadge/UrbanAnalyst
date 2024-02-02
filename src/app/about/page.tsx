@@ -66,12 +66,26 @@ export default function Home() {
                 <p className="text-center">
                     Urban Analyst is a platform for interactive visualisation of
                     the properties of cities, including transport systems and
-                    socio-demographic conditions.  The platform offers a
-                    &ldquo;Maps&rdquo; view, to enable various properties of
-                    individual cities to be visualised as interactive maps, and
-                    a &ldquo;Stats&rdquo;, or statistics, view that compares the
-                    properties of different cities in terms of each variable
-                    measured by Urban Analyst. Full details are provided&nbsp;
+                    socio-demographic conditions.  The platform offers
+                </p>
+                <ol>
+                    <li>
+                        a &ldquo;Maps&rdquo; view, to enable various
+                        properties of individual cities to be visualised as
+                        interactive maps, and
+                    </li>
+                    <li>
+                        a &ldquo;Stats&rdquo;, or statistics, view that
+                        compares the properties of different cities in terms
+                        of each variable measured by Urban Analyst.
+                    </li>
+                    <li>
+                      a &ldquo;Transform&rdquo; view that enables cities to be
+                      transformed to become like any other city.
+                    </li>
+                </ol>
+                <p>
+                    Full details are provided&nbsp;
                     <a
                     href="https://UrbanAnalyst.github.io/docs"
                     rel="noopener noreferrer"
