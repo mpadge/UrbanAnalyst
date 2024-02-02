@@ -207,8 +207,11 @@ export default function BarChart (props: StatsProps) {
             <>
             <div id="stats-page" className={styles.statspage}>
 
+                <div id="stats-heading" className={styles.statsheading}>
+                    <p> {heading} </p>
+                </div>
+
                 <div id="stats-container" className={styles.statsplot} >
-                    <h2> {heading} </h2>
                     <Suspense fallback={<div>Loading...</div>}>
                     <svg width={width} height={height}>
                     <g
