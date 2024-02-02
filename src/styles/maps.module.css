@@ -6,7 +6,7 @@
   z-index: 10;
   position: fixed;
   width: 250px;
-  top: 1%;
+  margin-top: 20px;
   left: 50%;
   transform: translate(-50%, 0);
 }
@@ -22,4 +22,11 @@
 .mapsheading h2 {
   font-weight: 600;
   margin-bottom: 0.7rem;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+    .mapsheading {
+        margin-top: 70px;
+    }
 }

@@ -39,6 +39,10 @@
   margin-left: 12px;
 }
 
+.controlsTransform {
+    composes: controls;
+}
+
 .hide {
     display: none;
 }
@@ -264,10 +268,18 @@
     margin-bottom: 10px;
 }
 
+.transformLogo {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
     .controls {
         width: 20dvw;
+    }
+    .controlsTransform {
+        composes: controls;
     }
     .listSelect {
         margin-left: 5px;
@@ -302,13 +314,24 @@
 @media (max-width: 700px) {
     .controls {
         width: 50dvw;
+        margin-top: 140px;
         font-size: 12px;
     }
     .controls h2 {
       font-weight: 400;
       font-size: 12px;
     }
+    .controls h3 {
+        margin-top: 0.3rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .controlsTransform {
+        composes: controls;
+        margin-top: 80px;
+    }
     .listSelect {
+        margin: 0px;
         margin-left: 5px;
         width: 40dvw;
     }
@@ -342,6 +365,12 @@
     }
     .layerslist input {
       margin-bottom: 10px;
+    }
+
+    .opacitySlider {
+        height: 10px;
+        margin-top: 2px;
+        margin-bottom: 2px;
     }
 
 }

@@ -112,7 +112,7 @@ export default function Control (props: TransformControlProps) {
 
     return (
         <>
-        <div id="top-left-container" className={`${styles.controls} ${junctionFont.className}`}>
+        <div id="top-left-container" className={`${styles.controlsTransform} ${junctionFont.className}`}>
             <div id="divinfo" style={{display: hideControls?"none":""}}>
 
                 <button
@@ -127,7 +127,7 @@ export default function Control (props: TransformControlProps) {
                 <Image
                 src="/ua.svg"
                 alt="UA Logo"
-                // className={styles.vercelLogo}
+                className={styles.transformLogo}
                 width={100}
                 height={50}
                 />
