@@ -74,7 +74,7 @@ export default function MapPage() {
     const [isTourOpen, setTourOpen] = useState(true);
 
     const handleClickOpen = () => {
-        setOpen(true);
+        setTourOpen(true);
     };
 
     const closeTour = () => {
@@ -82,13 +82,9 @@ export default function MapPage() {
     };
 
     const openTour = () => {
-        handleClickOpen(true);
+        handleClickOpen();
         setTourOpen(true);
     };
-    if(!localStorage.getItem('somekey')) {
-        localStorage.setItem('somekey', 'true')
-        setTourOpen(true)
-    }
 
     return (
         <>
