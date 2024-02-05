@@ -12,6 +12,8 @@ import Control from '@/components/maps/control';
 import Legend from '@/components/maps/legend';
 import UTAMap from '@/components/maps/map';
 import Buttons from '@/components/buttons3';
+import Tour from '@/components/maps/tour';
+import tourConfig from '@/components/maps/tourConfig';
 import { HeadingTextOneLayer, HeadingText } from "@/components/heading_text";
 import styles from '@/styles/maps.module.css';
 
@@ -67,6 +69,27 @@ export default function MapPage() {
 
     const heading: string = HeadingText(layer, layer2, numLayers, CITY_DATA.citiesArray);
 
+    // Tour state variables:
+    const accentColor = "#5cb7b7";
+    const [isTourOpen, setTourOpen] = useState(true);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const closeTour = () => {
+        setTourOpen(false);
+    };
+
+    const openTour = () => {
+        handleClickOpen(true);
+        setTourOpen(true);
+    };
+    if(!localStorage.getItem('somekey')) {
+        localStorage.setItem('somekey', 'true')
+        setTourOpen(true)
+    }
+
     return (
         <>
         <div id="divinfo" style={{display: explain?"none":""}} >
@@ -114,6 +137,17 @@ export default function MapPage() {
             citiesArray = {CITY_DATA.citiesArray}
         />
         <Buttons buttons={buttonProps} />
+        <Tour
+            onRequestClose={closeTour}
+            disableInteraction={false}
+            steps={tourConfig}
+            isOpen={isTourOpen}
+            maskClassName={styles.tourmask}
+            className={styles.tourhelper}
+            rounded={5}
+            accentColor={accentColor}
+            disableInteraction={true}
+        />
         </>
     )
 }
