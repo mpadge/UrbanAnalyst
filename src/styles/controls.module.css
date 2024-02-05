@@ -51,7 +51,7 @@
     width: 90%;
     align: center;
     margin-left: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     width: 8dvw;
 }
 
@@ -283,6 +283,7 @@
     }
     .listSelect {
         margin-left: 5px;
+        margin-bottom: 10px;
         width: 16dvw;
     }
     .numLayersSelect {
@@ -333,6 +334,7 @@
     .listSelect {
         margin: 0px;
         margin-left: 5px;
+        margin-bottom: 5px;
         width: 40dvw;
     }
     .numLayersSelect {
