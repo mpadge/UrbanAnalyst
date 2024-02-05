@@ -27,6 +27,8 @@ export const GlobalStateProvider: React.FC <GlobalStateProviderProps> = ({ child
     const [mapTour, setMapTour] = useState(true);
 
     console.log("-----GLOBAL STATE PROVIDER----- with mapTour = ", mapTour);
+    console.log('-----Current context value:', { mapTour, setMapTour });
+
     useEffect(() => {
         console.log("-----GLOBAL STATE PROVIDER UPDATE----- with mapTour = ", mapTour);
     }, [mapTour]);

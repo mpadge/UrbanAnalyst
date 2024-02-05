@@ -85,8 +85,11 @@ export default function MapPage() {
 
     const { globalState, setMapTour, setExampleVariable } = useGlobalState();
     const closeTour = () => {
+        const mt = globalState.mapTour;
+        console.log('-----MAP: Current context value:', { mt, setMapTour });
+        console.log("   Calling setMapTour: ", globalState.mapTour);
         setMapTour(true);
-        console.log("Immediately after setMapTour: ", globalState.mapTour); // This should log 'true' if the state is updated
+        console.log("   Immediately after setMapTour: ", globalState.mapTour);
         setTourOpen(false);
         console.log("------ STATE TOUR UPDATED ON CLOSE: ", globalState.mapTour);
     };
