@@ -1,14 +1,20 @@
-const tourConfig = [
+
+export const getTourConfig = (width: number) => [
     {    
-        selector: '[data-tut="reactour__iso"]',
+        selector: '[data-tut="reactour__one"]',
         content: `This is a button`,    
     },
     {    
-        selector: '[data-tut="reactour__finalbutton"]',
+        selector: '[data-tut="reactour__two"]',
         content: `This is a text field...`,    
+        style: {
+            position: "absolute" as const,
+            top: '10px',
+            left: width <= 700 ? 0 : '-40%',
+        }
     },
     {
-        selector: '[data-tut="reactour__box"]',
+        selector: '[data-tut="reactour__three"]',
         content: ({ goTo }: { goTo: (stepIndex: number) => void }) => (
             <div>
             Table description
@@ -36,4 +42,4 @@ const tourConfig = [
 
 ];
 
-export default tourConfig;
+export default getTourConfig;

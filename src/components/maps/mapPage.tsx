@@ -13,7 +13,8 @@ import Legend from '@/components/maps/legend';
 import UTAMap from '@/components/maps/map';
 import Buttons from '@/components/buttons3';
 import Tour from '@/components/maps/tour';
-import tourConfig from '@/components/maps/tourConfig';
+import useWindowSize from '@/components/window-size';
+import { getTourConfig } from '@/components/maps/tourConfig';
 import { HeadingTextOneLayer, HeadingText } from "@/components/heading_text";
 import styles from '@/styles/maps.module.css';
 
@@ -69,7 +70,11 @@ export default function MapPage() {
 
     const heading: string = HeadingText(layer, layer2, numLayers, CITY_DATA.citiesArray);
 
-    // Tour state variables:
+    // ----- TOUR -----
+    const size = useWindowSize();
+    const width = size?.width || 1000;
+    const tourConfig = getTourConfig(width);
+
     const accentColor = "#5cb7b7";
     const [isTourOpen, setTourOpen] = useState(true);
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 export default function useWindowSize() {
 
-    interface windowSize {
+    interface WindowSizeProps {
         width: number;
         height: number;
     }
@@ -25,8 +25,6 @@ export default function useWindowSize() {
         }
 
         window.addEventListener("resize", handleResize);
-
-        handleResize();
 
         return () => window.removeEventListener("resize", handleResize);
     }, []); // Empty array ensures that effect is only run on mount
