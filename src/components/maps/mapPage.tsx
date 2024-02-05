@@ -146,7 +146,6 @@ export default function MapPage() {
             className={styles.tourhelper}
             rounded={5}
             accentColor={accentColor}
-            disableInteraction={true}
         />
         </>
     )
