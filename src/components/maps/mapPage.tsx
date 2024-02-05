@@ -88,7 +88,7 @@ export default function MapPage() {
         const mt = globalState.mapTour;
         console.log('-----MAP: Current context value:', { mt, setMapTour });
         console.log("   Calling setMapTour: ", globalState.mapTour);
-        setMapTour(true);
+        setMapTour(false);
         console.log("   Immediately after setMapTour: ", globalState.mapTour);
         setTourOpen(false);
         console.log("------ STATE TOUR UPDATED ON CLOSE: ", globalState.mapTour);
