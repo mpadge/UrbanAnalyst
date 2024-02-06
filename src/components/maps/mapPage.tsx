@@ -17,6 +17,7 @@ import useWindowSize from '@/components/window-size';
 import { getTourConfig } from '@/components/maps/tourConfig';
 import { HeadingTextOneLayer, HeadingText } from "@/components/heading_text";
 import styles from '@/styles/maps.module.css';
+import tourStyles from '@/styles/tour.module.css';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
 import { ViewState } from "@/data/interfaces";
@@ -152,8 +153,8 @@ export default function MapPage() {
             disableInteraction={false}
             steps={tourConfig}
             isOpen={isTourOpen}
-            maskClassName={styles.tourmask}
-            className={styles.tourhelper}
+            maskClassName={tourStyles.tourmask}
+            className={tourStyles.tourhelper}
             rounded={5}
             accentColor={accentColor}
         />
