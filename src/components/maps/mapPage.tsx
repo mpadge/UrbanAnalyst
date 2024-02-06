@@ -76,20 +76,29 @@ export default function MapPage() {
     const tourConfig = getTourConfig(width);
 
     const accentColor = "#5cb7b7";
-    const [isTourOpen, setTourOpen] = useState(true);
+    const [isTourOpen, setTourOpen] = useState(false);
 
     const handleClickOpen = () => {
         setTourOpen(true);
     };
 
+    // Use sessionStorage to only show tour once per session.
     const closeTour = () => {
         setTourOpen(false);
+        if (typeof window != "undefined") {
+            sessionStorage.setItem("uatour", "done");
+        }
     };
 
     const openTour = () => {
         handleClickOpen();
         setTourOpen(true);
     };
+    useEffect(() => {
+        if(!sessionStorage.getItem('uatour')) {
+            setTourOpen(true)
+        }
+    }, [])
 
     return (
         <>
