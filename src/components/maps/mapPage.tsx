@@ -16,7 +16,6 @@ import Tour from '@/components/maps/tour';
 import useWindowSize from '@/components/window-size';
 import { getTourConfig } from '@/components/maps/tourConfig';
 import { HeadingTextOneLayer, HeadingText } from "@/components/heading_text";
-import { GlobalStateProvider, useGlobalState } from '@/context/GlobalStateContext';
 import styles from '@/styles/maps.module.css';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
@@ -77,21 +76,14 @@ export default function MapPage() {
     const tourConfig = getTourConfig(width);
 
     const accentColor = "#5cb7b7";
-    const [isTourOpen, setTourOpen] = useState(false);
+    const [isTourOpen, setTourOpen] = useState(true);
 
     const handleClickOpen = () => {
         setTourOpen(true);
     };
 
-    const { globalState, setMapTour, setExampleVariable } = useGlobalState();
     const closeTour = () => {
-        const mt = globalState.mapTour;
-        console.log('-----MAP: Current context value:', { mt, setMapTour });
-        console.log("   Calling setMapTour: ", globalState.mapTour);
-        setMapTour(false);
-        console.log("   Immediately after setMapTour: ", globalState.mapTour);
         setTourOpen(false);
-        console.log("------ STATE TOUR UPDATED ON CLOSE: ", globalState.mapTour);
     };
 
     const openTour = () => {
@@ -99,22 +91,8 @@ export default function MapPage() {
         setTourOpen(true);
     };
 
-    // console.log("------ STATE VAR: ", globalState.exampleVariable);
-    console.log("------ STATE TOUR: ", globalState.mapTour);
-    useEffect(() => {
-        if (globalState.mapTour) {
-            setTourOpen(true);
-            setMapTour(false);
-            console.log("------ STATE TOUR UPDATE: ", globalState.mapTour);
-        }
-    }, [globalState.mapTour, setMapTour]);
-
-    useEffect(() => {
-            console.log('mapTour state has changed:', globalState.mapTour);
-    }, [globalState.mapTour]);
-
     return (
-        <GlobalStateProvider>
+        <>
         <div id="divinfo" style={{display: explain?"none":""}} >
             <div id="maps-heading" className={styles.mapsheading}>
                 <p> {heading} </p>
@@ -170,6 +148,6 @@ export default function MapPage() {
             rounded={5}
             accentColor={accentColor}
         />
-        </GlobalStateProvider>
+        </>
     )
 }
