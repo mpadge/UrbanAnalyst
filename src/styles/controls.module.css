@@ -12,7 +12,7 @@
   font-size: 14px;
   top: 0;
   left: 0;
-  width: 10dvw;
+  width: var(--control-width-wide-outer);
 }
 
 
@@ -52,7 +52,7 @@
     align: center;
     margin-left: 10px;
     margin-bottom: 15px;
-    width: 8dvw;
+    width: var(--control-width-wide--inner);
 }
 
 .numLayersSelect {
@@ -60,7 +60,7 @@
     align: center;
     margin-left: 10px;
     margin-bottom: 10px;
-    width: 8dvw;
+    width: var(--control-width-wide--inner);
 }
 
 .opacitySlider {
@@ -84,7 +84,7 @@
 .opacitySlider::-webkit-slider-thumb {
     appearance: none;
     -webkit-appearance: none;
-    width: 20px;
+    width: var(--control-width-wide--inner);
     height: 20px;
     border-radius: 50%;
     background: #4caf50;
@@ -251,7 +251,7 @@
   font-size: 14px;
   top: 20;
   left: 10dvw;
-  width: 10dvw;
+  width: var(--control-width-wide--outer);
 }
 
 .layerlist div {
@@ -276,7 +276,7 @@
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
     .controls {
-        width: 20dvw;
+        width: var(--control-width-med--outer);
     }
     .controlsTransform {
         composes: controls;
@@ -284,11 +284,11 @@
     .listSelect {
         margin-left: 5px;
         margin-bottom: 10px;
-        width: 16dvw;
+        width: var(--control-width-med--inner);
     }
     .numLayersSelect {
         margin-left: 5px;
-        width: 16dvw;
+        width: var(--control-width-med--inner);
     }
     .layerlist {
       margin: 10px;
@@ -296,7 +296,7 @@
       font-size: 12px;
       top: 20;
       left: 10dvw;
-      width: 20dvw;
+      width: var(--control-width-med--inner);
       white-space: nowrap;
       overflow: auto;
     }
@@ -314,7 +314,7 @@
 /* Mobile */
 @media (max-width: 700px) {
     .controls {
-        width: 50dvw;
+        width: var(--control-width-narrow-outer);
         margin-top: 140px;
         font-size: 12px;
     }
@@ -335,11 +335,11 @@
         margin: 0px;
         margin-left: 5px;
         margin-bottom: 5px;
-        width: 40dvw;
+        width: var(--control-width-narrow-inner);
     }
     .numLayersSelect {
         margin-left: 5px;
-        width: 40dvw;
+        width: var(--control-width-narrow-inner);
     }
 
     .layerlist {
@@ -348,7 +348,7 @@
       font-size: 12px;
       top: 20;
       left: 20dvw;
-      min-width: 60dvw;
+      min-width: var(--control-width-narrow-outer);
       white-space: nowrap;
       overflow: auto;
     }
