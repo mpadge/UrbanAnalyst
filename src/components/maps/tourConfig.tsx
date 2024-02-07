@@ -1,3 +1,13 @@
+"use client"
+
+import useWindowSize from '@/components/window-size';
+
+function getLeftPos() {
+    const size = useWindowSize();
+    const width = size?.width || 1000;
+    const left = '-' + (width / 2 - 300) + 'px';
+    return left;
+}
 
 export const getTourConfig = (width: number) => [
     {    
@@ -14,7 +24,9 @@ export const getTourConfig = (width: number) => [
         style: {
             position: "absolute" as const,
             top: '10px',
-            left: width <= 700 ? 0 : '-40%',
+            width: '200px',
+            left: getLeftPos(width),
+            align: "right",
             backgroundColor: '#9cf7f7',
             borderRadius: '20px',
         }
