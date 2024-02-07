@@ -3,6 +3,10 @@ export const getTourConfig = (width: number) => [
     {    
         selector: '[data-tut="reactour__one"]',
         content: `This is a button`,    
+        style: {
+            backgroundColor: '#9cf7f7',
+            borderRadius: '20px',
+        }
     },
     {    
         selector: '[data-tut="reactour__two"]',
@@ -11,10 +15,16 @@ export const getTourConfig = (width: number) => [
             position: "absolute" as const,
             top: '10px',
             left: width <= 700 ? 0 : '-40%',
+            backgroundColor: '#9cf7f7',
+            borderRadius: '20px',
         }
     },
     {
         selector: '[data-tut="reactour__three"]',
+        style: {
+            backgroundColor: '#9cf7f7',
+            borderRadius: '20px',
+        },
         content: ({ goTo }: { goTo: (stepIndex: number) => void }) => (
             <div>
             Table description
