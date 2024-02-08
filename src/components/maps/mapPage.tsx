@@ -84,9 +84,9 @@ export default function MapPage() {
     const tourConfig = getTourConfig(width, height);
 
     const accentColor = "#5cb7b7";
-    const [isTourOpen, setTourOpen] = useState(true);
+    const [isTourOpen, setTourOpen] = useState(false);
 
-    const handleClickOpen = () => {
+    const handleTourOpen = () => {
         setTourOpen(true);
     };
 
@@ -98,10 +98,6 @@ export default function MapPage() {
         }
     };
 
-    const openTour = () => {
-        handleClickOpen();
-        setTourOpen(true);
-    };
     useEffect(() => {
         if(!sessionStorage.getItem('uatour')) {
             setTourOpen(true)
@@ -145,6 +141,7 @@ export default function MapPage() {
             handleLayerChange = {handleLayerChange}
             handleLayer2Change = {handleLayer2Change}
             handleExplainChange = {handleExplainChange}
+            handleTourOpen = {handleTourOpen}
         />
         <Legend
             idx = {idx}
