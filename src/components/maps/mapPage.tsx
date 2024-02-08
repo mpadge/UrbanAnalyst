@@ -73,15 +73,18 @@ export default function MapPage() {
 
     // ----- TOUR -----
     const [width, setWidth] = useState(0);
+    const [height, setHeight] = useState(0);
     const size = useWindowSize();
     useEffect(() => {
         const w = size?.width || 0;
         setWidth(w);
+        const h = size?.height || 0;
+        setHeight(h);
     }, [size])
-    const tourConfig = getTourConfig(width);
+    const tourConfig = getTourConfig(width, height);
 
     const accentColor = "#5cb7b7";
-    const [isTourOpen, setTourOpen] = useState(false);
+    const [isTourOpen, setTourOpen] = useState(true);
 
     const handleClickOpen = () => {
         setTourOpen(true);

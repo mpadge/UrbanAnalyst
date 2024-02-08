@@ -4,12 +4,13 @@ import useWindowSize from '@/components/window-size';
 
 // Positions of controls are all in dvw units, so panel positions here are
 // converted in analogous ways.
-function getLeftPos(width: number) {
+
+function posControlsX(width: number) {
     var left;
     if (width > 1120) {
-        left = 2 * width / 5;
+        left = 2 * width / 6;
     } else if (width > 700) {
-        left = 2 * width / 7;
+        left = 1 * width / 8;
     } else {
         left = 0;
     }
@@ -18,13 +19,28 @@ function getLeftPos(width: number) {
     return left;
 }
 
-export const getTourConfig = (width: number) => [
+function posControlsY(width: number, height: number) {
+    var top;
+    if (width > 1120) {
+        top = 1 * height / 4;
+    } else if (width > 700) {
+        top = 1 * height / 5;
+    } else {
+        top = 0;
+    }
+    top = '-' + Math.round(top) + 'px';
+
+    return top;
+}
+
+export const getTourConfig = (width: number, height: number) => [
     {    
         selector: '[data-tut="reactour__one"]',
         content: `This is a button`,
         style: {
             backgroundColor: '#9cf7f7',
             borderRadius: '20px',
+            top: `100px`,
         }
     },
     {    
@@ -32,9 +48,9 @@ export const getTourConfig = (width: number) => [
         content: `This is a text field...`,
         style: {
             position: "absolute" as const,
-            top: '10px',
             width: '200px',
-            left: getLeftPos(width),
+            left: posControlsX(width),
+            top: posControlsY(width, height),
             align: "right",
             backgroundColor: '#9cf7f7',
             borderRadius: '20px',
