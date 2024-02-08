@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
 import { DeckGL } from "@deck.gl/react/typed";
 import { FlyToInterpolator } from "@deck.gl/core/typed";
@@ -12,8 +12,12 @@ import Control from '@/components/maps/control';
 import Legend from '@/components/maps/legend';
 import UTAMap from '@/components/maps/map';
 import Buttons from '@/components/buttons3';
+import Tour from '@/components/maps/tour/tour';
+import useWindowSize from '@/components/window-size';
+import { getTourConfig } from '@/components/maps/tour/tourConfig';
 import { HeadingTextOneLayer, HeadingText } from "@/components/heading_text";
 import styles from '@/styles/maps.module.css';
+import tourStyles from '@/styles/tour.module.css';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
 import { ViewState } from "@/data/interfaces";
@@ -67,6 +71,39 @@ export default function MapPage() {
 
     const heading: string = HeadingText(layer, layer2, numLayers, CITY_DATA.citiesArray);
 
+    // ----- TOUR -----
+    const [width, setWidth] = useState(0);
+    const [height, setHeight] = useState(0);
+    const size = useWindowSize();
+    useEffect(() => {
+        const w = size?.width || 0;
+        setWidth(w);
+        const h = size?.height || 0;
+        setHeight(h);
+    }, [size])
+    const tourConfig = getTourConfig(width, height);
+
+    const accentColor = "#5cb7b7";
+    const [isTourOpen, setTourOpen] = useState(false);
+
+    const handleTourOpen = () => {
+        setTourOpen(true);
+    };
+
+    // Use sessionStorage to only show tour once per session.
+    const closeTour = () => {
+        setTourOpen(false);
+        if (typeof window != "undefined") {
+            sessionStorage.setItem("uatour", "done");
+        }
+    };
+
+    useEffect(() => {
+        if(!sessionStorage.getItem('uatour')) {
+            setTourOpen(true)
+        }
+    }, [])
+
     return (
         <>
         <div id="divinfo" style={{display: explain?"none":""}} >
@@ -104,6 +141,7 @@ export default function MapPage() {
             handleLayerChange = {handleLayerChange}
             handleLayer2Change = {handleLayer2Change}
             handleExplainChange = {handleExplainChange}
+            handleTourOpen = {handleTourOpen}
         />
         <Legend
             idx = {idx}
@@ -114,6 +152,16 @@ export default function MapPage() {
             citiesArray = {CITY_DATA.citiesArray}
         />
         <Buttons buttons={buttonProps} />
+        <Tour
+            onRequestClose={closeTour}
+            disableInteraction={false}
+            steps={tourConfig}
+            isOpen={isTourOpen}
+            maskClassName={tourStyles.tourmask}
+            className={tourStyles.tourhelper}
+            rounded={5}
+            accentColor={accentColor}
+        />
         </>
     )
 }

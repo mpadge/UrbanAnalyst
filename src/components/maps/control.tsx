@@ -11,6 +11,7 @@ import SelectNumLayers from '@/components/maps/num_layers';
 import OpacitySlider from '@/components/maps/slider';
 import ExplainButton from '@/components/maps/explain-button';
 import ExplainLayer from '@/components/maps/explain-layer';
+import HelpButton from '@/components/maps/help-button';
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
 
@@ -33,6 +34,7 @@ interface MapsControlProps {
     handleLayerChange: (layer: string) => void,
     handleLayer2Change: (layer: string) => void,
     handleExplainChange: (explain: any) => void
+    handleTourOpen: (isTourOpen: boolean) => void
 }
 
 
@@ -70,6 +72,7 @@ export default function Control (props: MapsControlProps) {
             />
             </p>
 
+            <h3>City</h3>
             <CityList
                 citiesArray={props.citiesArray}
                 idx={props.idx}
@@ -106,6 +109,10 @@ export default function Control (props: MapsControlProps) {
             <ExplainButton
                 explain = {props.explain}
                 handleExplainChange = {props.handleExplainChange} />
+
+            <HelpButton
+                handleTourOpen = {props.handleTourOpen}
+            />
             </div>
 
             <button
