@@ -72,8 +72,12 @@ export default function MapPage() {
     const heading: string = HeadingText(layer, layer2, numLayers, CITY_DATA.citiesArray);
 
     // ----- TOUR -----
+    const [width, setWidth] = useState(0);
     const size = useWindowSize();
-    const width = size?.width || 1000;
+    useEffect(() => {
+        const w = size?.width || 0;
+        setWidth(w);
+    }, [size])
     const tourConfig = getTourConfig(width);
 
     const accentColor = "#5cb7b7";
