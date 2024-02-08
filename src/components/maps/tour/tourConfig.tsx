@@ -2,6 +2,7 @@
 
 import useWindowSize from '@/components/window-size';
 import { posControlsX, posControlsY, maxWidth } from "@/components/maps/tour/tourPositionControls";
+import { controlBoxText, legendText, navText } from "@/components/maps/tour/tourText";
 
 export const getTourConfig = (width: number, height: number) => [
     {    
@@ -42,25 +43,7 @@ export const getTourConfig = (width: number, height: number) => [
     },
     {
         selector: '[data-tut="reactour__controls"]',
-        content: (
-            <div>
-                This is the <q>control center</q> to choose cities and data layers.
-                <br />
-                <br />
-                Details on each layer can be seen by clicking on the <q>Explain layer</q> button.
-                <br />
-                <br />
-                Layers can also be viewed in <q>Paired</q> mode, which then
-                displays the strenght of relationship between two chosen layers.
-                For example, selecting <q>Social</q> and <q>bicycle index</q>
-                will display how strongly social disavantage is related to bicycle infrastrcuture.
-                <br />
-                <br />
-                Lower values are always better for single layers; interpreations
-                of lower vs. higher values for paired layers are always given in
-                the <q>Explain layer</q> text.
-                </div>
-        ),
+        content: () => controlBoxText(width > 700),
         style: {
             left: posControlsX(width, "controls"),
             top: posControlsY(width, height, "controls"),
@@ -71,7 +54,7 @@ export const getTourConfig = (width: number, height: number) => [
     },
     {    
         selector: '[data-tut="reactour__two"]',
-        content: `Each layer has a legend here, for which more yellow colors are generally better.`,
+        content: () => legendText(width > 700),
         style: {
             width: '250px',
             left: posControlsX(width, "legend"),
@@ -90,25 +73,7 @@ export const getTourConfig = (width: number, height: number) => [
             width: maxWidth(width),
         },
         content: ({ goTo }: { goTo: (stepIndex: number) => void }) => (
-            <div>
-            Finally, these buttons navigate to other Urban Analyst pages.
-            <br /> 
-            <br /> 
-            <button color="primary"
-            onClick={() => goTo(0)}
-            style={{
-                display: "block",
-                margin: "1em auto",
-                border: '1px solid #f7f7f7',
-                background: '#bdbcbb',
-                padding: '.3em .7em',
-                fontSize: 'inherit',
-                cursor: 'pointer',
-            }}
-            >
-            Go back to step 1
-            </button>
-            </div>
+            navText(goTo, width > 700)
         )
     },
 
