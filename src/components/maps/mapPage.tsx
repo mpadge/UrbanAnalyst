@@ -12,9 +12,9 @@ import Control from '@/components/maps/control';
 import Legend from '@/components/maps/legend';
 import UTAMap from '@/components/maps/map';
 import Buttons from '@/components/buttons3';
-import Tour from '@/components/maps/tour';
+import Tour from '@/components/maps/tour/tour';
 import useWindowSize from '@/components/window-size';
-import { getTourConfig } from '@/components/maps/tourConfig';
+import { getTourConfig } from '@/components/maps/tour/tourConfig';
 import { HeadingTextOneLayer, HeadingText } from "@/components/heading_text";
 import styles from '@/styles/maps.module.css';
 import tourStyles from '@/styles/tour.module.css';
@@ -84,7 +84,7 @@ export default function MapPage() {
     const tourConfig = getTourConfig(width, height);
 
     const accentColor = "#5cb7b7";
-    const [isTourOpen, setTourOpen] = useState(true);
+    const [isTourOpen, setTourOpen] = useState(false);
 
     const handleClickOpen = () => {
         setTourOpen(true);
