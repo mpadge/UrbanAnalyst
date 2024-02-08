@@ -8,12 +8,13 @@ export const getTourConfig = (width: number, height: number) => [
         selector: '[data-tut="reactour__maps_welcome"]',
         content: () => (
             <div>
-                <h2>Urban Analyst</h2><br/>
-
+                <h2>Urban Analyst</h2>
+                <br />
                 This guided tour can be re-started any time by clicking on the
-                <q>Help</q> button.<br/><br/>
-
-                It can be closed by clicking anywhere outside these boxes. If you've
+                <q>Help</q> button.
+                <br />
+                <br />
+                It can be closed by clicking anywhere outside these boxes. If you&apos;ve
                     got a keyboard, you can step through with arrow keys, and close
                 with <q>Escape</q>. Press an arrow now to start...
             </div>
@@ -25,6 +26,31 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
+        selector: '[data-tut="reactour__map"]',
+        content: `This page shows interactive maps for a chosen city, and for values of a chosen variable.`,
+        style: {
+            backgroundColor: '#9cf7f7',
+            borderRadius: '20px',
+            left: posControlsX(width, "nav"),
+            width: maxWidth(width),
+        }
+    },
+    {
+        selector: '[data-tut="reactour__controls"]',
+        content: (
+            <div>
+            This is the main panel to choose cities and variables.
+            </div>
+        ),
+        style: {
+            width: '250px',
+            left: posControlsX(width, "controls"),
+            top: posControlsY(width, height, "controls"),
+            backgroundColor: '#9cf7f7',
+            borderRadius: '20px',
+        }
+    },
+    {
         selector: '[data-tut="reactour__one"]',
         content: `These are the navigation buttons`,
         style: {
@@ -33,17 +59,6 @@ export const getTourConfig = (width: number, height: number) => [
             left: posControlsX(width, "nav"),
             top: posControlsY(width, height, "nav"),
             width: maxWidth(width),
-        }
-    },
-    {
-        selector: '[data-tut="reactour__two"]',
-        content: `This is the control panel`,
-        style: {
-            width: '250px',
-            left: posControlsX(width, "controls"),
-            top: posControlsY(width, height, "controls"),
-            backgroundColor: '#9cf7f7',
-            borderRadius: '20px',
         }
     },
     {    
