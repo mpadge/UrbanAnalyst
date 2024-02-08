@@ -58,3 +58,28 @@ export function posControlsY(width: number, height: number, near = "controls") {
 
     return top;
 }
+
+export function maxWidth(width: number, wide = false) {
+    var w;
+    if (width > 1120) {
+        if (wide) {
+            w = 600;
+        } else {
+            w = 400;
+        }
+    } else if (width > 700) {
+        if (wide) {
+            w = 400;
+        } else {
+            w = 300;
+        }
+    } else {
+        if (wide) {
+            w = 300;
+        } else {
+            w = 250;
+        }
+    }
+
+    return w;
+}

@@ -1,16 +1,27 @@
 "use client"
 
 import useWindowSize from '@/components/window-size';
-import { posControlsX, posControlsY } from "@/components/maps/tour/tourPositionControls";
+import { posControlsX, posControlsY, maxWidth } from "@/components/maps/tour/tourPositionControls";
 
 export const getTourConfig = (width: number, height: number) => [
     {    
-        selector: '[data-tut="reactour__one"]',
-        content: `This is a button`,
+        selector: '[data-tut="reactour__maps_welcome"]',
+        content: () => (
+            <div>
+                <h2>Urban Analyst</h2><br/>
+
+                This guided tour can be re-started any time by clicking on the
+                <q>Help</q> button.<br/><br/>
+
+                It can be closed by clicking anywhere outside these boxes. If you've
+                    got a keyboard, you can step through with arrow keys, and close
+                with <q>Escape</q>. Press an arrow now to start...
+            </div>
+        ),
         style: {
             backgroundColor: '#9cf7f7',
             borderRadius: '20px',
-            width: '250px',
+            maxWidth: maxWidth(width, true),
         }
     },
     {
@@ -21,7 +32,7 @@ export const getTourConfig = (width: number, height: number) => [
             borderRadius: '20px',
             left: posControlsX(width, "nav"),
             top: posControlsY(width, height, "nav"),
-            width: width > 700 ? '250px' : '200px',
+            width: maxWidth(width),
         }
     },
     {
@@ -54,7 +65,7 @@ export const getTourConfig = (width: number, height: number) => [
         },
         content: ({ goTo }: { goTo: (stepIndex: number) => void }) => (
             <div>
-            Table description
+            <h2>Table description</h2>
             <br /> 
             You can go back to the 1st step
             <br /> 
