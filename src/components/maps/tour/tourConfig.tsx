@@ -21,16 +21,21 @@ export const getTourConfig = (width: number, height: number) => [
         ),
         style: {
             backgroundColor: '#9cf7f7',
-            borderRadius: '20px',
+            borderRadius: width > 700 ? '20px' : '10px',
             maxWidth: maxWidth(width, true),
         }
     },
     {
         selector: '[data-tut="reactour__map"]',
-        content: `This page shows interactive maps for a chosen city, and for values of a chosen variable.`,
+        content: (
+            <div>
+            This page shows interactive maps for a chosen city, and for values of a chosen variable or
+                <q>layer</q>.
+            </div>
+        ),
         style: {
             backgroundColor: '#9cf7f7',
-            borderRadius: '20px',
+            borderRadius: width > 700 ? '20px' : '10px',
             left: posControlsX(width, "nav"),
             width: maxWidth(width),
         }
@@ -39,31 +44,34 @@ export const getTourConfig = (width: number, height: number) => [
         selector: '[data-tut="reactour__controls"]',
         content: (
             <div>
-            This is the main panel to choose cities and variables.
-            </div>
+                This is the <q>control center</q> to choose cities and data layers.
+                <br />
+                <br />
+                Details on each layer can be seen by clicking on the <q>Explain layer</q> button.
+                <br />
+                <br />
+                Layers can also be viewed in <q>Paired</q> mode, which then
+                displays the strenght of relationship between two chosen layers.
+                For example, selecting <q>Social</q> and <q>bicycle index</q>
+                will display how strongly social disavantage is related to bicycle infrastrcuture.
+                <br />
+                <br />
+                Lower values are always better for single layers; interpreations
+                of lower vs. higher values for paired layers are always given in
+                the <q>Explain layer</q> text.
+                </div>
         ),
         style: {
-            width: '250px',
             left: posControlsX(width, "controls"),
             top: posControlsY(width, height, "controls"),
             backgroundColor: '#9cf7f7',
-            borderRadius: '20px',
-        }
-    },
-    {
-        selector: '[data-tut="reactour__one"]',
-        content: `These are the navigation buttons`,
-        style: {
-            backgroundColor: '#9cf7f7',
-            borderRadius: '20px',
-            left: posControlsX(width, "nav"),
-            top: posControlsY(width, height, "nav"),
-            width: maxWidth(width),
+            borderRadius: width > 700 ? '20px' : '10px',
+            maxWidth: maxWidth(width, true),
         }
     },
     {    
         selector: '[data-tut="reactour__two"]',
-        content: `And this is the legend`,
+        content: `Each layer has a legend here, for which more yellow colors are generally better.`,
         style: {
             width: '250px',
             left: posControlsX(width, "legend"),
@@ -73,16 +81,17 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__three"]',
+        selector: '[data-tut="reactour__one"]',
         style: {
             backgroundColor: '#9cf7f7',
             borderRadius: '20px',
+            left: posControlsX(width, "nav"),
+            top: posControlsY(width, height, "nav"),
+            width: maxWidth(width),
         },
         content: ({ goTo }: { goTo: (stepIndex: number) => void }) => (
             <div>
-            <h2>Table description</h2>
-            <br /> 
-            You can go back to the 1st step
+            Finally, these buttons navigate to other Urban Analyst pages.
             <br /> 
             <br /> 
             <button color="primary"

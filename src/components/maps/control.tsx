@@ -70,6 +70,7 @@ export default function Control (props: MapsControlProps) {
             />
             </p>
 
+            <h3>City</h3>
             <CityList
                 citiesArray={props.citiesArray}
                 idx={props.idx}

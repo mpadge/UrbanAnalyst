@@ -5,19 +5,19 @@ export function posControlsX(width: number, near = "controls") {
     var left;
     if (width > 1120) {
         if (near == "controls") {
-            left = width / 2.3 - 250;
+            left = width / 1.9 - 600;
         } else if (near == "nav") {
-            left = width / 5 + 250;
+            left = width / 6 + 400;
         } else {
-            left = width / 2.0 - 250;
+            left = width / 1.8 - 400;
         }
     } else if (width > 700) {
         if (near == "controls") {
-            left = width / 2.6 - 250;
+            left = width / 2.1 - 400;
         } else if (near == "nav") {
-            left = -width / 20 + 250;
+            left = -width / 12 + 300;
         } else {
-            left = width / 1.8 - 250;
+            left = width / 1.7 - 300;
         }
     } else {
         left = 0;
