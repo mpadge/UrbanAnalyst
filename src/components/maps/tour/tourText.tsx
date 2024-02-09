@@ -6,16 +6,21 @@ export function controlBoxText (wide = true) {
 
     return (
             <div>
+                <h2>Controls</h2>
+                <br />
                 {line1}
+                &nbsp;The current layer is named at the top of the map.  Details
+                on each layer can be seen by clicking on the <q>Explain
+                layer</q> button.
                 <br />
                 <br />
-                Details on each layer can be seen by clicking on the <q>Explain layer</q> button.
-                <br />
-                <br />
-                Layers can also be viewed in <q>Paired</q> mode, which then
-                displays the strenght of relationship between two chosen layers.
-                For example, selecting <q>Social</q> and <q>bicycle index</q>
-                will display how strongly social disavantage is related to bicycle infrastrcuture.
+                Layers can also be viewed in <q>Single</q> or <q>Paired</q>
+                mode. Paired mode displays the strength of relationship between
+                two chosen layers.  For example, selecting <q>Social</q> and
+                <q>bicycle index</q> will display how strongly social
+                disavantage is related to bicycle infrastrcuture. Details of
+                each selection can always be seen by clicking the <q>Explain
+                layer</q> button.
                 <br />
                 <br />
                 Lower values are always better for single layers; interpreations
@@ -27,11 +32,13 @@ export function controlBoxText (wide = true) {
 
 export function legendText(wide = true) {
     const txt = wide ?
-        `Each layer has a legend here, for which more yellow colors are generally better.` :
+        `Each layer has a legend here, for which yellow colors are generally better, and blue colors worse.` :
         `Each layer has a legend in the lower-left corner, for which more yellow colors are generally better.`;
 
     return (
         <div>
+            <h2>Legend</h2>
+            <br />
             {txt}
         </div>
     )
@@ -44,23 +51,25 @@ export function navText(goTo: (stepIndex: number) => void, wide = true) {
 
     return (
         <div>
-        {line1}
-        <br /> 
-        <br /> 
-        <button color="primary"
-        onClick={() => goTo(0)}
-        style={{
-            display: "block",
-            margin: "1em auto",
-            border: '1px solid #f7f7f7',
-            background: '#bdbcbb',
-            padding: '.3em .7em',
-            fontSize: 'inherit',
-            cursor: 'pointer',
-        }}
-        >
-        Go back to step 1
-        </button>
+            <h2>Navigation</h2>
+            <br />
+            {line1}
+            <br />
+            <br />
+            <button color="primary"
+            onClick={() => goTo(0)}
+            style={{
+                display: "block",
+                margin: "1em auto",
+                border: '1px solid #f7f7f7',
+                background: '#bdbcbb',
+                padding: '.3em .7em',
+                fontSize: 'inherit',
+                cursor: 'pointer',
+            }}
+            >
+            Go back to step 1
+            </button>
         </div>
     )
 }

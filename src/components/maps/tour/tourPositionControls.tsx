@@ -50,19 +50,19 @@ export function posControlsY(width: number, height: number, near = "controls") {
     var top;
     if (width > 1120) {
         if (near == "controls") {
-            top = 1 * height / 4;
+            top = height / 4.5;
         } else if (near == "nav") {
-            top = 1 * height / 3.5;
+            top = height / 4.0;
         } else {
-            top = 1 * height / 3.5;
+            top = height / 4.0;
         }
     } else if (width > 700) {
         if (near == "controls") {
-            top = 1 * height / 5;
+            top = height / 5;
         } else if (near == "nav") {
-            top = 1 * height / 3.5;
+            top = height / 5.0;
         } else {
-            top = 1 * height / 3.6;
+            top = height / 4.5;
         }
     } else {
         top = 0;
