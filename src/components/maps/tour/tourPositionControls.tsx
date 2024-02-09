@@ -1,5 +1,15 @@
-// Positions of controls are all in dvw units, so panel positions here are
-// converted in analogous ways.
+// Tour popover positions can only be controlled in px units as offset from
+// values of zero corresponding to the middle of the window.
+// There are two types of tour panels, each of which is defined for three screen
+// sizes by the following constants:
+
+const w_large_big = 600;
+const w_med_big = 400;
+const w_narrow_big = 300;
+const w_large_small = 400;
+const w_med_small = 300;
+const w_narrow_small = 250;
+
 
 export function posControlsX(width: number, near = "controls") {
     var left;
@@ -63,21 +73,21 @@ export function maxWidth(width: number, wide = false) {
     var w;
     if (width > 1120) {
         if (wide) {
-            w = 600;
+            w = w_large_big;
         } else {
-            w = 400;
+            w = w_large_small;
         }
     } else if (width > 700) {
         if (wide) {
-            w = 400;
+            w = w_med_big;
         } else {
-            w = 300;
+            w = w_med_small;
         }
     } else {
         if (wide) {
-            w = 300;
+            w = w_narrow_big;
         } else {
-            w = 250;
+            w = w_narrow_small;
         }
     }
 
