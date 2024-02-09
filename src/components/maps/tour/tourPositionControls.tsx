@@ -1,33 +1,39 @@
 // Tour popover positions can only be controlled in px units as offset from
-// values of zero corresponding to the middle of the window.
-// There are two types of tour panels, each of which is defined for three screen
-// sizes by the following constants:
+// values of zero corresponding to the middle of the window. The left-hand side
+// is, for example, then `-width / 2`. Those coordinates then describe the
+// **middle** of the tour popover, so a popover of width, `w`, at the far
+// left-hand side will then be at `-width / 2 + w / 2`. Most of the position
+// controls below start with that and then modify the edge position by a
+// specified amount.
+//
+// Popover widths are defined for two types of tour panels, each of which is
+// defined for three screen sizes by the following constants:
 
 const w_large_big = 600;
 const w_med_big = 400;
-const w_narrow_big = 300;
+const w_narrow_big = 300; // Only used in maxWidth, not posControls.
 const w_large_small = 400;
 const w_med_small = 300;
-const w_narrow_small = 250;
+const w_narrow_small = 250; // Only used in maxWidth, not posControls.
 
 
 export function posControlsX(width: number, near = "controls") {
     var left;
     if (width > 1120) {
         if (near == "controls") {
-            left = width / 1.9 - 600;
+            left = width / 2 - w_large_big / 2 - width / 9;
         } else if (near == "nav") {
-            left = width / 6 + 400;
+            left = width / 2 - w_large_small / 2 - width / 20;
         } else {
-            left = width / 1.8 - 400;
+            left = width / 2 - w_large_small / 2;
         }
     } else if (width > 700) {
         if (near == "controls") {
-            left = width / 2.1 - 400;
+            left = width / 2 - w_med_big / 2 - width / 5;
         } else if (near == "nav") {
-            left = -width / 12 + 300;
+            left = width / 2 - w_med_small / 2 - width / 10;
         } else {
-            left = width / 1.7 - 300;
+            left = width / 2 - w_med_small / 2 - width / 20;
         }
     } else {
         left = 0;
