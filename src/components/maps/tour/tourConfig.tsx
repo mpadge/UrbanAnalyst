@@ -34,7 +34,8 @@ export const getTourConfig = (width: number, height: number) => [
                 <h2>Maps</h2>
                 <br />
                 This page shows interactive maps for a chosen city, and for
-                    values of a chosen variable or <q>layer</q>.
+                values of a chosen variable or <q>layer</q>. Low values (yellow
+                colors) are generally better than higher values (blue colors).
             </div>
         ),
         style: {

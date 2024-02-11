@@ -21,7 +21,7 @@ export function posControlsX(width: number, near = "controls") {
     var left;
     if (width > 1120) {
         if (near == "controls") {
-            left = width / 2 - w_large_big / 2 - width / 9;
+            left = width / 2 - w_large_big / 2 - width / 10;
         } else if (near == "nav") {
             left = width / 2 - w_large_small / 2 - width / 20;
         } else {
