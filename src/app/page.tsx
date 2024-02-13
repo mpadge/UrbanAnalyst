@@ -58,13 +58,9 @@ export default function Home() {
 
             <div className={styles.centerMed}>
                 <p className="text-center">
-                    Urban Analyst provides interactive maps of the properties of
-                    cities including of their transport systems and
-                    socio-demographic conditions, as well as statistical
-                    summaries of all cities. Values for each city are aggregated
-                    from billions of individual routing queries, providing
-                    extraordinary insight into how people dynamically interact
-                    with their cities.
+                    How does your city compare to others?
+What would your city be like if it became more like some other city?
+What's the best way for that to happen?
                 </p> </div>
 
             <div className={styles.grid}>
