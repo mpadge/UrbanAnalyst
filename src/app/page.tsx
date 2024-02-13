@@ -60,7 +60,7 @@ export default function Home() {
                 <p className="text-center">
                     How does your city compare to others?
 What would your city be like if it became more like some other city?
-What's the best way for that to happen?
+What&apos;s the best way for that to happen?
                 </p> </div>
 
             <div className={styles.grid}>
