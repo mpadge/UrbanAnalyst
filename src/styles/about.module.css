@@ -99,7 +99,9 @@
     transform: none;
     height: 300px;
   }
-
+  .centerSmall p {
+    width: 85%;
+  }
 }
 
 /* Tablet and Smaller Desktop */
