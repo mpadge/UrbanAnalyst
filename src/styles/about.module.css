@@ -1,8 +1,8 @@
 .main {
-  display: inline;
-  align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
+    display: inline;
+    align-items: center;
+    padding: 6rem;
+    min-height: 100vh;
 }
 
 .main ol {
@@ -12,41 +12,41 @@
 }
 
 .description {
-  display: relative;
-  justify-content: left;
-  align-items: left;
-  font-size: 16px;
+    display: relative;
+    justify-content: left;
+    align-items: left;
+    font-size: 16px;
 }
 
 .description p {
-  position: absolute;
-  top: 20px;
-  left: 10%;
-  margin-top: 20px;
-  padding: 1rem;
-  width: auto;
-  background-color: rgba(var(--callout-rgb), 0.5);
-  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
-  border-radius: var(--border-radius);
+    position: absolute;
+    top: 20px;
+    left: 10%;
+    margin-top: 20px;
+    padding: 1rem;
+    width: auto;
+    background-color: rgba(var(--callout-rgb), 0.5);
+    border: 1px solid rgba(var(--callout-border-rgb), 0.3);
+    border-radius: var(--border-radius);
 }
 
 .centerBig {
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  padding: 4rem 0;
-  font-size: 4rem;
-  text-align: center;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 4rem 0;
+    font-size: 4rem;
+    text-align: center;
 }
 
 .leftMed {
-  position: relative;
-  text-align: left;
-  padding: 4rem 0;
-  font-size: 2rem;
-  font-weight: 300;
-  padding: 1rem;
-  margin-left: 10%;
+    position: relative;
+    text-align: left;
+    padding: 4rem 0;
+    font-size: 2rem;
+    font-weight: 300;
+    padding: 1rem;
+    margin-left: 10%;
 }
 
 .leftMed p {
@@ -88,20 +88,20 @@
 
 /* Mobile */
 @media (max-width: 700px) {
-  .description {
-    display: none;
-  }
+    .description {
+        display: none;
+    }
 
-  .center {
-    padding: 8rem 0 6rem;
-  }
-  .center::before {
-    transform: none;
-    height: 300px;
-  }
-  .centerSmall p {
-    width: 85%;
-  }
+    .center {
+        padding: 8rem 0 6rem;
+    }
+    .center::before {
+        transform: none;
+        height: 300px;
+    }
+    .centerSmall p {
+        width: 85%;
+    }
 }
 
 /* Tablet and Smaller Desktop */
@@ -112,10 +112,10 @@
 }
 
 @keyframes rotate {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
 }

@@ -1,25 +1,25 @@
 .maplegend {
-  display: block;
-  justify-content: left;
-  align-items: left;
-  margin: 20px;
-  z-index: 10;
-  position: fixed;
-  height: 8%;
-  bottom: 0%;
-  left: 0%;
+    display: block;
+    justify-content: left;
+    align-items: left;
+    margin: 20px;
+    z-index: 10;
+    position: fixed;
+    height: 8%;
+    bottom: 0%;
+    left: 0%;
 }
 
 .maplegend p {
-  position: fixed;
-  margin: 0;
-  padding: 1rem;
-  background-color: rgba(var(--callout-rgb), 0.5);
-  border: 0px solid rgba(var(--callout-border-rgb), 0.3);
-  border-radius: var(--border-radius);
+    position: fixed;
+    margin: 0;
+    padding: 1rem;
+    background-color: rgba(var(--callout-rgb), 0.5);
+    border: 0px solid rgba(var(--callout-border-rgb), 0.3);
+    border-radius: var(--border-radius);
 }
 
 .maplegend h2 {
-  font-weight: 600;
-  margin-bottom: 0.7rem;
+    font-weight: 600;
+    margin-bottom: 0.7rem;
 }

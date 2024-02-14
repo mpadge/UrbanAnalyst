@@ -1,52 +1,52 @@
 
 .buttons {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 50px;
-  margin-top: 0px;
-  z-index: 10;
-  position: fixed;
-  gap: 20px;
-  top: 20px;
-  right: 5dvw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 50px;
+    margin-top: 0px;
+    z-index: 10;
+    position: fixed;
+    gap: 20px;
+    top: 20px;
+    right: 5dvw;
 }
 
 
 .buttons span {
-  padding: 1rem;
-  background-color: rgba(var(--card-rgb), 0.5);
-  border: 1px solid rgba(var(--card-border-rgb), 0.3);
-  border-radius: var(--border-radius);
+    padding: 1rem;
+    background-color: rgba(var(--card-rgb), 0.5);
+    border: 1px solid rgba(var(--card-border-rgb), 0.3);
+    border-radius: var(--border-radius);
 }
 
 .buttons h2 {
-  font-weight: 600;
-  margin-bottom: 0.7rem;
+    font-weight: 600;
+    margin-bottom: 0.7rem;
 }
 
 
 /* Mobile */
 @media (max-width: 700px) {
-  .buttons {
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      gap: 15px;
-      top: 20px;
-      right: 5dvw;
-      width: auto;
-      white-space: nowrap;
-  }
+    .buttons {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 15px;
+        top: 20px;
+        right: 5dvw;
+        width: auto;
+        white-space: nowrap;
+    }
 
-  .buttons span, .buttons h2 {
-    padding: 10px;
-  }
+    .buttons span, .buttons h2 {
+        padding: 10px;
+    }
 }
 
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
-  .buttons {
-      right: 10dvw;
-  }
+    .buttons {
+        right: 10dvw;
+    }
 }
