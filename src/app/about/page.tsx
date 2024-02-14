@@ -68,6 +68,8 @@ export default function Home() {
                     the properties of cities, including transport systems and
                     socio-demographic conditions.  The platform offers
                 </p>
+            </div>
+            <div className={styles.centerSmall}>
                 <ol>
                     <li>
                         a &ldquo;Maps&rdquo; view, to enable various
@@ -84,14 +86,15 @@ export default function Home() {
                       transformed to become like any other city.
                     </li>
                 </ol>
-                <p>
+            </div>
+            <div className={styles.centerSmall}>
+                <p className="text-center"> 
                     Full details are provided&nbsp;
                     <a
                     href="https://UrbanAnalyst.github.io/docs"
                     rel="noopener noreferrer"
                     >
-                    in the documentation
-                    </a>.
+                    in the documentation</a>.
                 </p>
             </div>
 
