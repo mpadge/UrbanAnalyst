@@ -106,6 +106,12 @@ export default function BarChart (props: CompareProps) {
     const yAxisPadding = 10;
     const yTickSize = 0;
 
+    const numCities = props.citiesArray.length;
+    // palettes:
+    // https://github.com/d3/d3-scale-chromatic
+    var colourPalette = d3.scaleSequential().domain([ xMax, xMinActual ])
+        .interpolator(d3.interpolateBlues)
+
     const svgRef = React.useRef<SVGSVGElement>(null);
 
     // X-axis:
@@ -129,12 +135,12 @@ export default function BarChart (props: CompareProps) {
         const svg = d3.select(svgRef.current as any);
         svg.selectAll('*').remove();
 
-        const handleDrawBars = (svg: any) => {
+        const handleDrawBars = (svg: any, colourPalette: any) => {
             svg
                 .selectAll('rect')
                 .data(data)
                 .join('rect')
-                .attr('fill', '#008bec')
+                .attr('fill', (d: any) => colourPalette(d.value))
                 .attr('stroke-width', 1)
                 .attr('stroke', '#718096')
                 .attr('height', yScale.bandwidth())
@@ -143,7 +149,9 @@ export default function BarChart (props: CompareProps) {
                     d3.select(this).style('fill', '#00a7e4');
                 })
                 .on('mouseout', function(this: SVGRectElement) {
-                    d3.select(this).style('fill', '#008bec');
+                    d3.select(this).style('fill', (d: any) => {
+                        return colourPalette(d.value);
+                    })
                 })
                 .transition()                .transition()
                 .duration(750)
@@ -192,10 +200,10 @@ export default function BarChart (props: CompareProps) {
         const nTicks = (innerWidth < 700 || xMin > 0) ? 4 : 8;
 
         handleDrawXAxis(svg);
-        handleDrawBars(svg);
+        handleDrawBars(svg, colourPalette);
         handleDrawText(svg);
 
-    }, [data, innerHeight, innerWidth, xScale, yScale, xMin]);
+    }, [data, innerHeight, innerWidth, xScale, yScale, xMin, numCities, colourPalette]);
 
     const inputRef = useRef()
 
