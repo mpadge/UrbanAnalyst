@@ -4,6 +4,10 @@ import useWindowSize from '@/components/window-size';
 import { posControlsX, posControlsY, maxWidth } from "@/components/maps/tour/tourPositionControls";
 import { controlBoxText, legendText, navText } from "@/components/maps/tour/tourText";
 
+const tourPanelBackgroundColour = '#9cf7f7';
+const tourPanelBorderRadiusWide = '20px';
+const tourPanelBorderRadiusNarrow = '10px';
+
 export const getTourConfig = (width: number, height: number) => [
     {    
         selector: '[data-tut="reactour__maps_welcome"]',
@@ -22,8 +26,8 @@ export const getTourConfig = (width: number, height: number) => [
             </div>
         ),
         style: {
-            backgroundColor: '#9cf7f7',
-            borderRadius: width > 700 ? '20px' : '10px',
+            backgroundColor: tourPanelBackgroundColour,
+            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
             maxWidth: maxWidth(width, true),
         }
     },
@@ -39,8 +43,8 @@ export const getTourConfig = (width: number, height: number) => [
             </div>
         ),
         style: {
-            backgroundColor: '#9cf7f7',
-            borderRadius: width > 700 ? '20px' : '10px',
+            backgroundColor: tourPanelBackgroundColour,
+            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
             left: posControlsX(width, "nav"),
             width: maxWidth(width),
         }
@@ -51,8 +55,8 @@ export const getTourConfig = (width: number, height: number) => [
         style: {
             left: posControlsX(width, "controls"),
             top: posControlsY(width, height, "controls"),
-            backgroundColor: '#9cf7f7',
-            borderRadius: width > 700 ? '20px' : '10px',
+            backgroundColor: tourPanelBackgroundColour,
+            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
             maxWidth: maxWidth(width, true),
         }
     },
@@ -63,15 +67,15 @@ export const getTourConfig = (width: number, height: number) => [
             width: maxWidth(width),
             left: posControlsX(width, "legend"),
             top: posControlsY(width, height, "legend"),
-            backgroundColor: '#9cf7f7',
-            borderRadius: '20px',
+            backgroundColor: tourPanelBackgroundColour,
+            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
         }
     },
     {
         selector: '[data-tut="reactour__maps_nav_buttons"]',
         style: {
-            backgroundColor: '#9cf7f7',
-            borderRadius: '20px',
+            backgroundColor: tourPanelBackgroundColour,
+            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
             left: posControlsX(width, "nav"),
             top: posControlsY(width, height, "nav"),
             width: maxWidth(width),
