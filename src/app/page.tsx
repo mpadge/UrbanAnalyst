@@ -66,31 +66,31 @@ What&apos;s the best way for that to happen?
             <div className={styles.grid}>
 
                 <Link
+                href="/compare"
+                className={styles.card}
+                rel="noopener noreferrer"
+                >
+                    <h2>
+                        Compare <span>&#8628;</span>
+                    </h2>
+                    <p className={styles.cardText}>
+                        Compare statistics for every UA city.
+                    </p>
+                </Link>
+
+                <Link
                 href="/map"
                 className={styles.card}
                 rel="noopener noreferrer"
                 >
                     <h2>
-                        Maps <span>&#8628;</span>
+                        Map <span>&#8628;</span>
                     </h2>
                     <p className={styles.cardText}>
                         Interactive maps of all cities analysed to date.
                     </p>
                 </Link>
 
-
-                <Link
-                href="/compare"
-                className={styles.card}
-                rel="noopener noreferrer"
-                >
-                    <h2>
-                        Statistics <span>&#8628;</span>
-                    </h2>
-                    <p className={styles.cardText}>
-                        Compare statistics for every UA city.
-                    </p>
-                </Link>
 
                 <Link
                 href="/transform"
