@@ -106,7 +106,6 @@ export default function BarChart (props: CompareProps) {
     const yAxisPadding = 10;
     const yTickSize = 0;
 
-    const numCities = props.citiesArray.length;
     // palettes:
     // https://github.com/d3/d3-scale-chromatic
     var colourPalette = d3.scaleSequential().domain([ xMax, xMinActual ])
@@ -203,7 +202,7 @@ export default function BarChart (props: CompareProps) {
         handleDrawBars(svg, colourPalette);
         handleDrawText(svg);
 
-    }, [data, innerHeight, innerWidth, xScale, yScale, xMin, numCities, colourPalette]);
+    }, [data, innerHeight, innerWidth, xScale, yScale, xMin, colourPalette]);
 
     const inputRef = useRef()
 
