@@ -1,11 +1,11 @@
 
 import type { Metadata, Viewport } from 'next';
 
-import StatsPage from '@/components/compare/statsPage';
+import StatsPage from '@/components/compare/comparePage';
 
 export const metadata: Metadata = {
     title: 'UA',
-    description: 'Stats for Urban Analyst',
+    description: 'Compare cities for Urban Analyst',
     icons: '/ua.ico',
 }
 
