@@ -205,13 +205,13 @@ export default function BarChart (props: CompareProps) {
 
     return (
             <>
-            <div id="stats-page" className={styles.statspage}>
+            <div id="compare-page" className={styles.comparepage}>
 
-                <div id="stats-heading" className={styles.statsheading}>
+                <div id="compare-heading" className={styles.compareheading}>
                     <p> {heading} </p>
                 </div>
 
-                <div id="stats-container" className={styles.statsplot} >
+                <div id="compare-container" className={styles.compareplot} >
                     <Suspense fallback={<div>Loading...</div>}>
                     <svg width={width} height={height}>
                     <g

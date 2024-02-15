@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from '@/styles/compare.module.css';
 import { CityDataProps } from "@/data/interfaces";
-import { GetLayerText, GetLayerTextStats } from "@/components/explain-layer";
+import { GetLayerText, GetLayerTextCompare } from "@/components/explain-layer";
 
 interface CompareExplainProps {
     idx: number,
@@ -25,7 +25,7 @@ export default function ExplainButton (props: CompareExplainProps) {
         layer1 + "_" + layer2 : layer2 + "_" + layer1;
     const dual_layers: boolean = paired_keys.includes(these_layers);
     const layer_temp = dual_layers ? 
-        GetLayerTextStats(props.layer, props.layer2, props.numLayers, meanVarIndex, paired_keys) :
+        GetLayerTextCompare(props.layer, props.layer2, props.numLayers, meanVarIndex, paired_keys) :
         GetLayerText(props.layer, props.layer2, props.numLayers, meanVarIndex, paired_keys);
 
     // But set layer text to city data "social_index" field if that single layer
@@ -35,7 +35,7 @@ export default function ExplainButton (props: CompareExplainProps) {
 
     return (
         <div id="divinfo" style={{display: props.explain?"":"none"}} >
-            <div id="explain-layer" className={styles.statstext}>
+            <div id="explain-layer" className={styles.comparetext}>
                 <p>{layer_text} </p>
             </div>
         </div>
