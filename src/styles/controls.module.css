@@ -195,6 +195,7 @@
     align-items: center;
     text-align: center;
     margin: 20px;
+    margin-top: 80px;
     z-index: 10;
     position: relative;
     background-color: rgba(157, 248, 248, 0.95);
@@ -202,7 +203,7 @@
     border: 1px solid rgba(172, 175, 176, 0.9);
     border-radius: 12px;
     left: 10%;
-    width: 70%;
+    max-width: 60%;
 }
 
 
@@ -310,6 +311,10 @@
     .layerslist input {
         margin-bottom: 10px;
     }
+    .explaintext {
+        left: 20%;
+        max-width: 50%;
+    }
 }
 
 /* Mobile */
@@ -375,5 +380,8 @@
         margin-top: 2px;
         margin-bottom: 2px;
     }
-
+    .explaintext {
+        left: 30%;
+        max-width: 50%;
+    }
 }
