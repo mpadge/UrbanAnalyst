@@ -20,8 +20,8 @@ export const viewport: Viewport = {
 export default function Home() {
 
     const buttons = {
-        first: "maps",
-        second: "stats",
+        first: "compare",
+        second: "map",
         third: "transform",
         fourth: "about"
     }
@@ -66,7 +66,7 @@ What&apos;s the best way for that to happen?
             <div className={styles.grid}>
 
                 <Link
-                href="/maps"
+                href="/map"
                 className={styles.card}
                 rel="noopener noreferrer"
                 >
@@ -80,7 +80,7 @@ What&apos;s the best way for that to happen?
 
 
                 <Link
-                href="/stats"
+                href="/compare"
                 className={styles.card}
                 rel="noopener noreferrer"
                 >

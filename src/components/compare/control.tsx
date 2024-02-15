@@ -5,18 +5,18 @@ import Image from 'next/image'
 import localFont from 'next/font/local'
 
 import styles from '@/styles/controls.module.css';
-import LayerList from '@/components/stats/layerlist';
-import SelectNumLayers from '@/components/stats/num_layers';
-import SortOrderList from '@/components/stats/sortOrderList';
-import ExplainButton from '@/components/stats/explain-button';
-import ExplainLayer from '@/components/stats/explain-layer';
-import MeanAvgButtons from '@/components/stats/mean-avg';
+import LayerList from '@/components/compare/layerlist';
+import SelectNumLayers from '@/components/compare/num_layers';
+import SortOrderList from '@/components/compare/sortOrderList';
+import ExplainButton from '@/components/compare/explain-button';
+import ExplainLayer from '@/components/compare/explain-layer';
+import MeanAvgButtons from '@/components/compare/mean-avg';
 
 import { CityDataProps } from "@/data/interfaces";
 
 const junctionFont = localFont({ src: '../../app/junction-regular.woff' })
 
-interface StatsControlProps {
+interface CompareControlProps {
     idx: number,
     layer: string,
     layer2: string,
@@ -35,7 +35,7 @@ interface StatsControlProps {
 }
 
 
-export default function Control (props: StatsControlProps) {
+export default function Control (props: CompareControlProps) {
 
     const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
 

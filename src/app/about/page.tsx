@@ -21,8 +21,8 @@ export default function Home() {
 
     const buttons = {
         first: "home",
-        second: "maps",
-        third: "stats",
+        second: "compare",
+        third: "map",
         fourth: "transform"
     }
 

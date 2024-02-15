@@ -1,24 +1,27 @@
 
 import type { Metadata, Viewport } from 'next';
-
-import StatsPage from '@/components/stats/statsPage';
+import Image from 'next/image'
 
 export const metadata: Metadata = {
     title: 'UA',
-    description: 'Stats for Urban Analyst',
+    description: 'Maps for Urban Analyst',
     icons: '/ua.ico',
 }
 
 export const viewport: Viewport = {
     width: 'device-width',
     initialScale: 1.0,
+    maximumScale: 1.0,
+    userScalable: false,
 }
+
+import MapPage from '@/components/map/mapPage';
 
 export default function Home() {
 
     return (
         <>
-        <StatsPage />
+        <MapPage />
         </>
     )
 }

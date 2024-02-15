@@ -5,19 +5,19 @@ import Image from 'next/image'
 import localFont from 'next/font/local'
 
 import styles from '@/styles/controls.module.css';
-import CityList from '@/components/maps/citylist';
-import LayerList from '@/components/maps/layerlist';
-import SelectNumLayers from '@/components/maps/num_layers';
-import OpacitySlider from '@/components/maps/slider';
-import ExplainButton from '@/components/maps/explain-button';
-import ExplainLayer from '@/components/maps/explain-layer';
-import HelpButton from '@/components/maps/help-button';
+import CityList from '@/components/map/citylist';
+import LayerList from '@/components/map/layerlist';
+import SelectNumLayers from '@/components/map/num_layers';
+import OpacitySlider from '@/components/map/slider';
+import ExplainButton from '@/components/map/explain-button';
+import ExplainLayer from '@/components/map/explain-layer';
+import HelpButton from '@/components/map/help-button';
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
 
 const junctionFont = localFont({ src: '../../app/junction-regular.woff' })
 
-interface MapsControlProps {
+interface MapControlProps {
     idx: number,
     layer: string,
     layer2: string,
@@ -38,7 +38,7 @@ interface MapsControlProps {
 }
 
 
-export default function Control (props: MapsControlProps) {
+export default function Control (props: MapControlProps) {
 
     const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
 

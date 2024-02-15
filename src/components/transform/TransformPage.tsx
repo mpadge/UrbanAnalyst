@@ -7,15 +7,15 @@ import Control from '@/components/transform/control';
 import Legend from '@/components/transform/legend';
 import Buttons from '@/components/buttons3';
 
-// import UTAMap from '@/components/maps/map';
+// import UTAMap from '@/components/map/map';
 import MapTransformDynamic from '@/components/transform/TransformPageDynamic';
 import { CITY_DATA } from '@/data/citydata';
 import { ViewState } from "@/data/interfaces";
 
 const buttonProps = {
     first: "home",
-    second: "maps",
-    third: "stats"
+    second: "map",
+    third: "compare"
 }
 
 export default function TransformPage() {

@@ -8,15 +8,15 @@ import { DeckGL } from "@deck.gl/react/typed";
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 import { Map } from "react-map-gl";
 
-import Control from '@/components/maps/control';
-import Legend from '@/components/maps/legend';
-import UTAMap from '@/components/maps/map';
+import Control from '@/components/map/control';
+import Legend from '@/components/map/legend';
+import UTAMap from '@/components/map/map';
 import Buttons from '@/components/buttons3';
-import Tour from '@/components/maps/tour/tour';
+import Tour from '@/components/map/tour/tour';
 import useWindowSize from '@/components/window-size';
-import { getTourConfig } from '@/components/maps/tour/tourConfig';
+import { getTourConfig } from '@/components/map/tour/tourConfig';
 import { HeadingTextOneLayer, HeadingText } from "@/components/heading_text";
-import styles from '@/styles/maps.module.css';
+import styles from '@/styles/map.module.css';
 import tourStyles from '@/styles/tour.module.css';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
@@ -24,7 +24,7 @@ import { ViewState } from "@/data/interfaces";
 
 const buttonProps = {
     first: "home",
-    second: "stats",
+    second: "compare",
     third: "transform"
 }
 

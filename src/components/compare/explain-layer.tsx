@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import styles from '@/styles/stats.module.css';
+import styles from '@/styles/compare.module.css';
 import { CityDataProps } from "@/data/interfaces";
 import { GetLayerText, GetLayerTextStats } from "@/components/explain-layer";
 
-interface StatsExplainProps {
+interface CompareExplainProps {
     idx: number,
     layer: string,
     layer2: string,
@@ -13,7 +13,7 @@ interface StatsExplainProps {
     citiesArray: CityDataProps[]
 }
 
-export default function ExplainButton (props: StatsExplainProps) {
+export default function ExplainButton (props: CompareExplainProps) {
 
     const meanVarIndex = props.meanVals ? 0 : 1;
     const paired_keys = Object.keys(props.citiesArray[props.idx].dataRangesPaired);
