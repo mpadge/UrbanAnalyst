@@ -2,16 +2,16 @@
 
 import { NextPage } from "next";
 import { useState } from "react";
-import Control from '@/components/stats/control';
+import Control from '@/components/compare/control';
 import Buttons from '@/components/buttons3';
-import BarChart from '@/components/stats/statsBarChart';
+import BarChart from '@/components/compare/statsBarChart';
 import styles from '@/styles/Home.module.css'
 
 import { CITY_DATA } from '@/data/citydata';
 
 const buttonProps = {
     first: "home",
-    second: "maps",
+    second: "map",
     third: "transform"
 }
 

@@ -227,8 +227,8 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
     return layer_text;
 }
 
-// Explanatory text for paired stats layers
-export function GetLayerTextStats(layer: string, layer2: string, numLayers: string, meanVarIndex: number, paired_keys: string[]): string {
+// Explanatory text for paired 'compare' layers
+export function GetLayerTextCompare(layer: string, layer2: string, numLayers: string, meanVarIndex: number, paired_keys: string[]): string {
 
     const lyr1 = layer.replace("\_", "").replace("index", "");
     const lyr2 = layer2.replace("\_", "").replace("index", "");

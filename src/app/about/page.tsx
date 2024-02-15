@@ -21,8 +21,8 @@ export default function Home() {
 
     const buttons = {
         first: "home",
-        second: "maps",
-        third: "stats",
+        second: "compare",
+        third: "map",
         fourth: "transform"
     }
 
@@ -72,14 +72,14 @@ export default function Home() {
             <div className={styles.centerSmall}>
                 <ol>
                     <li>
-                        a &ldquo;Maps&rdquo; view, to enable various
-                        properties of individual cities to be visualised as
-                        interactive maps, and
+                        a &ldquo;Compare&rdquo; view that compares the
+                        properties of different cities in terms of each variable
+                        measured by Urban Analyst.
                     </li>
                     <li>
-                        a &ldquo;Stats&rdquo;, or statistics, view that
-                        compares the properties of different cities in terms
-                        of each variable measured by Urban Analyst.
+                        a &ldquo;Map&rdquo; view, to enable various properties
+                        of individual cities to be visualised as interactive
+                        maps, and
                     </li>
                     <li>
                       a &ldquo;Transform&rdquo; view that enables cities to be

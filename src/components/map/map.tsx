@@ -3,7 +3,7 @@ import { useState, Suspense } from "react";
 import { DeckGL } from "@deck.gl/react/typed";
 import { Map } from "react-map-gl";
 
-import mapLayer from '@/components/maps/mapLayer'
+import mapLayer from '@/components/map/mapLayer'
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
 

@@ -3,13 +3,13 @@ import React, { useState, useEffect, useRef, Suspense } from 'react';
 import * as d3 from 'd3';
 import Link from 'next/link'
 
-import styles from '@/styles/stats.module.css';
+import styles from '@/styles/compare.module.css';
 import useWindowSize from '@/components/window-size';
 
 import { CityDataProps } from "@/data/interfaces";
 import { HeadingTextOneLayer } from "@/components/heading_text";
 
-interface StatsProps {
+interface CompareProps {
     idx: number,
     layer1: string,
     layer2: string,
@@ -47,7 +47,7 @@ interface AxisProps {
     innerHeight?: number
 }
 
-export default function BarChart (props: StatsProps) {
+export default function BarChart (props: CompareProps) {
 
     const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
 
@@ -205,13 +205,13 @@ export default function BarChart (props: StatsProps) {
 
     return (
             <>
-            <div id="stats-page" className={styles.statspage}>
+            <div id="compare-page" className={styles.comparepage}>
 
-                <div id="stats-heading" className={styles.statsheading}>
+                <div id="compare-heading" className={styles.compareheading}>
                     <p> {heading} </p>
                 </div>
 
-                <div id="stats-container" className={styles.statsplot} >
+                <div id="compare-container" className={styles.compareplot} >
                     <Suspense fallback={<div>Loading...</div>}>
                     <svg width={width} height={height}>
                     <g
