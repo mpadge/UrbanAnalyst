@@ -157,7 +157,7 @@
 .explainbuttonOn {
     align: center;
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     margin-left: 10px;
     margin-right: 10px;
     background-color: rgba(78, 153, 234, 0.5);
@@ -198,6 +198,7 @@
     z-index: 10;
     position: relative;
     background-color: rgba(157, 248, 248, 0.95);
+    background-color: rgba(--var(--explain-background-rgb), 0.95);
     border: 1px solid rgba(172, 175, 176, 0.9);
     border-radius: 12px;
     left: 10%;
