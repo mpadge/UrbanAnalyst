@@ -3,6 +3,10 @@ import styles from '@/styles/controls.module.css';
 import { CityDataProps } from "@/data/interfaces";
 import { GetLayerText } from "@/components/explain-layer";
 
+// The background colour of the explain dialogs is the same as the tour
+// components defined in tour/tourConfig.tsx, where
+// '#9cf7f7' -> c (157, 248, 248)
+
 interface MapsExplainProps {
     idx: number,
     layer: string,
