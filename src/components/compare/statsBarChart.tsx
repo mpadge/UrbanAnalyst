@@ -108,7 +108,11 @@ export default function BarChart (props: CompareProps) {
 
     // palettes:
     // https://github.com/d3/d3-scale-chromatic
-    var colourPalette = d3.scaleSequential().domain([ xMax, xMinActual ])
+    // This palette is expanded slightly because otherwise the upper limit
+    // (here, xMax) is white. Expanding ensures that it is also a blue shade.
+    const paletteExpand = 0.2;
+    const xMaxExpand = xMax + paletteExpand * (xMax - xMinActual);
+    var colourPalette = d3.scaleSequential().domain([ xMaxExpand, xMinActual ])
         .interpolator(d3.interpolateBlues)
 
     const svgRef = React.useRef<SVGSVGElement>(null);
