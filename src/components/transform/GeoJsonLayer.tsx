@@ -6,7 +6,7 @@ export async function getGeoJsonLayer(geoJSONcontent: any, layerMin: number, lay
     
         let Color = d3
             .scaleSequential()
-            .domain([layerMin, layerMax])
+            .domain([layerMax, layerMin])
             .interpolator(d3.interpolateViridis);
 
         const this_layer = [
@@ -22,8 +22,10 @@ export async function getGeoJsonLayer(geoJSONcontent: any, layerMin: number, lay
                     if (isNaN(layerval)) {
                         layerval = layerMin;
                     }
-                    // Invert the palette:
-                    layerval = layerMin + (layerMax - layerval);
+                    if (!(varname === "bike_index" || varname === "nature_index")) {
+                        // Invert the palette:
+                        layerval = layerMin + (layerMax - layerval);
+                    }
                     const layerarr: any = d3.color(Color(layerval));
                     var red = 0, green = 0, blue = 0;
                     if (layerarr) {

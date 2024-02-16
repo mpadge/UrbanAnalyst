@@ -60,7 +60,7 @@ export default function Legend (props: LegendProps) {
         // (sequential) scales. Note that palette has to match one in map.tsx,
         // which is also reversed, so domain is [max, min].
         var Color = d3.scaleSequential()
-            .domain([layerRange[1], layerRange[0]])
+            .domain(layer_name === "bike_index" || layer_name === "nature_index" ? [layerRange[0], layerRange[1]] : [layerRange[1], layerRange[0]])
             .interpolator(d3.interpolateViridis);
 
         var rect = svg.append("g")
