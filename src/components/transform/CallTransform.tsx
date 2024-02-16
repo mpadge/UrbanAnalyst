@@ -1,5 +1,7 @@
 import * as wasm_js from '@/../pkg/uamutations.js';
 
+import { trimRange } from '@/components/utils/trimRange';
+
 const nentries = Number(process.env.NEXT_PUBLIC_NUM_TRANSFORM_SAMPLES) || 1000;
 
 // Function used to extract size of JSON object returned from WASM calls. this
@@ -49,6 +51,9 @@ export async function transformDataFunction(data1: number | null, data2: number 
                         break;
                     default:
                         throw new Error(`Invalid output layer: `);
+                }
+                if (outputLayer !== 'original') {
+                    outputCol = trimRange(outputCol);
                 }
                 setResult(outputCol);
             }
