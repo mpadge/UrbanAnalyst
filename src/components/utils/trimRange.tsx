@@ -28,3 +28,22 @@ export function trimRange(dat: number[]): number[] {
 
     return dat;
 }
+
+export function getRangeLimits(geoJSONcontent: any, varname: string) {
+    let min = Infinity;
+    let max = -Infinity;
+    if (geoJSONcontent) {
+        geoJSONcontent.features.forEach((feature: any) => {
+            const value = feature.properties?.[varname];
+            if (value !== undefined && !isNaN(value)) {
+                if (value < min) {
+                    min = value;
+                } else if (value > max) {
+                    max = value;
+                }
+            }
+        });
+    }
+
+    return [min, max];
+}
