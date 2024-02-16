@@ -9,6 +9,8 @@ export async function getGeoJsonLayer(geoJSONcontent: any, layerMin: number, lay
             .domain([layerMax, layerMin])
             .interpolator(d3.interpolateViridis);
 
+        console.log("-----varname: " + varname)
+
         const this_layer = [
             new GeoJsonLayer({
                 id: 'polygon-layer',
@@ -22,7 +24,7 @@ export async function getGeoJsonLayer(geoJSONcontent: any, layerMin: number, lay
                     if (isNaN(layerval)) {
                         layerval = layerMin;
                     }
-                    if (!(varname === "bike_index" || varname === "nature_index")) {
+                    if (!(varname === "bike_index" || varname === "natural")) {
                         // Invert the palette:
                         layerval = layerMin + (layerMax - layerval);
                     }
