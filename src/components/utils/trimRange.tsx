@@ -2,7 +2,6 @@
 export function trimRange(dat: number[]): number[] {
     const sortedDat = [...dat].sort((a, b) => a - b);
     const ncols = 10 ** Math.floor(Math.log10(dat.length));
-    console.log("-----ncols = ", ncols);
     const bin_width = (sortedDat[sortedDat.length -  1] - sortedDat[0]) / ncols;
 
     // Trim lower values
@@ -10,7 +9,6 @@ export function trimRange(dat: number[]): number[] {
     while ((sortedDat[i +  1] - sortedDat[i]) > bin_width && i < Math.floor(sortedDat.length /  2)) {
         i++;
     }
-    console.log("----trim lower value: ", sortedDat [1], " -> ", sortedDat [i + 1]);
     for (let j = 0; j < dat.length; j++) {
         if (dat[j] < sortedDat[i +  1]) {
             dat[j] = sortedDat[i +  1];
@@ -22,7 +20,6 @@ export function trimRange(dat: number[]): number[] {
     while ((sortedDat[i] - sortedDat[i -  1]) > bin_width && i > Math.ceil(sortedDat.length /  2)) {
         i--;
     }
-    console.log("----trim upper value: ", sortedDat [dat.length - 1], " -> ", sortedDat [i - 1]);
     for (let j = 0; j < dat.length; j++) {
         if (dat[j] > sortedDat[i -  1]) {
             dat[j] = sortedDat[i -  1];

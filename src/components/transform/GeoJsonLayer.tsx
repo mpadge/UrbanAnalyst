@@ -9,8 +9,6 @@ export async function getGeoJsonLayer(geoJSONcontent: any, layerMin: number, lay
             .domain([layerMax, layerMin])
             .interpolator(d3.interpolateViridis);
 
-        console.log("-----varname: " + varname)
-
         const this_layer = [
             new GeoJsonLayer({
                 id: 'polygon-layer',

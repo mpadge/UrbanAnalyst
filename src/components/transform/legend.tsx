@@ -32,7 +32,8 @@ export default function Legend (props: LegendProps) {
             .duration(750);
 
         // scaleband controls the ticks, which can be on linear or log scales:
-        const log_scale = layer_name == "school_dist" || layer_name == "intervals";
+        // const log_scale = layer_name == "school_dist" || layer_name == "intervals";
+        const log_scale = layer_name == "intervals";
         const scale_min = log_scale ? Math.pow(10, layerRange[0]) : layerRange[0];
         const scale_max = log_scale ? Math.pow(10, layerRange[1]) : layerRange[1];
 
@@ -59,7 +60,6 @@ export default function Legend (props: LegendProps) {
         // Colours are then independent of scaleband, and always on linear
         // (sequential) scales. Note that palette has to match one in map.tsx,
         // which is also reversed, so domain is [max, min].
-        console.log("-----layer_name: " + layer_name)
         var Color = d3.scaleSequential()
             .domain(layer_name === "bike_index" || layer_name === "natural" ? [layerRange[0], layerRange[1]] : [layerRange[1], layerRange[0]])
             .interpolator(d3.interpolateViridis);
