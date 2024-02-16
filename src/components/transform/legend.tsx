@@ -32,8 +32,7 @@ export default function Legend (props: LegendProps) {
             .duration(750);
 
         // scaleband controls the ticks, which can be on linear or log scales:
-        // const log_scale = layer_name == "school_dist" || layer_name == "intervals";
-        const log_scale = layer_name == "intervals";
+        const log_scale = layer_name == "school_dist" || layer_name == "intervals";
         const scale_min = log_scale ? Math.pow(10, layerRange[0]) : layerRange[0];
         const scale_max = log_scale ? Math.pow(10, layerRange[1]) : layerRange[1];
 
