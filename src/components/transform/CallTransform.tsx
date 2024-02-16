@@ -2,7 +2,7 @@ import * as wasm_js from '@/../pkg/uamutations.js';
 
 import { trimRange } from '@/components/utils/trimRange';
 
-const nentries = Number(process.env.NEXT_PUBLIC_NUM_TRANSFORM_SAMPLES) || 1000;
+const nentries = Number(process.env.NEXT_PUBLIC_NUM_TRANSFORM_SAMPLES) || 10000;
 
 // Function used to extract size of JSON object returned from WASM calls. this
 // is always a simple length = first of the two options, and is used just to
@@ -30,8 +30,6 @@ export async function transformDataFunction(data1: number | null, data2: number 
                 const data2js = JSON.stringify(data2);
                 const resultJson = wasm_js.uamutate(data1js, data2js, varname, nentries);
                 const resultObj = JSON.parse(resultJson);
-
-                // const numItems = JSONObjectSize(resultObj);
 
                 type Row = number[];
 
