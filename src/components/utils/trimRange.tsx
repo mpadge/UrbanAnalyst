@@ -29,6 +29,35 @@ export function trimRange(dat: number[]): number[] {
     return dat;
 }
 
+function calculateMean(arr: number[]): number {
+    return arr.reduce((acc, val) => acc + val,  0) / arr.length;
+}
+
+function calculateStandardDeviation(arr: number[], usePopulation = false): number {
+    const mean = calculateMean(arr);
+    return Math.sqrt(
+        arr
+        .reduce((acc: number[], val) => acc.concat((val - mean) **  2), [])
+        .reduce((acc: number, val) => acc + val,  0) /
+            (arr.length - (usePopulation ?  0 :  1))
+    );
+}
+
+
+export function trimRangeSDs(dat: number[], sdRange = 1.96): number[] {
+
+    const mn = calculateMean(dat);
+    const sd = calculateStandardDeviation(dat);
+    const lowerLimit = mn - sdRange * sd;
+    const upperLimit = mn + sdRange * sd;
+
+    return dat.map(value => {
+        if (value < lowerLimit) return lowerLimit;
+        if (value > upperLimit) return upperLimit;
+        return value;
+    });
+}
+
 export function getRangeLimits(geoJSONcontent: any, varname: string) {
     let min = Infinity;
     let max = -Infinity;
