@@ -1,11 +1,17 @@
 "use client"
 
 import { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Control from '@/components/compare/control';
 import Buttons from '@/components/buttons3';
 import BarChart from '@/components/compare/statsBarChart';
+import Tour from '@/components/compare/tour/tour';
+import useWindowSize from '@/components/window-size';
+
+import { getTourConfig } from '@/components/compare/tour/tourConfig';
+
 import styles from '@/styles/Home.module.css'
+import tourStyles from '@/styles/tour.module.css';
 
 import { CITY_DATA } from '@/data/citydata';
 
@@ -51,6 +57,40 @@ export default function Home() {
         setMeanVals(!meanVals);
     }
 
+    // ----- TOUR start-----
+    const [width, setWidth] = useState(0);
+    const [height, setHeight] = useState(0);
+    const size = useWindowSize();
+    useEffect(() => {
+        const w = size?.width || 0;
+        setWidth(w);
+        const h = size?.height || 0;
+        setHeight(h);
+    }, [size])
+    const tourConfig = getTourConfig(width, height);
+
+    const accentColor = "#5cb7b7";
+    const [isTourOpen, setTourOpen] = useState(false);
+
+    const handleTourOpen = () => {
+        setTourOpen(true);
+    };
+
+    // Use sessionStorage to only show tour once per session.
+    const closeTour = () => {
+        setTourOpen(false);
+        if (typeof window != "undefined") {
+            sessionStorage.setItem("uacomparetour", "done");
+        }
+    };
+
+    useEffect(() => {
+        if(!sessionStorage.getItem('uacomparetour')) {
+            setTourOpen(true)
+        }
+    }, [])
+    // ----- TOUR end-----
+
     return (
         <>
         <main className={styles.main}>
@@ -80,9 +120,20 @@ export default function Home() {
                 handleMeanChange = {handleMeanChange}
                 handleSortChange = {handleSortChange}
                 handleExplainChange = {handleExplainChange}
+                handleTourOpen = {handleTourOpen}
             />
             <Buttons buttons={buttonProps} />
         </main>
+        <Tour
+            onRequestClose={closeTour}
+            disableInteraction={false}
+            steps={tourConfig}
+            isOpen={isTourOpen}
+            maskClassName={tourStyles.tourmask}
+            className={tourStyles.tourhelper}
+            rounded={5}
+            accentColor={accentColor}
+        />
         </>
     )
 }

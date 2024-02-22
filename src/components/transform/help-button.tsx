@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import styles from '@/styles/controls.module.css';
 import { ExplainButtonProps } from "@/data/interfaces";
+import Tour from '@/components/transform/tour/tour';
+import { getTourConfig } from '@/components/transform/tour/tourConfig';
 import tourStyles from '@/styles/tour.module.css';
 
 interface HelpButtonProps {
