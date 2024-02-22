@@ -87,7 +87,7 @@ export default function TransformPage() {
     const tourConfig = getTourConfig(width, height);
 
     const accentColor = "#5cb7b7";
-    const [isTourOpen, setTourOpen] = useState(false);
+    const [isTourOpen, setTourOpen] = useState(true);
 
     const handleTourOpen = () => {
         setTourOpen(true);
@@ -148,6 +148,7 @@ export default function TransformPage() {
             handleCalculateChange={handleCalculateChange}
             handleVarnamesChange={handleVarnamesChange}
             handleOutputLayerChange={handleOutputLayerChange}
+            handleTourOpen = {handleTourOpen}
         />
         <Legend
             layerMin={layerMin}

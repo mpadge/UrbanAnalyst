@@ -14,6 +14,7 @@ import OpacitySlider from '@/components/map/slider';
 import LayersButton from '@/components/transform/layers-button';
 import CalculateButton from '@/components/transform/calculate-button';
 import OutputLayers from '@/components/transform/outputLayers';
+import HelpButton from '@/components/transform/help-button';
 
 import { ViewState, CityDataProps, CalculateButtonProps } from "@/data/interfaces";
 
@@ -37,6 +38,7 @@ interface TransformControlProps {
     handleCalculateChange: (calculate: boolean) => void
     handleVarnamesChange: (varnames: string[]) => void
     handleOutputLayerChange: (outputLayer: string) => void
+    handleTourOpen: (isTourOpen: boolean) => void
 }
 
 
@@ -174,6 +176,10 @@ export default function Control (props: TransformControlProps) {
                 <OutputLayers
                     outputLayer = {props.outputLayer}
                     handleOutputLayerChange={props.handleOutputLayerChange}
+                />
+
+                <HelpButton
+                    handleTourOpen = {props.handleTourOpen}
                 />
 
            </div>
