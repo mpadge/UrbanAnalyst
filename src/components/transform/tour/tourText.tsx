@@ -54,8 +54,8 @@ export function controlBoxText3 () {
 
 export function legendText(wide = true) {
     const txt = wide ?
-        `Each layer has a legend here, for which yellow colors are generally better, and blue colors worse.` :
-        `Each layer has a legend in the lower-left corner, for which more yellow colors are generally better.`;
+        `Each transformation layer has a legend here, for which yellow colors are generally better, and blue colors worse.` :
+        `Each transformation layer has a legend in the lower-left corner, for which more yellow colors are generally better.`;
 
     return (
         <div>
