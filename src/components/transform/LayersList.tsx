@@ -1,13 +1,21 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 
-import { LayersListProps } from "@/data/interfaces";
+import ResetButton from '@/components/transform/reset-button';
 import styles from '@/styles/controls.module.css';
 
 interface OptionType {
     value: string;
     label: string;
 }
+
+interface LayersListProps {
+    layer: string,
+    varnames: string[],
+    handleVarnamesChange: (varnames: string[]) => void
+    setInitialSetDefaultValues: (initialSetDefaultValues: boolean) => void
+}
+
 
 export default function LayersList(props: LayersListProps) {
 
@@ -54,6 +62,11 @@ export default function LayersList(props: LayersListProps) {
         });
     };
 
+    const handleReset = () => {
+        props.setInitialSetDefaultValues(true);
+        setSelectedOptions(props.varnames);
+    };
+
     return (
         <div>
             {reducedOptions.map((option) => (
@@ -69,6 +82,9 @@ export default function LayersList(props: LayersListProps) {
                     </label>
                 </div>
             ))}
+            <ResetButton
+                handleReset = {handleReset}
+            />
         </div>
     );
 }
