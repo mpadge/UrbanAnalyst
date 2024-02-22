@@ -1,6 +1,6 @@
 import * as wasm_js from '@/../pkg/uamutations.js';
 
-import { trimRange } from '@/components/utils/trimRange';
+import { trimRangeSDs } from '@/components/utils/trimRange';
 
 const nentries = Number(process.env.NEXT_PUBLIC_NUM_TRANSFORM_SAMPLES) || 10000;
 
@@ -50,16 +50,7 @@ export async function transformDataFunction(data1: number | null, data2: number 
                     default:
                         throw new Error(`Invalid output layer: `);
                 }
-                // Same as in wasm/src/lib.rs, taken from
-                // uaengine/R/ua-export.R:
-                const logVars = ["parking", "school_dist", "intervals"];
-                if ((outputLayer === 'original' || outputLayer === 'transformed') &&
-                    logVars.includes(varnames[0])) {
-                    outputCol = outputCol.map((value: number) => Math.log10(value));
-                }
-                if (outputLayer !== 'original') {
-                    outputCol = trimRange(outputCol);
-                }
+                outputCol = trimRangeSDs(outputCol);
                 setResult(outputCol);
             }
         })

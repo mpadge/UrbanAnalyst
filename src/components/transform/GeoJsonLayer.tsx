@@ -22,7 +22,7 @@ export async function getGeoJsonLayer(geoJSONcontent: any, layerMin: number, lay
                     if (isNaN(layerval)) {
                         layerval = layerMin;
                     }
-                    if (!(varname === "bike_index" || varname === "natural")) {
+                    if (varname === "bike_index" || varname === "natural") {
                         // Invert the palette:
                         layerval = layerMin + (layerMax - layerval);
                     }

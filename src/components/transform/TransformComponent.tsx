@@ -7,6 +7,7 @@ import TransformMsgs from '@/components/transform/PageMessages';
 import { loadDataFunction } from '@/components/transform/LoadData';
 import { transformDataFunction } from '@/components/transform/CallTransform';
 import { getGeoJsonLayer } from '@/components/transform/GeoJsonLayer';
+import { getRangeLimits } from '@/components/utils/trimRange';
 
 interface TransformProps {
     idx: number
@@ -82,26 +83,11 @@ const TransformComponent = (props: TransformProps) => {
     const { handleLayerMinChange, handleLayerMaxChange } = props;
     useEffect(() => {
         if (result) {
-            var min: number;
-            var max: number;
-            if (props.outputLayer === "original") {
-                // Get data ranges from original CITY_DATA array:
-                min = props.citiesArray[props.idx].dataRanges[props.layer as string][0];
-                max = props.citiesArray[props.idx].dataRanges[props.layer as string][1];
-                // And then implement transformations from wasm/src/transform:
-                if (props.layer === "bike_index" || props.layer === "nature_index") {
-                    const tmp = 1.0 - min;
-                    min = 1.0 - max;
-                    max = tmp;
-                }
-            } else {
-                min = Math.min(...result.filter(value => value !== 0));
-                max = Math.max(...result);
-            }
-            handleLayerMinChange(min);
-            handleLayerMaxChange(max);
+            const rangeLimits = getRangeLimits(geoJSONcontent, props.layer);
+            handleLayerMinChange(rangeLimits[0]);
+            handleLayerMaxChange(rangeLimits[1]);
         }
-    }, [result, props.citiesArray, props.idx, props.layer, props.outputLayer, handleLayerMinChange, handleLayerMaxChange]);
+    }, [result, props.citiesArray, props.idx, props.layer, props.outputLayer, geoJSONcontent, handleLayerMinChange, handleLayerMaxChange]);
 
     useEffect(() => {
         getGeoJsonLayer(geoJSONcontent, props.layerMin, props.layerMax, props.layer, props.alpha, setGeoJsonLayer);

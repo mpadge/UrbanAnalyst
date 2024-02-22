@@ -48,7 +48,8 @@ pub struct OrderingIndex {
 /// let values1 = DMatrix::from_vec(4, 1, values1);
 /// let values2 = vec![7.0, 9.0, 3.0, 2.0];
 /// let values2 = DMatrix::from_vec(4, 1, values2);
-/// let result = calculate_dists(&values1, &values2);
+/// let log_scale = false;
+/// let result = calculate_dists(&values1, &values2, &log_scale);
 /// // The first column of `result` contains the minimal absolute differences. Paired sequences are
 /// // (1, 2), (2, 3), (4, 7), (5, 9), with differences of (1, 1, 3, 4).
 /// let res_col0 = result.column(0).iter().cloned().collect::<Vec<f64>>();
@@ -59,7 +60,11 @@ pub struct OrderingIndex {
 /// let res1 = vec![1.0, 0.5, 0.75, 0.8];
 /// assert_eq!(res_col1, res1);
 /// ```
-pub fn calculate_dists(values1: &DMatrix<f64>, values2: &DMatrix<f64>) -> DMatrix<f64> {
+pub fn calculate_dists(
+    values1: &DMatrix<f64>,
+    values2: &DMatrix<f64>,
+    log_scale: &bool,
+) -> DMatrix<f64> {
     assert!(!values1.is_empty(), "values1 must not be empty");
     assert_eq!(
         values1.shape(),
@@ -73,7 +78,7 @@ pub fn calculate_dists(values1: &DMatrix<f64>, values2: &DMatrix<f64>) -> DMatri
     let sorting_order = get_ordering_index(&values1_ref_var.to_vec(), false, false);
 
     // Order values1_ref_var by sorting_order.index_sort:
-    let values1_sorted: Vec<f64> = sorting_order
+    let mut values1_sorted: Vec<f64> = sorting_order
         .index_sort
         .iter()
         .map(|&i| values1_ref_var[i])
@@ -82,16 +87,28 @@ pub fn calculate_dists(values1: &DMatrix<f64>, values2: &DMatrix<f64>) -> DMatri
     let mut values2_sorted = values2_ref_var.clone();
     values2_sorted.sort_by(|a, b| a.partial_cmp(b).unwrap());
 
+    if log_scale == &true {
+        values1_sorted.iter_mut().for_each(|x| *x = 10f64.powf(*x));
+        values2_sorted.iter_mut().for_each(|x| *x = 10f64.powf(*x));
+    }
+
     // Calculate conseqcutive differences between the two vectors:
     let differences_abs: Vec<f64> = values1_sorted
         .iter()
         .zip(values2_sorted.iter())
         .map(|(&a, &b)| b - a)
         .collect();
+    let eps = 1.0e-10;
     let differences_rel: Vec<f64> = values1_sorted
         .iter()
         .zip(values2_sorted.iter())
-        .map(|(&a, &b)| (b - a) / a)
+        .map(|(&a, &b)| {
+            if a <= eps || b <= eps {
+                0.0
+            } else {
+                (b - a) / a
+            }
+        })
         .collect();
     // And re-order those differences according to sorting_order.index_reorder, so they align with
     // the original order of `values1`:
@@ -196,7 +213,7 @@ mod tests {
         let values2 = vec![7.0, 9.0, 3.0, 2.0];
         let values1 = DMatrix::from_vec(4, 1, values1);
         let values2 = DMatrix::from_vec(4, 1, values2);
-        let result = calculate_dists(&values1, &values2);
+        let result = calculate_dists(&values1, &values2, &false);
         assert_eq!(result.ncols(), 2, "Result should have 2 columns");
         // First col has absolute differences:
         let res_col0 = result.column(0).iter().cloned().collect::<Vec<f64>>();

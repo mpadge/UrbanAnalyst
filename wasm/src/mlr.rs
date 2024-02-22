@@ -1,5 +1,7 @@
 use nalgebra::{DMatrix, DVector, SVD};
 
+use crate::utils;
+
 /// Calculates beta coefficients (slopes) of a multiple linear regression of dimensions [1.., _] of
 /// input array against first dimension [0, _].
 ///
@@ -85,6 +87,8 @@ pub fn mlr_beta(data: &DMatrix<f64>) -> Vec<f64> {
 ///     "Only the first row of v1 should be different"
 /// );
 pub fn adj_for_beta(values1: &mut DMatrix<f64>, values2: &DMatrix<f64>) {
+    let (mean1, sd1) = utils::mean_sd_dmat(values1);
+
     // Calculate MLR regression coefficients between first variables and all others:
     let mut beta1 = mlr_beta(values1);
     beta1[0] = 0.0;
@@ -106,6 +110,10 @@ pub fn adj_for_beta(values1: &mut DMatrix<f64>, values2: &DMatrix<f64>) {
     let mean_sum2 = sum_sum2 / sum2.len() as f64;
     let adjusted_sum2: DVector<f64> = sum2.map(|x| x + mean_sum1 - mean_sum2);
     let first_column = values1.column(0).clone_owned() + adjusted_sum2 - sum1.clone();
+
+    // Then finally adjust values to have same (mean, sd) as original values:
+    let (mean2, sd2) = utils::mean_sd_column(&first_column);
+    let first_column = first_column.map(|x| ((x - mean2) / sd2) * sd1 + mean1);
 
     values1.set_column(0, &first_column);
 }
@@ -168,5 +176,12 @@ mod tests {
             v1_orig.column(1),
             "Only the first column of v1 should be different"
         );
+    }
+
+    #[test]
+    #[should_panic(expected = "values1 must not be empty")]
+    fn test_mlr_beta_empty_data() {
+        let empty_data = DMatrix::<f64>::zeros(0, 0);
+        mlr_beta(&empty_data);
     }
 }

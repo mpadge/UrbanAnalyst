@@ -58,21 +58,32 @@ export function trimRangeSDs(dat: number[], sdRange = 1.96): number[] {
     });
 }
 
-export function getRangeLimits(geoJSONcontent: any, varname: string) {
-    let min = Infinity;
-    let max = -Infinity;
-    if (geoJSONcontent) {
+export function getRangeSDs(dat: number[], sdRange = 1.96): number[] {
+
+    const mn = calculateMean(dat);
+    const sd = calculateStandardDeviation(dat);
+    const lowerLimit = mn - sdRange * sd;
+    const upperLimit = mn + sdRange * sd;
+
+    return [lowerLimit, upperLimit];
+}
+
+export function getRangeLimits(geoJSONcontent: any, varname: string, sdRange = 1.96): [number, number] {
+    const values: number[] = [];
+
+    if (geoJSONcontent && geoJSONcontent.features) {
         geoJSONcontent.features.forEach((feature: any) => {
             const value = feature.properties?.[varname];
             if (value !== undefined && !isNaN(value)) {
-                if (value < min) {
-                    min = value;
-                } else if (value > max) {
-                    max = value;
-                }
+                values.push(value);
             }
         });
     }
 
-    return [min, max];
+    const mean = calculateMean(values);
+    const sd = calculateStandardDeviation(values);
+
+    const lowerLimit = mean - sdRange * sd;
+    const upperLimit = mean + sdRange * sd;
+    return [lowerLimit, upperLimit];
 }

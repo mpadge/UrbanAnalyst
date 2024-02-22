@@ -84,12 +84,6 @@ pub fn readfile(
         }
     }
 
-    if !std_index.is_empty() {
-        for i in &std_index {
-            standardise_array(&mut values, *i);
-        }
-    }
-
     for (i, exists) in var_exists.iter().enumerate() {
         assert!(
             *exists,
@@ -104,7 +98,6 @@ pub fn readfile(
 
     (values, city_group)
 }
-
 
 /// Standarise one column of an array to z-scores. Column in standardised in-place.
 ///
@@ -151,10 +144,9 @@ pub fn write_file(sums: &DMatrix<f64>, filename: &str) {
     writeln!(file, "original, transformed, absolute, relative").expect("Unable to write to file");
 
     for i in 0..sums.nrows() {
-        for j in 0..sums.ncols() {
-            write!(file, "{} ", sums[(i, j)]).expect("Unable to write to file");
-        }
-        writeln!(file).expect("Unable to write to file");
+        let row: Vec<f64> = sums.row(i).iter().cloned().collect();
+        let row_str: Vec<String> = row.iter().map(|&x| format!("{}", x)).collect();
+        writeln!(file, "{}", row_str.join(",")).expect("Unable to write to file");
     }
 }
 
@@ -277,10 +269,10 @@ mod tests {
 
         let expected_contents = "\
             original, transformed, absolute, relative\n\
-            1 \n\
-            4.5 \n\
-            3 \n\
-            2 \n";
+            1\n\
+            4.5\n\
+            3\n\
+            2\n";
         assert_eq!(contents, expected_contents);
     }
 }

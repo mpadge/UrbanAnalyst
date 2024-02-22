@@ -85,6 +85,9 @@ function getStringFromWasm0(ptr, len) {
 * This is the main function, which reads data from two JSON files, calculates absolute and
 * relative differences between the two sets of data, and writes the results to an output file.
 *
+* Some variables have to be log-transformed prior to any analytic routines. The names of these
+* are defined in utils::log_transform.
+*
 * # Arguments
 *
 * * `fname1` - Path to local JSON file with data which are to be mutated.

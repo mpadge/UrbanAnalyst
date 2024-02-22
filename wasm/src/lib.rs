@@ -9,9 +9,13 @@ pub mod calculate_dists;
 pub mod mlr;
 pub mod read_write_file;
 pub mod transform;
+pub mod utils;
 
 /// This is the main function, which reads data from two JSON files, calculates absolute and
 /// relative differences between the two sets of data, and writes the results to an output file.
+///
+/// Some variables have to be log-transformed prior to any analytic routines. The names of these
+/// are defined in utils::log_transform.
 ///
 /// # Arguments
 ///
@@ -49,10 +53,15 @@ pub fn uamutate(
     nentries: usize,
 ) -> String {
     let varnames: Vec<&str> = varname.split(',').collect();
+    let varnames_str: Vec<String> = varname.split(',').map(|s| s.to_string()).collect();
 
     // Read contents of JSON data:
     let (mut values1, groups1) = read_write_file::readfile(json_data1, &varnames, nentries);
     let (mut values2, _groups2) = read_write_file::readfile(json_data2, &varnames, nentries);
+
+    let log_scale = utils::log_transform(&mut values1, &varnames_str);
+    let _log_scale = utils::log_transform(&mut values2, &varnames_str);
+
     // Adjust `values1` by removing its dependence on varextra, and replacing with the dependnece
     // of values2 on same variables (but only if `varextra` are specified):
     if values1.nrows() > 1 {
@@ -60,15 +69,13 @@ pub fn uamutate(
     }
 
     // Transform values for variables specified in 'lookup_table' of 'transform.rs':
-    values1 = transform::transform_values(&values1, &varnames[0]);
-    values2 = transform::transform_values(&values2, &varnames[0]);
+    transform::transform_invert_values(&mut values1, &varnames[0]);
+    transform::transform_invert_values(&mut values2, &varnames[0]);
 
     // Then calculate successive differences between the two sets of values. These are the
     // distances by which `values1` need to be moved in the first dimension only to match the
     // closest equivalent values of `values2`.
-    let dists = calculate_dists::calculate_dists(&values1, &values2);
-    // These variables are specified in uaengine/R/ua-export.R:
-    let log_scale = varnames[0] == "parking" || varnames[0] == "school_dist" || varnames[0] == "intervals";
+    let dists = calculate_dists::calculate_dists(&values1, &values2, &log_scale);
     let result = aggregate_to_groups(&values1, &dists, &groups1, &log_scale);
 
     let result_array: Vec<Vec<f64>> = result.row_iter().map(|row| row.iter().cloned().collect()).collect();
@@ -112,9 +119,14 @@ fn aggregate_to_groups(
         "groups must have same length as values1"
     );
 
-    // Aggregate original values first:
-    let values1_first_col: Vec<f64> = values1.column(0).iter().cloned().collect();
-    let values1_aggregated = aggregate_to_groups_single_col(&values1_first_col, groups, log_scale);
+    // Aggregate original values first. These are already log-scaled, so set flag to `false`, and
+    // transform back after aggregation:
+    let mut values1_first_col: Vec<f64> = values1.column(0).iter().cloned().collect();
+    let mut values1_aggregated = aggregate_to_groups_single_col(&values1_first_col, groups, &false);
+    if *log_scale {
+        values1_aggregated = values1_aggregated.iter().map(|&x| 10f64.powf(x)).collect();
+        values1_first_col = values1_first_col.iter().map(|&x| 10f64.powf(x)).collect();
+    }
 
     // Then generate absolute transformed value from original value plus absolute distance:
     let dists_abs: Vec<f64> = dists.column(0).iter().cloned().collect();
@@ -123,7 +135,9 @@ fn aggregate_to_groups(
         .zip(dists_abs.iter())
         .map(|(&a, &b)| a + b)
         .collect();
-    // And aggregate those into groups:
+    // And aggregate those into groups. The `log_scale` flag ensures that variables which should be
+    // log-scaled are first aggregated in log form, then the aggregate values transformed back to
+    // 10^x.
     let values1_transformed_aggregated =
         aggregate_to_groups_single_col(&values1_transformed, groups, log_scale);
     assert!(
@@ -131,13 +145,17 @@ fn aggregate_to_groups(
         "values1_aggregated and values1_transformed_aggregated have different lengths"
     );
 
-    let dists_abs_aggregated = aggregate_to_groups_single_col(&dists_abs, groups, log_scale);
+    // Even log-scaled variables at that point have been aggregated in log-space, so distributions
+    // are far more normal than those of underlying values, and aggregation here is direct. Plus
+    // for `dists_abs` and `dists_rel`, values can also be < 0, so log-scaling can't be used in
+    // this aggregation anyway.
+    let dists_abs_aggregated = aggregate_to_groups_single_col(&dists_abs, groups, &false);
     assert!(
         dists_abs_aggregated.len() == values1_aggregated.len(),
         "values1_aggregated and dists_abs_aggregated have different lengths"
     );
     let dists_rel: Vec<f64> = dists.column(1).iter().cloned().collect();
-    let dists_rel_aggregated = aggregate_to_groups_single_col(&dists_rel, groups, log_scale);
+    let dists_rel_aggregated = aggregate_to_groups_single_col(&dists_rel, groups, &false);
     assert!(
         dists_rel_aggregated.len() == values1_aggregated.len(),
         "values1_aggregated and dists_rel_aggregated have different lengths"
@@ -176,11 +194,11 @@ fn aggregate_to_groups_single_col(dists: &[f64], groups: &[usize], log_scale: &b
 
     for (i, &group) in groups_out.iter().enumerate() {
         counts[group] += 1;
-        if *log_scale {
-            sums[group] += dists[i].log10();
+        sums[group] += if *log_scale {
+            dists[i].log10()
         } else {
-            sums[group] += dists[i];
-        }
+            dists[i]
+        };
     }
 
     // Then convert sums to mean values by dividing by counts:
@@ -204,6 +222,7 @@ fn aggregate_to_groups_single_col(dists: &[f64], groups: &[usize], log_scale: &b
 #[cfg(test)]
 mod tests {
     use super::*;
+    use nalgebra::DMatrix;
 
     #[test]
     fn test_uamutate() {
@@ -228,5 +247,35 @@ mod tests {
         let sums = uamutate(reader1, reader2, &varsall, nentries);
 
         assert!(!sums.is_empty());
+    }
+
+    #[test]
+    #[should_panic(expected = "dists must have two columns")]
+    fn test_aggregate_to_groups_invalid_dists_columns() {
+        let values1 = DMatrix::from_vec(1, 1, vec![1.0]);
+        let dists = DMatrix::from_vec(1, 1, vec![1.0]);
+        let groups = vec![1];
+        let log_scale = false;
+        aggregate_to_groups(&values1, &dists, &groups, &log_scale);
+    }
+
+    #[test]
+    #[should_panic(expected = "dists must have same number of rows as values1")]
+    fn test_aggregate_to_groups_mismatched_rows() {
+        let values1 = DMatrix::from_vec(1, 1, vec![1.0]);
+        let dists = DMatrix::from_vec(2, 2, vec![1.0, 2.0, 3.0, 4.0]);
+        let groups = vec![1, 2];
+        let log_scale = false;
+        aggregate_to_groups(&values1, &dists, &groups, &log_scale);
+    }
+
+    #[test]
+    #[should_panic(expected = "groups must have same length as values1")]
+    fn test_aggregate_to_groups_mismatched_groups_length() {
+        let values1 = DMatrix::from_vec(1, 1, vec![1.0]);
+        let dists = DMatrix::from_vec(1, 2, vec![1.0, 2.0]);
+        let groups = vec![1, 2];
+        let log_scale = false;
+        aggregate_to_groups(&values1, &dists, &groups, &log_scale);
     }
 }
