@@ -120,8 +120,10 @@ export default function Home() {
                 handleMeanChange = {handleMeanChange}
                 handleSortChange = {handleSortChange}
                 handleExplainChange = {handleExplainChange}
+                handleTourOpen = {handleTourOpen}
             />
             <Buttons buttons={buttonProps} />
+        </main>
         <Tour
             onRequestClose={closeTour}
             disableInteraction={false}
@@ -132,7 +134,6 @@ export default function Home() {
             rounded={5}
             accentColor={accentColor}
         />
-        </main>
         </>
     )
 }

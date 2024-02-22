@@ -11,6 +11,7 @@ import SortOrderList from '@/components/compare/sortOrderList';
 import ExplainButton from '@/components/compare/explain-button';
 import ExplainLayer from '@/components/compare/explain-layer';
 import MeanAvgButtons from '@/components/compare/mean-avg';
+import HelpButton from '@/components/map/help-button';
 
 import { CityDataProps } from "@/data/interfaces";
 
@@ -32,6 +33,7 @@ interface CompareControlProps {
     handleMeanChange: (meanVals: boolean) => void,
     handleSortChange: (sortOpt: string) => void,
     handleExplainChange: (explain: any) => void
+    handleTourOpen: (isTourOpen: boolean) => void
 }
 
 
@@ -99,6 +101,9 @@ export default function Control (props: CompareControlProps) {
             <ExplainButton
                 explain = {props.explain}
                 handleExplainChange = {props.handleExplainChange} />
+            <HelpButton
+                handleTourOpen = {props.handleTourOpen}
+            />
             </div>
 
             <button
