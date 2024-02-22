@@ -41,6 +41,7 @@ export function controlBoxText3 () {
                 The <q>Output Layer</q> control allows transformations to be
                 viewed in terms of:
                 <br />
+                <br />
                 1. <q>Original</q> - The original layer;<br />
                 2. <q>Transformed</q> - Transformed values of that layer;<br />
                 3. <q>Absolute</q> - The absolute value by which each area within
