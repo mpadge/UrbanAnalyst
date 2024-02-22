@@ -1,7 +1,7 @@
 "use client"
 
 import useWindowSize from '@/components/window-size';
-import { posControlsX, posControlsY, maxWidth } from "@/components/transform/tour/tourPositionControls";
+import { posControlsX, posControlsY, maxWidth } from "@/components/tourPositionControls";
 import { controlBoxText1, controlBoxText3, legendText, navText } from "@/components/transform/tour/tourText";
 
 const tourPanelBackgroundColour = '#9cf7f7';
