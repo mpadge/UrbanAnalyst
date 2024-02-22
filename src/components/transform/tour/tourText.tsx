@@ -21,18 +21,11 @@ export function controlBoxText1 (wide = true) {
                 transform the bicycle index in a way that also transforms its
                 relationship with social deprivation to reflect that
                 relationship with the target city.
-                <br />
-                <br />
-                By default, <q>Extra Layers</q> pre-selects all additional
-                layers which have better relationships with the chosen variable
-                or <q>layer</q> in the target city. Selecting any <q>Extra
-                Layers</q> which are not initially selected will generally lead
-                to worse outcomes.
             </div>
         )
 }
 
-export function controlBoxText3 () {
+export function controlBoxText4 () {
 
     return (
             <div>

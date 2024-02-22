@@ -2,7 +2,7 @@
 
 import useWindowSize from '@/components/window-size';
 import { posControlsX, posControlsY, maxWidth } from "@/components/tourPositionControls";
-import { controlBoxText1, controlBoxText3, legendText, navText } from "@/components/transform/tour/tourText";
+import { controlBoxText1, controlBoxText4, legendText, navText } from "@/components/transform/tour/tourText";
 
 const tourPanelBackgroundColour = '#9cf7f7';
 const tourPanelBorderRadiusWide = '20px';
@@ -86,6 +86,30 @@ export const getTourConfig = (width: number, height: number) => [
             <div>
                 <h2>Controls</h2>
                 <br />
+                By default, <q>Extra Layers</q> pre-selects all additional
+                layers which have better relationships with the chosen variable
+                or <q>layer</q> in the target city. Selecting any <q>Extra
+                Layers</q> which are not initially selected will generally lead
+                to worse outcomes. The <q>Extra Layers</q> dialog also includes
+                a <q>Reset</q> button which can be used to reset layers to
+                initial, default values for the chosen combination of cities and
+                focal layers.
+            </div>
+        ),
+        style: {
+            left: posControlsX(width, "controls"),
+            top: posControlsY(width, height, "controls"),
+            backgroundColor: tourPanelBackgroundColour,
+            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
+            maxWidth: maxWidth(width, true),
+        }
+    },
+    {
+        selector: '[data-tut="reactour__transform_controls3"]',
+        content: (
+            <div>
+                <h2>Controls</h2>
+                <br />
                 The <q>Calculate</q> button will calculate the selected
                 transformation. This button should be pushed each time any of
                 the input cities or layers are changed.
@@ -100,8 +124,8 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__transform_controls3"]',
-        content: () => controlBoxText3(),
+        selector: '[data-tut="reactour__transform_controls4"]',
+        content: () => controlBoxText4(),
         style: {
             left: posControlsX(width, "controls"),
             top: posControlsY(width, height, "controls"),
