@@ -2,7 +2,7 @@
 
 import useWindowSize from '@/components/window-size';
 import { posControlsX, posControlsY, maxWidth } from "@/components/transform/tour/tourPositionControls";
-import { controlBoxText, legendText, navText } from "@/components/transform/tour/tourText";
+import { controlBoxText1, controlBoxText3, legendText, navText } from "@/components/transform/tour/tourText";
 
 const tourPanelBackgroundColour = '#9cf7f7';
 const tourPanelBorderRadiusWide = '20px';
@@ -10,7 +10,7 @@ const tourPanelBorderRadiusNarrow = '10px';
 
 export const getTourConfig = (width: number, height: number) => [
     {    
-        selector: '[data-tut="reactour__maps_welcome"]',
+        selector: '[data-tut="reactour__transform_welcome"]',
         content: () => (
             <div>
                 <h2>Urban Analyst</h2>
@@ -32,7 +32,7 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__maps_page"]',
+        selector: '[data-tut="reactour__transform_page1"]',
         content: (
             <div>
                 <h2>Transform</h2>
@@ -51,7 +51,7 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__maps_page"]',
+        selector: '[data-tut="reactour__transform_page2"]',
         content: (
             <div>
                 <h2>Transform</h2>
@@ -70,8 +70,38 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__maps_controls"]',
-        content: () => controlBoxText(width > 700),
+        selector: '[data-tut="reactour__transform_controls1"]',
+        content: () => controlBoxText1(width > 700),
+        style: {
+            left: posControlsX(width, "controls"),
+            top: posControlsY(width, height, "controls"),
+            backgroundColor: tourPanelBackgroundColour,
+            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
+            maxWidth: maxWidth(width, true),
+        }
+    },
+    {
+        selector: '[data-tut="reactour__transform_controls2"]',
+        content: (
+            <div>
+                <h2>Controls</h2>
+                <br />
+                The <q>Calculate</q> button will calculate the selected
+                transformation. This button should be pushed each time any of
+                the input cities or layers are changed.
+            </div>
+        ),
+        style: {
+            left: posControlsX(width, "controls"),
+            top: posControlsY(width, height, "controls"),
+            backgroundColor: tourPanelBackgroundColour,
+            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
+            maxWidth: maxWidth(width, true),
+        }
+    },
+    {
+        selector: '[data-tut="reactour__transform_controls3"]',
+        content: () => controlBoxText3(),
         style: {
             left: posControlsX(width, "controls"),
             top: posControlsY(width, height, "controls"),
@@ -81,7 +111,7 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {    
-        selector: '[data-tut="reactour__maps_legend"]',
+        selector: '[data-tut="reactour__transform_legend"]',
         content: () => legendText(width > 700),
         style: {
             width: maxWidth(width),
@@ -92,7 +122,7 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__maps_nav_buttons"]',
+        selector: '[data-tut="reactour__transform_nav_buttons"]',
         style: {
             backgroundColor: tourPanelBackgroundColour,
             borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
