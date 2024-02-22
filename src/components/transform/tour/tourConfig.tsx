@@ -1,8 +1,8 @@
 "use client"
 
 import useWindowSize from '@/components/window-size';
-import { posControlsX, posControlsY, maxWidth } from "@/components/map/tour/tourPositionControls";
-import { controlBoxText, legendText, navText } from "@/components/map/tour/tourText";
+import { posControlsX, posControlsY, maxWidth } from "@/components/transform/tour/tourPositionControls";
+import { controlBoxText, legendText, navText } from "@/components/transform/tour/tourText";
 
 const tourPanelBackgroundColour = '#9cf7f7';
 const tourPanelBorderRadiusWide = '20px';
@@ -35,18 +35,38 @@ export const getTourConfig = (width: number, height: number) => [
         selector: '[data-tut="reactour__maps_page"]',
         content: (
             <div>
-                <h2>Maps</h2>
+                <h2>Transform</h2>
                 <br />
-                This page shows interactive maps for a chosen city, and for
-                values of a chosen variable or <q>layer</q>. Low values (yellow
-                colors) are generally better than higher values (blue colors).
+                This page allows data for a chosen city to be <q>transformed</q>
+                to have the same distribution as equivalent data for a chosen
+                <q>target city</q>. These transformations quantify how much the
+                city would have to change to become more like the target city.
+                </div>
+        ),
+        style: {
+            backgroundColor: tourPanelBackgroundColour,
+            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
+            left: posControlsX(width, "nav"),
+            maxWidth: maxWidth(width, false),
+        }
+    },
+    {
+        selector: '[data-tut="reactour__maps_page"]',
+        content: (
+            <div>
+                <h2>Transform</h2>
+                <br />
+                Transformations are <i>minimal cost</i>, so the sum of all
+                transformations represents the minimal possible overall change
+                necessary for the city to be transformed to the state of the
+                target city.
             </div>
         ),
         style: {
             backgroundColor: tourPanelBackgroundColour,
             borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
             left: posControlsX(width, "nav"),
-            width: maxWidth(width),
+            maxWidth: maxWidth(width, false),
         }
     },
     {

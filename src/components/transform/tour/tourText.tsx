@@ -9,25 +9,26 @@ export function controlBoxText (wide = true) {
                 <h2>Controls</h2>
                 <br />
                 {line1}
-                &nbsp;The current layer is named at the top of the map.  Details
-                on each layer can be seen by clicking on the <q>Explain
-                layer</q> button.
+                &nbsp;Details on each layer can be seen by clicking on the
+                <q>Explain layer</q> button.
                 <br />
                 <br />
-                Layers can also be viewed in <q>Single</q> or <q>Paired</q>
-                mode. Paired mode displays the strength of relationship between
-                two chosen layers.  For example, selecting <q>Social</q> and
-                <q>bicycle index</q> will display how strongly social
-                disavantage is related to bicycle infrastrcuture. Details of
-                each selection can always be seen by clicking the <q>Explain
-                layer</q> button.
+                The "Extra Layers" button allows transformations to be applied
+                not only in terms of the chosen variable or <q>layer</q>, but
+                also in terms of relationships with other layers. For example,
+                transforming the <q>Bicycle index</q> layer while choosing
+                <q>Social index</q> from Extra Layers will transform the bicycle
+                index in a way that also transforms its relationship with social
+                deprivation to reflect that relationship with the target city.
                 <br />
                 <br />
-                Lower values are always better for single layers; interpreations
-                of lower vs. higher values for paired layers are always given in
-                the <q>Explain layer</q> text.
-                </div>
-    )
+                By default, <q>Extra Layers</q> pre-selects all additional
+                layers which have better relationships with the chosen variable
+                or <q>layer</q> in the target city. Selecting any <q>Extra
+                Layers</q> which are not initially selected will generally lead
+                to worse outcomes.
+            </div>
+        )
 }
 
 export function legendText(wide = true) {

@@ -10,7 +10,7 @@ import Tour from '@/components/transform/tour/tour';
 import useWindowSize from '@/components/window-size';
 
 import MapTransformDynamic from '@/components/transform/TransformPageDynamic';
-import { getTourConfig } from '@/components/map/tour/tourConfig';
+import { getTourConfig } from '@/components/transform/tour/tourConfig';
 import { CITY_DATA } from '@/data/citydata';
 import { ViewState } from "@/data/interfaces";
 
