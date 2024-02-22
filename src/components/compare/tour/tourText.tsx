@@ -1,5 +1,5 @@
 
-export function controlBoxText (wide = true) {
+export function controlBoxText1 (wide = true) {
     const line1 = wide ?
         `This is the "control center" to choose cities and data layers.` :
         `On the left side is the "control center" to choose cities and data layers.`;
@@ -26,6 +26,24 @@ export function controlBoxText (wide = true) {
                 Lower values are always better for single layers; interpreations
                 of lower vs. higher values for paired layers are always given in
                 the <q>Explain layer</q> text.
+                </div>
+    )
+}
+
+export function controlBoxText2 () {
+    return (
+            <div>
+                <h2>Controls</h2>
+                <br />
+                There is also an option to toggle between:
+                <br />
+                <br />
+                1. <q>Average</q>, to view average values for each city; or<br />
+                2. <q>Variation</q>, to view the extent by which those average
+                values vary within each city (measured as the standard deviation).
+                <br />
+                <br />
+                Viewing variations is only possible for <q>Single</q> layers.
                 </div>
     )
 }

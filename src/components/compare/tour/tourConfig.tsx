@@ -2,7 +2,7 @@
 
 import useWindowSize from '@/components/window-size';
 import { posControlsX, posControlsY, maxWidth } from "@/components/tourPositionControls";
-import { controlBoxText, navText } from "@/components/compare/tour/tourText";
+import { controlBoxText1, controlBoxText2, navText } from "@/components/compare/tour/tourText";
 
 const tourPanelBackgroundColour = '#9cf7f7';
 const tourPanelBorderRadiusWide = '20px';
@@ -51,8 +51,19 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__compare_controls"]',
-        content: () => controlBoxText(width > 700),
+        selector: '[data-tut="reactour__compare_controls1"]',
+        content: () => controlBoxText1(width > 700),
+        style: {
+            left: posControlsX(width, "controls"),
+            top: posControlsY(width, height, "controls"),
+            backgroundColor: tourPanelBackgroundColour,
+            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
+            maxWidth: maxWidth(width, true),
+        }
+    },
+    {
+        selector: '[data-tut="reactour__compare_controls2"]',
+        content: () => controlBoxText2(),
         style: {
             left: posControlsX(width, "controls"),
             top: posControlsY(width, height, "controls"),
