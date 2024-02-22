@@ -70,7 +70,7 @@ export default function Home() {
     const tourConfig = getTourConfig(width, height);
 
     const accentColor = "#5cb7b7";
-    const [isTourOpen, setTourOpen] = useState(true);
+    const [isTourOpen, setTourOpen] = useState(false);
 
     const handleTourOpen = () => {
         setTourOpen(true);
