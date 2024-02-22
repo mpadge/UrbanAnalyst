@@ -1,16 +1,20 @@
 "use client"
 
-import { useState} from 'react';
+import { useEffect, useState} from 'react';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 
 import Control from '@/components/transform/control';
 import Legend from '@/components/transform/legend';
 import Buttons from '@/components/buttons3';
+import Tour from '@/components/transform/tour/tour';
+import useWindowSize from '@/components/window-size';
 
-// import UTAMap from '@/components/map/map';
 import MapTransformDynamic from '@/components/transform/TransformPageDynamic';
+import { getTourConfig } from '@/components/map/tour/tourConfig';
 import { CITY_DATA } from '@/data/citydata';
 import { ViewState } from "@/data/interfaces";
+
+import tourStyles from '@/styles/tour.module.css';
 
 const buttonProps = {
     first: "home",
@@ -70,6 +74,40 @@ export default function TransformPage() {
         setOutputLayer(outputLayer);
     }
 
+    // ----- TOUR start-----
+    const [width, setWidth] = useState(0);
+    const [height, setHeight] = useState(0);
+    const size = useWindowSize();
+    useEffect(() => {
+        const w = size?.width || 0;
+        setWidth(w);
+        const h = size?.height || 0;
+        setHeight(h);
+    }, [size])
+    const tourConfig = getTourConfig(width, height);
+
+    const accentColor = "#5cb7b7";
+    const [isTourOpen, setTourOpen] = useState(false);
+
+    const handleTourOpen = () => {
+        setTourOpen(true);
+    };
+
+    // Use sessionStorage to only show tour once per session.
+    const closeTour = () => {
+        setTourOpen(false);
+        if (typeof window != "undefined") {
+            sessionStorage.setItem("uatransformtour", "done");
+        }
+    };
+
+    useEffect(() => {
+        if(!sessionStorage.getItem('uatransformtour')) {
+            setTourOpen(true)
+        }
+    }, [])
+    // ----- TOUR end-----
+
     return (
         <>
         <Buttons buttons={buttonProps} />
@@ -116,6 +154,16 @@ export default function TransformPage() {
             layerMax={layerMax}
             alpha={alpha}
             layer_name={layer}
+        />
+        <Tour
+            onRequestClose={closeTour}
+            disableInteraction={false}
+            steps={tourConfig}
+            isOpen={isTourOpen}
+            maskClassName={tourStyles.tourmask}
+            className={tourStyles.tourhelper}
+            rounded={5}
+            accentColor={accentColor}
         />
         </>
     )
