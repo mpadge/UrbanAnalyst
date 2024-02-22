@@ -2,7 +2,7 @@
 
 import useWindowSize from '@/components/window-size';
 import { posControlsX, posControlsY, maxWidth } from "@/components/compare/tour/tourPositionControls";
-import { controlBoxText, legendText, navText } from "@/components/compare/tour/tourText";
+import { controlBoxText, navText } from "@/components/compare/tour/tourText";
 
 const tourPanelBackgroundColour = '#9cf7f7';
 const tourPanelBorderRadiusWide = '20px';
@@ -35,18 +35,19 @@ export const getTourConfig = (width: number, height: number) => [
         selector: '[data-tut="reactour__compare_page"]',
         content: (
             <div>
-                <h2>Maps</h2>
+                <h2>Compare</h2>
                 <br />
-                This page shows interactive maps for a chosen city, and for
-                values of a chosen variable or <q>layer</q>. Low values (yellow
-                colors) are generally better than higher values (blue colors).
+                This page compares aggregate statistics for every Urban Analyst
+                city. As for maps, low values are generally better than higher
+                values, so in terms of the chosen &quot;layer&quot; or statistic,
+                dark-coloured bars are generally better than light-coloured bars.
             </div>
         ),
         style: {
             backgroundColor: tourPanelBackgroundColour,
             borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
             left: posControlsX(width, "nav"),
-            width: maxWidth(width),
+            maxWidth: maxWidth(width, false),
         }
     },
     {
@@ -58,17 +59,6 @@ export const getTourConfig = (width: number, height: number) => [
             backgroundColor: tourPanelBackgroundColour,
             borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
             maxWidth: maxWidth(width, true),
-        }
-    },
-    {    
-        selector: '[data-tut="reactour__compare_legend"]',
-        content: () => legendText(width > 700),
-        style: {
-            width: maxWidth(width),
-            left: posControlsX(width, "legend"),
-            top: posControlsY(width, height, "legend"),
-            backgroundColor: tourPanelBackgroundColour,
-            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
         }
     },
     {

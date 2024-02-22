@@ -9,7 +9,7 @@ export function controlBoxText (wide = true) {
                 <h2>Controls</h2>
                 <br />
                 {line1}
-                &nbsp;The current layer is named at the top of the map.  Details
+                &nbsp;The current layer is named at the top of the page.  Details
                 on each layer can be seen by clicking on the <q>Explain
                 layer</q> button.
                 <br />
@@ -27,20 +27,6 @@ export function controlBoxText (wide = true) {
                 of lower vs. higher values for paired layers are always given in
                 the <q>Explain layer</q> text.
                 </div>
-    )
-}
-
-export function legendText(wide = true) {
-    const txt = wide ?
-        `Each layer has a legend here, for which yellow colors are generally better, and blue colors worse.` :
-        `Each layer has a legend in the lower-left corner, for which more yellow colors are generally better.`;
-
-    return (
-        <div>
-            <h2>Legend</h2>
-            <br />
-            {txt}
-        </div>
     )
 }
 
