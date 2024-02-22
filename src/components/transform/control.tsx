@@ -200,6 +200,7 @@ export default function Control (props: TransformControlProps) {
                 layer = {props.layer}
                 varnames = {props.varnames}
                 handleVarnamesChange = {props.handleVarnamesChange}
+                setInitialSetDefaultValues={setInitialSetDefaultValues}
             />
         </div>
         </>
