@@ -71,7 +71,7 @@ export default function MapPage() {
 
     const heading: string = HeadingText(layer, layer2, numLayers, CITY_DATA.citiesArray);
 
-    // ----- TOUR -----
+    // ----- TOUR start-----
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
     const size = useWindowSize();
@@ -94,15 +94,16 @@ export default function MapPage() {
     const closeTour = () => {
         setTourOpen(false);
         if (typeof window != "undefined") {
-            sessionStorage.setItem("uatour", "done");
+            sessionStorage.setItem("uamaptour", "done");
         }
     };
 
     useEffect(() => {
-        if(!sessionStorage.getItem('uatour')) {
+        if(!sessionStorage.getItem('uamaptour')) {
             setTourOpen(true)
         }
     }, [])
+    // ----- TOUR end-----
 
     return (
         <>
