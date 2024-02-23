@@ -92,6 +92,9 @@
 
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
+    .compareheading {
+        margin-top: 80px;
+    }
     .comparetext {
         left: 20dvw;
     }
@@ -100,7 +103,7 @@
 /* Mobile */
 @media (max-width: 700px) {
     .compareheading {
-        margin-top: 70px;
+        margin-top: 80px;
     }
     .comparetext {
         top: 45%;
