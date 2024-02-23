@@ -31,18 +31,12 @@ export default function Legend (props: LegendProps) {
         var t = d3.transition()
             .duration(750);
 
-        // scaleband controls the ticks, which can be on linear or log scales:
-        const log_scale = layer_name == "school_dist" || layer_name == "intervals";
-        const scale_min = log_scale ? Math.pow(10, layerRange[0]) : layerRange[0];
-        const scale_max = log_scale ? Math.pow(10, layerRange[1]) : layerRange[1];
+        const scale_min = layerRange[0];
+        const scale_max = layerRange[1];
 
-        var scaleband = log_scale ?
-            d3.scaleLog()
-                .domain([scale_min, scale_max])
-                .rangeRound([marginLeft, width - marginRight]) :
-            d3.scaleLinear()
-                .domain([scale_min, scale_max])
-                .rangeRound([marginLeft, width - marginRight]);
+        const scaleband = d3.scaleLinear()
+            .domain([scale_min, scale_max])
+            .rangeRound([marginLeft, width - marginRight]);
 
         const nticksin = 5;
         const nticks = scaleband.ticks(nticksin).length;
