@@ -58,8 +58,8 @@ export default function Home() {
 
             <div className={styles.centerMed}>
                 <p className="text-center">
-                    How does your city compare to others?
-What would your city be like if it became more like some other city?
+                    How does your city compare to others?<br/>
+What would your city be like if it became more like some other city?<br/>
 What&apos;s the best way for that to happen?
                 </p> </div>
 
@@ -116,33 +116,15 @@ What&apos;s the best way for that to happen?
             <div className={styles.centerNormal}>
 
                 <p className="text-center">
-                    Results for each city involve millions of public transport
-                    routing calculations, and generally billions of routing
-                    calculations through street networks.  These are calculated
-                    using Urban Analyst&apos;s own open-source software
-                    described in <a className = {styles.textLink}
+                    Results for each city involve billions of routing
+                    calculations through street networks and public transport
+                    systems.  These are calculated using Urban Analyst&apos;s
+                    own open-source software described in
+                    <a className = {styles.textLink}
                     href="https://UrbanAnalyst.github.io/docs" >&nbsp;the
                     documentation pages </a>. These enormous numbers of
                     calculations enable Urban Analyst to provide uniquely
-                    powerful insight into how people move throughout cities.
-                </p>
-            </div>
-
-            <div className={styles.centerBig}>
-                <p className="text-center">
-                    What is the best city?
-                </p>
-            </div>
-
-            <div className={styles.centerNormal}>
-                <p className="text-center">
-                    There is no &ldquo;best&rdquo; city. Any such judgements can
-                    only be made in terms of single variables. Urban Analyst
-                    measures and compares a range of variables, and
-                    relationships between these. Each city may be better in some
-                    regards, worse in others. Urban Analyst makes differences
-                    between cities visible, and allows different cities to be
-                    compared in a variety of ways.
+                    powerful insights into how people move throughout cities.
                 </p>
             </div>
 
