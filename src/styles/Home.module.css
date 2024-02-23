@@ -38,20 +38,30 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(33%, auto));
     width: var(--max-width);
-    max-width: 100%;
+    gap: 1rem;
 }
 
 .card {
-    padding: 1rem 1.2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding:  1rem  1.2rem;
     border-radius: var(--border-radius);
-    background: rgba(var(--card-rgb), 0);
-    border: 1px solid rgba(var(--card-border-rgb), 0);
-    transition: background 200ms, border 200ms;
+    background: rgba(var(--card-rgb),  0);
+    border:  1px solid rgba(var(--card-border-rgb),  0);
+    transition: background  200ms, border  200ms;
+    overflow: hidden;
 }
 
-.card span {
-    display: inline-block;
-    transition: transform 200ms;
+.cardContent {
+    flex:  1; /* Ensure text content takes up available space */
+}
+
+.cardImage {
+    position: relative;
+    width:  100%;
+    height:  0; /* Ensure image container takes up remaining space */
+    padding-top:  100%; /* Make height equal to width */
 }
 
 .card h2 {
@@ -64,7 +74,6 @@
     opacity: 0.6;
     font-size: 1.5rem;
     line-height: 1.5;
-    max-width: 300ch;
 }
 
 .centerBig {
@@ -290,7 +299,8 @@
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
     .grid {
-        grid-template-columns: repeat(2, 50%);
+        grid-template-columns: repeat(2, minmax(50%, auto));
+        width: auto;
     }
 }
 
