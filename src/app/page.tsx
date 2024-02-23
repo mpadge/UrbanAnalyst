@@ -1,6 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Metadata, Viewport } from 'next';
+import compareImage from '@/images/compare.png';
+import mapImage from '@/images/map.png';
+import transformImage from '@/images/transform.png';
 
 import styles from '@/styles/Home.module.css'
 import Buttons from '@/components/buttons4'
@@ -65,45 +68,70 @@ What&apos;s the best way for that to happen?
 
             <div className={styles.grid}>
 
-                <Link
-                href="/compare"
-                className={styles.card}
-                rel="noopener noreferrer"
-                >
-                    <h2>
-                        Compare <span>&#8628;</span>
-                    </h2>
-                    <p className={styles.cardText}>
-                        Compare statistics for every UA city.
-                    </p>
-                </Link>
+                <div className={styles.card}>
+                    <Link href="/compare" rel="noopener noreferrer">
+                        <div className={styles.cardContent}>
+                            <h2>
+                                Compare <span>&#8628;</span>
+                            </h2>
+                            <p className={styles.cardText}>
+                                Compare statistics for every UA city.
+                            </p>
+                        </div>
+                        <div className={styles.cardImage}>
+                            <Image
+                                src={compareImage}
+                                alt="Image of UrbanAnalyst Compare page"
+                                layout="fill"
+                                objectFit="contain"
+                                priority
+                            />
+                        </div>
+                    </Link>
+                </div>
 
-                <Link
-                href="/map"
-                className={styles.card}
-                rel="noopener noreferrer"
-                >
-                    <h2>
-                        Map <span>&#8628;</span>
-                    </h2>
-                    <p className={styles.cardText}>
-                        Interactive maps of all cities analysed to date.
-                    </p>
-                </Link>
+                <div className={styles.card}>
+                    <Link href="/map" rel="noopener noreferrer">
+                        <div className={styles.cardContent}>
+                            <h2>
+                                Map <span>&#8628;</span>
+                            </h2>
+                            <p className={styles.cardText}>
+                                Interactive maps of all cities analysed to date.
+                            </p>
+                        </div>
+                        <div className={styles.cardImage}>
+                            <Image
+                                src={mapImage}
+                                alt="Image of UrbanAnalyst Map page"
+                                layout="fill"
+                                objectFit="contain"
+                            />
+                        </div>
+                    </Link>
+                </div>
 
 
-                <Link
-                href="/transform"
-                className={styles.card}
-                rel="noopener noreferrer"
-                >
-                    <h2>
-                        Transform <span>&#8628;</span>
-                    </h2>
-                    <p className={styles.cardText}>
-                        Transform any city to be like any other
-                    </p>
-                </Link>
+                <div className={styles.card}>
+                    <Link href="/transform" rel="noopener noreferrer">
+                        <div className={styles.cardContent}>
+                            <h2>
+                                Transform <span>&#8628;</span>
+                            </h2>
+                            <p className={styles.cardText}>
+                                Transform any city to be like any other
+                            </p>
+                        </div>
+                        <div className={styles.cardImage}>
+                            <Image
+                                src={transformImage}
+                                alt="Image of UrbanAnalyst Transform page"
+                                layout="fill"
+                                objectFit="cover"
+                            />
+                        </div>
+                    </Link>
+                </div>
 
             </div>
 
