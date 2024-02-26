@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from "next/image"
 import Link from 'next/link'
 import type { Metadata, Viewport } from 'next';
 
@@ -45,7 +45,10 @@ export default function Home() {
                         width={100}
                         height={50}
                         priority
-                        />
+                        style={{
+                            maxWidth: "100%",
+                            height: "auto"
+                        }} />
                     </a>
                 </p>
             </div>
