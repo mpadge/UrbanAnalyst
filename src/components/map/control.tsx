@@ -1,7 +1,7 @@
 
 import { useState, useRef } from 'react';
 import Link from 'next/link'
-import Image from "next/legacy/image"
+import Image from "next/image"
 import localFont from 'next/font/local'
 
 import styles from '@/styles/controls.module.css';
@@ -69,7 +69,10 @@ export default function Control (props: MapControlProps) {
             // className={styles.vercelLogo}
             width={100}
             height={50}
-            />
+            style={{
+                maxWidth: "100%",
+                height: "auto"
+            }} />
             </p>
 
             <h3>City</h3>

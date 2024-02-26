@@ -1,4 +1,4 @@
-import Image from "next/legacy/image"
+import Image from "next/image"
 import Link from 'next/link'
 import type { Metadata, Viewport } from 'next';
 import compareImage from '@/images/compare.png';
@@ -48,7 +48,10 @@ export default function Home() {
                         width={100}
                         height={50}
                         priority
-                        />
+                        style={{
+                            maxWidth: "100%",
+                            height: "auto"
+                        }} />
                     </a>
                 </p>
             </div>
@@ -82,9 +85,12 @@ What&apos;s the best way for that to happen?
                             <Image
                                 src={compareImage}
                                 alt="Image of UrbanAnalyst Compare page"
-                                layout="fill"
-                                objectFit="contain"
                                 priority
+                                fill
+                                sizes="100vw"
+                                style={{
+                                    objectFit: "contain"
+                                }}
                             />
                         </div>
                     </Link>
@@ -104,8 +110,11 @@ What&apos;s the best way for that to happen?
                             <Image
                                 src={mapImage}
                                 alt="Image of UrbanAnalyst Map page"
-                                layout="fill"
-                                objectFit="contain"
+                                fill
+                                sizes="100vw"
+                                style={{
+                                    objectFit: "contain"
+                                }}
                             />
                         </div>
                     </Link>
@@ -126,8 +135,11 @@ What&apos;s the best way for that to happen?
                             <Image
                                 src={transformImage}
                                 alt="Image of UrbanAnalyst Transform page"
-                                layout="fill"
-                                objectFit="cover"
+                                fill
+                                sizes="100vw"
+                                style={{
+                                    objectFit: "cover"
+                                }}
                             />
                         </div>
                     </Link>

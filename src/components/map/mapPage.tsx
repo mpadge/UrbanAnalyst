@@ -1,7 +1,5 @@
 "use client"
 
-import Image from "next/legacy/image"
-
 import { useEffect, useState } from "react";
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
 import { DeckGL } from "@deck.gl/react/typed";
