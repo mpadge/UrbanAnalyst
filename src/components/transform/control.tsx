@@ -127,15 +127,16 @@ export default function Control (props: TransformControlProps) {
 
                 <p>
                 <Image
-                src="/ua.svg"
-                alt="UA Logo"
-                className={styles.transformLogo}
-                width={100}
-                height={50}
-                style={{
-                    maxWidth: "100%",
-                    height: "auto"
-                }} />
+                    src="/ua.svg"
+                    alt="UA Logo"
+                    className={styles.transformLogo}
+                    width={100}
+                    height={50}
+                    style={{
+                        maxWidth: "100%",
+                        height: "auto"
+                    }}
+                />
                 </p>
 
                 <h3>City</h3>

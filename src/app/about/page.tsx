@@ -39,16 +39,17 @@ export default function Home() {
                     >
                         Urban Analyst
                         <Image
-                        src="/ua.svg"
-                        alt="UA Logo"
-                        className={styles.vercelLogo}
-                        width={100}
-                        height={50}
-                        priority
-                        style={{
-                            maxWidth: "100%",
-                            height: "auto"
-                        }} />
+                            src="/ua.svg"
+                            alt="UA Logo"
+                            className={styles.vercelLogo}
+                            width={100}
+                            height={50}
+                            priority
+                            style={{
+                                maxWidth: "100%",
+                                height: "auto"
+                            }}
+                        />
                     </a>
                 </p>
             </div>
