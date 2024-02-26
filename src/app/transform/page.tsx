@@ -1,6 +1,6 @@
 
 import type { Metadata, Viewport } from 'next';
-import Image from 'next/image'
+import Image from "next/legacy/image"
 
 export const metadata: Metadata = {
     title: 'UA',
