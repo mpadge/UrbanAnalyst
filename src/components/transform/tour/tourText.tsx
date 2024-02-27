@@ -40,7 +40,7 @@ export function controlBoxText4 () {
                 3. <q>Absolute</q> - The absolute value by which each area within
                 the city would have to be transformed to match the distribution
                 in the target city; and<br />
-                4. <q>Relative</q> - Transformations relative to original values.
+                4. <q>Relative</q> - The absolute transformation values relative to original values.
             </div>
         )
 }
