@@ -402,7 +402,7 @@ const london = {
         "school_dist": [235.2, 88.52],
         "bike_index": [0.81, 0.04],
         "natural": [0.87, 0.09],
-        "parking": [150.82, 678.45]
+        "parking": [2.487, 4.456]
     },
     "stats_paired": {
         "intervals_transport": 0.32,
