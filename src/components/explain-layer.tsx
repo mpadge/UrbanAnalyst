@@ -212,7 +212,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Index of access to natural spaces multiplied by parking index. Low values reflect good access to natural spaces coupled with lower availability of automobile parking spaces."
         ],
         "natural_social": [
-            "Index of access to natural spaces multiplied by social index (rescaled to average of one). Low values indicate that good access to natural spaces is coupled with advantageous social conditions."
+            "Index of access to natural spaces multiplied by social index (rescaled to average of one). Low values indicate that good access to natural spaces is coupled with disadvantageous social conditions."
         ],
         "parking_social": [
             "Parking index multiplied by social index (rescaled to average of one). Low values reflect lower availability of automobile parking spaces coupled with advantageous social conditions"
