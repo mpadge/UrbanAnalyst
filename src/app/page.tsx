@@ -177,15 +177,7 @@ What&apos;s the best way for that to happen?
 
             <div className={styles.centerNormal}>
                 <p className="text-center">
-                    Urban Analyst is currently funeded by the
-                    German Government&apos;s
-                    <a className = {styles.textLink}
-                    href="https://prototypefund.de/project/urban-analyst/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >&nbsp;prototype fund
-                    </a>, including some funding for adding cities.
-                    The current recommended way is to open an issue on
+                    Please open an issue on
                     <a className = {styles.textLink}
                     href="https://github.com/mpadge/UrbanAnalyst/issues"
                     target="_blank"
