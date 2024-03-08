@@ -120,6 +120,36 @@
     margin: 20px;
 }
 
+.centerSmall {
+    margin-top: 0;
+    padding: 0.5rem 0;
+    font-size: 1.2rem;
+    font-weight: 300;
+    width: 80%;
+}
+
+.centerSmall p {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.centerSmall a {
+    color: rgb(30, 144, 255);
+}
+
+.centerSmall ol {
+    list-style-position: outside;
+    list-style-type: decimal;
+    width: 75%;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+
 .cardText {
     display: block;
     justify-content: center;
@@ -245,9 +275,14 @@
         padding: 0.5rem 0;
         font-size: 1.5rem;
     }
-
     .centerMed p {
         margin: 0.5px;
+    }
+    .centerSmall {
+        width: 100%;
+    }
+    .centerSmall ol {
+        margin-left: 6%;
     }
 
     .description {
@@ -301,6 +336,12 @@
     .grid {
         grid-template-columns: repeat(2, minmax(50%, auto));
         width: auto;
+    }
+    .centerSmall {
+        width: 95%;
+    }
+    .centerSmall ol {
+        margin-left: 10%;
     }
 }
 
