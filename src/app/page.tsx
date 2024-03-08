@@ -63,12 +63,14 @@ export default function Home() {
                 </p>
             </div>
 
-            <div className={styles.centerMed}>
+            <div className={styles.centerNormal}>
                 <p className="text-center">
-                    How does your city compare to others?<br/>
-What would your city be like if it became more like some other city?<br/>
-What&apos;s the best way for that to happen?
-                </p> </div>
+                    Urban Analyst is a platform for interactive visualisation of
+                    the properties of cities, including transport systems,
+                    measures of accessibility, and socio-demographic conditions.
+                    There are three main ways to examine and compare cities:
+                </p>
+            </div>
 
             <div className={styles.grid}>
 
