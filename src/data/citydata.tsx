@@ -1222,7 +1222,6 @@ const washington = {
         "transfers_social": -0.0009
     }
 }
-}
 
 export const CITY_DATA = {
     "citiesArray": [berlin, hamburg, london, mannheim, muenster, paris, philadelphia, washington],
