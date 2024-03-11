@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@types/reactour": "^1.18.5",
+    "@vercel/analytics": "^1.2.2",
+    "@vercel/speed-insights": "^1.0.10",
     "crypto": "^1.0.1",
     "d3": "^7.8.5",
     "deck.gl": "^8.9.30",
