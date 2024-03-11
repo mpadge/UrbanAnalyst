@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={junctionFont.className}>
         {children}
-        <SppeedInsights />
+        <SpeedInsights />
         <Analytics />
       </body>
     </html>
