@@ -188,13 +188,13 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Population density multiplied by social index (rescaled to average of one). Low values represent low population density coupled with advantageous social conditions."
         ],
         "schooldist_bike": [
-            "Distance to nearest school multiplied by bicycle index. Low values shorter distances to schools coupled with good provision of bicycle infrastructure."
+            "Distance to nearest school multiplied by bicycle index. Low values represent shorter distances to schools coupled with good provision of bicycle infrastructure."
         ],
         "schooldist_natural": [
-            "Distance to nearest school multiplied by index of accessibility to natural spaces. Low values shorter distances to schools coupled with good access to natural spaces."
+            "Distance to nearest school multiplied by index of accessibility to natural spaces. Low values indicate shorter distances to schools coupled with good access to natural spaces."
         ],
         "schooldist_parking": [
-            "Distance to nearest school multiplied by parking index. Low values shorter distances to schools coupled with lower availability of automobile parking spaces."
+            "Distance to nearest school multiplied by parking index. Low values represent shorter distances to schools coupled with lower availability of automobile parking spaces."
         ],
         "schooldist_social": [
             "Distance to nearest school multiplied by social index (rescaled to average of one). Low values indicate shorter distances to schools coupled with advantageous social conditions."
