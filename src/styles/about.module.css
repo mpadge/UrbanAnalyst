@@ -1,10 +1,15 @@
 .main {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
     padding: 6rem;
     min-height: 100vh;
+}
+
+.textLink {
+    color: #3383ff;
 }
 
 .main ol {
@@ -45,7 +50,7 @@
     align-items: left;
     text-align: left;
     padding: 4rem 0;
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: 300;
     padding: 1rem;
 }
@@ -57,15 +62,15 @@
     margin-bottom: 20px;
 }
 
-.centerSmall {
+.centerNormal {
     margin-top: 0;
     padding: 0.5rem 0;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 300;
     width: 80%;
 }
 
-.centerSmall p {
+.centerNormal p {
     position: relative;
     justify-content: center;
     align-items: center;
@@ -74,11 +79,11 @@
     text-align: left;
 }
 
-.centerSmall a {
+.centerNormal a {
     color: rgb(30, 144, 255);
 }
 
-.centerSmall ol {
+.centerNormal ol {
     list-style-position: outside;
     list-style-type: decimal;
     width: 75%;
@@ -99,10 +104,10 @@
         transform: none;
         height: 300px;
     }
-    .centerSmall {
+    .centerNormal {
         width: 100%;
     }
-    .centerSmall ol {
+    .centerNormal ol {
         margin-left: 6%;
     }
 
@@ -110,10 +115,10 @@
 
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
-    .centerSmall {
+    .centerNormal {
         width: 95%;
     }
-    .centerSmall ol {
+    .centerNormal ol {
         margin-left: 10%;
     }
 

@@ -66,14 +66,14 @@ export default function Home() {
                 </p>
             </div>
 
-            <div className={styles.centerSmall}>
+            <div className={styles.centerNormal}>
                 <p className="text-center">
                     Urban Analyst is a platform for interactive visualisation of
                     the properties of cities, including transport systems and
                     socio-demographic conditions.  The platform offers
                 </p>
             </div>
-            <div className={styles.centerSmall}>
+            <div className={styles.centerNormal}>
                 <ol>
                     <li>
                         a &ldquo;Compare&rdquo; view that compares the
@@ -91,7 +91,7 @@ export default function Home() {
                     </li>
                 </ol>
             </div>
-            <div className={styles.centerSmall}>
+            <div className={styles.centerNormal}>
                 <p className="text-center"> 
                     Full details are provided&nbsp;
                     <a
@@ -108,7 +108,7 @@ export default function Home() {
                 </p>
             </div>
 
-            <div className={styles.centerSmall}>
+            <div className={styles.centerNormal}>
                 <p className="text-center">
                     <a
                     href="https://github.com/mpadge"
@@ -133,7 +133,7 @@ export default function Home() {
                 </p>
             </div>
 
-            <div className={styles.centerSmall}>
+            <div className={styles.centerNormal}>
                 <p className="text-center">
                     Previous funding has been provided by
                     the German Government&#39;s &#8202;
