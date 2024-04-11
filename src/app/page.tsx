@@ -106,7 +106,7 @@ export default function Home() {
                                 Map <span>&#8628;</span>
                             </h2>
                             <p className={styles.cardText}>
-                                Interactive maps of all cities analysed to date.
+                                View interactive maps of all cities analysed to date.
                             </p>
                         </div>
                         <div className={styles.cardImage}>
