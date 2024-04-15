@@ -19,6 +19,9 @@ export default function SummarisePage() {
     const [idx, setIdx] = useState(0);
     const contentArray = Content();
 
+    const contentNames = contentArray.map(element => element.name);
+    const contentHtml = contentArray.map(element => element.content);
+
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
     }
@@ -26,7 +29,7 @@ export default function SummarisePage() {
     return (
         <>
             <div className={styles.summarise}>
-                {contentArray[idx]}
+                {contentHtml[idx]}
             </div>
         </>
     )

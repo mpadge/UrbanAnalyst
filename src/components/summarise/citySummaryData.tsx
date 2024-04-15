@@ -1,4 +1,6 @@
-const berlin = (
+const berlin = {
+    name: "berlin",
+    content: (
     <>
 <h1>Statistical summary of Berlin</h1>
 
@@ -52,9 +54,12 @@ const berlin = (
 <li> Marginally worse strength of relationship between bicycle infrastructure and parking index </li>
 </ul>
     </>
-)
+    )
+};
 
-const hamburg = (
+const hamburg = {
+    name: "hamburg",
+    content: (
     <>
 <h1>Statistical summary of Hamburg</h1>
 
@@ -106,9 +111,12 @@ const hamburg = (
 <li>Relative transport times are 90% better than in Hamburg.</li>
 </ul>
     </>
-)
+    )
+};
 
-const london = (
+const london = {
+    name: "london",
+    content: (
     <>
 <h1>Statistical summary of London</h1>
 
@@ -151,9 +159,12 @@ const london = (
 <li>Bicycle infrastructure are 6.2% better than in London.</li>
 </ul>
     </>
-)
+    )
+};
 
-const mannheim = (
+const mannheim = {
+    name: "mannheim",
+    content: (
     <>
 <h1>Statistical summary of Mannheim</h1>
 
@@ -220,9 +231,12 @@ const mannheim = (
 <li> Slightly worse strength of relationship between distance to nearest school and social index </li>
 </ul>
     </>
-)
+    )
+};
 
-const muenster = (
+const muenster = {
+    name: "muenster",
+    content: (
     <>
 <h1>Statistical summary of Muenster</h1>
 
@@ -298,9 +312,12 @@ const muenster = (
 <li>Relative transport times are 88% better than in Muenster.</li>
 </ul>
     </>
-)
+    )
+};
 
-const paris = (
+const paris = {
+    name: "paris",
+    content: (
     <>
 <h1>Statistical summary of Paris</h1>
 
@@ -360,9 +377,12 @@ const paris = (
 <li> Marginally worse strength of relationship between population density and bicycle infrastructure </li>
 </ul>
     </>
-)
+    )
+};
 
-const philadelphia = (
+const philadelphia = {
+    name: "philadelphia",
+    content: (
     <>
 <h1>Statistical summary of Philadelphia</h1>
 
@@ -413,9 +433,12 @@ const philadelphia = (
 <li> Marginally worse strength of relationship between population density and distances to nearest schools </li>
 </ul>
     </>
-)
+    )
+};
 
-const washington = (
+const washington = {
+    name: "washington",
+    content: (
     <>
 <h1>Statistical summary of Washington</h1>
 
@@ -469,7 +492,8 @@ const washington = (
 <li>Population density are 35.6% lower than in Washington.</li>
 </ul>
     </>
-)
+    )
+};
 
 const contentArray = [berlin, hamburg, london, mannheim, muenster, paris, philadelphia, washington];
 
