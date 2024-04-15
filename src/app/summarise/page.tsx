@@ -33,12 +33,6 @@ export default function Home() {
         <Buttons buttons={buttons} />
         <main className={styles.main}>
 
-            <div className={styles.centerBig}>
-                <p className="text-center">
-                    Urban Analyst
-                </p>
-            </div>
-
             <SummarisePage />
 
         </main>

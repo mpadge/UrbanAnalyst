@@ -15,7 +15,6 @@
     width: var(--control-width-wide-outer);
 }
 
-
 .controls p {
     position: relative;
     margin: 0;
@@ -37,10 +36,6 @@
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     margin-left: 12px;
-}
-
-.controlsTransform {
-    composes: controls;
 }
 
 .hide {
@@ -279,9 +274,6 @@
 @media (min-width: 701px) and (max-width: 1120px) {
     .controls {
         width: var(--control-width-med--outer);
-    }
-    .controlsTransform {
-        composes: controls;
     }
     .listSelect {
         margin-left: 5px;

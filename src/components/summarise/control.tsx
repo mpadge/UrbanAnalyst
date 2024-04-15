@@ -20,7 +20,13 @@ export default function Control (props: SummariseControlProps) {
     return (
         <>
         <div id="top-left-container" className={`${styles.controls} ${junctionFont.className}`}>
-            <p>
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: '20px',
+                marginBottom: '20px'
+            }}>
             <Image
                 src="/ua.svg"
                 alt="UA Logo"
@@ -31,7 +37,7 @@ export default function Control (props: SummariseControlProps) {
                     height: "auto"
                 }}
             />
-            </p>
+            </div>
 
             <h3>City</h3>
             <CityList
