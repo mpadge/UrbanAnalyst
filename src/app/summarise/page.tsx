@@ -32,29 +32,6 @@ export default function Home() {
         <>
         <Buttons buttons={buttons} />
         <main className={styles.main}>
-            <div className={styles.description}>
-                <p>
-                    <a
-                    href="https://github.com/UrbanAnalyst"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >
-                        Urban Analyst
-                        <Image
-                            src="/ua.svg"
-                            alt="UA Logo"
-                            className={styles.vercelLogo}
-                            width={100}
-                            height={50}
-                            priority
-                            style={{
-                                maxWidth: "100%",
-                                height: "auto"
-                            }}
-                        />
-                    </a>
-                </p>
-            </div>
 
             <div className={styles.centerBig}>
                 <p className="text-center">

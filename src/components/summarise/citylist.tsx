@@ -14,10 +14,9 @@ interface CityListProps {
 export default function CityList(props: CityListProps) {
 
     const contentArray = Content();
-    const contentNames = contentArray.map(element => element.name);
-    const options = contentNames.map((city, index) => ({
-        value: city,
-        label: city,
+    const options = contentArray.map((city, index) => ({
+        value: city.name,
+        label: city.nameFormatted,
         index: index
     }));
 

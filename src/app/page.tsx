@@ -6,7 +6,7 @@ import mapImage from '@/images/map.png';
 import transformImage from '@/images/transform.png';
 
 import styles from '@/styles/Home.module.css'
-import Buttons from '@/components/buttons4'
+import Buttons from '@/components/buttons5'
 import { ButtonProps } from '@/data/interfaces';
 
 export const metadata: Metadata = {
@@ -23,10 +23,11 @@ export const viewport: Viewport = {
 export default function Home() {
 
     const buttons = {
-        first: "compare",
-        second: "map",
-        third: "transform",
-        fourth: "about"
+        first: "summarise",
+        second: "compare",
+        third: "map",
+        fourth: "transform",
+        fifth: "about"
     }
 
     return (

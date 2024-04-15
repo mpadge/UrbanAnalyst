@@ -9,7 +9,7 @@ import { Map } from "react-map-gl";
 import Control from '@/components/map/control';
 import Legend from '@/components/map/legend';
 import UTAMap from '@/components/map/map';
-import Buttons from '@/components/buttons3';
+import Buttons from '@/components/buttons4';
 import Tour from '@/components/map/tour/tour';
 import useWindowSize from '@/components/window-size';
 import { getTourConfig } from '@/components/map/tour/tourConfig';
@@ -22,8 +22,9 @@ import { ViewState } from "@/data/interfaces";
 
 const buttonProps = {
     first: "home",
-    second: "compare",
-    third: "transform"
+    second: "summarise",
+    third: "compare",
+    fourth: "transform"
 }
 
 export default function MapPage() {
