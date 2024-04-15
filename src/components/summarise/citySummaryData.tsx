@@ -1,11 +1,19 @@
+import Link from 'next/link';
+import styles from '@/styles/summarise.module.css';
+
 const berlin = {
     name: "berlin",
     nameFormatted: "Berlin",
     content: (
     <>
 <h1>Statistical summary of Berlin</h1>
-
+<div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Berlin based on comparison with data for all other UA cities. The summary includes initial descriptions of &quot;single&quot; and &quot;paired&quot; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &quot;target city&quot; for Berlin , selected as the city with the best combined properties for all aspects for which Berlin is worse than average.</p></div>
 <h2>Single variables</h2>
+<p>Values for these single variables can be compared with values for all other UA cities in the
+<Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;compare page
+</a></Link>.</p>
 <h3>Non-transport variables:</h3>
 
 <p>The following aspects are notably bad in comparison to the average of all UA cities:</p><ul>
@@ -28,7 +36,6 @@ const berlin = {
 <li> Notable negative strength of relationship between transport and distances to nearest schools </li>
 </ul>
 <h2>Target city for Berlin </h2>
-
 <p>The best target city is the city which is best in all the ways that Berlin is worse than average. The target city is identified as the city lying at the farthest distance from Berlin in the multi-dimensional space of all variables for which Berlin is worse than average.</p>
 <h2>Best target city is London</h2>
 <p> London is better than Berlin mostly because of improvements in single variables rather than relationships between variables .</p>
@@ -64,8 +71,13 @@ const hamburg = {
     content: (
     <>
 <h1>Statistical summary of Hamburg</h1>
-
+<div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Hamburg based on comparison with data for all other UA cities. The summary includes initial descriptions of &quot;single&quot; and &quot;paired&quot; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &quot;target city&quot; for Hamburg , selected as the city with the best combined properties for all aspects for which Hamburg is worse than average.</p></div>
 <h2>Single variables</h2>
+<p>Values for these single variables can be compared with values for all other UA cities in the
+<Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;compare page
+</a></Link>.</p>
 <h3>Non-transport variables:</h3>
 
 <p>The following aspects of individual variables are notably good in comparison to the average of all UA cities:</p><ul>
@@ -85,7 +97,6 @@ const hamburg = {
 <li> Weak negative strength of relationship between population density and bicycle infrastructure </li>
 </ul>
 <h2>Target city for Hamburg </h2>
-
 <p>The best target city is the city which is best in all the ways that Hamburg is worse than average. The target city is identified as the city lying at the farthest distance from Hamburg in the multi-dimensional space of all variables for which Hamburg is worse than average.</p>
 <h2>Best target city is London</h2>
 <p> London is better than Hamburg primarily because of improvements in relationships between variables rather than single variables .</p>
@@ -122,8 +133,13 @@ const london = {
     content: (
     <>
 <h1>Statistical summary of London</h1>
-
+<div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for London based on comparison with data for all other UA cities. The summary includes initial descriptions of &quot;single&quot; and &quot;paired&quot; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &quot;target city&quot; for London , selected as the city with the best combined properties for all aspects for which London is worse than average.</p></div>
 <h2>Single variables</h2>
+<p>Values for these single variables can be compared with values for all other UA cities in the
+<Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;compare page
+</a></Link>.</p>
 <h3>Non-transport variables:</h3>
 
 <p>The following aspects of individual variables are notably good in comparison to the average of all UA cities:</p><ul>
@@ -141,7 +157,6 @@ const london = {
 <li> Highly significant and disadvantageous strength of relationship between bicycle infrastructure and social index </li>
 </ul>
 <h2>Target city for London </h2>
-
 <p>The best target city is the city which is best in all the ways that London is worse than average. The target city is identified as the city lying at the farthest distance from London in the multi-dimensional space of all variables for which London is worse than average.</p>
 <h2>Best target city is Muenster</h2>
 <p> Muenster is better than London primarily because of improvements in relationships between variables rather than single variables .</p>
@@ -171,8 +186,13 @@ const mannheim = {
     content: (
     <>
 <h1>Statistical summary of Mannheim</h1>
-
+<div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Mannheim based on comparison with data for all other UA cities. The summary includes initial descriptions of &quot;single&quot; and &quot;paired&quot; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &quot;target city&quot; for Mannheim , selected as the city with the best combined properties for all aspects for which Mannheim is worse than average.</p></div>
 <h2>Single variables</h2>
+<p>Values for these single variables can be compared with values for all other UA cities in the
+<Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;compare page
+</a></Link>.</p>
 <h3>Transportation:</h3>
 <ul>
 <li> Mannheim has the  worst transport system of all cities.</li>
@@ -204,7 +224,6 @@ const mannheim = {
 <li> Slight negative strength of relationship between population density and parking index </li>
 </ul>
 <h2>Target city for Mannheim </h2>
-
 <p>The best target city is the city which is best in all the ways that Mannheim is worse than average. The target city is identified as the city lying at the farthest distance from Mannheim in the multi-dimensional space of all variables for which Mannheim is worse than average.</p>
 <h2>Best target city is London</h2>
 <p> London is better than Mannheim mostly because of improvements in single variables rather than relationships between variables .</p>
@@ -244,8 +263,13 @@ const muenster = {
     content: (
     <>
 <h1>Statistical summary of Muenster</h1>
-
+<div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Muenster based on comparison with data for all other UA cities. The summary includes initial descriptions of &quot;single&quot; and &quot;paired&quot; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &quot;target city&quot; for Muenster , selected as the city with the best combined properties for all aspects for which Muenster is worse than average.</p></div>
 <h2>Single variables</h2>
+<p>Values for these single variables can be compared with values for all other UA cities in the
+<Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;compare page
+</a></Link>.</p>
 <h3>Transportation:</h3>
 <ul>
 <li> Muenster has the second worst transport system of all cities.</li>
@@ -283,7 +307,6 @@ const muenster = {
 <li> Slight negative strength of relationship between transport and accessibility to natural spaces </li>
 </ul>
 <h2>Target city for Muenster </h2>
-
 <p>The best target city is the city which is best in all the ways that Muenster is worse than average. The target city is identified as the city lying at the farthest distance from Muenster in the multi-dimensional space of all variables for which Muenster is worse than average.</p>
 <h2>Best target city is London</h2>
 <p> London is better than Muenster primarily because of improvements in relationships between variables rather than single variables .</p>
@@ -326,8 +349,13 @@ const paris = {
     content: (
     <>
 <h1>Statistical summary of Paris</h1>
-
+<div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Paris based on comparison with data for all other UA cities. The summary includes initial descriptions of &quot;single&quot; and &quot;paired&quot; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &quot;target city&quot; for Paris , selected as the city with the best combined properties for all aspects for which Paris is worse than average.</p></div>
 <h2>Single variables</h2>
+<p>Values for these single variables can be compared with values for all other UA cities in the
+<Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;compare page
+</a></Link>.</p>
 <h3>Transportation:</h3>
 <ul>
 <li> Paris has the  best transport system of all cities.</li>
@@ -359,7 +387,6 @@ const paris = {
 <li> Weak negative strength of relationship between bicycle infrastructure and social index </li>
 </ul>
 <h2>Target city for Paris </h2>
-
 <p>The best target city is the city which is best in all the ways that Paris is worse than average. The target city is identified as the city lying at the farthest distance from Paris in the multi-dimensional space of all variables for which Paris is worse than average.</p>
 <h2>Best target city is Muenster</h2>
 <p> Muenster is better than Paris primarily because of improvements in single variables rather than relationships between variables .</p>
@@ -392,8 +419,13 @@ const philadelphia = {
     content: (
     <>
 <h1>Statistical summary of Philadelphia</h1>
-
+<div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Philadelphia based on comparison with data for all other UA cities. The summary includes initial descriptions of &quot;single&quot; and &quot;paired&quot; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &quot;target city&quot; for Philadelphia , selected as the city with the best combined properties for all aspects for which Philadelphia is worse than average.</p></div>
 <h2>Single variables</h2>
+<p>Values for these single variables can be compared with values for all other UA cities in the
+<Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;compare page
+</a></Link>.</p>
 <h3>Non-transport variables:</h3>
 
 <p>The following aspects are notably bad in comparison to the average of all UA cities:</p><ul>
@@ -410,7 +442,6 @@ const philadelphia = {
 <li> Extremely strong and disadvantageous strength of relationship between bicycle infrastructure and accessibility to natural spaces </li>
 </ul>
 <h2>Target city for Philadelphia </h2>
-
 <p>The best target city is the city which is best in all the ways that Philadelphia is worse than average. The target city is identified as the city lying at the farthest distance from Philadelphia in the multi-dimensional space of all variables for which Philadelphia is worse than average.</p>
 <h2>Best target city is London</h2>
 <p> London is better than Philadelphia primarily because of improvements in single variables rather than relationships between variables .</p>
@@ -449,8 +480,13 @@ const washington = {
     content: (
     <>
 <h1>Statistical summary of Washington</h1>
-
+<div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Washington based on comparison with data for all other UA cities. The summary includes initial descriptions of &quot;single&quot; and &quot;paired&quot; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &quot;target city&quot; for Washington , selected as the city with the best combined properties for all aspects for which Washington is worse than average.</p></div>
 <h2>Single variables</h2>
+<p>Values for these single variables can be compared with values for all other UA cities in the
+<Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;compare page
+</a></Link>.</p>
 <h3>Transportation:</h3>
 <ul>
 <li> Washington has the second best transport system of all cities.</li>
@@ -482,7 +518,6 @@ const washington = {
 <li> Moderate negative strength of relationship between bicycle infrastructure and accessibility to natural spaces </li>
 </ul>
 <h2>Target city for Washington </h2>
-
 <p>The best target city is the city which is best in all the ways that Washington is worse than average. The target city is identified as the city lying at the farthest distance from Washington in the multi-dimensional space of all variables for which Washington is worse than average.</p>
 <h2>Best target city is Muenster</h2>
 <p> Muenster is better than Washington mostly because of improvements in relationships between variables rather than single variables .</p>

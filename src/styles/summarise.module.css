@@ -1,6 +1,6 @@
 .main {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     text-align: center;
@@ -9,14 +9,13 @@
 }
 
 .description {
-    display: relative;
     justify-content: left;
     align-items: left;
     font-size: 16px;
 }
 
 .description p {
-    position: absolute;
+    position: relative;
     top: 20px;
     left: 10%;
     margin-top: 20px;
@@ -27,6 +26,11 @@
     border-radius: var(--border-radius);
 }
 
+.introPara {
+    position: relative;
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
 
 .summarise h2 {
     font-size: 24px;
@@ -56,6 +60,12 @@
     text-align: left;
 }
 
+.linkStyle {
+    color: #3383ff;
+    text-decoration: none;
+}
+
+
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
     .main {
@@ -65,6 +75,11 @@
     }
     .description {
         display: none;
+    }
+    .introPara {
+        position: relative;
+        margin-left: 15vw;
+        margin-right: 5vw;
     }
 }
 
@@ -76,5 +91,10 @@
     }
     .summarise ul {
         margin-left: 20px;
+    }
+    .introPara {
+        position: relative;
+        margin-left: 25vw;
+        margin-right: 5vw;
     }
 }
