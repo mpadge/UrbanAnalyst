@@ -58,6 +58,11 @@
 
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
+    .main {
+        padding-top: 6rem;
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
     .description {
         display: none;
     }
@@ -65,4 +70,11 @@
 
 /* Mobile */
 @media (max-width: 700px) {
+    .main {
+        padding-top: 5rem;
+        padding-left: 3rem;
+    }
+    .summarise ul {
+        margin-left: 20px;
+    }
 }
