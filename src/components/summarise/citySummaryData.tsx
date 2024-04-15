@@ -1,3 +1,5 @@
+// This file is generated automatically; do not edit by hand.
+
 import Link from 'next/link';
 import styles from '@/styles/summarise.module.css';
 
@@ -13,13 +15,30 @@ const berlin = {
 <Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
 <a className={styles.linkStyle}>
 &nbsp;compare page
-</a></Link>.</p>
+</a></Link>
+, or detailed patterns for Berlin viewed in the
+<Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;map page
+</a></Link>
+.</p>
 <h3>Non-transport variables:</h3>
 
 <p>The following aspects are notably bad in comparison to the average of all UA cities:</p><ul>
 <li> Significantly worse bicycle infrastructure </li>
 </ul>
 <h2>Paired variables</h2>
+<p>As with single variables, values for these paired variables can be compared with values for all other UA cities in the
+<Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;compare page&nbsp;
+</a></Link>
+by clicking on &quot;paired&quot;, or detailed patterns for Berlin viewed in the
+<Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;map page
+</a></Link>
+, also clicking on &quot;paired&quot;.</p>
 <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
 <li> Very pronounced strength of relationship between index of access to natural spaces and social index </li>
 <li> Highly significant strength of relationship between population density and distances to nearest schools </li>
@@ -77,7 +96,13 @@ const hamburg = {
 <Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
 <a className={styles.linkStyle}>
 &nbsp;compare page
-</a></Link>.</p>
+</a></Link>
+, or detailed patterns for Hamburg viewed in the
+<Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;map page
+</a></Link>
+.</p>
 <h3>Non-transport variables:</h3>
 
 <p>The following aspects of individual variables are notably good in comparison to the average of all UA cities:</p><ul>
@@ -87,6 +112,17 @@ const hamburg = {
 <li> Marginally slower relative transport times </li>
 </ul>
 <h2>Paired variables</h2>
+<p>As with single variables, values for these paired variables can be compared with values for all other UA cities in the
+<Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;compare page&nbsp;
+</a></Link>
+by clicking on &quot;paired&quot;, or detailed patterns for Hamburg viewed in the
+<Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;map page
+</a></Link>
+, also clicking on &quot;paired&quot;.</p>
 <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
 <li> Highly significant strength of relationship between bicycle infrastructure and accessibility to natural spaces </li>
 <li> Weak strength of relationship between index of access to natural spaces and social index </li>
@@ -139,7 +175,13 @@ const london = {
 <Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
 <a className={styles.linkStyle}>
 &nbsp;compare page
-</a></Link>.</p>
+</a></Link>
+, or detailed patterns for London viewed in the
+<Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;map page
+</a></Link>
+.</p>
 <h3>Non-transport variables:</h3>
 
 <p>The following aspects of individual variables are notably good in comparison to the average of all UA cities:</p><ul>
@@ -147,6 +189,17 @@ const london = {
 <li> Notably shorter distances to nearest schools </li>
 </ul>
 <h2>Paired variables</h2>
+<p>As with single variables, values for these paired variables can be compared with values for all other UA cities in the
+<Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;compare page&nbsp;
+</a></Link>
+by clicking on &quot;paired&quot;, or detailed patterns for London viewed in the
+<Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;map page
+</a></Link>
+, also clicking on &quot;paired&quot;.</p>
 <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
 <li> Extremely strong strength of relationship between population density and accessibility to natural spaces </li>
 <li> Very pronounced strength of relationship between index of access to natural spaces and parking index </li>
@@ -192,7 +245,13 @@ const mannheim = {
 <Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
 <a className={styles.linkStyle}>
 &nbsp;compare page
-</a></Link>.</p>
+</a></Link>
+, or detailed patterns for Mannheim viewed in the
+<Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;map page
+</a></Link>
+.</p>
 <h3>Transportation:</h3>
 <ul>
 <li> Mannheim has the  worst transport system of all cities.</li>
@@ -209,6 +268,17 @@ const mannheim = {
 <li> Very notably longer distances to nearest schools </li>
 </ul>
 <h2>Paired variables</h2>
+<p>As with single variables, values for these paired variables can be compared with values for all other UA cities in the
+<Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;compare page&nbsp;
+</a></Link>
+by clicking on &quot;paired&quot;, or detailed patterns for Mannheim viewed in the
+<Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;map page
+</a></Link>
+, also clicking on &quot;paired&quot;.</p>
 <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
 <li> Extremely strong strength of relationship between bicycle infrastructure and social index </li>
 <li> Significant strength of relationship between index of access to natural spaces and parking index </li>
@@ -269,7 +339,13 @@ const muenster = {
 <Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
 <a className={styles.linkStyle}>
 &nbsp;compare page
-</a></Link>.</p>
+</a></Link>
+, or detailed patterns for Muenster viewed in the
+<Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;map page
+</a></Link>
+.</p>
 <h3>Transportation:</h3>
 <ul>
 <li> Muenster has the second worst transport system of all cities.</li>
@@ -287,6 +363,17 @@ const muenster = {
 <li> Very significantly better bicycle infrastructure </li>
 </ul>
 <h2>Paired variables</h2>
+<p>As with single variables, values for these paired variables can be compared with values for all other UA cities in the
+<Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;compare page&nbsp;
+</a></Link>
+by clicking on &quot;paired&quot;, or detailed patterns for Muenster viewed in the
+<Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;map page
+</a></Link>
+, also clicking on &quot;paired&quot;.</p>
 <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
 <li> Highly significant strength of relationship between distance to nearest school and social index </li>
 <li> Notable strength of relationship between bicycle infrastructure and social index </li>
@@ -355,7 +442,13 @@ const paris = {
 <Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
 <a className={styles.linkStyle}>
 &nbsp;compare page
-</a></Link>.</p>
+</a></Link>
+, or detailed patterns for Paris viewed in the
+<Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;map page
+</a></Link>
+.</p>
 <h3>Transportation:</h3>
 <ul>
 <li> Paris has the  best transport system of all cities.</li>
@@ -376,6 +469,17 @@ const paris = {
 <li> Marginally worse access to natural spaces </li>
 </ul>
 <h2>Paired variables</h2>
+<p>As with single variables, values for these paired variables can be compared with values for all other UA cities in the
+<Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;compare page&nbsp;
+</a></Link>
+by clicking on &quot;paired&quot;, or detailed patterns for Paris viewed in the
+<Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;map page
+</a></Link>
+, also clicking on &quot;paired&quot;.</p>
 <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
 <li> Notable strength of relationship between population density and parking index </li>
 <li> Marginal strength of relationship between population density and accessibility to natural spaces </li>
@@ -425,7 +529,13 @@ const philadelphia = {
 <Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
 <a className={styles.linkStyle}>
 &nbsp;compare page
-</a></Link>.</p>
+</a></Link>
+, or detailed patterns for Philadelphia viewed in the
+<Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;map page
+</a></Link>
+.</p>
 <h3>Non-transport variables:</h3>
 
 <p>The following aspects are notably bad in comparison to the average of all UA cities:</p><ul>
@@ -433,6 +543,17 @@ const philadelphia = {
 <li> Very notably worse bicycle infrastructure </li>
 </ul>
 <h2>Paired variables</h2>
+<p>As with single variables, values for these paired variables can be compared with values for all other UA cities in the
+<Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;compare page&nbsp;
+</a></Link>
+by clicking on &quot;paired&quot;, or detailed patterns for Philadelphia viewed in the
+<Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;map page
+</a></Link>
+, also clicking on &quot;paired&quot;.</p>
 <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
 <li> Notable strength of relationship between bicycle infrastructure and parking index </li>
 <li> Slight strength of relationship between distance to nearest school and accessibility to natural spaces </li>
@@ -486,7 +607,13 @@ const washington = {
 <Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
 <a className={styles.linkStyle}>
 &nbsp;compare page
-</a></Link>.</p>
+</a></Link>
+, or detailed patterns for Washington viewed in the
+<Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;map page
+</a></Link>
+.</p>
 <h3>Transportation:</h3>
 <ul>
 <li> Washington has the second best transport system of all cities.</li>
@@ -505,6 +632,17 @@ const washington = {
 <li> Slightly longer distances to nearest schools </li>
 </ul>
 <h2>Paired variables</h2>
+<p>As with single variables, values for these paired variables can be compared with values for all other UA cities in the
+<Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;compare page&nbsp;
+</a></Link>
+by clicking on &quot;paired&quot;, or detailed patterns for Washington viewed in the
+<Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
+<a className={styles.linkStyle}>
+&nbsp;map page
+</a></Link>
+, also clicking on &quot;paired&quot;.</p>
 <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
 <li> Highly significant strength of relationship between transport and bicycle infrastructure </li>
 <li> Very pronounced strength of relationship between transport and distances to nearest schools </li>
