@@ -6,7 +6,7 @@ import styles from '@/styles/about.module.css'
 import Buttons from '@/components/buttons4'
 import { ButtonProps } from '@/data/interfaces';
 
-import Content from '@/components/summarise/citySummaryData';
+import SummarisePage from '@/components/summarise/summarisePage';
 
 export const metadata: Metadata = {
     title: 'UA',
@@ -62,7 +62,7 @@ export default function Home() {
                 </p>
             </div>
 
-            <Content />
+            <SummarisePage />
 
         </main>
     </>
