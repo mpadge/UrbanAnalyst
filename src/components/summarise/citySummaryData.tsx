@@ -474,5 +474,5 @@ const washington = (
 const contentArray = [berlin, hamburg, london, mannheim, muenster, paris, philadelphia, washington];
 
 export default function Content() {
-    return contentArray[0];
+    return contentArray;
 }

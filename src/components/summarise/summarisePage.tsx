@@ -8,7 +8,6 @@ import useWindowSize from '@/components/window-size';
 import styles from '@/styles/summarise.module.css';
 import Content from '@/components/summarise/citySummaryData';
 
-
 const buttonProps = {
     first: "home",
     second: "compare",
@@ -18,7 +17,7 @@ const buttonProps = {
 export default function SummarisePage() {
 
     const [idx, setIdx] = useState(0);
-    // const [cityData, setCityData] = useState(CITY_DATA.citiesArray[idx]);
+    const contentArray = Content();
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
@@ -27,7 +26,7 @@ export default function SummarisePage() {
     return (
         <>
             <div className={styles.summarise}>
-                <Content />
+                {contentArray[idx]}
             </div>
         </>
     )
