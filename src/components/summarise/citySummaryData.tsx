@@ -1,5 +1,6 @@
 const berlin = {
     name: "berlin",
+    nameFormatted: "Berlin",
     content: (
     <>
 <h1>Statistical summary of Berlin</h1>
@@ -59,6 +60,7 @@ const berlin = {
 
 const hamburg = {
     name: "hamburg",
+    nameFormatted: "Hamburg",
     content: (
     <>
 <h1>Statistical summary of Hamburg</h1>
@@ -116,6 +118,7 @@ const hamburg = {
 
 const london = {
     name: "london",
+    nameFormatted: "London",
     content: (
     <>
 <h1>Statistical summary of London</h1>
@@ -164,6 +167,7 @@ const london = {
 
 const mannheim = {
     name: "mannheim",
+    nameFormatted: "Mannheim",
     content: (
     <>
 <h1>Statistical summary of Mannheim</h1>
@@ -236,6 +240,7 @@ const mannheim = {
 
 const muenster = {
     name: "muenster",
+    nameFormatted: "Münster",
     content: (
     <>
 <h1>Statistical summary of Muenster</h1>
@@ -317,6 +322,7 @@ const muenster = {
 
 const paris = {
     name: "paris",
+    nameFormatted: "Paris",
     content: (
     <>
 <h1>Statistical summary of Paris</h1>
@@ -382,6 +388,7 @@ const paris = {
 
 const philadelphia = {
     name: "philadelphia",
+    nameFormatted: "Philadelphia",
     content: (
     <>
 <h1>Statistical summary of Philadelphia</h1>
@@ -438,6 +445,7 @@ const philadelphia = {
 
 const washington = {
     name: "washington",
+    nameFormatted: "Washington DC",
     content: (
     <>
 <h1>Statistical summary of Washington</h1>
