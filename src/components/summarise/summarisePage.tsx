@@ -30,6 +30,10 @@ export default function SummarisePage() {
         <>
             <div className={styles.summarise}>
                 {contentHtml[idx]}
+                <Control
+                    idx={idx}
+                    handleIdxChange={handleIdxChange}
+                />
             </div>
         </>
     )
