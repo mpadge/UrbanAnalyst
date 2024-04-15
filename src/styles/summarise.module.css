@@ -1,3 +1,33 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 6rem;
+    min-height: 100vh;
+}
+
+.description {
+    display: relative;
+    justify-content: left;
+    align-items: left;
+    font-size: 16px;
+}
+
+.description p {
+    position: absolute;
+    top: 20px;
+    left: 10%;
+    margin-top: 20px;
+    padding: 1rem;
+    width: auto;
+    background-color: rgba(var(--callout-rgb), 0.5);
+    border: 1px solid rgba(var(--callout-border-rgb), 0.3);
+    border-radius: var(--border-radius);
+}
+
+
 .summarise h2 {
     font-size: 24px;
     font-weight: 600;
@@ -28,6 +58,9 @@
 
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
+    .description {
+        display: none;
+    }
 }
 
 /* Mobile */

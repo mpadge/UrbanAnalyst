@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from 'next/link'
 import type { Metadata, Viewport } from 'next';
 
-import styles from '@/styles/about.module.css'
+import styles from '@/styles/summarise.module.css'
 import Buttons from '@/components/buttons4'
 import { ButtonProps } from '@/data/interfaces';
 
