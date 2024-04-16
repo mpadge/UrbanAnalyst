@@ -5,7 +5,7 @@
     align-items: center;
     margin: 20px;
     z-index: 10;
-    position: absolute;
+    position: fixed;
     background-color: rgba(238, 240, 241, 0.5);
     border: 1px solid rgba(172, 175, 176, 0.3);
     border-radius: 12px;
