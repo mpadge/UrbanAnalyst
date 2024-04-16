@@ -36,8 +36,9 @@
         left: 5vw;
         right: 5vw;
     }
-    .buttons > * {
-        flex-basis: calc(33.33% - 20px);
+
+    .can-wrap {
+        flex-grow: 1;
     }
 
     .buttons span, .buttons h2 {
