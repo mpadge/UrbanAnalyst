@@ -66,7 +66,6 @@ by clicking on &quot;paired&quot;, or detailed patterns for Berlin viewed in the
 <h3>Non-Transportation Variables:</h3>
 <ul>
 <li>Bicycle infrastructure are 2.4% better than in Berlin.</li>
-<li>Relative transport times are 89.3% better than in Berlin.</li>
 </ul>
 <h2>Paired variables</h2>
 <p>The following aspects of paired variables are notably better in London:</p><ul>
@@ -107,9 +106,6 @@ const hamburg = {
 
 <p>The following aspects of individual variables are notably good in comparison to the average of all UA cities:</p><ul>
 <li> Very significantly better access to natural spaces </li>
-</ul>
-<p>While the following aspects are notably bad:</p><ul>
-<li> Marginally slower relative transport times </li>
 </ul>
 <h2>Paired variables</h2>
 <p>As with single variables, values for these paired variables can be compared with values for all other UA cities in the
@@ -153,12 +149,8 @@ by clicking on &quot;paired&quot;, or detailed patterns for Hamburg viewed in th
 <h3>Transportation:</h3><ul>
 <li>The transport system in London is on average 19% better than in Hamburg</li>
 </ul>
-<ul><li>This is particularly influenced by absolute transport times which are 3.6% faster</li></ul>
+<ul><li>This is particularly influenced by relative transport times which are 90.4% faster</li></ul>
 <ul><li>Nevertheless numbers of transfers are 56% slower</li></ul>
-<h3>Non-Transportation Variables:</h3>
-<ul>
-<li>Relative transport times are 90% better than in Hamburg.</li>
-</ul>
     </>
     )
 };
@@ -185,7 +177,6 @@ const london = {
 <h3>Non-transport variables:</h3>
 
 <p>The following aspects of individual variables are notably good in comparison to the average of all UA cities:</p><ul>
-<li> Very significantly faster relative transport times </li>
 <li> Notably shorter distances to nearest schools </li>
 </ul>
 <h2>Paired variables</h2>
@@ -258,13 +249,13 @@ const mannheim = {
 </ul>
 <p>This is particularly influenced by:</p>
 <ul>
+<li> Very notably slower relative transport times </li>
 <li> Moderately longer intervals between transport services </li>
 <li> Slightly slower absolute transport times </li>
 </ul>
 <h3>Non-transport variables:</h3>
 
 <p>The following aspects are notably bad in comparison to the average of all UA cities:</p><ul>
-<li> Very notably slower relative transport times </li>
 <li> Very notably longer distances to nearest schools </li>
 </ul>
 <h2>Paired variables</h2>
@@ -301,10 +292,9 @@ by clicking on &quot;paired&quot;, or detailed patterns for Mannheim viewed in t
 <h3>Transportation:</h3><ul>
 <li>The transport system in London is on average 34% better than in Mannheim</li>
 </ul>
-<ul><li>This is particularly influenced by intervals between transport services which are 50.8% better</li></ul>
+<ul><li>This is particularly influenced by relative transport times which are 92.5% faster</li></ul>
 <h3>Non-Transportation Variables:</h3>
 <ul>
-<li>Relative transport times are 92.5% better than in Mannheim.</li>
 <li>Distances to nearest schools are 50.8% better than in Mannheim.</li>
 <li>Access to natural spaces are 4.4% better than in Mannheim.</li>
 </ul>
@@ -424,7 +414,6 @@ by clicking on &quot;paired&quot;, or detailed patterns for Muenster viewed in t
 <h3>Non-Transportation Variables:</h3>
 <ul>
 <li>Distances to nearest schools are 40% better than in Muenster.</li>
-<li>Relative transport times are 88% better than in Muenster.</li>
 </ul>
     </>
     )
@@ -577,7 +566,6 @@ by clicking on &quot;paired&quot;, or detailed patterns for Philadelphia viewed 
 <li>Bicycle infrastructure are 3.6% better than in Philadelphia.</li>
 <li>Population density are 1.5% lower than in Philadelphia.</li>
 <li>Distances to nearest schools are 41.0% better than in Philadelphia.</li>
-<li>Relative transport times are 88.1% better than in Philadelphia.</li>
 </ul>
 <h2>Paired variables</h2>
 <p>The following aspects of paired variables are notably better in London:</p><ul>
@@ -621,14 +609,12 @@ const washington = {
 <p>This is particularly influenced by:</p>
 <ul>
 <li> Very notably faster absolute transport times </li>
+<li> Marginally faster relative transport times </li>
 <li> Marginally shorter intervals between transport services </li>
 </ul>
 <h3>Non-transport variables:</h3>
 
-<p>The following aspects of individual variables are notably good in comparison to the average of all UA cities:</p><ul>
-<li> Marginally faster relative transport times </li>
-</ul>
-<p>While the following aspects are notably bad:</p><ul>
+<p>The following aspects are notably bad in comparison to the average of all UA cities:</p><ul>
 <li> Slightly longer distances to nearest schools </li>
 </ul>
 <h2>Paired variables</h2>
