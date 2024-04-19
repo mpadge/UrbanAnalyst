@@ -18,6 +18,21 @@ const buttonProps = {
 export default function SummarisePage() {
 
     const [idx, setIdx] = useState(0);
+
+    useEffect(() => {
+        var idxLocal = 0;
+        if (typeof window != "undefined") {
+            const storedIdx = localStorage.getItem('uaSummariseIdx');
+            if(storedIdx) {
+                idxLocal = parseInt(storedIdx, 10);
+                if (isNaN(idxLocal)) {
+                    idxLocal = 0;
+                }
+            }
+        }
+        setIdx(idxLocal);
+    }, [])
+
     const contentArray = Content();
 
     const contentNames = contentArray.map(element => element.name);
@@ -25,6 +40,9 @@ export default function SummarisePage() {
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
+        if (typeof window != "undefined") {
+            localStorage.setItem("uaSummariseIdx", idx.toString());
+        }
     }
 
     return (
