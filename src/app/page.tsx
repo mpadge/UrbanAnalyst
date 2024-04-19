@@ -69,11 +69,28 @@ export default function Home() {
                     Urban Analyst is a platform for interactive visualisation of
                     the properties of cities, including transport systems,
                     measures of accessibility, and socio-demographic conditions.
-                    There are three main ways to examine and compare cities:
+                    There are four main ways to examine and compare cities:
                 </p>
             </div>
 
             <div className={styles.grid}>
+
+                <div className={styles.card}>
+                    <Link href="/summarise" rel="noopener noreferrer">
+                        <div className={styles.cardContent}>
+                            <h2>
+                                Summarise <span>&#8628;</span>
+                            </h2>
+                            <p className={styles.cardText}>
+                                Read a summary of analyses for any chosen city.
+                                The Summary page also identifies the best target
+                                city for each city, and summarises the ways by
+                                which that city could best improve to become
+                                more like the target city.
+                            </p>
+                        </div>
+                    </Link>
+                </div>
 
                 <div className={styles.card}>
                     <Link href="/compare" rel="noopener noreferrer">
