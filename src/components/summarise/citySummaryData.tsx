@@ -40,7 +40,7 @@ by clicking on &quot;paired&quot;, or detailed patterns for Berlin viewed in the
 </a></Link>
 , also clicking on &quot;paired&quot;.</p>
 <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
-<li> Very pronounced strength of relationship between index of access to natural spaces and social index </li>
+<li> Very pronounced strength of relationship between access to natural spaces and social index </li>
 <li> Highly significant strength of relationship between population density and distances to nearest schools </li>
 <li> Extremely strong strength of relationship between transport and accessibility to natural spaces </li>
 <li> Pronounced strength of relationship between population density and bicycle infrastructure </li>
@@ -50,7 +50,7 @@ by clicking on &quot;paired&quot;, or detailed patterns for Berlin viewed in the
 <li> Marginal strength of relationship between transport and social index </li>
 </ul>
 <p>While the following aspects are notably bad:</p><ul>
-<li> Highly significant and detrimental strength of relationship between index of access to natural spaces and parking index </li>
+<li> Highly significant and detrimental strength of relationship between access to natural spaces and parking index </li>
 <li> Strong negative strength of relationship between distance to nearest school and social index </li>
 <li> Notable negative strength of relationship between transport and distances to nearest schools </li>
 </ul>
@@ -74,7 +74,7 @@ by clicking on &quot;paired&quot;, or detailed patterns for Berlin viewed in the
 <li> Marginally better strength of relationship between bicycle infrastructure and accessibility to natural spaces </li>
 </ul>
 <p>While the following aspects are notably worse:</p><ul>
-<li> Very notably worse strength of relationship between index of access to natural spaces and parking index </li>
+<li> Very notably worse strength of relationship between access to natural spaces and parking index </li>
 <li> Considerably worse strength of relationship between distance to nearest school and social index </li>
 <li> Moderately worse strength of relationship between population density and accessibility to natural spaces </li>
 <li> Marginally worse strength of relationship between bicycle infrastructure and parking index </li>
@@ -121,7 +121,7 @@ by clicking on &quot;paired&quot;, or detailed patterns for Hamburg viewed in th
 , also clicking on &quot;paired&quot;.</p>
 <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
 <li> Highly significant strength of relationship between bicycle infrastructure and accessibility to natural spaces </li>
-<li> Weak strength of relationship between index of access to natural spaces and social index </li>
+<li> Weak strength of relationship between access to natural spaces and social index </li>
 </ul>
 <p>While the following aspects are notably bad:</p><ul>
 <li> Moderate negative strength of relationship between population density and accessibility to natural spaces </li>
@@ -143,7 +143,7 @@ by clicking on &quot;paired&quot;, or detailed patterns for Hamburg viewed in th
 <li> Significantly worse strength of relationship between population density and accessibility to natural spaces </li>
 <li> Significantly worse strength of relationship between bicycle infrastructure and parking index </li>
 <li> Notably worse strength of relationship between population density and bicycle infrastructure </li>
-<li> Slightly worse strength of relationship between index of access to natural spaces and parking index </li>
+<li> Slightly worse strength of relationship between access to natural spaces and parking index </li>
 </ul>
 <h2>Single variables</h2>
 <h3>Transportation:</h3><ul>
@@ -193,7 +193,7 @@ by clicking on &quot;paired&quot;, or detailed patterns for London viewed in the
 , also clicking on &quot;paired&quot;.</p>
 <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
 <li> Extremely strong strength of relationship between population density and accessibility to natural spaces </li>
-<li> Very pronounced strength of relationship between index of access to natural spaces and parking index </li>
+<li> Very pronounced strength of relationship between access to natural spaces and parking index </li>
 <li> Notable strength of relationship between transport and social index </li>
 <li> Marginal strength of relationship between transport and distances to nearest schools </li>
 </ul>
@@ -272,7 +272,7 @@ by clicking on &quot;paired&quot;, or detailed patterns for Mannheim viewed in t
 , also clicking on &quot;paired&quot;.</p>
 <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
 <li> Extremely strong strength of relationship between bicycle infrastructure and social index </li>
-<li> Significant strength of relationship between index of access to natural spaces and parking index </li>
+<li> Significant strength of relationship between access to natural spaces and parking index </li>
 <li> Marginal strength of relationship between population density and distances to nearest schools </li>
 <li> Weak strength of relationship between bicycle infrastructure and accessibility to natural spaces </li>
 </ul>
@@ -302,7 +302,7 @@ by clicking on &quot;paired&quot;, or detailed patterns for Mannheim viewed in t
 <p>The following aspects of paired variables are notably better in London:</p><ul>
 <li> Very notably better strength of relationship between transport and accessibility to natural spaces </li>
 <li> Considerably better strength of relationship between distance to nearest school and bicycle infrastructure </li>
-<li> Notably better strength of relationship between index of access to natural spaces and social index </li>
+<li> Notably better strength of relationship between access to natural spaces and social index </li>
 <li> Notably better strength of relationship between transport and social index </li>
 <li> Notably better strength of relationship between transport and bicycle infrastructure </li>
 <li> Slightly better strength of relationship between transport and distances to nearest schools </li>
@@ -379,10 +379,10 @@ by clicking on &quot;paired&quot;, or detailed patterns for Muenster viewed in t
 <li> Highly significant and detrimental strength of relationship between distance to nearest school and bicycle infrastructure </li>
 <li> Very pronounced and counterproductive strength of relationship between bicycle infrastructure and parking index </li>
 <li> Extremely strong and counterproductive strength of relationship between transport and distances to nearest schools </li>
-<li> Highly significant and detrimental strength of relationship between index of access to natural spaces and social index </li>
+<li> Highly significant and detrimental strength of relationship between access to natural spaces and social index </li>
 <li> Highly significant and disadvantageous strength of relationship between transport and bicycle infrastructure </li>
 <li> Pronounced negative strength of relationship between population density and distances to nearest schools </li>
-<li> Moderate negative strength of relationship between index of access to natural spaces and parking index </li>
+<li> Moderate negative strength of relationship between access to natural spaces and parking index </li>
 <li> Weak negative strength of relationship between population density and accessibility to natural spaces </li>
 <li> Slight negative strength of relationship between transport and accessibility to natural spaces </li>
 </ul>
@@ -397,7 +397,7 @@ by clicking on &quot;paired&quot;, or detailed patterns for Muenster viewed in t
 <li> Highly significantly better strength of relationship between distance to nearest school and accessibility to natural spaces </li>
 <li> Highly significantly better strength of relationship between distance to nearest school and bicycle infrastructure </li>
 <li> Considerably better strength of relationship between transport and distances to nearest schools </li>
-<li> Significantly better strength of relationship between index of access to natural spaces and social index </li>
+<li> Significantly better strength of relationship between access to natural spaces and social index </li>
 <li> Notably better strength of relationship between transport and bicycle infrastructure </li>
 <li> Significantly better strength of relationship between transport and accessibility to natural spaces </li>
 <li> Marginally better strength of relationship between bicycle infrastructure and accessibility to natural spaces </li>
@@ -406,7 +406,7 @@ by clicking on &quot;paired&quot;, or detailed patterns for Muenster viewed in t
 <li> Very notably worse strength of relationship between population density and bicycle infrastructure </li>
 <li> Very notably worse strength of relationship between bicycle infrastructure and parking index </li>
 <li> Notably worse strength of relationship between population density and distances to nearest schools </li>
-<li> Significantly worse strength of relationship between index of access to natural spaces and parking index </li>
+<li> Significantly worse strength of relationship between access to natural spaces and parking index </li>
 <li> Considerably worse strength of relationship between population density and accessibility to natural spaces </li>
 </ul>
 <h2>Single variables</h2>
@@ -482,7 +482,7 @@ by clicking on &quot;paired&quot;, or detailed patterns for Paris viewed in the
 <p>While the following aspects are notably bad:</p><ul>
 <li> Extremely strong and counterproductive strength of relationship between population density and distances to nearest schools </li>
 <li> Extremely strong and disadvantageous strength of relationship between distance to nearest school and social index </li>
-<li> Moderate negative strength of relationship between index of access to natural spaces and social index </li>
+<li> Moderate negative strength of relationship between access to natural spaces and social index </li>
 <li> Weak negative strength of relationship between bicycle infrastructure and social index </li>
 </ul>
 <h2>Target city for Paris </h2>
@@ -497,7 +497,7 @@ by clicking on &quot;paired&quot;, or detailed patterns for Paris viewed in the
 </ul>
 <h2>Paired variables</h2>
 <p>The following aspects of paired variables are notably better in Muenster:</p><ul>
-<li> Notably better strength of relationship between index of access to natural spaces and social index </li>
+<li> Notably better strength of relationship between access to natural spaces and social index </li>
 <li> Slightly better strength of relationship between transport and bicycle infrastructure </li>
 <li> Marginally better strength of relationship between transport and accessibility to natural spaces </li>
 <li> Slightly better strength of relationship between transport and distances to nearest schools </li>
@@ -581,7 +581,7 @@ by clicking on &quot;paired&quot;, or detailed patterns for Philadelphia viewed 
 <li> Slightly better strength of relationship between transport and social index </li>
 </ul>
 <p>While the following aspects are notably worse:</p><ul>
-<li> Notably worse strength of relationship between index of access to natural spaces and parking index </li>
+<li> Notably worse strength of relationship between access to natural spaces and parking index </li>
 <li> Notably worse strength of relationship between bicycle infrastructure and social index </li>
 <li> Slightly worse strength of relationship between population density and distances to nearest schools </li>
 </ul>
