@@ -217,7 +217,6 @@ by clicking on &quot;paired&quot;, or detailed patterns for London viewed in the
 <h2>Single variables</h2>
 <h3>Non-Transportation Variables:</h3>
 <ul>
-<li>Population density are 39.0% lower than in London.</li>
 <li>Bicycle infrastructure are 6.2% better than in London.</li>
 </ul>
     </>
@@ -492,7 +491,6 @@ by clicking on &quot;paired&quot;, or detailed patterns for Paris viewed in the
 <h2>Single variables</h2>
 <h3>Non-Transportation Variables:</h3>
 <ul>
-<li>Population density are 48.2% lower than in Paris.</li>
 <li>Access to natural spaces are 8.7% better than in Paris.</li>
 </ul>
 <h2>Paired variables</h2>
@@ -570,7 +568,6 @@ by clicking on &quot;paired&quot;, or detailed patterns for Philadelphia viewed 
 <ul>
 <li>Access to natural spaces are 8.4% better than in Philadelphia.</li>
 <li>Bicycle infrastructure are 3.6% better than in Philadelphia.</li>
-<li>Population density are 1.5% lower than in Philadelphia.</li>
 <li>Distances to nearest schools are 41.0% better than in Philadelphia.</li>
 </ul>
 <h2>Paired variables</h2>
@@ -662,7 +659,6 @@ by clicking on &quot;paired&quot;, or detailed patterns for Washington viewed in
 <li>Distances to nearest schools are 5.7% better than in Washington.</li>
 <li>Access to natural spaces are 7.7% better than in Washington.</li>
 <li>Bicycle infrastructure are 6.2% better than in Washington.</li>
-<li>Population density are 35.6% lower than in Washington.</li>
 </ul>
     </>
     )
