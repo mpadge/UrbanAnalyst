@@ -39,12 +39,12 @@
     --card-rgb: 180, 185, 188;
     --card-border-rgb: 131, 134, 135;
 
-    --control-width-wide-outer: 10dw;
-    --control-width-wide-inner: 8dw;
-    --control-width-med-outer: 12dw;
-    --control-width-med-inner: 10dw;
-    --control-width-narrow-outer: 25dw;
-    --control-width-narrow-inner: 20dw;
+    --control-width-wide-outer: 10vw;
+    --control-width-wide-inner: 8vw;
+    --control-width-med-outer: 12vw;
+    --control-width-med-inner: 10vw;
+    --control-width-narrow-outer: 25vw;
+    --control-width-narrow-inner: 20vw;
 
     --explain-dialog-background-rgb: 157, 248, 248;
 }

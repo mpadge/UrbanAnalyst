@@ -5,7 +5,7 @@ import { FlyToInterpolator } from "@deck.gl/core/typed";
 
 import Control from '@/components/transform/control';
 import Legend from '@/components/transform/legend';
-import Buttons from '@/components/buttons3';
+import Buttons from '@/components/buttons4';
 import Tour from '@/components/transform/tour/tour';
 import useWindowSize from '@/components/window-size';
 
@@ -18,8 +18,9 @@ import tourStyles from '@/styles/tour.module.css';
 
 const buttonProps = {
     first: "home",
-    second: "map",
-    third: "compare"
+    second: "summarise",
+    third: "map",
+    fourth: "compare"
 }
 
 export default function TransformPage() {

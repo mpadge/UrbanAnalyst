@@ -3,7 +3,7 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import Control from '@/components/compare/control';
-import Buttons from '@/components/buttons3';
+import Buttons from '@/components/buttons4';
 import BarChart from '@/components/compare/statsBarChart';
 import Tour from '@/components/compare/tour/tour';
 import useWindowSize from '@/components/window-size';
@@ -17,8 +17,9 @@ import { CITY_DATA } from '@/data/citydata';
 
 const buttonProps = {
     first: "home",
-    second: "map",
-    third: "transform"
+    second: "summarise",
+    third: "map",
+    fourth: "transform"
 }
 
 export default function Home() {

@@ -74,7 +74,8 @@ export interface ButtonProps {
     buttons: {
         first: string,
         second: string,
-        third?: string
+        third: string
         fourth?: string
+        fifth?: string
     }
 }
