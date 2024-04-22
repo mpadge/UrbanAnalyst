@@ -30,6 +30,7 @@ const buttonProps = {
 export default function MapPage() {
 
     const [idx, setIdx] = useState(0);
+
     const [cityData, setCityData] = useState(CITY_DATA.citiesArray[idx]);
     const [viewState, setViewState] = useState({
         ...CITY_DATA.citiesArray[idx].initialViewState,
@@ -45,8 +46,41 @@ export default function MapPage() {
     const [numLayers, setNumLayers] = useState("Single");
     const numLayersOptions = ["Single", "Paired"];
 
+    useEffect(() => {
+        var idxLocal = 0;
+        if (typeof window != "undefined") {
+            const storedIdx = localStorage.getItem('uaCityIdx');
+            if(storedIdx) {
+                idxLocal = parseInt(storedIdx, 10);
+                if (isNaN(idxLocal)) {
+                    idxLocal = 0;
+                }
+            }
+        }
+        setIdx(idxLocal);
+        setCityData(CITY_DATA.citiesArray[idxLocal]);
+        setViewState({
+            ...CITY_DATA.citiesArray[idxLocal].initialViewState,
+            pitch: 0,
+            bearing: 0,
+            transitionDuration: 2000,
+            transitionInterpolator: new FlyToInterpolator()
+        })
+    }, [])
+
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
+        setCityData(CITY_DATA.citiesArray[idx]);
+        setViewState({
+            ...CITY_DATA.citiesArray[idx].initialViewState,
+            pitch: 0,
+            bearing: 0,
+            transitionDuration: 2000,
+            transitionInterpolator: new FlyToInterpolator()
+        })
+        if (typeof window != "undefined") {
+            localStorage.setItem("uaCityIdx", idx.toString());
+        }
     }
     const handleAlphaChange = (alpha: number) => {
         setAlpha(alpha);
