@@ -22,7 +22,7 @@ export default function SummarisePage() {
     useEffect(() => {
         var idxLocal = 0;
         if (typeof window != "undefined") {
-            const storedIdx = localStorage.getItem('uaSummariseIdx');
+            const storedIdx = localStorage.getItem('uaCityIdx');
             if(storedIdx) {
                 idxLocal = parseInt(storedIdx, 10);
                 if (isNaN(idxLocal)) {
@@ -41,7 +41,7 @@ export default function SummarisePage() {
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
         if (typeof window != "undefined") {
-            localStorage.setItem("uaSummariseIdx", idx.toString());
+            localStorage.setItem("uaCityIdx", idx.toString());
         }
     }
 
