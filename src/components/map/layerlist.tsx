@@ -44,6 +44,7 @@ export default function LayerList(props: LayerListProps) {
         <Select
             options={options}
             defaultValue={matchingOption}
+            value={matchingOption}
             name="LayerSelector"
             //isClearable={isClearable}
             isSearchable={isSearchable}
