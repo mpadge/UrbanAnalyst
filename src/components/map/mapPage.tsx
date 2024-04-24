@@ -49,6 +49,7 @@ export default function MapPage() {
     useEffect(() => {
         var idxLocal = 0;
         var layerLocal = "social_index";
+        var layer2Local = "";
         if (typeof window != "undefined") {
             const storedIdx = localStorage.getItem('uaCityIdx');
             if(storedIdx) { // convert to int
@@ -61,6 +62,10 @@ export default function MapPage() {
             if(storedLayer) {
                 layerLocal = storedLayer;
             }
+            const storedLayer2 = localStorage.getItem('uaLayer2');
+            if(storedLayer2) {
+                layer2Local = storedLayer2;
+            }
         }
         setIdx(idxLocal);
         setCityData(CITY_DATA.citiesArray[idxLocal]);
@@ -72,6 +77,7 @@ export default function MapPage() {
             transitionInterpolator: new FlyToInterpolator()
         })
         setLayer(layerLocal);
+        setLayer2(layer2Local);
     }, [])
 
     const handleIdxChange = (idx: number) => {
@@ -103,6 +109,9 @@ export default function MapPage() {
     }
     const handleLayer2Change = (layer2: string) => {
         setLayer2(layer2);
+        if (typeof window != "undefined") {
+            localStorage.setItem("uaLayer2", layer2);
+        }
     }
     const handleExplainChange = (e: any) => {
         setExplain(!explain);
