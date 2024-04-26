@@ -39,13 +39,25 @@ export default function Home() {
 
     useEffect(() => {
         var layerLocal = "social_index";
+        var layer2Local = "";
+        var numLayersLocal = "Single";
         if (typeof window != "undefined") {
             const storedLayer = localStorage.getItem('uaLayer');
             if(storedLayer) {
                 layerLocal = storedLayer;
             }
+            const storedLayer2 = localStorage.getItem('uaLayer2');
+            if(storedLayer2) {
+                layer2Local = storedLayer2;
+            }
+            const storedNumLayers = localStorage.getItem('uaNumLayers');
+            if(storedNumLayers) {
+                numLayersLocal = storedNumLayers;
+            }
         }
         setLayer(layerLocal);
+        setLayer2(layer2Local);
+        setNumLayers(numLayersLocal);
     }, [])
 
     const handleLayerChange = (layer: string) => {
@@ -56,9 +68,15 @@ export default function Home() {
     }
     const handleLayer2Change = (layer2: string) => {
         setLayer2(layer2);
+        if (typeof window != "undefined") {
+            localStorage.setItem("uaLayer2", layer2);
+        }
     }
     const handleNumLayersChange = (numLayers: string) => {
         setNumLayers(numLayers);
+        if (typeof window != "undefined") {
+            localStorage.setItem("uaNumLayers", numLayers);
+        }
     }
     const handleExplainChange = (e: any) => {
         setExplain(!explain);
