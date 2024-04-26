@@ -11,7 +11,7 @@ import Legend from '@/components/map/legend';
 import UTAMap from '@/components/map/map';
 import Buttons from '@/components/buttons4';
 import Tour from '@/components/map/tour/tour';
-import useWindowSize from '@/components/window-size';
+import useWindowSize from '@/components/windowSize';
 import { getTourConfig } from '@/components/map/tour/tourConfig';
 import { HeadingTextOneLayer, HeadingText } from "@/components/headingText";
 import styles from '@/styles/map.module.css';

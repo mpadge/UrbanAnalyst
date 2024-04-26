@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import Control from '@/components/summarise/control';
 import Buttons from '@/components/buttons4';
-import useWindowSize from '@/components/window-size';
+import useWindowSize from '@/components/windowSize';
 import styles from '@/styles/summarise.module.css';
 import Content from '@/components/summarise/citySummaryData';
 

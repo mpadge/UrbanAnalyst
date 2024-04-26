@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 import Link from 'next/link'
 
 import styles from '@/styles/message.module.css';
-import useWindowSize from '@/components/window-size';
+import useWindowSize from '@/components/windowSize';
 
 import { CityDataProps } from "@/data/interfaces";
 

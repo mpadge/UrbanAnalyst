@@ -1,6 +1,6 @@
 "use client"
 
-import useWindowSize from '@/components/window-size';
+import useWindowSize from '@/components/windowSize';
 import { posControlsX, posControlsY, maxWidth } from "@/components/tourPositionControls";
 import { controlBoxText, legendText, navText } from "@/components/map/tour/tourText";
 

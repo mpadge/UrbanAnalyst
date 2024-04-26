@@ -6,7 +6,7 @@ import Control from '@/components/compare/control';
 import Buttons from '@/components/buttons4';
 import BarChart from '@/components/compare/statsBarChart';
 import Tour from '@/components/compare/tour/tour';
-import useWindowSize from '@/components/window-size';
+import useWindowSize from '@/components/windowSize';
 
 import { getTourConfig } from '@/components/compare/tour/tourConfig';
 
