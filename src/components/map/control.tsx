@@ -6,7 +6,7 @@ import localFont from 'next/font/local'
 
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/map/cityList';
-import LayerList from '@/components/map/layerlist';
+import LayerList from '@/components/map/layerList';
 import SelectNumLayers from '@/components/map/numLayers';
 import OpacitySlider from '@/components/map/slider';
 import ExplainButton from '@/components/map/explainButton';
