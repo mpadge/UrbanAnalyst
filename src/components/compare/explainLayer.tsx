@@ -4,7 +4,6 @@ import { CityDataProps } from "@/data/interfaces";
 import { GetLayerText, GetLayerTextCompare } from "@/components/explainLayer";
 
 interface CompareExplainProps {
-    idx: number,
     layer: string,
     layer2: string,
     numLayers: string,
@@ -16,7 +15,7 @@ interface CompareExplainProps {
 export default function ExplainButton (props: CompareExplainProps) {
 
     const meanVarIndex = props.meanVals ? 0 : 1;
-    const paired_keys = Object.keys(props.citiesArray[props.idx].dataRangesPaired);
+    const paired_keys = Object.keys(props.citiesArray[0].dataRangesPaired);
 
     const layer1: string = props.layer.replace("\_", "").replace("index", "");
     const layer2: string = props.layer2.replace("\_", "").replace("index", "");

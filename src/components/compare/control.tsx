@@ -18,7 +18,6 @@ import { CityDataProps } from "@/data/interfaces";
 const junctionFont = localFont({ src: '../../app/junction-regular.woff' })
 
 interface CompareControlProps {
-    idx: number,
     layer: string,
     layer2: string,
     numLayers: string,
@@ -38,8 +37,6 @@ interface CompareControlProps {
 
 
 export default function Control (props: CompareControlProps) {
-
-    const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
 
     const cityNames = props.citiesArray.map((item) => item.name);
 
@@ -117,7 +114,6 @@ export default function Control (props: CompareControlProps) {
 
         </div>
         <ExplainLayer
-            idx={props.idx}
             layer = {props.layer}
             layer2 = {props.layer2}
             numLayers = {props.numLayers}

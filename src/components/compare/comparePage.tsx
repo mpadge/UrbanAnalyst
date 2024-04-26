@@ -24,8 +24,9 @@ const buttonProps = {
 
 export default function Home() {
 
-    const [idx, setIdx] = useState(0);
-    const [cityData, setCityData] = useState(CITY_DATA.citiesArray[idx]);
+    // cityData only used to obtain generic info not specific to any city, so
+    // default index of [0] can be used.
+    const [cityData, setCityData] = useState(CITY_DATA.citiesArray[0]);
 
     const [layer, setLayer] = useState("social_index"); // options[0] in layerlist.tsx
     const [layer2, setLayer2] = useState("");
@@ -47,9 +48,6 @@ export default function Home() {
         setLayer(layerLocal);
     }, [])
 
-    const handleIdxChange = (idx: number) => {
-        setIdx(idx);
-    }
     const handleLayerChange = (layer: string) => {
         setLayer(layer);
         if (typeof window != "undefined") {
@@ -111,7 +109,6 @@ export default function Home() {
         <main className={styles.main}>
 
             <BarChart
-                idx = {idx}
                 layer1 = {layer}
                 layer2 = {layer2}
                 numLayers = {numLayers}
@@ -120,7 +117,6 @@ export default function Home() {
                 citiesArray = {CITY_DATA.citiesArray}
             />
             <Control
-                idx = {idx}
                 layer = {layer}
                 layer2 = {layer2}
                 numLayers = {numLayers}
