@@ -5,7 +5,7 @@ import Image from "next/image"
 import localFont from 'next/font/local'
 
 import styles from '@/styles/controls.module.css';
-import CityList from '@/components/summarise/citylist';
+import CityList from '@/components/summarise/cityList';
 
 const junctionFont = localFont({ src: '../../app/junction-regular.woff' })
 
