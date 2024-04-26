@@ -45,6 +45,7 @@ export default function TransformPage() {
 
     useEffect(() => {
         var idxLocal = 0;
+        var idx2Local = 1;
         var layerLocal = "social_index";
         var alphaLocal = 0.5;
         if (typeof window != "undefined") {
@@ -53,6 +54,13 @@ export default function TransformPage() {
                 idxLocal = parseInt(storedIdx, 10);
                 if (isNaN(idxLocal)) {
                     idxLocal = 0;
+                }
+            }
+            const storedIdx2 = localStorage.getItem('uaCityIdx2');
+            if(storedIdx2) { // convert to int
+                idx2Local = parseInt(storedIdx2, 10);
+                if (isNaN(idx2Local)) {
+                    idx2Local = 0;
                 }
             }
             const storedLayer = localStorage.getItem('uaLayer');
@@ -68,6 +76,7 @@ export default function TransformPage() {
             }
         }
         setIdx(idxLocal);
+        setIdx2(idx2Local);
         setViewState({
             ...CITY_DATA.citiesArray[idxLocal].initialViewState,
             pitch: 0,
@@ -95,6 +104,9 @@ export default function TransformPage() {
     }
     const handleIdx2Change = (idx2: number) => {
         setIdx2(idx2);
+        if (typeof window != "undefined") {
+            localStorage.setItem("uaCityIdx2", idx2.toString());
+        }
     }
     const handleViewStateChange = (pViewState: any) => {
         setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });

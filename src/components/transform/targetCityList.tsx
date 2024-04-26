@@ -32,6 +32,7 @@ export default function TargetCityList(props: CityListProps) {
         <Select
             options={options}
             defaultValue={options[props.idx2]}
+            value={options[props.idx2]}
             name="CitySelector"
             isSearchable={isSearchable}
             onChange = {handleChange}
