@@ -1,7 +1,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 
-import ResetButton from '@/components/transform/reset-button';
+import ResetButton from '@/components/transform/resetButton';
 import styles from '@/styles/controls.module.css';
 
 interface OptionType {
