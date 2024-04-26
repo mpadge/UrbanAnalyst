@@ -6,12 +6,12 @@ import localFont from 'next/font/local'
 
 import styles from '@/styles/controls.module.css';
 import LayerList from '@/components/compare/layerlist';
-import SelectNumLayers from '@/components/compare/num_layers';
+import SelectNumLayers from '@/components/compare/numLayers';
 import SortOrderList from '@/components/compare/sortOrderList';
-import ExplainButton from '@/components/compare/explain-button';
-import ExplainLayer from '@/components/compare/explain-layer';
-import MeanAvgButtons from '@/components/compare/mean-avg';
-import HelpButton from '@/components/map/helpButton';
+import ExplainButton from '@/components/compare/explainButton';
+import ExplainLayer from '@/components/compare/explainLayer';
+import MeanAvgButtons from '@/components/compare/meanAvg';
+import HelpButton from '@/components/compare/helpButton';
 
 import { CityDataProps } from "@/data/interfaces";
 
