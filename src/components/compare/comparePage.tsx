@@ -36,11 +36,25 @@ export default function Home() {
     const [sortOpt, setSortOpt] = useState("increasing");
     const [meanVals, setMeanVals] = useState(true);
 
+    useEffect(() => {
+        var layerLocal = "social_index";
+        if (typeof window != "undefined") {
+            const storedLayer = localStorage.getItem('uaLayer');
+            if(storedLayer) {
+                layerLocal = storedLayer;
+            }
+        }
+        setLayer(layerLocal);
+    }, [])
+
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
     }
     const handleLayerChange = (layer: string) => {
         setLayer(layer);
+        if (typeof window != "undefined") {
+            localStorage.setItem("uaLayer", layer);
+        }
     }
     const handleLayer2Change = (layer2: string) => {
         setLayer2(layer2);
