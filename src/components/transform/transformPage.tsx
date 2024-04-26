@@ -9,7 +9,7 @@ import Buttons from '@/components/buttons4';
 import Tour from '@/components/transform/tour/tour';
 import useWindowSize from '@/components/window-size';
 
-import MapTransformDynamic from '@/components/transform/TransformPageDynamic';
+import MapTransformDynamic from '@/components/transform/transformPageDynamic';
 import { getTourConfig } from '@/components/transform/tour/tourConfig';
 import { CITY_DATA } from '@/data/citydata';
 import { ViewState } from "@/data/interfaces";

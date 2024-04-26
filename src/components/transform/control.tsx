@@ -6,15 +6,15 @@ import localFont from 'next/font/local'
 
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/transform/cityList';
-import LayersList from '@/components/transform/LayersList';
+import LayersList from '@/components/transform/layersList';
 import TargetCityList from '@/components/transform/targetCityList';
 import LayerList from '@/components/map/layerlist';
 import SelectNumLayers from '@/components/map/num_layers';
 import OpacitySlider from '@/components/map/slider';
-import LayersButton from '@/components/transform/layers-button';
-import CalculateButton from '@/components/transform/calculate-button';
+import LayersButton from '@/components/transform/layersButton';
+import CalculateButton from '@/components/transform/calculateButton';
 import OutputLayers from '@/components/transform/outputLayers';
-import HelpButton from '@/components/transform/help-button';
+import HelpButton from '@/components/transform/helpButton';
 
 import { ViewState, CityDataProps, CalculateButtonProps } from "@/data/interfaces";
 

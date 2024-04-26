@@ -3,7 +3,7 @@
 
 import dynamic from 'next/dynamic'
 
-import TransformComponent from '@/components/transform/TransformComponent';
+import TransformComponent from '@/components/transform/transformComponent';
 
 const TransformDynamic = dynamic(() => Promise.resolve(TransformComponent), {
     ssr: false

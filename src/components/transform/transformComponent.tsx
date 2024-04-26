@@ -3,10 +3,10 @@ import { DeckGL } from "@deck.gl/react/typed";
 import { Map } from "react-map-gl";
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
-import TransformMsgs from '@/components/transform/PageMessages';
-import { loadDataFunction } from '@/components/transform/LoadData';
-import { transformDataFunction } from '@/components/transform/CallTransform';
-import { getGeoJsonLayer } from '@/components/transform/GeoJsonLayer';
+import TransformMsgs from '@/components/transform/pageMessages';
+import { loadDataFunction } from '@/components/transform/loadData';
+import { transformDataFunction } from '@/components/transform/callTransform';
+import { getGeoJsonLayer } from '@/components/transform/geoJsonLayer';
 import { getRangeLimits } from '@/components/utils/trimRange';
 
 interface TransformProps {

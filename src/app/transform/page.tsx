@@ -14,7 +14,7 @@ export const viewport: Viewport = {
     userScalable: false,
 }
 
-import TransformPage from '@/components/transform/TransformPage';
+import TransformPage from '@/components/transform/transformPage';
 
 export default function Home() {
 
