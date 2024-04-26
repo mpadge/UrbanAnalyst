@@ -50,6 +50,7 @@ export default function MapPage() {
         var idxLocal = 0;
         var layerLocal = "social_index";
         var layer2Local = "";
+        var numLayersLocal = "Single";
         if (typeof window != "undefined") {
             const storedIdx = localStorage.getItem('uaCityIdx');
             if(storedIdx) { // convert to int
@@ -66,6 +67,10 @@ export default function MapPage() {
             if(storedLayer2) {
                 layer2Local = storedLayer2;
             }
+            const storedNumLayers = localStorage.getItem('uaNumLayers');
+            if(storedNumLayers) {
+                numLayersLocal = storedNumLayers;
+            }
         }
         setIdx(idxLocal);
         setCityData(CITY_DATA.citiesArray[idxLocal]);
@@ -78,6 +83,7 @@ export default function MapPage() {
         })
         setLayer(layerLocal);
         setLayer2(layer2Local);
+        setNumLayers(numLayersLocal);
     }, [])
 
     const handleIdxChange = (idx: number) => {
@@ -118,6 +124,9 @@ export default function MapPage() {
     }
     const handleNumLayersChange = (numLayers: string) => {
         setNumLayers(numLayers);
+        if (typeof window != "undefined") {
+            localStorage.setItem("uaNumLayers", numLayers);
+        }
     }
 
     const heading: string = HeadingText(layer, layer2, numLayers, CITY_DATA.citiesArray);
