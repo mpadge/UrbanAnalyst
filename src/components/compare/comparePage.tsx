@@ -41,6 +41,7 @@ export default function Home() {
         var layerLocal = "social_index";
         var layer2Local = "";
         var numLayersLocal = "Single";
+        var sortOptLocal = "increasing";
         if (typeof window != "undefined") {
             const storedLayer = localStorage.getItem('uaLayer');
             if(storedLayer) {
@@ -54,10 +55,15 @@ export default function Home() {
             if(storedNumLayers) {
                 numLayersLocal = storedNumLayers;
             }
+            const storedSortOpt = localStorage.getItem('uaCompareSortOpt');
+            if(storedSortOpt) {
+                sortOptLocal = storedSortOpt;
+            }
         }
         setLayer(layerLocal);
         setLayer2(layer2Local);
         setNumLayers(numLayersLocal);
+        setSortOpt(sortOptLocal);
     }, [])
 
     const handleLayerChange = (layer: string) => {
@@ -83,6 +89,9 @@ export default function Home() {
     }
     const handleSortChange = (sortOpt: string) => {
         setSortOpt (sortOpt)
+        if (typeof window != "undefined") {
+            localStorage.setItem("uaCompareSortOpt", sortOpt);
+        }
     }
     const handleMeanChange = (e: any) => {
         setMeanVals(!meanVals);

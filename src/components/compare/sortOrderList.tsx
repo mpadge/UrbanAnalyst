@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Select from 'react-select';
 
 import styles from '@/styles/controls.module.css';
@@ -11,11 +11,11 @@ interface SortOrderListProps {
 
 export default function SortOrderList(props: SortOrderListProps) {
 
-    const options = [
+    const options = useMemo (() => [
         { value: 'increasing', label: 'increasing' },
         { value: 'decreasing', label: 'decreasing' },
         { value: 'alphabetic', label: 'alphabetic' },
-    ]
+    ], []);
 
     const [isSearchable, setIsSearchable] = useState(true);
     const [selected, setSelected] = useState(null);
@@ -25,11 +25,22 @@ export default function SortOrderList(props: SortOrderListProps) {
         props.handleSortChange(selectedOption.value);
     };
 
+    const findMatchingOption = useCallback(() => {
+        return options.find(option => option.value === props.sortOpt);
+    }, [options, props.sortOpt]);
+
+    const [matchingOption, setMatchingOption] = useState(findMatchingOption());
+    useEffect(() => {
+        const this_option = findMatchingOption();
+        setMatchingOption(this_option);
+    }, [props.sortOpt, findMatchingOption]);
+
   return (
     <section className={styles.listSelect}>
         <Select
             options={options}
-            defaultValue={options[0]}
+            defaultValue={matchingOption}
+            value={matchingOption}
             name="SortSelector"
             //isClearable={isClearable}
             isSearchable={isSearchable}
