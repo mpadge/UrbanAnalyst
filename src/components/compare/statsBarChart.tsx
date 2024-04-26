@@ -7,7 +7,7 @@ import styles from '@/styles/compare.module.css';
 import useWindowSize from '@/components/window-size';
 
 import { CityDataProps } from "@/data/interfaces";
-import { HeadingTextOneLayer } from "@/components/heading_text";
+import { HeadingTextOneLayer } from "@/components/headingText";
 
 interface CompareProps {
     idx: number,

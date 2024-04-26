@@ -13,7 +13,7 @@ import Buttons from '@/components/buttons4';
 import Tour from '@/components/map/tour/tour';
 import useWindowSize from '@/components/window-size';
 import { getTourConfig } from '@/components/map/tour/tourConfig';
-import { HeadingTextOneLayer, HeadingText } from "@/components/heading_text";
+import { HeadingTextOneLayer, HeadingText } from "@/components/headingText";
 import styles from '@/styles/map.module.css';
 import tourStyles from '@/styles/tour.module.css';
 

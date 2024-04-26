@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from '@/styles/compare.module.css';
 import { CityDataProps } from "@/data/interfaces";
-import { GetLayerText, GetLayerTextCompare } from "@/components/explain-layer";
+import { GetLayerText, GetLayerTextCompare } from "@/components/explainLayer";
 
 interface CompareExplainProps {
     idx: number,

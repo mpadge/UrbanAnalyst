@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from '@/styles/controls.module.css';
 import { CityDataProps } from "@/data/interfaces";
-import { GetLayerText } from "@/components/explain-layer";
+import { GetLayerText } from "@/components/explainLayer";
 
 // The background colour of the explain dialogs is the same as the tour
 // components defined in tour/tourConfig.tsx, where
