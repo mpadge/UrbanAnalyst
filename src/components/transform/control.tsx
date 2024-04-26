@@ -9,7 +9,7 @@ import CityList from '@/components/transform/cityList';
 import LayersList from '@/components/transform/layersList';
 import TargetCityList from '@/components/transform/targetCityList';
 import LayerList from '@/components/map/layerList';
-import SelectNumLayers from '@/components/map/numlayers';
+import SelectNumLayers from '@/components/map/numLayers';
 import OpacitySlider from '@/components/map/slider';
 import LayersButton from '@/components/transform/layersButton';
 import CalculateButton from '@/components/transform/calculateButton';
