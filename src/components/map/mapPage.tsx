@@ -51,6 +51,7 @@ export default function MapPage() {
         var layerLocal = "social_index";
         var layer2Local = "";
         var numLayersLocal = "Single";
+        var alphaLocal = 0.5;
         if (typeof window != "undefined") {
             const storedIdx = localStorage.getItem('uaCityIdx');
             if(storedIdx) { // convert to int
@@ -71,6 +72,13 @@ export default function MapPage() {
             if(storedNumLayers) {
                 numLayersLocal = storedNumLayers;
             }
+            const storedAlpha = localStorage.getItem('uaAlpha');
+            if(storedAlpha) {
+                alphaLocal = parseFloat(storedAlpha);
+                if (isNaN(alphaLocal)) {
+                    alphaLocal = 0.5;
+                }
+            }
         }
         setIdx(idxLocal);
         setCityData(CITY_DATA.citiesArray[idxLocal]);
@@ -84,6 +92,7 @@ export default function MapPage() {
         setLayer(layerLocal);
         setLayer2(layer2Local);
         setNumLayers(numLayersLocal);
+        setAlpha(alphaLocal);
     }, [])
 
     const handleIdxChange = (idx: number) => {
@@ -102,6 +111,9 @@ export default function MapPage() {
     }
     const handleAlphaChange = (alpha: number) => {
         setAlpha(alpha);
+        if (typeof window != "undefined") {
+            localStorage.setItem("uaAlpha", alpha.toString());
+        }
     }
     const handleViewStateChange = (pViewState: any) => {
         setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
