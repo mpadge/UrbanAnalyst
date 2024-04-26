@@ -11,7 +11,7 @@ import SortOrderList from '@/components/compare/sortOrderList';
 import ExplainButton from '@/components/compare/explain-button';
 import ExplainLayer from '@/components/compare/explain-layer';
 import MeanAvgButtons from '@/components/compare/mean-avg';
-import HelpButton from '@/components/map/help-button';
+import HelpButton from '@/components/map/helpButton';
 
 import { CityDataProps } from "@/data/interfaces";
 

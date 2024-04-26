@@ -7,11 +7,11 @@ import localFont from 'next/font/local'
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/map/citylist';
 import LayerList from '@/components/map/layerlist';
-import SelectNumLayers from '@/components/map/num_layers';
+import SelectNumLayers from '@/components/map/numLayers';
 import OpacitySlider from '@/components/map/slider';
-import ExplainButton from '@/components/map/explain-button';
-import ExplainLayer from '@/components/map/explain-layer';
-import HelpButton from '@/components/map/help-button';
+import ExplainButton from '@/components/map/explainButton';
+import ExplainLayer from '@/components/map/explainLayer';
+import HelpButton from '@/components/map/helpButton';
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
 
