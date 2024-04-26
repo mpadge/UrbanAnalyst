@@ -43,9 +43,55 @@ export default function TransformPage() {
     const [varnames, setVarnames] = useState<string[]>([]);
     const [outputLayer, setOutputLayer] = useState<string>("relative");
 
+    useEffect(() => {
+        var idxLocal = 0;
+        var layerLocal = "social_index";
+        var alphaLocal = 0.5;
+        if (typeof window != "undefined") {
+            const storedIdx = localStorage.getItem('uaCityIdx');
+            if(storedIdx) { // convert to int
+                idxLocal = parseInt(storedIdx, 10);
+                if (isNaN(idxLocal)) {
+                    idxLocal = 0;
+                }
+            }
+            const storedLayer = localStorage.getItem('uaLayer');
+            if(storedLayer) {
+                layerLocal = storedLayer;
+            }
+            const storedAlpha = localStorage.getItem('uaAlpha');
+            if(storedAlpha) {
+                alphaLocal = parseFloat(storedAlpha);
+                if (isNaN(alphaLocal)) {
+                    alphaLocal = 0.5;
+                }
+            }
+        }
+        setIdx(idxLocal);
+        setViewState({
+            ...CITY_DATA.citiesArray[idxLocal].initialViewState,
+            pitch: 0,
+            bearing: 0,
+            transitionDuration: 2000,
+            transitionInterpolator: new FlyToInterpolator()
+        })
+        setLayer(layerLocal);
+        setAlpha(alphaLocal);
+    }, [])
+
     // -------- handlers for state variables --------
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
+        setViewState({
+            ...CITY_DATA.citiesArray[idx].initialViewState,
+            pitch: 0,
+            bearing: 0,
+            transitionDuration: 2000,
+            transitionInterpolator: new FlyToInterpolator()
+        })
+        if (typeof window != "undefined") {
+            localStorage.setItem("uaCityIdx", idx.toString());
+        }
     }
     const handleIdx2Change = (idx2: number) => {
         setIdx2(idx2);
@@ -55,9 +101,15 @@ export default function TransformPage() {
     }
     const handleLayerChange = (layer: string) => {
         setLayer(layer);
+        if (typeof window != "undefined") {
+            localStorage.setItem("uaLayer", layer);
+        }
     }
     const handleAlphaChange = (alpha: number) => {
         setAlpha(alpha);
+        if (typeof window != "undefined") {
+            localStorage.setItem("uaAlpha", alpha.toString());
+        }
     }
     const handleLayerMinChange = (layerMin: number) => {
         setLayerMin(layerMin);
