@@ -39,17 +39,18 @@ export default function LayerList(props: LayerListProps) {
         setMatchingOption(this_option);
     }, [props.layer, findMatchingOption]);
 
-  return (
-    <section className={styles.listSelect}>
+    return (
+        <section className={styles.listSelect}>
         <Select
             options={options}
             defaultValue={matchingOption}
+            value={matchingOption}
             name="LayerSelector"
             //isClearable={isClearable}
             isSearchable={isSearchable}
             onChange = {handleChange}
         />
-    </section>
-  );
+        </section>
+    );
 }
 
