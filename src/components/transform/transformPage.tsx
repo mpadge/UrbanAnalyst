@@ -42,6 +42,7 @@ export default function TransformPage() {
     const [calculate, setCalculate] = useState<boolean>(true);
     const [varnames, setVarnames] = useState<string[]>([]);
     const [outputLayer, setOutputLayer] = useState<string>("relative");
+    const [cityLayers, setCityLayers] = useState<string[]>([]);
 
     useEffect(() => {
         var idxLocal = 0;
@@ -86,6 +87,9 @@ export default function TransformPage() {
         })
         setLayer(layerLocal);
         setAlpha(alphaLocal);
+
+        const theseLayers = Object.keys(CITY_DATA.citiesArray[idxLocal].dataRanges);
+        setCityLayers(theseLayers);
     }, [])
 
     // -------- handlers for state variables --------
@@ -203,6 +207,7 @@ export default function TransformPage() {
             calculate={calculate}
             alpha={alpha}
             citiesArray={CITY_DATA.citiesArray}
+            cityLayers={cityLayers}
             viewState={viewState}
             outputLayer={outputLayer}
             handleIdxChange={handleIdxChange}

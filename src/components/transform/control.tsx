@@ -28,6 +28,7 @@ interface TransformControlProps {
     calculate: boolean,
     alpha: number,
     citiesArray: CityDataProps[],
+    cityLayers: string[],
     viewState: ViewState,
     outputLayer: string
     handleIdxChange: (pIdx: number) => void,
@@ -159,6 +160,7 @@ export default function Control (props: TransformControlProps) {
                 <LayerList
                     layer = {props.layer}
                     handleLayerChange = {props.handleLayerChange}
+                    cityLayers = {props.cityLayers}
                 />
 
                 <LayersButton
