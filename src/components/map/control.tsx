@@ -95,12 +95,14 @@ export default function Control (props: MapControlProps) {
             <LayerList
                 layer = {props.layer}
                 handleLayerChange = {props.handleLayerChange}
+                cityLayers = {props.cityLayers}
             />
 
             {props.numLayers == "Paired"  &&
                 <LayerList
                     layer = {props.layer2}
                     handleLayerChange = {props.handleLayer2Change}
+                    cityLayers = {props.cityLayers}
                 />
             }
 
