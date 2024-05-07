@@ -45,6 +45,7 @@ export default function MapPage() {
     const [explain, setExplain] = useState(false);
     const [numLayers, setNumLayers] = useState("Single");
     const numLayersOptions = ["Single", "Paired"];
+    const [cityLayers, setCityLayers] = useState<string[]>([]);
 
     useEffect(() => {
         var idxLocal = 0;
@@ -93,6 +94,9 @@ export default function MapPage() {
         setLayer2(layer2Local);
         setNumLayers(numLayersLocal);
         setAlpha(alphaLocal);
+
+        const theseLayers = Object.keys(CITY_DATA.citiesArray[idxLocal].dataRanges);
+        setCityLayers(theseLayers);
     }, [])
 
     const handleIdxChange = (idx: number) => {
@@ -206,6 +210,7 @@ export default function MapPage() {
             alpha = {alpha}
             explain = {explain}
             citiesArray = {CITY_DATA.citiesArray}
+            cityLayers = {cityLayers}
             viewState = {viewState}
             handleIdxChange = {handleIdxChange}
             handleNumLayersChange = {handleNumLayersChange}

@@ -26,6 +26,7 @@ interface MapControlProps {
     alpha: number,
     explain: any,
     citiesArray: CityDataProps[],
+    cityLayers: string[],
     viewState: ViewState,
     handleIdxChange: (pIdx: number) => void,
     handleNumLayersChange: (numLayers: string) => void,
