@@ -29,7 +29,9 @@ interface CityStatsProps {
     school_dist: number[],
     bike_index: number[],
     natural: number[],
-    parking: number[]
+    parking: number[],
+    rent: number[],
+    value: number[],
 }
 
 
@@ -64,7 +66,9 @@ export default function BarChart (props: CompareProps) {
     const this_layer: string = props.numLayers == "Paired" && dual_layers ?
         these_layers : props.layer1;
 
-    const data = props.citiesArray.map((city, index) => ({
+    const data = props.citiesArray
+        .filter((city) => city.stats_paired.hasOwnProperty(this_layer) || city.stats_single.hasOwnProperty(this_layer))
+        .map((city) => ({
         city: city.nameFormatted,
         value: props.numLayers == "Paired" && dual_layers ?
             city.stats_paired[this_layer as string] :

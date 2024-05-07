@@ -18,7 +18,9 @@ export default function LayerList(props: LayerListProps) {
         { value: "school_dist", label: "School Dist." },
         { value: "bike_index", label: "Bicycle Index" },
         { value: "natural", label: "Nature Index" },
-        { value: "parking", label: "Parking" }
+        { value: "parking", label: "Parking" },
+        { value: "rent", label: "Housing Rent" },
+        { value: "value", label: "Housing Value" },
     ], []);
 
     const [isSearchable, setIsSearchable] = useState(true);
