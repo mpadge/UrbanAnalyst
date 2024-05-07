@@ -51,6 +51,12 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
         "parking": [
             "Parking index, as a (logarithmically) re-scaled measure of numbers of parking spaces per unit building volume. Lower values imply fewer available parking spaces for a given volume of building. Values for each street junction within a polygon are averaged across all nearby parking spaces, inversely weighted by distance. Each point is the described by a single measure of average number of nearby spaces per volume of nearby buildings. Final values are then population-density average values of these, as a measure of average parking availability per person."
         ],
+        "value": [
+            "House value in US dollars per room, from US Government census data for 2020."
+        ],
+        "rent": [
+            "Montly rent paid in US dollars per room, from US Government census data for 2020."
+        ],
 
         "timesrel_timesabs": [
             "Multiple of relative and absolute travel times. These two variables are generally strongly related, and this statistic should be interpreted with caution. Lower values represent faster travel both in absolute terms, and relativve to equivalent travel times in private automobiles."
