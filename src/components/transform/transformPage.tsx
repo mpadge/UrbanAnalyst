@@ -39,7 +39,7 @@ export default function TransformPage() {
     const [alpha, setAlpha] = useState(0.5);
     const [layerMin, setLayerMin] = useState<number>(0);
     const [layerMax, setLayerMax] = useState<number>(0);
-    const [calculate, setCalculate] = useState<boolean>(true);
+    const [calculate, setCalculate] = useState<boolean>(false);
     const [varnames, setVarnames] = useState<string[]>([]);
     const [outputLayer, setOutputLayer] = useState<string>("relative");
     const [cityLayers, setCityLayers] = useState<string[]>([]);
