@@ -51,11 +51,11 @@ const TransformComponent = (props: TransformProps) => {
 
     // Effect to load 'dataraw' point-based data for source and target cities.
     useEffect(() => {
-        // if (!props.calculate) return;
         setLoading(true);
         loadDataFunction(props.city, props.targetCity, setData1, setData2);
         setLoading(false);
-        }, [props.calculate, props.city, props.targetCity, setData1, setData2, setLoading]);
+        console.log("-----Loaded data-----");
+        }, [props.city, props.targetCity, setData1, setData2, setLoading]);
 
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
     // vector of aggregaed mean differences in each polygon of source city. This
