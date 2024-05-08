@@ -97,6 +97,16 @@ export default function MapPage() {
 
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idxLocal].dataRanges);
         setCityLayers(theseLayers);
+        if (!theseLayers.includes(layerLocal)) {
+            layerLocal = "social_index";
+            setLayer(layerLocal);
+            localStorage.removeItem('uaLayer');
+        }
+        if (!theseLayers.includes(layer2Local)) {
+            layer2Local = "social_index";
+            setLayer2(layer2Local);
+            localStorage.removeItem('uaLayer2');
+        }
     }, [])
 
     const handleIdxChange = (idx: number) => {
