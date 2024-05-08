@@ -30,6 +30,10 @@ export function HeadingTextOneLayer (layer: string) {
         heading = "Nature Index";
     } else if (layer === "parking") {
         heading = "Parking";
+    } else if (layer === "value") {
+        heading = "Housing Value";
+    } else if (layer === "rent") {
+        heading = "Housing Rent";
     }
 
     return heading;
