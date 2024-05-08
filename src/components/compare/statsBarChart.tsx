@@ -88,7 +88,7 @@ export default function BarChart (props: CompareProps) {
     const xMinActual = data.map((item) => item.value).reduce((a, b) => Math.min(a, b));
     const xMax = data.map((item) => item.value).reduce((a, b) => Math.max(a, b));
     const xRange = xMax - xMinActual;
-    const xMin = xMax - rangeExpand * xRange;
+    const xMin = xMinActual > 0 ? Math.max(0, xMax - rangeExpand * xRange) : xMax - rangeExpand * xRange;
 
     const size = useWindowSize();
 
