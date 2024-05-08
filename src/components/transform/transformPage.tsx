@@ -90,6 +90,11 @@ export default function TransformPage() {
 
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idxLocal].dataRanges);
         setCityLayers(theseLayers);
+        if (!theseLayers.includes(layerLocal)) {
+            layerLocal = "social_index";
+            setLayer(layerLocal);
+            localStorage.removeItem('uaLayer');
+        }
     }, [])
 
     // -------- handlers for state variables --------
@@ -104,6 +109,11 @@ export default function TransformPage() {
         })
         if (typeof window != "undefined") {
             localStorage.setItem("uaCityIdx", idx.toString());
+        }
+        const theseLayers = Object.keys(CITY_DATA.citiesArray[idx].dataRanges);
+        if (!theseLayers.includes(layer)) {
+            setLayer("social_index");
+            localStorage.removeItem('uaLayer');
         }
     }
     const handleIdx2Change = (idx2: number) => {
