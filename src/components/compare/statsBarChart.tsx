@@ -159,7 +159,7 @@ export default function BarChart (props: CompareProps) {
                         return colourPalette(d.value);
                     })
                 })
-                .transition()                .transition()
+                .transition()
                 .duration(750)
                 .attr('width', (d: any) => xScale(xValue(d)));
         };
