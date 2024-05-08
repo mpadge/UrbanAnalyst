@@ -122,6 +122,15 @@ export default function MapPage() {
         if (typeof window != "undefined") {
             localStorage.setItem("uaCityIdx", idx.toString());
         }
+        const theseLayers = Object.keys(CITY_DATA.citiesArray[idx].dataRanges);
+        if (!theseLayers.includes(layer)) {
+            setLayer("social_index");
+            localStorage.removeItem('uaLayer');
+        }
+        if (!theseLayers.includes(layer2)) {
+            setLayer2("social_index");
+            localStorage.removeItem('uaLayer2');
+        }
     }
     const handleAlphaChange = (alpha: number) => {
         setAlpha(alpha);
