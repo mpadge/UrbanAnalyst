@@ -71,19 +71,21 @@ export default function UTAMapLayer (props: MapProps) {
             getLineColor: [122, 122, 122],
             getFillColor: d => {
                 var layerval = Math.max (layer_min, Math.min (layer_max, d.properties?.[this_layer]));
-                if (isNaN(layerval)) {
+                const layerIsNaN = isNaN(layerval)
+                if (layerIsNaN) {
                     layerval = layer_min;
                 }
                 // Invert the palette:
                 layerval = layer_min + (layer_max - layerval);
                 const layerarr: any = d3.color(Color(layerval));
                 var red = 0, green = 0, blue = 0;
+                const layerAlpha = layerIsNaN ? 0 : 255;
                 if (layerarr) {
                     red = layerarr.r;
                     green = layerarr.g;
                     blue = layerarr.b;
                 }
-                return [red, green, blue]
+                return [red, green, blue, layerAlpha]
                 },
             opacity: 1 - props.alpha,
             updateTriggers: {
