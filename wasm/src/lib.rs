@@ -56,8 +56,16 @@ pub fn uamutate(
     let varnames_str: Vec<String> = varname.split(',').map(|s| s.to_string()).collect();
 
     // Read contents of JSON data:
-    let (mut values1, groups1) = read_write_file::readfile(json_data1, &varnames, nentries);
+    let (mut values1, mut groups1) = read_write_file::readfile(json_data1, &varnames, nentries);
     let (mut values2, _groups2) = read_write_file::readfile(json_data2, &varnames, nentries);
+
+    // Resize to smallest number of rows:
+    let nentries_actual = values1.nrows().min(values2.nrows());
+    if nentries_actual < nentries {
+        values1 = utils::resize_matrix(&values1, nentries_actual);
+        values2 = utils::resize_matrix(&values2, nentries_actual);
+        groups1.truncate(nentries_actual);
+    }
 
     let log_scale = utils::log_transform(&mut values1, &varnames_str);
     let _log_scale = utils::log_transform(&mut values2, &varnames_str);

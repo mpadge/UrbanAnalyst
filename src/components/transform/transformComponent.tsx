@@ -29,6 +29,10 @@ interface TransformProps {
     handleOutputLayerChange: (outputLayer: string) => void
 }
 
+interface StringAcc {
+      [key: string]: boolean;
+}
+
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 
@@ -54,17 +58,25 @@ const TransformComponent = (props: TransformProps) => {
         setLoading(true);
         loadDataFunction(props.city, props.targetCity, setData1, setData2);
         setLoading(false);
-        console.log("-----Loaded data-----");
         }, [props.city, props.targetCity, setData1, setData2, setLoading]);
 
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
     // vector of aggregaed mean differences in each polygon of source city. This
     // vector is stored in the column of 'result' corresponding to
     // 'varnames[0]'.
+    const { handleCalculateChange } = props;
     useEffect(() => {
-        const varnames: string[] = [props.layer, ...props.varnames];
+        const uniqueVarNames = Object.keys(
+          props.varnames.reduce((acc: StringAcc, name) => {
+            acc[name] = true;
+            return acc;
+          }, {})
+        ).sort();
+        const filteredVarNames = props.varnames.filter(name => name!== props.layer);
+        const varnames: string[] = [props.layer, ...filteredVarNames];
         transformDataFunction(data1, data2, varnames, props.outputLayer, setResult);
-        }, [data1, data2, props.layer, props.varnames, props.outputLayer, setResult]);
+        handleCalculateChange(false);
+        }, [data1, data2, props.layer, props.varnames, props.outputLayer, setResult, props.calculate, handleCalculateChange]);
 
     // Effect to load map data for source city, and replace specified column
     // with 'result' from previous effect:
@@ -94,14 +106,6 @@ const TransformComponent = (props: TransformProps) => {
     useEffect(() => {
         getGeoJsonLayer(geoJSONcontent, props.layerMin, props.layerMax, props.layer, props.alpha, setGeoJsonLayer);
     }, [props.layerMin, props.layerMax, props.layer, props.alpha, geoJSONcontent]);
-
-    const { handleCalculateChange } = props;
-    useEffect(() => {
-        if (geoJsonLayer) {
-            setCalculating(false);
-            handleCalculateChange(false);
-        }
-    }, [geoJsonLayer, setCalculating, handleCalculateChange]);
 
     return (
         <>

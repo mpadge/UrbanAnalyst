@@ -47,7 +47,10 @@ pub fn readfile(
 ) -> (DMatrix<f64>, Vec<usize>) {
     assert!(nentries > 0, "nentries must be greater than zero");
 
-    let mut values = DMatrix::<f64>::zeros(nentries, varnames.len());
+    let parsed_json: Value = serde_json::from_str(json_data).unwrap();
+    let actual_nentries = parsed_json.as_array().unwrap().len().min(nentries);
+
+    let mut values = DMatrix::<f64>::zeros(actual_nentries, varnames.len());
     let mut city_group = Vec::new();
     let city_group_col = "index";
 
@@ -55,7 +58,7 @@ pub fn readfile(
     let mut current_positions = vec![0; varnames.len()];
 
     let mut std_index: Vec<usize> = vec![];
-    let parsed_json: Value = serde_json::from_str(json_data).unwrap();
+
     if let Value::Array(array) = parsed_json {
         for item in array {
             if let Value::Object(map) = item {
@@ -66,7 +69,7 @@ pub fn readfile(
                             std_index.push(i);
                         }
                         if let Some(number) = number.as_f64() {
-                            if current_positions[i] < nentries {
+                            if current_positions[i] < actual_nentries {
                                 values[(current_positions[i], i)] = number;
                                 current_positions[i] += 1;
                             }
@@ -75,7 +78,7 @@ pub fn readfile(
                 }
                 if let Some(Value::Number(number)) = map.get(city_group_col) {
                     if let Some(number) = number.as_f64() {
-                        if city_group.len() < nentries {
+                        if city_group.len() < actual_nentries {
                             city_group.push(number as usize);
                         }
                     }

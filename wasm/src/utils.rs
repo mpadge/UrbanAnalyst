@@ -107,6 +107,30 @@ pub fn mean_sd_column(column: &DVector<f64>) -> (f64, f64) {
     (mean, sd)
 }
 
+/// Resizes a `DMatrix` to a specified number of rows, keeping the same number of columns.
+///
+/// # Arguments
+///
+/// * `matrix` - The original `DMatrix` to be resized.
+/// * `new_rows` - The new number of rows for the resized `DMatrix`.
+///
+/// # Returns
+///
+/// A new `DMatrix` with the specified number of rows and the same number of columns as the original `DMatrix`.
+pub fn resize_matrix(matrix: &DMatrix<f64>, new_rows: usize) -> DMatrix<f64> {
+    assert!(
+        new_rows <= matrix.nrows(),
+        "Cannot resize to a larger size than the original matrix."
+    );
+    let mut resized_matrix = DMatrix::zeros(new_rows, matrix.ncols());
+    for i in 0..new_rows {
+        for j in 0..matrix.ncols() {
+            resized_matrix[(i, j)] = matrix[(i, j)];
+        }
+    }
+    resized_matrix
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
