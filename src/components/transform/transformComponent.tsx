@@ -54,7 +54,6 @@ const TransformComponent = (props: TransformProps) => {
         setLoading(true);
         loadDataFunction(props.city, props.targetCity, setData1, setData2);
         setLoading(false);
-        console.log("-----Loaded data-----");
         }, [props.city, props.targetCity, setData1, setData2, setLoading]);
 
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
@@ -63,8 +62,9 @@ const TransformComponent = (props: TransformProps) => {
     // 'varnames[0]'.
     const { handleCalculateChange } = props;
     useEffect(() => {
-        if (!props.calculate) return;
-        const varnames: string[] = [props.layer, ...props.varnames];
+        const uniqueVarNames = [...new Set(props.varnames)];
+        const filteredVarNames = props.varnames.filter(name => name!== props.layer);
+        const varnames: string[] = [props.layer, ...filteredVarNames];
         transformDataFunction(data1, data2, varnames, props.outputLayer, setResult);
         handleCalculateChange(false);
         }, [data1, data2, props.layer, props.varnames, props.outputLayer, setResult, props.calculate, handleCalculateChange]);
