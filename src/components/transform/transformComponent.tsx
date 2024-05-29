@@ -29,6 +29,10 @@ interface TransformProps {
     handleOutputLayerChange: (outputLayer: string) => void
 }
 
+interface StringAcc {
+      [key: string]: boolean;
+}
+
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 
@@ -62,7 +66,12 @@ const TransformComponent = (props: TransformProps) => {
     // 'varnames[0]'.
     const { handleCalculateChange } = props;
     useEffect(() => {
-        const uniqueVarNames = [...new Set(props.varnames)];
+        const uniqueVarNames = Object.keys(
+          props.varnames.reduce((acc: StringAcc, name) => {
+            acc[name] = true;
+            return acc;
+          }, {})
+        ).sort();
         const filteredVarNames = props.varnames.filter(name => name!== props.layer);
         const varnames: string[] = [props.layer, ...filteredVarNames];
         transformDataFunction(data1, data2, varnames, props.outputLayer, setResult);
