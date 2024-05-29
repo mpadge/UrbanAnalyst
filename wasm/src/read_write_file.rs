@@ -49,6 +49,7 @@ pub fn readfile(
 
     let parsed_json: Value = serde_json::from_str(json_data).unwrap();
     let actual_nentries = parsed_json.as_array().unwrap().len().min(nentries);
+
     let mut values = DMatrix::<f64>::zeros(actual_nentries, varnames.len());
     let mut city_group = Vec::new();
     let city_group_col = "index";
