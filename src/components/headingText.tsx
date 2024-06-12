@@ -49,7 +49,7 @@ export function HeadingText (layer: string, layer2: string, numLayers: string, c
     const layer2fmt: string = layer2.replace("\_", "").replace("index", "");
     const these_layers =
         paired_keys.includes(layer1 + "_" + layer2fmt) ?
-        layer1 + "_" + layer2fmt : layer2fmt + "_" + layer1;
+            layer1 + "_" + layer2fmt : layer2fmt + "_" + layer1;
     const dual_layers: boolean = paired_keys.includes(these_layers);
     const this_layer: string = numLayers == "Paired" && dual_layers ?
         these_layers : layer;
