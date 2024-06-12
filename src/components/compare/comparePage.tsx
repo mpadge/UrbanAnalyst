@@ -133,45 +133,45 @@ export default function Home() {
 
     return (
         <>
-        <main className={styles.main}>
+            <main className={styles.main}>
 
-            <BarChart
-                layer1 = {layer}
-                layer2 = {layer2}
-                numLayers = {numLayers}
-                meanVals = {meanVals}
-                sortOpt = {sortOpt}
-                citiesArray = {CITY_DATA.citiesArray}
+                <BarChart
+                    layer1 = {layer}
+                    layer2 = {layer2}
+                    numLayers = {numLayers}
+                    meanVals = {meanVals}
+                    sortOpt = {sortOpt}
+                    citiesArray = {CITY_DATA.citiesArray}
+                />
+                <Control
+                    layer = {layer}
+                    layer2 = {layer2}
+                    numLayers = {numLayers}
+                    numLayersOptions = {numLayersOptions}
+                    meanVals = {meanVals}
+                    explain = {explain}
+                    sortOpt = {sortOpt}
+                    citiesArray = {CITY_DATA.citiesArray}
+                    handleLayerChange = {handleLayerChange}
+                    handleLayer2Change = {handleLayer2Change}
+                    handleNumLayersChange = {handleNumLayersChange}
+                    handleMeanChange = {handleMeanChange}
+                    handleSortChange = {handleSortChange}
+                    handleExplainChange = {handleExplainChange}
+                    handleTourOpen = {handleTourOpen}
+                />
+                <Buttons buttons={buttonProps} />
+            </main>
+            <Tour
+                onRequestClose={closeTour}
+                disableInteraction={false}
+                steps={tourConfig}
+                isOpen={isTourOpen}
+                maskClassName={tourStyles.tourmask}
+                className={tourStyles.tourhelper}
+                rounded={5}
+                accentColor={accentColor}
             />
-            <Control
-                layer = {layer}
-                layer2 = {layer2}
-                numLayers = {numLayers}
-                numLayersOptions = {numLayersOptions}
-                meanVals = {meanVals}
-                explain = {explain}
-                sortOpt = {sortOpt}
-                citiesArray = {CITY_DATA.citiesArray}
-                handleLayerChange = {handleLayerChange}
-                handleLayer2Change = {handleLayer2Change}
-                handleNumLayersChange = {handleNumLayersChange}
-                handleMeanChange = {handleMeanChange}
-                handleSortChange = {handleSortChange}
-                handleExplainChange = {handleExplainChange}
-                handleTourOpen = {handleTourOpen}
-            />
-            <Buttons buttons={buttonProps} />
-        </main>
-        <Tour
-            onRequestClose={closeTour}
-            disableInteraction={false}
-            steps={tourConfig}
-            isOpen={isTourOpen}
-            maskClassName={tourStyles.tourmask}
-            className={tourStyles.tourhelper}
-            rounded={5}
-            accentColor={accentColor}
-        />
         </>
     )
 }

@@ -14,12 +14,12 @@ export default function HelpButton (props: HelpButtonProps) {
     var buttonText: string = "Help";
 
     return (
-    <section className="button">
-    <button
-        className={buttonStyle}
-        type="button"
-        onClick={() => props.handleTourOpen(true)}
-    >{buttonText}</button>
-    </section>
+        <section className="button">
+            <button
+                className={buttonStyle}
+                type="button"
+                onClick={() => props.handleTourOpen(true)}
+            >{buttonText}</button>
+        </section>
     )
 }
