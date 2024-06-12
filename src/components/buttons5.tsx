@@ -31,57 +31,57 @@ export default function Buttons (props: ButtonProps) {
 
     return (
         <>
-        <div id="top-right-container" className={styles.buttons}>
-            <div id="first-button">
-                <Link
-                    href={firstHref}
-                    className={styles.card}
-                    rel="noopener noreferrer"
-                >
-                <span> {First} </span>
-                </Link>
-            </div>
+            <div id="top-right-container" className={styles.buttons}>
+                <div id="first-button">
+                    <Link
+                        href={firstHref}
+                        className={styles.card}
+                        rel="noopener noreferrer"
+                    >
+                        <span> {First} </span>
+                    </Link>
+                </div>
 
-            <div id="second-button">
-                <Link
-                    href={secondHref}
-                    className={styles.card}
-                    rel="noopener noreferrer"
-                >
-                <span> {Second} </span>
-                </Link>
-            </div>
+                <div id="second-button">
+                    <Link
+                        href={secondHref}
+                        className={styles.card}
+                        rel="noopener noreferrer"
+                    >
+                        <span> {Second} </span>
+                    </Link>
+                </div>
 
-            <div id="third-button">
-                <Link
-                    href={thirdHref}
-                    className={styles.card}
-                    rel="noopener noreferrer"
-                >
-                <span> {Third} </span>
-                </Link>
-            </div>
+                <div id="third-button">
+                    <Link
+                        href={thirdHref}
+                        className={styles.card}
+                        rel="noopener noreferrer"
+                    >
+                        <span> {Third} </span>
+                    </Link>
+                </div>
 
-            <div id="fourth-button">
-                <Link
-                    href={fourthHref}
-                    className={styles.card}
-                    rel="noopener noreferrer"
-                >
-                <span> {Fourth} </span>
-                </Link>
-            </div>
+                <div id="fourth-button">
+                    <Link
+                        href={fourthHref}
+                        className={styles.card}
+                        rel="noopener noreferrer"
+                    >
+                        <span> {Fourth} </span>
+                    </Link>
+                </div>
 
-            <div id="fifth-button">
-                <Link
-                    href={fifthHref}
-                    className={styles.card}
-                    rel="noopener noreferrer"
-                >
-                <span> {Fifth} </span>
-                </Link>
+                <div id="fifth-button">
+                    <Link
+                        href={fifthHref}
+                        className={styles.card}
+                        rel="noopener noreferrer"
+                    >
+                        <span> {Fifth} </span>
+                    </Link>
+                </div>
             </div>
-        </div>
         </>
-        )
+    )
 };
