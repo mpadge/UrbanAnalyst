@@ -28,18 +28,18 @@ export default function CityList(props: CityListProps) {
         props.handleIdxChange(selectedOption.index);
     };
 
-  return (
-    <section className={styles.listSelect}>
-        <Select
-            options={options}
-            defaultValue={options[props.idx]}
-            value={options[props.idx]}
-            name="CitySelector"
-            //isClearable={isClearable}
-            isSearchable={isSearchable}
-            onChange = {handleChange}
-        />
-    </section>
-  );
+    return (
+        <section className={styles.listSelect}>
+            <Select
+                options={options}
+                defaultValue={options[props.idx]}
+                value={options[props.idx]}
+                name="CitySelector"
+                //isClearable={isClearable}
+                isSearchable={isSearchable}
+                onChange = {handleChange}
+            />
+        </section>
+    );
 }
 

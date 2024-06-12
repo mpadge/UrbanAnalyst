@@ -24,70 +24,70 @@ export default function Control (props: SummariseControlProps) {
 
     return (
         <>
-        <div id="top-left-container" className={`${styles.controls} ${junctionFont.className}`}>
-            <div id="divinfo" style={{display: hideControls?"none":""}}>
+            <div id="top-left-container" className={`${styles.controls} ${junctionFont.className}`}>
+                <div id="divinfo" style={{display: hideControls?"none":""}}>
 
-            <div style={{
-                display: 'flex',
-                justifyContent: 'left',
-                alignItems: 'left',
-                marginLeft: '2px',
-                marginTop: '2px',
-                marginBottom: '2px'
-            }}>
-            <button
-                id="btnHideControls"
-                className="btn-transparent right-align"
-                onClick={() => handleControlsVisibility(true)}
-            >
-                X
-            </button>
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'left',
+                        alignItems: 'left',
+                        marginLeft: '2px',
+                        marginTop: '2px',
+                        marginBottom: '2px'
+                    }}>
+                        <button
+                            id="btnHideControls"
+                            className="btn-transparent right-align"
+                            onClick={() => handleControlsVisibility(true)}
+                        >
+                            X
+                        </button>
+                    </div>
+
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'left',
+                        alignItems: 'center',
+                        marginLeft: '20px',
+                        marginTop: '0px',
+                        marginBottom: '10px'
+                    }}>
+
+                        <Image
+                            src="/ua.svg"
+                            alt="UA Logo"
+                            width={100}
+                            height={50}
+                            style={{
+                                maxWidth: "100%",
+                                height: "auto"
+                            }}
+                        />
+                    </div>
+
+                    <h3>City</h3>
+                    <CityList
+                        idx={props.idx}
+                        handleIdxChange={props.handleIdxChange}
+                    />
+                </div>
+
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'left',
+                    alignItems: 'left',
+                    marginLeft: '2px',
+                    marginTop: '2px',
+                    marginBottom: '2px'
+                }}>
+                    <button
+                        id="btnShowControls"
+                        style={{display:hideControls?"":"none"}}
+                        onClick={() => handleControlsVisibility(false)}
+                    >Show Controls</button>
+                </div>
+
             </div>
-
-            <div style={{
-                display: 'flex',
-                justifyContent: 'left',
-                alignItems: 'center',
-                marginLeft: '20px',
-                marginTop: '0px',
-                marginBottom: '10px'
-            }}>
-
-            <Image
-                src="/ua.svg"
-                alt="UA Logo"
-                width={100}
-                height={50}
-                style={{
-                    maxWidth: "100%",
-                    height: "auto"
-                }}
-            />
-            </div>
-
-            <h3>City</h3>
-            <CityList
-                idx={props.idx}
-                handleIdxChange={props.handleIdxChange}
-            />
-            </div>
-
-            <div style={{
-                display: 'flex',
-                justifyContent: 'left',
-                alignItems: 'left',
-                marginLeft: '2px',
-                marginTop: '2px',
-                marginBottom: '2px'
-            }}>
-            <button
-                id="btnShowControls"
-                style={{display:hideControls?"":"none"}}
-                onClick={() => handleControlsVisibility(false)}
-            >Show Controls</button>
-            </div>
-
-        </div>
         </>
-        )
+    )
 };
