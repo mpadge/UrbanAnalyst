@@ -30,12 +30,12 @@ export default function Home() {
 
     return (
         <>
-        <Buttons buttons={buttons} />
-        <main className={styles.main}>
+            <Buttons buttons={buttons} />
+            <main className={styles.main}>
 
-            <SummarisePage />
+                <SummarisePage />
 
-        </main>
-    </>
+            </main>
+        </>
     )
 }

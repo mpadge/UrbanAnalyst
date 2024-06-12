@@ -20,7 +20,7 @@ export default function Home() {
 
     return (
         <>
-        <MapPage />
+            <MapPage />
         </>
     )
 }

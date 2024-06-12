@@ -11,8 +11,8 @@ export async function GET(request: NextRequest): Promise<Response> {
         headers: {
             'Content-Type': 'application/json',
             'authorization': `token ${process.env.GITHUB_TOKEN}`
-            }
-            });
+        }
+    });
     const data = await response.json();
 
     return Response.json(data);
