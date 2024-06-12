@@ -60,15 +60,15 @@ export default function BarChart (props: CompareProps) {
 
     const these_layers =
         paired_keys.includes(layer1 + "_" + layer2) ?
-        layer1 + "_" + layer2 : layer2 + "_" + layer1;
+            layer1 + "_" + layer2 : layer2 + "_" + layer1;
     const dual_layers: boolean = paired_keys.includes(these_layers);
 
     const this_layer: string = props.numLayers == "Paired" && dual_layers ?
         these_layers : props.layer1;
 
     const data = props.citiesArray
-        .filter((city) => city.stats_paired.hasOwnProperty(this_layer) || city.stats_single.hasOwnProperty(this_layer))
-        .map((city) => ({
+    .filter((city) => city.stats_paired.hasOwnProperty(this_layer) || city.stats_single.hasOwnProperty(this_layer))
+    .map((city) => ({
         city: city.nameFormatted,
         value: props.numLayers == "Paired" && dual_layers ?
             city.stats_paired[this_layer as string] :
@@ -116,7 +116,7 @@ export default function BarChart (props: CompareProps) {
     const paletteExpand = 0.2;
     const xMaxExpand = xMax + paletteExpand * (xMax - xMinActual);
     var colourPalette = d3.scaleSequential().domain([ xMaxExpand, xMinActual ])
-        .interpolator(d3.interpolateBlues)
+    .interpolator(d3.interpolateBlues)
 
     const svgRef = React.useRef<SVGSVGElement>(null);
 
@@ -125,16 +125,16 @@ export default function BarChart (props: CompareProps) {
     const expandRHS = 1.05; // Expand right-hand edge beyond max observed value
     const xMax2 = Math.max(0,xMin) + (xMax - Math.max(0,xMin)) * expandRHS;
     const xScale = d3.scaleLinear()
-        .domain([xMin, xMax2])
-        .range([xMin, innerWidth])
-        .nice();
+    .domain([xMin, xMax2])
+    .range([xMin, innerWidth])
+    .nice();
 
     // Y-axis
     const yValue = (d: any) => d.city;
     const yScale = d3.scaleBand()
-        .domain(data.map(yValue))
-        .range([0, innerHeight])
-        .padding(0.2);
+    .domain(data.map(yValue))
+    .range([0, innerHeight])
+    .padding(0.2);
 
     useEffect(() => {
 
@@ -180,19 +180,19 @@ export default function BarChart (props: CompareProps) {
                 .attr('y', (d: any) => {
                     const ysc: any = yScale ? yScale(yValue(d)) : 0
                     return ysc + yScale.bandwidth() / 1.5
-                    })
+                })
                 .attr('fill-opacity', 0.8)
                 .text((d: any) => d.city)
         };
 
         const handleDrawXAxis = (svg: any) => {
             const g = svg
-                .append("g")
-                .attr("transform", `translate(0,${innerHeight})`)
-                .call(d3.axisBottom(xScale)
-                    .tickSize(-innerHeight)
-                    .ticks(nTicks)
-                    .tickPadding(xAxisPadding));
+            .append("g")
+            .attr("transform", `translate(0,${innerHeight})`)
+            .call(d3.axisBottom(xScale)
+                .tickSize(-innerHeight)
+                .ticks(nTicks)
+                .tickPadding(xAxisPadding));
 
             g.selectAll(".tick line")
                 .style("stroke", "#dcdcdb");
@@ -218,7 +218,7 @@ export default function BarChart (props: CompareProps) {
         HeadingTextOneLayer(props.layer1);
 
     return (
-            <>
+        <>
             <div id="compare-page" className={styles.comparepage}>
 
                 <div id="compare-heading" className={styles.compareheading}>
@@ -227,21 +227,21 @@ export default function BarChart (props: CompareProps) {
 
                 <div id="compare-container" className={styles.compareplot} >
                     <Suspense fallback={<div>Loading...</div>}>
-                    <svg width={width} height={height}>
-                    <g
-                        style={{
-                            transform: `translate(${margin.right}px, ${margin.top}px)`
-                        }}
-                        ref={svgRef}
-                        x={width / 2}
-                        y={height / 2}
-                    >
-                    </g>
-                    </svg>
+                        <svg width={width} height={height}>
+                            <g
+                                style={{
+                                    transform: `translate(${margin.right}px, ${margin.top}px)`
+                                }}
+                                ref={svgRef}
+                                x={width / 2}
+                                y={height / 2}
+                            >
+                            </g>
+                        </svg>
                     </Suspense>
                 </div>
 
             </div>
-            </>
-           )
+        </>
+    )
 };

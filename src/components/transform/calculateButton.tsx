@@ -15,12 +15,12 @@ export default function CalculateButton (props: CalculateButtonProps) {
     const buttonText = buttonTextTemp;
 
     return (
-    <section className="button">
-    <button
-        className={buttonStyle}
-        type="button"
-        onClick={() => props.handleCalculateChange(true)}
-    >{buttonText}</button>
-    </section>
+        <section className="button">
+            <button
+                className={buttonStyle}
+                type="button"
+                onClick={() => props.handleCalculateChange(true)}
+            >{buttonText}</button>
+        </section>
     )
 }

@@ -39,25 +39,25 @@ export default function UTAMapLayer (props: MapProps) {
 
     const these_layers =
         paired_keys.includes(layer1 + "_" + layer2) ?
-        layer1 + "_" + layer2 : layer2 + "_" + layer1;
+            layer1 + "_" + layer2 : layer2 + "_" + layer1;
     const dual_layers: boolean = paired_keys.includes(these_layers);
 
     const this_layer: string = props.numLayers == "Paired" && dual_layers ?
         these_layers : props.layer;
 
     const layer_min = props.numLayers == "Paired" && dual_layers ?
-            props.citiesArray[props.idx].dataRangesPaired[these_layers as string][0] :
+        props.citiesArray[props.idx].dataRangesPaired[these_layers as string][0] :
         props.citiesArray[props.idx].dataRanges[this_layer as string][0];
     const layer_max = props.numLayers == "Paired" && dual_layers ?
-            props.citiesArray[props.idx].dataRangesPaired[these_layers as string][1] :
+        props.citiesArray[props.idx].dataRangesPaired[these_layers as string][1] :
         props.citiesArray[props.idx].dataRanges[this_layer as string][1];
 
     // palettes:
     // https://github.com/d3/d3-scale-chromatic
     var Color = d3.scaleSequential().domain([ layer_min, layer_max ])
-        //.interpolator(d3.interpolateMagma)
-        //.interpolator(d3.interpolateCividis)
-        .interpolator(d3.interpolateViridis)
+    //.interpolator(d3.interpolateMagma)
+    //.interpolator(d3.interpolateCividis)
+    .interpolator(d3.interpolateViridis)
 
     const mapPath: string = props.numLayers == "Paired" && dual_layers ? mapPath2 : mapPath1;
 
@@ -86,13 +86,13 @@ export default function UTAMapLayer (props: MapProps) {
                     blue = layerarr.b;
                 }
                 return [red, green, blue, layerAlpha]
-                },
+            },
             opacity: 1 - props.alpha,
             updateTriggers: {
                 getFillColor: [this_layer]
             }
-            })
-        ]
+        })
+    ]
 
     return layers
 };

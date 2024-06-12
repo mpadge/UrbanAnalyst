@@ -54,15 +54,15 @@ export default function LayerList(props: LayerListProps) {
 
     return (
         <section className={styles.listSelect}>
-        <Select
-            options={options}
-            defaultValue={matchingOption}
-            value={matchingOption}
-            name="LayerSelector"
-            //isClearable={isClearable}
-            isSearchable={isSearchable}
-            onChange = {handleChange}
-        />
+            <Select
+                options={options}
+                defaultValue={matchingOption}
+                value={matchingOption}
+                name="LayerSelector"
+                //isClearable={isClearable}
+                isSearchable={isSearchable}
+                onChange = {handleChange}
+            />
         </section>
     );
 }

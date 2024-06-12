@@ -21,7 +21,7 @@ export default function ExplainButton (props: CompareExplainProps) {
     const layer2: string = props.layer2.replace("\_", "").replace("index", "");
     const these_layers =
         paired_keys.includes(layer1 + "_" + layer2) ?
-        layer1 + "_" + layer2 : layer2 + "_" + layer1;
+            layer1 + "_" + layer2 : layer2 + "_" + layer1;
     const dual_layers: boolean = paired_keys.includes(these_layers);
     const layer_temp = dual_layers ? 
         GetLayerTextCompare(props.layer, props.layer2, props.numLayers, meanVarIndex, paired_keys) :

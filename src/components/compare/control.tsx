@@ -47,80 +47,80 @@ export default function Control (props: CompareControlProps) {
 
     return (
         <>
-        <div id="top-left-container" className={`${styles.controls} ${junctionFont.className}`}>
-            <div id="divinfo" style={{display: hideControls?"none":""}}>
+            <div id="top-left-container" className={`${styles.controls} ${junctionFont.className}`}>
+                <div id="divinfo" style={{display: hideControls?"none":""}}>
 
-            <button
-                id="btnHideControls"
-                className="btn-transparent right-align"
-                onClick={() => handleControlsVisibility(true)}
-            >
-                X
-            </button>
+                    <button
+                        id="btnHideControls"
+                        className="btn-transparent right-align"
+                        onClick={() => handleControlsVisibility(true)}
+                    >
+                        X
+                    </button>
 
-            <h3>
-            <Image
-                src="/ua.svg"
-                alt="UA Logo"
-                width={100}
-                height={50}
-                style={{
-                    maxWidth: "100%",
-                    height: "auto"
-                }}
-            />
-            </h3>
+                    <h3>
+                        <Image
+                            src="/ua.svg"
+                            alt="UA Logo"
+                            width={100}
+                            height={50}
+                            style={{
+                                maxWidth: "100%",
+                                height: "auto"
+                            }}
+                        />
+                    </h3>
 
-            <h3>Layer</h3>
-            <SelectNumLayers
-                numLayers = {props.numLayers}
-                numLayersOptions = {props.numLayersOptions}
-                handleNumLayersChange = {props.handleNumLayersChange}
-            />
-            <LayerList
-                layer = {props.layer}
-                handleLayerChange = {props.handleLayerChange}
-            />
-            {props.numLayers == "Paired"  &&
-                <LayerList
-                    layer = {props.layer2}
-                    handleLayerChange = {props.handleLayer2Change}
-                />
-            }
+                    <h3>Layer</h3>
+                    <SelectNumLayers
+                        numLayers = {props.numLayers}
+                        numLayersOptions = {props.numLayersOptions}
+                        handleNumLayersChange = {props.handleNumLayersChange}
+                    />
+                    <LayerList
+                        layer = {props.layer}
+                        handleLayerChange = {props.handleLayerChange}
+                    />
+                    {props.numLayers == "Paired"  &&
+                        <LayerList
+                            layer = {props.layer2}
+                            handleLayerChange = {props.handleLayer2Change}
+                        />
+                    }
 
-            <MeanAvgButtons
-                meanVals = {props.meanVals}
-                singleLayer = {props.numLayers != "Paired"}
-                handleMeanChange = {props.handleMeanChange}
-            />
-            <h3>Sort Order</h3>
-            <SortOrderList
-                sortOpt = {props.sortOpt}
-                handleSortChange = {props.handleSortChange}
-            />
-            <ExplainButton
-                explain = {props.explain}
-                handleExplainChange = {props.handleExplainChange} />
-            <HelpButton
-                handleTourOpen = {props.handleTourOpen}
-            />
+                    <MeanAvgButtons
+                        meanVals = {props.meanVals}
+                        singleLayer = {props.numLayers != "Paired"}
+                        handleMeanChange = {props.handleMeanChange}
+                    />
+                    <h3>Sort Order</h3>
+                    <SortOrderList
+                        sortOpt = {props.sortOpt}
+                        handleSortChange = {props.handleSortChange}
+                    />
+                    <ExplainButton
+                        explain = {props.explain}
+                        handleExplainChange = {props.handleExplainChange} />
+                    <HelpButton
+                        handleTourOpen = {props.handleTourOpen}
+                    />
+                </div>
+
+                <button
+                    id="btnShowControls"
+                    style={{display:hideControls?"":"none"}}
+                    onClick={() => handleControlsVisibility(false)}
+                >Show Controls</button>
+
             </div>
-
-            <button
-                id="btnShowControls"
-                style={{display:hideControls?"":"none"}}
-                onClick={() => handleControlsVisibility(false)}
-            >Show Controls</button>
-
-        </div>
-        <ExplainLayer
-            layer = {props.layer}
-            layer2 = {props.layer2}
-            numLayers = {props.numLayers}
-            explain = {props.explain}
-            meanVals = {props.meanVals}
-            citiesArray={props.citiesArray}
-        />
+            <ExplainLayer
+                layer = {props.layer}
+                layer2 = {props.layer2}
+                numLayers = {props.numLayers}
+                explain = {props.explain}
+                meanVals = {props.meanVals}
+                citiesArray={props.citiesArray}
+            />
         </>
-        )
+    )
 };

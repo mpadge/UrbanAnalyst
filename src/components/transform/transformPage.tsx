@@ -189,63 +189,63 @@ export default function TransformPage() {
 
     return (
         <>
-        <Buttons buttons={buttonProps} />
-        <MapTransformDynamic
-            idx={idx}
-            idx2={idx2}
-            layer={layer}
-            varnames={varnames}
-            calculate={calculate}
-            citiesArray = {CITY_DATA.citiesArray}
-            city = {CITY_DATA.citiesArray[idx].name}
-            targetCity = {CITY_DATA.citiesArray[idx2].name}
-            viewState = {viewState}
-            alpha = {alpha}
-            layerMin={layerMin}
-            layerMax={layerMax}
-            outputLayer={outputLayer}
-            handleLayerMinChange={handleLayerMinChange}
-            handleLayerMaxChange={handleLayerMaxChange}
-            handleCalculateChange={handleCalculateChange}
-            handleOutputLayerChange={handleOutputLayerChange}
-        />
-        <Control
-            idx={idx}
-            idx2={idx2}
-            layer={layer}
-            varnames={varnames}
-            calculate={calculate}
-            alpha={alpha}
-            citiesArray={CITY_DATA.citiesArray}
-            cityLayers={cityLayers}
-            viewState={viewState}
-            outputLayer={outputLayer}
-            handleIdxChange={handleIdxChange}
-            handleIdx2Change={handleIdx2Change}
-            handleAlphaChange={handleAlphaChange}
-            handleViewStateChange={handleViewStateChange}
-            handleLayerChange={handleLayerChange}
-            handleCalculateChange={handleCalculateChange}
-            handleVarnamesChange={handleVarnamesChange}
-            handleOutputLayerChange={handleOutputLayerChange}
-            handleTourOpen = {handleTourOpen}
-        />
-        <Legend
-            layerMin={layerMin}
-            layerMax={layerMax}
-            alpha={alpha}
-            layer_name={layer}
-        />
-        <Tour
-            onRequestClose={closeTour}
-            disableInteraction={false}
-            steps={tourConfig}
-            isOpen={isTourOpen}
-            maskClassName={tourStyles.tourmask}
-            className={tourStyles.tourhelper}
-            rounded={5}
-            accentColor={accentColor}
-        />
+            <Buttons buttons={buttonProps} />
+            <MapTransformDynamic
+                idx={idx}
+                idx2={idx2}
+                layer={layer}
+                varnames={varnames}
+                calculate={calculate}
+                citiesArray = {CITY_DATA.citiesArray}
+                city = {CITY_DATA.citiesArray[idx].name}
+                targetCity = {CITY_DATA.citiesArray[idx2].name}
+                viewState = {viewState}
+                alpha = {alpha}
+                layerMin={layerMin}
+                layerMax={layerMax}
+                outputLayer={outputLayer}
+                handleLayerMinChange={handleLayerMinChange}
+                handleLayerMaxChange={handleLayerMaxChange}
+                handleCalculateChange={handleCalculateChange}
+                handleOutputLayerChange={handleOutputLayerChange}
+            />
+            <Control
+                idx={idx}
+                idx2={idx2}
+                layer={layer}
+                varnames={varnames}
+                calculate={calculate}
+                alpha={alpha}
+                citiesArray={CITY_DATA.citiesArray}
+                cityLayers={cityLayers}
+                viewState={viewState}
+                outputLayer={outputLayer}
+                handleIdxChange={handleIdxChange}
+                handleIdx2Change={handleIdx2Change}
+                handleAlphaChange={handleAlphaChange}
+                handleViewStateChange={handleViewStateChange}
+                handleLayerChange={handleLayerChange}
+                handleCalculateChange={handleCalculateChange}
+                handleVarnamesChange={handleVarnamesChange}
+                handleOutputLayerChange={handleOutputLayerChange}
+                handleTourOpen = {handleTourOpen}
+            />
+            <Legend
+                layerMin={layerMin}
+                layerMax={layerMax}
+                alpha={alpha}
+                layer_name={layer}
+            />
+            <Tour
+                onRequestClose={closeTour}
+                disableInteraction={false}
+                steps={tourConfig}
+                isOpen={isTourOpen}
+                maskClassName={tourStyles.tourmask}
+                className={tourStyles.tourhelper}
+                rounded={5}
+                accentColor={accentColor}
+            />
         </>
     )
 }

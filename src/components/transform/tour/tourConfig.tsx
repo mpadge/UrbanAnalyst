@@ -41,7 +41,7 @@ export const getTourConfig = (width: number, height: number) => [
                 to have the same distribution as equivalent data for a chosen
                 <q>target city</q>. These transformations quantify how much the
                 city would have to change to become more like the target city.
-                </div>
+            </div>
         ),
         style: {
             backgroundColor: tourPanelBackgroundColour,
@@ -89,7 +89,7 @@ export const getTourConfig = (width: number, height: number) => [
                 By default, <q>Extra Layers</q> pre-selects all additional
                 layers which have better relationships with the chosen variable
                 or <q>layer</q> in the target city. Selecting any <q>Extra
-                Layers</q> which are not initially selected will generally lead
+                    Layers</q> which are not initially selected will generally lead
                 to worse outcomes. The <q>Extra Layers</q> dialog also includes
                 a <q>Reset</q> button which can be used to reset layers to
                 initial, default values for the chosen combination of cities and

@@ -26,7 +26,7 @@ export default function ExplainButton (props: MapsExplainProps) {
     const layer2: string = props.layer2.replace("\_", "").replace("index", "");
     const these_layers =
         paired_keys.includes(layer1 + "_" + layer2) ?
-        layer1 + "_" + layer2 : layer2 + "_" + layer1;
+            layer1 + "_" + layer2 : layer2 + "_" + layer1;
     const dual_layers: boolean = paired_keys.includes(these_layers);
     const layer_temp = GetLayerText(props.layer, props.layer2, props.numLayers, meanVarIndex, paired_keys);
     // But set layer text to city data "social_index" field if that single layer

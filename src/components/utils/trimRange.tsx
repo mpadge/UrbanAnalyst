@@ -37,8 +37,8 @@ function calculateStandardDeviation(arr: number[], usePopulation = false): numbe
     const mean = calculateMean(arr);
     return Math.sqrt(
         arr
-        .reduce((acc: number[], val) => acc.concat((val - mean) **  2), [])
-        .reduce((acc: number, val) => acc + val,  0) /
+            .reduce((acc: number[], val) => acc.concat((val - mean) **  2), [])
+            .reduce((acc: number, val) => acc + val,  0) /
             (arr.length - (usePopulation ?  0 :  1))
     );
 }

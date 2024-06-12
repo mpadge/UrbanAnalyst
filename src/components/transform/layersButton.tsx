@@ -20,12 +20,12 @@ export default function LayersButton (props: LayersButtonProps) {
     }
 
     return (
-    <section className="button">
-    <button
-        className={buttonStyle}
-        type="button"
-        onClick={(event: React.MouseEvent) => toggleDialog(event)}
-    >{buttonText}</button>
-    </section>
+        <section className="button">
+            <button
+                className={buttonStyle}
+                type="button"
+                onClick={(event: React.MouseEvent) => toggleDialog(event)}
+            >{buttonText}</button>
+        </section>
     )
 }

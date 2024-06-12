@@ -52,91 +52,91 @@ export default function Control (props: MapControlProps) {
 
     return (
         <>
-        <div id="top-left-container" className={`${styles.controls} ${junctionFont.className}`}>
-            <div id="divinfo" style={{display: hideControls?"none":""}}>
+            <div id="top-left-container" className={`${styles.controls} ${junctionFont.className}`}>
+                <div id="divinfo" style={{display: hideControls?"none":""}}>
 
-            <button
-                id="btnHideControls"
-                className="btn-transparent right-align"
-                onClick={() => handleControlsVisibility(true)}
-            >
-                X
-            </button>
+                    <button
+                        id="btnHideControls"
+                        className="btn-transparent right-align"
+                        onClick={() => handleControlsVisibility(true)}
+                    >
+                        X
+                    </button>
 
-            <p>
-            <Image
-                src="/ua.svg"
-                alt="UA Logo"
-                width={100}
-                height={50}
-                style={{
-                    maxWidth: "100%",
-                    height: "auto"
-                }}
-            />
-            </p>
+                    <p>
+                        <Image
+                            src="/ua.svg"
+                            alt="UA Logo"
+                            width={100}
+                            height={50}
+                            style={{
+                                maxWidth: "100%",
+                                height: "auto"
+                            }}
+                        />
+                    </p>
 
-            <h3>City</h3>
-            <CityList
-                citiesArray={props.citiesArray}
-                idx={props.idx}
-                viewState = {props.viewState}
-                handleIdxChange={props.handleIdxChange}
-                handleViewStateChange={props.handleViewStateChange}
-                // onSelect={city => props.handleIdxChange(props.idx)}
-            />
+                    <h3>City</h3>
+                    <CityList
+                        citiesArray={props.citiesArray}
+                        idx={props.idx}
+                        viewState = {props.viewState}
+                        handleIdxChange={props.handleIdxChange}
+                        handleViewStateChange={props.handleViewStateChange}
+                        // onSelect={city => props.handleIdxChange(props.idx)}
+                    />
 
-            <h3>Layer</h3>
-            <SelectNumLayers
-                numLayers = {props.numLayers}
-                numLayersOptions = {props.numLayersOptions}
-                handleNumLayersChange = {props.handleNumLayersChange}
-            />
-            <LayerList
-                layer = {props.layer}
-                handleLayerChange = {props.handleLayerChange}
-                cityLayers = {props.cityLayers}
-            />
+                    <h3>Layer</h3>
+                    <SelectNumLayers
+                        numLayers = {props.numLayers}
+                        numLayersOptions = {props.numLayersOptions}
+                        handleNumLayersChange = {props.handleNumLayersChange}
+                    />
+                    <LayerList
+                        layer = {props.layer}
+                        handleLayerChange = {props.handleLayerChange}
+                        cityLayers = {props.cityLayers}
+                    />
 
-            {props.numLayers == "Paired"  &&
-                <LayerList
-                    layer = {props.layer2}
-                    handleLayerChange = {props.handleLayer2Change}
-                    cityLayers = {props.cityLayers}
-                />
-            }
+                    {props.numLayers == "Paired"  &&
+                        <LayerList
+                            layer = {props.layer2}
+                            handleLayerChange = {props.handleLayer2Change}
+                            cityLayers = {props.cityLayers}
+                        />
+                    }
 
-            <h3>Opacity</h3>
-            <OpacitySlider
-                alpha = {props.alpha}
-                handleAlphaChange={props.handleAlphaChange}
-            />
+                    <h3>Opacity</h3>
+                    <OpacitySlider
+                        alpha = {props.alpha}
+                        handleAlphaChange={props.handleAlphaChange}
+                    />
 
-            <ExplainButton
-                explain = {props.explain}
-                handleExplainChange = {props.handleExplainChange} />
+                    <ExplainButton
+                        explain = {props.explain}
+                        handleExplainChange = {props.handleExplainChange} />
 
-            <HelpButton
-                handleTourOpen = {props.handleTourOpen}
-            />
+                    <HelpButton
+                        handleTourOpen = {props.handleTourOpen}
+                    />
+                </div>
+
+                <button
+                    id="btnShowControls"
+                    style={{display:hideControls?"":"none"}}
+                    onClick={() => handleControlsVisibility(false)}
+                >Show Controls</button>
+
             </div>
-
-            <button
-                id="btnShowControls"
-                style={{display:hideControls?"":"none"}}
-                onClick={() => handleControlsVisibility(false)}
-            >Show Controls</button>
-
-        </div>
-        <ExplainLayer
-            idx={props.idx}
-            layer = {props.layer}
-            layer2 = {props.layer2}
-            numLayers = {props.numLayers}
-            explain = {props.explain}
-            meanVals = {true}
-            citiesArray={props.citiesArray}
-        />
+            <ExplainLayer
+                idx={props.idx}
+                layer = {props.layer}
+                layer2 = {props.layer2}
+                numLayers = {props.numLayers}
+                explain = {props.explain}
+                meanVals = {true}
+                citiesArray={props.citiesArray}
+            />
         </>
-        )
+    )
 };

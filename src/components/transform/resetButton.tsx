@@ -11,12 +11,12 @@ export default function ResetButton (props: ResetButtonProps) {
     var buttonText: string = "Reset";
 
     return (
-    <section className="button">
-    <button
-        className={buttonStyle}
-        type="button"
-        onClick={() => props.handleReset()}
-    >{buttonText}</button>
-    </section>
+        <section className="button">
+            <button
+                className={buttonStyle}
+                type="button"
+                onClick={() => props.handleReset()}
+            >{buttonText}</button>
+        </section>
     )
 }

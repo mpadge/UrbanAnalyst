@@ -35,18 +35,18 @@ export default function SortOrderList(props: SortOrderListProps) {
         setMatchingOption(this_option);
     }, [props.sortOpt, findMatchingOption]);
 
-  return (
-    <section className={styles.listSelect}>
-        <Select
-            options={options}
-            defaultValue={matchingOption}
-            value={matchingOption}
-            name="SortSelector"
-            //isClearable={isClearable}
-            isSearchable={isSearchable}
-            onChange = {handleChange}
-        />
-    </section>
-  );
+    return (
+        <section className={styles.listSelect}>
+            <Select
+                options={options}
+                defaultValue={matchingOption}
+                value={matchingOption}
+                name="SortSelector"
+                //isClearable={isClearable}
+                isSearchable={isSearchable}
+                onChange = {handleChange}
+            />
+        </section>
+    );
 }
 
