@@ -15,12 +15,12 @@ export default function ExplainButton (props: ExplainButtonProps) {
     const buttonText = buttonTextTemp;
 
     return (
-    <section className="button">
-    <button
-        className={buttonStyle}
-        type="button"
-        onClick={() => props.handleExplainChange(props.explain)}
-    >{buttonText}</button>
-    </section>
+        <section className="button">
+            <button
+                className={buttonStyle}
+                type="button"
+                onClick={() => props.handleExplainChange(props.explain)}
+            >{buttonText}</button>
+        </section>
     )
 }

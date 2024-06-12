@@ -29,22 +29,22 @@ export default function CityList(props: CityListProps) {
         setSelected(selectedOption);
         props.handleIdxChange(selectedOption.index);
         props.handleViewStateChange({...props.citiesArray[selectedOption.index].initialViewState,
-                pitch: 0,
-                bearing: 0 });
+            pitch: 0,
+            bearing: 0 });
     };
 
-  return (
-    <section className={styles.listSelect}>
-        <Select
-            options={options}
-            defaultValue={options[props.idx]}
-            value={options[props.idx]}
-            name="CitySelector"
-            //isClearable={isClearable}
-            isSearchable={isSearchable}
-            onChange = {handleChange}
-        />
-    </section>
-  );
+    return (
+        <section className={styles.listSelect}>
+            <Select
+                options={options}
+                defaultValue={options[props.idx]}
+                value={options[props.idx]}
+                name="CitySelector"
+                //isClearable={isClearable}
+                isSearchable={isSearchable}
+                onChange = {handleChange}
+            />
+        </section>
+    );
 }
 

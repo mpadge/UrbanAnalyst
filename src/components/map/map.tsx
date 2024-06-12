@@ -33,24 +33,24 @@ export default function UTAMap (props: MapProps) {
 
     return (
         <>
-        {(
-        <Suspense fallback={<p>Loading map ...</p>}>
+            {(
+                <Suspense fallback={<p>Loading map ...</p>}>
 
-        <DeckGL
-            width={"100vw"}
-            height={"100vh"}
-            controller={true}
-            layers={layer}
-            initialViewState={props.viewState}
-        >
-        <Map
-            mapStyle={MAP_STYLE}
-            mapboxAccessToken={MapboxAccessToken}
-        >
-        </Map>
-        </DeckGL>
-        </Suspense>
-        )}
+                    <DeckGL
+                        width={"100vw"}
+                        height={"100vh"}
+                        controller={true}
+                        layers={layer}
+                        initialViewState={props.viewState}
+                    >
+                        <Map
+                            mapStyle={MAP_STYLE}
+                            mapboxAccessToken={MapboxAccessToken}
+                        >
+                        </Map>
+                    </DeckGL>
+                </Suspense>
+            )}
         </>
-        )
+    )
 };

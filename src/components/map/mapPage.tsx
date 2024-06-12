@@ -202,63 +202,63 @@ export default function MapPage() {
 
     return (
         <>
-        <div id="divinfo" style={{display: explain?"none":""}} >
-            <div id="maps-heading" className={styles.mapsheading}>
-                <p> {heading} </p>
+            <div id="divinfo" style={{display: explain?"none":""}} >
+                <div id="maps-heading" className={styles.mapsheading}>
+                    <p> {heading} </p>
+                </div>
             </div>
-        </div>
-        <UTAMap
-            idx = {idx}
-            layer = {layer}
-            layer2 = {layer2}
-            numLayers = {numLayers}
-            alpha = {alpha}
-            citiesArray = {CITY_DATA.citiesArray}
-            viewState = {viewState}
-            handleAlphaChange = {handleAlphaChange}
-            handleViewStateChange = {handleViewStateChange}
-            handleLayerChange = {handleLayerChange}
-            handleLayer2Change = {handleLayer2Change}
-        />
-        <Control
-            idx = {idx}
-            layer = {layer}
-            layer2 = {layer2}
-            numLayers = {numLayers}
-            numLayersOptions = {numLayersOptions}
-            alpha = {alpha}
-            explain = {explain}
-            citiesArray = {CITY_DATA.citiesArray}
-            cityLayers = {cityLayers}
-            viewState = {viewState}
-            handleIdxChange = {handleIdxChange}
-            handleNumLayersChange = {handleNumLayersChange}
-            handleAlphaChange = {handleAlphaChange}
-            handleViewStateChange = {handleViewStateChange}
-            handleLayerChange = {handleLayerChange}
-            handleLayer2Change = {handleLayer2Change}
-            handleExplainChange = {handleExplainChange}
-            handleTourOpen = {handleTourOpen}
-        />
-        <Legend
-            idx = {idx}
-            layer = {layer}
-            layer2 = {layer2}
-            numLayers = {numLayers}
-            alpha = {alpha}
-            citiesArray = {CITY_DATA.citiesArray}
-        />
-        <Buttons buttons={buttonProps} />
-        <Tour
-            onRequestClose={closeTour}
-            disableInteraction={false}
-            steps={tourConfig}
-            isOpen={isTourOpen}
-            maskClassName={tourStyles.tourmask}
-            className={tourStyles.tourhelper}
-            rounded={5}
-            accentColor={accentColor}
-        />
+            <UTAMap
+                idx = {idx}
+                layer = {layer}
+                layer2 = {layer2}
+                numLayers = {numLayers}
+                alpha = {alpha}
+                citiesArray = {CITY_DATA.citiesArray}
+                viewState = {viewState}
+                handleAlphaChange = {handleAlphaChange}
+                handleViewStateChange = {handleViewStateChange}
+                handleLayerChange = {handleLayerChange}
+                handleLayer2Change = {handleLayer2Change}
+            />
+            <Control
+                idx = {idx}
+                layer = {layer}
+                layer2 = {layer2}
+                numLayers = {numLayers}
+                numLayersOptions = {numLayersOptions}
+                alpha = {alpha}
+                explain = {explain}
+                citiesArray = {CITY_DATA.citiesArray}
+                cityLayers = {cityLayers}
+                viewState = {viewState}
+                handleIdxChange = {handleIdxChange}
+                handleNumLayersChange = {handleNumLayersChange}
+                handleAlphaChange = {handleAlphaChange}
+                handleViewStateChange = {handleViewStateChange}
+                handleLayerChange = {handleLayerChange}
+                handleLayer2Change = {handleLayer2Change}
+                handleExplainChange = {handleExplainChange}
+                handleTourOpen = {handleTourOpen}
+            />
+            <Legend
+                idx = {idx}
+                layer = {layer}
+                layer2 = {layer2}
+                numLayers = {numLayers}
+                alpha = {alpha}
+                citiesArray = {CITY_DATA.citiesArray}
+            />
+            <Buttons buttons={buttonProps} />
+            <Tour
+                onRequestClose={closeTour}
+                disableInteraction={false}
+                steps={tourConfig}
+                isOpen={isTourOpen}
+                maskClassName={tourStyles.tourmask}
+                className={tourStyles.tourhelper}
+                rounded={5}
+                accentColor={accentColor}
+            />
         </>
     )
 }
