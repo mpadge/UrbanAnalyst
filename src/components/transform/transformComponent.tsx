@@ -30,7 +30,7 @@ interface TransformProps {
 }
 
 interface StringAcc {
-      [key: string]: boolean;
+    [key: string]: boolean;
 }
 
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
@@ -58,7 +58,7 @@ const TransformComponent = (props: TransformProps) => {
         setLoading(true);
         loadDataFunction(props.city, props.targetCity, setData1, setData2);
         setLoading(false);
-        }, [props.city, props.targetCity, setData1, setData2, setLoading]);
+    }, [props.city, props.targetCity, setData1, setData2, setLoading]);
 
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
     // vector of aggregaed mean differences in each polygon of source city. This
@@ -67,31 +67,31 @@ const TransformComponent = (props: TransformProps) => {
     const { handleCalculateChange } = props;
     useEffect(() => {
         const uniqueVarNames = Object.keys(
-          props.varnames.reduce((acc: StringAcc, name) => {
-            acc[name] = true;
-            return acc;
-          }, {})
+            props.varnames.reduce((acc: StringAcc, name) => {
+                acc[name] = true;
+                return acc;
+            }, {})
         ).sort();
         const filteredVarNames = props.varnames.filter(name => name!== props.layer);
         const varnames: string[] = [props.layer, ...filteredVarNames];
         transformDataFunction(data1, data2, varnames, props.outputLayer, setResult);
         handleCalculateChange(false);
-        }, [data1, data2, props.layer, props.varnames, props.outputLayer, setResult, props.calculate, handleCalculateChange]);
+    }, [data1, data2, props.layer, props.varnames, props.outputLayer, setResult, props.calculate, handleCalculateChange]);
 
     // Effect to load map data for source city, and replace specified column
     // with 'result' from previous effect:
     useEffect(() => {
         fetch(mapPathSource)
-        .then(response => response.json())
-        .then(data => {
-            data.features.forEach((feature: any, index: number) => {
-                if (result) { // needed here because 'result' can still be null
-                    feature.properties[props.layer] = result[index];
-                }
-            });
-            setGeoJSONcontent(data);
-        })
-        .catch((error) => console.error('Error:', error));
+            .then(response => response.json())
+            .then(data => {
+                data.features.forEach((feature: any, index: number) => {
+                    if (result) { // needed here because 'result' can still be null
+                        feature.properties[props.layer] = result[index];
+                    }
+                });
+                setGeoJSONcontent(data);
+            })
+            .catch((error) => console.error('Error:', error));
     }, [mapPathSource, result, props.layer]);
 
     const { handleLayerMinChange, handleLayerMaxChange } = props;
@@ -109,21 +109,21 @@ const TransformComponent = (props: TransformProps) => {
 
     return (
         <>
-        {loading ? <TransformMsgs msg='Loading ...' /> :
-            calculating ? <TransformMsgs msg='Calculating ...' /> : null}
-        <DeckGL
-            width={"100vw"}
-            height={"100vh"}
-            controller={true}
-            layers={geoJsonLayer}
-            initialViewState={props.viewState}
-        >
-        <Map
-            mapStyle={MAP_STYLE}
-            mapboxAccessToken={MapboxAccessToken}
-        >
-        </Map>
-        </DeckGL>
+            {loading ? <TransformMsgs msg='Loading ...' /> :
+                calculating ? <TransformMsgs msg='Calculating ...' /> : null}
+            <DeckGL
+                width={"100vw"}
+                height={"100vh"}
+                controller={true}
+                layers={geoJsonLayer}
+                initialViewState={props.viewState}
+            >
+                <Map
+                    mapStyle={MAP_STYLE}
+                    mapboxAccessToken={MapboxAccessToken}
+                >
+                </Map>
+            </DeckGL>
         </>
     )
 }

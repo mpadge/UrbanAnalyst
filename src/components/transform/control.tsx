@@ -67,7 +67,7 @@ export default function Control (props: TransformControlProps) {
         if (!initialSetDefaultValues) { return; }
 
         const source_city_values =
-            Object.entries(props.citiesArray[props.idx].stats_single);
+        Object.entries(props.citiesArray[props.idx].stats_single);
         const source_city_mean_all = source_city_values.map(([key, value]) => ({
             name: key,
             value: value[0]
@@ -115,100 +115,100 @@ export default function Control (props: TransformControlProps) {
 
     return (
         <>
-        <div id="top-left-container" className={`${styles.controlsTransform} ${junctionFont.className}`}>
-            <div id="divinfo" style={{display: hideControls?"none":""}}>
+            <div id="top-left-container" className={`${styles.controlsTransform} ${junctionFont.className}`}>
+                <div id="divinfo" style={{display: hideControls?"none":""}}>
+
+                    <button
+                        id="btnHideControls"
+                        className="btn-transparent right-align"
+                        onClick={() => handleControlsVisibility(true)}
+                    >
+                        X
+                    </button>
+
+                    <p>
+                        <Image
+                            src="/ua.svg"
+                            alt="UA Logo"
+                            className={styles.transformLogo}
+                            width={100}
+                            height={50}
+                            style={{
+                                maxWidth: "100%",
+                                height: "auto"
+                            }}
+                        />
+                    </p>
+
+                    <h3>City</h3>
+                    <CityList
+                        citiesArray={props.citiesArray}
+                        idx={props.idx}
+                        viewState = {props.viewState}
+                        handleIdxChange={props.handleIdxChange}
+                        handleViewStateChange={props.handleViewStateChange}
+                    />
+
+                    <h3>Target City</h3>
+                    <TargetCityList
+                        idx2={props.idx2}
+                        citiesArray={props.citiesArray}
+                        handleIdx2Change={props.handleIdx2Change}
+                    />
+
+                    <h3>Layer</h3>
+                    <LayerList
+                        layer = {props.layer}
+                        handleLayerChange = {props.handleLayerChange}
+                        cityLayers = {props.cityLayers}
+                    />
+
+                    <LayersButton
+                        showLayersDialog={showLayersDialog}
+                        handleLayersDialogVisibility={handleLayersDialogVisibility}
+                    />
+
+                    <h3>Opacity</h3>
+                    <OpacitySlider
+                        alpha = {props.alpha}
+                        handleAlphaChange={props.handleAlphaChange}
+                    />
+
+                    <CalculateButton
+                        calculate={props.calculate}
+                        handleCalculateChange={props.handleCalculateChange}
+                    />
+                    <h3>Output Layer</h3>
+                    <OutputLayers
+                        outputLayer = {props.outputLayer}
+                        handleOutputLayerChange={props.handleOutputLayerChange}
+                    />
+
+                    <HelpButton
+                        handleTourOpen = {props.handleTourOpen}
+                    />
+
+                </div>
 
                 <button
-                    id="btnHideControls"
-                    className="btn-transparent right-align"
-                    onClick={() => handleControlsVisibility(true)}
-                >
-                    X
-                </button>
+                    id="btnShowControls"
+                    style={{display:hideControls?"":"none"}}
+                    onClick={() => handleControlsVisibility(false)}
+                >Show Controls</button>
 
-                <p>
-                <Image
-                    src="/ua.svg"
-                    alt="UA Logo"
-                    className={styles.transformLogo}
-                    width={100}
-                    height={50}
-                    style={{
-                        maxWidth: "100%",
-                        height: "auto"
-                    }}
-                />
-                </p>
-
-                <h3>City</h3>
-                <CityList
-                    citiesArray={props.citiesArray}
-                    idx={props.idx}
-                    viewState = {props.viewState}
-                    handleIdxChange={props.handleIdxChange}
-                    handleViewStateChange={props.handleViewStateChange}
-                />
-
-                <h3>Target City</h3>
-                <TargetCityList
-                    idx2={props.idx2}
-                    citiesArray={props.citiesArray}
-                    handleIdx2Change={props.handleIdx2Change}
-                />
-
-                <h3>Layer</h3>
-                <LayerList
+            </div>
+            <div
+                id="layerlist-container"
+                className={styles.layerlist}
+                style={{display: showLayersDialog?"":"none"}}
+            >
+                <LayersList
                     layer = {props.layer}
-                    handleLayerChange = {props.handleLayerChange}
-                    cityLayers = {props.cityLayers}
+                    varnames = {props.varnames}
+                    handleVarnamesChange = {props.handleVarnamesChange}
+                    setInitialSetDefaultValues={setInitialSetDefaultValues}
                 />
-
-                <LayersButton
-                    showLayersDialog={showLayersDialog}
-                    handleLayersDialogVisibility={handleLayersDialogVisibility}
-                />
-
-                <h3>Opacity</h3>
-                <OpacitySlider
-                    alpha = {props.alpha}
-                    handleAlphaChange={props.handleAlphaChange}
-                />
-
-                <CalculateButton
-                    calculate={props.calculate}
-                    handleCalculateChange={props.handleCalculateChange}
-                />
-                <h3>Output Layer</h3>
-                <OutputLayers
-                    outputLayer = {props.outputLayer}
-                    handleOutputLayerChange={props.handleOutputLayerChange}
-                />
-
-                <HelpButton
-                    handleTourOpen = {props.handleTourOpen}
-                />
-
-           </div>
-
-            <button
-                id="btnShowControls"
-                style={{display:hideControls?"":"none"}}
-                onClick={() => handleControlsVisibility(false)}
-            >Show Controls</button>
-
-        </div>
-        <div
-            id="layerlist-container"
-            className={styles.layerlist}
-            style={{display: showLayersDialog?"":"none"}}
-        >
-            <LayersList
-                layer = {props.layer}
-                varnames = {props.varnames}
-                handleVarnamesChange = {props.handleVarnamesChange}
-                setInitialSetDefaultValues={setInitialSetDefaultValues}
-            />
-        </div>
+            </div>
         </>
-        )
+    )
 };

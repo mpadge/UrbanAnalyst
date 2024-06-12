@@ -27,17 +27,17 @@ export default function TargetCityList(props: CityListProps) {
         props.handleIdx2Change(selectedOption.index);
     };
 
-  return (
-    <section className={styles.listSelect}>
-        <Select
-            options={options}
-            defaultValue={options[props.idx2]}
-            value={options[props.idx2]}
-            name="CitySelector"
-            isSearchable={isSearchable}
-            onChange = {handleChange}
-        />
-    </section>
-  );
+    return (
+        <section className={styles.listSelect}>
+            <Select
+                options={options}
+                defaultValue={options[props.idx2]}
+                value={options[props.idx2]}
+                name="CitySelector"
+                isSearchable={isSearchable}
+                onChange = {handleChange}
+            />
+        </section>
+    );
 }
 

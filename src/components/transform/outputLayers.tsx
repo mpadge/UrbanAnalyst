@@ -26,16 +26,16 @@ export default function OutputLayers(props: OutputLayerProps) {
         props.handleOutputLayerChange(selectedOption.value);
     };
 
-  return (
-    <section className={styles.listSelect}>
-        <Select
-            options={options}
-            defaultValue={options[3]}
-            name="OutputLayersySelector"
-            isSearchable={searchable}
-            onChange = {handleChange}
-        />
-    </section>
-  );
+    return (
+        <section className={styles.listSelect}>
+            <Select
+                options={options}
+                defaultValue={options[3]}
+                name="OutputLayersySelector"
+                isSearchable={searchable}
+                onChange = {handleChange}
+            />
+        </section>
+    );
 }
 

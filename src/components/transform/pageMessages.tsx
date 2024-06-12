@@ -27,19 +27,19 @@ export default function TransformMsgs (props: MsgProps) {
         svg.selectAll("text").remove();
 
         var text = svg.append("g")
-            .call((g: any) => g.select(".domain").remove())
-            .call((g: any) => g.append("text")
-                .attr("x", winWidth / 2.3)
-                .attr("y", winHeight / 2.3)
-                .attr("fill", "currentColor")
-                .attr("text-anchor", "start")
-                .text(props.msg));
+        .call((g: any) => g.select(".domain").remove())
+        .call((g: any) => g.append("text")
+            .attr("x", winWidth / 2.3)
+            .attr("y", winHeight / 2.3)
+            .attr("fill", "currentColor")
+            .attr("text-anchor", "start")
+            .text(props.msg));
 
     }, [svgRef, props.msg, winWidth, winHeight]);
 
     return (
-            <div id="message-container" className={styles.mapmessage}>
+        <div id="message-container" className={styles.mapmessage}>
             <svg ref={svgRef} style={{width: '100%', height: '100%'}}/>
-            </div>
-           )
+        </div>
+    )
 };
