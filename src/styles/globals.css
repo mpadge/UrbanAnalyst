@@ -47,6 +47,8 @@
     --control-width-narrow-inner: 20vw;
 
     --explain-dialog-background-rgb: 157, 248, 248;
+
+    --thumb-size: 16px;
 }
 
 @media (prefers-color-scheme: dark) {

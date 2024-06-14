@@ -28,10 +28,10 @@ export default function RangeSlider(props: RangeSliderProps) {
 
     return (
         <div className="sliders">
-            <div className="input-wrapper">
+            <div className="sliderInputs">
                 <input
                     id="min"
-                    className="input"
+                    className="sliderInput"
                     type="range"
                     onChange={props.handleSliderMinChange}
                     min={props.rangeMin}
@@ -42,7 +42,7 @@ export default function RangeSlider(props: RangeSliderProps) {
                 ></input>
                 <input
                     id="max"
-                    className="input"
+                    className="sliderInput"
                     type="range"
                     onChange={props.handleSliderMaxChange}
                     min={props.rangeMin}
@@ -53,15 +53,15 @@ export default function RangeSlider(props: RangeSliderProps) {
                 ></input>
             </div>
 
-            <div className="control-wrapper">
-                <div className="control" style={{ left: `${minSliderPos}%` }} />
-                <div className="rail">
+            <div className="sliderControls">
+                <div className="sliderControl" style={{ left: `${minSliderPos}%` }} />
+                <div className="sliderRail">
                     <div
-                        className="inner-rail"
+                        className="sliderInnerRail"
                         style={{ left: `${minSliderPos}%`, right: `${100 - maxSliderPos}%` }}
                     />
                 </div>
-                <div className="control" style={{ left: `${maxSliderPos}%` }} />
+                <div className="sliderControl" style={{ left: `${maxSliderPos}%` }} />
             </div>
         </div>
     )

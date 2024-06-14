@@ -1,5 +1,3 @@
-$thumb-size: 16px;
-
 @mixin track-styles {
     appearance: none;
     background: transparent;
@@ -9,8 +7,8 @@ $thumb-size: 16px;
 @mixin thumb-styles {
     appearance: none;
     pointer-events: all;
-    width: $thumb-size;
-    height: $thumb-size;
+    width: var(--thumb-size);
+    height: var(--thumb-size);
     border-radius: 0px;
     border: 0 none;
     cursor: grab;
@@ -31,25 +29,25 @@ $thumb-size: 16px;
     position: relative;
     display: flex;
     align-items: center;
-    margin: 40px calc(#{$thumb-size} / 2);
+    margin: 40px calc(var(--thumb-size) / 2);
     padding-top: 1.6rem;
-    height: calc(#{$thumb-size} + 1.6rem);
+    height: calc(var(--thumb-size) + 1.6rem);
 }
 
-.input-wrapper {
-    width: calc(100% + #{$thumb-size});
-    margin: 0 calc(#{$thumb-size} / -2);
+.sliderInputs {
+    width: calc(100% + var(--thumb-size));
+    margin: 0 calc(var(--thumb-size) / -2);
     position: absolute;
-    height: $thumb-size;
+    height: var(--thumb-size);
 }
 
-.control-wrapper {
+.sliderControls {
     width: 100%;
     position: absolute;
-    height: $thumb-size;
+    height: var(--thumb-size);
 }
 
-.input {
+.sliderInput {
     position: absolute;
     width: 100%;
     pointer-events: none;
@@ -58,33 +56,9 @@ $thumb-size: 16px;
     opacity: 0;
     z-index: 3;
     padding: 0;
-
-    &::-ms-track {
-        @include track-styles;
-    }
-
-    &::-moz-range-track {
-        @include track-styles;
-    }
-
-    &:focus::-webkit-slider-runnable-track {
-        @include track-styles;
-    }
-
-    &::-ms-thumb {
-        @include thumb-styles;
-    }
-
-    &::-moz-range-thumb {
-        @include thumb-styles;
-    }
-
-    &::-webkit-slider-thumb {
-        @include thumb-styles;
-    }
 };
 
-.rail {
+.sliderRail {
     position: absolute;
     width: 100%;
     top: 50%;
@@ -94,21 +68,21 @@ $thumb-size: 16px;
     background: lightgrey;
 }
 
-.inner-rail {
+.sliderInnerRail {
     position: absolute;
     height: 100%;
     background: hotpink;
     opacity: 0.5;
 }
 
-.control {
-    width: $thumb-size;
-    height: $thumb-size;
+.sliderControl {
+    width: var(--thumb-size);
+    height: var(--thumb-size);
     border-radius: 50%;
     position: absolute;
     background: hotpink;
     top: 50%;
-    margin-left: calc(#{$thumb-size} / -2);
+    margin-left: calc(var(--thumb-size) / -2);
     transform: translate3d(0, -50%, 0);
     z-index: 2;
 }
