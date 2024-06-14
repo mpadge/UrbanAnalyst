@@ -27,11 +27,11 @@ export default function RangeSlider(props: RangeSliderProps) {
         (props.rangeMax - props.rangeMin)) * 100;
 
     return (
-        <div className="sliders">
-            <div className="sliderInputs">
+        <div className={styles.sliders}>
+            <div className={styles.sliderInputs}>
                 <input
                     id="min"
-                    className="sliderInput"
+                    /// className={styles.sliderInput}
                     type="range"
                     onChange={props.handleSliderMinChange}
                     min={props.rangeMin}
@@ -42,7 +42,7 @@ export default function RangeSlider(props: RangeSliderProps) {
                 ></input>
                 <input
                     id="max"
-                    className="sliderInput"
+                    /// className={styles.sliderInput}
                     type="range"
                     onChange={props.handleSliderMaxChange}
                     min={props.rangeMin}

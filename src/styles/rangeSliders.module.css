@@ -51,9 +51,9 @@
     position: absolute;
     width: 100%;
     pointer-events: none;
-    appearance: none;
+    /* appearance: none; */
     height: 100%;
-    opacity: 0;
+    opacity: 1;
     z-index: 3;
     padding: 0;
 };
