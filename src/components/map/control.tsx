@@ -51,19 +51,21 @@ export default function Control (props: MapControlProps) {
         setHideControls(pHideControls);
     }
 
-    const [rangeMin, setRangeMin] = useState<number>(0);
-    const [rangeMax, setRangeMax] = useState<number>(1);
+    const rangeMin = 0;
+    const rangeMax = 1;
+    const [sliderMin, setSliderMin] = useState<number>(rangeMin);
+    const [sliderMax, setSliderMax] = useState<number>(rangeMax);
     const step = 0.1;
-    const handleRangeMinChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSliderMinChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseFloat(event.target.value);
-        const actualMinValue = Math.min(value, rangeMax - step);
-        setRangeMin(actualMinValue);
+        const actualMinValue = Math.min(value, sliderMax - step);
+        setSliderMin(actualMinValue);
     };
 
-    const handleRangeMaxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSliderMaxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseFloat(event.target.value);
-        const actualMaxValue = Math.max(value, rangeMin + step);
-        setRangeMax(actualMaxValue);
+        const actualMaxValue = Math.max(value, sliderMin + step);
+        setSliderMax(actualMaxValue);
     };
 
     return (
@@ -132,9 +134,11 @@ export default function Control (props: MapControlProps) {
                     <RangeSlider
                         rangeMin = {rangeMin}
                         rangeMax = {rangeMax}
+                        sliderMin = {sliderMin}
+                        sliderMax = {sliderMax}
                         step = {step}
-                        handleRangeMinChange={handleRangeMinChange}
-                        handleRangeMaxChange={handleRangeMaxChange}
+                        handleSliderMinChange={handleSliderMinChange}
+                        handleSliderMaxChange={handleSliderMaxChange}
                     />
 
                     <ExplainButton

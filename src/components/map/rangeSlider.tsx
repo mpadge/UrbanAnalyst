@@ -3,11 +3,13 @@ import { useState } from 'react';
 import styles from '@/styles/controls.module.css';
 
 interface RangeSliderProps {
-    rangeMin: number,
-    rangeMax: number,
+    rangeMin: number, // Minimal allowed value
+    rangeMax: number, // Maximal allowed value
+    sliderMin: number,
+    sliderMax: number,
     step: number,
-    handleRangeMinChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-    handleRangeMaxChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+    handleSliderMinChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    handleSliderMaxChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 
 }
 
@@ -25,23 +27,23 @@ export default function RangeSlider(props: RangeSliderProps) {
                 id="min"
                 className={`${styles.RangeSlider} ${styles.min}`}
                 type="range"
-                onChange={props.handleRangeMinChange}
-                min={0}
-                max={1}
+                onChange={props.handleSliderMinChange}
+                min={props.rangeMin}
+                max={props.rangeMax}
                 step={props.step}
-                value={props.rangeMin}
-                style={getBackgroundSize(props.rangeMin)}
+                value={props.sliderMin}
+                style={getBackgroundSize(props.sliderMin)}
             ></input>
             <input
                 id="max"
                 className={`${styles.RangeSlider} ${styles.max}`}
                 type="range"
-                onChange={props.handleRangeMaxChange}
-                min={0}
-                max={1}
+                onChange={props.handleSliderMaxChange}
+                min={props.rangeMin}
+                max={props.rangeMax}
                 step={props.step}
-                value={props.rangeMax}
-                style={getBackgroundSize(props.rangeMax)}
+                value={props.sliderMax}
+                style={getBackgroundSize(props.sliderMax)}
             ></input>
         </div>
     )
