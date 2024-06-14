@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import styles from '@/styles/controls.module.css';
+import styles from '@/styles/rangeSliders.module.css';
 
 interface RangeSliderProps {
     rangeMin: number, // Minimal allowed value
@@ -21,30 +21,48 @@ export default function RangeSlider(props: RangeSliderProps) {
         };
     };
 
+    const minSliderPos = ((props.sliderMin - props.rangeMin) /
+        (props.rangeMax - props.rangeMin)) * 100;
+    const maxSliderPos = ((props.sliderMax - props.rangeMin) /
+        (props.rangeMax - props.rangeMin)) * 100;
+
     return (
         <div className="sliders">
-            <input
-                id="min"
-                className={`${styles.RangeSlider} ${styles.min}`}
-                type="range"
-                onChange={props.handleSliderMinChange}
-                min={props.rangeMin}
-                max={props.rangeMax}
-                step={props.step}
-                value={props.sliderMin}
-                style={getBackgroundSize(props.sliderMin)}
-            ></input>
-            <input
-                id="max"
-                className={`${styles.RangeSlider} ${styles.max}`}
-                type="range"
-                onChange={props.handleSliderMaxChange}
-                min={props.rangeMin}
-                max={props.rangeMax}
-                step={props.step}
-                value={props.sliderMax}
-                style={getBackgroundSize(props.sliderMax)}
-            ></input>
+            <div className="input-wrapper">
+                <input
+                    id="min"
+                    className="input"
+                    type="range"
+                    onChange={props.handleSliderMinChange}
+                    min={props.rangeMin}
+                    max={props.rangeMax}
+                    step={props.step}
+                    value={props.sliderMin}
+                    style={getBackgroundSize(props.sliderMin)}
+                ></input>
+                <input
+                    id="max"
+                    className="input"
+                    type="range"
+                    onChange={props.handleSliderMaxChange}
+                    min={props.rangeMin}
+                    max={props.rangeMax}
+                    step={props.step}
+                    value={props.sliderMax}
+                    style={getBackgroundSize(props.sliderMax)}
+                ></input>
+            </div>
+
+            <div className="control-wrapper">
+                <div className="control" style={{ left: `${minSliderPos}%` }} />
+                <div className="rail">
+                    <div
+                        className="inner-rail"
+                        style={{ left: `${minSliderPos}%`, right: `${100 - maxSliderPos}%` }}
+                    />
+                </div>
+                <div className="control" style={{ left: `${maxSliderPos}%` }} />
+            </div>
         </div>
     )
 }
