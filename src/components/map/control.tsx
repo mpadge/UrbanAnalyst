@@ -8,7 +8,7 @@ import styles from '@/styles/controls.module.css';
 import CityList from '@/components/map/cityList';
 import LayerList from '@/components/map/layerList';
 import SelectNumLayers from '@/components/map/numLayers';
-import OpacitySlider from '@/components/map/slider';
+import OpacitySlider from '@/components/map/opacitySlider';
 import ExplainButton from '@/components/map/explainButton';
 import ExplainLayer from '@/components/map/explainLayer';
 import HelpButton from '@/components/map/helpButton';
