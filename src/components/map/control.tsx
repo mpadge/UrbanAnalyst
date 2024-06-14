@@ -9,6 +9,7 @@ import CityList from '@/components/map/cityList';
 import LayerList from '@/components/map/layerList';
 import SelectNumLayers from '@/components/map/numLayers';
 import OpacitySlider from '@/components/map/opacitySlider';
+import RangeSlider from '@/components/map/rangeSlider';
 import ExplainButton from '@/components/map/explainButton';
 import ExplainLayer from '@/components/map/explainLayer';
 import HelpButton from '@/components/map/helpButton';
@@ -49,6 +50,21 @@ export default function Control (props: MapControlProps) {
     const handleControlsVisibility = (pHideControls: boolean) => {
         setHideControls(pHideControls);
     }
+
+    const [rangeMin, setRangeMin] = useState<number>(0);
+    const [rangeMax, setRangeMax] = useState<number>(1);
+    const step = 0.1;
+    const handleRangeMinChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = parseFloat(event.target.value);
+        const actualMinValue = Math.min(value, rangeMax - step);
+        setRangeMin(actualMinValue);
+    };
+
+    const handleRangeMaxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = parseFloat(event.target.value);
+        const actualMaxValue = Math.max(value, rangeMin + step);
+        setRangeMax(actualMaxValue);
+    };
 
     return (
         <>
@@ -110,6 +126,15 @@ export default function Control (props: MapControlProps) {
                     <OpacitySlider
                         alpha = {props.alpha}
                         handleAlphaChange={props.handleAlphaChange}
+                    />
+
+                    <h3>Range</h3>
+                    <RangeSlider
+                        rangeMin = {rangeMin}
+                        rangeMax = {rangeMax}
+                        step = {step}
+                        handleRangeMinChange={handleRangeMinChange}
+                        handleRangeMaxChange={handleRangeMaxChange}
                     />
 
                     <ExplainButton
