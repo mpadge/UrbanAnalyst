@@ -31,7 +31,7 @@ export default function RangeSlider(props: RangeSliderProps) {
             <div className={styles.sliderInputs}>
                 <input
                     id="min"
-                    /// className={styles.sliderInput}
+                    className={styles.sliderInput}
                     type="range"
                     onChange={props.handleSliderMinChange}
                     min={props.rangeMin}
@@ -42,7 +42,7 @@ export default function RangeSlider(props: RangeSliderProps) {
                 ></input>
                 <input
                     id="max"
-                    /// className={styles.sliderInput}
+                    className={styles.sliderInput}
                     type="range"
                     onChange={props.handleSliderMaxChange}
                     min={props.rangeMin}
@@ -53,15 +53,15 @@ export default function RangeSlider(props: RangeSliderProps) {
                 ></input>
             </div>
 
-            <div className="sliderControls">
-                <div className="sliderControl" style={{ left: `${minSliderPos}%` }} />
-                <div className="sliderRail">
+            <div className={styles.sliderControls}>
+                <div className={styles.sliderControl} style={{ left: `${minSliderPos}%` }} />
+                <div className={styles.sliderRail}>
                     <div
-                        className="sliderInnerRail"
+                        className={styles.sliderInnerRail}
                         style={{ left: `${minSliderPos}%`, right: `${100 - maxSliderPos}%` }}
                     />
                 </div>
-                <div className="sliderControl" style={{ left: `${maxSliderPos}%` }} />
+                <div className={styles.sliderControl} style={{ left: `${maxSliderPos}%` }} />
             </div>
         </div>
     )
