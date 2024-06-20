@@ -1,5 +1,5 @@
 
-import { useState, useRef } from 'react';
+import { ChangeEvent, SyntheticEvent, SetStateAction, useState, useRef } from 'react';
 import Link from 'next/link'
 import Image from "next/image"
 import localFont from 'next/font/local'
@@ -53,19 +53,22 @@ export default function Control (props: MapControlProps) {
 
     const rangeMin = 0;
     const rangeMax = 1;
-    const [sliderMin, setSliderMin] = useState<number>(rangeMin);
-    const [sliderMax, setSliderMax] = useState<number>(rangeMax);
+    const [sliderValues, setSliderValues] = useState<number[]>([rangeMin, rangeMax]);
     const step = 0.1;
-    const handleSliderMinChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = parseFloat(event.target.value);
-        const actualMinValue = Math.min(value, sliderMax - step);
-        setSliderMin(actualMinValue);
-    };
+    const handleSliderValuesChange = (
+        event: Event,
+        value: number | number [],
+        activeThumb: number
+    ) => {
 
-    const handleSliderMaxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = parseFloat(event.target.value);
-        const actualMaxValue = Math.max(value, sliderMin + step);
-        setSliderMax(actualMaxValue);
+        let newValue: number[];
+        if (typeof value === 'number') {
+            newValue = [value];
+        } else {
+            newValue=value;
+        }
+
+        setSliderValues(newValue);
     };
 
     return (
@@ -134,11 +137,9 @@ export default function Control (props: MapControlProps) {
                     <RangeSlider
                         rangeMin = {rangeMin}
                         rangeMax = {rangeMax}
-                        sliderMin = {sliderMin}
-                        sliderMax = {sliderMax}
+                        sliderValues = {sliderValues}
                         step = {step}
-                        handleSliderMinChange={handleSliderMinChange}
-                        handleSliderMaxChange={handleSliderMaxChange}
+                        handleSliderValuesChange={handleSliderValuesChange}
                     />
 
                     <ExplainButton

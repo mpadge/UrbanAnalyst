@@ -1,67 +1,40 @@
 
-import { useState } from 'react';
+import { ChangeEvent, SyntheticEvent, SetStateAction, useState } from 'react';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
+
 import styles from '@/styles/rangeSliders.module.css';
 
 interface RangeSliderProps {
     rangeMin: number, // Minimal allowed value
     rangeMax: number, // Maximal allowed value
-    sliderMin: number,
-    sliderMax: number,
+    sliderValues: number[],
     step: number,
-    handleSliderMinChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-    handleSliderMaxChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-
+    handleSliderValuesChange: (
+        event: Event,
+        value: number | number [],
+        activeThumb: number
+    ) => void,
 }
 
 export default function RangeSlider(props: RangeSliderProps) {
 
-    const getBackgroundSize = (value: number) => {
-        return {
-            backgroundSize: `${(value * 100)}% 100%`,
-        };
-    };
-
-    const minSliderPos = ((props.sliderMin - props.rangeMin) /
-        (props.rangeMax - props.rangeMin)) * 100;
-    const maxSliderPos = ((props.sliderMax - props.rangeMin) /
-        (props.rangeMax - props.rangeMin)) * 100;
-
     return (
         <div className={styles.sliders}>
-            <div className={styles.sliderInputs}>
-                <input
-                    id="min"
-                    className={styles.sliderInput}
-                    type="range"
-                    onChange={props.handleSliderMinChange}
-                    min={props.rangeMin}
-                    max={props.rangeMax}
-                    step={props.step}
-                    value={props.sliderMin}
-                    style={getBackgroundSize(props.sliderMin)}
-                ></input>
-                <input
-                    id="max"
-                    className={styles.sliderInput}
-                    type="range"
-                    onChange={props.handleSliderMaxChange}
-                    min={props.rangeMin}
-                    max={props.rangeMax}
-                    step={props.step}
-                    value={props.sliderMax}
-                    style={getBackgroundSize(props.sliderMax)}
-                ></input>
-            </div>
-
-            <div className={styles.sliderControls}>
-                <div className={styles.sliderControl} style={{ left: `${minSliderPos}%` }} />
-                <div className={styles.sliderRail}>
-                    <div
-                        className={styles.sliderInnerRail}
-                        style={{ left: `${minSliderPos}%`, right: `${100 - maxSliderPos}%` }}
+            <div>
+                <Box sx={{ width: 150 }}>
+                    <Slider
+                        min={props.rangeMin}
+                        max={props.rangeMax}
+                        value={props.sliderValues}
+                        step={props.step}
+                        aria-label="Default"
+                        valueLabelDisplay="auto"
+                        onChange={props.handleSliderValuesChange}
+                        disableSwap
                     />
-                </div>
-                <div className={styles.sliderControl} style={{ left: `${maxSliderPos}%` }} />
+                </Box>
             </div>
         </div>
     )
