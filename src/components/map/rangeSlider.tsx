@@ -23,7 +23,7 @@ export default function RangeSlider(props: RangeSliderProps) {
     return (
         <div className={styles.sliders}>
             <div>
-                <Box sx={{ width: 150 }}>
+                <Box className={styles.sliderBox}>
                     <Slider
                         min={props.rangeMin}
                         max={props.rangeMax}
