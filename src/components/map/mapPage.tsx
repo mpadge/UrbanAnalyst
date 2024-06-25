@@ -131,7 +131,7 @@ export default function MapPage() {
             CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][0];
         const layer_max = numLayers == "Paired" && dual_layers ?
             CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][1] :
-            CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][0];
+            CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][1];
 
         setLayerMin(layer_min);
         setLayerMax(layer_max);
