@@ -193,6 +193,13 @@ export default function MapPage() {
         }
     }
 
+    const handleLayerMinChange = (layerMin: number) => {
+        setLayerMin(layerMin);
+    }
+    const handleLayerMaxChange = (layerMax: number) => {
+        setLayerMax(layerMax);
+    }
+
     const heading: string = HeadingText(layer, layer2, numLayers, CITY_DATA.citiesArray);
 
     // ----- TOUR start-----
@@ -258,6 +265,8 @@ export default function MapPage() {
                 numLayers = {numLayers}
                 numLayersOptions = {numLayersOptions}
                 alpha = {alpha}
+                layerMin = {layerMin}
+                layerMax = {layerMax}
                 explain = {explain}
                 citiesArray = {CITY_DATA.citiesArray}
                 cityLayers = {cityLayers}
@@ -268,6 +277,8 @@ export default function MapPage() {
                 handleViewStateChange = {handleViewStateChange}
                 handleLayerChange = {handleLayerChange}
                 handleLayer2Change = {handleLayer2Change}
+                handleLayerMinChange = {handleLayerMinChange}
+                handleLayerMaxChange = {handleLayerMaxChange}
                 handleExplainChange = {handleExplainChange}
                 handleTourOpen = {handleTourOpen}
             />

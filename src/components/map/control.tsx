@@ -25,6 +25,8 @@ interface MapControlProps {
     numLayers: string,
     numLayersOptions: string[],
     alpha: number,
+    layerMin: number,
+    layerMax: number,
     explain: any,
     citiesArray: CityDataProps[],
     cityLayers: string[],
@@ -35,6 +37,8 @@ interface MapControlProps {
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void,
     handleLayer2Change: (layer: string) => void,
+    handleLayerMinChange: (layerMin: number) => void,
+    handleLayerMaxChange: (layerMax: number) => void,
     handleExplainChange: (explain: any) => void
     handleTourOpen: (isTourOpen: boolean) => void
 }
