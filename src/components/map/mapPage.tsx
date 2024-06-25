@@ -113,7 +113,8 @@ export default function MapPage() {
             localStorage.removeItem('uaLayer2');
         }
 
-        // layer_min/max values which can be adjusted with range slider.
+        // layer_min/max values which can be adjusted with range slider. This
+        // code is also repeated in mapLayer.tsx.
         const layer1: string = layer.replace("\_", "").replace("index", "");
         const layer2_repl: string = layer2.replace("\_", "").replace("index", "");
         const paired_keys = Object.keys(CITY_DATA.citiesArray[idx].dataRangesPaired);

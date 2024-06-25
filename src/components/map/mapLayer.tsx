@@ -35,6 +35,7 @@ export default function UTAMapLayer (props: MapProps) {
         transitionInterpolator: new FlyToInterpolator()
     });
 
+    // This code also repeated in mapPage.tsx to calculate [layerMin, layerMax] props.
     const layer1: string = props.layer.replace("\_", "").replace("index", "");
     const layer2: string = props.layer2.replace("\_", "").replace("index", "");
     const paired_keys = Object.keys(props.citiesArray[props.idx].dataRangesPaired);
@@ -47,16 +48,9 @@ export default function UTAMapLayer (props: MapProps) {
     const this_layer: string = props.numLayers == "Paired" && dual_layers ?
         these_layers : props.layer;
 
-    const layer_min = props.numLayers == "Paired" && dual_layers ?
-        props.citiesArray[props.idx].dataRangesPaired[these_layers as string][0] :
-        props.citiesArray[props.idx].dataRanges[this_layer as string][0];
-    const layer_max = props.numLayers == "Paired" && dual_layers ?
-        props.citiesArray[props.idx].dataRangesPaired[these_layers as string][1] :
-        props.citiesArray[props.idx].dataRanges[this_layer as string][1];
-
     // palettes:
     // https://github.com/d3/d3-scale-chromatic
-    var Color = d3.scaleSequential().domain([ layer_min, layer_max ])
+    var Color = d3.scaleSequential().domain([ props.layerMin, props.layerMax ])
     //.interpolator(d3.interpolateMagma)
     //.interpolator(d3.interpolateCividis)
     .interpolator(d3.interpolateViridis)
@@ -72,13 +66,13 @@ export default function UTAMapLayer (props: MapProps) {
             getLineWidth: 10,
             getLineColor: [122, 122, 122],
             getFillColor: d => {
-                var layerval = Math.max (layer_min, Math.min (layer_max, d.properties?.[this_layer]));
+                var layerval = Math.max (props.layerMin, Math.min (props.layerMax, d.properties?.[this_layer]));
                 const layerIsNaN = isNaN(layerval)
                 if (layerIsNaN) {
-                    layerval = layer_min;
+                    layerval = props.layerMin;
                 }
                 // Invert the palette:
-                layerval = layer_min + (layer_max - layerval);
+                layerval = props.layerMin + (props.layerMax - layerval);
                 const layerarr: any = d3.color(Color(layerval));
                 var red = 0, green = 0, blue = 0;
                 const layerAlpha = layerIsNaN ? 0 : 255;
