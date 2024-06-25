@@ -1,4 +1,27 @@
 
+export type DataRangeKeys = "social_index" | "times_rel" | "times_abs" |
+    "transfers" | "intervals" | "transport" | "popdens" | "school_dist" |
+    "bike_index" | "natural" | "parking";
+
+export type Data2RangeKeys = "timesrel_timesabs" | "timesrel_transfers" |
+    "timesrel_intervals" | "timesrel_transport" | "timesrel_popdens" |
+    "timesrel_schooldist" | "timesrel_bike" | "timesrel_natural" |
+    "timesrel_parking" | "timesrel_social" | "timesabs_transfers" |
+    "timesabs_intervals" | "timesabs_transport" | "timesabs_popdens" |
+    "timesabs_schooldist" | "timesabs_bike" | "timesabs_natural" |
+    "timesabs_parking" | "timesabs_social" | "transfers_intervals" |
+    "transfers_transport" | "transfers_popdens" | "transfers_schooldist" |
+    "transfers_bike" | "transfers_natural" | "transfers_parking" |
+    "transfers_social" | "intervals_transport" | "intervals_popdens" |
+    "intervals_schooldist" | "intervals_bike" | "intervals_natural" |
+    "intervals_parking" | "intervals_social" | "transport_popdens" |
+    "transport_schooldist" | "transport_bike" | "transport_natural" |
+    "transport_parking" | "transport_social" | "popdens_schooldist" |
+    "popdens_bike" | "popdens_natural" | "popdens_parking" | "popdens_social" |
+    "schooldist_bike" | "schooldist_natural" | "schooldist_parking" |
+    "schooldist_social" | "bike_natural" | "bike_parking" | "bike_social" |
+    "natural_parking" | "natural_social" | "parking_social";
+
 export interface ViewState {
     latitude: number,
     longitude: number,

@@ -18,6 +18,8 @@ interface MapProps {
     layer2: string,
     numLayers: string,
     alpha: number,
+    layerMin: number,
+    layerMax: number,
     viewState: ViewState,
     citiesArray: CityDataProps[],
     handleAlphaChange: (pAlpha: number) => void,
