@@ -49,8 +49,7 @@ export default function MapPage() {
     const numLayersOptions = ["Single", "Paired"];
     const [cityLayers, setCityLayers] = useState<string[]>([]);
 
-    const [layerMin, setLayerMin] = useState<number>(0);
-    const [layerMax, setLayerMax] = useState<number>(1);
+    const [layerRange, setLayerRange] = useState<number[]>([0, 1]);
 
     useEffect(() => {
         var idxLocal = 0;
@@ -134,8 +133,7 @@ export default function MapPage() {
             CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][1] :
             CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][1];
 
-        setLayerMin(layer_min);
-        setLayerMax(layer_max);
+        setLayerRange([layer_min, layer_max]);
     }, [idx, layer, layer2, numLayers])
 
     const handleIdxChange = (idx: number) => {
@@ -193,11 +191,8 @@ export default function MapPage() {
         }
     }
 
-    const handleLayerMinChange = (layerMin: number) => {
-        setLayerMin(layerMin);
-    }
-    const handleLayerMaxChange = (layerMax: number) => {
-        setLayerMax(layerMax);
+    const handleLayerRangeChange = (layerRange: number[]) => {
+        setLayerRange(layerRange);
     }
 
     const heading: string = HeadingText(layer, layer2, numLayers, CITY_DATA.citiesArray);
@@ -249,16 +244,14 @@ export default function MapPage() {
                 layer2 = {layer2}
                 numLayers = {numLayers}
                 alpha = {alpha}
-                layerMin = {layerMin}
-                layerMax = {layerMax}
+                layerRange = {layerRange}
                 citiesArray = {CITY_DATA.citiesArray}
                 viewState = {viewState}
                 handleAlphaChange = {handleAlphaChange}
                 handleViewStateChange = {handleViewStateChange}
                 handleLayerChange = {handleLayerChange}
                 handleLayer2Change = {handleLayer2Change}
-                handleLayerMinChange = {handleLayerMinChange}
-                handleLayerMaxChange = {handleLayerMaxChange}
+                handleLayerRangeChange = {handleLayerRangeChange}
             />
             <Control
                 idx = {idx}
@@ -267,8 +260,7 @@ export default function MapPage() {
                 numLayers = {numLayers}
                 numLayersOptions = {numLayersOptions}
                 alpha = {alpha}
-                layerMin = {layerMin}
-                layerMax = {layerMax}
+                layerRange = {layerRange}
                 explain = {explain}
                 citiesArray = {CITY_DATA.citiesArray}
                 cityLayers = {cityLayers}
@@ -279,8 +271,7 @@ export default function MapPage() {
                 handleViewStateChange = {handleViewStateChange}
                 handleLayerChange = {handleLayerChange}
                 handleLayer2Change = {handleLayer2Change}
-                handleLayerMinChange = {handleLayerMinChange}
-                handleLayerMaxChange = {handleLayerMaxChange}
+                handleLayerRangeChange = {handleLayerRangeChange}
                 handleExplainChange = {handleExplainChange}
                 handleTourOpen = {handleTourOpen}
             />

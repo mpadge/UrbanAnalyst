@@ -25,8 +25,7 @@ interface MapControlProps {
     numLayers: string,
     numLayersOptions: string[],
     alpha: number,
-    layerMin: number,
-    layerMax: number,
+    layerRange: number[],
     explain: any,
     citiesArray: CityDataProps[],
     cityLayers: string[],
@@ -37,8 +36,7 @@ interface MapControlProps {
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void,
     handleLayer2Change: (layer: string) => void,
-    handleLayerMinChange: (layerMin: number) => void,
-    handleLayerMaxChange: (layerMax: number) => void,
+    handleLayerRangeChange: (layerRange: number[]) => void,
     handleExplainChange: (explain: any) => void
     handleTourOpen: (isTourOpen: boolean) => void
 }
@@ -55,13 +53,13 @@ export default function Control (props: MapControlProps) {
         setHideControls(pHideControls);
     }
 
-    console.log("-------layer (min, max) = (", props.layerMin, ", ", props.layerMax, ")");
+    console.log("-------layer (min, max) = (", props.layerRange[0], ", ", props.layerRange[1], ")");
 
-    const [sliderValues, setSliderValues] = useState<number[]>([props.layerMin, props.layerMax]);
-    var step = Math.floor(props.layerMax - props.layerMin) / 20;
+    const [sliderValues, setSliderValues] = useState<number[]>(props.layerRange);
+    var step = Math.floor(props.layerRange[1] - props.layerRange[0]) / 20;
     var multiplier = 10;
     while (step === 0) {
-        const stepTemp = Math.floor(multiplier * (props.layerMax - props.layerMin) / 20) / multiplier;
+        const stepTemp = Math.floor(multiplier * (props.layerRange[1] - props.layerRange[0]) / 20) / multiplier;
         if (stepTemp !== 0) {
             step = stepTemp;
             break;
@@ -79,8 +77,7 @@ export default function Control (props: MapControlProps) {
             newValue = [value];
         } else {
             newValue=value;
-            // props.handleLayerMinChange(value[0]);
-            // props.handleLayerMaxChange(value[1]);
+            // props.handleLayerRangeChange(value);
         }
 
         setSliderValues(newValue);
@@ -150,8 +147,8 @@ export default function Control (props: MapControlProps) {
 
                     <h3>Plot Limits</h3>
                     <RangeSlider
-                        rangeMin = {props.layerMin}
-                        rangeMax = {props.layerMax}
+                        rangeMin = {props.layerRange[0]}
+                        rangeMax = {props.layerRange[1]}
                         sliderValues = {sliderValues}
                         step = {step}
                         handleSliderValuesChange={handleSliderValuesChange}

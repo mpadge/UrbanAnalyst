@@ -12,24 +12,21 @@ const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 // const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-nolabels-gl-style/style.json';
 const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 
-interface MapProps {
+export interface MapProps {
     idx: number,
     layer: string,
     layer2: string,
     numLayers: string,
     alpha: number,
-    layerMin: number,
-    layerMax: number,
+    layerRange: number[],
     viewState: ViewState,
     citiesArray: CityDataProps[],
     handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void
     handleLayer2Change: (layer2: string) => void
-    handleLayerMinChange: (layerMin: number) => void,
-    handleLayerMaxChange: (layerMax: number) => void,
+    handleLayerRangeChange: (layerRange: number[]) => void,
 }
-
 
 export default function UTAMap (props: MapProps) {
 
