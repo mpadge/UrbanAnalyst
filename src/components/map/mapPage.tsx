@@ -257,6 +257,8 @@ export default function MapPage() {
                 handleViewStateChange = {handleViewStateChange}
                 handleLayerChange = {handleLayerChange}
                 handleLayer2Change = {handleLayer2Change}
+                handleLayerMinChange = {handleLayerMinChange}
+                handleLayerMaxChange = {handleLayerMaxChange}
             />
             <Control
                 idx = {idx}

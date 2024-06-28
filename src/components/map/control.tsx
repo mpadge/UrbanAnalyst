@@ -55,10 +55,10 @@ export default function Control (props: MapControlProps) {
         setHideControls(pHideControls);
     }
 
-    const rangeMin = 0;
-    const rangeMax = 1;
-    const [sliderValues, setSliderValues] = useState<number[]>([rangeMin, rangeMax]);
-    const step = 0.1;
+    console.log("-------layer (min, max) = (", props.layerMin, ", ", props.layerMax, ")");
+
+    const [sliderValues, setSliderValues] = useState<number[]>([props.layerMin, props.layerMax]);
+    const step = 0.01;
     const handleSliderValuesChange = (
         event: Event,
         value: number | number [],
@@ -70,6 +70,8 @@ export default function Control (props: MapControlProps) {
             newValue = [value];
         } else {
             newValue=value;
+            // props.handleLayerMinChange(value[0]);
+            // props.handleLayerMaxChange(value[1]);
         }
 
         setSliderValues(newValue);
@@ -139,8 +141,8 @@ export default function Control (props: MapControlProps) {
 
                     <h3>Plot Limits</h3>
                     <RangeSlider
-                        rangeMin = {rangeMin}
-                        rangeMax = {rangeMax}
+                        rangeMin = {props.layerMin}
+                        rangeMax = {props.layerMax}
                         sliderValues = {sliderValues}
                         step = {step}
                         handleSliderValuesChange={handleSliderValuesChange}

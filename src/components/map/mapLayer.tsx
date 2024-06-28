@@ -21,6 +21,8 @@ interface MapProps {
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void
     handleLayer2Change: (layer2: string) => void
+    handleLayerMinChange: (layerMin: number) => void,
+    handleLayerMaxChange: (layerMax: number) => void,
 }
 
 
