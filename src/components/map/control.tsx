@@ -59,6 +59,16 @@ export default function Control (props: MapControlProps) {
 
     const [sliderValues, setSliderValues] = useState<number[]>([props.layerMin, props.layerMax]);
     const step = 0.01;
+    var step = Math.floor(props.layerMax - props.layerMin) / 20;
+    var multiplier = 10;
+    while (step === 0) {
+        const stepTemp = Math.floor(multiplier * (props.layerMax - props.layerMin) / 20) / multiplier;
+        if (stepTemp !== 0) {
+            step = stepTemp;
+            break;
+        }
+        multiplier *= 10;
+    }
     const handleSliderValuesChange = (
         event: Event,
         value: number | number [],
