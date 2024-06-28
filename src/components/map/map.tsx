@@ -19,6 +19,7 @@ export interface MapProps {
     numLayers: string,
     alpha: number,
     layerRange: number[],
+    layerStartStop: number[],
     viewState: ViewState,
     citiesArray: CityDataProps[],
     handleAlphaChange: (pAlpha: number) => void,
@@ -26,6 +27,7 @@ export interface MapProps {
     handleLayerChange: (layer: string) => void
     handleLayer2Change: (layer2: string) => void
     handleLayerRangeChange: (layerRange: number[]) => void,
+    handleLayerStartStopChange: (layerRange: number[]) => void,
 }
 
 export default function UTAMap (props: MapProps) {

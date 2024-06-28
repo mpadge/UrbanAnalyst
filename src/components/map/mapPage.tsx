@@ -49,6 +49,7 @@ export default function MapPage() {
     const numLayersOptions = ["Single", "Paired"];
     const [cityLayers, setCityLayers] = useState<string[]>([]);
 
+    const [layerStartStop, setLayerStartStop] = useState<number[]>([0, 1]);
     const [layerRange, setLayerRange] = useState<number[]>([0, 1]);
 
     useEffect(() => {
@@ -134,6 +135,7 @@ export default function MapPage() {
             CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][1];
 
         setLayerRange([layer_min, layer_max]);
+        setLayerStartStop([layer_min, layer_max]);
     }, [idx, layer, layer2, numLayers])
 
     const handleIdxChange = (idx: number) => {
@@ -194,6 +196,9 @@ export default function MapPage() {
     const handleLayerRangeChange = (layerRange: number[]) => {
         setLayerRange(layerRange);
     }
+    const handleLayerStartStopChange = (layerStartStop: number[]) => {
+        setLayerStartStop(layerStartStop);
+    }
 
     const heading: string = HeadingText(layer, layer2, numLayers, CITY_DATA.citiesArray);
 
@@ -245,6 +250,7 @@ export default function MapPage() {
                 numLayers = {numLayers}
                 alpha = {alpha}
                 layerRange = {layerRange}
+                layerStartStop = {layerStartStop}
                 citiesArray = {CITY_DATA.citiesArray}
                 viewState = {viewState}
                 handleAlphaChange = {handleAlphaChange}
@@ -252,6 +258,7 @@ export default function MapPage() {
                 handleLayerChange = {handleLayerChange}
                 handleLayer2Change = {handleLayer2Change}
                 handleLayerRangeChange = {handleLayerRangeChange}
+                handleLayerStartStopChange = {handleLayerStartStopChange}
             />
             <Control
                 idx = {idx}
@@ -261,6 +268,7 @@ export default function MapPage() {
                 numLayersOptions = {numLayersOptions}
                 alpha = {alpha}
                 layerRange = {layerRange}
+                layerStartStop = {layerStartStop}
                 explain = {explain}
                 citiesArray = {CITY_DATA.citiesArray}
                 cityLayers = {cityLayers}
@@ -272,6 +280,7 @@ export default function MapPage() {
                 handleLayerChange = {handleLayerChange}
                 handleLayer2Change = {handleLayer2Change}
                 handleLayerRangeChange = {handleLayerRangeChange}
+                handleLayerStartStopChange = {handleLayerStartStopChange}
                 handleExplainChange = {handleExplainChange}
                 handleTourOpen = {handleTourOpen}
             />

@@ -26,6 +26,7 @@ interface MapControlProps {
     numLayersOptions: string[],
     alpha: number,
     layerRange: number[],
+    layerStartStop: number[],
     explain: any,
     citiesArray: CityDataProps[],
     cityLayers: string[],
@@ -37,6 +38,7 @@ interface MapControlProps {
     handleLayerChange: (layer: string) => void,
     handleLayer2Change: (layer: string) => void,
     handleLayerRangeChange: (layerRange: number[]) => void,
+    handleLayerStartStopChange: (layerStartStop: number[]) => void,
     handleExplainChange: (explain: any) => void
     handleTourOpen: (isTourOpen: boolean) => void
 }

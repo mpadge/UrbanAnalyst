@@ -9,7 +9,6 @@ import { ViewState, CityDataProps } from "@/data/interfaces";
 
 import { MapProps } from "@/components/map/map";
 
-
 export default function UTAMapLayer (props: MapProps) {
 
     const mapPath1 = props.citiesArray[props.idx].path;
