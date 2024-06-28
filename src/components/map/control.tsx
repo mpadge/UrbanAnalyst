@@ -58,7 +58,6 @@ export default function Control (props: MapControlProps) {
     console.log("-------layer (min, max) = (", props.layerMin, ", ", props.layerMax, ")");
 
     const [sliderValues, setSliderValues] = useState<number[]>([props.layerMin, props.layerMax]);
-    const step = 0.01;
     var step = Math.floor(props.layerMax - props.layerMin) / 20;
     var multiplier = 10;
     while (step === 0) {
