@@ -80,7 +80,7 @@ export default function Control (props: MapControlProps) {
             newValue = [value];
         } else {
             newValue=value;
-            // props.handleLayerRangeChange(value);
+            props.handleLayerRangeChange(value);
         }
 
         setSliderValues(newValue);

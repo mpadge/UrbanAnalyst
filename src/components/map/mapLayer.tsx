@@ -14,12 +14,6 @@ export default function UTAMapLayer (props: MapProps) {
     const mapPath1 = props.citiesArray[props.idx].path;
     const mapPath2 = mapPath1.replace("data\.json", "data2.json");
 
-    const [viewState, setViewState] = useState({
-        ...props.viewState,
-        transitionDuration: 2000,
-        transitionInterpolator: new FlyToInterpolator()
-    });
-
     // This code also repeated in mapPage.tsx to calculate [layerMin, layerMax] props.
     const layer1: string = props.layer.replace("\_", "").replace("index", "");
     const layer2: string = props.layer2.replace("\_", "").replace("index", "");

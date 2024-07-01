@@ -1,6 +1,7 @@
 import { NextPage } from "next";
-import { useState, Suspense } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { DeckGL } from "@deck.gl/react/typed";
+import { FlyToInterpolator } from "@deck.gl/core/typed";
 import { Map } from "react-map-gl";
 
 import mapLayer from '@/components/map/mapLayer'
@@ -31,7 +32,19 @@ export interface MapProps {
 
 export default function UTAMap (props: MapProps) {
 
-    const layer = mapLayer(props);
+    const this_layer = mapLayer(props);
+    const [layer, setLayer] = useState(this_layer);
+    useEffect(() => {
+        const this_layer = mapLayer(props);
+        setLayer(mapLayer(props));
+    }, [props]);
+
+    const [viewState, setViewState] = useState({
+        ...props.viewState,
+        transitionDuration: 2000,
+        transitionInterpolator: new FlyToInterpolator()
+    });
+
 
     return (
         <>
