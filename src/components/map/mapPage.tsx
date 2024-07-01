@@ -287,6 +287,7 @@ export default function MapPage() {
             />
             <Legend
                 idx = {idx}
+                layerRange = {layerRange}
                 layer = {layer}
                 layer2 = {layer2}
                 numLayers = {numLayers}
