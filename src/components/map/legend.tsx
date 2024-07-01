@@ -9,6 +9,7 @@ interface LegendProps {
     idx: number,
     layer: string,
     layer2: string,
+    layerRange: number[],
     numLayers: string,
     alpha: number,
     citiesArray: CityDataProps[]
@@ -39,8 +40,8 @@ export default function Legend (props: LegendProps) {
 
         // scaleband controls the ticks, which can be on linear or log scales:
         const log_scale = layer_name == "school_dist" || layer_name == "intervals";
-        const scale_min = log_scale ? Math.pow(10, layerRange[0]) : layerRange[0];
-        const scale_max = log_scale ? Math.pow(10, layerRange[1]) : layerRange[1];
+        const scale_min = log_scale ? Math.pow(10, props.layerRange[0]) : props.layerRange[0];
+        const scale_max = log_scale ? Math.pow(10, props.layerRange[1]) : props.layerRange[1];
 
         var scaleband = log_scale ?
             d3.scaleLog()
@@ -122,12 +123,7 @@ export default function Legend (props: LegendProps) {
         const this_layer: string = props.numLayers === "Paired" && dual_layers ?
             these_layers : props.layer;
 
-        const dataRanges: any = props.numLayers === "Paired" && dual_layers ?
-            props.citiesArray[props.idx].dataRangesPaired :
-            props.citiesArray[props.idx].dataRanges;
-        const layerRange = dataRanges[this_layer];
-
-        update(svg, layerRange, this_layer, props.alpha)
+        update(svg, props.layerRange, this_layer, props.alpha)
 
     }, [svgRef, props])
 

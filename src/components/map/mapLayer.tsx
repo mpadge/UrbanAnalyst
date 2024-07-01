@@ -7,32 +7,14 @@ import 'd3-scale-chromatic';
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
 
-interface MapProps {
-    idx: number,
-    layer: string,
-    layer2: string,
-    numLayers: string,
-    alpha: number,
-    viewState: ViewState,
-    citiesArray: CityDataProps[],
-    handleAlphaChange: (pAlpha: number) => void,
-    handleViewStateChange: (pViewState: ViewState) => void,
-    handleLayerChange: (layer: string) => void
-    handleLayer2Change: (layer2: string) => void
-}
-
+import { MapProps } from "@/components/map/map";
 
 export default function UTAMapLayer (props: MapProps) {
 
     const mapPath1 = props.citiesArray[props.idx].path;
     const mapPath2 = mapPath1.replace("data\.json", "data2.json");
 
-    const [viewState, setViewState] = useState({
-        ...props.viewState,
-        transitionDuration: 2000,
-        transitionInterpolator: new FlyToInterpolator()
-    });
-
+    // This code also repeated in mapPage.tsx to calculate [layerMin, layerMax] props.
     const layer1: string = props.layer.replace("\_", "").replace("index", "");
     const layer2: string = props.layer2.replace("\_", "").replace("index", "");
     const paired_keys = Object.keys(props.citiesArray[props.idx].dataRangesPaired);
@@ -45,19 +27,12 @@ export default function UTAMapLayer (props: MapProps) {
     const this_layer: string = props.numLayers == "Paired" && dual_layers ?
         these_layers : props.layer;
 
-    const layer_min = props.numLayers == "Paired" && dual_layers ?
-        props.citiesArray[props.idx].dataRangesPaired[these_layers as string][0] :
-        props.citiesArray[props.idx].dataRanges[this_layer as string][0];
-    const layer_max = props.numLayers == "Paired" && dual_layers ?
-        props.citiesArray[props.idx].dataRangesPaired[these_layers as string][1] :
-        props.citiesArray[props.idx].dataRanges[this_layer as string][1];
-
     // palettes:
     // https://github.com/d3/d3-scale-chromatic
-    var Color = d3.scaleSequential().domain([ layer_min, layer_max ])
-    //.interpolator(d3.interpolateMagma)
-    //.interpolator(d3.interpolateCividis)
-    .interpolator(d3.interpolateViridis)
+    var Color = d3.scaleSequential().domain(props.layerRange)
+        //.interpolator(d3.interpolateMagma)
+        //.interpolator(d3.interpolateCividis)
+        .interpolator(d3.interpolateViridis)
 
     const mapPath: string = props.numLayers == "Paired" && dual_layers ? mapPath2 : mapPath1;
 
@@ -70,13 +45,13 @@ export default function UTAMapLayer (props: MapProps) {
             getLineWidth: 10,
             getLineColor: [122, 122, 122],
             getFillColor: d => {
-                var layerval = Math.max (layer_min, Math.min (layer_max, d.properties?.[this_layer]));
+                var layerval = Math.max (props.layerRange[0], Math.min (props.layerRange[1], d.properties?.[this_layer]));
                 const layerIsNaN = isNaN(layerval)
                 if (layerIsNaN) {
-                    layerval = layer_min;
+                    layerval = props.layerRange[0];
                 }
                 // Invert the palette:
-                layerval = layer_min + (layer_max - layerval);
+                layerval = props.layerRange[0] + (props.layerRange[1] - layerval);
                 const layerarr: any = d3.color(Color(layerval));
                 var red = 0, green = 0, blue = 0;
                 const layerAlpha = layerIsNaN ? 0 : 255;
@@ -89,7 +64,7 @@ export default function UTAMapLayer (props: MapProps) {
             },
             opacity: 1 - props.alpha,
             updateTriggers: {
-                getFillColor: [this_layer]
+                getFillColor: [this_layer, props.layerRange]
             }
         })
     ]

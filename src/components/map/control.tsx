@@ -1,5 +1,5 @@
 
-import { useState, useRef } from 'react';
+import { ChangeEvent, SyntheticEvent, SetStateAction, useEffect, useState, useRef } from 'react';
 import Link from 'next/link'
 import Image from "next/image"
 import localFont from 'next/font/local'
@@ -8,7 +8,8 @@ import styles from '@/styles/controls.module.css';
 import CityList from '@/components/map/cityList';
 import LayerList from '@/components/map/layerList';
 import SelectNumLayers from '@/components/map/numLayers';
-import OpacitySlider from '@/components/map/slider';
+import OpacitySlider from '@/components/map/opacitySlider';
+import RangeSlider from '@/components/map/rangeSlider';
 import ExplainButton from '@/components/map/explainButton';
 import ExplainLayer from '@/components/map/explainLayer';
 import HelpButton from '@/components/map/helpButton';
@@ -24,6 +25,8 @@ interface MapControlProps {
     numLayers: string,
     numLayersOptions: string[],
     alpha: number,
+    layerRange: number[],
+    layerStartStop: number[],
     explain: any,
     citiesArray: CityDataProps[],
     cityLayers: string[],
@@ -34,6 +37,7 @@ interface MapControlProps {
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void,
     handleLayer2Change: (layer: string) => void,
+    handleLayerRangeChange: (layerRange: number[]) => void,
     handleExplainChange: (explain: any) => void
     handleTourOpen: (isTourOpen: boolean) => void
 }
@@ -49,6 +53,38 @@ export default function Control (props: MapControlProps) {
     const handleControlsVisibility = (pHideControls: boolean) => {
         setHideControls(pHideControls);
     }
+
+    const [sliderValues, setSliderValues] = useState<number[]>(props.layerRange);
+    useEffect(() => {
+        setSliderValues(props.layerRange);
+    }, [props.layerRange]);
+
+    var step = Math.floor(props.layerStartStop[1] - props.layerStartStop[0]) / 20;
+    var multiplier = 10;
+    while (step === 0) {
+        const stepTemp = Math.floor(multiplier * (props.layerStartStop[1] - props.layerStartStop[0]) / 20) / multiplier;
+        if (stepTemp !== 0) {
+            step = stepTemp;
+            break;
+        }
+        multiplier *= 10;
+    }
+    const handleSliderValuesChange = (
+        event: Event,
+        value: number | number [],
+        activeThumb: number
+    ) => {
+
+        let newValue: number[];
+        if (typeof value === 'number') {
+            newValue = [value];
+        } else {
+            newValue=value;
+            props.handleLayerRangeChange(value);
+        }
+
+        setSliderValues(newValue);
+    };
 
     return (
         <>
@@ -110,6 +146,15 @@ export default function Control (props: MapControlProps) {
                     <OpacitySlider
                         alpha = {props.alpha}
                         handleAlphaChange={props.handleAlphaChange}
+                    />
+
+                    <h3>Colour Limits</h3>
+                    <RangeSlider
+                        rangeMin = {props.layerStartStop[0]}
+                        rangeMax = {props.layerStartStop[1]}
+                        sliderValues = {sliderValues}
+                        step = {step}
+                        handleSliderValuesChange={handleSliderValuesChange}
                     />
 
                     <ExplainButton

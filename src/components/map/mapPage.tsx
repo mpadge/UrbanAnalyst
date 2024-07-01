@@ -18,6 +18,8 @@ import styles from '@/styles/map.module.css';
 import tourStyles from '@/styles/tour.module.css';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
+import { DataRangeKeys, Data2RangeKeys } from '@/data/interfaces';
+
 import { ViewState } from "@/data/interfaces";
 
 const buttonProps = {
@@ -46,6 +48,9 @@ export default function MapPage() {
     const [numLayers, setNumLayers] = useState("Single");
     const numLayersOptions = ["Single", "Paired"];
     const [cityLayers, setCityLayers] = useState<string[]>([]);
+
+    const [layerStartStop, setLayerStartStop] = useState<number[]>([0, 1]);
+    const [layerRange, setLayerRange] = useState<number[]>([0, 1]);
 
     useEffect(() => {
         var idxLocal = 0;
@@ -107,7 +112,37 @@ export default function MapPage() {
             setLayer2(layer2Local);
             localStorage.removeItem('uaLayer2');
         }
-    }, [])
+
+        // layer_min/max values which can be adjusted with range slider. This
+        // code is also repeated in mapLayer.tsx.
+        const layer1: string = layer.replace("\_", "").replace("index", "");
+        const layer2_repl: string = layer2.replace("\_", "").replace("index", "");
+        const paired_keys = Object.keys(CITY_DATA.citiesArray[idx].dataRangesPaired);
+
+        const these_layers =
+            paired_keys.includes(layer1 + "_" + layer2_repl) ?
+                layer1 + "_" + layer2_repl : layer2_repl + "_" + layer1;
+        const dual_layers: boolean = paired_keys.includes(these_layers);
+
+        const this_layer: string = numLayers == "Paired" && dual_layers ?
+            these_layers : layer;
+
+        const layer_start = numLayers == "Paired" && dual_layers ?
+            CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][0] :
+            CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][0];
+        const layer_min = numLayers == "Paired" && dual_layers ?
+            CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][1] :
+            CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][1];
+        const layer_max = numLayers == "Paired" && dual_layers ?
+            CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][2] :
+            CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][2];
+        const layer_stop = numLayers == "Paired" && dual_layers ?
+            CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][3] :
+            CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][3];
+
+        setLayerRange([layer_min, layer_max]);
+        setLayerStartStop([layer_start, layer_stop]);
+    }, [idx, layer, layer2, numLayers])
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
@@ -164,6 +199,10 @@ export default function MapPage() {
         }
     }
 
+    const handleLayerRangeChange = (layerRange: number[]) => {
+        setLayerRange(layerRange);
+    }
+
     const heading: string = HeadingText(layer, layer2, numLayers, CITY_DATA.citiesArray);
 
     // ----- TOUR start-----
@@ -213,12 +252,15 @@ export default function MapPage() {
                 layer2 = {layer2}
                 numLayers = {numLayers}
                 alpha = {alpha}
+                layerRange = {layerRange}
+                layerStartStop = {layerStartStop}
                 citiesArray = {CITY_DATA.citiesArray}
                 viewState = {viewState}
                 handleAlphaChange = {handleAlphaChange}
                 handleViewStateChange = {handleViewStateChange}
                 handleLayerChange = {handleLayerChange}
                 handleLayer2Change = {handleLayer2Change}
+                handleLayerRangeChange = {handleLayerRangeChange}
             />
             <Control
                 idx = {idx}
@@ -227,6 +269,8 @@ export default function MapPage() {
                 numLayers = {numLayers}
                 numLayersOptions = {numLayersOptions}
                 alpha = {alpha}
+                layerRange = {layerRange}
+                layerStartStop = {layerStartStop}
                 explain = {explain}
                 citiesArray = {CITY_DATA.citiesArray}
                 cityLayers = {cityLayers}
@@ -237,11 +281,13 @@ export default function MapPage() {
                 handleViewStateChange = {handleViewStateChange}
                 handleLayerChange = {handleLayerChange}
                 handleLayer2Change = {handleLayer2Change}
+                handleLayerRangeChange = {handleLayerRangeChange}
                 handleExplainChange = {handleExplainChange}
                 handleTourOpen = {handleTourOpen}
             />
             <Legend
                 idx = {idx}
+                layerRange = {layerRange}
                 layer = {layer}
                 layer2 = {layer2}
                 numLayers = {numLayers}
