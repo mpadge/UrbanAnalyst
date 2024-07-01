@@ -127,15 +127,21 @@ export default function MapPage() {
         const this_layer: string = numLayers == "Paired" && dual_layers ?
             these_layers : layer;
 
-        const layer_min = numLayers == "Paired" && dual_layers ?
+        const layer_start = numLayers == "Paired" && dual_layers ?
             CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][0] :
             CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][0];
-        const layer_max = numLayers == "Paired" && dual_layers ?
+        const layer_min = numLayers == "Paired" && dual_layers ?
             CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][1] :
             CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][1];
+        const layer_max = numLayers == "Paired" && dual_layers ?
+            CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][2] :
+            CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][2];
+        const layer_stop = numLayers == "Paired" && dual_layers ?
+            CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][3] :
+            CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][3];
 
         setLayerRange([layer_min, layer_max]);
-        setLayerStartStop([layer_min, layer_max]);
+        setLayerStartStop([layer_start, layer_stop]);
     }, [idx, layer, layer2, numLayers])
 
     const handleIdxChange = (idx: number) => {
