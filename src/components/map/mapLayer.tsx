@@ -64,7 +64,7 @@ export default function UTAMapLayer (props: MapProps) {
             },
             opacity: 1 - props.alpha,
             updateTriggers: {
-                getFillColor: [this_layer]
+                getFillColor: [this_layer, props.layerRange]
             }
         })
     ]
