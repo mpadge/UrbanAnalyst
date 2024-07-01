@@ -1,6 +1,8 @@
 
 import { useState } from 'react';
-import styles from '@/styles/controls.module.css';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
+import styles from '@/styles/sliders.module.css';
 
 interface OpacitySliderProps {
     alpha: number,
@@ -16,17 +18,21 @@ export default function OpacitySlider (props: OpacitySliderProps) {
     };
 
     return (
-        <section className="slider">
-            <input
-                className={styles.opacitySlider}
-                type="range"
-                onChange={(event) => props.handleAlphaChange(Number(event.target.value))}
-                min={0}
-                max={1}
-                step={0.1}
-                value={props.alpha}
-                style={getBackgroundSize()}
-            ></input>
+        <section className={styles.sliders}>
+            <div>
+                <Box className={styles.sliderBox}>
+                    <Slider
+                        min={0}
+                        max={1}
+                        value={props.alpha}
+                        step={0.1}
+                        style={getBackgroundSize()}
+                        aria-label="Default"
+                        valueLabelDisplay="auto"
+                        onChange={(event) => props.handleAlphaChange(Number(event.target.value))}
+                    />
+                </Box>
+            </div>
         </section>
     )
 }

@@ -1,10 +1,9 @@
 
 import { ChangeEvent, SyntheticEvent, SetStateAction, useState } from 'react';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 
-import styles from '@/styles/rangeSliders.module.css';
+import styles from '@/styles/sliders.module.css';
 
 interface RangeSliderProps {
     rangeMin: number, // Minimal allowed value
