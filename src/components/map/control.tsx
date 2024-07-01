@@ -148,7 +148,7 @@ export default function Control (props: MapControlProps) {
                         handleAlphaChange={props.handleAlphaChange}
                     />
 
-                    <h3>Plot Limits</h3>
+                    <h3>Colour Limits</h3>
                     <RangeSlider
                         rangeMin = {props.layerStartStop[0]}
                         rangeMax = {props.layerStartStop[1]}
