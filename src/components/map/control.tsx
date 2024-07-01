@@ -57,10 +57,10 @@ export default function Control (props: MapControlProps) {
     console.log("-------layer (min, max) = (", props.layerRange[0], ", ", props.layerRange[1], ")");
 
     const [sliderValues, setSliderValues] = useState<number[]>(props.layerRange);
-    var step = Math.floor(props.layerRange[1] - props.layerRange[0]) / 20;
+    var step = Math.floor(props.layerStartStop[1] - props.layerStartStop[0]) / 20;
     var multiplier = 10;
     while (step === 0) {
-        const stepTemp = Math.floor(multiplier * (props.layerRange[1] - props.layerRange[0]) / 20) / multiplier;
+        const stepTemp = Math.floor(multiplier * (props.layerStartStop[1] - props.layerStartStop[0]) / 20) / multiplier;
         if (stepTemp !== 0) {
             step = stepTemp;
             break;
@@ -148,8 +148,8 @@ export default function Control (props: MapControlProps) {
 
                     <h3>Plot Limits</h3>
                     <RangeSlider
-                        rangeMin = {props.layerRange[0]}
-                        rangeMax = {props.layerRange[1]}
+                        rangeMin = {props.layerStartStop[0]}
+                        rangeMax = {props.layerStartStop[1]}
                         sliderValues = {sliderValues}
                         step = {step}
                         handleSliderValuesChange={handleSliderValuesChange}
