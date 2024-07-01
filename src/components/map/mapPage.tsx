@@ -196,9 +196,6 @@ export default function MapPage() {
     const handleLayerRangeChange = (layerRange: number[]) => {
         setLayerRange(layerRange);
     }
-    const handleLayerStartStopChange = (layerStartStop: number[]) => {
-        setLayerStartStop(layerStartStop);
-    }
 
     const heading: string = HeadingText(layer, layer2, numLayers, CITY_DATA.citiesArray);
 
@@ -258,7 +255,6 @@ export default function MapPage() {
                 handleLayerChange = {handleLayerChange}
                 handleLayer2Change = {handleLayer2Change}
                 handleLayerRangeChange = {handleLayerRangeChange}
-                handleLayerStartStopChange = {handleLayerStartStopChange}
             />
             <Control
                 idx = {idx}
@@ -280,7 +276,6 @@ export default function MapPage() {
                 handleLayerChange = {handleLayerChange}
                 handleLayer2Change = {handleLayer2Change}
                 handleLayerRangeChange = {handleLayerRangeChange}
-                handleLayerStartStopChange = {handleLayerStartStopChange}
                 handleExplainChange = {handleExplainChange}
                 handleTourOpen = {handleTourOpen}
             />

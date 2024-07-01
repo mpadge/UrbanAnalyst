@@ -27,7 +27,6 @@ export interface MapProps {
     handleLayerChange: (layer: string) => void
     handleLayer2Change: (layer2: string) => void
     handleLayerRangeChange: (layerRange: number[]) => void,
-    handleLayerStartStopChange: (layerRange: number[]) => void,
 }
 
 export default function UTAMap (props: MapProps) {
