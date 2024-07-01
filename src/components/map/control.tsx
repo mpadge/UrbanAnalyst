@@ -1,5 +1,5 @@
 
-import { ChangeEvent, SyntheticEvent, SetStateAction, useState, useRef } from 'react';
+import { ChangeEvent, SyntheticEvent, SetStateAction, useEffect, useState, useRef } from 'react';
 import Link from 'next/link'
 import Image from "next/image"
 import localFont from 'next/font/local'
@@ -54,9 +54,11 @@ export default function Control (props: MapControlProps) {
         setHideControls(pHideControls);
     }
 
-    console.log("-------layer (min, max) = (", props.layerRange[0], ", ", props.layerRange[1], ")");
-
     const [sliderValues, setSliderValues] = useState<number[]>(props.layerRange);
+    useEffect(() => {
+        setSliderValues(props.layerRange);
+    }, [props.layerRange]);
+
     var step = Math.floor(props.layerStartStop[1] - props.layerStartStop[0]) / 20;
     var multiplier = 10;
     while (step === 0) {
