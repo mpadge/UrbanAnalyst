@@ -58,62 +58,6 @@
     width: var(--control-width-wide--inner);
 }
 
-.opacitySlider {
-    width: 90%;
-    height: 10px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    border-radius: 10%;
-    background: #eee;
-    background-image: linear-gradient(#6a6ad4, #33c7ff);
-    background-repeat: no-repeat;
-    opacity: 0.8;
-    outline: none;
-    transition: 0.1s;
-}
-
-.opacitySlider:hover {
-    opacity: 1;
-}
-
-.opacitySlider::-webkit-slider-thumb {
-    appearance: none;
-    -webkit-appearance: none;
-    width: var(--control-width-wide--inner);
-    height: 20px;
-    border-radius: 50%;
-    background: #4caf50;
-    cursor: pointer;
-    box-shadow: 0 0 2px 0 #555;
-}
-
-.opacitySlider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #4caf50;
-    cursor: pointer;
-    box-shadow: 0 0 2px 0 #555;
-}
-
-.opacitySlider::-webkit-slider-runnable-track {
-    -webkit-appearance: none;
-    box-shadow: none;
-    border: none;
-    background: transparent;
-    margin-left: 10px;
-    margin-bottom: 20px;
-}
-
-.opacitySlider::-moz-slider-runnable-track {
-    -webkit-appearance: none;
-    box-shadow: none;
-    border: none;
-    background: transparent;
-    margin-left: 10px;
-    margin-bottom: 20px;
-}
-
 .explainbuttonOff {
     align: center;
     margin-top: 10px;
