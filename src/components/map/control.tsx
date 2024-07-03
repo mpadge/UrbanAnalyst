@@ -123,7 +123,6 @@ export default function Control (props: MapControlProps) {
                         // onSelect={city => props.handleIdxChange(props.idx)}
                     />
 
-                    <h3>Layer</h3>
                     <SelectNumLayers
                         numLayers = {props.numLayers}
                         numLayersOptions = {props.numLayersOptions}
