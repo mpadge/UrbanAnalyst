@@ -7,6 +7,7 @@ import localFont from 'next/font/local'
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/map/cityList';
 import LayerList from '@/components/map/layerList';
+import LayerList2 from '@/components/map/layerList2';
 import SelectNumLayers from '@/components/map/numLayers';
 import OpacitySlider from '@/components/map/opacitySlider';
 import RangeSlider from '@/components/map/rangeSlider';
@@ -129,13 +130,15 @@ export default function Control (props: MapControlProps) {
                         handleNumLayersChange = {props.handleNumLayersChange}
                     />
                     <LayerList
+                        title = {props.numLayers == "Paired" ? "Layer1" : "Layer"}
                         layer = {props.layer}
                         handleLayerChange = {props.handleLayerChange}
                         cityLayers = {props.cityLayers}
                     />
 
                     {props.numLayers == "Paired"  &&
-                        <LayerList
+                        <LayerList2
+                            title = "Layer2"
                             layer = {props.layer2}
                             handleLayerChange = {props.handleLayer2Change}
                             cityLayers = {props.cityLayers}

@@ -18,7 +18,7 @@ interface LayerListProps {
 }
 
 
-export default function LayerList(props: LayerListProps) {
+export default function LayerList2(props: LayerListProps) {
 
     const options = useMemo (() => {
         const allOptions = [
@@ -37,38 +37,24 @@ export default function LayerList(props: LayerListProps) {
             { value: "rent", label: "Housing Rent" },
         ];
 
-        if (!props.cityLayers || props.cityLayers.length === 0) {
-            return allOptions;
-        }
-
-        const filteredOptions = allOptions.filter(option => props.cityLayers.includes(option.value));
-        return filteredOptions.length > 0 ? filteredOptions : allOptions;
+        return allOptions.filter(option => props.cityLayers.includes(option.value));
     }, [props.cityLayers]);
 
     const [isSearchable, setIsSearchable] = useState(true);
 
     const findMatchingOption = useCallback(() => {
-        var op = "social_index";
-        if (options && options.length > 0) {
-            const matchingOption = options.find(option => option.value === props.layer)?.value;
-            op = matchingOption ?? options[0]?.value ?? "social_index";
-        }
-        return op;
+        return options.find(option => option.value === props.layer);
     }, [options, props.layer]);
 
-    const [selectedOption, setSelectedOption] = useState(findMatchingOption());
+    const [matchingOption, setMatchingOption] = useState(findMatchingOption());
     useEffect(() => {
         const this_option = findMatchingOption();
-        if (this_option) {
-            setSelectedOption(this_option);
-        } else {
-            setSelectedOption(options[0].value);
-        }
-    }, [props.layer, findMatchingOption, options]);
+        setMatchingOption(this_option);
+    }, [props.layer, findMatchingOption]);
 
     const handleChange = (event: SelectChangeEvent) => {
         props.handleLayerChange(event.target.value as string);
-        setSelectedOption(event.target.value as string);
+        setMatchingOption(event.target.Value as string);
     };
 
     return (
@@ -76,10 +62,10 @@ export default function LayerList(props: LayerListProps) {
             <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">{props.title}</InputLabel>
                 <Select
-                    labelId="layer1-select-label"
-                    id="layer1-select"
-                    value={selectedOption}
-                    label={props.title}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={matchingOption}
+                    // label={props.title}
                     onChange={handleChange}
                 >
                     {options.map((option) => (
