@@ -138,7 +138,8 @@ export default function Control (props: MapControlProps) {
                     {props.numLayers == "Paired"  &&
                         <LayerList2
                             title = "Layer2"
-                            layer = {props.layer2}
+                            layer1 = {props.layer}
+                            layer2 = {props.layer2}
                             handleLayerChange = {props.handleLayer2Change}
                             cityLayers = {props.cityLayers}
                         />

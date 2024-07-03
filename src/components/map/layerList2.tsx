@@ -12,7 +12,8 @@ import styles from '@/styles/controls.module.css';
 
 interface LayerListProps {
     title: string,
-    layer: string,
+    layer1: string,
+    layer2: string,
     handleLayerChange: (layer: string) => void,
     cityLayers: string[],
 }
@@ -50,11 +51,11 @@ export default function LayerList2(props: LayerListProps) {
     const findMatchingOption = useCallback(() => {
         var op = "social_index";
         if (options && options.length > 0) {
-            const matchingOption = options.find(option => option.value === props.layer)?.value;
+            const matchingOption = options.find(option => option.value === props.layer2)?.value;
             op = matchingOption ?? options[0]?.value ?? "social_index";
         }
         return op;
-    }, [options, props.layer]);
+    }, [options, props.layer2]);
 
     const [selectedOption, setSelectedOption] = useState(findMatchingOption());
     useEffect(() => {
@@ -64,7 +65,7 @@ export default function LayerList2(props: LayerListProps) {
         } else {
             setSelectedOption(options[0].value);
         }
-    }, [props.layer, findMatchingOption, options]);
+    }, [props.layer2, findMatchingOption, options]);
 
     const handleChange = (event: SelectChangeEvent) => {
         props.handleLayerChange(event.target.value as string);
