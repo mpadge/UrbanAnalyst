@@ -29,7 +29,7 @@ export default function OpacitySlider (props: OpacitySliderProps) {
                         style={getBackgroundSize()}
                         aria-label="Default"
                         valueLabelDisplay="auto"
-                        onChange={(event) => props.handleAlphaChange(Number(event.target.value))}
+                        onChange={(event) => props.handleAlphaChange(Number((event.target as HTMLInputElement).value))}
                     />
                 </Box>
             </div>
