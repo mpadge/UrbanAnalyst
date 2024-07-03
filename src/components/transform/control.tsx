@@ -158,6 +158,7 @@ export default function Control (props: TransformControlProps) {
 
                     <h3>Layer</h3>
                     <LayerList
+                        title = "Layer"
                         layer = {props.layer}
                         handleLayerChange = {props.handleLayerChange}
                         cityLayers = {props.cityLayers}
