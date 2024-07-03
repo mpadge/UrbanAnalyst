@@ -12,13 +12,14 @@ import styles from '@/styles/controls.module.css';
 
 interface LayerListProps {
     title: string,
-    layer: string,
+    layer1: string,
+    layer2: string,
     handleLayerChange: (layer: string) => void,
     cityLayers: string[],
 }
 
 
-export default function LayerList(props: LayerListProps) {
+export default function LayerList2(props: LayerListProps) {
 
     const options = useMemo (() => {
         const allOptions = [
@@ -41,20 +42,22 @@ export default function LayerList(props: LayerListProps) {
             return allOptions;
         }
 
-        const filteredOptions = allOptions.filter(option => props.cityLayers.includes(option.value));
+        const filteredOptions = allOptions
+            .filter(option => props.cityLayers.includes(option.value))
+            .filter(option => option.value !== props.layer1);
         return filteredOptions.length > 0 ? filteredOptions : allOptions;
-    }, [props.cityLayers]);
+    }, [props.cityLayers, props.layer1]);
 
     const [isSearchable, setIsSearchable] = useState(true);
 
     const findMatchingOption = useCallback(() => {
         var op = "social_index";
         if (options && options.length > 0) {
-            const matchingOption = options.find(option => option.value === props.layer)?.value;
+            const matchingOption = options.find(option => option.value === props.layer2)?.value;
             op = matchingOption ?? options[0]?.value ?? "social_index";
         }
         return op;
-    }, [options, props.layer]);
+    }, [options, props.layer2]);
 
     const [selectedOption, setSelectedOption] = useState(findMatchingOption());
     useEffect(() => {
@@ -64,7 +67,7 @@ export default function LayerList(props: LayerListProps) {
         } else {
             setSelectedOption(options[0].value);
         }
-    }, [props.layer, findMatchingOption, options]);
+    }, [props.layer2, findMatchingOption, options]);
 
     const handleChange = (event: SelectChangeEvent) => {
         props.handleLayerChange(event.target.value as string);
@@ -74,10 +77,10 @@ export default function LayerList(props: LayerListProps) {
     return (
         <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">{props.title}</InputLabel>
+                <InputLabel id="layer2-select-label">{props.title}</InputLabel>
                 <Select
-                    labelId="layer1-select-label"
-                    id="layer1-select"
+                    labelId="layer2-select-label"
+                    id="layer2-select"
                     value={selectedOption}
                     label={props.title}
                     onChange={handleChange}

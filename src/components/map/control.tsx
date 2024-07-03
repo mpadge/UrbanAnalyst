@@ -7,6 +7,7 @@ import localFont from 'next/font/local'
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/map/cityList';
 import LayerList from '@/components/map/layerList';
+import LayerList2 from '@/components/map/layerList2';
 import SelectNumLayers from '@/components/map/numLayers';
 import OpacitySlider from '@/components/map/opacitySlider';
 import RangeSlider from '@/components/map/rangeSlider';
@@ -122,21 +123,23 @@ export default function Control (props: MapControlProps) {
                         // onSelect={city => props.handleIdxChange(props.idx)}
                     />
 
-                    <h3>Layer</h3>
                     <SelectNumLayers
                         numLayers = {props.numLayers}
                         numLayersOptions = {props.numLayersOptions}
                         handleNumLayersChange = {props.handleNumLayersChange}
                     />
                     <LayerList
+                        title = {props.numLayers == "Paired" ? "Layer1" : "Layer"}
                         layer = {props.layer}
                         handleLayerChange = {props.handleLayerChange}
                         cityLayers = {props.cityLayers}
                     />
 
                     {props.numLayers == "Paired"  &&
-                        <LayerList
-                            layer = {props.layer2}
+                        <LayerList2
+                            title = "Layer2"
+                            layer1 = {props.layer}
+                            layer2 = {props.layer2}
                             handleLayerChange = {props.handleLayer2Change}
                             cityLayers = {props.cityLayers}
                         />

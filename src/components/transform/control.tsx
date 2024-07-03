@@ -156,8 +156,8 @@ export default function Control (props: TransformControlProps) {
                         handleIdx2Change={props.handleIdx2Change}
                     />
 
-                    <h3>Layer</h3>
                     <LayerList
+                        title = "Layer"
                         layer = {props.layer}
                         handleLayerChange = {props.handleLayerChange}
                         cityLayers = {props.cityLayers}
