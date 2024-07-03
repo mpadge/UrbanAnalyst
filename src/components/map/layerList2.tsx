@@ -42,9 +42,11 @@ export default function LayerList2(props: LayerListProps) {
             return allOptions;
         }
 
-        const filteredOptions = allOptions.filter(option => props.cityLayers.includes(option.value));
+        const filteredOptions = allOptions
+            .filter(option => props.cityLayers.includes(option.value))
+            .filter(option => option.value !== props.layer1);
         return filteredOptions.length > 0 ? filteredOptions : allOptions;
-    }, [props.cityLayers]);
+    }, [props.cityLayers, props.layer1]);
 
     const [isSearchable, setIsSearchable] = useState(true);
 
