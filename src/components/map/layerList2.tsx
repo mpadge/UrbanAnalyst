@@ -37,35 +37,49 @@ export default function LayerList2(props: LayerListProps) {
             { value: "rent", label: "Housing Rent" },
         ];
 
-        return allOptions.filter(option => props.cityLayers.includes(option.value));
+        if (!props.cityLayers || props.cityLayers.length === 0) {
+            return allOptions;
+        }
+
+        const filteredOptions = allOptions.filter(option => props.cityLayers.includes(option.value));
+        return filteredOptions.length > 0 ? filteredOptions : allOptions;
     }, [props.cityLayers]);
 
     const [isSearchable, setIsSearchable] = useState(true);
 
     const findMatchingOption = useCallback(() => {
-        return options.find(option => option.value === props.layer);
+        var op = "social_index";
+        if (options && options.length > 0) {
+            const matchingOption = options.find(option => option.value === props.layer)?.value;
+            op = matchingOption ?? options[0]?.value ?? "social_index";
+        }
+        return op;
     }, [options, props.layer]);
 
-    const [matchingOption, setMatchingOption] = useState(findMatchingOption());
+    const [selectedOption, setSelectedOption] = useState(findMatchingOption());
     useEffect(() => {
         const this_option = findMatchingOption();
-        setMatchingOption(this_option);
-    }, [props.layer, findMatchingOption]);
+        if (this_option) {
+            setSelectedOption(this_option);
+        } else {
+            setSelectedOption(options[0].value);
+        }
+    }, [props.layer, findMatchingOption, options]);
 
     const handleChange = (event: SelectChangeEvent) => {
         props.handleLayerChange(event.target.value as string);
-        setMatchingOption(event.target.Value as string);
+        setSelectedOption(event.target.value as string);
     };
 
     return (
         <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">{props.title}</InputLabel>
+                <InputLabel id="layer2-select-label">{props.title}</InputLabel>
                 <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={matchingOption}
-                    // label={props.title}
+                    labelId="layer2-select-label"
+                    id="layer2-select"
+                    value={selectedOption}
+                    label={props.title}
                     onChange={handleChange}
                 >
                     {options.map((option) => (
