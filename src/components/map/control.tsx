@@ -166,7 +166,7 @@ export default function Control (props: MapControlProps) {
 
                     <RootSpacing>
                         <Divider flexItem >Colour Controls</Divider>
-                        <Typography variant="h3" align="center" margins="0">
+                        <Typography variant="h3" align="center" margin="0">
                             Opacity
                         </Typography>
                         <OpacitySlider
@@ -174,7 +174,7 @@ export default function Control (props: MapControlProps) {
                             handleAlphaChange={props.handleAlphaChange}
                         />
 
-                        <Typography variant="h3" align="center" margins="0">
+                        <Typography variant="h3" align="center" margin="0">
                             Colour Limits
                         </Typography>
                         <RangeSlider
