@@ -1,29 +1,35 @@
-
 import React, { useState } from 'react';
+
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 import { NumLayersProps } from "@/data/interfaces";
 import styles from '@/styles/controls.module.css';
 
 export default function SelectNumLayers(props: NumLayersProps) {
 
+    const [numLayers, setNumLayers] = useState<string | null>("Single");
+
+    const handleNumLayersClick = (
+        event: React.MouseEvent<HTMLElement>,
+        newNumLayers: string | null,
+    ) => {
+        setNumLayers(newNumLayers);
+        if (newNumLayers) {
+            props.handleNumLayersChange(newNumLayers);
+        }
+    };
+
     return (
-        <section className={styles.numLayersSelect}>
-            {props.numLayersOptions.map((category: string) => (
-                <button
-                    key={category}
-                    type="button"
-                    style={{
-                        backgroundColor: category === props.numLayers ? "" : "white" ,
-                        color: category === props.numLayers ? "" : "black"
-                    }}
-                    //className={styles.buttonGroup}
-                    onClick={(event) => { 
-                        props.handleNumLayersChange(category);
-                    }}
-                >
-                    {category}
-                </button>
-            ))}
-        </section>
+        <ToggleButtonGroup
+            value={numLayers}
+            exclusive
+            onChange={handleNumLayersClick}
+            aria-label="text alignment"
+            size="small"
+        >
+            <ToggleButton value="Single">Single</ToggleButton>
+            <ToggleButton value="Paired">Paired</ToggleButton>
+        </ToggleButtonGroup>
     )
 }

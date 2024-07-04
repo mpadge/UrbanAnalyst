@@ -1,9 +1,9 @@
 .sliderBox {
     margin-left: 20px;
     margin-right: 20px;
-    margin-top: 0;
-    margin-bottom: 0px;
-    height: 40px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    height: 20px;
     width: var(--control-width-wide-inner);
 }
 

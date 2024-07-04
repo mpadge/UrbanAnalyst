@@ -4,6 +4,12 @@ import Link from 'next/link'
 import Image from "next/image"
 import localFont from 'next/font/local'
 
+import { styled } from '@mui/material/styles';
+import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/map/cityList';
 import LayerList from '@/components/map/layerList';
@@ -43,6 +49,11 @@ interface MapControlProps {
     handleTourOpen: (isTourOpen: boolean) => void
 }
 
+const RootSpacing = styled('div')(({ theme }) => ({
+    width: '100%',
+    marginTop: '12px',
+    marginBottom: '0px',
+}));
 
 export default function Control (props: MapControlProps) {
 
@@ -122,42 +133,58 @@ export default function Control (props: MapControlProps) {
                         // onSelect={city => props.handleIdxChange(props.idx)}
                     />
 
-                    <SelectNumLayers
-                        numLayers = {props.numLayers}
-                        numLayersOptions = {props.numLayersOptions}
-                        handleNumLayersChange = {props.handleNumLayersChange}
-                    />
-                    <LayerList
-                        title = {props.numLayers == "Paired" ? "Layer1" : "Layer"}
-                        layer = {props.layer}
-                        handleLayerChange = {props.handleLayerChange}
-                        cityLayers = {props.cityLayers}
-                    />
-
-                    {props.numLayers == "Paired"  &&
-                        <LayerList2
-                            title = "Layer2"
-                            layer1 = {props.layer}
-                            layer2 = {props.layer2}
-                            handleLayerChange = {props.handleLayer2Change}
+                    <RootSpacing>
+                    <Divider flexItem >Layer Controls</Divider>
+                    <Box sx={{ p: 1 }}>
+                        <Stack spacing={1} alignItems="center" marginBottom="8px">
+                        <SelectNumLayers
+                            numLayers = {props.numLayers}
+                            numLayersOptions = {props.numLayersOptions}
+                            handleNumLayersChange = {props.handleNumLayersChange}
+                        />
+                        </Stack>
+                        <Stack spacing={1}>
+                        <LayerList
+                            title = {props.numLayers == "Paired" ? "Layer1" : "Layer"}
+                            layer = {props.layer}
+                            handleLayerChange = {props.handleLayerChange}
                             cityLayers = {props.cityLayers}
                         />
-                    }
 
-                    <h3>Opacity</h3>
-                    <OpacitySlider
-                        alpha = {props.alpha}
-                        handleAlphaChange={props.handleAlphaChange}
-                    />
+                        {props.numLayers == "Paired"  &&
+                            <LayerList2
+                                title = "Layer2"
+                                layer1 = {props.layer}
+                                layer2 = {props.layer2}
+                                handleLayerChange = {props.handleLayer2Change}
+                                cityLayers = {props.cityLayers}
+                            />
+                        }
+                            </Stack>
+                    </Box>
+                    </RootSpacing>
 
-                    <h3>Colour Limits</h3>
-                    <RangeSlider
-                        rangeMin = {props.layerStartStop[0]}
-                        rangeMax = {props.layerStartStop[1]}
-                        sliderValues = {sliderValues}
-                        step = {step}
-                        handleSliderValuesChange={handleSliderValuesChange}
-                    />
+                    <RootSpacing>
+                        <Divider flexItem >Colour Controls</Divider>
+                        <Typography variant="h3" align="center" margin="0">
+                            Opacity
+                        </Typography>
+                        <OpacitySlider
+                            alpha = {props.alpha}
+                            handleAlphaChange={props.handleAlphaChange}
+                        />
+
+                        <Typography variant="h3" align="center" margin="0">
+                            Colour Limits
+                        </Typography>
+                        <RangeSlider
+                            rangeMin = {props.layerStartStop[0]}
+                            rangeMax = {props.layerStartStop[1]}
+                            sliderValues = {sliderValues}
+                            step = {step}
+                            handleSliderValuesChange={handleSliderValuesChange}
+                        />
+                    </RootSpacing>
 
                     <ExplainButton
                         explain = {props.explain}
