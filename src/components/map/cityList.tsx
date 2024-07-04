@@ -21,7 +21,7 @@ interface CityListProps {
 export default function CityList(props: CityListProps) {
 
     const options = props.citiesArray.map((city, index) => ({
-        value: String (index),
+        value: String(index),
         label: city.nameFormatted
     }));
 
@@ -29,9 +29,10 @@ export default function CityList(props: CityListProps) {
 
     // findMatchingOption returns the *index* of the option:
     const findMatchingOption = useCallback(() => {
-        var op = 0;
+        var op = "0";
+        const idxString = String(props.idx);
         if (options && options.length > 0) {
-            const matchingOption = options.find(option => option.value === props.idx)?.value;
+            const matchingOption = options.find(option => option.value === idxString)?.value;
             op = matchingOption ?? options[0]?.value ?? 0;
         }
         return op;
