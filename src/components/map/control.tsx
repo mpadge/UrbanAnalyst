@@ -134,34 +134,34 @@ export default function Control (props: MapControlProps) {
                     />
 
                     <RootSpacing>
-                    <Divider flexItem >Layer Controls</Divider>
-                    <Box sx={{ p: 1 }}>
-                        <Stack spacing={1} alignItems="center" marginBottom="8px">
-                        <SelectNumLayers
-                            numLayers = {props.numLayers}
-                            numLayersOptions = {props.numLayersOptions}
-                            handleNumLayersChange = {props.handleNumLayersChange}
-                        />
-                        </Stack>
-                        <Stack spacing={1}>
-                        <LayerList
-                            title = {props.numLayers == "Paired" ? "Layer1" : "Layer"}
-                            layer = {props.layer}
-                            handleLayerChange = {props.handleLayerChange}
-                            cityLayers = {props.cityLayers}
-                        />
-
-                        {props.numLayers == "Paired"  &&
-                            <LayerList2
-                                title = "Layer2"
-                                layer1 = {props.layer}
-                                layer2 = {props.layer2}
-                                handleLayerChange = {props.handleLayer2Change}
-                                cityLayers = {props.cityLayers}
-                            />
-                        }
+                        <Divider flexItem >Layer Controls</Divider>
+                        <Box sx={{ p: 1 }}>
+                            <Stack spacing={1} alignItems="center" marginBottom="8px">
+                                <SelectNumLayers
+                                    numLayers = {props.numLayers}
+                                    numLayersOptions = {props.numLayersOptions}
+                                    handleNumLayersChange = {props.handleNumLayersChange}
+                                />
                             </Stack>
-                    </Box>
+                            <Stack spacing={1}>
+                                <LayerList
+                                    title = {props.numLayers == "Paired" ? "Layer1" : "Layer"}
+                                    layer = {props.layer}
+                                    handleLayerChange = {props.handleLayerChange}
+                                    cityLayers = {props.cityLayers}
+                                />
+
+                                {props.numLayers == "Paired"  &&
+                                    <LayerList2
+                                        title = "Layer2"
+                                        layer1 = {props.layer}
+                                        layer2 = {props.layer2}
+                                        handleLayerChange = {props.handleLayer2Change}
+                                        cityLayers = {props.cityLayers}
+                                    />
+                                }
+                            </Stack>
+                        </Box>
                     </RootSpacing>
 
                     <RootSpacing>
@@ -186,13 +186,15 @@ export default function Control (props: MapControlProps) {
                         />
                     </RootSpacing>
 
-                    <ExplainButton
-                        explain = {props.explain}
-                        handleExplainChange = {props.handleExplainChange} />
+                    <Stack spacing={1}>
+                        <ExplainButton
+                            explain = {props.explain}
+                            handleExplainChange = {props.handleExplainChange} />
 
-                    <HelpButton
-                        handleTourOpen = {props.handleTourOpen}
-                    />
+                        <HelpButton
+                            handleTourOpen = {props.handleTourOpen}
+                        />
+                    </Stack>
                 </div>
 
                 <button
