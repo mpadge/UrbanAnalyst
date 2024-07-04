@@ -4,6 +4,10 @@ import Link from 'next/link'
 import Image from "next/image"
 import localFont from 'next/font/local'
 
+import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/map/cityList';
 import LayerList from '@/components/map/layerList';
@@ -42,7 +46,6 @@ interface MapControlProps {
     handleExplainChange: (explain: any) => void
     handleTourOpen: (isTourOpen: boolean) => void
 }
-
 
 export default function Control (props: MapControlProps) {
 
@@ -122,27 +125,33 @@ export default function Control (props: MapControlProps) {
                         // onSelect={city => props.handleIdxChange(props.idx)}
                     />
 
-                    <SelectNumLayers
-                        numLayers = {props.numLayers}
-                        numLayersOptions = {props.numLayersOptions}
-                        handleNumLayersChange = {props.handleNumLayersChange}
-                    />
-                    <LayerList
-                        title = {props.numLayers == "Paired" ? "Layer1" : "Layer"}
-                        layer = {props.layer}
-                        handleLayerChange = {props.handleLayerChange}
-                        cityLayers = {props.cityLayers}
-                    />
-
-                    {props.numLayers == "Paired"  &&
-                        <LayerList2
-                            title = "Layer2"
-                            layer1 = {props.layer}
-                            layer2 = {props.layer2}
-                            handleLayerChange = {props.handleLayer2Change}
+                    <Divider />
+                    <Box sx={{ p: 1 }}>
+                        <Typography gutterBottom variant="body2">
+                            Layer Controls
+                        </Typography>
+                        <SelectNumLayers
+                            numLayers = {props.numLayers}
+                            numLayersOptions = {props.numLayersOptions}
+                            handleNumLayersChange = {props.handleNumLayersChange}
+                        />
+                        <LayerList
+                            title = {props.numLayers == "Paired" ? "Layer1" : "Layer"}
+                            layer = {props.layer}
+                            handleLayerChange = {props.handleLayerChange}
                             cityLayers = {props.cityLayers}
                         />
-                    }
+
+                        {props.numLayers == "Paired"  &&
+                            <LayerList2
+                                title = "Layer2"
+                                layer1 = {props.layer}
+                                layer2 = {props.layer2}
+                                handleLayerChange = {props.handleLayer2Change}
+                                cityLayers = {props.cityLayers}
+                            />
+                        }
+                    </Box>
 
                     <h3>Opacity</h3>
                     <OpacitySlider
