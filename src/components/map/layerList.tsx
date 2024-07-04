@@ -23,8 +23,8 @@ export default function LayerList(props: LayerListProps) {
     const options = useMemo (() => {
         const allOptions = [
             { value: "social_index", label: "Social" },
-            { value: "times_rel", label: "Transport Rel." },
-            { value: "times_abs", label: "Transport Abs." },
+            { value: "times_rel", label: "Rel. Transport" },
+            { value: "times_abs", label: "Abs. Transport" },
             { value: "transfers", label: "Num. Transfers" },
             { value: "intervals", label: "Transp. Interval" },
             { value: "transport", label: "Transport Combined" },
