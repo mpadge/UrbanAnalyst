@@ -113,7 +113,6 @@ export default function Control (props: MapControlProps) {
                         />
                     </p>
 
-                    <h3>City</h3>
                     <CityList
                         citiesArray={props.citiesArray}
                         idx={props.idx}
