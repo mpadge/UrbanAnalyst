@@ -160,6 +160,10 @@ export default function Control (props: MapControlProps) {
                                         cityLayers = {props.cityLayers}
                                     />
                                 }
+                                <ExplainButton
+                                    explain = {props.explain}
+                                    handleExplainChange = {props.handleExplainChange} />
+
                             </Stack>
                         </Box>
                     </RootSpacing>
@@ -186,11 +190,8 @@ export default function Control (props: MapControlProps) {
                         />
                     </RootSpacing>
 
-                    <Stack spacing={1}>
-                        <ExplainButton
-                            explain = {props.explain}
-                            handleExplainChange = {props.handleExplainChange} />
-
+                    <Divider flexItem />
+                    <Stack spacing={1} margin="5px">
                         <HelpButton
                             handleTourOpen = {props.handleTourOpen}
                         />
