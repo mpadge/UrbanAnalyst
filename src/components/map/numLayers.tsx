@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import Select from 'react-select';
 
 import { NumLayersProps } from "@/data/interfaces";
 import styles from '@/styles/controls.module.css';
