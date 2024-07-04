@@ -47,6 +47,7 @@ export default function LayerList(props: LayerListProps) {
 
     const [isSearchable, setIsSearchable] = useState(true);
 
+    // findMatchingOption returns the *value* of the option:
     const findMatchingOption = useCallback(() => {
         var op = "social_index";
         if (options && options.length > 0) {
