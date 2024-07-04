@@ -1,5 +1,5 @@
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -27,7 +27,7 @@ export default function CityList(props: CityListProps) {
 
     const [isSearchable, setIsSearchable] = useState(true);
 
-    // findMatchingOption returns the *index* of the option:
+    // findMatchingOption returns the *index* of the option, but mui requires values to be strings.
     const findMatchingOption = useCallback(() => {
         var op = "0";
         const idxString = String(props.idx);
@@ -38,6 +38,17 @@ export default function CityList(props: CityListProps) {
         return op;
     }, [options, props.idx]);
     const [selectedOption, setSelectedOption] = useState(findMatchingOption());
+
+    // This is necessary to ensure localStorage values are correctly set on initial load:
+    useEffect(() => {
+        const this_option = findMatchingOption();
+        if (this_option) {
+            setSelectedOption(this_option);
+        } else {
+            setSelectedOption(options[0].value);
+        }
+    }, [findMatchingOption, options]);
+
     const handleChange = (event: SelectChangeEvent) => {
         const val = event.target.value as string;
         if (val) {
