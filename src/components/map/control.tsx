@@ -51,7 +51,7 @@ interface MapControlProps {
 
 const RootSpacing = styled('div')(({ theme }) => ({
     width: '100%',
-    marginTop: '15px',
+    marginTop: '12px',
     marginBottom: '0px',
 }));
 
@@ -164,20 +164,27 @@ export default function Control (props: MapControlProps) {
                     </Box>
                     </RootSpacing>
 
-                    <h3>Opacity</h3>
-                    <OpacitySlider
-                        alpha = {props.alpha}
-                        handleAlphaChange={props.handleAlphaChange}
-                    />
+                    <RootSpacing>
+                        <Divider flexItem >Colour Controls</Divider>
+                        <Typography variant="h3" align="center" margins="0">
+                            Opacity
+                        </Typography>
+                        <OpacitySlider
+                            alpha = {props.alpha}
+                            handleAlphaChange={props.handleAlphaChange}
+                        />
 
-                    <h3>Colour Limits</h3>
-                    <RangeSlider
-                        rangeMin = {props.layerStartStop[0]}
-                        rangeMax = {props.layerStartStop[1]}
-                        sliderValues = {sliderValues}
-                        step = {step}
-                        handleSliderValuesChange={handleSliderValuesChange}
-                    />
+                        <Typography variant="h3" align="center" margins="0">
+                            Colour Limits
+                        </Typography>
+                        <RangeSlider
+                            rangeMin = {props.layerStartStop[0]}
+                            rangeMax = {props.layerStartStop[1]}
+                            sliderValues = {sliderValues}
+                            step = {step}
+                            handleSliderValuesChange={handleSliderValuesChange}
+                        />
+                    </RootSpacing>
 
                     <ExplainButton
                         explain = {props.explain}
