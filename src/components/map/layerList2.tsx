@@ -77,7 +77,7 @@ export default function LayerList2(props: LayerListProps) {
     return (
         <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
-                <InputLabel id="layer2-select-label">{props.title}</InputLabel>
+                <InputLabel id="layer2-input-label">{props.title}</InputLabel>
                 <Select
                     labelId="layer2-select-label"
                     id="layer2-select"
