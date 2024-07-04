@@ -52,7 +52,7 @@ export default function CityList(props: CityListProps) {
     return (
         <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
-                <InputLabel id="city-input-label">{props.title}</InputLabel>
+                <InputLabel id="city-input-label">City</InputLabel>
                 <Select
                     labelId="city-select-label"
                     id="city-select"
