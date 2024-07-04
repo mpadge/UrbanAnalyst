@@ -4,8 +4,10 @@ import Link from 'next/link'
 import Image from "next/image"
 import localFont from 'next/font/local'
 
+import { styled } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 import styles from '@/styles/controls.module.css';
@@ -46,6 +48,12 @@ interface MapControlProps {
     handleExplainChange: (explain: any) => void
     handleTourOpen: (isTourOpen: boolean) => void
 }
+
+const RootSpacing = styled('div')(({ theme }) => ({
+    width: '100%',
+    marginTop: '15px',
+    marginBottom: '0px',
+}));
 
 export default function Control (props: MapControlProps) {
 
@@ -125,16 +133,17 @@ export default function Control (props: MapControlProps) {
                         // onSelect={city => props.handleIdxChange(props.idx)}
                     />
 
-                    <Divider />
+                    <RootSpacing>
+                    <Divider flexItem >Layer Controls</Divider>
                     <Box sx={{ p: 1 }}>
-                        <Typography gutterBottom variant="body2">
-                            Layer Controls
-                        </Typography>
+                        <Stack spacing={1} alignItems="center" marginBottom="8px">
                         <SelectNumLayers
                             numLayers = {props.numLayers}
                             numLayersOptions = {props.numLayersOptions}
                             handleNumLayersChange = {props.handleNumLayersChange}
                         />
+                        </Stack>
+                        <Stack spacing={1}>
                         <LayerList
                             title = {props.numLayers == "Paired" ? "Layer1" : "Layer"}
                             layer = {props.layer}
@@ -151,7 +160,9 @@ export default function Control (props: MapControlProps) {
                                 cityLayers = {props.cityLayers}
                             />
                         }
+                            </Stack>
                     </Box>
+                    </RootSpacing>
 
                     <h3>Opacity</h3>
                     <OpacitySlider

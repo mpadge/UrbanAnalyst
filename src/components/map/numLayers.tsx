@@ -26,6 +26,7 @@ export default function SelectNumLayers(props: NumLayersProps) {
             exclusive
             onChange={handleNumLayersClick}
             aria-label="text alignment"
+            size="small"
         >
             <ToggleButton value="Single">Single</ToggleButton>
             <ToggleButton value="Paired">Paired</ToggleButton>
