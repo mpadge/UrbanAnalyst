@@ -6,14 +6,21 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 
 import styles from '@/styles/controls.module.css';
-import { ExplainButtonProps } from "@/data/interfaces";
+import { CityDataProps, ExplainButtonProps } from "@/data/interfaces";
 
-export interface SimpleDialogProps {
-    open: boolean;
-    onClose: () => void;
+export interface MapsExplainProps {
+    open: boolean,
+    onClose: () => void,
+    idx: number,
+    layer: string,
+    layer2: string,
+    numLayers: string,
+    explain: boolean,
+    meanVals: boolean,
+    citiesArray: CityDataProps[]
 }
 
-function SimpleDialog(props: SimpleDialogProps) {
+function ExplainLayerDialog(props: MapsExplainProps) {
     const { onClose, open } = props;
 
     const handleClose = () => {
@@ -57,9 +64,16 @@ export default function ExplainButton (props: ExplainButtonProps) {
             <Button variant="outlined" onClick={handleClickOpen}>
                 Open simple dialog
             </Button>
-            <SimpleDialog
+            <ExplainLayerDialog
                 open={open}
                 onClose={handleClose}
+                idx = {props.idx}
+                layer = {props.layer}
+                layer2 = {props.layer2}
+                numLayers = {props.numLayers}
+                explain = {props.explain}
+                meanVals = {props.meanVals}
+                citiesArray = {props.citiesArray}
             />
         </Stack>
     )
