@@ -6,6 +6,7 @@ import { CityDataProps } from "@/data/interfaces";
 import styles from '@/styles/controls.module.css';
 
 interface CityListProps {
+    idx: number,
     idx2: number,
     citiesArray: CityDataProps[],
     handleIdx2Change: (Idx2: number) => void,
