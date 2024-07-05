@@ -14,6 +14,7 @@ interface TransformProps {
     idx2: number
     layer: string
     varnames: string[]
+    calculate: boolean,
     citiesArray: CityDataProps[],
     city: string
     targetCity: string
@@ -24,6 +25,7 @@ interface TransformProps {
     outputLayer: string
     handleLayerMinChange: (layerMin: number) => void
     handleLayerMaxChange: (layerMin: number) => void
+    handleCalculateChange: (calculate: boolean) => void
     handleOutputLayerChange: (outputLayer: string) => void
 }
 
@@ -44,6 +46,7 @@ const TransformComponent = (props: TransformProps) => {
     const [geoJsonLayer, setGeoJsonLayer] = useState<any>(null)
     const [loading, setLoading] = useState<boolean>(true);
     const [calculating, setCalculating] = useState<boolean>(false);
+    const [calculated, setCalculated] = useState<boolean>(true);
 
     useEffect(() => {
         const mapPathSource = "/data/" + props.city + "/data.json";
@@ -61,6 +64,7 @@ const TransformComponent = (props: TransformProps) => {
     // vector of aggregaed mean differences in each polygon of source city. This
     // vector is stored in the column of 'result' corresponding to
     // 'varnames[0]'.
+    const { handleCalculateChange } = props;
     useEffect(() => {
         const uniqueVarNames = Object.keys(
             props.varnames.reduce((acc: StringAcc, name) => {
@@ -71,7 +75,8 @@ const TransformComponent = (props: TransformProps) => {
         const filteredVarNames = props.varnames.filter(name => name!== props.layer);
         const varnames: string[] = [props.layer, ...filteredVarNames];
         transformDataFunction(data1, data2, varnames, props.outputLayer, setResult);
-    }, [data1, data2, props.layer, props.varnames, props.outputLayer, setResult]);
+        handleCalculateChange(false);
+    }, [data1, data2, props.layer, props.varnames, props.outputLayer, setResult, props.calculate, handleCalculateChange]);
 
     // Effect to load map data for source city, and replace specified column
     // with 'result' from previous effect:

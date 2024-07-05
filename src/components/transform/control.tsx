@@ -12,10 +12,11 @@ import LayerList from '@/components/map/layerList';
 import SelectNumLayers from '@/components/map/numLayers';
 import OpacitySlider from '@/components/map/opacitySlider';
 import LayersButton from '@/components/transform/layersButton';
+import CalculateButton from '@/components/transform/calculateButton';
 import OutputLayers from '@/components/transform/outputLayers';
 import HelpButton from '@/components/transform/helpButton';
 
-import { ViewState, CityDataProps } from "@/data/interfaces";
+import { ViewState, CityDataProps, CalculateButtonProps } from "@/data/interfaces";
 
 const junctionFont = localFont({ src: '../../app/junction-regular.woff' })
 
@@ -24,6 +25,7 @@ interface TransformControlProps {
     idx2: number,
     layer: string
     varnames: string[]
+    calculate: boolean,
     alpha: number,
     citiesArray: CityDataProps[],
     cityLayers: string[],
@@ -34,6 +36,7 @@ interface TransformControlProps {
     handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void,
+    handleCalculateChange: (calculate: boolean) => void
     handleVarnamesChange: (varnames: string[]) => void
     handleOutputLayerChange: (outputLayer: string) => void
     handleTourOpen: (isTourOpen: boolean) => void
@@ -170,6 +173,10 @@ export default function Control (props: TransformControlProps) {
                         handleAlphaChange={props.handleAlphaChange}
                     />
 
+                    <CalculateButton
+                        calculate={props.calculate}
+                        handleCalculateChange={props.handleCalculateChange}
+                    />
                     <h3>Output Layer</h3>
                     <OutputLayers
                         outputLayer = {props.outputLayer}

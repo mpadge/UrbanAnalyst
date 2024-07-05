@@ -39,6 +39,7 @@ export default function TransformPage() {
     const [alpha, setAlpha] = useState(0.5);
     const [layerMin, setLayerMin] = useState<number>(0);
     const [layerMax, setLayerMax] = useState<number>(0);
+    const [calculate, setCalculate] = useState<boolean>(false);
     const [varnames, setVarnames] = useState<string[]>([]);
     const [outputLayer, setOutputLayer] = useState<string>("relative");
     const [cityLayers, setCityLayers] = useState<string[]>([]);
@@ -142,6 +143,9 @@ export default function TransformPage() {
     const handleLayerMaxChange = (layerMax: number) => {
         setLayerMax(layerMax);
     }
+    const handleCalculateChange = (calculate: boolean) => {
+        setCalculate(calculate);
+    }
     const handleVarnamesChange = (varnames: string[]) => {
         setVarnames(varnames);
     }
@@ -191,6 +195,7 @@ export default function TransformPage() {
                 idx2={idx2}
                 layer={layer}
                 varnames={varnames}
+                calculate={calculate}
                 citiesArray = {CITY_DATA.citiesArray}
                 city = {CITY_DATA.citiesArray[idx].name}
                 targetCity = {CITY_DATA.citiesArray[idx2].name}
@@ -201,6 +206,7 @@ export default function TransformPage() {
                 outputLayer={outputLayer}
                 handleLayerMinChange={handleLayerMinChange}
                 handleLayerMaxChange={handleLayerMaxChange}
+                handleCalculateChange={handleCalculateChange}
                 handleOutputLayerChange={handleOutputLayerChange}
             />
             <Control
@@ -208,6 +214,7 @@ export default function TransformPage() {
                 idx2={idx2}
                 layer={layer}
                 varnames={varnames}
+                calculate={calculate}
                 alpha={alpha}
                 citiesArray={CITY_DATA.citiesArray}
                 cityLayers={cityLayers}
@@ -218,6 +225,7 @@ export default function TransformPage() {
                 handleAlphaChange={handleAlphaChange}
                 handleViewStateChange={handleViewStateChange}
                 handleLayerChange={handleLayerChange}
+                handleCalculateChange={handleCalculateChange}
                 handleVarnamesChange={handleVarnamesChange}
                 handleOutputLayerChange={handleOutputLayerChange}
                 handleTourOpen = {handleTourOpen}
