@@ -12,7 +12,7 @@ import { GetLayerText } from "@/components/explainLayer";
 import { CityDataProps, ExplainButtonProps } from "@/data/interfaces";
 import { HeadingTextOneLayer, HeadingText } from "@/components/headingText";
 
-export interface MapsExplainProps {
+export interface ExplainProps {
     open: boolean,
     onClose: () => void,
     idx: number,
@@ -24,7 +24,7 @@ export interface MapsExplainProps {
     citiesArray: CityDataProps[]
 }
 
-function ExplainLayerDialog(props: MapsExplainProps) {
+export function ExplainLayerDialog(props: ExplainProps) {
     const { onClose, open } = props;
 
     const handleClose = () => {
