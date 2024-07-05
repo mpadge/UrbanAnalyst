@@ -162,7 +162,14 @@ export default function Control (props: MapControlProps) {
                                 }
                                 <ExplainButton
                                     explain = {props.explain}
-                                    handleExplainChange = {props.handleExplainChange} />
+                                    handleExplainChange = {props.handleExplainChange}
+                                    idx={props.idx}
+                                    layer = {props.layer}
+                                    layer2 = {props.layer2}
+                                    numLayers = {props.numLayers}
+                                    meanVals = {true}
+                                    citiesArray={props.citiesArray}
+                                />
 
                             </Stack>
                         </Box>
