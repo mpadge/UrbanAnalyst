@@ -9,7 +9,6 @@ import LayerList from '@/components/compare/layerlist';
 import SelectNumLayers from '@/components/compare/numLayers';
 import SortOrderList from '@/components/compare/sortOrderList';
 import ExplainButton from '@/components/compare/explainButton';
-import ExplainLayer from '@/components/compare/explainLayer';
 import MeanAvgButtons from '@/components/compare/meanAvg';
 import HelpButton from '@/components/compare/helpButton';
 
@@ -23,7 +22,6 @@ interface CompareControlProps {
     numLayers: string,
     numLayersOptions: string[],
     meanVals: boolean,
-    explain: any,
     sortOpt: string,
     citiesArray: CityDataProps[],
     handleLayerChange: (layer: string) => void,
@@ -31,7 +29,6 @@ interface CompareControlProps {
     handleNumLayersChange: (numLayers: string) => void,
     handleMeanChange: (meanVals: boolean) => void,
     handleSortChange: (sortOpt: string) => void,
-    handleExplainChange: (explain: any) => void
     handleTourOpen: (isTourOpen: boolean) => void
 }
 
@@ -99,8 +96,13 @@ export default function Control (props: CompareControlProps) {
                         handleSortChange = {props.handleSortChange}
                     />
                     <ExplainButton
-                        explain = {props.explain}
-                        handleExplainChange = {props.handleExplainChange} />
+                        idx={0}
+                        layer = {props.layer}
+                        layer2 = {props.layer2}
+                        numLayers = {props.numLayers}
+                        meanVals = {true}
+                        citiesArray={props.citiesArray}
+                    />
                     <HelpButton
                         handleTourOpen = {props.handleTourOpen}
                     />
@@ -113,14 +115,6 @@ export default function Control (props: CompareControlProps) {
                 >Show Controls</button>
 
             </div>
-            <ExplainLayer
-                layer = {props.layer}
-                layer2 = {props.layer2}
-                numLayers = {props.numLayers}
-                explain = {props.explain}
-                meanVals = {props.meanVals}
-                citiesArray={props.citiesArray}
-            />
         </>
     )
 };

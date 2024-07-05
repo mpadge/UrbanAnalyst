@@ -79,8 +79,12 @@ export interface NumLayersProps {
 }
 
 export interface ExplainButtonProps {
-    explain: boolean,
-    handleExplainChange: (explain: boolean) => void
+    idx: number,
+    layer: string,
+    layer2: string,
+    numLayers: string,
+    meanVals: boolean,
+    citiesArray: CityDataProps[]
 }
 
 export interface CalculateButtonProps {

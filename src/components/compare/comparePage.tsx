@@ -33,7 +33,6 @@ export default function Home() {
     const [numLayers, setNumLayers] = useState("Single");
     const numLayersOptions = ["Single", "Paired"];
 
-    const [explain, setExplain] = useState(false);
     const [sortOpt, setSortOpt] = useState("increasing");
     const [meanVals, setMeanVals] = useState(true);
 
@@ -83,9 +82,6 @@ export default function Home() {
         if (typeof window != "undefined") {
             localStorage.setItem("uaNumLayers", numLayers);
         }
-    }
-    const handleExplainChange = (e: any) => {
-        setExplain(!explain);
     }
     const handleSortChange = (sortOpt: string) => {
         setSortOpt (sortOpt)
@@ -149,7 +145,6 @@ export default function Home() {
                     numLayers = {numLayers}
                     numLayersOptions = {numLayersOptions}
                     meanVals = {meanVals}
-                    explain = {explain}
                     sortOpt = {sortOpt}
                     citiesArray = {CITY_DATA.citiesArray}
                     handleLayerChange = {handleLayerChange}
@@ -157,7 +152,6 @@ export default function Home() {
                     handleNumLayersChange = {handleNumLayersChange}
                     handleMeanChange = {handleMeanChange}
                     handleSortChange = {handleSortChange}
-                    handleExplainChange = {handleExplainChange}
                     handleTourOpen = {handleTourOpen}
                 />
                 <Buttons buttons={buttonProps} />

@@ -18,7 +18,6 @@ import SelectNumLayers from '@/components/map/numLayers';
 import OpacitySlider from '@/components/map/opacitySlider';
 import RangeSlider from '@/components/map/rangeSlider';
 import ExplainButton from '@/components/map/explainButton';
-import ExplainLayer from '@/components/map/explainLayer';
 import HelpButton from '@/components/map/helpButton';
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
@@ -34,7 +33,6 @@ interface MapControlProps {
     alpha: number,
     layerRange: number[],
     layerStartStop: number[],
-    explain: any,
     citiesArray: CityDataProps[],
     cityLayers: string[],
     viewState: ViewState,
@@ -45,7 +43,6 @@ interface MapControlProps {
     handleLayerChange: (layer: string) => void,
     handleLayer2Change: (layer: string) => void,
     handleLayerRangeChange: (layerRange: number[]) => void,
-    handleExplainChange: (explain: any) => void
     handleTourOpen: (isTourOpen: boolean) => void
 }
 
@@ -161,8 +158,13 @@ export default function Control (props: MapControlProps) {
                                     />
                                 }
                                 <ExplainButton
-                                    explain = {props.explain}
-                                    handleExplainChange = {props.handleExplainChange} />
+                                    idx={props.idx}
+                                    layer = {props.layer}
+                                    layer2 = {props.layer2}
+                                    numLayers = {props.numLayers}
+                                    meanVals = {true}
+                                    citiesArray={props.citiesArray}
+                                />
 
                             </Stack>
                         </Box>
@@ -205,15 +207,6 @@ export default function Control (props: MapControlProps) {
                 >Show Controls</button>
 
             </div>
-            <ExplainLayer
-                idx={props.idx}
-                layer = {props.layer}
-                layer2 = {props.layer2}
-                numLayers = {props.numLayers}
-                explain = {props.explain}
-                meanVals = {true}
-                citiesArray={props.citiesArray}
-            />
         </>
     )
 };
