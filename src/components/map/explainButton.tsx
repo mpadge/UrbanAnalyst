@@ -10,6 +10,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import styles from '@/styles/controls.module.css';
 import { GetLayerText } from "@/components/explainLayer";
 import { CityDataProps, ExplainButtonProps } from "@/data/interfaces";
+import { HeadingTextOneLayer, HeadingText } from "@/components/headingText";
 
 export interface MapsExplainProps {
     open: boolean,
@@ -45,9 +46,11 @@ function ExplainLayerDialog(props: MapsExplainProps) {
     const layer_text = !dual_layers && props.layer == "social_index" ?
         props.citiesArray[props.idx].social_index : layer_temp;
 
+    const heading: string = HeadingText(props.layer, props.layer2, props.numLayers, props.citiesArray);
+
     return (
         <Dialog onClose={handleClose} open={open}>
-            <DialogTitle>Set backup account</DialogTitle>
+            <DialogTitle>{heading}</DialogTitle>
                     <DialogContent>
                 <DialogContentText id="alert-dialog-description">
                     {layer_text}
@@ -80,12 +83,8 @@ export default function ExplainButton (props: ExplainButtonProps) {
 
     return (
         <Stack alignItems="center">
-            <Button
-                variant="outlined"
-                onClick={() => props.handleExplainChange(props.explain)}
-            >{buttonText}</Button>
             <Button variant="outlined" onClick={handleClickOpen}>
-                Open simple dialog
+                Explain Layer
             </Button>
             <ExplainLayerDialog
                 open={open}
