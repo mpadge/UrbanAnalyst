@@ -7,7 +7,6 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
-import styles from '@/styles/controls.module.css';
 
 interface CityListProps {
     idx: number,
@@ -23,8 +22,6 @@ export default function CityList(props: CityListProps) {
         value: String(index),
         label: city.nameFormatted
     }));
-
-    const [isSearchable, setIsSearchable] = useState(true);
 
     // findMatchingOption returns the *index* of the option, but mui requires values to be strings.
     const findMatchingOption = useCallback(() => {

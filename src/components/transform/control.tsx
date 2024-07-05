@@ -148,7 +148,6 @@ export default function Control (props: TransformControlProps) {
                         handleViewStateChange={props.handleViewStateChange}
                     />
 
-                    <h3>Target City</h3>
                     <TargetCityList
                         idx={props.idx}
                         idx2={props.idx2}
