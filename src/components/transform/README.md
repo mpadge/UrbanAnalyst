@@ -11,5 +11,4 @@ page](https://urbananalyst.city/transform) follow this structure:
         - `control.tsx` for the control interface, which calls the following:
             - `cityList.tsx` to select the focal city
             - `layersList.tsx` to select the correlated variables/layers to be included in transform algorithm.
-            - `calculateButton.tsx` for the "Calculate" button at the bottom of control panel
         - `legend.tsx` as a separate d3 object to plot the legend.

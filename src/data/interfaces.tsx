@@ -87,11 +87,6 @@ export interface ExplainButtonProps {
     citiesArray: CityDataProps[]
 }
 
-export interface CalculateButtonProps {
-    calculate: boolean,
-    handleCalculateChange: (calculate: boolean) => void
-}
-
 export interface LayersButtonProps {
     showLayersDialog: boolean,
     handleLayersDialogVisibility: (showLayersDialog: boolean) => void

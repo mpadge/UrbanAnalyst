@@ -105,25 +105,6 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__transform_controls3"]',
-        content: (
-            <div>
-                <h2>Controls</h2>
-                <br />
-                The <q>Calculate</q> button will calculate the selected
-                transformation. This button should be pushed each time any of
-                the input cities or layers are changed.
-            </div>
-        ),
-        style: {
-            left: posControlsX(width, "controls"),
-            top: posControlsY(width, height, "controls"),
-            backgroundColor: tourPanelBackgroundColour,
-            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
-            maxWidth: maxWidth(width, true),
-        }
-    },
-    {
         selector: '[data-tut="reactour__transform_controls4"]',
         content: () => controlBoxText4(),
         style: {
