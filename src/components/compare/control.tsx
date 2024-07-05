@@ -30,7 +30,6 @@ interface CompareControlProps {
     handleNumLayersChange: (numLayers: string) => void,
     handleMeanChange: (meanVals: boolean) => void,
     handleSortChange: (sortOpt: string) => void,
-    handleExplainChange: (explain: any) => void
     handleTourOpen: (isTourOpen: boolean) => void
 }
 
@@ -98,8 +97,6 @@ export default function Control (props: CompareControlProps) {
                         handleSortChange = {props.handleSortChange}
                     />
                     <ExplainButton
-                        explain = {props.explain}
-                        handleExplainChange = {props.handleExplainChange}
                         idx={0}
                         layer = {props.layer}
                         layer2 = {props.layer2}

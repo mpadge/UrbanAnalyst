@@ -33,7 +33,6 @@ interface MapControlProps {
     alpha: number,
     layerRange: number[],
     layerStartStop: number[],
-    explain: any,
     citiesArray: CityDataProps[],
     cityLayers: string[],
     viewState: ViewState,
@@ -44,7 +43,6 @@ interface MapControlProps {
     handleLayerChange: (layer: string) => void,
     handleLayer2Change: (layer: string) => void,
     handleLayerRangeChange: (layerRange: number[]) => void,
-    handleExplainChange: (explain: any) => void
     handleTourOpen: (isTourOpen: boolean) => void
 }
 
@@ -160,8 +158,6 @@ export default function Control (props: MapControlProps) {
                                     />
                                 }
                                 <ExplainButton
-                                    explain = {props.explain}
-                                    handleExplainChange = {props.handleExplainChange}
                                     idx={props.idx}
                                     layer = {props.layer}
                                     layer2 = {props.layer2}

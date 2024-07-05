@@ -19,7 +19,6 @@ export interface ExplainProps {
     layer: string,
     layer2: string,
     numLayers: string,
-    explain: boolean,
     meanVals: boolean,
     citiesArray: CityDataProps[]
 }
@@ -84,7 +83,6 @@ export default function ExplainButton (props: ExplainButtonProps) {
                 layer = {props.layer}
                 layer2 = {props.layer2}
                 numLayers = {props.numLayers}
-                explain = {props.explain}
                 meanVals = {props.meanVals}
                 citiesArray = {props.citiesArray}
             />

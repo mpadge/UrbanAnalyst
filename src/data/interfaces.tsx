@@ -79,8 +79,6 @@ export interface NumLayersProps {
 }
 
 export interface ExplainButtonProps {
-    explain: boolean,
-    handleExplainChange: (explain: boolean) => void
     idx: number,
     layer: string,
     layer2: string,
