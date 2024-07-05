@@ -44,7 +44,6 @@ export default function MapPage() {
     const [layer, setLayer] = useState("social_index");
     const [layer2, setLayer2] = useState("");
     const [alpha, setAlpha] = useState(0.5);
-    const [explain, setExplain] = useState(false);
     const [numLayers, setNumLayers] = useState("Single");
     const numLayersOptions = ["Single", "Paired"];
     const [cityLayers, setCityLayers] = useState<string[]>([]);
@@ -189,9 +188,6 @@ export default function MapPage() {
             localStorage.setItem("uaLayer2", layer2);
         }
     }
-    const handleExplainChange = (e: any) => {
-        setExplain(!explain);
-    }
     const handleNumLayersChange = (numLayers: string) => {
         setNumLayers(numLayers);
         if (typeof window != "undefined") {
@@ -241,10 +237,8 @@ export default function MapPage() {
 
     return (
         <>
-            <div id="divinfo" style={{display: explain?"none":""}} >
-                <div id="maps-heading" className={styles.mapsheading}>
-                    <p> {heading} </p>
-                </div>
+            <div id="maps-heading" className={styles.mapsheading}>
+                <p> {heading} </p>
             </div>
             <UTAMap
                 idx = {idx}
@@ -271,7 +265,6 @@ export default function MapPage() {
                 alpha = {alpha}
                 layerRange = {layerRange}
                 layerStartStop = {layerStartStop}
-                explain = {explain}
                 citiesArray = {CITY_DATA.citiesArray}
                 cityLayers = {cityLayers}
                 viewState = {viewState}
@@ -282,7 +275,6 @@ export default function MapPage() {
                 handleLayerChange = {handleLayerChange}
                 handleLayer2Change = {handleLayer2Change}
                 handleLayerRangeChange = {handleLayerRangeChange}
-                handleExplainChange = {handleExplainChange}
                 handleTourOpen = {handleTourOpen}
             />
             <Legend

@@ -38,7 +38,6 @@ export default function ExplainButton (props: ExplainButtonProps) {
                 layer = {props.layer}
                 layer2 = {props.layer2}
                 numLayers = {props.numLayers}
-                explain = {props.explain}
                 meanVals = {props.meanVals}
                 citiesArray = {props.citiesArray}
             />

@@ -22,7 +22,6 @@ interface CompareControlProps {
     numLayers: string,
     numLayersOptions: string[],
     meanVals: boolean,
-    explain: any,
     sortOpt: string,
     citiesArray: CityDataProps[],
     handleLayerChange: (layer: string) => void,
