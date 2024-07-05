@@ -62,15 +62,6 @@ function ExplainLayerDialog(props: MapsExplainProps) {
 
 export default function ExplainButton (props: ExplainButtonProps) {
 
-    var buttonStyleTemp: any = styles.explainbuttonOff;
-    var buttonTextTemp: string = "Explain Layer";
-    if (props.explain) {
-        buttonStyleTemp = styles.explainbuttonOn;
-        buttonTextTemp = "Close Text";
-    }
-    const buttonStyle = buttonStyleTemp;
-    const buttonText = buttonTextTemp;
-
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
