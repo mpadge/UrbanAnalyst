@@ -140,7 +140,6 @@ export default function Control (props: TransformControlProps) {
                         />
                     </p>
 
-                    <h3>City</h3>
                     <CityList
                         citiesArray={props.citiesArray}
                         idx={props.idx}
@@ -149,8 +148,8 @@ export default function Control (props: TransformControlProps) {
                         handleViewStateChange={props.handleViewStateChange}
                     />
 
-                    <h3>Target City</h3>
                     <TargetCityList
+                        idx={props.idx}
                         idx2={props.idx2}
                         citiesArray={props.citiesArray}
                         handleIdx2Change={props.handleIdx2Change}
