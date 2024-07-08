@@ -14,7 +14,7 @@ import OpacitySlider from '@/components/map/opacitySlider';
 import LayersButton from '@/components/transform/layersButton';
 import CalculateButton from '@/components/transform/calculateButton';
 import OutputLayers from '@/components/transform/outputLayers';
-import HelpButton from '@/components/transform/helpButton';
+import HelpButton from '@/components/helpButton';
 
 import { ViewState, CityDataProps, CalculateButtonProps } from "@/data/interfaces";
 

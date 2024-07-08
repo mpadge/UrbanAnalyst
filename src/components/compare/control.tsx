@@ -10,7 +10,7 @@ import SelectNumLayers from '@/components/compare/numLayers';
 import SortOrderList from '@/components/compare/sortOrderList';
 import ExplainButton from '@/components/compare/explainButton';
 import MeanAvgButtons from '@/components/compare/meanAvg';
-import HelpButton from '@/components/compare/helpButton';
+import HelpButton from '@/components/helpButton';
 
 import { CityDataProps } from "@/data/interfaces";
 
