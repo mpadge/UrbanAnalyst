@@ -9,6 +9,7 @@ import Buttons from '@/components/buttons4';
 import Tour from '@/components/transform/tour/tour';
 import useWindowSize from '@/components/windowSize';
 
+import { CityDataProps } from "@/data/interfaces";
 import MapTransformDynamic from '@/components/transform/transformPageDynamic';
 import { getTourConfig } from '@/components/transform/tour/tourConfig';
 import { CITY_DATA } from '@/data/citydata';
@@ -22,6 +23,27 @@ const buttonProps = {
     third: "map",
     fourth: "compare"
 }
+
+export interface TransformProps {
+    idx: number
+    idx2: number
+    layer: string
+    varnames: string[]
+    calculate: boolean,
+    citiesArray: CityDataProps[],
+    city: string
+    targetCity: string
+    viewState: ViewState
+    alpha: number
+    layerMin: number
+    layerMax: number
+    outputLayer: string
+    handleLayerMinChange: (layerMin: number) => void
+    handleLayerMaxChange: (layerMin: number) => void
+    handleCalculateChange: (calculate: boolean) => void
+    handleOutputLayerChange: (outputLayer: string) => void
+}
+
 
 export default function TransformPage() {
 

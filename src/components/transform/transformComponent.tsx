@@ -2,32 +2,13 @@ import { useEffect, useState} from 'react';
 import { DeckGL } from "@deck.gl/react/typed";
 import { Map } from "react-map-gl";
 
-import { ViewState, CityDataProps } from "@/data/interfaces";
+import { ViewState } from "@/data/interfaces";
 import TransformMsgs from '@/components/transform/pageMessages';
 import { loadDataFunction } from '@/components/transform/loadData';
 import { transformDataFunction } from '@/components/transform/callTransform';
 import { getGeoJsonLayer } from '@/components/transform/geoJsonLayer';
 import { getRangeLimits } from '@/components/utils/trimRange';
-
-interface TransformProps {
-    idx: number
-    idx2: number
-    layer: string
-    varnames: string[]
-    calculate: boolean,
-    citiesArray: CityDataProps[],
-    city: string
-    targetCity: string
-    viewState: ViewState
-    alpha: number
-    layerMin: number
-    layerMax: number
-    outputLayer: string
-    handleLayerMinChange: (layerMin: number) => void
-    handleLayerMaxChange: (layerMin: number) => void
-    handleCalculateChange: (calculate: boolean) => void
-    handleOutputLayerChange: (outputLayer: string) => void
-}
+import { TransformProps } from '@/components/transform/transformPage';
 
 interface StringAcc {
     [key: string]: boolean;
