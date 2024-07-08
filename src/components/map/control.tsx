@@ -18,7 +18,7 @@ import SelectNumLayers from '@/components/map/numLayers';
 import OpacitySlider from '@/components/map/opacitySlider';
 import RangeSlider from '@/components/map/rangeSlider';
 import ExplainButton from '@/components/map/explainButton';
-import HelpButton from '@/components/map/helpButton';
+import HelpButton from '@/components/helpButton';
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
 
