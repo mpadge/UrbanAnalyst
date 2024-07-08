@@ -66,11 +66,11 @@ export default function Home() {
 
                 <div className={styles.centerNormal}>
                     <p className="text-center">
-                        Urban Analyst is a platform for interactive visualisation
-                        and comparison of the properties of cities, including
+                        Urban Analyst is a platform for interactive
+                        visualisation and comparison of cities, including
                         transport systems, measures of accessibility, and
-                        socio-demographic conditions.  There are four main ways to
-                        examine and compare cities: </p> </div>
+                        socio-demographic conditions.  There are four main ways
+                        to examine and compare cities: </p> </div>
 
                 <div className={styles.grid}>
 
