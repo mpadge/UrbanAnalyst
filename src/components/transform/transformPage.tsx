@@ -35,11 +35,13 @@ export interface TransformProps {
     targetCity: string
     viewState: ViewState
     alpha: number
+    layerRange: number[],
     layerMin: number
     layerMax: number
     outputLayer: string
     handleLayerMinChange: (layerMin: number) => void
     handleLayerMaxChange: (layerMin: number) => void
+    handleLayerRangeChange: (layerRange: number[]) => void
     handleCalculateChange: (calculate: boolean) => void
     handleOutputLayerChange: (outputLayer: string) => void
 }
@@ -61,6 +63,8 @@ export default function TransformPage() {
     const [alpha, setAlpha] = useState(0.5);
     const [layerMin, setLayerMin] = useState<number>(0);
     const [layerMax, setLayerMax] = useState<number>(0);
+    const [layerRange, setLayerRange] = useState<number[]>([0, 1]);
+
     const [calculate, setCalculate] = useState<boolean>(false);
     const [varnames, setVarnames] = useState<string[]>([]);
     const [outputLayer, setOutputLayer] = useState<string>("relative");
@@ -153,6 +157,10 @@ export default function TransformPage() {
             localStorage.setItem("uaLayer", layer);
         }
     }
+    const handleLayerRangeChange = (layerRange: number[]) => {
+        setLayerRange(layerRange);
+    }
+
     const handleAlphaChange = (alpha: number) => {
         setAlpha(alpha);
         if (typeof window != "undefined") {
@@ -225,9 +233,11 @@ export default function TransformPage() {
                 alpha = {alpha}
                 layerMin={layerMin}
                 layerMax={layerMax}
+                layerRange = {layerRange}
                 outputLayer={outputLayer}
                 handleLayerMinChange={handleLayerMinChange}
                 handleLayerMaxChange={handleLayerMaxChange}
+                handleLayerRangeChange={handleLayerRangeChange}
                 handleCalculateChange={handleCalculateChange}
                 handleOutputLayerChange={handleOutputLayerChange}
             />
