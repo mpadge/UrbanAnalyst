@@ -1,5 +1,5 @@
 
-import { ChangeEvent, SyntheticEvent, SetStateAction, useEffect, useState, useRef } from 'react';
+import { ChangeEvent, SyntheticEvent, SetStateAction, useEffect, useState } from 'react';
 import Link from 'next/link'
 import Image from "next/image"
 import localFont from 'next/font/local'
