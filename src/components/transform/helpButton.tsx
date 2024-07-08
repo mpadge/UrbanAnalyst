@@ -1,27 +1,24 @@
 
 import { useState } from 'react';
-import styles from '@/styles/controls.module.css';
-import { ExplainButtonProps } from "@/data/interfaces";
-import Tour from '@/components/transform/tour/tour';
-import { getTourConfig } from '@/components/transform/tour/tourConfig';
-import tourStyles from '@/styles/tour.module.css';
+
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 interface HelpButtonProps {
     handleTourOpen: (isTourOpen: boolean) => void
 }
 
+
 export default function HelpButton (props: HelpButtonProps) {
 
-    var buttonStyle: any = styles.explainbuttonOff;
     var buttonText: string = "Help";
 
     return (
-        <section className="button">
-            <button
-                className={buttonStyle}
-                type="button"
+        <Stack alignItems="center">
+            <Button
+                variant="outlined"
                 onClick={() => props.handleTourOpen(true)}
-            >{buttonText}</button>
-        </section>
+            >{buttonText}</Button>
+        </Stack>
     )
 }
