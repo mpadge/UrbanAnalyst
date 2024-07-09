@@ -70,18 +70,21 @@ const TransformComponent = (props: TransformProps) => {
                     setGeoJSONcontent(data);
                 })
                 .catch((error) => console.error('Error:', error));
+            props.handleStoreGeoJsonResultChange(false);
         }
-    }, [mapPathSource, result, props.layer]);
+    }, [mapPathSource, result, props.layer, props.storeGeoJsonResult, props.handleStoreGeoJsonResultChange]);
 
     useMemo(() => {
-        if (result) {
+        if (geoJSONcontent) {
             const rangeLimits = getRangeLimits(geoJSONcontent, props.layer);
             props.handleLayerRangeChange(rangeLimits);
         }
-    }, [result, props.layer, geoJSONcontent, props.handleLayerRangeChange]);
+    }, [props.layer, geoJSONcontent, props.handleLayerRangeChange]);
 
     useMemo(() => {
-        getGeoJsonLayer(geoJSONcontent, [props.layerMin, props.layerMax], props.layer, props.alpha, setGeoJsonLayer);
+        if (geoJSONcontent) {
+            getGeoJsonLayer(geoJSONcontent, [props.layerMin, props.layerMax], props.layer, props.alpha, setGeoJsonLayer);
+        }
     }, [props.layerMin, props.layerMax, props.layer, props.alpha, geoJSONcontent]);
 
     return (

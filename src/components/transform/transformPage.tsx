@@ -30,6 +30,7 @@ export interface TransformProps {
     layer: string
     varnames: string[]
     calculate: boolean,
+    storeGeoJsonResult: boolean,
     citiesArray: CityDataProps[],
     city: string
     targetCity: string
@@ -41,6 +42,7 @@ export interface TransformProps {
     outputLayer: string
     handleLayerRangeChange: (layerRange: number[]) => void
     handleCalculateChange: (calculate: boolean) => void
+    handleStoreGeoJsonResultChange: (storeGeoJsonResult: boolean) => void
     handleOutputLayerChange: (outputLayer: string) => void
 }
 
@@ -64,6 +66,7 @@ export default function TransformPage() {
     const [layerRange, setLayerRange] = useState<number[]>([0, 1]);
 
     const [calculate, setCalculate] = useState<boolean>(false);
+    const [storeGeoJsonResult, setStoreGeoJsonResult] = useState<boolean>(false);
     const [varnames, setVarnames] = useState<string[]>([]);
     const [outputLayer, setOutputLayer] = useState<string>("relative");
     const [cityLayers, setCityLayers] = useState<string[]>([]);
@@ -169,6 +172,9 @@ export default function TransformPage() {
     const handleCalculateChange = (calculate: boolean) => {
         setCalculate(calculate);
     }
+    const handleStoreGeoJsonResultChange = (storeGeoJsonResult: boolean) => {
+        setStoreGeoJsonResult(storeGeoJsonResult);
+    }
     const handleVarnamesChange = (varnames: string[]) => {
         setVarnames(varnames);
     }
@@ -219,6 +225,7 @@ export default function TransformPage() {
                 layer={layer}
                 varnames={varnames}
                 calculate={calculate}
+                storeGeoJsonResult={storeGeoJsonResult}
                 citiesArray = {CITY_DATA.citiesArray}
                 city = {CITY_DATA.citiesArray[idx].name}
                 targetCity = {CITY_DATA.citiesArray[idx2].name}
@@ -230,6 +237,7 @@ export default function TransformPage() {
                 outputLayer={outputLayer}
                 handleLayerRangeChange={handleLayerRangeChange}
                 handleCalculateChange={handleCalculateChange}
+                handleStoreGeoJsonResultChange={handleStoreGeoJsonResultChange}
                 handleOutputLayerChange={handleOutputLayerChange}
             />
             <Control
