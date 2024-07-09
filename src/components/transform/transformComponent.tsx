@@ -74,13 +74,12 @@ const TransformComponent = (props: TransformProps) => {
         }
     }, [mapPathSource, result, props.layer]);
 
-    const { handleLayerRangeChange } = props;
     useMemo(() => {
         if (result) {
             const rangeLimits = getRangeLimits(geoJSONcontent, props.layer);
-            handleLayerRangeChange(rangeLimits);
+            props.handleLayerRangeChange(rangeLimits);
         }
-    }, [result, props.layer, geoJSONcontent, handleLayerRangeChange]);
+    }, [result, props.layer, geoJSONcontent, props.handleLayerRangeChange]);
 
     useMemo(() => {
         getGeoJsonLayer(geoJSONcontent, [props.layerMin, props.layerMax], props.layer, props.alpha, setGeoJsonLayer);
