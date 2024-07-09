@@ -1,4 +1,4 @@
-import { useEffect, useState} from 'react';
+import { useMemo, useEffect, useState} from 'react';
 import { DeckGL } from "@deck.gl/react/typed";
 import { Map } from "react-map-gl";
 
@@ -43,7 +43,7 @@ const TransformComponent = (props: TransformProps) => {
     // vector is stored in the column of 'result' corresponding to
     // 'varnames[0]'.
     const { handleCalculateChange } = props;
-    useEffect(() => {
+    useMemo(() => {
         const uniqueVarNames = Object.keys(
             props.varnames.reduce((acc: StringAcc, name) => {
                 acc[name] = true;
@@ -54,33 +54,35 @@ const TransformComponent = (props: TransformProps) => {
         const varnames: string[] = [props.layer, ...filteredVarNames];
         transformDataFunction(data1, data2, varnames, props.outputLayer, setResult);
         handleCalculateChange(false);
-    }, [data1, data2, props.layer, props.varnames, props.outputLayer, setResult, props.calculate, handleCalculateChange]);
+    }, [data1, data2, props.layer, props.varnames, props.outputLayer, setResult, handleCalculateChange]);
 
     // Effect to load map data for source city, and replace specified column
     // with 'result' from previous effect:
-    useEffect(() => {
-        fetch(mapPathSource)
-            .then(response => response.json())
-            .then(data => {
-                data.features.forEach((feature: any, index: number) => {
-                    if (result) { // needed here because 'result' can still be null
-                        feature.properties[props.layer] = result[index];
-                    }
-                });
-                setGeoJSONcontent(data);
-            })
-            .catch((error) => console.error('Error:', error));
+    useMemo(() => {
+        if (result) {
+            fetch(mapPathSource)
+                .then(response => response.json())
+                .then(data => {
+                    data.features.forEach((feature: any, index: number) => {
+                        if (result) { // needed here because 'result' can still be null
+                            feature.properties[props.layer] = result[index];
+                        }
+                    });
+                    setGeoJSONcontent(data);
+                })
+                .catch((error) => console.error('Error:', error));
+        }
     }, [mapPathSource, result, props.layer]);
 
     const { handleLayerRangeChange } = props;
-    useEffect(() => {
+    useMemo(() => {
         if (result) {
             const rangeLimits = getRangeLimits(geoJSONcontent, props.layer);
             handleLayerRangeChange(rangeLimits);
         }
-    }, [result, props.citiesArray, props.idx, props.layer, props.outputLayer, geoJSONcontent, handleLayerRangeChange]);
+    }, [result, props.layer, geoJSONcontent, handleLayerRangeChange]);
 
-    useEffect(() => {
+    useMemo(() => {
         getGeoJsonLayer(geoJSONcontent, [props.layerMin, props.layerMax], props.layer, props.alpha, setGeoJsonLayer);
     }, [props.layerMin, props.layerMax, props.layer, props.alpha, geoJSONcontent]);
 
