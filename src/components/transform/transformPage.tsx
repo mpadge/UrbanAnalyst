@@ -35,9 +35,9 @@ export interface TransformProps {
     targetCity: string
     viewState: ViewState
     alpha: number
-    layerRange: number[],
     layerMin: number
     layerMax: number
+    layerRange: number[],
     outputLayer: string
     handleLayerMinChange: (layerMin: number) => void
     handleLayerMaxChange: (layerMin: number) => void
@@ -157,9 +157,6 @@ export default function TransformPage() {
             localStorage.setItem("uaLayer", layer);
         }
     }
-    const handleLayerRangeChange = (layerRange: number[]) => {
-        setLayerRange(layerRange);
-    }
 
     const handleAlphaChange = (alpha: number) => {
         setAlpha(alpha);
@@ -172,6 +169,9 @@ export default function TransformPage() {
     }
     const handleLayerMaxChange = (layerMax: number) => {
         setLayerMax(layerMax);
+    }
+    const handleLayerRangeChange = (layerRange: number[]) => {
+        setLayerRange(layerRange);
     }
     const handleCalculateChange = (calculate: boolean) => {
         setCalculate(calculate);
@@ -263,8 +263,7 @@ export default function TransformPage() {
                 handleTourOpen = {handleTourOpen}
             />
             <Legend
-                layerMin={layerMin}
-                layerMax={layerMax}
+                layerRange={[layerMin, layerMax]}
                 alpha={alpha}
                 layer_name={layer}
             />

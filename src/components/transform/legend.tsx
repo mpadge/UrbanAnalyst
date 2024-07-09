@@ -6,8 +6,7 @@ import styles from '@/styles/legend.module.css';
 import { CityDataProps } from "@/data/interfaces";
 
 interface LegendProps {
-    layerMin: number,
-    layerMax: number,
+    layerRange: number[],
     alpha: number,
     layer_name: string
 }
@@ -98,11 +97,9 @@ export default function Legend (props: LegendProps) {
 
         var svg = d3.select(svgRef.current);
 
-        const layerRange = [props.layerMin, props.layerMax];
+        update(svg, props.layerRange, props.layer_name, props.alpha)
 
-        update(svg, layerRange, props.layer_name, props.alpha)
-
-    }, [svgRef, props.layerMin, props.layerMax, props.layer_name, props.alpha]);
+    }, [svgRef, props.layerRange, props.layer_name, props.alpha]);
 
     return (
         <div id="bottom-right-container" className={styles.maplegend}>
