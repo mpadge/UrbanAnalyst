@@ -42,7 +42,6 @@ const TransformComponent = (props: TransformProps) => {
     // vector of aggregaed mean differences in each polygon of source city. This
     // vector is stored in the column of 'result' corresponding to
     // 'varnames[0]'.
-    const { handleCalculateChange } = props;
     useMemo(() => {
         const uniqueVarNames = Object.keys(
             props.varnames.reduce((acc: StringAcc, name) => {
@@ -53,8 +52,8 @@ const TransformComponent = (props: TransformProps) => {
         const filteredVarNames = props.varnames.filter(name => name!== props.layer);
         const varnames: string[] = [props.layer, ...filteredVarNames];
         transformDataFunction(data1, data2, varnames, props.outputLayer, setResult);
-        handleCalculateChange(false);
-    }, [data1, data2, props.layer, props.varnames, props.outputLayer, setResult, handleCalculateChange]);
+        props.handleCalculateChange(false);
+    }, [data1, data2, props.layer, props.varnames, props.outputLayer, setResult, props.handleCalculateChange]);
 
     // Effect to load map data for source city, and replace specified column
     // with 'result' from previous effect:
