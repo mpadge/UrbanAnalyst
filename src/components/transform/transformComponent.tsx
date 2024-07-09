@@ -85,7 +85,7 @@ const TransformComponent = (props: TransformProps) => {
     }, [result, props.citiesArray, props.idx, props.layer, props.outputLayer, geoJSONcontent, handleLayerMinChange, handleLayerMaxChange]);
 
     useEffect(() => {
-        getGeoJsonLayer(geoJSONcontent, props.layerMin, props.layerMax, props.layer, props.alpha, setGeoJsonLayer);
+        getGeoJsonLayer(geoJSONcontent, [props.layerMin, props.layerMax], props.layer, props.alpha, setGeoJsonLayer);
     }, [props.layerMin, props.layerMax, props.layer, props.alpha, geoJSONcontent]);
 
     return (
