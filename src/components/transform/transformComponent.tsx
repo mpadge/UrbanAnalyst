@@ -42,21 +42,23 @@ const TransformComponent = (props: TransformProps) => {
     // vector of aggregaed mean differences in each polygon of source city. This
     // vector is stored in the column of 'result' corresponding to
     // 'varnames[0]'.
+    const { layer, varnames, outputLayer, handleCalculateChange } = props;
     useMemo(() => {
         const uniqueVarNames = Object.keys(
-            props.varnames.reduce((acc: StringAcc, name) => {
+            varnames.reduce((acc: StringAcc, name) => {
                 acc[name] = true;
                 return acc;
             }, {})
         ).sort();
-        const filteredVarNames = props.varnames.filter(name => name!== props.layer);
-        const varnames: string[] = [props.layer, ...filteredVarNames];
-        transformDataFunction(data1, data2, varnames, props.outputLayer, setResult);
-        props.handleCalculateChange(false);
-    }, [data1, data2, props.layer, props.varnames, props.outputLayer, setResult, props.handleCalculateChange]);
+        const filteredVarNames = varnames.filter(name => name!== layer);
+        const varnamesArr: string[] = [layer, ...filteredVarNames];
+        transformDataFunction(data1, data2, varnamesArr, outputLayer, setResult);
+        handleCalculateChange(false);
+    }, [data1, data2, layer, varnames, outputLayer, setResult, handleCalculateChange]);
 
     // Effect to load map data for source city, and replace specified column
     // with 'result' from previous effect:
+    const { handleStoreGeoJsonResultChange } = props;
     useMemo(() => {
         if (result) {
             fetch(mapPathSource)
@@ -64,28 +66,31 @@ const TransformComponent = (props: TransformProps) => {
                 .then(data => {
                     data.features.forEach((feature: any, index: number) => {
                         if (result) { // needed here because 'result' can still be null
-                            feature.properties[props.layer] = result[index];
+                            feature.properties[layer] = result[index];
                         }
                     });
                     setGeoJSONcontent(data);
                 })
                 .catch((error) => console.error('Error:', error));
-            props.handleStoreGeoJsonResultChange(false);
+            handleStoreGeoJsonResultChange(false);
         }
-    }, [mapPathSource, result, props.layer, props.storeGeoJsonResult, props.handleStoreGeoJsonResultChange]);
+    }, [mapPathSource, result, layer, handleStoreGeoJsonResultChange]);
 
+    const { handleLayerRangeChange, handleStoreRangeLimitsChange } = props;
     useMemo(() => {
         if (geoJSONcontent) {
-            const rangeLimits = getRangeLimits(geoJSONcontent, props.layer);
-            props.handleLayerRangeChange(rangeLimits);
+            const rangeLimits = getRangeLimits(geoJSONcontent, layer);
+            handleLayerRangeChange(rangeLimits);
+            handleStoreRangeLimitsChange(false)
         }
-    }, [props.layer, geoJSONcontent, props.handleLayerRangeChange]);
+    }, [layer, geoJSONcontent, handleLayerRangeChange, handleStoreRangeLimitsChange]);
 
+    const { layerMin, layerMax, alpha } = props;
     useMemo(() => {
         if (geoJSONcontent) {
-            getGeoJsonLayer(geoJSONcontent, [props.layerMin, props.layerMax], props.layer, props.alpha, setGeoJsonLayer);
+            getGeoJsonLayer(geoJSONcontent, [layerMin, layerMax], layer, alpha, setGeoJsonLayer);
         }
-    }, [props.layerMin, props.layerMax, props.layer, props.alpha, geoJSONcontent]);
+    }, [layerMin, layerMax, layer, alpha, geoJSONcontent]);
 
     return (
         <>

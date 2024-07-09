@@ -31,6 +31,7 @@ export interface TransformProps {
     varnames: string[]
     calculate: boolean,
     storeGeoJsonResult: boolean,
+    storeRangeLimits: boolean,
     citiesArray: CityDataProps[],
     city: string
     targetCity: string
@@ -43,6 +44,7 @@ export interface TransformProps {
     handleLayerRangeChange: (layerRange: number[]) => void
     handleCalculateChange: (calculate: boolean) => void
     handleStoreGeoJsonResultChange: (storeGeoJsonResult: boolean) => void
+    handleStoreRangeLimitsChange: (storeRangeLimits: boolean) => void
     handleOutputLayerChange: (outputLayer: string) => void
 }
 
@@ -67,6 +69,7 @@ export default function TransformPage() {
 
     const [calculate, setCalculate] = useState<boolean>(false);
     const [storeGeoJsonResult, setStoreGeoJsonResult] = useState<boolean>(false);
+    const [storeRangeLimits, setStoreRangeLimits] = useState<boolean>(false);
     const [varnames, setVarnames] = useState<string[]>([]);
     const [outputLayer, setOutputLayer] = useState<string>("relative");
     const [cityLayers, setCityLayers] = useState<string[]>([]);
@@ -175,6 +178,9 @@ export default function TransformPage() {
     const handleStoreGeoJsonResultChange = (storeGeoJsonResult: boolean) => {
         setStoreGeoJsonResult(storeGeoJsonResult);
     }
+    const handleStoreRangeLimitsChange = (storeRangeLimits: boolean) => {
+        setStoreRangeLimits(storeRangeLimits);
+    }
     const handleVarnamesChange = (varnames: string[]) => {
         setVarnames(varnames);
     }
@@ -226,6 +232,7 @@ export default function TransformPage() {
                 varnames={varnames}
                 calculate={calculate}
                 storeGeoJsonResult={storeGeoJsonResult}
+                storeRangeLimits={storeRangeLimits}
                 citiesArray = {CITY_DATA.citiesArray}
                 city = {CITY_DATA.citiesArray[idx].name}
                 targetCity = {CITY_DATA.citiesArray[idx2].name}
@@ -238,6 +245,7 @@ export default function TransformPage() {
                 handleLayerRangeChange={handleLayerRangeChange}
                 handleCalculateChange={handleCalculateChange}
                 handleStoreGeoJsonResultChange={handleStoreGeoJsonResultChange}
+                handleStoreRangeLimitsChange={handleStoreRangeLimitsChange}
                 handleOutputLayerChange={handleOutputLayerChange}
             />
             <Control
@@ -246,6 +254,8 @@ export default function TransformPage() {
                 layer={layer}
                 varnames={varnames}
                 calculate={calculate}
+                storeGeoJsonResult={storeGeoJsonResult}
+                storeRangeLimits={storeRangeLimits}
                 alpha={alpha}
                 citiesArray={CITY_DATA.citiesArray}
                 cityLayers={cityLayers}
@@ -257,6 +267,8 @@ export default function TransformPage() {
                 handleViewStateChange={handleViewStateChange}
                 handleLayerChange={handleLayerChange}
                 handleCalculateChange={handleCalculateChange}
+                handleStoreGeoJsonResultChange={handleStoreGeoJsonResultChange}
+                handleStoreRangeLimitsChange={handleStoreRangeLimitsChange}
                 handleVarnamesChange={handleVarnamesChange}
                 handleOutputLayerChange={handleOutputLayerChange}
                 handleTourOpen = {handleTourOpen}
