@@ -80,21 +80,19 @@ const TransformComponent = (props: TransformProps) => {
 
     const { handleLayerRangeChange } = props;
     useMemo(() => {
-        if (geoJSONcontent && rangeChangeFlag) {
+        if (rangeChangeFlag) {
             const rangeLimits = getRangeLimits(geoJSONcontent, layer);
-            if (rangeLimits) {
-                handleLayerRangeChange(rangeLimits);
-            }
+            handleLayerRangeChange(rangeLimits);
+            setRangeChangeFlag(false);
         }
-    }, [layer, geoJSONcontent, handleLayerRangeChange, rangeChangeFlag]);
+    }, [layer, geoJSONcontent, handleLayerRangeChange, rangeChangeFlag, setRangeChangeFlag]);
 
     const { layerMin, layerMax, alpha } = props;
     useMemo(() => {
-        if (geoJSONcontent && rangeChangeFlag) {
+        if (geoJSONcontent) {
             getGeoJsonLayer(geoJSONcontent, [layerMin, layerMax], layer, alpha, setGeoJsonLayer);
-            setRangeChangeFlag(false);
         }
-    }, [layerMin, layerMax, layer, alpha, geoJSONcontent, rangeChangeFlag, setRangeChangeFlag]);
+    }, [layer, layerMin, layerMax, alpha, geoJSONcontent]);
 
     return (
         <>
