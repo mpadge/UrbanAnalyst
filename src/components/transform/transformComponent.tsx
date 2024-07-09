@@ -58,7 +58,6 @@ const TransformComponent = (props: TransformProps) => {
 
     // Effect to load map data for source city, and replace specified column
     // with 'result' from previous effect:
-    const { handleStoreGeoJsonResultChange } = props;
     useMemo(() => {
         if (result) {
             fetch(mapPathSource)
@@ -72,18 +71,16 @@ const TransformComponent = (props: TransformProps) => {
                     setGeoJSONcontent(data);
                 })
                 .catch((error) => console.error('Error:', error));
-            handleStoreGeoJsonResultChange(false);
         }
-    }, [mapPathSource, result, layer, handleStoreGeoJsonResultChange]);
+    }, [mapPathSource, result, layer]);
 
-    const { handleLayerRangeChange, handleStoreRangeLimitsChange } = props;
+    const { handleLayerRangeChange } = props;
     useMemo(() => {
         if (geoJSONcontent) {
             const rangeLimits = getRangeLimits(geoJSONcontent, layer);
             handleLayerRangeChange(rangeLimits);
-            handleStoreRangeLimitsChange(false)
         }
-    }, [layer, geoJSONcontent, handleLayerRangeChange, handleStoreRangeLimitsChange]);
+    }, [layer, geoJSONcontent, handleLayerRangeChange]);
 
     const { layerMin, layerMax, alpha } = props;
     useMemo(() => {

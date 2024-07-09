@@ -26,8 +26,6 @@ interface TransformControlProps {
     layer: string
     varnames: string[]
     calculate: boolean,
-    storeGeoJsonResult: boolean,
-    storeRangeLimits: boolean,
     alpha: number,
     citiesArray: CityDataProps[],
     cityLayers: string[],
@@ -39,8 +37,6 @@ interface TransformControlProps {
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void,
     handleCalculateChange: (calculate: boolean) => void
-    handleStoreGeoJsonResultChange: (storeGeoJsonResult: boolean) => void
-    handleStoreRangeLimitsChange: (storeRangeLimits: boolean) => void
     handleVarnamesChange: (varnames: string[]) => void
     handleOutputLayerChange: (outputLayer: string) => void
     handleTourOpen: (isTourOpen: boolean) => void
