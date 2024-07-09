@@ -3,7 +3,6 @@ import { DeckGL } from "@deck.gl/react/typed";
 import { Map } from "react-map-gl";
 
 import { ViewState } from "@/data/interfaces";
-import TransformMsgs from '@/components/transform/pageMessages';
 import { loadDataFunction } from '@/components/transform/loadData';
 import { transformDataFunction } from '@/components/transform/callTransform';
 import { getGeoJsonLayer } from '@/components/transform/geoJsonLayer';
@@ -25,9 +24,6 @@ const TransformComponent = (props: TransformProps) => {
     const [result, setResult] = useState<number[] | null>(null);
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
     const [geoJsonLayer, setGeoJsonLayer] = useState<any>(null)
-    const [loading, setLoading] = useState<boolean>(true);
-    const [calculating, setCalculating] = useState<boolean>(false);
-    const [calculated, setCalculated] = useState<boolean>(true);
 
     useEffect(() => {
         const mapPathSource = "/data/" + props.city + "/data.json";
@@ -36,10 +32,8 @@ const TransformComponent = (props: TransformProps) => {
 
     // Effect to load 'dataraw' point-based data for source and target cities.
     useEffect(() => {
-        setLoading(true);
         loadDataFunction(props.city, props.targetCity, setData1, setData2);
-        setLoading(false);
-    }, [props.city, props.targetCity, setData1, setData2, setLoading]);
+    }, [props.city, props.targetCity, setData1, setData2]);
 
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
     // vector of aggregaed mean differences in each polygon of source city. This
@@ -89,8 +83,6 @@ const TransformComponent = (props: TransformProps) => {
 
     return (
         <>
-            {loading ? <TransformMsgs msg='Loading ...' /> :
-                calculating ? <TransformMsgs msg='Calculating ...' /> : null}
             <DeckGL
                 width={"100vw"}
                 height={"100vh"}
