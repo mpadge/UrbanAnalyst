@@ -39,8 +39,6 @@ export interface TransformProps {
     layerMax: number
     layerRange: number[],
     outputLayer: string
-    handleLayerMinChange: (layerMin: number) => void
-    handleLayerMaxChange: (layerMin: number) => void
     handleLayerRangeChange: (layerRange: number[]) => void
     handleCalculateChange: (calculate: boolean) => void
     handleOutputLayerChange: (outputLayer: string) => void
@@ -164,14 +162,9 @@ export default function TransformPage() {
             localStorage.setItem("uaAlpha", alpha.toString());
         }
     }
-    const handleLayerMinChange = (layerMin: number) => {
-        setLayerMin(layerMin);
-    }
-    const handleLayerMaxChange = (layerMax: number) => {
-        setLayerMax(layerMax);
-    }
     const handleLayerRangeChange = (layerRange: number[]) => {
-        setLayerRange(layerRange);
+        setLayerMin(layerRange[0]);
+        setLayerMax(layerRange[1]);
     }
     const handleCalculateChange = (calculate: boolean) => {
         setCalculate(calculate);
@@ -235,8 +228,6 @@ export default function TransformPage() {
                 layerMax={layerMax}
                 layerRange = {layerRange}
                 outputLayer={outputLayer}
-                handleLayerMinChange={handleLayerMinChange}
-                handleLayerMaxChange={handleLayerMaxChange}
                 handleLayerRangeChange={handleLayerRangeChange}
                 handleCalculateChange={handleCalculateChange}
                 handleOutputLayerChange={handleOutputLayerChange}

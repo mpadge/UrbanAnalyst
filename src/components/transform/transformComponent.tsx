@@ -75,14 +75,13 @@ const TransformComponent = (props: TransformProps) => {
             .catch((error) => console.error('Error:', error));
     }, [mapPathSource, result, props.layer]);
 
-    const { handleLayerMinChange, handleLayerMaxChange } = props;
+    const { handleLayerRangeChange } = props;
     useEffect(() => {
         if (result) {
             const rangeLimits = getRangeLimits(geoJSONcontent, props.layer);
-            handleLayerMinChange(rangeLimits[0]);
-            handleLayerMaxChange(rangeLimits[1]);
+            handleLayerRangeChange(rangeLimits);
         }
-    }, [result, props.citiesArray, props.idx, props.layer, props.outputLayer, geoJSONcontent, handleLayerMinChange, handleLayerMaxChange]);
+    }, [result, props.citiesArray, props.idx, props.layer, props.outputLayer, geoJSONcontent, handleLayerRangeChange]);
 
     useEffect(() => {
         getGeoJsonLayer(geoJSONcontent, [props.layerMin, props.layerMax], props.layer, props.alpha, setGeoJsonLayer);
