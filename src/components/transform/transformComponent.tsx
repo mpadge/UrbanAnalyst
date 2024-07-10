@@ -25,8 +25,6 @@ const TransformComponent = (props: TransformProps) => {
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
     const [geoJsonLayer, setGeoJsonLayer] = useState<any>(null)
 
-    const [rangeChangeFlag, setRangeChangeFlag] = useState<boolean>(true);
-
     useEffect(() => {
         const mapPathSource = "/data/" + props.city + "/data.json";
         setMapPathSource(mapPathSource);
@@ -56,14 +54,13 @@ const TransformComponent = (props: TransformProps) => {
         const varnamesArr: string[] = [layer, ...filteredVarNames];
         transformDataFunction(data1, data2, varnamesArr, outputLayer, setResult);
         handleCalculateChange(false);
-        setRangeChangeFlag(true);
-    }, [data1, data2, layer, varnames, outputLayer, setResult, handleCalculateChange, setRangeChangeFlag]);
+    }, [data1, data2, layer, varnames, outputLayer, setResult, handleCalculateChange]);
 
     // Effect to load map data for source city, and replace specified column
     // with 'result' from previous effect:
+    const { handleStoreGeoJsonResultChange } = props;
     useMemo(() => {
         if (result) {
-            setRangeChangeFlag(true);
             fetch(mapPathSource)
                 .then(response => response.json())
                 .then(data => {
@@ -75,24 +72,25 @@ const TransformComponent = (props: TransformProps) => {
                     setGeoJSONcontent(data);
                 })
                 .catch((error) => console.error('Error:', error));
+            handleStoreGeoJsonResultChange(false);
         }
-    }, [mapPathSource, result, layer, setRangeChangeFlag]);
+    }, [mapPathSource, result, layer, handleStoreGeoJsonResultChange]);
 
-    const { handleLayerRangeChange } = props;
+    const { handleLayerRangeChange, handleStoreRangeLimitsChange } = props;
     useMemo(() => {
-        if (rangeChangeFlag) {
+        if (geoJSONcontent) {
             const rangeLimits = getRangeLimits(geoJSONcontent, layer);
             handleLayerRangeChange(rangeLimits);
-            setRangeChangeFlag(false);
+            handleStoreRangeLimitsChange(false)
         }
-    }, [layer, geoJSONcontent, handleLayerRangeChange, rangeChangeFlag, setRangeChangeFlag]);
+    }, [layer, geoJSONcontent, handleLayerRangeChange, handleStoreRangeLimitsChange]);
 
     const { layerMin, layerMax, alpha } = props;
     useMemo(() => {
         if (geoJSONcontent) {
             getGeoJsonLayer(geoJSONcontent, [layerMin, layerMax], layer, alpha, setGeoJsonLayer);
         }
-    }, [layer, layerMin, layerMax, alpha, geoJSONcontent]);
+    }, [layerMin, layerMax, layer, alpha, geoJSONcontent]);
 
     return (
         <>
