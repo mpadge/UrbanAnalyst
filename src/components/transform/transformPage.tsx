@@ -9,6 +9,7 @@ import Buttons from '@/components/buttons4';
 import Tour from '@/components/transform/tour/tour';
 import useWindowSize from '@/components/windowSize';
 
+import { CityDataProps } from "@/data/interfaces";
 import MapTransformDynamic from '@/components/transform/transformPageDynamic';
 import { getTourConfig } from '@/components/transform/tour/tourConfig';
 import { CITY_DATA } from '@/data/citydata';
@@ -22,6 +23,31 @@ const buttonProps = {
     third: "map",
     fourth: "compare"
 }
+
+export interface TransformProps {
+    idx: number
+    idx2: number
+    layer: string
+    varnames: string[]
+    calculate: boolean,
+    storeGeoJsonResult: boolean,
+    storeRangeLimits: boolean,
+    citiesArray: CityDataProps[],
+    city: string
+    targetCity: string
+    viewState: ViewState
+    alpha: number
+    layerMin: number
+    layerMax: number
+    layerRange: number[],
+    outputLayer: string
+    handleLayerRangeChange: (layerRange: number[]) => void
+    handleCalculateChange: (calculate: boolean) => void
+    handleStoreGeoJsonResultChange: (storeGeoJsonResult: boolean) => void
+    handleStoreRangeLimitsChange: (storeRangeLimits: boolean) => void
+    handleOutputLayerChange: (outputLayer: string) => void
+}
+
 
 export default function TransformPage() {
 
@@ -39,7 +65,11 @@ export default function TransformPage() {
     const [alpha, setAlpha] = useState(0.5);
     const [layerMin, setLayerMin] = useState<number>(0);
     const [layerMax, setLayerMax] = useState<number>(0);
+    const [layerRange, setLayerRange] = useState<number[]>([0, 1]);
+
     const [calculate, setCalculate] = useState<boolean>(false);
+    const [storeGeoJsonResult, setStoreGeoJsonResult] = useState<boolean>(false);
+    const [storeRangeLimits, setStoreRangeLimits] = useState<boolean>(false);
     const [varnames, setVarnames] = useState<string[]>([]);
     const [outputLayer, setOutputLayer] = useState<string>("relative");
     const [cityLayers, setCityLayers] = useState<string[]>([]);
@@ -131,20 +161,25 @@ export default function TransformPage() {
             localStorage.setItem("uaLayer", layer);
         }
     }
+
     const handleAlphaChange = (alpha: number) => {
         setAlpha(alpha);
         if (typeof window != "undefined") {
             localStorage.setItem("uaAlpha", alpha.toString());
         }
     }
-    const handleLayerMinChange = (layerMin: number) => {
-        setLayerMin(layerMin);
-    }
-    const handleLayerMaxChange = (layerMax: number) => {
-        setLayerMax(layerMax);
+    const handleLayerRangeChange = (layerRange: number[]) => {
+        setLayerMin(layerRange[0]);
+        setLayerMax(layerRange[1]);
     }
     const handleCalculateChange = (calculate: boolean) => {
         setCalculate(calculate);
+    }
+    const handleStoreGeoJsonResultChange = (storeGeoJsonResult: boolean) => {
+        setStoreGeoJsonResult(storeGeoJsonResult);
+    }
+    const handleStoreRangeLimitsChange = (storeRangeLimits: boolean) => {
+        setStoreRangeLimits(storeRangeLimits);
     }
     const handleVarnamesChange = (varnames: string[]) => {
         setVarnames(varnames);
@@ -196,6 +231,8 @@ export default function TransformPage() {
                 layer={layer}
                 varnames={varnames}
                 calculate={calculate}
+                storeGeoJsonResult={storeGeoJsonResult}
+                storeRangeLimits={storeRangeLimits}
                 citiesArray = {CITY_DATA.citiesArray}
                 city = {CITY_DATA.citiesArray[idx].name}
                 targetCity = {CITY_DATA.citiesArray[idx2].name}
@@ -203,10 +240,12 @@ export default function TransformPage() {
                 alpha = {alpha}
                 layerMin={layerMin}
                 layerMax={layerMax}
+                layerRange = {layerRange}
                 outputLayer={outputLayer}
-                handleLayerMinChange={handleLayerMinChange}
-                handleLayerMaxChange={handleLayerMaxChange}
+                handleLayerRangeChange={handleLayerRangeChange}
                 handleCalculateChange={handleCalculateChange}
+                handleStoreGeoJsonResultChange={handleStoreGeoJsonResultChange}
+                handleStoreRangeLimitsChange={handleStoreRangeLimitsChange}
                 handleOutputLayerChange={handleOutputLayerChange}
             />
             <Control
@@ -231,8 +270,7 @@ export default function TransformPage() {
                 handleTourOpen = {handleTourOpen}
             />
             <Legend
-                layerMin={layerMin}
-                layerMax={layerMax}
+                layerRange={[layerMin, layerMax]}
                 alpha={alpha}
                 layer_name={layer}
             />

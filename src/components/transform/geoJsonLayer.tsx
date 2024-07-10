@@ -2,11 +2,14 @@ import * as d3 from 'd3';
 import 'd3-scale-chromatic';
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
 
-export async function getGeoJsonLayer(geoJSONcontent: any, layerMin: number, layerMax: number, varname: string, alpha: number, setGeoJsonLayer: (layer: any) => void) {
+
+
+
+export async function getGeoJsonLayer(geoJSONcontent: any, layerRange: number[], varname: string, alpha: number, setGeoJsonLayer: (layer: any) => void) {
 
     let Color = d3
     .scaleSequential()
-    .domain([layerMax, layerMin])
+    .domain(layerRange)
     .interpolator(d3.interpolateViridis);
 
     const this_layer = [
@@ -18,13 +21,13 @@ export async function getGeoJsonLayer(geoJSONcontent: any, layerMin: number, lay
             getLineWidth: 10,
             getLineColor: [122, 122, 122],
             getFillColor: d => {
-                var layerval = Math.max (layerMin, Math.min (layerMax, d.properties?.[varname]));
+                var layerval = Math.max (layerRange[0], Math.min (layerRange[1], d.properties?.[varname]));
                 if (isNaN(layerval)) {
-                    layerval = layerMin;
+                    layerval = layerRange[0];
                 }
                 if (varname === "bike_index" || varname === "natural") {
                     // Invert the palette:
-                    layerval = layerMin + (layerMax - layerval);
+                    layerval = layerRange[0] + (layerRange[1] - layerval);
                 }
                 const layerarr: any = d3.color(Color(layerval));
                 var red = 0, green = 0, blue = 0;

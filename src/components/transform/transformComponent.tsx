@@ -1,33 +1,13 @@
-import { useEffect, useState} from 'react';
+import { useMemo, useEffect, useState} from 'react';
 import { DeckGL } from "@deck.gl/react/typed";
 import { Map } from "react-map-gl";
 
-import { ViewState, CityDataProps } from "@/data/interfaces";
-import TransformMsgs from '@/components/transform/pageMessages';
+import { ViewState } from "@/data/interfaces";
 import { loadDataFunction } from '@/components/transform/loadData';
 import { transformDataFunction } from '@/components/transform/callTransform';
 import { getGeoJsonLayer } from '@/components/transform/geoJsonLayer';
 import { getRangeLimits } from '@/components/utils/trimRange';
-
-interface TransformProps {
-    idx: number
-    idx2: number
-    layer: string
-    varnames: string[]
-    calculate: boolean,
-    citiesArray: CityDataProps[],
-    city: string
-    targetCity: string
-    viewState: ViewState
-    alpha: number
-    layerMin: number
-    layerMax: number
-    outputLayer: string
-    handleLayerMinChange: (layerMin: number) => void
-    handleLayerMaxChange: (layerMin: number) => void
-    handleCalculateChange: (calculate: boolean) => void
-    handleOutputLayerChange: (outputLayer: string) => void
-}
+import { TransformProps } from '@/components/transform/transformPage';
 
 interface StringAcc {
     [key: string]: boolean;
@@ -44,9 +24,6 @@ const TransformComponent = (props: TransformProps) => {
     const [result, setResult] = useState<number[] | null>(null);
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
     const [geoJsonLayer, setGeoJsonLayer] = useState<any>(null)
-    const [loading, setLoading] = useState<boolean>(true);
-    const [calculating, setCalculating] = useState<boolean>(false);
-    const [calculated, setCalculated] = useState<boolean>(true);
 
     useEffect(() => {
         const mapPathSource = "/data/" + props.city + "/data.json";
@@ -55,62 +32,68 @@ const TransformComponent = (props: TransformProps) => {
 
     // Effect to load 'dataraw' point-based data for source and target cities.
     useEffect(() => {
-        setLoading(true);
-        loadDataFunction(props.city, props.targetCity, setData1, setData2);
-        setLoading(false);
-    }, [props.city, props.targetCity, setData1, setData2, setLoading]);
+        loadDataFunction(props.city, setData1);
+    }, [props.city, setData1]);
+    useEffect(() => {
+        loadDataFunction(props.targetCity, setData2);
+    }, [props.targetCity, setData2]);
 
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
     // vector of aggregaed mean differences in each polygon of source city. This
     // vector is stored in the column of 'result' corresponding to
     // 'varnames[0]'.
-    const { handleCalculateChange } = props;
-    useEffect(() => {
+    const { layer, varnames, outputLayer, handleCalculateChange } = props;
+    useMemo(() => {
         const uniqueVarNames = Object.keys(
-            props.varnames.reduce((acc: StringAcc, name) => {
+            varnames.reduce((acc: StringAcc, name) => {
                 acc[name] = true;
                 return acc;
             }, {})
         ).sort();
-        const filteredVarNames = props.varnames.filter(name => name!== props.layer);
-        const varnames: string[] = [props.layer, ...filteredVarNames];
-        transformDataFunction(data1, data2, varnames, props.outputLayer, setResult);
+        const filteredVarNames = varnames.filter(name => name!== layer);
+        const varnamesArr: string[] = [layer, ...filteredVarNames];
+        transformDataFunction(data1, data2, varnamesArr, outputLayer, setResult);
         handleCalculateChange(false);
-    }, [data1, data2, props.layer, props.varnames, props.outputLayer, setResult, props.calculate, handleCalculateChange]);
+    }, [data1, data2, layer, varnames, outputLayer, setResult, handleCalculateChange]);
 
     // Effect to load map data for source city, and replace specified column
     // with 'result' from previous effect:
-    useEffect(() => {
-        fetch(mapPathSource)
-            .then(response => response.json())
-            .then(data => {
-                data.features.forEach((feature: any, index: number) => {
-                    if (result) { // needed here because 'result' can still be null
-                        feature.properties[props.layer] = result[index];
-                    }
-                });
-                setGeoJSONcontent(data);
-            })
-            .catch((error) => console.error('Error:', error));
-    }, [mapPathSource, result, props.layer]);
-
-    const { handleLayerMinChange, handleLayerMaxChange } = props;
-    useEffect(() => {
+    const { handleStoreGeoJsonResultChange } = props;
+    useMemo(() => {
         if (result) {
-            const rangeLimits = getRangeLimits(geoJSONcontent, props.layer);
-            handleLayerMinChange(rangeLimits[0]);
-            handleLayerMaxChange(rangeLimits[1]);
+            fetch(mapPathSource)
+                .then(response => response.json())
+                .then(data => {
+                    data.features.forEach((feature: any, index: number) => {
+                        if (result) { // needed here because 'result' can still be null
+                            feature.properties[layer] = result[index];
+                        }
+                    });
+                    setGeoJSONcontent(data);
+                })
+                .catch((error) => console.error('Error:', error));
+            handleStoreGeoJsonResultChange(false);
         }
-    }, [result, props.citiesArray, props.idx, props.layer, props.outputLayer, geoJSONcontent, handleLayerMinChange, handleLayerMaxChange]);
+    }, [mapPathSource, result, layer, handleStoreGeoJsonResultChange]);
 
-    useEffect(() => {
-        getGeoJsonLayer(geoJSONcontent, props.layerMin, props.layerMax, props.layer, props.alpha, setGeoJsonLayer);
-    }, [props.layerMin, props.layerMax, props.layer, props.alpha, geoJSONcontent]);
+    const { handleLayerRangeChange, handleStoreRangeLimitsChange } = props;
+    useMemo(() => {
+        if (geoJSONcontent) {
+            const rangeLimits = getRangeLimits(geoJSONcontent, layer);
+            handleLayerRangeChange(rangeLimits);
+            handleStoreRangeLimitsChange(false)
+        }
+    }, [layer, geoJSONcontent, handleLayerRangeChange, handleStoreRangeLimitsChange]);
+
+    const { layerMin, layerMax, alpha } = props;
+    useMemo(() => {
+        if (geoJSONcontent) {
+            getGeoJsonLayer(geoJSONcontent, [layerMin, layerMax], layer, alpha, setGeoJsonLayer);
+        }
+    }, [layerMin, layerMax, layer, alpha, geoJSONcontent]);
 
     return (
         <>
-            {loading ? <TransformMsgs msg='Loading ...' /> :
-                calculating ? <TransformMsgs msg='Calculating ...' /> : null}
             <DeckGL
                 width={"100vw"}
                 height={"100vh"}
