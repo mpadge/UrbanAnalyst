@@ -16,6 +16,11 @@ interface StringAcc {
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 
+/**
+ * The main component controlling the transformation algorithm and storing the data.
+ *
+ * @param TransformProps.
+ */
 const TransformComponent = (props: TransformProps) => {
     /**
      * -------- state variables --------
