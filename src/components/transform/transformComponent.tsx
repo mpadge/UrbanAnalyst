@@ -21,7 +21,7 @@ const TransformComponent = (props: TransformProps) => {
     const [mapPathSource, setMapPathSource] = useState<string>("");
     const [data1, setData1] = useState<number | null>(null);
     const [data2, setData2] = useState<number | null>(null);
-    const [result, setResult] = useState<number[] | null>(null);
+    const [transformDataOneCol, setTransformDataOneCol] = useState<number[] | null>(null);
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
     const [geoJsonLayer, setGeoJsonLayer] = useState<any>(null)
 
@@ -40,7 +40,7 @@ const TransformComponent = (props: TransformProps) => {
 
     // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
     // vector of aggregaed mean differences in each polygon of source city. This
-    // vector is stored in the column of 'result' corresponding to
+    // vector is stored in the column of 'transformDataOneCol' corresponding to
     // 'varnames[0]'.
     const { layer, varnames, outputLayer, handleCalculateChange } = props;
     useMemo(() => {
@@ -52,21 +52,21 @@ const TransformComponent = (props: TransformProps) => {
         ).sort();
         const filteredVarNames = varnames.filter(name => name!== layer);
         const varnamesArr: string[] = [layer, ...filteredVarNames];
-        transformDataFunction(data1, data2, varnamesArr, outputLayer, setResult);
+        transformDataFunction(data1, data2, varnamesArr, outputLayer, setTransformDataOneCol);
         handleCalculateChange(false);
-    }, [data1, data2, layer, varnames, outputLayer, setResult, handleCalculateChange]);
+    }, [data1, data2, layer, varnames, outputLayer, setTransformDataOneCol, handleCalculateChange]);
 
     // Effect to load map data for source city, and replace specified column
-    // with 'result' from previous effect:
+    // with 'transformDataOneCol' from previous effect:
     const { handleStoreGeoJsonResultChange } = props;
     useMemo(() => {
-        if (result) {
+        if (transformDataOneCol) {
             fetch(mapPathSource)
                 .then(response => response.json())
                 .then(data => {
                     data.features.forEach((feature: any, index: number) => {
-                        if (result) { // needed here because 'result' can still be null
-                            feature.properties[layer] = result[index];
+                        if (transformDataOneCol) { // needed here because 'transformDataOneCol' can still be null
+                            feature.properties[layer] = transformDataOneCol[index];
                         }
                     });
                     setGeoJSONcontent(data);
@@ -74,7 +74,7 @@ const TransformComponent = (props: TransformProps) => {
                 .catch((error) => console.error('Error:', error));
             handleStoreGeoJsonResultChange(false);
         }
-    }, [mapPathSource, result, layer, handleStoreGeoJsonResultChange]);
+    }, [mapPathSource, transformDataOneCol, layer, handleStoreGeoJsonResultChange]);
 
     const { handleLayerRangeChange, handleStoreRangeLimitsChange } = props;
     useMemo(() => {

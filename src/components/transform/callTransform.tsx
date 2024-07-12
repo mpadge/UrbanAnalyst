@@ -4,9 +4,11 @@ import { trimRangeSDs } from '@/components/utils/trimRange';
 
 const nentries = Number(process.env.NEXT_PUBLIC_NUM_TRANSFORM_SAMPLES) || 10000;
 
-// Function used to extract size of JSON object returned from WASM calls. this
-// is always a simple length = first of the two options, and is used just to
-// assert that that length matches value expected from map data.
+/**
+ * Function used to extract size of JSON object returned from WASM calls. this
+ * is always a simple length = first of the two options, and is used just to
+ * assert that that length matches value expected from map data.
+ */
 const JSONObjectSize = (obj: any) => {
     let numItems: number = 0;
     if (Array.isArray(obj)) {
@@ -17,7 +19,11 @@ const JSONObjectSize = (obj: any) => {
     return numItems;
 }
 
-export async function transformDataFunction(data1: number | null, data2: number | null, varnames: string[], outputLayer: string, setResult: (data: any) => void) {
+/**
+ * The **async** function to call the WASM transform module. The result is
+ * stored by calling the React function passed as input, `setTransformDataOneCol`.
+ */
+export async function transformDataFunction(data1: number | null, data2: number | null, varnames: string[], outputLayer: string, setTransformDataOneCol: (data: any) => void) {
     fetch('@/../pkg/uamutations_bg.wasm')
         .then(response => {
             return response.arrayBuffer();
@@ -51,7 +57,7 @@ export async function transformDataFunction(data1: number | null, data2: number 
                         throw new Error(`Invalid output layer: `);
                 }
                 outputCol = trimRangeSDs(outputCol);
-                setResult(outputCol);
+                setTransformDataOneCol(outputCol);
             }
         })
         .catch(error => {
