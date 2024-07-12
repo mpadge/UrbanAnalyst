@@ -24,6 +24,11 @@ const buttonProps = {
     fourth: "compare"
 }
 
+/**
+ * Definition of interface for `TransformProps`. These are constructed in
+ * {@link TransformPage} and passed through to `TransformDynamic`, which
+ * passes straight through to `TransformComponent`.
+ */
 export interface TransformProps {
     idx: number
     idx2: number
@@ -48,7 +53,32 @@ export interface TransformProps {
     handleOutputLayerChange: (outputLayer: string) => void
 }
 
-
+/**
+ * Main Transform Page component
+ *
+ * @remark This uses the {@link TransformProps} interface to construct all
+ * props and pass on to both `transformComponent` and `control`. The props are
+ * used as follows:
+ *
+ * - `idx`: The integer defining the city from the full `CITY_DATA.citiesArray`.
+ * - `idx2`: The equivalent integer defining the *target* city.
+ * - `layer`: The string defining the single layer to be transformed.
+ * - `varnames`: Array of variable names also passed to the transform algorith,
+ *   so transformation of `layer` also minimises the multi-variate distance to
+ *   all variables defined here.
+ * - `calculate`: A boolean flag used to trigger calculations (will be
+ *   removed).
+ * - `citiesArray`: Static array of all data for all cities, read from main
+ *   `/data` directory.
+ * - `city`: String representing name of city, read from `citiesArray[idx]`.
+ * - `targetCity`: Equivalent string for target city.
+ * - `alpha`: Opacity for visual plotting of DeckGL layer.
+ * - `layerMin`: Minimum value to be plotted on DeckGL layer.
+ * - `layerMax`: Maximum value to be plotted on DeckGL layer.
+ * - `layerRange`: Not yet fully implemented.
+ * - `outputLayer`: Control for which layer should appear on main `transform`
+ *   page: "Original", "Transformed", "Absolute", or "Relative".
+ */
 export default function TransformPage() {
 
     // -------- state variables --------
