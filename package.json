@@ -8,9 +8,7 @@
     "build:wasm": "wasm-pack build wasm --release --target web --out-dir ../pkg && cp ./pkg/*.wasm ./public/pkg/",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "docs": "jsdoc -c jsdoc.conf.json",
-    "docs-open": "xdg-open docs/index.html &"
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
