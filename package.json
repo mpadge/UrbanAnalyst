@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "docs": "jsdoc -c jsdoc.conf.json"
+    "docs": "jsdoc -c jsdoc.conf.json",
+    "docs-open": "xdg-open docs/index.html &"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
