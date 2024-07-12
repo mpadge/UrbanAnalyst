@@ -54,7 +54,8 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
  *  5. Effect to select `outputLayer` column of transform data to be used in
  *     map.
  *      - props: `outputLayer`, `transformDataAll`, `setTransformDataOneCol`.
- *  6. Effect to load and store geoJSON data.
+ *  6. Effect to load geoJSON data, append `trasformDataOneCol`, and store
+ *     result.
  *      - props: `mapPathSource`, `transformDataOneCol`, `props.layer`,
  *      `handleStoreGeoJsonResultChange`.
  *  7. Effect to calculate range limits to be plotted.
