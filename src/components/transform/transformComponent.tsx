@@ -4,7 +4,7 @@ import { Map } from "react-map-gl";
 
 import { ViewState } from "@/data/interfaces";
 import { loadDataFunction } from '@/components/transform/loadData';
-import { transformDataFunction } from '@/components/transform/callTransform';
+import { transformDataFunction, transformDataSelectCol } from '@/components/transform/callTransform';
 import { getGeoJsonLayer } from '@/components/transform/geoJsonLayer';
 import { getRangeLimits } from '@/components/utils/trimRange';
 import { TransformProps } from '@/components/transform/transformPage';
@@ -21,6 +21,7 @@ const TransformComponent = (props: TransformProps) => {
     const [mapPathSource, setMapPathSource] = useState<string>("");
     const [data1, setData1] = useState<number | null>(null);
     const [data2, setData2] = useState<number | null>(null);
+    const [transformDataAll, setTransformDataAll] = useState<Object | null>(null);
     const [transformDataOneCol, setTransformDataOneCol] = useState<number[] | null>(null);
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
     const [geoJsonLayer, setGeoJsonLayer] = useState<any>(null)
@@ -52,7 +53,8 @@ const TransformComponent = (props: TransformProps) => {
         ).sort();
         const filteredVarNames = varnames.filter(name => name!== layer);
         const varnamesArr: string[] = [layer, ...filteredVarNames];
-        transformDataFunction(data1, data2, varnamesArr, outputLayer, setTransformDataOneCol);
+        transformDataFunction(data1, data2, varnamesArr, setTransformDataAll);
+        transformDataSelectCol(transformDataAll, outputLayer, setTransformDataOneCol);
         handleCalculateChange(false);
     }, [data1, data2, layer, varnames, outputLayer, setTransformDataOneCol, handleCalculateChange]);
 
