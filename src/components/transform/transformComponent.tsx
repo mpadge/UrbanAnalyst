@@ -17,7 +17,9 @@ const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 
 const TransformComponent = (props: TransformProps) => {
-    // -------- state variables --------
+    /**
+     * -------- state variables --------
+     */
     const [mapPathSource, setMapPathSource] = useState<string>("");
     const [data1, setData1] = useState<number | null>(null);
     const [data2, setData2] = useState<number | null>(null);
@@ -31,7 +33,9 @@ const TransformComponent = (props: TransformProps) => {
         setMapPathSource(mapPathSource);
     }, [props.city]);
 
-    // Effect to load 'dataraw' point-based data for source and target cities.
+    /**
+     * Effect to load 'dataraw' point-based data for source and target cities.
+     */
     useEffect(() => {
         loadDataFunction(props.city, setData1);
     }, [props.city, setData1]);
@@ -39,10 +43,11 @@ const TransformComponent = (props: TransformProps) => {
         loadDataFunction(props.targetCity, setData2);
     }, [props.targetCity, setData2]);
 
-    // Effect to pass 'data1', 'data2' to WASM mutation algorithm, and return
-    // vector of aggregaed mean differences in each polygon of source city. This
-    // vector is stored in the column of 'transformDataOneCol' corresponding to
-    // 'varnames[0]'.
+    /** Effect to pass 'data1', 'data2' to WASM mutation algorithm, and returnvector
+     * vector of aggregaed mean differences in each polygon of source city. This
+     * vector is stored in the column of 'transformDataOneCol' corresponding to
+     * 'varnames[0]'.
+     */
     const { layer, varnames, outputLayer, handleCalculateChange } = props;
     useMemo(() => {
         const uniqueVarNames = Object.keys(
@@ -63,8 +68,10 @@ const TransformComponent = (props: TransformProps) => {
         }
     }, [outputLayer, transformDataAll, setTransformDataOneCol]);
 
-    // Effect to load map data for source city, and replace specified column
-    // with 'transformDataOneCol' from previous effect:
+    /**
+     * Effect to load map data for source city, and replace specified column
+     * with 'transformDataOneCol' from previous effect:
+     */
     const { handleStoreGeoJsonResultChange } = props;
     useMemo(() => {
         if (transformDataOneCol) {
