@@ -1,3 +1,8 @@
+/**
+ * Main page
+ *
+ */
+
 import Image from "next/image"
 import Link from 'next/link'
 import type { Metadata, Viewport } from 'next';
@@ -9,17 +14,26 @@ import styles from '@/styles/Home.module.css'
 import Buttons from '@/components/buttons5'
 import { ButtonProps } from '@/data/interfaces';
 
+/**
+ * NextJS metadata for main page
+ */
 export const metadata: Metadata = {
     title: 'UA',
     description: 'Urban Analyses for the world',
     icons: '/ua.ico',
 }
 
+/**
+ * Default viewport for DeckGL
+ */
 export const viewport: Viewport = {
     width: 'device-width',
     initialScale: 1.0,
 }
 
+/**
+ * Main page for entire site.
+ */
 export default function Home() {
 
     const buttons = {
