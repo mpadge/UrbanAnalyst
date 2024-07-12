@@ -21,7 +21,7 @@ const TransformComponent = (props: TransformProps) => {
     const [mapPathSource, setMapPathSource] = useState<string>("");
     const [data1, setData1] = useState<number | null>(null);
     const [data2, setData2] = useState<number | null>(null);
-    const [transformDataAll, setTransformDataAll] = useState<Object | null>(null);
+    const [transformDataAll, setTransformDataAll] = useState<Array<any> | null>(null);
     const [transformDataOneCol, setTransformDataOneCol] = useState<number[] | null>(null);
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
     const [geoJsonLayer, setGeoJsonLayer] = useState<any>(null)

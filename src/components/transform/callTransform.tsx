@@ -53,7 +53,7 @@ export async function transformDataFunction(
 };
 
 export async function transformDataSelectCol(
-    transformDataAll: Object | null,
+    transformDataAll: Array<any> | null,
     outputLayer: string,
     setTransformDataOneCol: (data: any) => void
 ) {
