@@ -19,7 +19,55 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
 /**
  * The main component controlling the transformation algorithm and storing the data.
  *
- * @param TransformProps.
+ * This function pre-generates all data needed to diplay as final
+ * `DeckGL` map, and ultimately passes everything through to `setGeoJsonLayer`
+ * to set those data as React state variable, `geoJsonLayer`.
+ *
+ * The following state variables and setter-functions are used here:
+ * - `mapPathSource`: Internal path to the map data for specified city, held
+ *   within the `./public/data` directory.
+ * - `data1`: Raw point data for source city (fetched from private GitHub
+ *   repo). These, and `data2`, are the primary input to the transformation
+ *   algorithm.
+ * - `data2`: Raw point data for target city.
+ * - `transformDataAll`: The direct result of the WASM transformation
+ *   algorithm, stored as an array of four columns, for (original, transformed,
+ *   absolute, and relative) values.
+ * - `transformDataOneCol`: The single column of `transformDataAll` selected by
+ *   the input prop, `outputLayer`.
+ * - `geoJSONcontent`: The raw geoJSON data dervied by binding
+ *   `transformDataOneCol` to the geoJSON data.
+ * - `geoJsonLayer`:  The final and full layer passed directly to `DeckGL`.
+ *
+ *  The function uses the following effects, listed along with corresponding
+ *  `props` which trigger effects. Props passed through to main function as
+ *  part of `TransformProps` are prefixed with `props.<Name>`.
+ *
+ *  1. Set the path to the internal (`./public`) source of the city-specific data.
+ *      - props: `city`
+ *  2. Load data for the main city (from external, private GitHub repo).
+ *      - props: `city`, `setData1`.
+ *  3. Load data for the target city.
+ *      - props: `targetCity`, `setData2`.
+ *  4. The "main" Effect to call `transformDataFunction`.
+ *      - props: `data1`, `data2`, `layer`, `varnames`, `handleCalculateChange`.
+ *  5. Effect to select `outputLayer` column of transform data to be used in
+ *     map.
+ *      - props: `outputLayer`, `transformDataAll`, `setTransformDataOneCol`.
+ *  6. Effect to load and store geoJSON data.
+ *      - props: `mapPathSource`, `transformDataOneCol`, `props.layer`,
+ *      `handleStoreGeoJsonResultChange`.
+ *  7. Effect to calculate range limits to be plotted.
+ *      - props: `props.layer`, `geoJSONcontent`, `handleLayerRangeChange`,
+ *      `handleStoreRangeLimitsChange`.
+ *  8. Effect to get and store the final geoJSON layer to be passed to
+ *     `DeckGL`.
+ *      - props: `props.layerMin`, `props.layerMax`, `props.layer`,
+ *      `props.alpha`, `geoJSONcontent`
+ *
+ * @param props - the props defined in {@link TransformProps}.
+ * @return The rendered `DeckGL` page using data from `geoJsonLayer`, and underlying base map.
+ *
  */
 const TransformComponent = (props: TransformProps) => {
     /**
