@@ -54,9 +54,14 @@ const TransformComponent = (props: TransformProps) => {
         const filteredVarNames = varnames.filter(name => name!== layer);
         const varnamesArr: string[] = [layer, ...filteredVarNames];
         transformDataFunction(data1, data2, varnamesArr, setTransformDataAll);
-        transformDataSelectCol(transformDataAll, outputLayer, setTransformDataOneCol);
         handleCalculateChange(false);
-    }, [data1, data2, layer, varnames, outputLayer, setTransformDataOneCol, handleCalculateChange]);
+    }, [data1, data2, layer, varnames, handleCalculateChange]);
+
+    useEffect(() => {
+        if (transformDataAll) {
+            transformDataSelectCol(transformDataAll, outputLayer, setTransformDataOneCol);
+        }
+    }, [outputLayer, transformDataAll, setTransformDataOneCol]);
 
     // Effect to load map data for source city, and replace specified column
     // with 'transformDataOneCol' from previous effect:
