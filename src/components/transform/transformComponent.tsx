@@ -59,8 +59,7 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
  *      - props: `mapPathSource`, `transformDataOneCol`, `props.layer`,
  *      `handleStoreGeoJsonResultChange`.
  *  7. Effect to calculate range limits to be plotted.
- *      - props: `props.layer`, `geoJSONcontent`, `handleLayerRangeChange`,
- *      `handleStoreRangeLimitsChange`.
+ *      - props: `props.layer`, `geoJSONcontent`, `handleLayerRangeChange`
  *  8. Effect to get and store the final geoJSON layer to be passed to
  *     `DeckGL`.
  *      - props: `props.layerMin`, `props.layerMax`, `props.layer`,
@@ -144,14 +143,13 @@ const TransformComponent = (props: TransformProps) => {
         }
     }, [mapPathSource, transformDataOneCol, layer, handleStoreGeoJsonResultChange]);
 
-    const { handleLayerRangeChange, handleStoreRangeLimitsChange } = props;
+    const { handleLayerRangeChange } = props;
     useMemo(() => {
         if (geoJSONcontent) {
             const rangeLimits = getRangeLimits(geoJSONcontent, layer);
             handleLayerRangeChange(rangeLimits);
-            handleStoreRangeLimitsChange(false)
         }
-    }, [layer, geoJSONcontent, handleLayerRangeChange, handleStoreRangeLimitsChange]);
+    }, [layer, geoJSONcontent, handleLayerRangeChange]);
 
     const { layerMin, layerMax, alpha } = props;
     useMemo(() => {
