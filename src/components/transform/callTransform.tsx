@@ -45,12 +45,8 @@ export async function transformDataFunction(
                 const data2js = JSON.stringify(data2);
                 const resultJson = wasm_js.uamutate(data1js, data2js, varname, nentries);
                 const resultObj = JSON.parse(resultJson);
-                console.log("-------SET TRANSFORMdATALL called------");
                 setTransformDataAll(resultObj);
-                console.log("-------ONCOMPLETE INVOKED------");
                 onComplete();
-            } else {
-                console.log("-------NO DATA PASSED TO TRANSFORMDATAFUNCTION------");
             }
         })
         .catch(error => {
