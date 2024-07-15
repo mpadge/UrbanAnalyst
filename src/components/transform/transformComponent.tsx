@@ -56,8 +56,7 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
  *      - props: `outputLayer`, `transformDataAll`, `setTransformDataOneCol`.
  *  6. Effect to load geoJSON data, append `trasformDataOneCol`, and store
  *     result.
- *      - props: `mapPathSource`, `transformDataOneCol`, `props.layer`,
- *      `handleStoreGeoJsonResultChange`.
+ *      - props: `mapPathSource`, `transformDataOneCol`, `props.layer`
  *  7. Effect to calculate range limits to be plotted.
  *      - props: `props.layer`, `geoJSONcontent`, `handleLayerRangeChange`
  *  8. Effect to get and store the final geoJSON layer to be passed to
@@ -93,14 +92,12 @@ const TransformComponent = (props: TransformProps) => {
     const dataLoadingComplete = useRef(false);
     const initialCalculate = useRef(false);
     useEffect(() => {
-        console.log("------LOAD ONE------");
         setData1(null);
         loadDataFunction(props.city, setData1);
         dataLoadingComplete.current = true;
         initialCalculate.current = true;
     }, [props.city, setData1]);
     useEffect(() => {
-        console.log("------LOAD TWO------");
         setData2(null);
         loadDataFunction(props.targetCity, setData2);
         dataLoadingComplete.current = true;
@@ -115,9 +112,7 @@ const TransformComponent = (props: TransformProps) => {
     const { layer, varnames, outputLayer } = props;
     const [isTransformationComplete, setIsTransformationComplete] = useState(false);
     useEffect(() => {
-        console.log("------IN CALCULATE EFFECT------");
         if (initialCalculate.current && dataLoadingComplete.current && data1 !== null && data2 !== null) {
-            console.log("------------AND CALCULATING ....");
             const uniqueVarNames = Object.keys(
                 varnames.reduce((acc: StringAcc, name) => {
                     acc[name] = true;
@@ -129,16 +124,11 @@ const TransformComponent = (props: TransformProps) => {
             transformDataFunction(data1, data2, varnamesArr, setTransformDataAll, () => setIsTransformationComplete(true));;
             initialCalculate.current = false;
             dataLoadingComplete.current = false;
-        } else {
-            console.log("------------BUT NOT CALCULATING ....");
         }
     }, [data1, data2, layer, varnames]);
 
     useEffect(() => {
-        console.log("------TRANSFORMDATAALL OUT = ", transformDataAll);
-        console.log("------ISTRANSFORMATIONCOMPLETE = ", isTransformationComplete);
         if (transformDataAll && isTransformationComplete) {
-            console.log("------TRANSFORMDATAALL IN  = ", transformDataAll);
             transformDataSelectCol(transformDataAll, outputLayer, setTransformDataOneCol);
         }
     }, [outputLayer, transformDataAll, setTransformDataOneCol, isTransformationComplete]);
@@ -147,7 +137,6 @@ const TransformComponent = (props: TransformProps) => {
      * Effect to load map data for source city, and replace specified column
      * with 'transformDataOneCol' from previous effect:
      */
-    const { handleStoreGeoJsonResultChange } = props;
     useMemo(() => {
         if (transformDataOneCol) {
             fetch(mapPathSource)
@@ -161,13 +150,12 @@ const TransformComponent = (props: TransformProps) => {
                     setGeoJSONcontent(data);
                 })
                 .catch((error) => console.error('Error:', error));
-            handleStoreGeoJsonResultChange(false);
         }
-    }, [mapPathSource, transformDataOneCol, layer, handleStoreGeoJsonResultChange]);
+    }, [mapPathSource, transformDataOneCol, layer]);
 
     const { handleLayerRangeChange } = props;
     useMemo(() => {
-        if (geoJSONcontent) {
+        if (geoJSONcontent !== null) {
             const rangeLimits = getRangeLimits(geoJSONcontent, layer);
             handleLayerRangeChange(rangeLimits);
         }
@@ -175,7 +163,7 @@ const TransformComponent = (props: TransformProps) => {
 
     const { layerMin, layerMax, alpha } = props;
     useMemo(() => {
-        if (geoJSONcontent) {
+        if (geoJSONcontent !== null) {
             getGeoJsonLayer(geoJSONcontent, [layerMin, layerMax], layer, alpha, setGeoJsonLayer);
         }
     }, [layerMin, layerMax, layer, alpha, geoJSONcontent]);
