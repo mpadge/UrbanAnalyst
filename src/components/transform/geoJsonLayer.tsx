@@ -3,14 +3,12 @@ import 'd3-scale-chromatic';
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
 
 
-
-
 export async function getGeoJsonLayer(geoJSONcontent: any, layerRange: number[], varname: string, alpha: number, setGeoJsonLayer: (layer: any) => void) {
 
     let Color = d3
-    .scaleSequential()
-    .domain(layerRange)
-    .interpolator(d3.interpolateViridis);
+        .scaleSequential()
+        .domain(layerRange)
+        .interpolator(d3.interpolateViridis);
 
     const this_layer = [
         new GeoJsonLayer({
