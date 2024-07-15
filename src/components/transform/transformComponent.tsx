@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useState} from 'react';
+import { useMemo, useEffect, useRef, useState} from 'react';
 import { DeckGL } from "@deck.gl/react/typed";
 import { Map } from "react-map-gl";
 
@@ -89,11 +89,19 @@ const TransformComponent = (props: TransformProps) => {
     /**
      * Effect to load 'dataraw' point-based data for source and target cities.
      */
+    const initialLoadData1 = useRef(false);
     useEffect(() => {
-        loadDataFunction(props.city, setData1);
+        if (!initialLoadData1.current) {
+            loadDataFunction(props.city, setData1);
+            initialLoadData1.current = true;
+        }
     }, [props.city, setData1]);
+    const initialLoadData2 = useRef(false);
     useEffect(() => {
-        loadDataFunction(props.targetCity, setData2);
+        if (!initialLoadData2.current) {
+            loadDataFunction(props.targetCity, setData2);
+            initialLoadData2.current = true;
+        }
     }, [props.targetCity, setData2]);
 
     /** Effect to pass 'data1', 'data2' to WASM mutation algorithm, and returnvector
