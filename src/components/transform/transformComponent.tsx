@@ -176,20 +176,20 @@ const TransformComponent = (props: TransformProps) => {
         }
     }, [mapPathSource, transformDataOneCol, layer]);
 
-    const { handleLayerRangeChange } = props;
+    const { setLayerRange } = props;
     useMemo(() => {
         if (geoJSONcontent !== null) {
             const rangeLimits = getRangeLimits(geoJSONcontent, layer);
-            handleLayerRangeChange(rangeLimits);
+            setLayerRange(rangeLimits);
         }
-    }, [layer, geoJSONcontent, handleLayerRangeChange]);
+    }, [layer, geoJSONcontent, setLayerRange]);
 
-    const { layerMin, layerMax, alpha } = props;
+    const { layerRange, alpha } = props;
     useMemo(() => {
         if (geoJSONcontent !== null) {
-            getGeoJsonLayer(geoJSONcontent, [layerMin, layerMax], layer, alpha, setGeoJsonLayer);
+            getGeoJsonLayer(geoJSONcontent, layerRange, layer, alpha, setGeoJsonLayer);
         }
-    }, [layerMin, layerMax, layer, alpha, geoJSONcontent]);
+    }, [layerRange, layer, alpha, geoJSONcontent]);
 
     return (
         <>
