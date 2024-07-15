@@ -61,7 +61,7 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
  *      - props: `props.layer`, `geoJSONcontent`, `handleLayerRangeChange`
  *  8. Effect to get and store the final geoJSON layer to be passed to
  *     `DeckGL`.
- *      - props: `props.layerMin`, `props.layerMax`, `props.layer`,
+ *      - props: `props.layerRange`, `props.layer`,
  *      `props.alpha`, `geoJSONcontent`
  *
  * @param props - the props defined in {@link TransformProps}.
@@ -137,7 +137,7 @@ const TransformComponent = (props: TransformProps) => {
      * Effect to load map data for source city, and replace specified column
      * with 'transformDataOneCol' from previous effect:
      */
-    useMemo(() => {
+    useEffect(() => {
         if (transformDataOneCol) {
             fetch(mapPathSource)
                 .then(response => response.json())
@@ -153,20 +153,20 @@ const TransformComponent = (props: TransformProps) => {
         }
     }, [mapPathSource, transformDataOneCol, layer]);
 
-    const { handleLayerRangeChange } = props;
-    useMemo(() => {
+    const { setLayerRange } = props;
+    useEffect(() => {
         if (geoJSONcontent !== null) {
             const rangeLimits = getRangeLimits(geoJSONcontent, layer);
-            handleLayerRangeChange(rangeLimits);
+            setLayerRange(rangeLimits);
         }
-    }, [layer, geoJSONcontent, handleLayerRangeChange]);
+    }, [layer, geoJSONcontent, setLayerRange]);
 
-    const { layerMin, layerMax, alpha } = props;
-    useMemo(() => {
+    const { layerRange, alpha } = props;
+    useEffect(() => {
         if (geoJSONcontent !== null) {
-            getGeoJsonLayer(geoJSONcontent, [layerMin, layerMax], layer, alpha, setGeoJsonLayer);
+            getGeoJsonLayer(geoJSONcontent, layerRange, layer, alpha, setGeoJsonLayer);
         }
-    }, [layerMin, layerMax, layer, alpha, geoJSONcontent]);
+    }, [layerRange, layer, alpha, geoJSONcontent]);
 
     return (
         <>

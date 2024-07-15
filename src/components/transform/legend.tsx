@@ -30,11 +30,8 @@ export default function Legend (props: LegendProps) {
         var t = d3.transition()
         .duration(750);
 
-        const scale_min = layerRange[0];
-        const scale_max = layerRange[1];
-
         const scaleband = d3.scaleLinear()
-        .domain([scale_min, scale_max])
+        .domain(layerRange)
         .rangeRound([marginLeft, width - marginRight]);
 
         const nticksin = 5;
@@ -43,7 +40,7 @@ export default function Legend (props: LegendProps) {
 
         const nColors = 50;
         var scalebandColors = d3.scaleLinear()
-        .domain([layerRange[0], layerRange[1]])
+        .domain(layerRange)
         .rangeRound([marginLeft, width - marginRight]);
         var scalecolors = scalebandColors.ticks(nColors)
 
