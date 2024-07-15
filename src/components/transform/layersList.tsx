@@ -13,7 +13,6 @@ interface LayersListProps {
     layer: string,
     varnames: string[],
     setVarnames: (varnames: string[]) => void
-    setInitialSetDefaultValues: (initialSetDefaultValues: boolean) => void
 }
 
 
@@ -63,7 +62,7 @@ export default function LayersList(props: LayersListProps) {
     };
 
     const handleReset = () => {
-        props.setInitialSetDefaultValues(true);
+        console.log("------RE-SETTING VARNAMES TO ", props.varnames);
         setSelectedOptions(props.varnames);
     };
 
