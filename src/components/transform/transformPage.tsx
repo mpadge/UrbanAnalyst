@@ -51,7 +51,6 @@ export interface TransformProps {
     idx2: number
     layer: string
     varnames: string[]
-    storeGeoJsonResult: boolean,
     citiesArray: CityDataProps[],
     city: string
     targetCity: string
@@ -62,7 +61,6 @@ export interface TransformProps {
     layerRange: number[],
     outputLayer: string
     handleLayerRangeChange: (layerRange: number[]) => void
-    handleStoreGeoJsonResultChange: (storeGeoJsonResult: boolean) => void
     handleOutputLayerChange: (outputLayer: string) => void
 }
 
@@ -90,7 +88,6 @@ export default function TransformPage() {
     const [layerMax, setLayerMax] = useState<number>(0);
     const [layerRange, setLayerRange] = useState<number[]>([0, 1]);
 
-    const [storeGeoJsonResult, setStoreGeoJsonResult] = useState<boolean>(false);
     const [varnames, setVarnames] = useState<string[]>([]);
     const [outputLayer, setOutputLayer] = useState<string>("relative");
     const [cityLayers, setCityLayers] = useState<string[]>([]);
@@ -193,9 +190,6 @@ export default function TransformPage() {
         setLayerMin(layerRange[0]);
         setLayerMax(layerRange[1]);
     }
-    const handleStoreGeoJsonResultChange = (storeGeoJsonResult: boolean) => {
-        setStoreGeoJsonResult(storeGeoJsonResult);
-    }
     const handleVarnamesChange = (varnames: string[]) => {
         setVarnames(varnames);
     }
@@ -245,7 +239,6 @@ export default function TransformPage() {
                 idx2={idx2}
                 layer={layer}
                 varnames={varnames}
-                storeGeoJsonResult={storeGeoJsonResult}
                 citiesArray = {CITY_DATA.citiesArray}
                 city = {CITY_DATA.citiesArray[idx].name}
                 targetCity = {CITY_DATA.citiesArray[idx2].name}
@@ -256,7 +249,6 @@ export default function TransformPage() {
                 layerRange = {layerRange}
                 outputLayer={outputLayer}
                 handleLayerRangeChange={handleLayerRangeChange}
-                handleStoreGeoJsonResultChange={handleStoreGeoJsonResultChange}
                 handleOutputLayerChange={handleOutputLayerChange}
             />
             <Control

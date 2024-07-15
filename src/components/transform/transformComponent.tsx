@@ -56,8 +56,7 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
  *      - props: `outputLayer`, `transformDataAll`, `setTransformDataOneCol`.
  *  6. Effect to load geoJSON data, append `trasformDataOneCol`, and store
  *     result.
- *      - props: `mapPathSource`, `transformDataOneCol`, `props.layer`,
- *      `handleStoreGeoJsonResultChange`.
+ *      - props: `mapPathSource`, `transformDataOneCol`, `props.layer`
  *  7. Effect to calculate range limits to be plotted.
  *      - props: `props.layer`, `geoJSONcontent`, `handleLayerRangeChange`
  *  8. Effect to get and store the final geoJSON layer to be passed to
@@ -147,7 +146,6 @@ const TransformComponent = (props: TransformProps) => {
      * Effect to load map data for source city, and replace specified column
      * with 'transformDataOneCol' from previous effect:
      */
-    const { handleStoreGeoJsonResultChange } = props;
     useMemo(() => {
         if (transformDataOneCol) {
             fetch(mapPathSource)
@@ -161,13 +159,12 @@ const TransformComponent = (props: TransformProps) => {
                     setGeoJSONcontent(data);
                 })
                 .catch((error) => console.error('Error:', error));
-            handleStoreGeoJsonResultChange(false);
         }
-    }, [mapPathSource, transformDataOneCol, layer, handleStoreGeoJsonResultChange]);
+    }, [mapPathSource, transformDataOneCol, layer]);
 
     const { handleLayerRangeChange } = props;
     useMemo(() => {
-        if (geoJSONcontent) {
+        if (geoJSONcontent !== null) {
             const rangeLimits = getRangeLimits(geoJSONcontent, layer);
             handleLayerRangeChange(rangeLimits);
         }
@@ -175,7 +172,7 @@ const TransformComponent = (props: TransformProps) => {
 
     const { layerMin, layerMax, alpha } = props;
     useMemo(() => {
-        if (geoJSONcontent) {
+        if (geoJSONcontent !== null) {
             getGeoJsonLayer(geoJSONcontent, [layerMin, layerMax], layer, alpha, setGeoJsonLayer);
         }
     }, [layerMin, layerMax, layer, alpha, geoJSONcontent]);
