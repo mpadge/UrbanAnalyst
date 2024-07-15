@@ -92,14 +92,12 @@ const TransformComponent = (props: TransformProps) => {
     const dataLoadingComplete = useRef(false);
     const initialCalculate = useRef(false);
     useEffect(() => {
-        console.log("------LOAD ONE------");
         setData1(null);
         loadDataFunction(props.city, setData1);
         dataLoadingComplete.current = true;
         initialCalculate.current = true;
     }, [props.city, setData1]);
     useEffect(() => {
-        console.log("------LOAD TWO------");
         setData2(null);
         loadDataFunction(props.targetCity, setData2);
         dataLoadingComplete.current = true;
@@ -114,9 +112,7 @@ const TransformComponent = (props: TransformProps) => {
     const { layer, varnames, outputLayer } = props;
     const [isTransformationComplete, setIsTransformationComplete] = useState(false);
     useEffect(() => {
-        console.log("------IN CALCULATE EFFECT------");
         if (initialCalculate.current && dataLoadingComplete.current && data1 !== null && data2 !== null) {
-            console.log("------------AND CALCULATING ....");
             const uniqueVarNames = Object.keys(
                 varnames.reduce((acc: StringAcc, name) => {
                     acc[name] = true;
@@ -128,16 +124,11 @@ const TransformComponent = (props: TransformProps) => {
             transformDataFunction(data1, data2, varnamesArr, setTransformDataAll, () => setIsTransformationComplete(true));;
             initialCalculate.current = false;
             dataLoadingComplete.current = false;
-        } else {
-            console.log("------------BUT NOT CALCULATING ....");
         }
     }, [data1, data2, layer, varnames]);
 
     useEffect(() => {
-        console.log("------TRANSFORMDATAALL OUT = ", transformDataAll);
-        console.log("------ISTRANSFORMATIONCOMPLETE = ", isTransformationComplete);
         if (transformDataAll && isTransformationComplete) {
-            console.log("------TRANSFORMDATAALL IN  = ", transformDataAll);
             transformDataSelectCol(transformDataAll, outputLayer, setTransformDataOneCol);
         }
     }, [outputLayer, transformDataAll, setTransformDataOneCol, isTransformationComplete]);
