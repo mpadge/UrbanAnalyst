@@ -183,9 +183,6 @@ export default function TransformPage() {
             localStorage.setItem("uaAlpha", alpha.toString());
         }
     }
-    const handleVarnamesChange = (varnames: string[]) => {
-        setVarnames(varnames);
-    }
     const handleOutputLayerChange = (outputLayer: string) => {
         setOutputLayer(outputLayer);
     }
@@ -257,7 +254,7 @@ export default function TransformPage() {
                 handleAlphaChange={handleAlphaChange}
                 handleViewStateChange={handleViewStateChange}
                 handleLayerChange={handleLayerChange}
-                handleVarnamesChange={handleVarnamesChange}
+                setVarnames={setVarnames}
                 handleOutputLayerChange={handleOutputLayerChange}
                 handleTourOpen = {handleTourOpen}
             />

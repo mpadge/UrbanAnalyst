@@ -12,7 +12,7 @@ interface OptionType {
 interface LayersListProps {
     layer: string,
     varnames: string[],
-    handleVarnamesChange: (varnames: string[]) => void
+    setVarnames: (varnames: string[]) => void
     setInitialSetDefaultValues: (initialSetDefaultValues: boolean) => void
 }
 
@@ -46,7 +46,7 @@ export default function LayersList(props: LayersListProps) {
 
     const handleOptionChange = (selectedOptions: any) => {
         setSelectedOptions(selectedOptions.map((option: OptionType) => option.value));
-        props.handleVarnamesChange(selectedOptions.map((option: OptionType) => option.value));
+        props.setVarnames(selectedOptions.map((option: OptionType) => option.value));
     };
 
     const handleCheckboxChange = (option: OptionType, isChecked: boolean) => {
@@ -57,7 +57,7 @@ export default function LayersList(props: LayersListProps) {
             } else {
                 newSelectedOptions = currentSelectedOptions.filter((selectedValue) => selectedValue !== option.value);
             }
-            props.handleVarnamesChange(newSelectedOptions);
+            props.setVarnames(newSelectedOptions);
             return newSelectedOptions;
         });
     };

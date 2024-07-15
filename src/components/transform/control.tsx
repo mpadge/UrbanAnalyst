@@ -34,7 +34,7 @@ interface TransformControlProps {
     handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void,
-    handleVarnamesChange: (varnames: string[]) => void
+    setVarnames: (varnames: string[]) => void
     handleOutputLayerChange: (outputLayer: string) => void
     handleTourOpen: (isTourOpen: boolean) => void
 }
@@ -59,7 +59,7 @@ export default function Control (props: TransformControlProps) {
 
     // Effect to set default "Extra layers" as all those with better values:
     const [initialSetDefaultValues, setInitialSetDefaultValues] = useState(true);
-    const { handleVarnamesChange } = props;
+    const { setVarnames } = props;
     useEffect(() => {
         if (!initialSetDefaultValues) { return; }
 
@@ -105,10 +105,10 @@ export default function Control (props: TransformControlProps) {
             }
         });
         setDefaultVarnames(varnames);
-        handleVarnamesChange(varnames);
+        setVarnames(varnames);
         setInitialSetDefaultValues(false);
 
-    }, [props.idx, props.idx2, props.layer, props.citiesArray, initialSetDefaultValues, handleVarnamesChange]);
+    }, [props.idx, props.idx2, props.layer, props.citiesArray, initialSetDefaultValues, setVarnames]);
 
     return (
         <>
@@ -196,7 +196,7 @@ export default function Control (props: TransformControlProps) {
                 <LayersList
                     layer = {props.layer}
                     varnames = {props.varnames}
-                    handleVarnamesChange = {props.handleVarnamesChange}
+                    setVarnames = {props.setVarnames}
                     setInitialSetDefaultValues={setInitialSetDefaultValues}
                 />
             </div>
