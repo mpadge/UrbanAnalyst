@@ -39,6 +39,60 @@ interface TransformControlProps {
     handleTourOpen: (isTourOpen: boolean) => void
 }
 
+interface DefaultExtraLayersProps {
+    idx: number,
+    idx2: number,
+    layer: string,
+    citiesArray: CityDataProps[]
+}
+
+function DefaultExtraLayers (props: DefaultExtraLayersProps) {
+
+    const source_city_values =
+    Object.entries(props.citiesArray[props.idx].stats_single);
+    const source_city_mean_all = source_city_values.map(([key, value]) => ({
+        name: key,
+        value: value[0]
+    }));
+    const target_city_values = Object.entries(props.citiesArray[props.idx2].stats_single);
+    const target_city_mean_all = target_city_values.map(([key, value]) => ({
+        name: key,
+        value: value[0]
+    }));
+    const source_city_mean = source_city_mean_all.filter(entry => entry.name !== props.layer);
+    const target_city_mean = target_city_mean_all.filter(entry => entry.name !== props.layer);
+
+    // Directions of comparison for each variable. If 'lower', then lower
+    // values are better.
+    const comparisons = [
+        { name: "social_index", lower: true },
+        { name: "times_rel", lower: true},
+        { name: "times_abs", lower: true},
+        { name: "transfers", lower: true},
+        { name: "intervals", lower: true},
+        { name: "transport", lower: true},
+        { name: "popdens", lower: true},
+        { name: "school_dist", lower: true},
+        { name: "bike_index", lower: true},
+        { name: "natural", lower: true},
+        { name: "parking", lower: true},
+    ];
+    let varnames: string[] = [];
+    comparisons.forEach(comparison => {
+        const sourceEntry = source_city_mean.find(entry => entry.name === comparison.name);
+        const targetEntry = target_city_mean.find(entry => entry.name === comparison.name);
+
+        if (sourceEntry && targetEntry) {
+            if ((comparison.lower && targetEntry.value < sourceEntry.value) ||
+                (!comparison.lower && targetEntry.value > sourceEntry.value)) {
+                varnames.push(comparison.name);
+            }
+        }
+    });
+
+    return varnames;
+}
+
 
 export default function Control (props: TransformControlProps) {
 
@@ -58,57 +112,16 @@ export default function Control (props: TransformControlProps) {
     const [defaultVarnames, setDefaultVarnames] = useState(props.varnames);
 
     // Effect to set default "Extra layers" as all those with better values:
-    const [initialSetDefaultValues, setInitialSetDefaultValues] = useState(true);
+    const initialSetDefaultValues = useRef(false);
     const { idx, idx2, layer, citiesArray, setVarnames } = props;
     useEffect(() => {
-        if (!initialSetDefaultValues) { return; }
-
-        const source_city_values =
-        Object.entries(citiesArray[idx].stats_single);
-        const source_city_mean_all = source_city_values.map(([key, value]) => ({
-            name: key,
-            value: value[0]
-        }));
-        const target_city_values = Object.entries(citiesArray[idx2].stats_single);
-        const target_city_mean_all = target_city_values.map(([key, value]) => ({
-            name: key,
-            value: value[0]
-        }));
-        const source_city_mean = source_city_mean_all.filter(entry => entry.name !== layer);
-        const target_city_mean = target_city_mean_all.filter(entry => entry.name !== layer);
-
-        // Directions of comparison for each variable. If 'lower', then lower
-        // values are better.
-        const comparisons = [
-            { name: "social_index", lower: true },
-            { name: "times_rel", lower: true},
-            { name: "times_abs", lower: true},
-            { name: "transfers", lower: true},
-            { name: "intervals", lower: true},
-            { name: "transport", lower: true},
-            { name: "popdens", lower: true},
-            { name: "school_dist", lower: true},
-            { name: "bike_index", lower: true},
-            { name: "natural", lower: true},
-            { name: "parking", lower: true},
-        ];
-        let varnames: string[] = [];
-        comparisons.forEach(comparison => {
-            const sourceEntry = source_city_mean.find(entry => entry.name === comparison.name);
-            const targetEntry = target_city_mean.find(entry => entry.name === comparison.name);
-
-            if (sourceEntry && targetEntry) {
-                if ((comparison.lower && targetEntry.value < sourceEntry.value) ||
-                    (!comparison.lower && targetEntry.value > sourceEntry.value)) {
-                    varnames.push(comparison.name);
-                }
-            }
-        });
-        setDefaultVarnames(varnames);
-        setVarnames(varnames);
-        setInitialSetDefaultValues(false);
-
-    }, [idx, idx2, layer, citiesArray, initialSetDefaultValues, setVarnames]);
+        if (!initialSetDefaultValues.current) {
+            const varnames = DefaultExtraLayers({ idx, idx2, layer, citiesArray });
+            setDefaultVarnames(varnames);
+            setVarnames(varnames);
+            initialSetDefaultValues.current = true;
+        }
+    }, [idx, idx2, layer, citiesArray, setVarnames]);
 
     return (
         <>
@@ -197,7 +210,6 @@ export default function Control (props: TransformControlProps) {
                     layer = {props.layer}
                     varnames = {props.varnames}
                     setVarnames = {props.setVarnames}
-                    setInitialSetDefaultValues={setInitialSetDefaultValues}
                 />
             </div>
         </>
