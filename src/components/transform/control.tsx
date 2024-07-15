@@ -164,16 +164,15 @@ export default function Control (props: TransformControlProps) {
                         handleLayersDialogVisibility={handleLayersDialogVisibility}
                     />
 
+                    <OutputLayers
+                        outputLayer = {props.outputLayer}
+                        handleOutputLayerChange={props.handleOutputLayerChange}
+                    />
+
                     <h3>Opacity</h3>
                     <OpacitySlider
                         alpha = {props.alpha}
                         handleAlphaChange={props.handleAlphaChange}
-                    />
-
-                    <h3>Output Layer</h3>
-                    <OutputLayers
-                        outputLayer = {props.outputLayer}
-                        handleOutputLayerChange={props.handleOutputLayerChange}
                     />
 
                     <HelpButton

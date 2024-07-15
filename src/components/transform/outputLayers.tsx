@@ -1,6 +1,11 @@
 
 import React, { useState } from 'react';
-import Select from 'react-select';
+
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import styles from '@/styles/controls.module.css';
 
@@ -19,23 +24,35 @@ export default function OutputLayers(props: OutputLayerProps) {
     ];
 
     const searchable = false;
-    const [selected, setSelected] = useState(null);
+    const [selected, setSelected] = useState<string>("original");
 
-    const handleChange = (selectedOption: any) => {
-        setSelected(selectedOption);
-        props.handleOutputLayerChange(selectedOption.value);
+    const handleChange = (event: SelectChangeEvent) => {
+        const val = event.target.value as string;
+        if (val) {
+            setSelected(val);
+            props.handleOutputLayerChange(val);
+        }
     };
 
     return (
-        <section className={styles.listSelect}>
-            <Select
-                options={options}
-                defaultValue={options[3]}
-                name="OutputLayersySelector"
-                isSearchable={searchable}
-                onChange = {handleChange}
-            />
-        </section>
+        <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+                <InputLabel id="outputLayer-input-label">Output Layer</InputLabel>
+                <Select
+                    labelId="outputLayer-select-label"
+                    id="outputLayer-select"
+                    value={selected}
+                    label="OutputLayer"
+                    onChange={handleChange}
+                >
+                    {options.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+        </Box>
     );
 }
 
