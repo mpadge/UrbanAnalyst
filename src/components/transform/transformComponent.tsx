@@ -50,7 +50,7 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
  *  3. Load data for the target city.
  *      - props: `targetCity`, `setData2`.
  *  4. The "main" Effect to call `transformDataFunction`.
- *      - props: `data1`, `data2`, `layer`, `varnames`, `handleCalculateChange`.
+ *      - props: `data1`, `data2`, `layer`, `varnames`.
  *  5. Effect to select `outputLayer` column of transform data to be used in
  *     map.
  *      - props: `outputLayer`, `transformDataAll`, `setTransformDataOneCol`.
@@ -84,24 +84,27 @@ const TransformComponent = (props: TransformProps) => {
     useEffect(() => {
         const mapPathSource = "/data/" + props.city + "/data.json";
         setMapPathSource(mapPathSource);
-    }, [props.city]);
+        setData1(null);
+    }, [props.city, setData1]);
 
     /**
      * Effect to load 'dataraw' point-based data for source and target cities.
      */
-    const initialLoadData1 = useRef(false);
+    const dataLoadingComplete = useRef(false);
+    const initialCalculate = useRef(false);
     useEffect(() => {
-        if (!initialLoadData1.current) {
-            loadDataFunction(props.city, setData1);
-            initialLoadData1.current = true;
-        }
+        console.log("------LOAD ONE------");
+        setData1(null);
+        loadDataFunction(props.city, setData1);
+        dataLoadingComplete.current = true;
+        initialCalculate.current = true;
     }, [props.city, setData1]);
-    const initialLoadData2 = useRef(false);
     useEffect(() => {
-        if (!initialLoadData2.current) {
-            loadDataFunction(props.targetCity, setData2);
-            initialLoadData2.current = true;
-        }
+        console.log("------LOAD TWO------");
+        setData2(null);
+        loadDataFunction(props.targetCity, setData2);
+        dataLoadingComplete.current = true;
+        initialCalculate.current = true;
     }, [props.targetCity, setData2]);
 
     /** Effect to pass 'data1', 'data2' to WASM mutation algorithm, and returnvector
@@ -109,25 +112,36 @@ const TransformComponent = (props: TransformProps) => {
      * vector is stored in the column of 'transformDataOneCol' corresponding to
      * 'varnames[0]'.
      */
-    const { layer, varnames, outputLayer, handleCalculateChange } = props;
-    useMemo(() => {
-        const uniqueVarNames = Object.keys(
-            varnames.reduce((acc: StringAcc, name) => {
-                acc[name] = true;
-                return acc;
-            }, {})
-        ).sort();
-        const filteredVarNames = varnames.filter(name => name!== layer);
-        const varnamesArr: string[] = [layer, ...filteredVarNames];
-        transformDataFunction(data1, data2, varnamesArr, setTransformDataAll);
-        handleCalculateChange(false);
-    }, [data1, data2, layer, varnames, handleCalculateChange]);
+    const { layer, varnames, outputLayer } = props;
+    const [isTransformationComplete, setIsTransformationComplete] = useState(false);
+    useEffect(() => {
+        console.log("------IN CALCULATE EFFECT------");
+        if (initialCalculate.current && dataLoadingComplete.current && data1 !== null && data2 !== null) {
+            console.log("------------AND CALCULATING ....");
+            const uniqueVarNames = Object.keys(
+                varnames.reduce((acc: StringAcc, name) => {
+                    acc[name] = true;
+                    return acc;
+                }, {})
+            ).sort();
+            const filteredVarNames = varnames.filter(name => name!== layer);
+            const varnamesArr: string[] = [layer, ...filteredVarNames];
+            transformDataFunction(data1, data2, varnamesArr, setTransformDataAll, () => setIsTransformationComplete(true));;
+            initialCalculate.current = false;
+            dataLoadingComplete.current = false;
+        } else {
+            console.log("------------BUT NOT CALCULATING ....");
+        }
+    }, [data1, data2, layer, varnames]);
 
     useEffect(() => {
-        if (transformDataAll) {
+        console.log("------TRANSFORMDATAALL OUT = ", transformDataAll);
+        console.log("------ISTRANSFORMATIONCOMPLETE = ", isTransformationComplete);
+        if (transformDataAll && isTransformationComplete) {
+            console.log("------TRANSFORMDATAALL IN  = ", transformDataAll);
             transformDataSelectCol(transformDataAll, outputLayer, setTransformDataOneCol);
         }
-    }, [outputLayer, transformDataAll, setTransformDataOneCol]);
+    }, [outputLayer, transformDataAll, setTransformDataOneCol, isTransformationComplete]);
 
     /**
      * Effect to load map data for source city, and replace specified column

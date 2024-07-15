@@ -35,8 +35,6 @@ const buttonProps = {
  * - `varnames`: Array of variable names also passed to the transform algorith,
  *   so transformation of `layer` also minimises the multi-variate distance to
  *   all variables defined here.
- * - `calculate`: A boolean flag used to trigger calculations (will be
- *   removed).
  * - `citiesArray`: Static array of all data for all cities, read from main
  *   `/data` directory.
  * - `city`: String representing name of city, read from `citiesArray[idx]`.
@@ -53,7 +51,6 @@ export interface TransformProps {
     idx2: number
     layer: string
     varnames: string[]
-    calculate: boolean,
     storeGeoJsonResult: boolean,
     citiesArray: CityDataProps[],
     city: string
@@ -65,7 +62,6 @@ export interface TransformProps {
     layerRange: number[],
     outputLayer: string
     handleLayerRangeChange: (layerRange: number[]) => void
-    handleCalculateChange: (calculate: boolean) => void
     handleStoreGeoJsonResultChange: (storeGeoJsonResult: boolean) => void
     handleOutputLayerChange: (outputLayer: string) => void
 }
@@ -94,7 +90,6 @@ export default function TransformPage() {
     const [layerMax, setLayerMax] = useState<number>(0);
     const [layerRange, setLayerRange] = useState<number[]>([0, 1]);
 
-    const [calculate, setCalculate] = useState<boolean>(false);
     const [storeGeoJsonResult, setStoreGeoJsonResult] = useState<boolean>(false);
     const [varnames, setVarnames] = useState<string[]>([]);
     const [outputLayer, setOutputLayer] = useState<string>("relative");
@@ -198,9 +193,6 @@ export default function TransformPage() {
         setLayerMin(layerRange[0]);
         setLayerMax(layerRange[1]);
     }
-    const handleCalculateChange = (calculate: boolean) => {
-        setCalculate(calculate);
-    }
     const handleStoreGeoJsonResultChange = (storeGeoJsonResult: boolean) => {
         setStoreGeoJsonResult(storeGeoJsonResult);
     }
@@ -253,7 +245,6 @@ export default function TransformPage() {
                 idx2={idx2}
                 layer={layer}
                 varnames={varnames}
-                calculate={calculate}
                 storeGeoJsonResult={storeGeoJsonResult}
                 citiesArray = {CITY_DATA.citiesArray}
                 city = {CITY_DATA.citiesArray[idx].name}
@@ -265,7 +256,6 @@ export default function TransformPage() {
                 layerRange = {layerRange}
                 outputLayer={outputLayer}
                 handleLayerRangeChange={handleLayerRangeChange}
-                handleCalculateChange={handleCalculateChange}
                 handleStoreGeoJsonResultChange={handleStoreGeoJsonResultChange}
                 handleOutputLayerChange={handleOutputLayerChange}
             />

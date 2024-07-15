@@ -30,7 +30,8 @@ export async function transformDataFunction(
     data1: number | null,
     data2: number | null,
     varnames: string[],
-    setTransformDataAll: (data: any) => void
+    setTransformDataAll: (data: any) => void,
+    onComplete: () => void
 ) {
     fetch('@/../pkg/uamutations_bg.wasm')
         .then(response => {
@@ -44,7 +45,12 @@ export async function transformDataFunction(
                 const data2js = JSON.stringify(data2);
                 const resultJson = wasm_js.uamutate(data1js, data2js, varname, nentries);
                 const resultObj = JSON.parse(resultJson);
+                console.log("-------SET TRANSFORMdATALL called------");
                 setTransformDataAll(resultObj);
+                console.log("-------ONCOMPLETE INVOKED------");
+                onComplete();
+            } else {
+                console.log("-------NO DATA PASSED TO TRANSFORMDATAFUNCTION------");
             }
         })
         .catch(error => {
