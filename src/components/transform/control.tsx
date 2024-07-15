@@ -64,18 +64,18 @@ export default function Control (props: TransformControlProps) {
         if (!initialSetDefaultValues) { return; }
 
         const source_city_values =
-        Object.entries(props.citiesArray[props.idx].stats_single);
+        Object.entries(citiesArray[idx].stats_single);
         const source_city_mean_all = source_city_values.map(([key, value]) => ({
             name: key,
             value: value[0]
         }));
-        const target_city_values = Object.entries(props.citiesArray[props.idx2].stats_single);
+        const target_city_values = Object.entries(citiesArray[idx2].stats_single);
         const target_city_mean_all = target_city_values.map(([key, value]) => ({
             name: key,
             value: value[0]
         }));
-        const source_city_mean = source_city_mean_all.filter(entry => entry.name !== props.layer);
-        const target_city_mean = target_city_mean_all.filter(entry => entry.name !== props.layer);
+        const source_city_mean = source_city_mean_all.filter(entry => entry.name !== layer);
+        const target_city_mean = target_city_mean_all.filter(entry => entry.name !== layer);
 
         // Directions of comparison for each variable. If 'lower', then lower
         // values are better.
