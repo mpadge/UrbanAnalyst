@@ -45,28 +45,47 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
  *
  *  1. Set the path to the internal (`./public`) source of the city-specific data.
  *      - props: `props.city`, `setData1`
+ *
+ *      Called on every update to `props.city`.
  *  2. Load data for the main city (from external, private GitHub repo).
  *      - props: `props.city`, `setData1`
  *      - refs:  `dataLoadingComplete`, `initialCalculate`
+ *
+ *      Called on every update to `props.city`; also sets
+ *      `dataLoadingComplete(true)` and `initialCalculate(true)`.
  *  3. Load data for the target city.
  *      - props: `props.targetCity`, `setData2`.
  *      - refs:  `dataLoadingComplete`, `initialCalculate`
+ *
+ *      Called on every update to `props.targetCity`; also sets
+ *      `dataLoadingComplete(true)` and `initialCalculate(true)`.
  *  4. The "main" Effect to call `transformDataFunction`.
  *      - props: `data1`, `data2`, `props.layer`, `props.varnames`.
  *      - refs: `initialCalculate`, `dataLoadingComplete`.
+ *
+ *      Called on every update to any of [data1, data2, layer, varnames1]; also
+ *      resets `initialCalculate(false)`, `dataLoadingComplete(false)`.
  *  5. Effect to select `outputLayer` column of transform data to be used in
  *     map.
  *      - props: `outputLayer`, `transformDataAll`, `setTransformDataOneCol`,
  *      `isTransformationComplete`.
+ *
+ *      Called on every update to `outputLayer` or `transformDataAll`.
  *  6. Effect to load geoJSON data, append `trasformDataOneCol`, and store
  *     result.
  *      - props: `mapPathSource`, `transformDataOneCol`, `props.layer`
+ *
+ *      Called on every change to `mapPathSource` or `layer`.
  *  7. Effect to calculate range limits to be plotted.
  *      - props: `props.layer`, `geoJSONcontent`, `handleLayerRangeChange`
+ *
+ *      Called on every change to [layer, geoJSONcontent].
  *  8. Effect to get and store the final geoJSON layer to be passed to
  *     `DeckGL`.
  *      - props: `props.layerRange`, `props.layer`, `props.alpha`,
  *      `geoJSONcontent`
+ *
+ *      Called on every change to [layerRange, layer, alpha, geoJSONcontent].
  *
  * @param props - the props defined in {@link TransformProps}.
  * @return The rendered `DeckGL` page using data from `geoJsonLayer`, and underlying base map.
