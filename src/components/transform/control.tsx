@@ -170,7 +170,6 @@ export default function Control (props: TransformControlProps) {
                         handleAlphaChange={props.handleAlphaChange}
                     />
 
-                    <h3>Output Layer</h3>
                     <OutputLayers
                         outputLayer = {props.outputLayer}
                         handleOutputLayerChange={props.handleOutputLayerChange}
