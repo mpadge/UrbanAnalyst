@@ -130,6 +130,9 @@ export default function TransformPage() {
         setLayer(layerLocal);
         setAlpha(alphaLocal);
 
+        // Names of all layers; only effect of `idxLocal` is to include
+        // additional layers such as those in US data, but otherwise has no
+        // effect here:
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idxLocal].dataRanges);
         setCityLayers(theseLayers);
         if (!theseLayers.includes(layerLocal)) {
