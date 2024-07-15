@@ -62,7 +62,6 @@ export default function LayersList(props: LayersListProps) {
     };
 
     const handleReset = () => {
-        console.log("------RE-SETTING VARNAMES TO ", props.varnames);
         setSelectedOptions(props.varnames);
     };
 
