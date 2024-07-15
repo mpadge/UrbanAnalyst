@@ -40,8 +40,6 @@ const buttonProps = {
  * - `city`: String representing name of city, read from `citiesArray[idx]`.
  * - `targetCity`: Equivalent string for target city.
  * - `alpha`: Opacity for visual plotting of DeckGL layer.
- * - `layerMin`: Minimum value to be plotted on DeckGL layer.
- * - `layerMax`: Maximum value to be plotted on DeckGL layer.
  * - `layerRange`: Not yet fully implemented.
  * - `outputLayer`: Control for which layer should appear on main `transform`
  *   page: "Original", "Transformed", "Absolute", or "Relative".
@@ -56,11 +54,9 @@ export interface TransformProps {
     targetCity: string
     viewState: ViewState
     alpha: number
-    layerMin: number
-    layerMax: number
     layerRange: number[],
     outputLayer: string
-    handleLayerRangeChange: (layerRange: number[]) => void
+    setLayerRange: (layerRange: number[]) => void
     handleOutputLayerChange: (outputLayer: string) => void
 }
 
@@ -84,8 +80,6 @@ export default function TransformPage() {
     });
     const [layer, setLayer] = useState("bike_index");
     const [alpha, setAlpha] = useState(0.5);
-    const [layerMin, setLayerMin] = useState<number>(0);
-    const [layerMax, setLayerMax] = useState<number>(0);
     const [layerRange, setLayerRange] = useState<number[]>([0, 1]);
 
     const [varnames, setVarnames] = useState<string[]>([]);
@@ -186,10 +180,6 @@ export default function TransformPage() {
             localStorage.setItem("uaAlpha", alpha.toString());
         }
     }
-    const handleLayerRangeChange = (layerRange: number[]) => {
-        setLayerMin(layerRange[0]);
-        setLayerMax(layerRange[1]);
-    }
     const handleVarnamesChange = (varnames: string[]) => {
         setVarnames(varnames);
     }
@@ -244,11 +234,9 @@ export default function TransformPage() {
                 targetCity = {CITY_DATA.citiesArray[idx2].name}
                 viewState = {viewState}
                 alpha = {alpha}
-                layerMin={layerMin}
-                layerMax={layerMax}
                 layerRange = {layerRange}
                 outputLayer={outputLayer}
-                handleLayerRangeChange={handleLayerRangeChange}
+                setLayerRange={setLayerRange}
                 handleOutputLayerChange={handleOutputLayerChange}
             />
             <Control
@@ -271,7 +259,7 @@ export default function TransformPage() {
                 handleTourOpen = {handleTourOpen}
             />
             <Legend
-                layerRange={[layerMin, layerMax]}
+                layerRange={layerRange}
                 alpha={alpha}
                 layer_name={layer}
             />
