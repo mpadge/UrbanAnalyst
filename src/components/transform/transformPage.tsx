@@ -274,7 +274,6 @@ export default function TransformPage() {
                 idx2={idx2}
                 layer={layer}
                 varnames={varnames}
-                calculate={calculate}
                 alpha={alpha}
                 citiesArray={CITY_DATA.citiesArray}
                 cityLayers={cityLayers}
@@ -285,7 +284,6 @@ export default function TransformPage() {
                 handleAlphaChange={handleAlphaChange}
                 handleViewStateChange={handleViewStateChange}
                 handleLayerChange={handleLayerChange}
-                handleCalculateChange={handleCalculateChange}
                 handleVarnamesChange={handleVarnamesChange}
                 handleOutputLayerChange={handleOutputLayerChange}
                 handleTourOpen = {handleTourOpen}
