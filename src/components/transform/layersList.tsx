@@ -12,6 +12,15 @@ interface OptionType {
     label: string;
 }
 
+/**
+ * - `idx`: Only needed to pass through to `DefaultExtraLayers` function (defined
+ *   in `control.tsx`), to enable resetting to default selection.
+ * - `idx2`: Same.
+ * - `citiesArray`: Same.
+ * - `layer`: Used to filter list of extra layers to exclude selected one.
+ * - `varnames`: List of currently selected extra layers.
+ * - `setVarnames`: React state setter for `varnames`.
+ */
 interface LayersListProps {
     idx: number,
     idx2: number,
@@ -22,6 +31,10 @@ interface LayersListProps {
 }
 
 
+/**
+ * Function to select extra layers to be included in transformation
+ * calculation.
+ */
 export default function LayersList(props: LayersListProps) {
 
     const options = useMemo (() => [
