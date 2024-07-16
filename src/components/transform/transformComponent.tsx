@@ -59,28 +59,31 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
  *
  *      Called on every update to `props.targetCity`; also sets
  *      `dataLoadingComplete(true)` and `initialCalculate(true)`.
- *  4. The "main" Effect to call `transformDataFunction`.
+ *  4. An effect to reset the `dataLoadingComplete` and `initialCalculate` refs
+ *     in response to any changes to extra layers, so that the following effect
+ *     can be re-triggered.
+ *  5. The "main" Effect to call `transformDataFunction`.
  *      - props: `data1`, `data2`, `props.layer`, `props.varnames`.
  *      - refs: `initialCalculate`, `dataLoadingComplete`.
  *
  *      Called on every update to any of [data1, data2, layer, varnames1]; also
  *      resets `initialCalculate(false)`, `dataLoadingComplete(false)`.
- *  5. Effect to select `outputLayer` column of transform data to be used in
+ *  6. Effect to select `outputLayer` column of transform data to be used in
  *     map.
  *      - props: `outputLayer`, `transformDataAll`, `setTransformDataOneCol`,
  *      `isTransformationComplete`.
  *
  *      Called on every update to `outputLayer` or `transformDataAll`.
- *  6. Effect to load geoJSON data, append `trasformDataOneCol`, and store
+ *  7. Effect to load geoJSON data, append `trasformDataOneCol`, and store
  *     result.
  *      - props: `mapPathSource`, `transformDataOneCol`, `props.layer`
  *
  *      Called on every change to `mapPathSource` or `layer`.
- *  7. Effect to calculate range limits to be plotted.
+ *  8. Effect to calculate range limits to be plotted.
  *      - props: `props.layer`, `geoJSONcontent`, `handleLayerRangeChange`
  *
  *      Called on every change to [layer, geoJSONcontent].
- *  8. Effect to get and store the final geoJSON layer to be passed to
+ *  9. Effect to get and store the final geoJSON layer to be passed to
  *     `DeckGL`.
  *      - props: `props.layerRange`, `props.layer`, `props.alpha`,
  *      `geoJSONcontent`
@@ -103,6 +106,9 @@ const TransformComponent = (props: TransformProps) => {
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
     const [geoJsonLayer, setGeoJsonLayer] = useState<any>(null)
 
+    /**
+     * ------ Effect #1 ------
+     */
     useEffect(() => {
         const mapPathSource = "/data/" + props.city + "/data.json";
         setMapPathSource(mapPathSource);
@@ -114,12 +120,18 @@ const TransformComponent = (props: TransformProps) => {
      */
     const dataLoadingComplete = useRef(false);
     const initialCalculate = useRef(false);
+    /**
+     * ------ Effect #2 ------
+     */
     useEffect(() => {
         setData1(null);
         loadDataFunction(props.city, setData1);
         dataLoadingComplete.current = true;
         initialCalculate.current = true;
     }, [props.city, setData1]);
+    /**
+     * ------ Effect #3 ------
+     */
     useEffect(() => {
         setData2(null);
         loadDataFunction(props.targetCity, setData2);
@@ -134,11 +146,17 @@ const TransformComponent = (props: TransformProps) => {
      */
     const { layer, varnames, outputLayer } = props;
     const [isTransformationComplete, setIsTransformationComplete] = useState(false);
-    // Reset refs when 'varnames' change, to trigger re-calculation:
+    /**
+     * ------ Effect #4 to reset refs when 'varnames' change, to trigger
+     * ------ re-calculation:
+     */
     useEffect(() => {
         initialCalculate.current = true;
         dataLoadingComplete.current = true;
     }, [varnames]);
+    /**
+     * ------ Effect #5: The main effect ------
+     */
     useEffect(() => {
         if (initialCalculate.current && dataLoadingComplete.current && data1 !== null && data2 !== null) {
             const uniqueVarNames = Object.keys(
@@ -155,6 +173,9 @@ const TransformComponent = (props: TransformProps) => {
         }
     }, [data1, data2, layer, varnames]);
 
+    /**
+     * ------ Effect #6 ------
+     */
     useEffect(() => {
         if (transformDataAll && isTransformationComplete) {
             transformDataSelectCol(transformDataAll, outputLayer, setTransformDataOneCol);
@@ -162,8 +183,8 @@ const TransformComponent = (props: TransformProps) => {
     }, [outputLayer, transformDataAll, setTransformDataOneCol, isTransformationComplete]);
 
     /**
-     * Effect to load map data for source city, and replace specified column
-     * with 'transformDataOneCol' from previous effect:
+     * ------ Effect #7 to load map data for source city, and replace specified
+     * ------ column with 'transformDataOneCol' from previous effect:
      */
     useMemo(() => {
         if (transformDataOneCol) {
@@ -182,6 +203,9 @@ const TransformComponent = (props: TransformProps) => {
     }, [mapPathSource, transformDataOneCol, layer]);
 
     const { setLayerRange } = props;
+    /**
+     * ------ Effect #8 ------
+     */
     useMemo(() => {
         if (geoJSONcontent !== null) {
             const rangeLimits = getRangeLimits(geoJSONcontent, layer);
@@ -190,6 +214,9 @@ const TransformComponent = (props: TransformProps) => {
     }, [layer, geoJSONcontent, setLayerRange]);
 
     const { layerRange, alpha } = props;
+    /**
+     * ------ Effect #9 ------
+     */
     useMemo(() => {
         if (geoJSONcontent !== null) {
             getGeoJsonLayer(geoJSONcontent, layerRange, layer, alpha, setGeoJsonLayer);
