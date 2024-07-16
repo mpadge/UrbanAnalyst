@@ -4,12 +4,18 @@ import React, { useEffect, useMemo, useState } from 'react';
 import ResetButton from '@/components/transform/resetButton';
 import styles from '@/styles/controls.module.css';
 
+import { DefaultExtraLayers } from '@/components/transform/control';
+import { CityDataProps } from "@/data/interfaces";
+
 interface OptionType {
     value: string;
     label: string;
 }
 
 interface LayersListProps {
+    idx: number,
+    idx2: number,
+    citiesArray: CityDataProps[],
     layer: string,
     varnames: string[],
     setVarnames: (varnames: string[]) => void
@@ -62,7 +68,10 @@ export default function LayersList(props: LayersListProps) {
     };
 
     const handleReset = () => {
-        setSelectedOptions(props.varnames);
+        const { idx, idx2, layer, citiesArray } = props;
+        const varnames = DefaultExtraLayers({ idx, idx2, layer, citiesArray });
+        props.setVarnames(varnames);
+        setSelectedOptions(varnames);
     };
 
     return (

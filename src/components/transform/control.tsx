@@ -46,7 +46,7 @@ interface DefaultExtraLayersProps {
     citiesArray: CityDataProps[]
 }
 
-function DefaultExtraLayers (props: DefaultExtraLayersProps) {
+export function DefaultExtraLayers (props: DefaultExtraLayersProps) {
 
     const source_city_values =
     Object.entries(props.citiesArray[props.idx].stats_single);
@@ -207,6 +207,9 @@ export default function Control (props: TransformControlProps) {
                 style={{display: showLayersDialog?"":"none"}}
             >
                 <LayersList
+                    idx = {props.idx}
+                    idx2 = {props.idx2}
+                    citiesArray = {props.citiesArray}
                     layer = {props.layer}
                     varnames = {props.varnames}
                     setVarnames = {props.setVarnames}
