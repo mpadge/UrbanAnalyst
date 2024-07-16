@@ -134,6 +134,11 @@ const TransformComponent = (props: TransformProps) => {
      */
     const { layer, varnames, outputLayer } = props;
     const [isTransformationComplete, setIsTransformationComplete] = useState(false);
+    // Reset refs when 'varnames' change, to trigger re-calculation:
+    useEffect(() => {
+        initialCalculate.current = true;
+        dataLoadingComplete.current = true;
+    }, [varnames]);
     useEffect(() => {
         if (initialCalculate.current && dataLoadingComplete.current && data1 !== null && data2 !== null) {
             const uniqueVarNames = Object.keys(
