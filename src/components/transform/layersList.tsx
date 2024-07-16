@@ -4,18 +4,37 @@ import React, { useEffect, useMemo, useState } from 'react';
 import ResetButton from '@/components/transform/resetButton';
 import styles from '@/styles/controls.module.css';
 
+import { DefaultExtraLayers } from '@/components/transform/control';
+import { CityDataProps } from "@/data/interfaces";
+
 interface OptionType {
     value: string;
     label: string;
 }
 
+/**
+ * - `idx`: Only needed to pass through to `DefaultExtraLayers` function (defined
+ *   in `control.tsx`), to enable resetting to default selection.
+ * - `idx2`: Same.
+ * - `citiesArray`: Same.
+ * - `layer`: Used to filter list of extra layers to exclude selected one.
+ * - `varnames`: List of currently selected extra layers.
+ * - `setVarnames`: React state setter for `varnames`.
+ */
 interface LayersListProps {
+    idx: number,
+    idx2: number,
+    citiesArray: CityDataProps[],
     layer: string,
     varnames: string[],
     setVarnames: (varnames: string[]) => void
 }
 
 
+/**
+ * Function to select extra layers to be included in transformation
+ * calculation.
+ */
 export default function LayersList(props: LayersListProps) {
 
     const options = useMemo (() => [
@@ -62,7 +81,10 @@ export default function LayersList(props: LayersListProps) {
     };
 
     const handleReset = () => {
-        setSelectedOptions(props.varnames);
+        const { idx, idx2, layer, citiesArray } = props;
+        const varnames = DefaultExtraLayers({ idx, idx2, layer, citiesArray });
+        props.setVarnames(varnames);
+        setSelectedOptions(varnames);
     };
 
     return (
