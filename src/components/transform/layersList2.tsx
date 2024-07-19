@@ -186,7 +186,7 @@ export default function LayersList2(props: LayersListProps) {
                             >
                                 <option aria-label="None" value="" />
                                 {reducedOptions.map((option) => (
-                                    <option value={option.value}>{option.label}</option>
+                                    <option key={option.value} value={option.value}>{option.label}</option>
                                 ))}
                             </Select>
                     </FormControl>
