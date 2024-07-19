@@ -1,13 +1,13 @@
 
 import styles from '@/styles/controls.module.css';
 
-interface MeanAvgProps {
+interface meanVarProps {
     meanVals: boolean,
     singleLayer: boolean,
     handleMeanChange: (mn: boolean) => void
 }
 
-export default function MeanAvgButtons(props: MeanAvgProps) {
+export default function meanVarButtons(props: meanVarProps) {
 
     return (
         <section className={styles.radioButtons}>

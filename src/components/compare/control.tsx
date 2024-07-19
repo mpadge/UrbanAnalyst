@@ -9,7 +9,7 @@ import LayerList from '@/components/compare/layerlist';
 import SelectNumLayers from '@/components/compare/numLayers';
 import SortOrderList from '@/components/compare/sortOrderList';
 import ExplainButton from '@/components/compare/explainButton';
-import MeanAvgButtons from '@/components/compare/meanAvg';
+import MeanVarButtons from '@/components/compare/meanVar';
 import HelpButton from '@/components/helpButton';
 
 import { CityDataProps } from "@/data/interfaces";
@@ -85,7 +85,7 @@ export default function Control (props: CompareControlProps) {
                         />
                     }
 
-                    <MeanAvgButtons
+                    <MeanVarButtons
                         meanVals = {props.meanVals}
                         singleLayer = {props.numLayers != "Paired"}
                         handleMeanChange = {props.handleMeanChange}
