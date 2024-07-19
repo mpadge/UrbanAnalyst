@@ -1,12 +1,16 @@
 
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { SyntheticEvent, useCallback, useEffect, useState, useRef } from 'react';
 import Link from 'next/link'
 import Image from "next/image"
 import localFont from 'next/font/local'
 
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/transform/cityList';
 import LayersList from '@/components/transform/layersList';
+import LayersList2 from '@/components/transform/layersList2';
 import TargetCityList from '@/components/transform/targetCityList';
 import LayerList from '@/components/map/layerList';
 import SelectNumLayers from '@/components/map/numLayers';
@@ -123,6 +127,19 @@ export default function Control (props: TransformControlProps) {
         }
     }, [idx, idx2, layer, citiesArray, setVarnames]);
 
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event: React.SyntheticEvent<unknown>, reason?: string) => {
+        if (reason !== 'backdropClick') {
+            setOpen(false);
+        }
+    };
+
+
     return (
         <>
             <div id="top-left-container" className={`${styles.controlsTransform} ${junctionFont.className}`}>
@@ -192,6 +209,8 @@ export default function Control (props: TransformControlProps) {
                         handleTourOpen = {props.handleTourOpen}
                     />
 
+                    <Button onClick={handleClickOpen}>Extra Layers</Button>
+
                 </div>
 
                 <button
@@ -200,6 +219,19 @@ export default function Control (props: TransformControlProps) {
                     onClick={() => handleControlsVisibility(false)}
                 >Show Controls</button>
 
+            </div>
+            <div>
+        <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
+                    <LayersList2
+                        idx = {props.idx}
+                        idx2 = {props.idx2}
+                        citiesArray = {props.citiesArray}
+                        layer = {props.layer}
+                        varnames = {props.varnames}
+                        setVarnames = {props.setVarnames}
+                        handleClose={handleClose}
+                    />
+        </Dialog>
             </div>
             <div
                 id="layerlist-container"
