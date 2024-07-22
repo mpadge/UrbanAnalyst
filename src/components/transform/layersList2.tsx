@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -10,6 +10,9 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import Chip from '@mui/material/Chip';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Theme, useTheme } from '@mui/material/styles';
@@ -44,25 +47,51 @@ interface LayersListProps {
     handleClose: () => void;
 }
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
+const CheckboxList = ({ items, varnames, setSelectedOptions }) => {
+    // get  initial items with entries in `varnames`:
+    const initialState = items.reduce((acc, curr) => {
+        acc[curr.value] = varnames.includes(curr.value);
+        return acc;
+    }, {});
+
+    const [checkedState, setCheckedState] = useState(initialState);
+
+    const handleCheckboxChange = (event, value) => {
+        const isChecked = event.target.checked;
+        setCheckedState({
+            ...checkedState,
+            [value]: isChecked,
+        });
+
+        // Update the selected options array
+        const updatedOptions = Object.keys(checkedState)
+            .filter(key => checkedState[key])
+            .map(key => key);
+        setSelectedOptions(updatedOptions);
+    };
+
+    
+    useEffect(() => {
+        const initialSelectedOptions = items.filter(item => item.checked).map(item => item.value);
+        setSelectedOptions(initialSelectedOptions);
+    }, [items, setSelectedOptions]);
+
+    return (
+        <div>
+            <FormGroup>
+                {items.map((item) => (
+                    <FormControlLabel
+                        control={<Checkbox />}
+                        label={item.label}
+                        checked={!!checkedState[item.value]}
+                        onChange={(event) => handleCheckboxChange(event, item.value)}
+                    />
+                ))}
+            </FormGroup>
+        </div>
+    );
 };
 
-function getStyles(name: string, personName: readonly string[], theme: Theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-};
 
 /**
  * Function to select extra layers to be included in transformation
@@ -73,17 +102,17 @@ export default function LayersList2(props: LayersListProps) {
 
   const options = useMemo(
     () => [
-      { value: "social_index", label: "Social" },
-      { value: "times_rel", label: "Transport Rel." },
-      { value: "times_abs", label: "Transport Abs." },
-      { value: "transfers", label: "Num. Transfers" },
-      { value: "intervals", label: "Transp. Interval" },
-      { value: "transport", label: "Transport Combined" },
-      { value: "popdens", label: "Population" },
-      { value: "school_dist", label: "School Dist." },
-      { value: "bike_index", label: "Bicycle Index" },
-      { value: "natural", label: "Nature Index" },
-      { value: "parking", label: "Parking" },
+      { value: "social_index", label: "Social", checked: false },
+      { value: "times_rel", label: "Transport Rel.", checked: false },
+      { value: "times_abs", label: "Transport Abs.", checked: false },
+      { value: "transfers", label: "Num. Transfers", checked: false },
+      { value: "intervals", label: "Transp. Interval", checked: false },
+      { value: "transport", label: "Transport Combined", checked: false },
+      { value: "popdens", label: "Population", checked: false },
+      { value: "school_dist", label: "School Dist.", checked: false },
+      { value: "bike_index", label: "Bicycle Index", checked: false },
+      { value: "natural", label: "Nature Index", checked: false },
+      { value: "parking", label: "Parking", checked: false },
     ],
     [],
   );
@@ -92,50 +121,23 @@ export default function LayersList2(props: LayersListProps) {
     return options.filter((option) => option.value !== props.layer);
   }, [options, props.layer]);
 
+  const [checked, setChecked] = useState<{ [key: string]: boolean }>({});
+
   const [selectedOptions, setSelectedOptions] = useState<string[]>(
     props.varnames,
   );
 
-  // Pre-select default varnames passed from 'control.tsx':
-  const selectVarnames = useEffect(() => {
-    setSelectedOptions(props.varnames);
-  }, [props.varnames, setSelectedOptions]);
-
-  const handleOptionChange = (selectedOptions: any) => {
-    setSelectedOptions(
-      selectedOptions.map((option: OptionType) => option.value),
-    );
-    props.setVarnames(
-      selectedOptions.map((option: OptionType) => option.value),
-    );
-  };
-
-  const handleCheckboxChange = (option: OptionType, isChecked: boolean) => {
-    setSelectedOptions((currentSelectedOptions) => {
-      let newSelectedOptions;
-      if (isChecked) {
-        newSelectedOptions = [...currentSelectedOptions, option.value];
-      } else {
-        newSelectedOptions = currentSelectedOptions.filter(
-          (selectedValue) => selectedValue !== option.value,
-        );
-      }
-      props.setVarnames(newSelectedOptions);
-      return newSelectedOptions;
-    });
-  };
-
-    const handleChange = (event: SelectChangeEvent<typeof selectedOptions>) => {
-        const {
-            target: { value },
-        } = event;
-        setSelectedOptions(
-            // On autofill we get a stringified value.
-            typeof value === 'string' ? value.split(',') : value,
-        );
-    };
-
-
+    // Pre-select default varnames passed from 'control.tsx':
+    const selectVarnames = useEffect(() => {
+        setSelectedOptions(props.varnames);
+        setChecked((prevCheckedState) => {
+            return reducedOptions.reduce((acc, option) => {
+                const isChecked = props.varnames.includes(option.value);
+                acc[option.value] = isChecked;
+                return acc;
+            }, {...prevCheckedState});
+        });
+    }, [props.varnames, reducedOptions, setChecked]);
 
   const handleReset = () => {
     const { idx, idx2, layer, citiesArray } = props;
@@ -162,36 +164,18 @@ export default function LayersList2(props: LayersListProps) {
       ))}
       <ResetButton handleReset={handleReset} />
 
-
             <DialogTitle>Extra Layers</DialogTitle>
-            <DialogContent>
-                <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                    <FormControl sx={{ m: 1, minWidth: 120 }}>
-                        <InputLabel htmlFor="demo-dialog-native">Extra Layers</InputLabel>
-                            <Select
-                                labelId="extra-layers-select-label"
-                                id="extra-layers-select"
-                                multiple
-                                value={selectedOptions}
-                                onChange={handleChange}
-                                input={<OutlinedInput label="Extra Layers" id="select-multiple-layers" />}
-                                renderValue={(selectedOptions) => (
-                                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                                        {selectedOptions.map((value) => (
-                                            <Chip key={value} label={value} />
-                                        ))}
-                                    </Box>
-                                )}
-                                MenuProps={MenuProps}
-                            >
-                                <option aria-label="None" value="" />
-                                {reducedOptions.map((option) => (
-                                    <option key={option.value} value={option.value}>{option.label}</option>
-                                ))}
-                            </Select>
-                    </FormControl>
-                </Box>
-            </DialogContent>
+                <DialogContent>
+                    <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                        <FormControl sx={{ m: 1, minWidth: 120 }}>
+                            <CheckboxList
+                                items={reducedOptions}
+                                varnames={props.varnames}
+                                setSelectedOptions={setSelectedOptions}
+                            />
+                        </FormControl>
+                    </Box>
+                </DialogContent>
             <DialogActions>
                 <Button onClick={props.handleClose}>Cancel</Button>
                 <Button onClick={props.handleClose}>Ok</Button>
