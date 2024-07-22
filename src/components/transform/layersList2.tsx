@@ -24,8 +24,8 @@ import { DefaultExtraLayers } from "@/components/transform/control";
 import { CityDataProps } from "@/data/interfaces";
 
 interface OptionType {
-  value: string;
-  label: string;
+    value: string;
+    label: string;
 }
 
 /**
@@ -38,12 +38,12 @@ interface OptionType {
  * - `setVarnames`: React state setter for `varnames`.
  */
 interface LayersListProps {
-  idx: number;
-  idx2: number;
-  citiesArray: CityDataProps[];
-  layer: string;
-  varnames: string[];
-  setVarnames: (varnames: string[]) => void;
+    idx: number;
+    idx2: number;
+    citiesArray: CityDataProps[];
+    layer: string;
+    varnames: string[];
+    setVarnames: (varnames: string[]) => void;
     handleClose: () => void;
 }
 
@@ -65,12 +65,12 @@ const CheckboxList = ({ items, varnames, setSelectedOptions }) => {
 
         // Update the selected options array
         const updatedOptions = Object.keys(checkedState)
-            .filter(key => checkedState[key])
-            .map(key => key);
+        .filter(key => checkedState[key])
+        .map(key => key);
         setSelectedOptions(updatedOptions);
     };
 
-    
+
     useEffect(() => {
         const initialSelectedOptions = items.filter(item => item.checked).map(item => item.value);
         setSelectedOptions(initialSelectedOptions);
@@ -100,32 +100,32 @@ const CheckboxList = ({ items, varnames, setSelectedOptions }) => {
 export default function LayersList2(props: LayersListProps) {
     const theme = useTheme();
 
-  const options = useMemo(
-    () => [
-      { value: "social_index", label: "Social", checked: false },
-      { value: "times_rel", label: "Transport Rel.", checked: false },
-      { value: "times_abs", label: "Transport Abs.", checked: false },
-      { value: "transfers", label: "Num. Transfers", checked: false },
-      { value: "intervals", label: "Transp. Interval", checked: false },
-      { value: "transport", label: "Transport Combined", checked: false },
-      { value: "popdens", label: "Population", checked: false },
-      { value: "school_dist", label: "School Dist.", checked: false },
-      { value: "bike_index", label: "Bicycle Index", checked: false },
-      { value: "natural", label: "Nature Index", checked: false },
-      { value: "parking", label: "Parking", checked: false },
-    ],
-    [],
-  );
+    const options = useMemo(
+        () => [
+            { value: "social_index", label: "Social", checked: false },
+            { value: "times_rel", label: "Transport Rel.", checked: false },
+            { value: "times_abs", label: "Transport Abs.", checked: false },
+            { value: "transfers", label: "Num. Transfers", checked: false },
+            { value: "intervals", label: "Transp. Interval", checked: false },
+            { value: "transport", label: "Transport Combined", checked: false },
+            { value: "popdens", label: "Population", checked: false },
+            { value: "school_dist", label: "School Dist.", checked: false },
+            { value: "bike_index", label: "Bicycle Index", checked: false },
+            { value: "natural", label: "Nature Index", checked: false },
+            { value: "parking", label: "Parking", checked: false },
+        ],
+        [],
+    );
 
-  const reducedOptions = useMemo(() => {
-    return options.filter((option) => option.value !== props.layer);
-  }, [options, props.layer]);
+    const reducedOptions = useMemo(() => {
+        return options.filter((option) => option.value !== props.layer);
+    }, [options, props.layer]);
 
-  const [checked, setChecked] = useState<{ [key: string]: boolean }>({});
+    const [checked, setChecked] = useState<{ [key: string]: boolean }>({});
 
-  const [selectedOptions, setSelectedOptions] = useState<string[]>(
-    props.varnames,
-  );
+    const [selectedOptions, setSelectedOptions] = useState<string[]>(
+        props.varnames,
+    );
 
     // Pre-select default varnames passed from 'control.tsx':
     const selectVarnames = useEffect(() => {
@@ -139,32 +139,32 @@ export default function LayersList2(props: LayersListProps) {
         });
     }, [props.varnames, reducedOptions, setChecked]);
 
-  const handleReset = () => {
-    const { idx, idx2, layer, citiesArray } = props;
-    const varnames = DefaultExtraLayers({ idx, idx2, layer, citiesArray });
-    props.setVarnames(varnames);
-    setSelectedOptions(varnames);
-  };
+    const handleReset = () => {
+        const { idx, idx2, layer, citiesArray } = props;
+        const varnames = DefaultExtraLayers({ idx, idx2, layer, citiesArray });
+        props.setVarnames(varnames);
+        setSelectedOptions(varnames);
+    };
 
-  return (
+    return (
         <>
-    <div>
-      {reducedOptions.map((option) => (
-        <div key={option.value}>
-          <label>
-            <input
-              type="checkbox"
-              value={option.value}
-              checked={selectedOptions.includes(option.value)}
-              onChange={(e) => handleCheckboxChange(option, e.target.checked)}
-            />
-            {option.label}
-          </label>
-        </div>
-      ))}
-      <ResetButton handleReset={handleReset} />
+            <div>
+                {reducedOptions.map((option) => (
+                    <div key={option.value}>
+                        <label>
+                            <input
+                                type="checkbox"
+                                value={option.value}
+                                checked={selectedOptions.includes(option.value)}
+                                onChange={(e) => handleCheckboxChange(option, e.target.checked)}
+                            />
+                            {option.label}
+                        </label>
+                    </div>
+                ))}
+                <ResetButton handleReset={handleReset} />
 
-            <DialogTitle>Extra Layers</DialogTitle>
+                <DialogTitle>Extra Layers</DialogTitle>
                 <DialogContent>
                     <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
                         <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -176,11 +176,11 @@ export default function LayersList2(props: LayersListProps) {
                         </FormControl>
                     </Box>
                 </DialogContent>
-            <DialogActions>
-                <Button onClick={props.handleClose}>Cancel</Button>
-                <Button onClick={props.handleClose}>Ok</Button>
-            </DialogActions>
-        </div>
+                <DialogActions>
+                    <Button onClick={props.handleClose}>Cancel</Button>
+                    <Button onClick={props.handleClose}>Ok</Button>
+                </DialogActions>
+            </div>
         </>
     );
 }
