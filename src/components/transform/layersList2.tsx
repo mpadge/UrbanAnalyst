@@ -47,52 +47,6 @@ interface LayersListProps {
     handleClose: () => void;
 }
 
-const CheckboxList = ({ items, varnames, setSelectedOptions }) => {
-    // get  initial items with entries in `varnames`:
-    const initialState = items.reduce((acc, curr) => {
-        acc[curr.value] = varnames.includes(curr.value);
-        return acc;
-    }, {});
-
-    const [checkedState, setCheckedState] = useState(initialState);
-
-    const handleCheckboxChange = (event, value) => {
-        const isChecked = event.target.checked;
-        setCheckedState({
-            ...checkedState,
-            [value]: isChecked,
-        });
-
-        // Update the selected options array
-        const updatedOptions = Object.keys(checkedState)
-        .filter(key => checkedState[key])
-        .map(key => key);
-        setSelectedOptions(updatedOptions);
-    };
-
-
-    useEffect(() => {
-        const initialSelectedOptions = items.filter(item => item.checked).map(item => item.value);
-        setSelectedOptions(initialSelectedOptions);
-    }, [items, setSelectedOptions]);
-
-    return (
-        <div>
-            <FormGroup>
-                {items.map((item) => (
-                    <FormControlLabel
-                        control={<Checkbox />}
-                        label={item.label}
-                        checked={!!checkedState[item.value]}
-                        onChange={(event) => handleCheckboxChange(event, item.value)}
-                    />
-                ))}
-            </FormGroup>
-        </div>
-    );
-};
-
-
 /**
  * Function to select extra layers to be included in transformation
  * calculation.
@@ -123,9 +77,34 @@ export default function LayersList2(props: LayersListProps) {
 
     const [checked, setChecked] = useState<{ [key: string]: boolean }>({});
 
+    const initialState = reducedOptions.reduce((acc, curr) => {
+        acc[curr.value] = props.varnames.includes(curr.value);
+        return acc;
+    }, {});
+
+    const [checkedState, setCheckedState] = useState(initialState);
+
     const [selectedOptions, setSelectedOptions] = useState<string[]>(
         props.varnames,
     );
+
+    const handleCheckboxChange = (event, value) => {
+        const isChecked = event.target.checked;
+        setCheckedState({
+            ...checkedState,
+            [value]: isChecked,
+        });
+
+        const updatedOptions = Object.keys(checkedState)
+            .filter(key => checkedState[key])
+            .map(key => key);
+        setSelectedOptions(updatedOptions);
+    };
+
+    useEffect(() => {
+        const initialSelectedOptions = reducedOptions.filter(item => item.checked).map(item => item.value);
+        setSelectedOptions(initialSelectedOptions);
+    }, [reducedOptions, setSelectedOptions]);
 
     // Pre-select default varnames passed from 'control.tsx':
     const selectVarnames = useEffect(() => {
@@ -144,6 +123,12 @@ export default function LayersList2(props: LayersListProps) {
         const varnames = DefaultExtraLayers({ idx, idx2, layer, citiesArray });
         props.setVarnames(varnames);
         setSelectedOptions(varnames);
+
+        const initialState = reducedOptions.reduce((acc, curr) => {
+            acc[curr.value] = props.varnames.includes(curr.value);
+            return acc;
+        }, {});
+        setCheckedState(initialState);
     };
 
     return (
@@ -168,11 +153,16 @@ export default function LayersList2(props: LayersListProps) {
                 <DialogContent>
                     <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
                         <FormControl sx={{ m: 1, minWidth: 120 }}>
-                            <CheckboxList
-                                items={reducedOptions}
-                                varnames={props.varnames}
-                                setSelectedOptions={setSelectedOptions}
-                            />
+                            <FormGroup>
+                                {reducedOptions.map((item) => (
+                                    <FormControlLabel
+                                        control={<Checkbox />}
+                                        label={item.label}
+                                        checked={!!checkedState[item.value]}
+                                        onChange={(event) => handleCheckboxChange(event, item.value)}
+                                    />
+                                ))}
+                            </FormGroup>
                         </FormControl>
                     </Box>
                 </DialogContent>
