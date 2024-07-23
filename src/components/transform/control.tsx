@@ -1,17 +1,20 @@
 
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { SyntheticEvent, useCallback, useEffect, useState, useRef } from 'react';
 import Link from 'next/link'
 import Image from "next/image"
 import localFont from 'next/font/local'
+
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
 
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/transform/cityList';
 import LayersList from '@/components/transform/layersList';
 import TargetCityList from '@/components/transform/targetCityList';
-import LayerList from '@/components/map/layerList';
+import LayerList from '@/components/transform/layerList';
 import SelectNumLayers from '@/components/map/numLayers';
 import OpacitySlider from '@/components/map/opacitySlider';
-import LayersButton from '@/components/transform/layersButton';
 import OutputLayers from '@/components/transform/outputLayers';
 import HelpButton from '@/components/helpButton';
 
@@ -123,6 +126,17 @@ export default function Control (props: TransformControlProps) {
         }
     }, [idx, idx2, layer, citiesArray, setVarnames]);
 
+    const [openExtraLayers, setOpenExtraLayers] = useState(false);
+
+    const handleClickOpenExtraLayers = () => {
+        setOpenExtraLayers(true);
+    };
+
+    const handleCloseExtraLayers = () => {
+        setOpenExtraLayers(false);
+    };
+
+
     return (
         <>
             <div id="top-left-container" className={`${styles.controlsTransform} ${junctionFont.className}`}>
@@ -166,16 +180,25 @@ export default function Control (props: TransformControlProps) {
                     />
 
                     <LayerList
+                        idx = {props.idx}
+                        idx2 = {props.idx2}
+                        citiesArray = {props.citiesArray}
                         title = "Layer"
                         layer = {props.layer}
                         handleLayerChange = {props.handleLayerChange}
+                        varnames = {props.varnames}
+                        setVarnames = {props.setVarnames}
                         cityLayers = {props.cityLayers}
                     />
 
-                    <LayersButton
-                        showLayersDialog={showLayersDialog}
-                        handleLayersDialogVisibility={handleLayersDialogVisibility}
-                    />
+                    <Stack alignItems="center">
+                        <Button
+                            // variant="outlined"
+                            onClick={handleClickOpenExtraLayers}
+                        >
+                            Extra Layers
+                        </Button>
+                    </Stack>
 
                     <OutputLayers
                         outputLayer = {props.outputLayer}
@@ -201,19 +224,18 @@ export default function Control (props: TransformControlProps) {
                 >Show Controls</button>
 
             </div>
-            <div
-                id="layerlist-container"
-                className={styles.layerlist}
-                style={{display: showLayersDialog?"":"none"}}
-            >
-                <LayersList
-                    idx = {props.idx}
-                    idx2 = {props.idx2}
-                    citiesArray = {props.citiesArray}
-                    layer = {props.layer}
-                    varnames = {props.varnames}
-                    setVarnames = {props.setVarnames}
-                />
+            <div>
+                <Dialog disableEscapeKeyDown open={openExtraLayers} onClose={handleCloseExtraLayers}>
+                    <LayersList
+                        idx = {props.idx}
+                        idx2 = {props.idx2}
+                        citiesArray = {props.citiesArray}
+                        layer = {props.layer}
+                        varnames = {props.varnames}
+                        setVarnames = {props.setVarnames}
+                        handleClose={handleCloseExtraLayers}
+                    />
+                </Dialog>
             </div>
         </>
     )

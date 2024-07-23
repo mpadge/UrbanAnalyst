@@ -1,10 +1,26 @@
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
-import React, { useEffect, useMemo, useState } from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Chip from '@mui/material/Chip';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { Theme, useTheme } from '@mui/material/styles';
 
-import ResetButton from '@/components/transform/resetButton';
-import styles from '@/styles/controls.module.css';
+import ResetButton from "@/components/transform/resetButton";
+import styles from "@/styles/controls.module.css";
 
-import { DefaultExtraLayers } from '@/components/transform/control';
+import { DefaultExtraLayers } from "@/components/transform/control";
 import { CityDataProps } from "@/data/interfaces";
 
 interface OptionType {
@@ -22,89 +38,123 @@ interface OptionType {
  * - `setVarnames`: React state setter for `varnames`.
  */
 interface LayersListProps {
-    idx: number,
-    idx2: number,
-    citiesArray: CityDataProps[],
-    layer: string,
-    varnames: string[],
-    setVarnames: (varnames: string[]) => void
+    idx: number;
+    idx2: number;
+    citiesArray: CityDataProps[];
+    layer: string;
+    varnames: string[];
+    setVarnames: (varnames: string[]) => void;
+    handleClose: () => void;
 }
-
 
 /**
  * Function to select extra layers to be included in transformation
  * calculation.
  */
 export default function LayersList(props: LayersListProps) {
+    const theme = useTheme();
 
-    const options = useMemo (() => [
-        { value: "social_index", label: "Social" },
-        { value: "times_rel", label: "Transport Rel." },
-        { value: "times_abs", label: "Transport Abs." },
-        { value: "transfers", label: "Num. Transfers" },
-        { value: "intervals", label: "Transp. Interval" },
-        { value: "transport", label: "Transport Combined" },
-        { value: "popdens", label: "Population" },
-        { value: "school_dist", label: "School Dist." },
-        { value: "bike_index", label: "Bicycle Index" },
-        { value: "natural", label: "Nature Index" },
-        { value: "parking", label: "Parking" }
-    ], []);
+    const options = useMemo(
+        () => [
+            { value: "social_index", label: "Social", checked: false },
+            { value: "times_rel", label: "Transport Rel.", checked: false },
+            { value: "times_abs", label: "Transport Abs.", checked: false },
+            { value: "transfers", label: "Num. Transfers", checked: false },
+            { value: "intervals", label: "Transp. Interval", checked: false },
+            { value: "transport", label: "Transport Combined", checked: false },
+            { value: "popdens", label: "Population", checked: false },
+            { value: "school_dist", label: "School Dist.", checked: false },
+            { value: "bike_index", label: "Bicycle Index", checked: false },
+            { value: "natural", label: "Nature Index", checked: false },
+            { value: "parking", label: "Parking", checked: false },
+        ],
+        [],
+    );
 
     const reducedOptions = useMemo(() => {
-        return options.filter(option => option.value !== props.layer);
-    }, [options, props.layer, ]);
+        return options.filter((option) => option.value !== props.layer);
+    }, [options, props.layer]);
 
-    const [selectedOptions, setSelectedOptions] = useState<string[]>(props.varnames);
+    // `checked` holds Object with named entries and boolean flag for each
+    // checked item. This is used to control the `checked` state in each
+    // `FormControlLabel`.
+    type AccType = { [key: string]: boolean };
+    const [checked, setChecked] = useState<AccType>({});
+    const handleCheckboxChange = (event: any, value: any) => {
+        const isChecked = event.target.checked;
+        setChecked(prevChecked => ({
+            ...prevChecked,
+            [value]: isChecked,
+        }));
+    };
 
     // Pre-select default varnames passed from 'control.tsx':
-    const selectVarnames = useEffect(() => {
-        setSelectedOptions(props.varnames);
-    }, [props.varnames, setSelectedOptions]);
+    const { varnames } = props;
+    const initialSetFromProps = useRef(false);
+    useEffect(() => {
+        if (!initialSetFromProps.current) {
+            setChecked((prevCheckedState) => {
+                return reducedOptions.reduce((acc, option) => {
+                    const isChecked = varnames.includes(option.value);
+                    acc[option.value] = isChecked;
+                    return acc;
+                }, {...prevCheckedState});
+            });
+            initialSetFromProps.current = true;
+        }
+    }, [varnames, reducedOptions, setChecked]);
 
-    const handleOptionChange = (selectedOptions: any) => {
-        setSelectedOptions(selectedOptions.map((option: OptionType) => option.value));
-        props.setVarnames(selectedOptions.map((option: OptionType) => option.value));
-    };
-
-    const handleCheckboxChange = (option: OptionType, isChecked: boolean) => {
-        setSelectedOptions((currentSelectedOptions) => {
-            let newSelectedOptions;
-            if (isChecked) {
-                newSelectedOptions = [...currentSelectedOptions, option.value];
-            } else {
-                newSelectedOptions = currentSelectedOptions.filter((selectedValue) => selectedValue !== option.value);
-            }
-            props.setVarnames(newSelectedOptions);
-            return newSelectedOptions;
-        });
-    };
+    // Effect to update props.varnames in response to changed in 'checked'
+    // values.
+    const { setVarnames } = props;
+    useEffect(() => {
+        const varnames = reducedOptions
+            .filter(option => checked[option.value] === true)
+            .map(option => option.value);
+        setVarnames(varnames);
+    }, [checked, setVarnames, reducedOptions]);
 
     const handleReset = () => {
         const { idx, idx2, layer, citiesArray } = props;
         const varnames = DefaultExtraLayers({ idx, idx2, layer, citiesArray });
         props.setVarnames(varnames);
-        setSelectedOptions(varnames);
+
+        const initialState = reducedOptions.reduce<AccType>((acc, curr) => {
+            acc[curr.value] = varnames.includes(curr.value);
+            return acc;
+        }, {} as AccType);
+        setChecked(initialState);
     };
 
     return (
-        <div>
-            {reducedOptions.map((option) => (
-                <div key={option.value}>
-                    <label>
-                        <input
-                            type="checkbox"
-                            value={option.value}
-                            checked={selectedOptions.includes(option.value)}
-                            onChange={(e) => handleCheckboxChange(option, e.target.checked)}
-                        />
-                        {option.label}
-                    </label>
-                </div>
-            ))}
-            <ResetButton
-                handleReset = {handleReset}
-            />
-        </div>
+        <>
+            <div>
+                <DialogTitle>Extra Layers</DialogTitle>
+                <DialogContent>
+                    <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                        <FormControl sx={{ m: 1, minWidth: 120 }}>
+                            <FormGroup>
+                                {reducedOptions.map((item: OptionType) => (
+                                    <FormControlLabel
+                                        key={item.value}
+                                        control={<Checkbox />}
+                                        label={item.label}
+                                        checked={!!checked[item.value]}
+                                        onChange={(event) => handleCheckboxChange(event, item.value)}
+                                    />
+                                ))}
+                            </FormGroup>
+                        </FormControl>
+                    </Box>
+                </DialogContent>
+
+                <ResetButton handleReset={handleReset} />
+
+                <DialogActions>
+                    <Button onClick={props.handleClose}>Cancel</Button>
+                    <Button onClick={props.handleClose}>Ok</Button>
+                </DialogActions>
+            </div>
+        </>
     );
 }
