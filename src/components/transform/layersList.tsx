@@ -51,7 +51,7 @@ interface LayersListProps {
  * Function to select extra layers to be included in transformation
  * calculation.
  */
-export default function LayersList2(props: LayersListProps) {
+export default function LayersList(props: LayersListProps) {
     const theme = useTheme();
 
     const options = useMemo(

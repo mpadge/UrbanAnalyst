@@ -9,7 +9,7 @@ import Dialog from '@mui/material/Dialog';
 
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/transform/cityList';
-import LayersList2 from '@/components/transform/layersList2';
+import LayersList from '@/components/transform/layersList';
 import TargetCityList from '@/components/transform/targetCityList';
 import LayerList from '@/components/transform/layerList';
 import SelectNumLayers from '@/components/map/numLayers';
@@ -218,7 +218,7 @@ export default function Control (props: TransformControlProps) {
             </div>
             <div>
                 <Dialog disableEscapeKeyDown open={openExtraLayers} onClose={handleCloseExtraLayers}>
-                    <LayersList2
+                    <LayersList
                         idx = {props.idx}
                         idx2 = {props.idx2}
                         citiesArray = {props.citiesArray}
