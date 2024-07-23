@@ -12,7 +12,7 @@ import CityList from '@/components/transform/cityList';
 import LayersList from '@/components/transform/layersList';
 import LayersList2 from '@/components/transform/layersList2';
 import TargetCityList from '@/components/transform/targetCityList';
-import LayerList from '@/components/map/layerList';
+import LayerList from '@/components/transform/layerList';
 import SelectNumLayers from '@/components/map/numLayers';
 import OpacitySlider from '@/components/map/opacitySlider';
 import LayersButton from '@/components/transform/layersButton';
@@ -183,9 +183,14 @@ export default function Control (props: TransformControlProps) {
                     />
 
                     <LayerList
+                        idx = {props.idx}
+                        idx2 = {props.idx2}
+                        citiesArray = {props.citiesArray}
                         title = "Layer"
                         layer = {props.layer}
                         handleLayerChange = {props.handleLayerChange}
+                        varnames = {props.varnames}
+                        setVarnames = {props.setVarnames}
                         cityLayers = {props.cityLayers}
                     />
 
