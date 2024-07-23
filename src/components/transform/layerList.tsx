@@ -69,7 +69,8 @@ export default function LayerList(props: LayerListProps) {
         const this_option = findMatchingOption();
         if (this_option) {
             setSelectedOption(this_option);
-            setVarnames(DefaultExtraLayers({ idx, idx2, this_option, citiesArray }));
+            const layer = this_option;
+            setVarnames(DefaultExtraLayers({ idx, idx2, layer, citiesArray }));
         } else {
             setSelectedOption(options[0].value);
         }

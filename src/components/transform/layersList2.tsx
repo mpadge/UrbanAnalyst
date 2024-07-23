@@ -77,10 +77,11 @@ export default function LayersList2(props: LayersListProps) {
 
     const [checked, setChecked] = useState<{ [key: string]: boolean }>({});
 
-    const initialState = reducedOptions.reduce((acc, curr) => {
+    type AccType = { [key: string]: boolean };
+    const initialState = reducedOptions.reduce<AccType>((acc, curr) => {
         acc[curr.value] = props.varnames.includes(curr.value);
         return acc;
-    }, {});
+    }, {} as AccType);
 
     const [checkedState, setCheckedState] = useState(initialState);
 
@@ -88,7 +89,7 @@ export default function LayersList2(props: LayersListProps) {
         props.varnames,
     );
 
-    const handleCheckboxChange = (event, value) => {
+    const handleCheckboxChange = (event: any, value: any) => {
         const isChecked = event.target.checked;
         setCheckedState({
             ...checkedState,
@@ -125,10 +126,10 @@ export default function LayersList2(props: LayersListProps) {
         props.setVarnames(varnames);
         setSelectedOptions(varnames);
 
-        const initialState = reducedOptions.reduce((acc, curr) => {
+        const initialState = reducedOptions.reduce<AccType>((acc, curr) => {
             acc[curr.value] = props.varnames.includes(curr.value);
             return acc;
-        }, {});
+        }, {} as AccType);
         setCheckedState(initialState);
     };
 
