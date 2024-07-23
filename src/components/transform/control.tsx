@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from "next/image"
 import localFont from 'next/font/local'
 
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 
@@ -190,7 +191,14 @@ export default function Control (props: TransformControlProps) {
                         cityLayers = {props.cityLayers}
                     />
 
-                    <Button onClick={handleClickOpenExtraLayers}>Extra Layers</Button>
+                    <Stack alignItems="center">
+                        <Button
+                            // variant="outlined"
+                            onClick={handleClickOpenExtraLayers}
+                        >
+                            Extra Layers
+                        </Button>
+                    </Stack>
 
                     <OutputLayers
                         outputLayer = {props.outputLayer}
