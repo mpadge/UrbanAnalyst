@@ -155,7 +155,7 @@ export default function LayersList2(props: LayersListProps) {
                     <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
                         <FormControl sx={{ m: 1, minWidth: 120 }}>
                             <FormGroup>
-                                {reducedOptions.map((item) => (
+                                {reducedOptions.map((item: OptionType) => (
                                     <FormControlLabel
                                         control={<Checkbox />}
                                         label={item.label}
