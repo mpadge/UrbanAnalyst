@@ -224,7 +224,7 @@ export default function Control (props: TransformControlProps) {
 
             </div>
             <div>
-        <Dialog disableEscapeKeyDown open={openExtraLayers} onClose={handleCloseExtraLayers}>
+                <Dialog disableEscapeKeyDown open={openExtraLayers} onClose={handleCloseExtraLayers}>
                     <LayersList2
                         idx = {props.idx}
                         idx2 = {props.idx2}
@@ -234,7 +234,7 @@ export default function Control (props: TransformControlProps) {
                         setVarnames = {props.setVarnames}
                         handleClose={handleCloseExtraLayers}
                     />
-        </Dialog>
+                </Dialog>
             </div>
             <div
                 id="layerlist-container"
