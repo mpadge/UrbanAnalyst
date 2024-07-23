@@ -108,7 +108,7 @@ export default function LayersList2(props: LayersListProps) {
     }, [reducedOptions, setSelectedOptions]);
 
     // Pre-select default varnames passed from 'control.tsx':
-    const selectVarnames = useEffect(() => {
+    useEffect(() => {
         setSelectedOptions(props.varnames);
         setChecked((prevCheckedState) => {
             return reducedOptions.reduce((acc, option) => {
