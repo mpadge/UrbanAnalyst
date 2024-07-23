@@ -99,6 +99,7 @@ export default function LayersList2(props: LayersListProps) {
             .filter(key => checkedState[key])
             .map(key => key);
         setSelectedOptions(updatedOptions);
+        props.setVarnames(updatedOptions);
     };
 
     useEffect(() => {
