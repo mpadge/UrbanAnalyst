@@ -1,3 +1,5 @@
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 import styles from '@/styles/controls.module.css';
 
@@ -11,12 +13,13 @@ export default function ResetButton (props: ResetButtonProps) {
     var buttonText: string = "Reset";
 
     return (
-        <section className="button">
-            <button
-                className={buttonStyle}
-                type="button"
+        <Stack alignItems="center">
+            <Button
+                variant="outlined"
                 onClick={() => props.handleReset()}
-            >{buttonText}</button>
-        </section>
+            >
+                {buttonText}
+            </Button>
+        </Stack>
     )
 }
