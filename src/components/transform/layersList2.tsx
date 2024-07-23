@@ -129,21 +129,6 @@ export default function LayersList2(props: LayersListProps) {
     return (
         <>
             <div>
-                {reducedOptions.map((option) => (
-                    <div key={option.value}>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value={option.value}
-                                checked={!!checked[option.value]}
-                                onChange={(e) => handleCheckboxChange(option, e.target.checked)}
-                            />
-                            {option.label}
-                        </label>
-                    </div>
-                ))}
-                <ResetButton handleReset={handleReset} />
-
                 <DialogTitle>Extra Layers</DialogTitle>
                 <DialogContent>
                     <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -162,6 +147,9 @@ export default function LayersList2(props: LayersListProps) {
                         </FormControl>
                     </Box>
                 </DialogContent>
+
+                <ResetButton handleReset={handleReset} />
+
                 <DialogActions>
                     <Button onClick={props.handleClose}>Cancel</Button>
                     <Button onClick={props.handleClose}>Ok</Button>
