@@ -127,17 +127,14 @@ export default function Control (props: TransformControlProps) {
         }
     }, [idx, idx2, layer, citiesArray, setVarnames]);
 
-    const [open, setOpen] = useState(false);
+    const [openExtraLayers, setOpenExtraLayers] = useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
+    const handleClickOpenExtraLayers = () => {
+        setOpenExtraLayers(true);
     };
 
-    // const handleClose = (event: React.SyntheticEvent<unknown>, reason?: string) => {
-    const handleClose = () => {
-        // if (reason !== 'backdropClick') {
-            setOpen(false);
-        // }
+    const handleCloseExtraLayers = () => {
+        setOpenExtraLayers(false);
     };
 
 
@@ -215,7 +212,7 @@ export default function Control (props: TransformControlProps) {
                         handleTourOpen = {props.handleTourOpen}
                     />
 
-                    <Button onClick={handleClickOpen}>Extra Layers</Button>
+                    <Button onClick={handleClickOpenExtraLayers}>Extra Layers</Button>
 
                 </div>
 
@@ -227,7 +224,7 @@ export default function Control (props: TransformControlProps) {
 
             </div>
             <div>
-        <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
+        <Dialog disableEscapeKeyDown open={openExtraLayers} onClose={handleCloseExtraLayers}>
                     <LayersList2
                         idx = {props.idx}
                         idx2 = {props.idx2}
@@ -235,7 +232,7 @@ export default function Control (props: TransformControlProps) {
                         layer = {props.layer}
                         varnames = {props.varnames}
                         setVarnames = {props.setVarnames}
-                        handleClose={handleClose}
+                        handleClose={handleCloseExtraLayers}
                     />
         </Dialog>
             </div>
