@@ -133,10 +133,11 @@ export default function Control (props: TransformControlProps) {
         setOpen(true);
     };
 
-    const handleClose = (event: React.SyntheticEvent<unknown>, reason?: string) => {
-        if (reason !== 'backdropClick') {
+    // const handleClose = (event: React.SyntheticEvent<unknown>, reason?: string) => {
+    const handleClose = () => {
+        // if (reason !== 'backdropClick') {
             setOpen(false);
-        }
+        // }
     };
 
 
