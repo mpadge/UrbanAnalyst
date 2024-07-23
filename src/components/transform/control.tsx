@@ -9,13 +9,11 @@ import Dialog from '@mui/material/Dialog';
 
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/transform/cityList';
-import LayersList from '@/components/transform/layersList';
 import LayersList2 from '@/components/transform/layersList2';
 import TargetCityList from '@/components/transform/targetCityList';
 import LayerList from '@/components/transform/layerList';
 import SelectNumLayers from '@/components/map/numLayers';
 import OpacitySlider from '@/components/map/opacitySlider';
-import LayersButton from '@/components/transform/layersButton';
 import OutputLayers from '@/components/transform/outputLayers';
 import HelpButton from '@/components/helpButton';
 
@@ -192,10 +190,7 @@ export default function Control (props: TransformControlProps) {
                         cityLayers = {props.cityLayers}
                     />
 
-                    <LayersButton
-                        showLayersDialog={showLayersDialog}
-                        handleLayersDialogVisibility={handleLayersDialogVisibility}
-                    />
+                    <Button onClick={handleClickOpenExtraLayers}>Extra Layers</Button>
 
                     <OutputLayers
                         outputLayer = {props.outputLayer}
@@ -211,8 +206,6 @@ export default function Control (props: TransformControlProps) {
                     <HelpButton
                         handleTourOpen = {props.handleTourOpen}
                     />
-
-                    <Button onClick={handleClickOpenExtraLayers}>Extra Layers</Button>
 
                 </div>
 
@@ -235,20 +228,6 @@ export default function Control (props: TransformControlProps) {
                         handleClose={handleCloseExtraLayers}
                     />
                 </Dialog>
-            </div>
-            <div
-                id="layerlist-container"
-                className={styles.layerlist}
-                style={{display: showLayersDialog?"":"none"}}
-            >
-                <LayersList
-                    idx = {props.idx}
-                    idx2 = {props.idx2}
-                    citiesArray = {props.citiesArray}
-                    layer = {props.layer}
-                    varnames = {props.varnames}
-                    setVarnames = {props.setVarnames}
-                />
             </div>
         </>
     )
