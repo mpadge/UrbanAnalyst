@@ -75,62 +75,55 @@ export default function LayersList2(props: LayersListProps) {
         return options.filter((option) => option.value !== props.layer);
     }, [options, props.layer]);
 
-    const [checked, setChecked] = useState<{ [key: string]: boolean }>({});
-
+    // `checked` holds Object with named entries and boolean flag for each
+    // checked item. This is used to control the `checked` state in each
+    // `FormControlLabel`.
     type AccType = { [key: string]: boolean };
-    const initialState = reducedOptions.reduce<AccType>((acc, curr) => {
-        acc[curr.value] = props.varnames.includes(curr.value);
-        return acc;
-    }, {} as AccType);
-
-    const [checkedState, setCheckedState] = useState(initialState);
-
-    const [selectedOptions, setSelectedOptions] = useState<string[]>(
-        props.varnames,
-    );
-
+    const [checked, setChecked] = useState<AccType>({});
     const handleCheckboxChange = (event: any, value: any) => {
         const isChecked = event.target.checked;
-        setCheckedState({
-            ...checkedState,
+        setChecked(prevChecked => ({
+            ...prevChecked,
             [value]: isChecked,
-        });
-
-        const updatedOptions = Object.keys(checkedState)
-            .filter(key => checkedState[key])
-            .map(key => key);
-        setSelectedOptions(updatedOptions);
-        props.setVarnames(updatedOptions);
+        }));
     };
 
-    useEffect(() => {
-        const initialSelectedOptions = reducedOptions.filter(item => item.checked).map(item => item.value);
-        setSelectedOptions(initialSelectedOptions);
-    }, [reducedOptions, setSelectedOptions]);
-
     // Pre-select default varnames passed from 'control.tsx':
+    const { varnames } = props;
+    const initialSetFromProps = useRef(false);
     useEffect(() => {
-        setSelectedOptions(props.varnames);
-        setChecked((prevCheckedState) => {
-            return reducedOptions.reduce((acc, option) => {
-                const isChecked = props.varnames.includes(option.value);
-                acc[option.value] = isChecked;
-                return acc;
-            }, {...prevCheckedState});
-        });
-    }, [props.varnames, reducedOptions, setChecked]);
+        if (!initialSetFromProps.current) {
+            setChecked((prevCheckedState) => {
+                return reducedOptions.reduce((acc, option) => {
+                    const isChecked = varnames.includes(option.value);
+                    acc[option.value] = isChecked;
+                    return acc;
+                }, {...prevCheckedState});
+            });
+            initialSetFromProps.current = true;
+        }
+    }, [varnames, reducedOptions, setChecked]);
+
+    // Effect to update props.varnames in response to changed in 'checked'
+    // values.
+    const { setVarnames } = props;
+    useEffect(() => {
+        const varnames = reducedOptions
+            .filter(option => checked[option.value] === true)
+            .map(option => option.value);
+        setVarnames(varnames);
+    }, [checked, setVarnames, reducedOptions]);
 
     const handleReset = () => {
         const { idx, idx2, layer, citiesArray } = props;
         const varnames = DefaultExtraLayers({ idx, idx2, layer, citiesArray });
         props.setVarnames(varnames);
-        setSelectedOptions(varnames);
 
         const initialState = reducedOptions.reduce<AccType>((acc, curr) => {
-            acc[curr.value] = props.varnames.includes(curr.value);
+            acc[curr.value] = varnames.includes(curr.value);
             return acc;
         }, {} as AccType);
-        setCheckedState(initialState);
+        setChecked(initialState);
     };
 
     return (
@@ -142,7 +135,7 @@ export default function LayersList2(props: LayersListProps) {
                             <input
                                 type="checkbox"
                                 value={option.value}
-                                checked={selectedOptions.includes(option.value)}
+                                checked={!!checked[option.value]}
                                 onChange={(e) => handleCheckboxChange(option, e.target.checked)}
                             />
                             {option.label}
@@ -161,7 +154,7 @@ export default function LayersList2(props: LayersListProps) {
                                         key={item.value}
                                         control={<Checkbox />}
                                         label={item.label}
-                                        checked={!!checkedState[item.value]}
+                                        checked={!!checked[item.value]}
                                         onChange={(event) => handleCheckboxChange(event, item.value)}
                                     />
                                 ))}
