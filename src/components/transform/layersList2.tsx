@@ -157,6 +157,7 @@ export default function LayersList2(props: LayersListProps) {
                             <FormGroup>
                                 {reducedOptions.map((item: OptionType) => (
                                     <FormControlLabel
+                                        key={item.value}
                                         control={<Checkbox />}
                                         label={item.label}
                                         checked={!!checkedState[item.value]}
