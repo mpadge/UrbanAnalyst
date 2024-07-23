@@ -73,7 +73,7 @@ export default function LayerList(props: LayerListProps) {
         } else {
             setSelectedOption(options[0].value);
         }
-    }, [idx, idx2, citiesArray, findMatchingOption, options]);
+    }, [idx, idx2, citiesArray, setVarnames, findMatchingOption, options]);
 
     const handleChange = (event: SelectChangeEvent) => {
         props.handleLayerChange(event.target.value as string);
