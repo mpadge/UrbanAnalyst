@@ -38,7 +38,7 @@ export function getGeoJsonLayer(geoJSONcontent: any, layerRange: number[], varna
             },
             opacity: 1 - alpha,
             updateTriggers: {
-                getFillColor: [varname]
+                getFillColor: [varname, layerRange]
             }
         })
     ]
