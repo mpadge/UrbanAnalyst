@@ -219,7 +219,8 @@ const TransformComponent = (props: TransformProps) => {
      */
     useMemo(() => {
         if (geoJSONcontent !== null) {
-            getGeoJsonLayer(geoJSONcontent, layerRange, layer, alpha, setGeoJsonLayer);
+            const this_layer = getGeoJsonLayer(geoJSONcontent, layerRange, layer, alpha);
+            setGeoJsonLayer(this_layer);
         }
     }, [layerRange, layer, alpha, geoJSONcontent]);
 
