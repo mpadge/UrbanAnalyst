@@ -28,6 +28,8 @@ interface TransformControlProps {
     layer: string
     varnames: string[]
     alpha: number,
+    layerRange: number[]
+    layerStartStop: number[]
     citiesArray: CityDataProps[],
     cityLayers: string[],
     viewState: ViewState,
@@ -37,6 +39,7 @@ interface TransformControlProps {
     handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
     handleLayerChange: (layer: string) => void,
+    setLayerRange: (layerRange: number[]) => void,
     setVarnames: (varnames: string[]) => void
     handleOutputLayerChange: (outputLayer: string) => void
     handleTourOpen: (isTourOpen: boolean) => void

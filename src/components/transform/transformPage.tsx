@@ -54,7 +54,8 @@ export interface TransformProps {
     targetCity: string
     viewState: ViewState
     alpha: number
-    layerRange: number[],
+    layerRange: number[]
+    layerStartStop: number[]
     outputLayer: string
     setLayerRange: (layerRange: number[]) => void
     handleOutputLayerChange: (outputLayer: string) => void
@@ -249,6 +250,7 @@ export default function TransformPage() {
                 viewState = {viewState}
                 alpha = {alpha}
                 layerRange = {layerRange}
+                layerStartStop = {layerStartStop}
                 outputLayer={outputLayer}
                 setLayerRange={setLayerRange}
                 handleOutputLayerChange={handleOutputLayerChange}
@@ -259,6 +261,8 @@ export default function TransformPage() {
                 layer={layer}
                 varnames={varnames}
                 alpha={alpha}
+                layerRange = {layerRange}
+                layerStartStop = {layerStartStop}
                 citiesArray={CITY_DATA.citiesArray}
                 cityLayers={cityLayers}
                 viewState={viewState}
@@ -268,6 +272,7 @@ export default function TransformPage() {
                 handleAlphaChange={handleAlphaChange}
                 handleViewStateChange={handleViewStateChange}
                 handleLayerChange={handleLayerChange}
+                setLayerRange={setLayerRange}
                 setVarnames={setVarnames}
                 handleOutputLayerChange={handleOutputLayerChange}
                 handleTourOpen = {handleTourOpen}
