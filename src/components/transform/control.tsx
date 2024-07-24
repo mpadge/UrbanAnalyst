@@ -7,6 +7,7 @@ import localFont from 'next/font/local'
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
+import Typography from '@mui/material/Typography';
 
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/transform/cityList';
@@ -15,6 +16,7 @@ import TargetCityList from '@/components/transform/targetCityList';
 import LayerList from '@/components/transform/layerList';
 import SelectNumLayers from '@/components/map/numLayers';
 import OpacitySlider from '@/components/map/opacitySlider';
+import RangeSlider from '@/components/map/rangeSlider';
 import OutputLayers from '@/components/transform/outputLayers';
 import HelpButton from '@/components/helpButton';
 
@@ -139,6 +141,38 @@ export default function Control (props: TransformControlProps) {
         setOpenExtraLayers(false);
     };
 
+    // Layer range sliders:
+    const [sliderValues, setSliderValues] = useState<number[]>(props.layerRange);
+    useEffect(() => {
+        setSliderValues(props.layerRange);
+    }, [props.layerRange]);
+
+    var layerRangeStep = Math.floor(props.layerStartStop[1] - props.layerStartStop[0]) / 20;
+    var multiplier = 10;
+    while (layerRangeStep === 0) {
+        const stepTemp = Math.floor(multiplier * (props.layerStartStop[1] - props.layerStartStop[0]) / 20) / multiplier;
+        if (stepTemp !== 0) {
+            layerRangeStep = stepTemp;
+            break;
+        }
+        multiplier *= 10;
+    }
+    const handleSliderValuesChange = (
+        event: Event,
+        value: number | number [],
+        activeThumb: number
+    ) => {
+
+        let newValue: number[];
+        if (typeof value === 'number') {
+            newValue = [value];
+        } else {
+            newValue=value;
+            props.setLayerRange(value);
+        }
+
+        setSliderValues(newValue);
+    };
 
     return (
         <>
@@ -212,6 +246,17 @@ export default function Control (props: TransformControlProps) {
                     <OpacitySlider
                         alpha = {props.alpha}
                         handleAlphaChange={props.handleAlphaChange}
+                    />
+
+                    <Typography variant="h3" align="center" margin="0">
+                        Colour Limits
+                    </Typography>
+                    <RangeSlider
+                        rangeMin = {props.layerStartStop[0]}
+                        rangeMax = {props.layerStartStop[1]}
+                        sliderValues = {sliderValues}
+                        step = {layerRangeStep}
+                        handleSliderValuesChange={handleSliderValuesChange}
                     />
 
                     <HelpButton
