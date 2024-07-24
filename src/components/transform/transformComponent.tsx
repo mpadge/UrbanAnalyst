@@ -213,16 +213,15 @@ const TransformComponent = (props: TransformProps) => {
         }
     }, [layer, geoJSONcontent, setLayerRange]);
 
-    const { layerRange, alpha } = props;
     /**
      * ------ Effect #9 ------
      */
     useMemo(() => {
         if (geoJSONcontent !== null) {
-            const this_layer = getGeoJsonLayer(geoJSONcontent, layerRange, layer, alpha);
+            const this_layer = getGeoJsonLayer(geoJSONcontent, props.layerRange, layer, props.alpha);
             setGeoJsonLayer(this_layer);
         }
-    }, [layerRange, layer, alpha, geoJSONcontent]);
+    }, [props.layerRange, layer, props.alpha, geoJSONcontent]);
 
     return (
         <>
