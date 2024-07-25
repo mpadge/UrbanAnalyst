@@ -86,11 +86,13 @@ export default function Control (props: CompareControlProps) {
                         />
                     }
 
-                    <MeanVarButtons
-                        meanVals = {props.meanVals}
-                        singleLayer = {props.numLayers != "Paired"}
-                        handleMeanChange = {props.handleMeanChange}
-                    />
+                    {props.numLayers != "Paired" &&
+                        <MeanVarButtons
+                            meanVals = {props.meanVals}
+                            singleLayer = {props.numLayers != "Paired"}
+                            handleMeanChange = {props.handleMeanChange}
+                        />
+                    }
                     <SortOrderList
                         sortOpt = {props.sortOpt}
                         handleSortChange = {props.handleSortChange}
