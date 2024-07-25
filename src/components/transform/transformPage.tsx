@@ -58,6 +58,7 @@ export interface TransformProps {
     layerStartStop: number[]
     outputLayer: string
     setLayerRange: (layerRange: number[]) => void
+    setLayerStartStop: (layerStartStop: number[]) => void
     handleOutputLayerChange: (outputLayer: string) => void
 }
 
@@ -253,6 +254,7 @@ export default function TransformPage() {
                 layerStartStop = {layerStartStop}
                 outputLayer={outputLayer}
                 setLayerRange={setLayerRange}
+                setLayerStartStop={setLayerStartStop}
                 handleOutputLayerChange={handleOutputLayerChange}
             />
             <Control

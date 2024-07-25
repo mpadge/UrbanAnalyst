@@ -202,16 +202,17 @@ const TransformComponent = (props: TransformProps) => {
         }
     }, [mapPathSource, transformDataOneCol, layer]);
 
-    const { setLayerRange } = props;
     /**
      * ------ Effect #8 ------
      */
+    const { setLayerRange, setLayerStartStop } = props;
     useMemo(() => {
         if (geoJSONcontent !== null) {
             const rangeLimits = getRangeLimits(geoJSONcontent, layer);
             setLayerRange(rangeLimits);
+            setLayerStartStop(rangeLimits);
         }
-    }, [layer, geoJSONcontent, setLayerRange]);
+    }, [layer, geoJSONcontent, setLayerRange, setLayerStartStop]);
 
     /**
      * ------ Effect #9 ------
