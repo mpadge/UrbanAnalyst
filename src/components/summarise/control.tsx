@@ -35,7 +35,7 @@ export default function Control (props: SummariseControlProps) {
                         alignItems: 'left',
                         marginLeft: '2px',
                         marginTop: '2px',
-                        marginBottom: '2px'
+                        marginBottom: '16px'
                     }}>
                     <Tooltip title="Click to close controls">
                     <button
@@ -57,7 +57,6 @@ export default function Control (props: SummariseControlProps) {
                     </Tooltip>
                     </div>
 
-                    <h3>City</h3>
                     <CityList
                         idx={props.idx}
                         handleIdxChange={props.handleIdxChange}
