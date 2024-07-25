@@ -4,6 +4,9 @@ import Link from 'next/link'
 import Image from "next/image"
 import localFont from 'next/font/local'
 
+import { styled } from '@mui/material/styles';
+import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -53,6 +56,12 @@ interface DefaultExtraLayersProps {
     layer: string,
     citiesArray: CityDataProps[]
 }
+
+const RootSpacing = styled('div')(({ theme }) => ({
+    width: '100%',
+    marginTop: '12px',
+    marginBottom: '0px',
+}));
 
 export function DefaultExtraLayers (props: DefaultExtraLayersProps) {
 
@@ -216,48 +225,72 @@ export default function Control (props: TransformControlProps) {
                         handleIdx2Change={props.handleIdx2Change}
                     />
 
-                    <LayerList
-                        idx = {props.idx}
-                        idx2 = {props.idx2}
-                        citiesArray = {props.citiesArray}
-                        title = "Layer"
-                        layer = {props.layer}
-                        handleLayerChange = {props.handleLayerChange}
-                        varnames = {props.varnames}
-                        setVarnames = {props.setVarnames}
-                        cityLayers = {props.cityLayers}
-                    />
+                    <RootSpacing>
+                        <Divider flexItem >Layer Controls</Divider>
+                        <Box sx={{ p: 1 }}>
+                            <Stack spacing={1} alignItems="center" marginBottom="0px">
+                                <LayerList
+                                    idx = {props.idx}
+                                    idx2 = {props.idx2}
+                                    citiesArray = {props.citiesArray}
+                                    title = "Layer"
+                                    layer = {props.layer}
+                                    handleLayerChange = {props.handleLayerChange}
+                                    varnames = {props.varnames}
+                                    setVarnames = {props.setVarnames}
+                                    cityLayers = {props.cityLayers}
+                                />
+                            </Stack>
 
-                    <Stack alignItems="center">
-                        <Button
-                            // variant="outlined"
-                            onClick={handleClickOpenExtraLayers}
-                        >
-                            Extra Layers
-                        </Button>
-                    </Stack>
+                            <Stack alignItems="center">
+                                <Button
+                                    // variant="outlined"
+                                    onClick={handleClickOpenExtraLayers}
+                                >
+                                    Extra Layers
+                                </Button>
+                            </Stack>
 
-                    <OutputLayers
-                        outputLayer = {props.outputLayer}
-                        handleOutputLayerChange={props.handleOutputLayerChange}
-                    />
+                            <Stack alignItems="center">
+                                <OutputLayers
+                                    outputLayer = {props.outputLayer}
+                                    handleOutputLayerChange={props.handleOutputLayerChange}
+                                />
+                            </Stack>
+                        </Box>
+                    </RootSpacing>
 
-                    <h3>Opacity</h3>
-                    <OpacitySlider
-                        alpha = {props.alpha}
-                        handleAlphaChange={props.handleAlphaChange}
-                    />
+                    <RootSpacing>
+                        <Divider flexItem >Colour Controls</Divider>
+                        <Box sx={{ p: 0 }}>
+                            <Stack alignItems="center">
+                                <Typography variant="h3" align="center" margin="0">
+                                    Opacity
+                                </Typography>
+                            </Stack>
+                            <Stack alignItems="center">
+                                <OpacitySlider
+                                    alpha = {props.alpha}
+                                    handleAlphaChange={props.handleAlphaChange}
+                                />
+                            </Stack>
 
-                    <Typography variant="h3" align="center" margin="0">
-                        Colour Limits
-                    </Typography>
-                    <RangeSlider
-                        rangeMin = {props.layerStartStop[0]}
-                        rangeMax = {props.layerStartStop[1]}
-                        sliderValues = {sliderValues}
-                        step = {layerRangeStep}
-                        handleSliderValuesChange={handleSliderValuesChange}
-                    />
+                            <Stack alignItems="center">
+                                <Typography variant="h3" align="center" margin="0">
+                                    Colour Limits
+                                </Typography>
+                            </Stack>
+                            <Stack alignItems="center" marginBottom="2px">
+                                <RangeSlider
+                                    rangeMin = {props.layerStartStop[0]}
+                                    rangeMax = {props.layerStartStop[1]}
+                                    sliderValues = {sliderValues}
+                                    step = {layerRangeStep}
+                                    handleSliderValuesChange={handleSliderValuesChange}
+                                />
+                            </Stack>
+                        </Box>
+                    </RootSpacing>
 
                     <HelpButton
                         handleTourOpen = {props.handleTourOpen}
