@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
 import styles from '@/styles/controls.module.css';
@@ -188,27 +189,24 @@ export default function Control (props: TransformControlProps) {
             <div id="top-left-container" className={`${styles.controlsTransform} ${junctionFont.className}`}>
                 <div id="divinfo" style={{display: hideControls?"none":""}}>
 
+                    <Tooltip title="Click to close controls">
                     <button
                         id="btnHideControls"
                         className="btn-transparent right-align"
                         onClick={() => handleControlsVisibility(true)}
                     >
-                        X
-                    </button>
-
-                    <p>
                         <Image
                             src="/ua.svg"
                             alt="UA Logo"
-                            className={styles.transformLogo}
-                            width={100}
-                            height={50}
+                            width={20}
+                            height={10}
                             style={{
                                 maxWidth: "100%",
                                 height: "auto"
                             }}
                         />
-                    </p>
+                    </button>
+                    </Tooltip>
 
                     <CityList
                         citiesArray={props.citiesArray}
@@ -302,7 +300,19 @@ export default function Control (props: TransformControlProps) {
                     id="btnShowControls"
                     style={{display:hideControls?"":"none"}}
                     onClick={() => handleControlsVisibility(false)}
-                >Show Controls</button>
+                >
+                    <Image
+                        src="/ua.svg"
+                        alt="UA Logo"
+                        width={20}
+                        height={10}
+                        style={{
+                            maxWidth: "100%",
+                            height: "auto"
+                        }}
+                    />
+                    Show Controls
+                </button>
 
             </div>
             <div>
