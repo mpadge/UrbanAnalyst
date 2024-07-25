@@ -4,7 +4,11 @@ import Link from 'next/link'
 import Image from "next/image"
 import localFont from 'next/font/local'
 
-import styles from '@/styles/controls.module.css';
+import { styled } from '@mui/material/styles';
+import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+
 import LayerList from '@/components/compare/layerlist';
 import SelectNumLayers from '@/components/compare/numLayers';
 import SortOrderList from '@/components/compare/sortOrderList';
@@ -12,6 +16,7 @@ import ExplainButton from '@/components/compare/explainButton';
 import MeanVarButtons from '@/components/compare/meanVar';
 import HelpButton from '@/components/helpButton';
 
+import styles from '@/styles/controls.module.css';
 import { CityDataProps } from "@/data/interfaces";
 
 const junctionFont = localFont({ src: '../../app/junction-regular.woff' })
@@ -32,6 +37,17 @@ interface CompareControlProps {
     handleTourOpen: (isTourOpen: boolean) => void
 }
 
+const LayerSpacing = styled('div')(({ theme }) => ({
+    width: '100%',
+    marginTop: '0px',
+    marginBottom: '8px',
+}));
+
+const SortOrderSpacing = styled('div')(({ theme }) => ({
+    width: '100%',
+    marginTop: '0px',
+    marginBottom: '12px',
+}));
 
 export default function Control (props: CompareControlProps) {
 
@@ -68,33 +84,54 @@ export default function Control (props: CompareControlProps) {
                         />
                     </h3>
 
-                    <h3>Layer</h3>
-                    <SelectNumLayers
-                        numLayers = {props.numLayers}
-                        numLayersOptions = {props.numLayersOptions}
-                        handleNumLayersChange = {props.handleNumLayersChange}
-                    />
-                    <LayerList
-                        layer = {props.layer}
-                        handleLayerChange = {props.handleLayerChange}
-                    />
-                    {props.numLayers == "Paired"  &&
-                        <LayerList
-                            layer = {props.layer2}
-                            handleLayerChange = {props.handleLayer2Change}
-                        />
-                    }
+                    <LayerSpacing>
+                        <Box sx={{ p: 1 }}>
+                            <Stack spacing={1} alignItems="center" marginBottom="0px">
+                                <SelectNumLayers
+                                    numLayers = {props.numLayers}
+                                    numLayersOptions = {props.numLayersOptions}
+                                    handleNumLayersChange = {props.handleNumLayersChange}
+                                />
+                            </Stack>
+                            <Stack spacing={1} alignItems="center" marginBottom="0px">
+                                <LayerList
+                                    title = "Layer"
+                                    layer = {props.layer}
+                                    handleLayerChange = {props.handleLayerChange}
+                                />
+                            </Stack>
+                            {props.numLayers == "Paired"  &&
+                                <Stack spacing={1} alignItems="center" marginBottom="0px">
+                                    <LayerList
+                                        title = "Paired Layer"
+                                        layer = {props.layer2}
+                                        handleLayerChange = {props.handleLayer2Change}
+                                    />
+                                </Stack>
+                            }
 
-                    <MeanVarButtons
-                        meanVals = {props.meanVals}
-                        singleLayer = {props.numLayers != "Paired"}
-                        handleMeanChange = {props.handleMeanChange}
-                    />
-                    <h3>Sort Order</h3>
-                    <SortOrderList
-                        sortOpt = {props.sortOpt}
-                        handleSortChange = {props.handleSortChange}
-                    />
+                            {props.numLayers != "Paired" &&
+                                <Stack spacing={1} alignItems="center" marginBottom="0px">
+                                    <MeanVarButtons
+                                        meanVals = {props.meanVals}
+                                        singleLayer = {props.numLayers != "Paired"}
+                                        handleMeanChange = {props.handleMeanChange}
+                                    />
+                                </Stack>
+                            }
+                        </Box>
+                    </LayerSpacing>
+
+                    <SortOrderSpacing>
+                    <Box sx={{ p: 1 }}>
+                        <Stack spacing={1} alignItems="center" marginBottom="0px">
+                            <SortOrderList
+                                sortOpt = {props.sortOpt}
+                                handleSortChange = {props.handleSortChange}
+                            />
+                        </Stack>
+                    </Box>
+                    </SortOrderSpacing>
                     <ExplainButton
                         idx={0}
                         layer = {props.layer}

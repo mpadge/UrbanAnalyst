@@ -15,7 +15,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Chip from '@mui/material/Chip';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Theme, useTheme } from '@mui/material/styles';
 
 import ResetButton from "@/components/transform/resetButton";
 import styles from "@/styles/controls.module.css";
@@ -52,7 +51,6 @@ interface LayersListProps {
  * calculation.
  */
 export default function LayersList(props: LayersListProps) {
-    const theme = useTheme();
 
     const options = useMemo(
         () => [

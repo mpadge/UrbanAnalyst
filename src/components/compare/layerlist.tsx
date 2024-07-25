@@ -1,14 +1,23 @@
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import Select from 'react-select';
 
-import { LayerListProps } from "@/data/interfaces";
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
 import styles from '@/styles/controls.module.css';
+
+interface LayerListProps { // different from same defined in data/interfaces
+    layer: string,
+    title: string,
+    handleLayerChange: (layer: string) => void
+}
 
 export default function LayerList(props: LayerListProps) {
 
     const options = useMemo (() => [
-        { value: "social_index", label: "Social" },
         { value: "times_rel", label: "Transport Rel." },
         { value: "times_abs", label: "Transport Abs." },
         { value: "transfers", label: "Num. Transfers" },
@@ -23,36 +32,49 @@ export default function LayerList(props: LayerListProps) {
         { value: "value", label: "Housing Value" },
     ], []);
 
-    const [isSearchable, setIsSearchable] = useState(true);
-    const [selected, setSelected] = useState(null);
-
-    const handleChange = (selectedOption: any) => {
-        setSelected(selectedOption);
-        props.handleLayerChange(selectedOption.value);
-    };
-
     const findMatchingOption = useCallback(() => {
-        return options.find(option => option.value === props.layer);
+        var op = "transport";
+        if (options && options.length > 0) {
+            const matchingOption = options.find(option => option.value === props.layer)?.value;
+            op = matchingOption ?? options[4]?.value ?? "transport";
+        }
+        return op;
     }, [options, props.layer]);
 
-    const [matchingOption, setMatchingOption] = useState(findMatchingOption());
+    const [selectedOption, setSelectedOption] = useState(findMatchingOption());
+
     useEffect(() => {
         const this_option = findMatchingOption();
-        setMatchingOption(this_option);
-    }, [props.layer, findMatchingOption]);
+        if (this_option) {
+            setSelectedOption(this_option);
+        } else {
+            setSelectedOption(options[4].value);
+        }
+    }, [props.layer, findMatchingOption, options]);
+
+    const handleChange = (event: SelectChangeEvent) => {
+        props.handleLayerChange(event.target.value as string);
+        setSelectedOption(event.target.value as string);
+    };
 
     return (
-        <section className={styles.listSelect}>
-            <Select
-                options={options}
-                defaultValue={matchingOption}
-                value={matchingOption}
-                name="LayerSelector"
-                //isClearable={isClearable}
-                isSearchable={isSearchable}
-                onChange = {handleChange}
-            />
-        </section>
+        <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+                <InputLabel id="layer1-input-label">{props.title}</InputLabel>
+                <Select
+                    labelId="compare-layer1-select-label"
+                    id="compare-layer1-select"
+                    value={selectedOption}
+                    label={props.title}
+                    onChange={handleChange}
+                >
+                    {options.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+        </Box>
     );
 }
-
