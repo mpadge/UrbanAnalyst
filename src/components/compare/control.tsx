@@ -91,7 +91,6 @@ export default function Control (props: CompareControlProps) {
                         singleLayer = {props.numLayers != "Paired"}
                         handleMeanChange = {props.handleMeanChange}
                     />
-                    <h3>Sort Order</h3>
                     <SortOrderList
                         sortOpt = {props.sortOpt}
                         handleSortChange = {props.handleSortChange}
