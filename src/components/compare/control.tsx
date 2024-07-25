@@ -68,18 +68,19 @@ export default function Control (props: CompareControlProps) {
                         />
                     </h3>
 
-                    <h3>Layer</h3>
                     <SelectNumLayers
                         numLayers = {props.numLayers}
                         numLayersOptions = {props.numLayersOptions}
                         handleNumLayersChange = {props.handleNumLayersChange}
                     />
                     <LayerList
+                        title = "Layer"
                         layer = {props.layer}
                         handleLayerChange = {props.handleLayerChange}
                     />
                     {props.numLayers == "Paired"  &&
                         <LayerList
+                            title = "Paired Layer"
                             layer = {props.layer2}
                             handleLayerChange = {props.handleLayer2Change}
                         />

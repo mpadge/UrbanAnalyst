@@ -10,9 +10,13 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { LayerListProps } from "@/data/interfaces";
 import styles from '@/styles/controls.module.css';
 
-export default function LayerList(props: LayerListProps) {
+interface LayerListProps { // different from same defined in data/interfaces
+    layer: string,
+    title: string,
+    handleLayerChange: (layer: string) => void
+}
 
-    const title = "Layer";
+export default function LayerList(props: LayerListProps) {
 
     const options = useMemo (() => [
         { value: "times_rel", label: "Transport Rel." },
@@ -57,12 +61,12 @@ export default function LayerList(props: LayerListProps) {
     return (
         <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
-                <InputLabel id="layer1-input-label">{title}</InputLabel>
+                <InputLabel id="layer1-input-label">{props.title}</InputLabel>
                 <Select
                     labelId="compare-layer1-select-label"
                     id="compare-layer1-select"
                     value={selectedOption}
-                    label={title}
+                    label={props.title}
                     onChange={handleChange}
                 >
                     {options.map((option) => (
