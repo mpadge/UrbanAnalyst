@@ -7,7 +7,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-import { LayerListProps } from "@/data/interfaces";
 import styles from '@/styles/controls.module.css';
 
 interface LayerListProps { // different from same defined in data/interfaces
