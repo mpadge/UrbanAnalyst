@@ -13,7 +13,7 @@ import { CityDataProps } from "@/data/interfaces";
 import MapTransformDynamic from '@/components/transform/transformPageDynamic';
 import { getTourConfig } from '@/components/transform/tour/tourConfig';
 import { CITY_DATA } from '@/data/citydata';
-import { ViewState } from "@/data/interfaces";
+import { DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/interfaces';
 
 import tourStyles from '@/styles/tour.module.css';
 
@@ -54,9 +54,11 @@ export interface TransformProps {
     targetCity: string
     viewState: ViewState
     alpha: number
-    layerRange: number[],
+    layerRange: number[]
+    layerStartStop: number[]
     outputLayer: string
     setLayerRange: (layerRange: number[]) => void
+    setLayerStartStop: (layerStartStop: number[]) => void
     handleOutputLayerChange: (outputLayer: string) => void
 }
 
@@ -80,6 +82,8 @@ export default function TransformPage() {
     });
     const [layer, setLayer] = useState("bike_index");
     const [alpha, setAlpha] = useState(0.5);
+
+    const [layerStartStop, setLayerStartStop] = useState<number[]>([0, 1]);
     const [layerRange, setLayerRange] = useState<number[]>([0, 1]);
 
     const [varnames, setVarnames] = useState<string[]>([]);
@@ -141,6 +145,18 @@ export default function TransformPage() {
             localStorage.removeItem('uaLayer');
         }
     }, [])
+
+    useEffect(() => {
+        // layer_min/max values which can be adjusted with range slider. This
+        // code is also repeated in mapPage.tsx and mapLayer.tsx.
+        const layer_start = CITY_DATA.citiesArray[idx].dataRanges[layer as DataRangeKeys][0];
+        const layer_min = CITY_DATA.citiesArray[idx].dataRanges[layer as DataRangeKeys][1];
+        const layer_max = CITY_DATA.citiesArray[idx].dataRanges[layer as DataRangeKeys][2];
+        const layer_stop = CITY_DATA.citiesArray[idx].dataRanges[layer as DataRangeKeys][3];
+
+        setLayerRange([layer_min, layer_max]);
+        setLayerStartStop([layer_start, layer_stop]);
+    }, [idx, layer]);
 
     // -------- handlers for state variables --------
     const handleIdxChange = (idx: number) => {
@@ -235,8 +251,10 @@ export default function TransformPage() {
                 viewState = {viewState}
                 alpha = {alpha}
                 layerRange = {layerRange}
+                layerStartStop = {layerStartStop}
                 outputLayer={outputLayer}
                 setLayerRange={setLayerRange}
+                setLayerStartStop={setLayerStartStop}
                 handleOutputLayerChange={handleOutputLayerChange}
             />
             <Control
@@ -245,6 +263,8 @@ export default function TransformPage() {
                 layer={layer}
                 varnames={varnames}
                 alpha={alpha}
+                layerRange = {layerRange}
+                layerStartStop = {layerStartStop}
                 citiesArray={CITY_DATA.citiesArray}
                 cityLayers={cityLayers}
                 viewState={viewState}
@@ -254,6 +274,7 @@ export default function TransformPage() {
                 handleAlphaChange={handleAlphaChange}
                 handleViewStateChange={handleViewStateChange}
                 handleLayerChange={handleLayerChange}
+                setLayerRange={setLayerRange}
                 setVarnames={setVarnames}
                 handleOutputLayerChange={handleOutputLayerChange}
                 handleTourOpen = {handleTourOpen}

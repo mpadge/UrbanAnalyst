@@ -9,7 +9,7 @@ import { ViewState, CityDataProps } from "@/data/interfaces";
 
 import { MapProps } from "@/components/map/map";
 
-export default function UTAMapLayer (props: MapProps) {
+export default function MapLayer (props: MapProps) {
 
     const mapPath1 = props.citiesArray[props.idx].path;
     const mapPath2 = mapPath1.replace("data\.json", "data2.json");

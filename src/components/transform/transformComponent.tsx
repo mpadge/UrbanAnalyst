@@ -202,26 +202,29 @@ const TransformComponent = (props: TransformProps) => {
         }
     }, [mapPathSource, transformDataOneCol, layer]);
 
-    const { setLayerRange } = props;
     /**
      * ------ Effect #8 ------
      */
+    const { setLayerRange, setLayerStartStop } = props;
     useMemo(() => {
         if (geoJSONcontent !== null) {
             const rangeLimits = getRangeLimits(geoJSONcontent, layer);
-            setLayerRange(rangeLimits);
+            const rangeSdLims = [rangeLimits[1], rangeLimits[2]];
+            const rangeMinMax = [rangeLimits[0], rangeLimits[3]];
+            setLayerRange(rangeSdLims);
+            setLayerStartStop(rangeMinMax);;
         }
-    }, [layer, geoJSONcontent, setLayerRange]);
+    }, [layer, geoJSONcontent, setLayerRange, setLayerStartStop]);
 
-    const { layerRange, alpha } = props;
     /**
      * ------ Effect #9 ------
      */
     useMemo(() => {
         if (geoJSONcontent !== null) {
-            getGeoJsonLayer(geoJSONcontent, layerRange, layer, alpha, setGeoJsonLayer);
+            const this_layer = getGeoJsonLayer(geoJSONcontent, props.layerRange, layer, props.alpha);
+            setGeoJsonLayer(this_layer);
         }
-    }, [layerRange, layer, alpha, geoJSONcontent]);
+    }, [props.layerRange, layer, props.alpha, geoJSONcontent]);
 
     return (
         <>
