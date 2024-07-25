@@ -68,7 +68,7 @@ export function getRangeSDs(dat: number[], sdRange = 1.96): number[] {
     return [lowerLimit, upperLimit];
 }
 
-export function getRangeLimits(geoJSONcontent: any, varname: string, sdRange = 1.96): [number, number] {
+export function getRangeLimits(geoJSONcontent: any, varname: string, sdRange = 1.96): [number, number, number, number] {
     const values: number[] = [];
 
     if (geoJSONcontent && geoJSONcontent.features) {
