@@ -25,8 +25,6 @@ export default function CityList(props: CityListProps) {
         label: city.nameFormatted
     }));
 
-    const [isSearchable, setIsSearchable] = useState(true);
-
     // findMatchingOption returns the *index* of the option, but mui requires values to be strings.
     const findMatchingOption = useCallback(() => {
         var op = "0";

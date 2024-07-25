@@ -4,6 +4,8 @@ import Link from 'next/link'
 import Image from "next/image"
 import localFont from 'next/font/local'
 
+import Tooltip from '@mui/material/Tooltip';
+
 import styles from '@/styles/controls.module.css';
 import CityList from '@/components/summarise/cityList';
 
@@ -33,39 +35,28 @@ export default function Control (props: SummariseControlProps) {
                         alignItems: 'left',
                         marginLeft: '2px',
                         marginTop: '2px',
-                        marginBottom: '2px'
+                        marginBottom: '16px'
                     }}>
-                        <button
-                            id="btnHideControls"
-                            className="btn-transparent right-align"
-                            onClick={() => handleControlsVisibility(true)}
-                        >
-                            X
-                        </button>
-                    </div>
-
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'left',
-                        alignItems: 'center',
-                        marginLeft: '20px',
-                        marginTop: '0px',
-                        marginBottom: '10px'
-                    }}>
-
+                    <Tooltip title="Click to close controls">
+                    <button
+                        id="btnHideControls"
+                        className="btn-transparent right-align"
+                        onClick={() => handleControlsVisibility(true)}
+                    >
                         <Image
                             src="/ua.svg"
                             alt="UA Logo"
-                            width={100}
-                            height={50}
+                            width={20}
+                            height={10}
                             style={{
                                 maxWidth: "100%",
                                 height: "auto"
                             }}
                         />
+                    </button>
+                    </Tooltip>
                     </div>
 
-                    <h3>City</h3>
                     <CityList
                         idx={props.idx}
                         handleIdxChange={props.handleIdxChange}
