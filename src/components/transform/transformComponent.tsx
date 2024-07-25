@@ -209,8 +209,10 @@ const TransformComponent = (props: TransformProps) => {
     useMemo(() => {
         if (geoJSONcontent !== null) {
             const rangeLimits = getRangeLimits(geoJSONcontent, layer);
-            setLayerRange(rangeLimits);
-            setLayerStartStop(rangeLimits);
+            const rangeSdLims = rangeLimits.slice(1, 3); // slice from 1 to before 3
+            const rangeMinMax = [rangeLimits[0]].concat(rangeLimits[3]);
+            setLayerRange(rangeSdLims);
+            setLayerStartStop(rangeMinMax);;
         }
     }, [layer, geoJSONcontent, setLayerRange, setLayerStartStop]);
 

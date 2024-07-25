@@ -85,5 +85,7 @@ export function getRangeLimits(geoJSONcontent: any, varname: string, sdRange = 1
 
     const lowerLimit = mean - sdRange * sd;
     const upperLimit = mean + sdRange * sd;
-    return [lowerLimit, upperLimit];
+    const max = Math.max(...values);
+    const min = Math.min(...values);
+    return [min, lowerLimit, upperLimit, max];
 }
