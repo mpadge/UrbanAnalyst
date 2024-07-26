@@ -28,7 +28,11 @@ export default function ExplainButton (props: ExplainButtonProps) {
 
     return (
         <Stack alignItems="center">
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button
+                variant="outlined"
+                onClick={handleClickOpen}
+                size="small"
+            >
                 Explain Layer
             </Button>
             <ExplainLayerDialog

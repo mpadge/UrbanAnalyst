@@ -27,9 +27,10 @@ export default function SelectNumLayers(props: NumLayersProps) {
             onChange={handleNumLayersClick}
             aria-label="text alignment"
             size="small"
+            sx={{ maxHeight: 24 }}
         >
-            <ToggleButton value="Single">Single</ToggleButton>
-            <ToggleButton value="Paired">Paired</ToggleButton>
+            <ToggleButton size="small" value="Single">Single</ToggleButton>
+            <ToggleButton size="small" value="Paired">Paired</ToggleButton>
         </ToggleButtonGroup>
     )
 }
