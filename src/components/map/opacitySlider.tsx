@@ -19,14 +19,15 @@ export default function OpacitySlider (props: OpacitySliderProps) {
         };
     };
 
-    const size = useWindowSize().width < 700 ? "small" : "medium";
+    const width = useWindowSize().width;
+    const sizeString = width == null ? "medium" : (width < 700 ? "small" : "medium");
 
     return (
         <section className={styles.sliders}>
             <div>
                 <Box className={styles.sliderBox}>
                     <Slider
-                        size={size}
+                        size={sizeString}
                         min={0}
                         max={1}
                         value={props.alpha}

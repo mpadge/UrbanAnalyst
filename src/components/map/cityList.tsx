@@ -60,14 +60,15 @@ export default function CityList(props: CityListProps) {
         }
     };
 
-    const size = useWindowSize().width < 700 ? "small" : "medium";
+    const width = useWindowSize().width;
+    const sizeString = width == null ? "medium" : (width < 700 ? "small" : "medium");
 
     return (
         <Box sx={{
             minWidth: 120,
             marginTop: 1,
         }}>
-            <FormControl fullWidth size={size}>
+            <FormControl fullWidth size={sizeString}>
                 <InputLabel id="city-input-label">City</InputLabel>
                 <Select
                     labelId="city-select-label"

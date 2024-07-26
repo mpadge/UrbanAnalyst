@@ -20,14 +20,15 @@ interface RangeSliderProps {
 
 export default function RangeSlider(props: RangeSliderProps) {
 
-    const size = useWindowSize().width < 700 ? "small" : "medium";
+    const width = useWindowSize().width;
+    const sizeString = width == null ? "medium" : (width < 700 ? "small" : "medium");
 
     return (
         <div className={styles.sliders}>
             <div>
                 <Box className={styles.sliderBox}>
                     <Slider
-                        size={size}
+                        size={sizeString}
                         min={props.rangeMin}
                         max={props.rangeMax}
                         value={props.sliderValues}

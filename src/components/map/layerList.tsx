@@ -72,11 +72,12 @@ export default function LayerList(props: LayerListProps) {
         setSelectedOption(event.target.value as string);
     };
 
-    const size = useWindowSize().width < 700 ? "small" : "medium";
+    const width = useWindowSize().width;
+    const sizeString = width == null ? "medium" : (width < 700 ? "small" : "medium");
 
     return (
         <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth size={size}>
+            <FormControl fullWidth size={sizeString}>
                 <InputLabel id="layer1-input-label">{props.title}</InputLabel>
                 <Select
                     labelId="layer1-select-label"
