@@ -12,6 +12,7 @@ export default function HelpButton (props: HelpButtonProps) {
     return (
         <Stack alignItems="center">
             <Button
+                size="small"
                 variant="outlined"
                 onClick={() => props.handleTourOpen(true)}
             >{buttonText}</Button>

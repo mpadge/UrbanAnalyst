@@ -3,6 +3,7 @@ import { ChangeEvent, SyntheticEvent, SetStateAction, useState } from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 
+import useWindowSize from "@/components/windowSize";
 import styles from '@/styles/sliders.module.css';
 
 interface RangeSliderProps {
@@ -19,11 +20,15 @@ interface RangeSliderProps {
 
 export default function RangeSlider(props: RangeSliderProps) {
 
+    const width = useWindowSize().width;
+    const sizeString = width == null ? "medium" : (width < 700 ? "small" : "medium");
+
     return (
         <div className={styles.sliders}>
             <div>
                 <Box className={styles.sliderBox}>
                     <Slider
+                        size={sizeString}
                         min={props.rangeMin}
                         max={props.rangeMax}
                         value={props.sliderValues}

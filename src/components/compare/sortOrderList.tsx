@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
+import useWindowSize from "@/components/windowSize";
 import styles from '@/styles/controls.module.css';
 
 interface SortOrderListProps {
@@ -49,9 +50,12 @@ export default function SortOrderList(props: SortOrderListProps) {
         }
     }, [props.sortOpt, findMatchingOption, options]);
 
+    const width = useWindowSize().width;
+    const sizeString = width == null ? "medium" : (width < 700 ? "small" : "medium");
+
     return (
         <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
+            <FormControl fullWidth size={sizeString}>
                 <InputLabel id="layer1-input-label">{title}</InputLabel>
                 <Select
                     labelId="compare-sortorder-select-label"

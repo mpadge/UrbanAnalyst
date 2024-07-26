@@ -8,6 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
+import useWindowSize from "@/components/windowSize";
 import styles from '@/styles/controls.module.css';
 
 interface CityListProps {
@@ -59,9 +60,15 @@ export default function CityList(props: CityListProps) {
         }
     };
 
+    const width = useWindowSize().width;
+    const sizeString = width == null ? "medium" : (width < 700 ? "small" : "medium");
+
     return (
-        <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
+        <Box sx={{
+            minWidth: 120,
+            marginTop: 1,
+        }}>
+            <FormControl fullWidth size={sizeString}>
                 <InputLabel id="city-input-label">City</InputLabel>
                 <Select
                     labelId="city-select-label"
