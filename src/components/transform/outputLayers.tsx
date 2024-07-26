@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
+import useWindowSize from "@/components/windowSize";
 import styles from '@/styles/controls.module.css';
 
 interface OutputLayerProps {
@@ -34,9 +35,12 @@ export default function OutputLayers(props: OutputLayerProps) {
         }
     };
 
+    const width = useWindowSize().width;
+    const sizeString = width == null ? "medium" : (width < 700 ? "small" : "medium");
+
     return (
         <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
+            <FormControl fullWidth size={sizeString}>
                 <InputLabel id="outputLayer-input-label">Output Layer</InputLabel>
                 <Select
                     labelId="outputLayer-select-label"
