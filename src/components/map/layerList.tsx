@@ -7,7 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-// import { LayerListProps } from "@/data/interfaces";
+import useWindowSize from "@/components/windowSize";
 import styles from '@/styles/controls.module.css';
 
 interface LayerListProps {
@@ -72,9 +72,11 @@ export default function LayerList(props: LayerListProps) {
         setSelectedOption(event.target.value as string);
     };
 
+    const size = useWindowSize().width < 700 ? "small" : "medium";
+
     return (
         <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
+            <FormControl fullWidth size={size}>
                 <InputLabel id="layer1-input-label">{props.title}</InputLabel>
                 <Select
                     labelId="layer1-select-label"
