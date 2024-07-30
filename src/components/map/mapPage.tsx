@@ -18,9 +18,7 @@ import styles from '@/styles/map.module.css';
 import tourStyles from '@/styles/tour.module.css';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
-import { DataRangeKeys, Data2RangeKeys } from '@/data/interfaces';
-
-import { ViewState } from "@/data/interfaces";
+import { CityDataProps, DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/interfaces';
 
 const buttonProps = {
     first: "home",
