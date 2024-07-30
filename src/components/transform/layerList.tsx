@@ -13,14 +13,14 @@ import useWindowSize from "@/components/windowSize";
 import styles from '@/styles/controls.module.css';
 
 interface LayerListProps {
-    idx: number;
-    idx2: number;
-    citiesArray: CityDataProps[];
+    idx: number,
+    idx2: number,
+    citiesArray: CityDataProps[],
     title: string,
     layer: string,
     handleLayerChange: (layer: string) => void,
-    varnames: string,
-    setVarnames: (varnames: string[]) => void;
+    varnames: string[],
+    setVarnames: (varnames: string[]) => void,
     cityLayers: string[],
 }
 
