@@ -61,6 +61,15 @@ export interface MapProps {
     handleLayerRangeChange: (layerRange: number[]) => void,
 }
 
+/**
+ * Main Map Page component
+ *
+ * This constructs all state variables passed on as `MapProps` to the actual
+ * `map.tsx` which renders to DeckGL and underlying map components.
+ *
+ * The only additional state variables not defined as part of `MapProps`
+ * are those related to the ReactTour components.
+ */
 export default function MapPage() {
 
     const [idx, setIdx] = useState(0);
