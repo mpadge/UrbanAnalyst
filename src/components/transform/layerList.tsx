@@ -19,7 +19,6 @@ interface LayerListProps {
     title: string,
     layer: string,
     handleLayerChange: (layer: string) => void,
-    varnames: string[];
     setVarnames: (varnames: string[]) => void;
     cityLayers: string[],
 }
