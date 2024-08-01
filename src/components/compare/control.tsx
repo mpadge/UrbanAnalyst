@@ -96,6 +96,7 @@ export default function Control (props: CompareControlProps) {
                                 <LayerList
                                     title = "Layer"
                                     layer = {props.layer}
+                                    singleLayer = {props.numLayers != "Paired"}
                                     handleLayerChange = {props.handleLayerChange}
                                 />
                             </Stack>
@@ -104,6 +105,7 @@ export default function Control (props: CompareControlProps) {
                                     <LayerList
                                         title = "Paired Layer"
                                         layer = {props.layer2}
+                                        singleLayer = {props.numLayers != "Paired"}
                                         handleLayerChange = {props.handleLayer2Change}
                                     />
                                 </Stack>
