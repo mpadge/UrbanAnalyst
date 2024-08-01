@@ -38,7 +38,7 @@ export default function LayerList(props: LayerListProps) {
     // Recuce options by removing social layer for single-layer only,
     // but leave for paired layer view.
     const reducedOptions = useMemo(() => {
-        return props.singleLayer ??  
+        return props.singleLayer ?
             options.filter((option) => option.value !== "social_index") :
             options;
     }, [options, props.singleLayer]);
