@@ -19,6 +19,7 @@ interface LayerListProps { // different from same defined in data/interfaces
 export default function LayerList(props: LayerListProps) {
 
     const options = useMemo (() => [
+        { value: "social_index", label: "Social" },
         { value: "times_rel", label: "Transport Rel." },
         { value: "times_abs", label: "Transport Abs." },
         { value: "transfers", label: "Num. Transfers" },
