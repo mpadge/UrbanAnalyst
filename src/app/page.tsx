@@ -2,7 +2,6 @@
  * Main page
  *
  */
-
 import Image from "next/image"
 import Link from 'next/link'
 import type { Metadata, Viewport } from 'next';
@@ -11,8 +10,8 @@ import mapImage from '@/images/map.png';
 import transformImage from '@/images/transform.png';
 
 import styles from '@/styles/Home.module.css'
-import Buttons from '@/components/buttons5'
-import { ButtonProps } from '@/data/interfaces';
+import ButtonAppBar from '@/components/appBar';
+import { ButtonAppProps, ButtonProps } from '@/data/interfaces';
 
 /**
  * NextJS metadata for main page
@@ -44,9 +43,17 @@ export default function Home() {
         fifth: "about"
     }
 
+    const buttonTxt = [
+        "summarise",
+        "compare",
+        "map",
+        "transform",
+        "about"
+    ]
+
     return (
         <>
-            <Buttons buttons={buttons} />
+            <ButtonAppBar text={buttonTxt} />
             <main className={styles.main}>
                 <div className={styles.description}>
                     <p>
