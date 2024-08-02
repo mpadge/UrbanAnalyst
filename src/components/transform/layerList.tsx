@@ -13,14 +13,14 @@ import useWindowSize from "@/components/windowSize";
 import styles from '@/styles/controls.module.css';
 
 interface LayerListProps {
-    idx: number;
-    idx2: number;
-    citiesArray: CityDataProps[];
+    idx: number,
+    idx2: number,
+    citiesArray: CityDataProps[],
     title: string,
     layer: string,
     handleLayerChange: (layer: string) => void,
-    varnames: string[];
-    setVarnames: (varnames: string[]) => void;
+    varnames: string[],
+    setVarnames: (varnames: string[]) => void,
     cityLayers: string[],
 }
 
@@ -29,7 +29,6 @@ export default function LayerList(props: LayerListProps) {
 
     const options = useMemo (() => {
         const allOptions = [
-            { value: "social_index", label: "Social" },
             { value: "times_rel", label: "Rel. Transport" },
             { value: "times_abs", label: "Abs. Transport" },
             { value: "transfers", label: "Num. Transfers" },

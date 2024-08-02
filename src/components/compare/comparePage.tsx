@@ -37,7 +37,7 @@ export default function Home() {
     const [meanVals, setMeanVals] = useState(true);
 
     useEffect(() => {
-        var layerLocal = "social_index";
+        var layerLocal = "transport";
         var layer2Local = "";
         var numLayersLocal = "Single";
         var sortOptLocal = "increasing";

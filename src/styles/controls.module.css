@@ -42,22 +42,6 @@
     display: none;
 }
 
-.listSelect {
-    width: 90%;
-    align: center;
-    margin-left: 10px;
-    margin-bottom: 15px;
-    width: var(--control-width-wide--inner);
-}
-
-.numLayersSelect {
-    width: 90%;
-    align: center;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    width: var(--control-width-wide--inner);
-}
-
 .explainbuttonOff {
     align: center;
     margin-top: 10px;
@@ -93,163 +77,10 @@
     margin-left: 12px;
 }
 
-.explainbuttonOn {
-    align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    background-color: rgba(78, 153, 234, 0.5);
-    border: 1px solid rgba(172, 175, 176, 0.3);
-    border-radius: 12px;
-    width: 70%;
-    padding: 2px;
-    opacity: 0.6;
-}
-
-
-.explainbuttonOn p {
-    position: relative;
-    margin: 0;
-    padding: 1rem;
-}
-
-.explainbuttonOn h2 {
-    font-weight: 600;
-    margin-top: 0.7rem;
-    margin-bottom: 0.7rem;
-    margin-left: 12px;
-}
-
-.explainbuttonOn h3 {
-    font-weight: 400;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    margin-left: 12px;
-}
-
-.explaintext {
-    display: inherit;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin: 20px;
-    margin-top: 80px;
-    z-index: 10;
-    position: relative;
-    background-color: rgba(157, 248, 248, 0.95);
-    background-color: rgba(--var(--explain-background-rgb), 0.95);
-    border: 1px solid rgba(172, 175, 176, 0.9);
-    border-radius: 12px;
-    left: 10%;
-    max-width: 60%;
-}
-
-
-.explaintext p {
-    position: relative;
-    margin: 0;
-    padding: 1rem;
-}
-
-.explaintext h2 {
-    font-weight: 600;
-    margin-top: 0.7rem;
-    margin-bottom: 0.7rem;
-    margin-left: 12px;
-}
-
-.explaintext h3 {
-    font-weight: 400;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    margin-left: 12px;
-}
-
-.radioButtons {
-    align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.radioButton {
-    align: center;
-    margin-left: 15px;
-}
-
-.radioButton label {
-    align: center;
-}
-
-.layerlist {
-    display: inherit;
-    margin: 20px;
-    z-index: 10;
-    position: absolute;
-    background-color: rgba(238, 240, 241, 0.5);
-    border: 1px solid rgba(172, 175, 176, 0.3);
-    border-radius: 12px;
-    font-size: 14px;
-    top: 20;
-    left: 10dvw;
-    width: var(--control-width-wide--outer);
-}
-
-.layerlist div {
-    margin: 0;
-    margin-top: 10px;
-    padding: 0rem;
-    text-align: left;
-    white-space: nowrap;
-    overflow: auto;
-}
-
-.layerlist input {
-    margin-left: 20px;
-    margin-bottom: 10px;
-}
-
-.transformLogo {
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
     .controls {
         width: var(--control-width-med--outer);
-    }
-    .listSelect {
-        margin-left: 5px;
-        margin-bottom: 10px;
-        width: var(--control-width-med--inner);
-    }
-    .numLayersSelect {
-        margin-left: 5px;
-        width: var(--control-width-med--inner);
-    }
-    .layerlist {
-        margin: 10px;
-        border-radius: 10px;
-        font-size: 12px;
-        top: 20;
-        left: 10dvw;
-        width: var(--control-width-med--inner);
-        white-space: nowrap;
-        overflow: auto;
-    }
-    .layerlist div {
-        margin: 0;
-        margin-top: 6px;
-        padding: 0rem;
-        text-align: left;
-    }
-    .layerslist input {
-        margin-bottom: 10px;
-    }
-    .explaintext {
-        left: 20%;
-        max-width: 50%;
     }
 }
 
@@ -273,48 +104,5 @@
     .controlsTransform {
         composes: controls;
         margin-top: 80px;
-    }
-    .listSelect {
-        margin: 0px;
-        margin-left: 5px;
-        margin-bottom: 5px;
-        width: var(--control-width-narrow-inner);
-        min-width: 135px;
-    }
-    .numLayersSelect {
-        margin-left: 5px;
-        width: var(--control-width-narrow-inner);
-    }
-
-    .layerlist {
-        margin: 10px;
-        border-radius: 10px;
-        font-size: 12px;
-        top: 20;
-        left: 20dvw;
-        min-width: var(--control-width-narrow-outer);
-        white-space: nowrap;
-        overflow: auto;
-    }
-    .layerlist div {
-        margin: 0;
-        margin-top: 6px;
-        padding: 0rem;
-        text-align: left;
-    }
-    .layerlist h3 {
-        font-weight: 250;
-        font-size: 12px;
-        margin-top: 0.1rem;
-        margin-bottom: 0.1rem;
-        margin-left: 8px;
-    }
-    .layerslist input {
-        margin-bottom: 10px;
-    }
-
-    .explaintext {
-        left: 30%;
-        max-width: 50%;
     }
 }

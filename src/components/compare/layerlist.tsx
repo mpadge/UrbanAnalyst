@@ -11,14 +11,16 @@ import useWindowSize from "@/components/windowSize";
 import styles from '@/styles/controls.module.css';
 
 interface LayerListProps { // different from same defined in data/interfaces
-    layer: string,
     title: string,
+    layer: string,
+    singleLayer: boolean,
     handleLayerChange: (layer: string) => void
 }
 
 export default function LayerList(props: LayerListProps) {
 
     const options = useMemo (() => [
+        { value: "social_index", label: "Social" },
         { value: "times_rel", label: "Transport Rel." },
         { value: "times_abs", label: "Transport Abs." },
         { value: "transfers", label: "Num. Transfers" },
@@ -33,14 +35,22 @@ export default function LayerList(props: LayerListProps) {
         { value: "value", label: "Housing Value" },
     ], []);
 
+    // Recuce options by removing social layer for single-layer only,
+    // but leave for paired layer view.
+    const reducedOptions = useMemo(() => {
+        return props.singleLayer ?
+            options.filter((option) => option.value !== "social_index") :
+            options;
+    }, [options, props.singleLayer]);
+
     const findMatchingOption = useCallback(() => {
         var op = "transport";
-        if (options && options.length > 0) {
-            const matchingOption = options.find(option => option.value === props.layer)?.value;
-            op = matchingOption ?? options[4]?.value ?? "transport";
+        if (reducedOptions && reducedOptions.length > 0) {
+            const matchingOption = reducedOptions.find(option => option.value === props.layer)?.value;
+            op = matchingOption ?? reducedOptions[4]?.value ?? "transport";
         }
         return op;
-    }, [options, props.layer]);
+    }, [reducedOptions, props.layer]);
 
     const [selectedOption, setSelectedOption] = useState(findMatchingOption());
 
@@ -49,9 +59,9 @@ export default function LayerList(props: LayerListProps) {
         if (this_option) {
             setSelectedOption(this_option);
         } else {
-            setSelectedOption(options[4].value);
+            setSelectedOption("transport");
         }
-    }, [props.layer, findMatchingOption, options]);
+    }, [props.layer, findMatchingOption, reducedOptions]);
 
     const handleChange = (event: SelectChangeEvent) => {
         props.handleLayerChange(event.target.value as string);
@@ -72,7 +82,7 @@ export default function LayerList(props: LayerListProps) {
                     label={props.title}
                     onChange={handleChange}
                 >
-                    {options.map((option) => (
+                    {reducedOptions.map((option) => (
                         <MenuItem key={option.value} value={option.value}>
                             {option.label}
                         </MenuItem>

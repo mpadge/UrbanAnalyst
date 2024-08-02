@@ -7,7 +7,7 @@ import 'd3-scale-chromatic';
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
 
-import { MapProps } from "@/components/map/map";
+import { MapProps } from "@/components/map/mapPage";
 
 export default function MapLayer (props: MapProps) {
 

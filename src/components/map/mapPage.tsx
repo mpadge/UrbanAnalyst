@@ -18,9 +18,7 @@ import styles from '@/styles/map.module.css';
 import tourStyles from '@/styles/tour.module.css';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
-import { DataRangeKeys, Data2RangeKeys } from '@/data/interfaces';
-
-import { ViewState } from "@/data/interfaces";
+import { CityDataProps, DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/interfaces';
 
 const buttonProps = {
     first: "home",
@@ -29,6 +27,47 @@ const buttonProps = {
     fourth: "transform"
 }
 
+/**
+ * Definition of interface for `MapProps`. These are constructed in
+ * here and passed through to {@link map}. Individual props are:
+ *
+ * - `idx`: The integer defining the city from the full `CITY_DATA.citiesArray`.
+ * - `layer`: The string defining the single layer to be diplayed.
+ * - `layer2`: The string defining the optional paired layer to be used to
+ *    display pairwise relationship.
+ * - `numLayers`: String equal to either "single" or "paired".
+ * - `alpha`: Opacity of rendered map (0 - 1).
+ * - `layerRange`: Range of values to be plotted on map; obtained from the
+ *   `rangeSlider` input.
+ * - `layerStartStop`: Range of values spanned by `layerRange` slider. These are
+ *   defined on page load, and fixed from then on.
+ */
+export interface MapProps {
+    idx: number,
+    layer: string,
+    layer2: string,
+    numLayers: string,
+    alpha: number,
+    layerRange: number[],
+    layerStartStop: number[],
+    viewState: ViewState,
+    citiesArray: CityDataProps[],
+    handleAlphaChange: (pAlpha: number) => void,
+    handleViewStateChange: (pViewState: ViewState) => void,
+    handleLayerChange: (layer: string) => void
+    handleLayer2Change: (layer2: string) => void
+    handleLayerRangeChange: (layerRange: number[]) => void,
+}
+
+/**
+ * Main Map Page component
+ *
+ * This constructs all state variables passed on as `MapProps` to the actual
+ * `map.tsx` which renders to DeckGL and underlying map components.
+ *
+ * The only additional state variables not defined as part of `MapProps`
+ * are those related to the ReactTour components.
+ */
 export default function MapPage() {
 
     const [idx, setIdx] = useState(0);
