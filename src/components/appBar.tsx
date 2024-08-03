@@ -12,6 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
+import useWindowSize from "@/components/windowSize";
 import { ButtonAppProps } from '@/data/interfaces';
 
 function getHref(s: string) {
@@ -26,12 +27,17 @@ function capitaliseFirst(s: string) {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
+const MIN_MENU_WIDTH = 600;
+
 export default function ButtonAppBar(props: ButtonAppProps) {
 
     const buttonInputs = props.text.map((i) => ({
         key: capitaliseFirst(i),
         value: getHref(i),
     }))
+
+    const width = useWindowSize().width;
+    const sizeString = width == null ? "medium" : (width < 700 ? "small" : "medium");
 
     const [anchorNav, setAnchorNav] = React.useState<null | HTMLElement>(null);
 
@@ -49,7 +55,7 @@ export default function ButtonAppBar(props: ButtonAppProps) {
                 <Toolbar>
                     <Box sx={{ flexGrow: 0 }}>
                         <IconButton
-                            size="large"
+                            size={sizeString}
                             edge="start"
                             color="inherit"
                             aria-label="menu"
@@ -85,9 +91,14 @@ export default function ButtonAppBar(props: ButtonAppProps) {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         UA
                     </Typography>
-                    {buttonInputs.map((button) => (
-                        <Button key={button.key} color="inherit" href={button.value}>{button.key}</Button>
-                    ))}
+                    {typeof width === "number" &&
+                        width > MIN_MENU_WIDTH &&
+                        buttonInputs.map((button) => (
+                            <Button key={button.key} color="inherit" href={button.value}>
+                                {button.key}
+                            </Button>
+                        ))
+                    }
                 </Toolbar>
             </AppBar>
         </Box>
