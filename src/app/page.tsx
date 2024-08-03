@@ -35,14 +35,6 @@ export const viewport: Viewport = {
  */
 export default function Home() {
 
-    const buttons = {
-        first: "summarise",
-        second: "compare",
-        third: "map",
-        fourth: "transform",
-        fifth: "about"
-    }
-
     const buttonTxt = [
         "summarise",
         "compare",
