@@ -92,7 +92,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Relative travel times multiplied by median house prices per room. Lower values reflect lower multi-modal travel times (faster transport) compared with equivalent automobile times, combined with lower monthly rent."
         ],
         "timesrel_social": [
-            "Relative travel times multiplied by social index (rescaled to average of one). Lower values reflect lower multi-modal travel times (faster transport) compared with equivalent automobile times, combined with advantageous social conditions."
+            "Relationship between welative travel times and social index. Lower (more negative) values reflect lower multi-modal travel times (faster transport) compared with equivalent automobile times, combined with disadvantageous social conditions."
         ],
         "timesabs_transfers": [
             "Absolute travel times multiplied by numbers of transfers. Lower values represent lower travel times (faster transport) combined with fewer numbers of transfers."
@@ -125,7 +125,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Median house prices per room times absolute travel times. Lower values reflect lower multi-modal travel times (faster transport), combined with lower house prices."
         ],
         "timesabs_social": [
-            "Social index (rescaled to average of one) times absolute travel times. Lower values reflect lower multi-modal travel times (faster transport), combined with advantageous social conditions."
+            "Relationship between social index and absolute travel times. Lower (more negative) values reflect lower multi-modal travel times (faster transport), combined with disadvantageous social conditions."
         ],
         "transfers_intervals": [
             "Numbers of transfers multiplied by intervals between consecutive services. Lower values represent short intervals between consecutive transport services combined with fewer transfers within journeys."
@@ -155,7 +155,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Numbers of transfers multiplied by median house prices per room. Low values represent transport services requiring fewer transfers coupled with lower house prices."
         ],
         "transfers_social": [
-            "Numbers of transfers multiplied by social index (rescaled to average of one). Low values represent transport services requiring fewer transfers coupled with advantageous social conditions."
+            "Relationship between numbers of transfers and social index. Low (more negative) values represent transport services requiring fewer transfers coupled with disadvantageous social conditions."
         ],
         "intervals_transport": [
             "Transport intervals multiplied by compound transport index. Transport intervals are already included in the compound transport index, and these values will generally not mean anything."
@@ -182,7 +182,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Transport intervals multiplied by median house prices per room. Low values represent transport with shorter intervals between consecutive services coupled with lower house prices."
         ],
         "intervals_social": [
-            "Transport intervals multiplied by social index (rescaled to average of one). Low values represent transport with shorter intervals between consecutive services coupled with advantageous social conditions."
+            "Relationship between transport intervals and social index. Low (more negative) values represent transport with shorter intervals between consecutive services coupled with disadvantageous social conditions."
         ],
         "transport_popdens": [
             "Compound transport index multiplied by population densities. Low values represent overall good provision of public transport coupled with low population density."
@@ -206,7 +206,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Compound transport index multiplied by median house prices per room. Low values represent overall good provision of public transport coupled with lower house prices."
         ],
         "transport_social": [
-            "Compound transport index multiplied by social index (rescaled to average of one). Low values represent overall good provision of public transport coupled with advantageous social conditions."
+            "Relationship between compound transport index multiplied by social index. Low (more negative) values represent overall good provision of public transport coupled with disadvantageous social conditions."
         ],
         "popdens_schooldist": [
             "Population density multiplied by distances to nearest schools. Low values represent low population density coupled with short distances to schools."
@@ -227,7 +227,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Population density multiplied by median house prices per room. Low values represent low population density coupled with lower house prices."
         ],
         "popdens_social": [
-            "Population density multiplied by social index (rescaled to average of one). Low values represent low population density coupled with advantageous social conditions."
+            "Relationship between population density and social index. Low (more negative) values represent low population density coupled with disadvantageous social conditions."
         ],
         "schooldist_bike": [
             "Distance to nearest school multiplied by bicycle index. Low values represent shorter distances to schools coupled with good provision of bicycle infrastructure."
@@ -245,7 +245,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Distance to nearest school multiplied by median house prices per room. Low values indicate shorter distances to schools coupled with lower house prices."
         ],
         "schooldist_social": [
-            "Distance to nearest school multiplied by social index (rescaled to average of one). Low values indicate shorter distances to schools coupled with advantageous social conditions."
+            "Relationship between distance to nearest school and social index. Low (more negative) values indicate shorter distances to schools coupled with disadvantageous social conditions."
         ],
         "bike_natural": [
             "Bicycle infrastructure index multiplied by index of accessibility to natural spaces. Low values reflect good access to natural spaces coupled with good provision of bicycle infrastructure."
@@ -260,7 +260,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Bicycle infrastructure index multiplied by median house prices per room. Low values reflect good provision of bicycle infrastructure coupled with lower house prices."
         ],
         "bike_social": [
-            "Bicycle infrastructure index multiplied by social index (rescaled to average of one). Low values reflect good provision of bicycle infrastructure coupled with advantageous social conditions."
+            "Relationship between bicycle infrastructure index and social index. Low (more negative) values reflect good provision of bicycle infrastructure coupled with disadvantageous social conditions."
         ],
         "natural_parking": [
             "Index of access to natural spaces multiplied by parking index. Low values reflect good access to natural spaces coupled with lower availability of automobile parking spaces."
@@ -272,7 +272,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Index of access to natural spaces multiplied by median house prices per room. Low values indicate that good access to natural spaces is coupled with lower house prices."
         ],
         "natural_social": [
-            "Index of access to natural spaces multiplied by social index (rescaled to average of one). Low values indicate that good access to natural spaces is coupled with disadvantageous social conditions."
+            "Relationship between index of access to natural spaces and social index. Low (more negative) values indicate that good access to natural spaces is coupled with disadvantageous social conditions."
         ],
         "parking_rent": [
             "Parking index multiplied by median monthly rent per room. Low values reflect lower availability of automobile parking spaces coupled with lower monthly rent."
@@ -281,16 +281,16 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Parking index multiplied by median house prices per room. Low values reflect lower availability of automobile parking spaces coupled with lower house prices"
         ],
         "parking_social": [
-            "Parking index multiplied by social index (rescaled to average of one). Low values reflect lower availability of automobile parking spaces coupled with advantageous social conditions"
+            "Relationship between parking index and social index. Low (more negative) values reflect lower availability of automobile parking spaces coupled with disadvantageous social conditions"
         ],
         "rent_value": [
             "Median monthly rent per room multiplied by median house prices per room. Low values reflect lower monthly rent coupled with lower house prices."
         ],
         "rent_social": [
-            "Median monthly rent per room multiplied by social index (rescaled to average of one). Low values reflect lower monthly rent coupled with advantageous social conditions."
+            "Relationship between median monthly rent per room and ocial index. Low values reflect lower monthly rent coupled with disadvantageous social conditions."
         ],
         "value_social": [
-            "Median house prices per room multiplied by social index (rescaled to average of one). Low values reflect lower house prices coupled with advantageous social conditions."
+            "Relationship between median house prices per room and ultiplied by social index. Low values reflect lower house prices coupled with disadvantageous social conditions."
         ],
     };
 
