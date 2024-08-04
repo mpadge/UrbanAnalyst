@@ -3,9 +3,7 @@ import Link from 'next/link'
 import type { Metadata, Viewport } from 'next';
 
 import styles from '@/styles/summarise.module.css'
-import Buttons from '@/components/buttons4'
 import ButtonAppBar from '@/components/appBar';
-import { ButtonAppProps, ButtonProps } from '@/data/interfaces';
 
 import SummarisePage from '@/components/summarise/summarisePage';
 
