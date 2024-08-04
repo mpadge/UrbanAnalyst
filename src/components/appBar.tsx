@@ -12,6 +12,25 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import SvgIcon from '@mui/material/SvgIcon';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { indigo, blue, teal, pink } from '@mui/material/colors';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#757ce8',
+      main: '#3f50b5',
+      dark: '#002884',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#ff7961',
+      main: '#f44336',
+      dark: '#ba000d',
+      contrastText: '#000',
+    },
+  },
+});
 
 import useWindowSize from "@/components/windowSize";
 import { ButtonAppProps } from '@/data/interfaces';
@@ -93,7 +112,8 @@ export default function ButtonAppBar(props: ButtonAppProps) {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="fixed">
+            <ThemeProvider theme={theme}>
+            <AppBar position="fixed" color="primary">
                 <Toolbar>
                     <Box sx={{ flexGrow: 0 }}>
                         <IconButton
@@ -145,6 +165,7 @@ export default function ButtonAppBar(props: ButtonAppProps) {
                     }
                 </Toolbar>
             </AppBar>
+            </ThemeProvider>
         </Box>
     );
 }
