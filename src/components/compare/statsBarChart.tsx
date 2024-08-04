@@ -7,7 +7,6 @@ import styles from '@/styles/compare.module.css';
 import useWindowSize from '@/components/windowSize';
 
 import { CityDataProps } from "@/data/interfaces";
-import { HeadingTextOneLayer } from "@/components/headingText";
 
 interface CompareProps {
     layer1: string,
@@ -213,17 +212,9 @@ export default function BarChart (props: CompareProps) {
 
     const inputRef = useRef()
 
-    const heading: string = props.numLayers == "Paired" && dual_layers ?
-        HeadingTextOneLayer(layer1) + " & " + HeadingTextOneLayer(layer2) :
-        HeadingTextOneLayer(props.layer1);
-
     return (
         <>
             <div id="compare-page" className={styles.comparepage}>
-
-                <div id="compare-heading" className={styles.compareheading}>
-                    <p> {heading} </p>
-                </div>
 
                 <div id="compare-container" className={styles.compareplot} >
                     <Suspense fallback={<div>Loading...</div>}>

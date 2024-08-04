@@ -12,8 +12,6 @@ import UTAMap from '@/components/map/map';
 import Tour from '@/components/map/tour/tour';
 import useWindowSize from '@/components/windowSize';
 import { getTourConfig } from '@/components/map/tour/tourConfig';
-import { HeadingTextOneLayer, HeadingText } from "@/components/headingText";
-import styles from '@/styles/map.module.css';
 import tourStyles from '@/styles/tour.module.css';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
@@ -230,8 +228,6 @@ export default function MapPage() {
         setLayerRange(layerRange);
     }
 
-    const heading: string = HeadingText(layer, layer2, numLayers, CITY_DATA.citiesArray);
-
     // ----- TOUR start-----
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
@@ -268,9 +264,6 @@ export default function MapPage() {
 
     return (
         <>
-            <div id="maps-heading" className={styles.mapsheading}>
-                <p> {heading} </p>
-            </div>
             <UTAMap
                 idx = {idx}
                 layer = {layer}
