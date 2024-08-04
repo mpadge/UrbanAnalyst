@@ -3,8 +3,7 @@ import Link from 'next/link'
 import type { Metadata, Viewport } from 'next';
 
 import styles from '@/styles/about.module.css'
-import Buttons from '@/components/buttons5'
-import { ButtonProps } from '@/data/interfaces';
+import ButtonAppBar from '@/components/appBar';
 
 export const metadata: Metadata = {
     title: 'UA',
@@ -19,41 +18,18 @@ export const viewport: Viewport = {
 
 export default function Home() {
 
-    const buttons = {
-        first: "home",
-        second: "summarise",
-        third: "compare",
-        fourth: "map",
-        fifth: "transform"
-    }
+    const buttonTxt = [
+        "home",
+        "summarise",
+        "compare",
+        "map",
+        "transform",
+    ]
 
     return (
         <>
-            <Buttons buttons={buttons} />
+            <ButtonAppBar text={buttonTxt} />
             <main className={styles.main}>
-                <div className={styles.description}>
-                    <p>
-                        <a
-                            href="https://github.com/UrbanAnalyst"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Urban Analyst
-                            <Image
-                                src="/ua.svg"
-                                alt="UA Logo"
-                                className={styles.vercelLogo}
-                                width={100}
-                                height={50}
-                                priority
-                                style={{
-                                    maxWidth: "100%",
-                                    height: "auto"
-                                }}
-                            />
-                        </a>
-                    </p>
-                </div>
 
                 <div className={styles.centerBig}>
                     <p className="text-center">
