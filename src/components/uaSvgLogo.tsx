@@ -25,13 +25,13 @@ export const SvgComponent: React.FC<React.SVGProps<SVGSVGElement>> = (props) => 
             fill="transparent"
             stroke="currentColor"
             strokeWidth="3"
-            d="M 4 6 v 8 C 4 21, 10 21, 10 14 v -8"
+            d="M 4 5 v 8 C 3 21, 9 21, 9 14 v -9"
         />
         <path
             fill="transparent"
             stroke="currentColor"
             strokeWidth="3"
-            d="M 13 20 l 4 -12 l 4 12"
+            d="M 12.5 20 l 4 -12 l 4 12"
         />
         <path
             fill="transparent"
