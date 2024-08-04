@@ -2,7 +2,6 @@
  * Main page
  *
  */
-
 import Image from "next/image"
 import Link from 'next/link'
 import type { Metadata, Viewport } from 'next';
@@ -11,8 +10,8 @@ import mapImage from '@/images/map.png';
 import transformImage from '@/images/transform.png';
 
 import styles from '@/styles/Home.module.css'
-import Buttons from '@/components/buttons5'
-import { ButtonProps } from '@/data/interfaces';
+import ButtonAppBar from '@/components/appBar';
+import { ButtonAppProps } from '@/data/interfaces';
 
 /**
  * NextJS metadata for main page
@@ -36,41 +35,18 @@ export const viewport: Viewport = {
  */
 export default function Home() {
 
-    const buttons = {
-        first: "summarise",
-        second: "compare",
-        third: "map",
-        fourth: "transform",
-        fifth: "about"
-    }
+    const buttonTxt = [
+        "summarise",
+        "compare",
+        "map",
+        "transform",
+        "about"
+    ]
 
     return (
         <>
-            <Buttons buttons={buttons} />
+            <ButtonAppBar text={buttonTxt} />
             <main className={styles.main}>
-                <div className={styles.description}>
-                    <p>
-                        <a
-                            href="https://github.com/UrbanAnalyst"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Urban Analyst
-                            <Image
-                                src="/ua.svg"
-                                alt="UA Logo"
-                                className={styles.vercelLogo}
-                                width={100}
-                                height={50}
-                                priority
-                                style={{
-                                    maxWidth: "100%",
-                                    height: "auto"
-                                }}
-                            />
-                        </a>
-                    </p>
-                </div>
 
                 <div className={styles.centerBig}>
                     <p className="text-center">

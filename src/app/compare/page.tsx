@@ -1,6 +1,7 @@
 
 import type { Metadata, Viewport } from 'next';
 
+import ButtonAppBar from '@/components/appBar';
 import StatsPage from '@/components/compare/comparePage';
 
 export const metadata: Metadata = {
@@ -16,8 +17,17 @@ export const viewport: Viewport = {
 
 export default function Home() {
 
+    const buttonTxt = [
+        "home",
+        "summarise",
+        "map",
+        "transform",
+        "about"
+    ]
+
     return (
         <>
+        <ButtonAppBar text={buttonTxt} />
         <StatsPage />
         </>
     )

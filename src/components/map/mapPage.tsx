@@ -9,7 +9,6 @@ import { Map } from "react-map-gl";
 import Control from '@/components/map/control';
 import Legend from '@/components/map/legend';
 import UTAMap from '@/components/map/map';
-import Buttons from '@/components/buttons4';
 import Tour from '@/components/map/tour/tour';
 import useWindowSize from '@/components/windowSize';
 import { getTourConfig } from '@/components/map/tour/tourConfig';
@@ -19,13 +18,6 @@ import tourStyles from '@/styles/tour.module.css';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
 import { CityDataProps, DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/interfaces';
-
-const buttonProps = {
-    first: "home",
-    second: "summarise",
-    third: "compare",
-    fourth: "transform"
-}
 
 /**
  * Definition of interface for `MapProps`. These are constructed in
@@ -325,7 +317,6 @@ export default function MapPage() {
                 alpha = {alpha}
                 citiesArray = {CITY_DATA.citiesArray}
             />
-            <Buttons buttons={buttonProps} />
             <Tour
                 onRequestClose={closeTour}
                 disableInteraction={false}

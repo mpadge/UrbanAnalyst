@@ -106,3 +106,7 @@ export interface ButtonProps {
         fifth?: string
     }
 }
+
+export interface ButtonAppProps {
+    text: string[];
+}
