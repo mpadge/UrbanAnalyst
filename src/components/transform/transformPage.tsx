@@ -5,7 +5,6 @@ import { FlyToInterpolator } from "@deck.gl/core/typed";
 
 import Control from '@/components/transform/control';
 import Legend from '@/components/transform/legend';
-import Buttons from '@/components/buttons4';
 import Tour from '@/components/transform/tour/tour';
 import useWindowSize from '@/components/windowSize';
 
@@ -17,12 +16,6 @@ import { DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/interfaces';
 
 import tourStyles from '@/styles/tour.module.css';
 
-const buttonProps = {
-    first: "home",
-    second: "summarise",
-    third: "map",
-    fourth: "compare"
-}
 
 /**
  * Definition of interface for `TransformProps`. These are constructed in
@@ -239,7 +232,6 @@ export default function TransformPage() {
 
     return (
         <>
-            <Buttons buttons={buttonProps} />
             <MapTransformDynamic
                 idx={idx}
                 idx2={idx2}
