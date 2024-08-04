@@ -3,7 +3,6 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import Control from '@/components/compare/control';
-import Buttons from '@/components/buttons4';
 import BarChart from '@/components/compare/statsBarChart';
 import Tour from '@/components/compare/tour/tour';
 import useWindowSize from '@/components/windowSize';
@@ -14,13 +13,6 @@ import styles from '@/styles/Home.module.css'
 import tourStyles from '@/styles/tour.module.css';
 
 import { CITY_DATA } from '@/data/citydata';
-
-const buttonProps = {
-    first: "home",
-    second: "summarise",
-    third: "map",
-    fourth: "transform"
-}
 
 export default function Home() {
 
@@ -154,7 +146,6 @@ export default function Home() {
                     handleSortChange = {handleSortChange}
                     handleTourOpen = {handleTourOpen}
                 />
-                <Buttons buttons={buttonProps} />
             </main>
             <Tour
                 onRequestClose={closeTour}
