@@ -6,7 +6,7 @@
     z-index: 10;
     position: fixed;
     width: 250px;
-    margin-top: 20px;
+    margin-top: 80px;
     left: 50%;
     transform: translate(-50%, 0);
 }
