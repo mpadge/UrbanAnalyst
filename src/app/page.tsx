@@ -11,7 +11,7 @@ import transformImage from '@/images/transform.png';
 
 import styles from '@/styles/Home.module.css'
 import ButtonAppBar from '@/components/appBar';
-import { ButtonAppProps, ButtonProps } from '@/data/interfaces';
+import { ButtonAppProps } from '@/data/interfaces';
 
 /**
  * NextJS metadata for main page
