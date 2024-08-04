@@ -4,7 +4,8 @@ import type { Metadata, Viewport } from 'next';
 
 import styles from '@/styles/summarise.module.css'
 import Buttons from '@/components/buttons4'
-import { ButtonProps } from '@/data/interfaces';
+import ButtonAppBar from '@/components/appBar';
+import { ButtonAppProps, ButtonProps } from '@/data/interfaces';
 
 import SummarisePage from '@/components/summarise/summarisePage';
 
@@ -21,16 +22,17 @@ export const viewport: Viewport = {
 
 export default function Home() {
 
-    const buttons = {
-        first: "home",
-        second: "compare",
-        third: "map",
-        fourth: "transform"
-    }
+    const buttonTxt = [
+        "home",
+        "compare",
+        "map",
+        "transform",
+        "about"
+    ]
 
     return (
         <>
-            <Buttons buttons={buttons} />
+            <ButtonAppBar text={buttonTxt} />
             <main className={styles.main}>
 
                 <SummarisePage />
