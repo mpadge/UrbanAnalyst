@@ -132,9 +132,9 @@ export default function ButtonAppBar(props: ButtonAppProps) {
 
                     <SvgIcon component={SvgComponent}>
                     </SvgIcon>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        UA
-                    </Typography>
+
+                    <Box sx={{ flexGrow: 1 }}>
+                    </Box>
                     {typeof width === "number" &&
                         width > MIN_MENU_WIDTH &&
                         buttonInputs.map((button) => (
