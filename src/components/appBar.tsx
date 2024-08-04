@@ -57,8 +57,6 @@ const SvgComponent: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   </svg>
 )
 
-import UAIcon from "../../public/ua.svg";
-
 function getHref(s: string) {
     if (s == "home") {
         return "/";
