@@ -17,7 +17,7 @@ import useWindowSize from "@/components/windowSize";
 import { ButtonAppProps } from '@/data/interfaces';
 
 
-const SvgComponent = (props) => (
+const SvgComponent: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
         width="1em"
         height="1em"
