@@ -19,6 +19,7 @@ import HelpButton from '@/components/helpButton';
 
 import styles from '@/styles/controls.module.css';
 import { CityDataProps } from "@/data/interfaces";
+import { getIdxWashington } from '@/components/headingText';
 
 const junctionFont = localFont({ src: '../../app/junction-regular.woff' })
 
@@ -50,16 +51,6 @@ const SortOrderSpacing = styled('div')(({ theme }) => ({
     marginBottom: '12px',
 }));
 
-/**
- * The "Explain Layer" button gets the layer definitions from the CityData
- * arrays for a single, hard-coded city. To ensure that this includes the extra
- * US census variables, this needs to be a US city. This function returns the
- * index of Washingtone DC.
- */
-function getIdxWashington(props: CompareControlProps): number | undefined {
-    return props.citiesArray.findIndex((item) => item.name === "washington");
-}
-
 export default function Control (props: CompareControlProps) {
 
     const cityNames = props.citiesArray.map((item) => item.name);
@@ -69,7 +60,7 @@ export default function Control (props: CompareControlProps) {
         setHideControls(pHideControls);
     }
 
-    const IdxWashington = getIdxWashington(props);
+    const IdxWashington = getIdxWashington(props.citiesArray);
 
     return (
         <>

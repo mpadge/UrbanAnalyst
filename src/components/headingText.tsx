@@ -1,5 +1,16 @@
 import { CityDataProps } from "@/data/interfaces";
 
+/**
+ * The "Explain Layer" button gets the layer definitions from the CityData
+ * arrays for a single, hard-coded city. To ensure that this includes the extra
+ * US census variables, this needs to be a US city. This function returns the
+ * index of Washingtone DC.
+ */
+export function getIdxWashington(props: CityDataProps[]) {
+    return props.findIndex((item) => item.name === "washington");
+}
+
+
 export function HeadingTextOneLayer (layer: string) {
 
     var heading: string = "";
