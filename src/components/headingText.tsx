@@ -1,5 +1,16 @@
 import { CityDataProps } from "@/data/interfaces";
 
+/**
+ * The "Explain Layer" button gets the layer definitions from the CityData
+ * arrays for a single, hard-coded city. To ensure that this includes the extra
+ * US census variables, this needs to be a US city. This function returns the
+ * index of Washingtone DC.
+ */
+export function getIdxWashington(props: CityDataProps[]) {
+    return props.findIndex((item) => item.name === "washington");
+}
+
+
 export function HeadingTextOneLayer (layer: string) {
 
     var heading: string = "";
@@ -44,7 +55,9 @@ export function HeadingTextOneLayer (layer: string) {
 // lines.
 export function HeadingText (layer: string, layer2: string, numLayers: string, citiesArray: CityDataProps[]) {
 
-    const paired_keys = Object.keys(citiesArray[0].dataRangesPaired);
+    const idxWashington = getIdxWashington (citiesArray);
+
+    const paired_keys = Object.keys(citiesArray[idxWashington].dataRangesPaired);
     const layer1: string = layer.replace("\_", "").replace("index", "");
     const layer2fmt: string = layer2.replace("\_", "").replace("index", "");
     const these_layers =

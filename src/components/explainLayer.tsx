@@ -287,7 +287,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Median monthly rent per room multiplied by median house prices per room. Low values reflect lower monthly rent coupled with lower house prices."
         ],
         "rent_social": [
-            "Relationship between median monthly rent per room and ocial index. Low values reflect lower monthly rent coupled with disadvantageous social conditions."
+            "Relationship between median monthly rent per room and social index. Low values reflect lower monthly rent coupled with disadvantageous social conditions."
         ],
         "value_social": [
             "Relationship between median house prices per room and ultiplied by social index. Low values reflect lower house prices coupled with disadvantageous social conditions."
@@ -338,6 +338,12 @@ export function GetLayerTextCompare(layer: string, layer2: string, numLayers: st
         "timesrel_parking": [
             "Strength of relationship between relative travel times and parking index. Lower (negative) values reflect fast transport relative to equivalent automobile times coupled with higher availability of automobile parking spaces."
         ],
+        "timesrel_rent": [
+            "Relative travel times multiplied by median monthly rent per room. Lower values reflect lower multi-modal travel times (faster transport) compared with equivalent automobile times, combined with lower monthly rent."
+        ],
+        "timesrel_value": [
+            "Relative travel times multiplied by median house prices per room. Lower values reflect lower multi-modal travel times (faster transport) compared with equivalent automobile times, combined with lower monthly rent."
+        ],
         "timesrel_social": [
             "Strength of relationship between relative travel times and social index. Higher (positive) values reflect lower travel times (faster transport), combined with advantageous social conditions. Lower (negative) values reflect faster relative transport being more strongly associated with disadvantageous social conditions."
         ],
@@ -365,6 +371,12 @@ export function GetLayerTextCompare(layer: string, layer2: string, numLayers: st
         "timesabs_parking": [
             "Strength of relationship between absolute travel times and parking index. Lower (negative) values represent cities in which fast transport is coupled with higher availability of automobile parking spaces."
         ],
+        "timesabs_rent": [
+            "Median monthly rent per room times absolute travel times. Lower values reflect lower multi-modal travel times (faster transport), combined with lower monthly rent."
+        ],
+        "timesabs_value": [
+            "Median house prices per room times absolute travel times. Lower values reflect lower multi-modal travel times (faster transport), combined with lower house prices."
+        ],
         "timesabs_social": [
             "Strength of relationship between social index times absolute travel times. Positive (higher) values represent cities in which lower travel times (faster transport) are strongly coupled with advantageous social conditions. Lower (negative) values represent a stronger relationship between fast transport and disadvantageous social conditions."
         ],
@@ -389,6 +401,12 @@ export function GetLayerTextCompare(layer: string, layer2: string, numLayers: st
         "transfers_parking": [
             "Strength of relationship between numbers of transfers and parking index. Low (negative) values represent transport services requiring fewer transfers coupled with higher availability of automobile parking spaces."
         ],
+        "transfers_rent": [
+            "Numbers of transfers multiplied by median monthly rent per room. Low values represent transport services requiring fewer transfers coupled with lower monthly rent."
+        ],
+        "transfers_value": [
+            "Numbers of transfers multiplied by median house prices per room. Low values represent transport services requiring fewer transfers coupled with lower house prices."
+        ],
         "transfers_social": [
             "Strength of relationship between numbers of transfers and social index. Higher (positive) values represent transport services requiring fewer transfers being coupled with advantageous social conditions."
         ],
@@ -410,6 +428,12 @@ export function GetLayerTextCompare(layer: string, layer2: string, numLayers: st
         "intervals_parking": [
             "Strength of relationship between transport intervals and parking index. Low (negative) values represent transport with shorter intervals between consecutive services coupled with higher availability of automobile parking spaces."
         ],
+        "intervals_rent": [
+            "Transport intervals multiplied by median monthly rent per room. Low values represent transport with shorter intervals between consecutive services coupled with lower monthly rent."
+        ],
+        "intervals_value": [
+            "Transport intervals multiplied by median house prices per room. Low values represent transport with shorter intervals between consecutive services coupled with lower house prices."
+        ],
         "intervals_social": [
             "Strength of relationship between transport intervals and social index. Higher (positive) values represent transport with shorter intervals between consecutive services coupled with advantageous social conditions."
         ],
@@ -428,6 +452,12 @@ export function GetLayerTextCompare(layer: string, layer2: string, numLayers: st
         "transport_parking": [
             "Strength of relationship between compound transport index and parking index. Lower (negative) values represent overall good provision of public transport coupled with higher availability of automobile parking spaces."
         ],
+        "transport_rent": [
+            "Compound transport index multiplied by median monthly rent per room. Low values represent overall good provision of public transport coupled with lower monthly rent."
+        ],
+        "transport_value": [
+            "Compound transport index multiplied by median house prices per room. Low values represent overall good provision of public transport coupled with lower house prices."
+        ],
         "transport_social": [
             "Strength of relationship between compound transport index and social index. Lower (negative) values represent overall good provision of public transport coupled with generally less advantageous social conditions."
         ],
@@ -443,6 +473,12 @@ export function GetLayerTextCompare(layer: string, layer2: string, numLayers: st
         "popdens_parking": [
             "Strength of relationship between population density and parking index. Lower (negative) values represent low population density coupled with higher availability of automobile parking spaces."
         ],
+        "popdens_rent": [
+            "Population density multiplied by median monthly rent per room. Low values represent low population density coupled with lower monthly rent."
+        ],
+        "popdens_value": [
+            "Population density multiplied by median house prices per room. Low values represent low population density coupled with lower house prices."
+        ],
         "popdens_social": [
             "Strength of relationship between population density and social index. Higher (positive) values represent cities for which low population densities are coupled with advantageous social conditions."
         ],
@@ -455,6 +491,12 @@ export function GetLayerTextCompare(layer: string, layer2: string, numLayers: st
         "schooldist_parking": [
             "Strength of relationship between distance to nearest school and parking index. Higher (positive) values indicate cities for which shorter distances to schools are coupled with lower availability of automobile parking spaces."
         ],
+        "schooldist_rent": [
+            "Distance to nearest school multiplied by median monthly rent per room. Low values indicate shorter distances to schools coupled with lower monthly rent."
+        ],
+        "schooldist_value": [
+            "Distance to nearest school multiplied by median house prices per room. Low values indicate shorter distances to schools coupled with lower house prices."
+        ],
         "schooldist_social": [
             "Strength of relationship between distance to nearest school and social index. Lower (negative) values indicate cities for which shorter distances to schools are coupled with disadvantageous social conditions."
         ],
@@ -464,18 +506,45 @@ export function GetLayerTextCompare(layer: string, layer2: string, numLayers: st
         "bike_parking": [
             "Strength of relationship between bicycle infrastructure index and parking index. High (positive) values represent cities in which higher availability of automobile parking spaces is coupled with good provision of bicycle infrastructure."
         ],
+        "bike_rent": [
+            "Bicycle infrastructure index multiplied by median monthly rent per room. Low values reflect good provision of bicycle infrastructure coupled with lower monthly rent."
+        ],
+        "bike_value": [
+            "Bicycle infrastructure index multiplied by median house prices per room. Low values reflect good provision of bicycle infrastructure coupled with lower house prices."
+        ],
         "bike_social": [
             "Strength of relationship between bicycle infrastructure index and social index. Higher (positive) values represent cities in which good provision of bicycle infrastructure is coupled with advantageous social conditions."
         ],
         "natural_parking": [
             "Strength of relationship between index of access to natural spaces and parking index. Higher (positive) values represent cities in which good access to natural spaces is coupled with lower availability of automobile parking spaces."
         ],
+        "natural_rent": [
+            "Index of access to natural spaces multiplied by median monthly rent per room. Low values indicate that good access to natural spaces is coupled with lower monthly rent."
+        ],
+        "natural_value": [
+            "Index of access to natural spaces multiplied by median house prices per room. Low values indicate that good access to natural spaces is coupled with lower house prices."
+        ],
         "natural_social": [
             "Strength of relationship between index of access to natural spaces and social index. Higher (positive) values reflect good access to natural spaces being more strongly coupled with advantageous social conditions; lower (negative) values reflect access to natural spaces being coupled with disadvantageous social conditions."
         ],
+        "parking_rent": [
+            "Parking index multiplied by median monthly rent per room. Low values reflect lower availability of automobile parking spaces coupled with lower monthly rent."
+        ],
+        "parking_value": [
+            "Parking index multiplied by median house prices per room. Low values reflect lower availability of automobile parking spaces coupled with lower house prices"
+        ],
         "parking_social": [
             "Strength of relationship between parking index and social index. Lower (negative) values represent cities in which lower availability of automobile parking spaces is coupled with advantageous social conditions"
-        ]
+        ],
+        "rent_value": [
+            "Median monthly rent per room multiplied by median house prices per room. Low values reflect lower monthly rent coupled with lower house prices."
+        ],
+        "rent_social": [
+            "Relationship between median monthly rent per room and social index. Low values reflect lower monthly rent coupled with disadvantageous social conditions."
+        ],
+        "value_social": [
+            "Relationship between median house prices per room and ultiplied by social index. Low values reflect lower house prices coupled with disadvantageous social conditions."
+        ],
     };
 
     var layer_text: string = "";

@@ -19,6 +19,7 @@ import HelpButton from '@/components/helpButton';
 
 import styles from '@/styles/controls.module.css';
 import { CityDataProps } from "@/data/interfaces";
+import { getIdxWashington } from '@/components/headingText';
 
 const junctionFont = localFont({ src: '../../app/junction-regular.woff' })
 
@@ -58,6 +59,8 @@ export default function Control (props: CompareControlProps) {
     const handleControlsVisibility = (pHideControls: boolean) => {
         setHideControls(pHideControls);
     }
+
+    const IdxWashington = getIdxWashington(props.citiesArray);
 
     return (
         <>
@@ -134,7 +137,7 @@ export default function Control (props: CompareControlProps) {
                     </Box>
                     </SortOrderSpacing>
                     <ExplainButton
-                        idx={0}
+                        idx={IdxWashington}
                         layer = {props.layer}
                         layer2 = {props.layer2}
                         numLayers = {props.numLayers}
