@@ -8,6 +8,7 @@ through [vercel](https://vercel.com).
 - [nextjs](https://nextjs.org) for the site itself.
 - [deck.gl](https://deck.gl) for the maps.
 - [d3](https://d3js.org) for the statistical visualisations.
+- [mui's material-ui](https://mui.com/material-ui/) for the components.
 
 ## Run locally
 
