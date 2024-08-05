@@ -51,7 +51,6 @@ export default function CityList(props: CityListProps) {
         const val = event.target.value as string;
         if (val) {
             setSelectedOption(val);
-            console.log("------CHANGED TO ", val)
             const matchingIdx: number = options.find(option => option.value === val)?.index ?? 0;
             props.handleIdxChange(matchingIdx);
         }
