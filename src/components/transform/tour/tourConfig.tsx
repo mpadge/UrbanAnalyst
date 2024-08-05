@@ -115,6 +115,26 @@ export const getTourConfig = (width: number, height: number) => [
             maxWidth: maxWidth(width, true),
         }
     },
+    {
+        selector: '[data-tut="reactour__transform_controls_rangelimits"]',
+        content: (
+            <div>
+                <h2>Controls</h2>
+                <br />
+                The control panel also includes a <q>Colour Limits</q> slider
+                which can be used to restrict the range of data fitted in to the
+                colour scale. This can be used to focus the full colour range in
+                to particular ranges or areas of interest.
+            </div>
+        ),
+        style: {
+            left: posControlsX(width, "controls"),
+            top: posControlsY(width, height, "controls"),
+            backgroundColor: tourPanelBackgroundColour,
+            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
+            maxWidth: maxWidth(width, true),
+        }
+    },
     {    
         selector: '[data-tut="reactour__transform_legend"]',
         content: () => legendText(width > 700),

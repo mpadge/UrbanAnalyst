@@ -10,11 +10,11 @@ export function controlBoxText (wide = true) {
             <br />
             {line1}
             &nbsp;The <q>Layer Controls</q> select what is shown on the map.
-            Details on each layer can be seen by clicking on the 
+            Details on each layer selection can be seen by clicking on the
             <q>Explain layer</q> button.
             <br />
             <br />
-            Layers can also be viewed in <q>Single</q> or <q>Paired</q>
+            Layers can be viewed in <q>Single</q> or <q>Paired</q>
             mode. Single mode displays values for the single selected layer.
             Paired mode displays the strength of relationship between two
             chosen layers.  For example, selecting <q>Social</q> and
