@@ -14,8 +14,6 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
         lyr1 + "_" + lyr2 : lyr2 + "_" + lyr1;
     const this_layer = numLayers == "Single" ? lyr1 : these_layers;
 
-    console.log("-----lyr1, 2 = (", lyr1, ", ", lyr2, "); this_layer = ", this_layer)
-
     const LAYER_TEXT: LayerTextProps = {
 
         "social": ["Representative socio-demographic data such as unemployment rates, deprivation indices, inequality indices, or other indices of social disadvantage."],
