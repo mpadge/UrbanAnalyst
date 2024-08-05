@@ -9,15 +9,16 @@ export function controlBoxText (wide = true) {
             <h2>Controls</h2>
             <br />
             {line1}
-            &nbsp;The current layer is named at the top of the map.  Details
-            on each layer can be seen by clicking on the <q>Explain
-                layer</q> button.
+            &nbsp;The <q>Layer Controls</q> select what is shown on the map.
+            Details on each layer can be seen by clicking on the 
+            <q>Explain layer</q> button.
             <br />
             <br />
             Layers can also be viewed in <q>Single</q> or <q>Paired</q>
-            mode. Paired mode displays the strength of relationship between
-            two chosen layers.  For example, selecting <q>Social</q> and
-            <q>bicycle index</q> will display how strongly social
+            mode. Single mode displays values for the single selected layer.
+            Paired mode displays the strength of relationship between two
+            chosen layers.  For example, selecting <q>Social</q> and
+            <q>Bicycle Index</q> will display how strongly social
             disavantage is related to bicycle infrastrcuture. Details of
             each selection can always be seen by clicking the <q>Explain
                 layer</q> button.
@@ -46,8 +47,8 @@ export function legendText(wide = true) {
 
 export function navText(goTo: (stepIndex: number) => void, wide = true) {
     const line1 = wide ?
-        `Finally, these buttons navigate to other Urban Analyst pages.` :
-        `Finally, the buttons at the top right navigate to other Urban Analyst pages.`;
+        `Finally, these menu items navigate to other Urban Analyst pages.` :
+        `Finally, the menu items navigate to other Urban Analyst pages.`;
 
     return (
         <div>

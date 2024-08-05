@@ -1,16 +1,17 @@
 
 export function controlBoxText1 (wide = true) {
     const line1 = wide ?
-        `This is the "control center" to choose cities and data layers.` :
-        `On the left side is the "control center" to choose cities and data layers.`;
+        `This is the "control center" to choose cities and data layers to be transformed.` :
+        `On the left side is the "control center" to choose cities and data layers to be transformed.`;
 
     return (
         <div>
             <h2>Controls</h2>
             <br />
             {line1}
-            &nbsp;Details on each layer can be seen by clicking on the
-            <q>Explain layer</q> button.
+            &nbsp;Details on individual layers can be seen by clicking on the
+            <q>Explain layer</q> button on the <q>Map</q> or <q>Compare</q>
+            pages.
             <br />
             <br />
             The <q>Extra Layers</q> button allows transformations to be
@@ -61,8 +62,8 @@ export function legendText(wide = true) {
 
 export function navText(goTo: (stepIndex: number) => void, wide = true) {
     const line1 = wide ?
-        `Finally, these buttons navigate to other Urban Analyst pages.` :
-        `Finally, the buttons at the top right navigate to other Urban Analyst pages.`;
+        `Finally, these menu items navigate to other Urban Analyst pages.` :
+        `Finally, the menu items navigate to other Urban Analyst pages.`;
 
     return (
         <div>
