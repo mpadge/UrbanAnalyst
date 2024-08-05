@@ -287,7 +287,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Median monthly rent per room multiplied by median house prices per room. Low values reflect lower monthly rent coupled with lower house prices."
         ],
         "rent_social": [
-            "Relationship between median monthly rent per room and ocial index. Low values reflect lower monthly rent coupled with disadvantageous social conditions."
+            "Relationship between median monthly rent per room and social index. Low values reflect lower monthly rent coupled with disadvantageous social conditions."
         ],
         "value_social": [
             "Relationship between median house prices per room and ultiplied by social index. Low values reflect lower house prices coupled with disadvantageous social conditions."
@@ -540,7 +540,7 @@ export function GetLayerTextCompare(layer: string, layer2: string, numLayers: st
             "Median monthly rent per room multiplied by median house prices per room. Low values reflect lower monthly rent coupled with lower house prices."
         ],
         "rent_social": [
-            "Relationship between median monthly rent per room and ocial index. Low values reflect lower monthly rent coupled with disadvantageous social conditions."
+            "Relationship between median monthly rent per room and social index. Low values reflect lower monthly rent coupled with disadvantageous social conditions."
         ],
         "value_social": [
             "Relationship between median house prices per room and ultiplied by social index. Low values reflect lower house prices coupled with disadvantageous social conditions."
