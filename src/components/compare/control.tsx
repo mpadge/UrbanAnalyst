@@ -50,6 +50,16 @@ const SortOrderSpacing = styled('div')(({ theme }) => ({
     marginBottom: '12px',
 }));
 
+/**
+ * The "Explain Layer" button gets the layer definitions from the CityData
+ * arrays for a single, hard-coded city. To ensure that this includes the extra
+ * US census variables, this needs to be a US city. This function returns the
+ * index of Washingtone DC.
+ */
+function getIdxWashington(props: CompareControlProps): number | undefined {
+    return props.citiesArray.findIndex((item) => item.name === "washington");
+}
+
 export default function Control (props: CompareControlProps) {
 
     const cityNames = props.citiesArray.map((item) => item.name);
@@ -58,6 +68,8 @@ export default function Control (props: CompareControlProps) {
     const handleControlsVisibility = (pHideControls: boolean) => {
         setHideControls(pHideControls);
     }
+
+    const IdxWashington = getIdxWashington(props);
 
     return (
         <>
@@ -134,7 +146,7 @@ export default function Control (props: CompareControlProps) {
                     </Box>
                     </SortOrderSpacing>
                     <ExplainButton
-                        idx={0}
+                        idx={IdxWashington}
                         layer = {props.layer}
                         layer2 = {props.layer2}
                         numLayers = {props.numLayers}
