@@ -86,7 +86,7 @@ export default function TransformPage() {
     useEffect(() => {
         var idxLocal = 0;
         var idx2Local = 1;
-        var layerLocal = "social_index";
+        var layerLocal = "transport";
         var alphaLocal = 0.5;
         if (typeof window != "undefined") {
             const storedIdx = localStorage.getItem('uaCityIdx');
@@ -133,7 +133,7 @@ export default function TransformPage() {
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idxLocal].dataRanges);
         setCityLayers(theseLayers);
         if (!theseLayers.includes(layerLocal)) {
-            layerLocal = "social_index";
+            layerLocal = "transport";
             setLayer(layerLocal);
             localStorage.removeItem('uaLayer');
         }
@@ -166,7 +166,7 @@ export default function TransformPage() {
         }
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idx].dataRanges);
         if (!theseLayers.includes(layer)) {
-            setLayer("social_index");
+            setLayer("transport");
             localStorage.removeItem('uaLayer');
         }
     }

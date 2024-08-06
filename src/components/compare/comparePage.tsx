@@ -20,7 +20,7 @@ export default function Home() {
     // default index of [0] can be used.
     const [cityData, setCityData] = useState(CITY_DATA.citiesArray[0]);
 
-    const [layer, setLayer] = useState("social_index"); // options[0] in layerlist.tsx
+    const [layer, setLayer] = useState("transport"); // options[0] in layerlist.tsx
     const [layer2, setLayer2] = useState("");
     const [numLayers, setNumLayers] = useState("Single");
     const numLayersOptions = ["Single", "Paired"];

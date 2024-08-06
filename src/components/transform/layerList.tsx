@@ -55,10 +55,10 @@ export default function LayerList(props: LayerListProps) {
 
     // findMatchingOption returns the *value* of the option:
     const findMatchingOption = useCallback(() => {
-        var op = "social_index";
+        var op = "transport";
         if (options && options.length > 0) {
             const matchingOption = options.find(option => option.value === props.layer)?.value;
-            op = matchingOption ?? options[0]?.value ?? "social_index";
+            op = matchingOption ?? options[0]?.value ?? "transport";
         }
         return op;
     }, [options, props.layer]);
