@@ -171,7 +171,7 @@ export default function Home() {
                         systems.  These are calculated using Urban Analyst&apos;s
                         own open-source software described in
                         <a className = {styles.textLink}
-                            href="https://UrbanAnalyst.github.io/docs" >&nbsp;the
+                            href="https://docs.urbananalyst.city" >&nbsp;the
                             documentation pages </a>. These enormous numbers of
                         calculations enable Urban Analyst to provide uniquely
                         powerful insights into how people move throughout cities.

@@ -72,7 +72,7 @@ export default function Home() {
                     <p className="text-center"> 
                         Full details are provided&nbsp;
                         <a
-                            href="https://UrbanAnalyst.github.io/docs"
+                            href="https://docs.urbananalyst.city"
                             rel="noopener noreferrer"
                         >
                             in the documentation</a>.
