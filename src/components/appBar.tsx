@@ -16,20 +16,20 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { indigo, blue, teal, pink } from '@mui/material/colors';
 
 const theme = createTheme({
-  palette: {
-    primary: {
-      light: '#757ce8',
-      main: '#3f50b555',
-      dark: '#002884',
-      contrastText: '#000',
+    palette: {
+        primary: {
+            light: '#757ce8',
+            main: '#3f50b555',
+            dark: '#002884',
+            contrastText: '#000',
+        },
+        secondary: {
+            light: '#ff7961',
+            main: '#f44336',
+            dark: '#ba000d',
+            contrastText: '#000',
+        },
     },
-    secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000',
-    },
-  },
 });
 
 import useWindowSize from "@/components/windowSize";
@@ -73,58 +73,58 @@ export default function ButtonAppBar(props: ButtonAppProps) {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <ThemeProvider theme={theme}>
-            <AppBar position="fixed" color="primary">
-                <Toolbar>
-                    <Box sx={{ flexGrow: 0 }}>
-                        <IconButton
-                            size={sizeString}
-                            edge="start"
-                            color="inherit"
-                            aria-label="menu"
-                            onClick={handleOpenNavMenu}
-                            sx={{ mr: 2 }}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorNav}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorNav)}
-                            onClose={handleCloseNavMenu}
-                        >
-                            {buttonInputs.map((button) => (
-                                <MenuItem key={button.key} onClick={handleCloseNavMenu} component="a" href={button.value}>
-                                    <Typography textAlign="center" >{button.key}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
+                <AppBar position="fixed" color="primary">
+                    <Toolbar>
+                        <Box sx={{ flexGrow: 0 }}>
+                            <IconButton
+                                size={sizeString}
+                                edge="start"
+                                color="inherit"
+                                aria-label="menu"
+                                onClick={handleOpenNavMenu}
+                                sx={{ mr: 2 }}
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorNav}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorNav)}
+                                onClose={handleCloseNavMenu}
+                            >
+                                {buttonInputs.map((button) => (
+                                    <MenuItem key={button.key} onClick={handleCloseNavMenu} component="a" href={button.value}>
+                                        <Typography textAlign="center" >{button.key}</Typography>
+                                    </MenuItem>
+                                ))}
+                            </Menu>
+                        </Box>
 
-                    <SvgIcon component={SvgComponent}>
-                    </SvgIcon>
+                        <SvgIcon component={SvgComponent}>
+                        </SvgIcon>
 
-                    <Box sx={{ flexGrow: 1 }}>
-                    </Box>
-                    {typeof width === "number" &&
-                        width > MIN_MENU_WIDTH &&
-                        buttonInputs.map((button) => (
-                            <Button key={button.key} color="inherit" href={button.value}>
-                                {button.key}
-                            </Button>
-                        ))
-                    }
-                </Toolbar>
-            </AppBar>
+                        <Box sx={{ flexGrow: 1 }}>
+                        </Box>
+                        {typeof width === "number" &&
+                            width > MIN_MENU_WIDTH &&
+                            buttonInputs.map((button) => (
+                                <Button key={button.key} color="inherit" href={button.value}>
+                                    {button.key}
+                                </Button>
+                            ))
+                        }
+                    </Toolbar>
+                </AppBar>
             </ThemeProvider>
         </Box>
     );
