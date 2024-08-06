@@ -57,6 +57,11 @@ export default function ButtonAppBar(props: ButtonAppProps) {
         value: getHref(i),
     }))
 
+    const menuInputs = buttonInputs.concat({
+        key: "Docs",
+        value: "https://docs.urbananalyst.city",
+    })
+
     const width = useWindowSize().width;
     const sizeString = width == null ? "medium" : (width < 700 ? "small" : "medium");
 
@@ -102,9 +107,9 @@ export default function ButtonAppBar(props: ButtonAppProps) {
                                 open={Boolean(anchorNav)}
                                 onClose={handleCloseNavMenu}
                             >
-                                {buttonInputs.map((button) => (
-                                    <MenuItem key={button.key} onClick={handleCloseNavMenu} component="a" href={button.value}>
-                                        <Typography textAlign="center" >{button.key}</Typography>
+                                {menuInputs.map((item) => (
+                                    <MenuItem key={item.key} onClick={handleCloseNavMenu} component="a" href={item.value}>
+                                        <Typography textAlign="center" >{item.key}</Typography>
                                     </MenuItem>
                                 ))}
                             </Menu>
