@@ -53,6 +53,12 @@ export default function Home() {
                 <div className={styles.centerNormal}>
                     <ol>
                         <li>
+                            a &ldquo;Summarise&rdquo; page that provides brief
+                            descriptions of the properties of any chosen city,
+                            and identifies the best potential city for
+                            transformation.
+                        </li>
+                        <li>
                             a &ldquo;Compare&rdquo; view that compares the
                             properties of different cities in terms of each variable
                             measured by Urban Analyst.
