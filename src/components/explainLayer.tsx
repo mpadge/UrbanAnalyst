@@ -291,7 +291,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
         ],
         "value_social": [
             "Relationship between median house prices per room and ultiplied by social index. Low values reflect lower house prices coupled with disadvantageous social conditions."
-        ],
+        ]
     };
 
     var layer_text: string = "";
@@ -544,7 +544,7 @@ export function GetLayerTextCompare(layer: string, layer2: string, numLayers: st
         ],
         "value_social": [
             "Relationship between median house prices per room and ultiplied by social index. Low values reflect lower house prices coupled with disadvantageous social conditions."
-        ],
+        ]
     };
 
     var layer_text: string = "";
