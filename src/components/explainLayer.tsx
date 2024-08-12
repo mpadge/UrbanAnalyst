@@ -272,7 +272,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Index of access to natural spaces multiplied by median house prices per room. Low values indicate that good access to natural spaces is coupled with lower house prices."
         ],
         "natural_social": [
-            "Relationship between index of access to natural spaces and social index. Low (more negative) values indicate that good access to natural spaces is coupled with disadvantageous social conditions."
+            "Relationship between index of access to natural spaces and social index. Lower values indicate that good access to natural spaces is coupled with advantageous social conditions."
         ],
         "parking_rent": [
             "Parking index multiplied by median monthly rent per room. Low values reflect lower availability of automobile parking spaces coupled with lower monthly rent."
