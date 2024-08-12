@@ -1037,7 +1037,7 @@ const philadelphia = {
         "natural": [0.95, 0.06],
         "parking": [2.04, 4.51],
         "rent": [154.73, 126.09],
-        "value": [27205.8, 20443.43]
+        "value": [27205.8, 20443.43],
     },
     "stats_paired": {
         "rent_value": 0.28,
