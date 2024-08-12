@@ -474,11 +474,11 @@ const paris = {
                     </a></Link>
                 , also clicking on &quot;paired&quot;.</p>
             <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
+                <li> Extremely strong strength of relationship between population density and distances to nearest schools </li>
                 <li> Strong strength of relationship between population density and parking index </li>
                 <li> Marginal strength of relationship between population density and accessibility to natural spaces </li>
             </ul>
             <p>While the following aspects are notably bad:</p><ul>
-                <li> Highly significant and detrimental strength of relationship between population density and distances to nearest schools </li>
                 <li> Highly significant and counterproductive strength of relationship between distance to nearest school and social index </li>
                 <li> Strong negative strength of relationship between access to natural spaces and social index </li>
             </ul>
