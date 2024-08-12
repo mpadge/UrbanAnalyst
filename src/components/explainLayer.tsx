@@ -209,7 +209,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
             "Relationship between compound transport index multiplied by social index. Low (more negative) values represent overall good provision of public transport coupled with disadvantageous social conditions."
         ],
         "popdens_schooldist": [
-            "Population density multiplied by distances to nearest schools. Low values represent low population density coupled with short distances to schools."
+            "Population density multiplied by distances to nearest schools. Low (negative) values represent high population density coupled with short distances to schools."
         ],
         "popdens_bike": [
             "Population density multiplied by bicycle index. Low values represent low population density coupled with good provision of bicycle infrastructure."
