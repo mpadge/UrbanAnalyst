@@ -3,11 +3,22 @@
     color: #303030;
 }
 
-.tourhelper {
+.tourhelperLight {
     --reactour-accent: #5cb7b7;
     line-height: 1.3;
     font-size: 18px;
     opacity: 0.9;
+    color: #111111 !important;
+}
+
+/* Reactour text in dark mode automatically sets to white;
+ * this whole thing only exists to stop that */
+.tourhelperDark {
+    --reactour-accent: #5cb7b7;
+    line-height: 1.3;
+    font-size: 18px;
+    opacity: 0.9;
+    color: #111111 !important;
 }
 
 /* Tablet and Smaller Desktop */

@@ -15,6 +15,7 @@ import { CITY_DATA } from '@/data/citydata';
 import { DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/interfaces';
 
 import tourStyles from '@/styles/tour.module.css';
+import getPreferredTourClass from '@/components/tourClass';
 
 
 /**
@@ -197,6 +198,12 @@ export default function TransformPage() {
     }
 
     // ----- TOUR start-----
+    const [tourClass, setTourClass] = useState(tourStyles.tourhelperLight);
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setTourClass(getPreferredTourClass());
+        }
+    }, []);
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
     const size = useWindowSize();
@@ -282,7 +289,7 @@ export default function TransformPage() {
                 steps={tourConfig}
                 isOpen={isTourOpen}
                 maskClassName={tourStyles.tourmask}
-                className={tourStyles.tourhelper}
+                className={tourClass}
                 rounded={5}
                 accentColor={accentColor}
             />

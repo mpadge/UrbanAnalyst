@@ -11,6 +11,7 @@ import { getTourConfig } from '@/components/compare/tour/tourConfig';
 
 import styles from '@/styles/Home.module.css'
 import tourStyles from '@/styles/tour.module.css';
+import getPreferredTourClass from '@/components/tourClass';
 
 import { CITY_DATA } from '@/data/citydata';
 
@@ -86,6 +87,12 @@ export default function Home() {
     }
 
     // ----- TOUR start-----
+    const [tourClass, setTourClass] = useState(tourStyles.tourhelperLight);
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setTourClass(getPreferredTourClass());
+        }
+    }, []);
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
     const size = useWindowSize();
@@ -153,7 +160,7 @@ export default function Home() {
                 steps={tourConfig}
                 isOpen={isTourOpen}
                 maskClassName={tourStyles.tourmask}
-                className={tourStyles.tourhelper}
+                className={tourClass}
                 rounded={5}
                 accentColor={accentColor}
             />
