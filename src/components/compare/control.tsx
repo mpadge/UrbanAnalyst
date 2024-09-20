@@ -66,6 +66,13 @@ export default function Control (props: CompareControlProps) {
             setControStyle(dark ? styles.dark : styles.light);
         }
     }, []);
+    const [uaLogo, setUaLogo] = useState('/ua.svg');
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            setUaLogo(dark ? '/ua-dark.svg' : 'ua.svg');
+        }
+    }, []);
 
     const IdxWashington = getIdxWashington(props.citiesArray);
 
@@ -81,7 +88,7 @@ export default function Control (props: CompareControlProps) {
                         onClick={() => handleControlsVisibility(true)}
                     >
                         <Image
-                            src="/ua.svg"
+                            src={uaLogo}
                             alt="UA Logo"
                             width={20}
                             height={10}

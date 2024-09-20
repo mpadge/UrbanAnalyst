@@ -11,6 +11,13 @@
     xmlns:svg="http://www.w3.org/2000/svg">
     <defs
         id="defs6" />
+    <rect
+        x="0"
+        y="0"
+        width="82"
+        height="82"
+        fill="#cccccc"
+    />
     <g
         id="g8">
         <path

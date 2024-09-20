@@ -63,6 +63,13 @@ export default function Control (props: MapControlProps) {
     const handleControlsVisibility = (pHideControls: boolean) => {
         setHideControls(pHideControls);
     }
+    const [uaLogo, setUaLogo] = useState('/ua.svg');
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            setUaLogo(dark ? '/ua-dark.svg' : 'ua.svg');
+        }
+    }, []);
 
     const [sliderValues, setSliderValues] = useState<number[]>(props.layerRange);
     useEffect(() => {
@@ -108,7 +115,7 @@ export default function Control (props: MapControlProps) {
                         onClick={() => handleControlsVisibility(true)}
                     >
                         <Image
-                            src="/ua.svg"
+                            src={uaLogo}
                             alt="UA Logo"
                             width={20}
                             height={10}
