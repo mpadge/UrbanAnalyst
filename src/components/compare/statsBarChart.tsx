@@ -55,6 +55,14 @@ export default function BarChart (props: CompareProps) {
 
     const meanValIndex = props.meanVals ? 0 : 1;
 
+    const [textColour, setTextColour] = useState('black');
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const darkMode: boolean = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            setTextColour(darkMode ? 'white' : 'black');
+        }
+    }, []);
+
     const layer1: string = props.layer1.replace("\_", "").replace("index", "");
     const layer2: string = props.layer2.replace("\_", "").replace("index", "");
     const paired_keys = Object.keys(props.citiesArray[idxWashington].stats_paired);
@@ -171,6 +179,7 @@ export default function BarChart (props: CompareProps) {
                 .selectAll('text')
                 .data(data)
                 .join('text')
+                .attr('fill', textColour)
                 .attr('font-size', () => {
                     return innerWidth < 700 ? '12px' : '20px';
                 })
@@ -210,7 +219,7 @@ export default function BarChart (props: CompareProps) {
         handleDrawBars(svg, colourPalette);
         handleDrawText(svg);
 
-    }, [data, innerHeight, innerWidth, xScale, yScale, xMin, colourPalette]);
+    }, [data, innerHeight, innerWidth, xScale, yScale, xMin, colourPalette, textColour]);
 
     const inputRef = useRef()
 
