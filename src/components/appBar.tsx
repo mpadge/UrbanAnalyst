@@ -15,7 +15,7 @@ import SvgIcon from '@mui/material/SvgIcon';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { indigo, blue, teal, pink } from '@mui/material/colors';
 
-const theme = createTheme({
+const lightTheme = createTheme({
     palette: {
         primary: {
             light: '#757ce8',
@@ -31,6 +31,29 @@ const theme = createTheme({
         },
     },
 });
+
+const darkTheme = createTheme({
+    palette: {
+        primary: {
+            light: '#757ce8',
+            main: '#3f50b555',
+            dark: '#002884',
+            contrastText: '#eee',
+        },
+        secondary: {
+            light: '#ff7961',
+            main: '#f44336',
+            dark: '#ba000d',
+            contrastText: '#000',
+        },
+    },
+});
+
+function getPreferredTheme() {
+    const prefersDarkScheme = typeof window != "undefined" ?
+        window.matchMedia('(prefers-color-scheme: dark)').matches : false;
+    return prefersDarkScheme ? darkTheme : lightTheme;
+}
 
 import useWindowSize from "@/components/windowSize";
 import { ButtonAppProps } from '@/data/interfaces';
@@ -51,6 +74,8 @@ function capitaliseFirst(s: string) {
 const MIN_MENU_WIDTH = 600;
 
 export default function ButtonAppBar(props: ButtonAppProps) {
+
+    const theme = getPreferredTheme();
 
     const buttonInputs = props.text.map((i) => ({
         key: capitaliseFirst(i),
