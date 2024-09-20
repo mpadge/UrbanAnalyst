@@ -224,7 +224,7 @@ export default function Control (props: TransformControlProps) {
                     />
 
                     <RootSpacing>
-                        <Divider flexItem >Layer Controls</Divider>
+                        <Divider sx={{ color: 'black' }} flexItem >Layer Controls</Divider>
                         <Box sx={{ p: 1 }}>
                             <Stack spacing={1} alignItems="center" marginBottom="0px">
                                 <LayerList
@@ -259,10 +259,10 @@ export default function Control (props: TransformControlProps) {
                     </RootSpacing>
 
                     <RootSpacing>
-                        <Divider flexItem >Colour Controls</Divider>
+                        <Divider sx={{ color: 'black' }} flexItem >Colour Controls</Divider>
                         <Box sx={{ p: 0 }}>
                             <Stack alignItems="center">
-                                <Typography variant="h3" align="center" margin="0">
+                                <Typography sx={{ color: 'black' }} variant="h3" align="center" margin="0">
                                     Opacity
                                 </Typography>
                             </Stack>
@@ -274,7 +274,7 @@ export default function Control (props: TransformControlProps) {
                             </Stack>
 
                             <Stack alignItems="center">
-                                <Typography variant="h3" align="center" margin="0">
+                                <Typography sx={{ color: 'black' }} variant="h3" align="center" margin="0">
                                     Colour Limits
                                 </Typography>
                             </Stack>

@@ -130,7 +130,7 @@ export default function Control (props: MapControlProps) {
                     />
 
                     <RootSpacing>
-                        <Divider flexItem >Layer Controls</Divider>
+                        <Divider sx={{ color: 'black' }} flexItem >Layer Controls</Divider>
                         <Box sx={{ p: 1 }}>
                             <Stack spacing={1} alignItems="center" marginBottom="8px">
                                 <SelectNumLayers
@@ -170,8 +170,8 @@ export default function Control (props: MapControlProps) {
                     </RootSpacing>
 
                     <RootSpacing>
-                        <Divider flexItem >Colour Controls</Divider>
-                        <Typography variant="h3" align="center" margin="0">
+                        <Divider sx={{ color: 'black' }} flexItem >Colour Controls</Divider>
+                        <Typography sx={{ color: 'black' }} variant="h3" align="center" margin="0">
                             Opacity
                         </Typography>
                         <OpacitySlider
@@ -179,7 +179,7 @@ export default function Control (props: MapControlProps) {
                             handleAlphaChange={props.handleAlphaChange}
                         />
 
-                        <Typography variant="h3" align="center" margin="0">
+                        <Typography sx={{ color: 'black' }} variant="h3" align="center" margin="0">
                             Colour Limits
                         </Typography>
                         <RangeSlider
