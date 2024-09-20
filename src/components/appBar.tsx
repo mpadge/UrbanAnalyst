@@ -15,6 +15,10 @@ import SvgIcon from '@mui/material/SvgIcon';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { indigo, blue, teal, pink } from '@mui/material/colors';
 
+import useWindowSize from "@/components/windowSize";
+import { ButtonAppProps } from '@/data/interfaces';
+import { SvgComponent } from '@/components/uaSvgLogo';
+
 const lightTheme = createTheme({
     palette: {
         primary: {
@@ -54,10 +58,6 @@ function getPreferredTheme() {
         window.matchMedia('(prefers-color-scheme: dark)').matches : false;
     return prefersDarkScheme ? darkTheme : lightTheme;
 }
-
-import useWindowSize from "@/components/windowSize";
-import { ButtonAppProps } from '@/data/interfaces';
-import { SvgComponent } from '@/components/uaSvgLogo';
 
 function getHref(s: string) {
     if (s == "home") {
