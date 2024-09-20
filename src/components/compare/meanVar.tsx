@@ -36,8 +36,8 @@ export default function MeanVarButtons(props: meanVarProps) {
                     name="radio-buttons-group"
                     onChange={handleChange}
                 >
-                    <FormControlLabel value="average" control={<Radio />} label="Avg." />
-                    <FormControlLabel value="variation" control={<Radio />} label="Var." />
+                    <FormControlLabel value="average" control={<Radio />} label="Avg." sx={{ color: 'black' }}/>
+                    <FormControlLabel value="variation" control={<Radio />} label="Var." sx={{ color: 'black' }}/>
                 </RadioGroup>
             </FormControl>
         </>
