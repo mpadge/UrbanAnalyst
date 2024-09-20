@@ -52,7 +52,6 @@ const darkTheme = createTheme({
 function getPreferredTheme() {
     const prefersDarkScheme = typeof window != "undefined" ?
         window.matchMedia('(prefers-color-scheme: dark)').matches : false;
-    if (prefersDarkScheme) console.log("-----DARK THEME-----");
     return prefersDarkScheme ? darkTheme : lightTheme;
 }
 
@@ -82,7 +81,6 @@ export default function ButtonAppBar(props: ButtonAppProps) {
             setTheme(getPreferredTheme());
         }
     }, []);
-    // const theme = getPreferredTheme();
 
     const buttonInputs = props.text.map((i) => ({
         key: capitaliseFirst(i),
