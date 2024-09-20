@@ -65,7 +65,14 @@ export default function Legend (props: LegendProps) {
             .rangeRound([marginLeft, width - marginRight]);
             var scalecolors = scalebandColors.ticks(nColors)
 
-            let tickAdjust = (g: any) => g.selectAll(".tick line").attr("y1", marginTop + marginBottom - height);
+            let tickAdjust = (g: any) => {
+                g.selectAll(".tick line")
+                    .attr("y1", marginTop + marginBottom - height)
+                    .attr("stroke", 'black');
+
+                g.selectAll(".tick text")
+                    .attr("fill", 'black');
+            };
 
             // Colours are then independent of scaleband, and always on linear
             // (sequential) scales. Note that palette has to match one in map.tsx,
@@ -102,7 +109,7 @@ export default function Legend (props: LegendProps) {
                 .attr("transform", `translate(0,${height - marginBottom + 5})`)
                 .attr("x", marginLeft + 20)
                 .attr("y", marginTop + marginBottom - height - 10)
-                .attr("fill", "currentColor")
+                .attr("fill", 'black')
                 .attr("text-anchor", "start")
                 .attr("font-weight", "bold")
                 .attr("font-size", "16px")
