@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from 'react';
+import { useEffect, useState, MouseEvent } from 'react';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -36,15 +36,15 @@ const darkTheme = createTheme({
     palette: {
         primary: {
             light: '#757ce8',
-            main: '#3f50b555',
-            dark: '#002884',
+            main: '#3f50b5cc',
+            dark: '#bb2884',
             contrastText: '#eee',
         },
         secondary: {
             light: '#ff7961',
             main: '#f44336',
             dark: '#ba000d',
-            contrastText: '#000',
+            contrastText: '#eee',
         },
     },
 });
@@ -52,6 +52,7 @@ const darkTheme = createTheme({
 function getPreferredTheme() {
     const prefersDarkScheme = typeof window != "undefined" ?
         window.matchMedia('(prefers-color-scheme: dark)').matches : false;
+    if (prefersDarkScheme) console.log("-----DARK THEME-----");
     return prefersDarkScheme ? darkTheme : lightTheme;
 }
 
@@ -75,7 +76,13 @@ const MIN_MENU_WIDTH = 600;
 
 export default function ButtonAppBar(props: ButtonAppProps) {
 
-    const theme = getPreferredTheme();
+    const [theme, setTheme] = useState(lightTheme);
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setTheme(getPreferredTheme());
+        }
+    }, []);
+    // const theme = getPreferredTheme();
 
     const buttonInputs = props.text.map((i) => ({
         key: capitaliseFirst(i),
@@ -90,9 +97,9 @@ export default function ButtonAppBar(props: ButtonAppProps) {
     const width = useWindowSize().width;
     const sizeString = width == null ? "medium" : (width < 700 ? "small" : "medium");
 
-    const [anchorNav, setAnchorNav] = React.useState<null | HTMLElement>(null);
+    const [anchorNav, setAnchorNav] = useState<null | HTMLElement>(null);
 
-    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
         setAnchorNav(event.currentTarget);
     };
 
