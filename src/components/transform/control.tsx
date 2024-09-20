@@ -186,7 +186,7 @@ export default function Control (props: TransformControlProps) {
 
     return (
         <>
-            <div id="top-left-container" className={`${styles.controlsTransform} ${junctionFont.className}`}>
+            <div id="top-left-container" className={`${styles.controlsTransform} ${styles.light} ${junctionFont.className}`}>
                 <div id="divinfo" style={{display: hideControls?"none":""}}>
 
                     <Tooltip title="Click to close controls">

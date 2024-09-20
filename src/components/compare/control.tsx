@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link'
 import Image from "next/image"
 import localFont from 'next/font/local'
@@ -59,12 +59,19 @@ export default function Control (props: CompareControlProps) {
     const handleControlsVisibility = (pHideControls: boolean) => {
         setHideControls(pHideControls);
     }
+    const [controlStyle, setControStyle] = useState(styles.light);
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            setControStyle(dark ? styles.dark : styles.light);
+        }
+    }, []);
 
     const IdxWashington = getIdxWashington(props.citiesArray);
 
     return (
         <>
-            <div id="top-left-container" className={`${styles.controls} ${junctionFont.className}`}>
+            <div id="top-left-container" className={`${styles.controls} ${controlStyle} ${junctionFont.className}`}>
                 <div id="divinfo" style={{display: hideControls?"none":""}}>
 
                     <Tooltip title="Click to close controls">
