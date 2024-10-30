@@ -143,6 +143,26 @@ export default function Home() {
                         </a>.
                     </p>
                 </div>
+
+                <div className={styles.leftMed}>
+                    <p className="text-center">
+                        Want to know more?
+                    </p>
+                </div>
+
+                <div className={styles.centerNormal}>
+                    <p className="text-center">
+                        Email &#8202;
+                        <a
+                            href="mailto:info@urbananalyst.city"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            info@urbananalyst.city
+                        </a>
+                    </p>
+                </div>
+
             </main>
         </>
     )
