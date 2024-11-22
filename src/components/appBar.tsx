@@ -90,7 +90,10 @@ export default function ButtonAppBar(props: ButtonAppProps) {
     const menuInputs = buttonInputs.concat({
         key: "Docs",
         value: "https://docs.urbananalyst.city",
-    })
+    }).concat({
+        key: "Demo",
+        value: "https://demo.urbananalyst.city",
+    });
 
     const width = useWindowSize().width;
     const sizeString = width == null ? "medium" : (width < 700 ? "small" : "medium");
