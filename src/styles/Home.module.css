@@ -120,6 +120,10 @@
     margin: 20px;
 }
 
+.centerNormal a {
+    color: rgb(30, 144, 255);
+}
+
 .centerSmall {
     margin-top: 0;
     padding: 0.5rem 0;
