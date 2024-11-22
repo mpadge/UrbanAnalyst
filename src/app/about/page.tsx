@@ -77,11 +77,11 @@ export default function Home() {
                 <div className={styles.centerNormal}>
                     <p className="text-center"> 
                         Full details are provided&nbsp;
-                        <a
+                        <Link
                             href="https://docs.urbananalyst.city"
                             rel="noopener noreferrer"
                         >
-                            in the documentation</a>.
+                            in the documentation</Link>.
                     </p>
                 </div>
 
@@ -93,20 +93,20 @@ export default function Home() {
 
                 <div className={styles.centerNormal}>
                     <p className="text-center">
-                        <a
+                        <Link
                             href="https://github.com/mpadge"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
                             Mark Padgham
-                        </a>
+                        </Link>
                         , along with all of the other contributors to the
-                        <a
+                        <Link
                             href="https://github.com/UrbanAnalyst"
                             rel="noopener noreferrer"
                         >
                             &nbsp;open-source software which drives it.
-                        </a>.
+                        </Link>.
                     </p>
                 </div>
 
@@ -120,27 +120,27 @@ export default function Home() {
                     <p className="text-center">
                         Previous funding has been provided by
                         the German Government&#39;s &#8202;
-                        <a
+                        <Link
                             href="https://prototypefund.de"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
                             prototypefund
-                        </a>
+                        </Link>
                         , as part of their &#8202;
-                        <a
+                        <Link
                             href="https://prototypefund.de/project/urban-transport-analyst-uta/"
                             target="_blank"
                             rel="noopener noreferrer"
-                        >twelfth </a>
+                        >twelfth </Link>
                         and &#8202;
-                        <a
+                        <Link
                             href="https://prototypefund.de/project/urban-analyst/"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
                             fourteenth funding rounds
-                        </a>.
+                        </Link>.
                     </p>
                 </div>
 
@@ -153,13 +153,14 @@ export default function Home() {
                 <div className={styles.centerNormal}>
                     <p className="text-center">
                         Email &#8202;
-                        <a
+                        <Link
                             href="mailto:info@urbananalyst.city"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
                             info@urbananalyst.city
-                        </a>
+                        </Link>
+                        .
                     </p>
                 </div>
 
