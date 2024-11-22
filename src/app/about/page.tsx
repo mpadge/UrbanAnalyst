@@ -53,23 +53,38 @@ export default function Home() {
                 <div className={styles.centerNormal}>
                     <ol>
                         <li>
-                            a &ldquo;Summarise&rdquo; page that provides brief
+                            a&nbsp;
+                            <Link href="/summarise">
+                                &ldquo;Summarise&rdquo; page
+                            </Link>
+                            &nbsp;that provides brief
                             descriptions of the properties of any chosen city,
                             and identifies the best potential city for
                             transformation.
                         </li>
                         <li>
-                            a &ldquo;Compare&rdquo; view that compares the
-                            properties of different cities in terms of each variable
-                            measured by Urban Analyst.
+                            a&nbsp;
+                            <Link href="/compare">
+                                &ldquo;Compare&rdquo; view
+                            </Link>
+                            &nbsp;that compares the properties of different cities in
+                            terms of each variable measured by Urban Analyst.
                         </li>
                         <li>
-                            a &ldquo;Map&rdquo; view, to enable various properties
+                            a&nbsp;
+                            <Link href="/map">
+                                &ldquo;Map&rdquo; view
+                            </Link>
+                            , to enable various properties
                             of individual cities to be visualised as interactive
                             maps, and
                         </li>
                         <li>
-                            a &ldquo;Transform&rdquo; view that enables cities to be
+                            a&nbsp;
+                            <Link href="/transform">
+                                &ldquo;Transform&rdquo; view
+                            </Link>
+                            &nbsp;that enables cities to be
                             transformed to become like any other city.
                         </li>
                     </ol>
