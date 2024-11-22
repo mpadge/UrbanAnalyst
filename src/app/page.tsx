@@ -186,7 +186,12 @@ export default function Home() {
 
                 <div className={styles.centerNormal}>
                     <p className="text-center">
-                        Please open an issue on
+                        To request the addition of a particular city, email us
+                        at&nbsp;
+                        <Link href="mailto:info@urbananalyst.city" rel="noopener noreferrer">
+                            info@urbananalyst.city
+                        </Link>
+                        . Or open an issue on
                         <a className = {styles.textLink}
                             href="https://github.com/mpadge/UrbanAnalyst/issues"
                             target="_blank"
@@ -194,7 +199,7 @@ export default function Home() {
                         >
                             &nbsp;the GitHub repository of this site
                         </a>
-                        &nbsp;requesting the addition of a particular city.
+                        .
                     </p>
                 </div>
 
