@@ -201,7 +201,7 @@ export default function Home() {
                             href="https://demo.urbananalyst.city" >
                             demonstration pages
                         </Link>.
-                        If you're interested in how an Urban Analyst site can
+                        If you&apos;re interested in how an Urban Analyst site can
                         be adapted to your needs, email us at&nbsp;
                         <Link href="mailto:info@urbananalyst.city" rel="noopener noreferrer">
                             info@urbananalyst.city
