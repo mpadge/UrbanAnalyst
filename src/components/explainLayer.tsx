@@ -12,7 +12,7 @@ export function GetLayerText(layer: string, layer2: string, numLayers: string, m
 
     const these_layers = paired_keys.includes(lyr1 + "_" + lyr2) ?
         lyr1 + "_" + lyr2 : lyr2 + "_" + lyr1;
-    const this_layer = numLayers == "Single" ? lyr1 : these_layers;
+    const this_layer = numLayers.toLowerCase() === "single" ? lyr1 : these_layers;
 
     const LAYER_TEXT: LayerTextProps = {
 
