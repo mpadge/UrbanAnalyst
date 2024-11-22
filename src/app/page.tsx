@@ -170,11 +170,43 @@ export default function Home() {
                         calculations through street networks and public transport
                         systems.  These are calculated using Urban Analyst&apos;s
                         own open-source software described in
-                        <a className = {styles.textLink}
+                        <Link className = {styles.textLink}
                             href="https://docs.urbananalyst.city" >&nbsp;the
-                            documentation pages </a>. These enormous numbers of
-                        calculations enable Urban Analyst to provide uniquely
-                        powerful insights into how people move throughout cities.
+                            documentation pages
+                        </Link>.
+                        These enormous numbers of calculations enable Urban
+                        Analyst to provide uniquely powerful insights into
+                        urban form and function.
+                    </p>
+                </div>
+
+                <div className={styles.centerBig}>
+                    <p className="text-center">
+                        Urban Analyst for your city
+                    </p>
+                </div>
+
+                <div className={styles.centerNormal}>
+
+                    <p className="text-center">
+                        This main site is free and powered by open-source
+                        software. The data shown here are aggregated from
+                        highly detailed data calculated at every street
+                        intersection in each city. Calculations include travel
+                        times from everywhere to everywhere using combinations
+                        of every conceivable mode of transport. A demonstration
+                        of the full-resolution detail of these data is provided
+                        on the additional&nbsp;
+                        <Link className = {styles.textLink}
+                            href="https://demo.urbananalyst.city" >
+                            demonstration pages
+                        </Link>.
+                        If you're interested in how an Urban Analyst site can
+                        be adapted to your needs, email us at&nbsp;
+                        <Link href="mailto:info@urbananalyst.city" rel="noopener noreferrer">
+                            info@urbananalyst.city
+                        </Link>
+                        .
                     </p>
                 </div>
 
