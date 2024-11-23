@@ -191,18 +191,19 @@ export default function Home() {
                     <p className="text-center">
                         This main site is free and powered by open-source
                         software. The data shown here are aggregated from
-                        highly detailed data calculated at every street
+                        highly detailed calculations at every street
                         intersection in each city. Calculations include travel
                         times from everywhere to everywhere using combinations
-                        of every conceivable mode of transport. A demonstration
-                        of the full-resolution detail of these data is provided
-                        on the additional&nbsp;
+                        of every conceivable mode of transport.  The
+                        full-resolution detail of these data can be seen on the
+                        additional&nbsp;
                         <Link className = {styles.textLink}
                             href="https://demo.urbananalyst.city" >
                             demonstration pages
                         </Link>.
-                        If you&apos;re interested in how an Urban Analyst site can
-                        be adapted to your needs, email us at&nbsp;
+                        City-specific Urban Analyst sites can be customized for any 
+                        conceivable needs. To find out more, please email us
+                        at&nbsp;
                         <Link href="mailto:info@urbananalyst.city" rel="noopener noreferrer">
                             info@urbananalyst.city
                         </Link>
