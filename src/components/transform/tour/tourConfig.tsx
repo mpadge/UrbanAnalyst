@@ -10,7 +10,6 @@ const tourPanelBorderRadiusNarrow = '10px';
 
 export const getTourConfig = (width: number, height: number) => [
     {    
-        selector: '[data-tut="reactour__transform_welcome"]',
         content: () => (
             <div>
                 <h2>Urban Analyst</h2>
@@ -32,7 +31,6 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__transform_page1"]',
         content: (
             <div>
                 <h2>Transform</h2>
@@ -51,7 +49,6 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__transform_page2"]',
         content: (
             <div>
                 <h2>Transform</h2>
@@ -70,7 +67,6 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__transform_controls1"]',
         content: () => controlBoxText1(width > 700),
         style: {
             left: posControlsX(width, "controls"),
@@ -81,7 +77,6 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__transform_controls2"]',
         content: (
             <div>
                 <h2>Controls</h2>
@@ -105,7 +100,6 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__transform_controls4"]',
         content: () => controlBoxText4(),
         style: {
             left: posControlsX(width, "controls"),
@@ -116,7 +110,6 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__transform_controls_rangelimits"]',
         content: (
             <div>
                 <h2>Controls</h2>
@@ -136,7 +129,6 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {    
-        selector: '[data-tut="reactour__transform_legend"]',
         content: () => legendText(width > 700),
         style: {
             width: maxWidth(width),
@@ -147,7 +139,9 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__transform_nav_buttons"]',
+        content: ({ goTo }: { goTo: (stepIndex: number) => void }) => (
+            navText(goTo, width > 700)
+        ),
         style: {
             backgroundColor: tourPanelBackgroundColour,
             borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
@@ -155,9 +149,6 @@ export const getTourConfig = (width: number, height: number) => [
             top: posControlsY(width, height, "nav"),
             width: maxWidth(width),
         },
-        content: ({ goTo }: { goTo: (stepIndex: number) => void }) => (
-            navText(goTo, width > 700)
-        )
     },
 
 ];
