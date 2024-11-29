@@ -97,7 +97,7 @@ export default function Home() {
                                     alt="Image of UrbanAnalyst Compare page"
                                     priority
                                     fill
-                                    sizes="100vw"
+                                    sizes="(max-width: 700px) 100vw, 50vw"
                                     style={{
                                         objectFit: "contain"
                                     }}
@@ -121,7 +121,7 @@ export default function Home() {
                                     src={mapImage}
                                     alt="Image of UrbanAnalyst Map page"
                                     fill
-                                    sizes="100vw"
+                                    sizes="(max-width: 700px) 100vw, 50vw"
                                     style={{
                                         objectFit: "contain"
                                     }}
@@ -146,7 +146,7 @@ export default function Home() {
                                     src={transformImage}
                                     alt="Image of UrbanAnalyst Transform page"
                                     fill
-                                    sizes="100vw"
+                                    sizes="(max-width: 700px) 100vw, 50vw"
                                     style={{
                                         objectFit: "cover"
                                     }}
