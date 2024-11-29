@@ -202,8 +202,12 @@ export default function Home() {
                             demonstration pages
                         </Link>.
                         City-specific Urban Analyst sites can be customized for any 
-                        conceivable needs. To find out more, please email us
-                        at&nbsp;
+                        conceivable needs. To find out more, check out the&nbsp;
+                        <Link className = {styles.textLink}
+                            href="https://demo.urbananalyst.city" >
+                            demonstration pages
+                        </Link>,
+                        or email&nbsp;
                         <Link href="mailto:info@urbananalyst.city" rel="noopener noreferrer">
                             info@urbananalyst.city
                         </Link>
