@@ -17,7 +17,7 @@ import { ButtonAppProps } from '@/data/interfaces';
  * NextJS metadata for main page
  */
 export const metadata: Metadata = {
-    title: 'UA',
+    title: 'UrbanAnalyst',
     description: 'Urban Analyses for the world',
     icons: '/ua.ico',
 }

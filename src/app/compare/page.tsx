@@ -5,8 +5,8 @@ import ButtonAppBar from '@/components/appBar';
 import StatsPage from '@/components/compare/comparePage';
 
 export const metadata: Metadata = {
-    title: 'UA',
-    description: 'Compare cities for Urban Analyst',
+    title: 'UrbanAnalyst',
+    description: 'UrbanAnalyst Compare page',
     icons: '/ua.ico',
 }
 
