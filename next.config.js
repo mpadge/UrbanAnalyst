@@ -11,6 +11,9 @@ const nextConfig = {
     // Since Webpack 5 doesn't enable WebAssembly by default, we should do it manually
     config.experiments = { ...config.experiments, asyncWebAssembly: true }
 
+    // Deubbing (vercel/next.js/issues/27650)
+    // config.infrastructureLogging = { debug: /PackFileCache/ }
+
     return config
   },
 }
