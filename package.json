@@ -28,7 +28,7 @@
         "react-dom": "^18.2.0",
         "react-map-gl": "^7.1.7",
         "react-select": "^5.8.0",
-        "reactour": "^1.19.2",
+        "reactour": "^1.19.4",
         "sharp": "^0.33.2",
         "wasm": "file:pkg"
     },
