@@ -1,4 +1,3 @@
-
 export function controlBoxText1 (wide = true) {
     const line1 = wide ?
         `This is the "control center" to choose cities and data layers.` :

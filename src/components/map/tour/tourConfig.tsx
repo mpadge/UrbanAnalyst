@@ -10,8 +10,7 @@ const tourPanelBorderRadiusNarrow = '10px';
 
 export const getTourConfig = (width: number, height: number) => [
     {    
-        selector: '[data-tut="reactour__maps_welcome"]',
-        content: () => (
+        content: (
             <div>
                 <h2>Urban Analyst</h2>
                 <br />
@@ -32,7 +31,6 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__maps_page"]',
         content: (
             <div>
                 <h2>Maps</h2>
@@ -50,7 +48,6 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__maps_controls"]',
         content: () => controlBoxText(width > 700),
         style: {
             left: posControlsX(width, "controls"),
@@ -61,7 +58,6 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__maps_controls_rangelimits"]',
         content: (
             <div>
                 <h2>Controls</h2>
@@ -81,7 +77,6 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {    
-        selector: '[data-tut="reactour__maps_legend"]',
         content: () => legendText(width > 700),
         style: {
             width: maxWidth(width),
@@ -92,7 +87,9 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__maps_nav_buttons"]',
+        content: ({ goTo }: { goTo: (stepIndex: number) => void }) => (
+            navText(goTo, width > 700)
+        ),
         style: {
             backgroundColor: tourPanelBackgroundColour,
             borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
@@ -100,9 +97,6 @@ export const getTourConfig = (width: number, height: number) => [
             top: posControlsY(width, height, "nav"),
             width: maxWidth(width),
         },
-        content: ({ goTo }: { goTo: (stepIndex: number) => void }) => (
-            navText(goTo, width > 700)
-        )
     },
 
 ];

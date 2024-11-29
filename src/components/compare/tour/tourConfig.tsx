@@ -10,8 +10,7 @@ const tourPanelBorderRadiusNarrow = '10px';
 
 export const getTourConfig = (width: number, height: number) => [
     {    
-        selector: '[data-tut="reactour__compare_welcome"]',
-        content: () => (
+        content: (
             <div>
                 <h2>Urban Analyst</h2>
                 <br />
@@ -32,7 +31,6 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__compare_page"]',
         content: (
             <div>
                 <h2>Compare</h2>
@@ -51,7 +49,6 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__compare_controls1"]',
         content: () => controlBoxText1(width > 700),
         style: {
             left: posControlsX(width, "controls"),
@@ -62,7 +59,6 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__compare_controls2"]',
         content: () => controlBoxText2(),
         style: {
             left: posControlsX(width, "controls"),
@@ -73,7 +69,6 @@ export const getTourConfig = (width: number, height: number) => [
         }
     },
     {
-        selector: '[data-tut="reactour__compare_nav_buttons"]',
         style: {
             backgroundColor: tourPanelBackgroundColour,
             borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,

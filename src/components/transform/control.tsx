@@ -207,10 +207,9 @@ export default function Control (props: TransformControlProps) {
                             src={uaLogo}
                             alt="UA Logo"
                             width={20}
-                            height={10}
+                            height={20}
                             style={{
-                                maxWidth: "100%",
-                                height: "auto"
+                                maxWidth: "100%"
                             }}
                         />
                     </button>
