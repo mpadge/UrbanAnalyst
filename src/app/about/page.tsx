@@ -6,8 +6,8 @@ import styles from '@/styles/about.module.css'
 import ButtonAppBar from '@/components/appBar';
 
 export const metadata: Metadata = {
-    title: 'UA',
-    description: 'Urban Analyses for the world',
+    title: 'UrbanAnalyst',
+    description: 'UrbanAnalyst About page',
     icons: '/ua.ico',
 }
 
