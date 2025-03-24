@@ -4,13 +4,16 @@ export async function GET(request: NextRequest): Promise<Response> {
     const { searchParams } = new URL(request.url)
     const city = searchParams.get('city');
 
-    const url = `https://raw.githubusercontent.com/UrbanAnalyst/CityDataPrivate/main/${city}/dataraw.json`;
+    // https://docs.github.com/en/rest/repos/contents?apiVersion=2022-11-28#get-repository-content
+    const url = `https://api.github.com/repos/UrbanAnalyst/CityDataPrivate/contents/${city}/dataraw.json`;
     const response = await fetch(url, {
         method: 'GET',
         cache: 'no-store',
         headers: {
+            'Accept': 'application/vnd.github.raw+json',
             'Content-Type': 'application/json',
-            'authorization': `token ${process.env.GITHUB_TOKEN}`
+            'Authorization': `Bearer ${process.env.GITHUB_TOKEN}`,
+            'X-GitHub-Api-Version': '2022-11-28'
         }
     });
     const data = await response.json();
