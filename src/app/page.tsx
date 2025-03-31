@@ -60,7 +60,9 @@ export default function Home() {
                         visualisation and comparison of cities, including
                         transport systems, measures of accessibility, and
                         socio-demographic conditions.  There are four main ways
-                        to examine and compare cities: </p> </div>
+                        to examine and compare cities:
+                    </p>
+                </div>
 
                 <div className={styles.grid}>
 
