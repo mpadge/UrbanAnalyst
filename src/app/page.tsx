@@ -12,6 +12,7 @@ import transformImage from '@/images/transform.png';
 import styles from '@/styles/Home.module.css'
 import ButtonAppBar from '@/components/appBar';
 import { ButtonAppProps } from '@/data/interfaces';
+import UABarChart from '@/components/main/uaindexBarChart';
 
 /**
  * NextJS metadata for main page
@@ -56,11 +57,23 @@ export default function Home() {
 
                 <div className={styles.centerNormal}>
                     <p className="text-center">
-                        Urban Analyst is a platform for interactive
+                        Urban Analyst (UA) is a platform for interactive
                         visualisation and comparison of cities, including
                         transport systems, measures of accessibility, and
-                        socio-demographic conditions.  There are four main ways
-                        to examine and compare cities:
+                        socio-demographic conditions. The &ldquo;UA
+                        Index&rdquo; combines all measures into a single index.
+                        Lower values in UA are generally better than higher
+                        values. Think travel times or unemployment statistics.
+                        The UA Index works the same: the best city has the
+                        lowest score. Current scores and ranks are:
+                    </p>
+                </div>
+
+                <UABarChart />
+
+                <div className={styles.centerNormal}>
+                    <p className="text-center">
+                        There are four main ways to examine and compare cities:
                     </p>
                 </div>
 
