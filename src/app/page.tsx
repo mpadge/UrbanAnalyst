@@ -60,12 +60,32 @@ export default function Home() {
                         Urban Analyst (UA) is a platform for interactive
                         visualisation and comparison of cities, including
                         transport systems, measures of accessibility, and
-                        socio-demographic conditions. The &ldquo;UA
-                        Index&rdquo; combines all measures into a single index.
-                        Lower values in UA are generally better than higher
-                        values. Think travel times or unemployment statistics.
-                        The UA Index works the same: the best city has the
-                        lowest score. Current scores and ranks are:
+                        socio-demographic conditions. This site allows full
+                        exploration of all of these factors, including detailed
+                        interactive spatial&nbsp;
+                        <Link href="/map" rel="noopener noreferrer">
+                            maps
+                        </Link>
+                        &nbsp;of each city, charts&nbsp;
+                        <Link href="/compare" rel="noopener noreferrer">
+                        comparing
+                        </Link>
+                        &nbsp;all cities, and analyses of how cities can be&nbsp;
+                        <Link href="/transform" rel="noopener noreferrer">
+                        transformed
+                        </Link>
+                        &nbsp;to become more like other UA cities.
+                    </p>
+                </div>
+
+                <div className={styles.centerNormal}>
+                    <p className="text-center">
+                        All measurements are also combined into a single
+                        &ldquo;UA
+                        Index&rdquo;, for which lower values are better than
+                        higher values. Think travel times or unemployment
+                        statistics. The best city has the lowest UA Index.
+                        Current scores and ranks are:
                     </p>
                 </div>
 
@@ -73,7 +93,8 @@ export default function Home() {
 
                 <div className={styles.centerNormal}>
                     <p className="text-center">
-                        There are four main ways to examine and compare cities:
+                        To understand these values, the site offers four ways
+                        to explore and compare cities:
                     </p>
                 </div>
 
