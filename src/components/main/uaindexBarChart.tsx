@@ -80,6 +80,7 @@ export default function UABarChart () {
             // (here, xMax) is white. Expanding ensures that it is also a blue shade.
             const paletteExpand = 0.2;
             const xMaxExpand = xMax + paletteExpand * (xMax - xMin);
+            console.log("-----PALETTE DOMAIN = [" + xMin + ", " + xMaxExpand + "]")
             var colourPalette = d3
                 .scaleSequential()
                 .domain([ xMaxExpand, xMin])
@@ -111,7 +112,7 @@ export default function UABarChart () {
                     .selectAll('rect')
                     .data(data)
                     .join('rect')
-                    .attr('fill', (d: any) => colourPalette(d.value))
+                    .attr('fill', (d: any) => colourPalette(d.score))
                     .attr('stroke-width', 1)
                     .attr('stroke', '#718096')
                     .attr('height', yScale.bandwidth())
@@ -121,7 +122,7 @@ export default function UABarChart () {
                     })
                     .on('mouseout', function(this: SVGRectElement) {
                         d3.select(this).style('fill', (d: any) => {
-                            return colourPalette(d.value);
+                            return colourPalette(d.score);
                         })
                     })
                     .transition()
