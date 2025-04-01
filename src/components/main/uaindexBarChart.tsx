@@ -158,8 +158,29 @@ export default function UABarChart () {
                     .text((d: any) => capitalizeFirstLetter(d.city))
             };
 
+            const nTicks = (innerWidth < 700 || xMin > 0) ? 4 : 8;
+
+            const handleDrawXAxis = (svg: any) => {
+                const g = svg
+                .append("g")
+                .attr("transform", `translate(0,${innerHeight})`)
+                .call(d3.axisBottom(xScale)
+                    .tickSize(-innerHeight)
+                    .ticks(nTicks)
+                    .tickPadding(xAxisPadding));
+
+                g.selectAll(".tick line")
+                    .style("stroke", "#dcdcdb");
+
+                g.selectAll(".tick text")
+                    .style("font-size", () => {
+                        return innerWidth < 700 ? "12px" : "20px"
+                    })
+            }
+
             handleDrawBars(svg, colourPalette);
             handleDrawText(svg);
+            handleDrawXAxis(svg);
         }
 
     }, [svgRef, data, width, height, xMin, xMax, textColour,
