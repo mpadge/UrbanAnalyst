@@ -25,6 +25,10 @@ async function LoadData(
     return null;
 }
 
+function capitalizeFirstLetter(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 export default function UABarChart () {
 
     const [data, setData] = useState<[indexDataProps] | null>(null);
@@ -32,6 +36,8 @@ export default function UABarChart () {
         LoadData(setData);
     }, []);
     // console.log("----- data = " + JSON.stringify(data, null, 4));
+
+    const [textColour, setTextColour] = useState('black');
 
     const size = useWindowSize();
     const defaultWidth = 1000;
@@ -130,12 +136,34 @@ export default function UABarChart () {
                     .attr('width', (d: any) => xScale(xValue(d)));
             };
 
+            const handleDrawText = (svg: any) => {
+                svg
+                    .append("g")
+                    .selectAll('text')
+                    .data(data)
+                    .join('text')
+                    .attr('fill', textColour)
+                    .attr('font-size', () => {
+                        return innerWidth < 700 ? '12px' : '20px';
+                    })
+                    .attr('font-weight', () => {
+                        return innerWidth < 700 ? '300' : '400';
+                    })
+                    .attr('x', (d: any) => xScale(xValue(d)) + 10)
+                    .attr('y', (d: any) => {
+                        const ysc: any = yScale ? yScale(yValue(d)) : 0
+                        return ysc + yScale.bandwidth() / 1.5
+                    })
+                    .attr('fill-opacity', 0.8)
+                    .text((d: any) => capitalizeFirstLetter(d.city))
+            };
+
             handleDrawBars(svg, colourPalette);
+            handleDrawText(svg);
         }
 
-    }, [svgRef, data, width, height, xMin, xMax,
+    }, [svgRef, data, width, height, xMin, xMax, textColour,
             margin.top, margin.left, margin.bottom, margin.right]);
-
 
     return (
         <>
