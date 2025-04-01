@@ -37,7 +37,7 @@ export const getTourConfig = (width: number, height: number) => [
                 <br />
                 This page compares aggregate statistics for every Urban Analyst
                 city. As for maps, low values are generally better than higher
-                values, so in terms of the chosen &quot;layer&quot; or statistic,
+                values, so in terms of the chosen &ldquo;layer&rdquo; or statistic,
                 dark-coloured bars are generally better than light-coloured bars.
             </div>
         ),

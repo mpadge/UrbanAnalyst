@@ -12,6 +12,7 @@ import transformImage from '@/images/transform.png';
 import styles from '@/styles/Home.module.css'
 import ButtonAppBar from '@/components/appBar';
 import { ButtonAppProps } from '@/data/interfaces';
+import UABarChart from '@/components/main/uaindexBarChart';
 
 /**
  * NextJS metadata for main page
@@ -56,11 +57,57 @@ export default function Home() {
 
                 <div className={styles.centerNormal}>
                     <p className="text-center">
-                        Urban Analyst is a platform for interactive
+                        Urban Analyst (UA) is a platform for interactive
                         visualisation and comparison of cities, including
                         transport systems, measures of accessibility, and
-                        socio-demographic conditions.  There are four main ways
-                        to examine and compare cities: </p> </div>
+                        socio-demographic conditions. This site allows full
+                        exploration of all of these factors, including detailed
+                        interactive spatial&nbsp;
+                        <Link href="/map" rel="noopener noreferrer">
+                            maps
+                        </Link>
+                        &nbsp;of each city, charts&nbsp;
+                        <Link href="/compare" rel="noopener noreferrer">
+                        comparing
+                        </Link>
+                        &nbsp;all cities, and analyses of how cities can be&nbsp;
+                        <Link href="/transform" rel="noopener noreferrer">
+                        transformed
+                        </Link>
+                        &nbsp;to become more like other UA cities.
+                        <br /><br />
+
+                        All measurements are also combined into a single
+                        &ldquo;UA
+                        Index&rdquo;, for which lower values are better than
+                        higher values. Think travel times or unemployment
+                        statistics. The best city has the lowest UA Index.
+                        Scores of all current UA cities, ranked from best at
+                        the top, are:
+                    </p>
+                </div>
+
+                <UABarChart />
+
+                <div className={styles.centerNormal}>
+                    <p className="text-center">
+                        Unlike most other city scoring and ranking systems,
+                        Urban Analyst measures the relationships between all
+                        parameters, importantly including relationships with
+                        social inequality. Good cities thus not only have, for
+                        example, better transport systems, greater availability
+                        of education, or easier access to nature, but all of
+                        these aspects are also developed in ways that counteract
+                        and reduce social inequality within a city. A good city
+                        has a transport system which works just as well, or
+                        better, for disadvantaged as for well-off residents.
+                        <br /><br />
+
+                        To further understand differences between, and patterns
+                        within, cities, the site offers four ways to explore
+                        and compare cities:
+                    </p>
+                </div>
 
                 <div className={styles.grid}>
 
@@ -88,7 +135,10 @@ export default function Home() {
                                     Compare <span>&#8628;</span>
                                 </h2>
                                 <p className={styles.cardText}>
-                                    Compare statistics for every UA city.
+                                    Compare statistics for every UA city, both
+                                    in terms of all parameters measured for
+                                    every city, as well as in terms of
+                                    relationships between those parameters.
                                 </p>
                             </div>
                             <div className={styles.cardImage}>
@@ -113,7 +163,10 @@ export default function Home() {
                                     Map <span>&#8628;</span>
                                 </h2>
                                 <p className={styles.cardText}>
-                                    View interactive maps of all cities analysed to date.
+                                    View interactive maps of all cities
+                                    analysed to date, also in terms both of all
+                                    individual parameters as well as
+                                    relationships between them all.
                                 </p>
                             </div>
                             <div className={styles.cardImage}>
@@ -159,17 +212,23 @@ export default function Home() {
 
                 <div className={styles.centerBig}>
                     <p className="text-center">
-                        How does it work?
+                        Where do the data come from?
                     </p>
                 </div>
 
                 <div className={styles.centerNormal}>
 
                     <p className="text-center">
+                        All data are obtained from openly published sources, as
+                        described in detail in
+                        <Link className = {styles.textLink}
+                            href="https://docs.urbananalyst.city" >&nbsp;the
+                            documentation pages
+                        </Link>.
                         Results for each city involve billions of routing
                         calculations through street networks and public transport
                         systems.  These are calculated using Urban Analyst&apos;s
-                        own open-source software described in
+                        own open-source software also described in
                         <Link className = {styles.textLink}
                             href="https://docs.urbananalyst.city" >&nbsp;the
                             documentation pages

@@ -9,7 +9,7 @@ const berlin = {
     content: (
         <>
             <h1>Statistical summary of Berlin</h1>
-            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Berlin based on comparison with data for all other UA cities. The summary includes initial descriptions of &quot;single&quot; and &quot;paired&quot; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &quot;target city&quot; for Berlin , selected as the city with the best combined properties for all aspects for which Berlin is worse than average.</p></div>
+            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Berlin based on comparison with data for all other UA cities. The summary includes initial descriptions of &ldquo;single&rdquo; and &ldquo;paired&rdquo; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &ldquo;target city&rdquo; for Berlin , selected as the city with the best combined properties for all aspects for which Berlin is worse than average.</p></div>
             <h2>Single variables</h2>
             <p>Values for these single variables can be compared with values for all other UA cities in the
                 <Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
@@ -33,12 +33,12 @@ const berlin = {
                     <a className={styles.linkStyle}>
                         &nbsp;compare page&nbsp;
                     </a></Link>
-                by clicking on &quot;paired&quot;, or detailed patterns for Berlin viewed in the
+                by clicking on &ldquo;paired&rdquo;, or detailed patterns for Berlin viewed in the
                 <Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
                     <a className={styles.linkStyle}>
                         &nbsp;map page
                     </a></Link>
-                , also clicking on &quot;paired&quot;.</p>
+                , also clicking on &ldquo;paired&rdquo;.</p>
             <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
                 <li> Very pronounced strength of relationship between access to natural spaces and social index </li>
                 <li> Highly significant strength of relationship between transport and accessibility to natural spaces </li>
@@ -89,7 +89,7 @@ const hamburg = {
     content: (
         <>
             <h1>Statistical summary of Hamburg</h1>
-            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Hamburg based on comparison with data for all other UA cities. The summary includes initial descriptions of &quot;single&quot; and &quot;paired&quot; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &quot;target city&quot; for Hamburg , selected as the city with the best combined properties for all aspects for which Hamburg is worse than average.</p></div>
+            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Hamburg based on comparison with data for all other UA cities. The summary includes initial descriptions of &ldquo;single&rdquo; and &ldquo;paired&rdquo; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &ldquo;target city&rdquo; for Hamburg , selected as the city with the best combined properties for all aspects for which Hamburg is worse than average.</p></div>
             <h2>Single variables</h2>
             <p>Values for these single variables can be compared with values for all other UA cities in the
                 <Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
@@ -113,12 +113,12 @@ const hamburg = {
                     <a className={styles.linkStyle}>
                         &nbsp;compare page&nbsp;
                     </a></Link>
-                by clicking on &quot;paired&quot;, or detailed patterns for Hamburg viewed in the
+                by clicking on &ldquo;paired&ldquo;, or detailed patterns for Hamburg viewed in the
                 <Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
                     <a className={styles.linkStyle}>
                         &nbsp;map page
                     </a></Link>
-                , also clicking on &quot;paired&quot;.</p>
+                , also clicking on &ldquo;paired&rdquo;.</p>
             <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
                 <li> Notable strength of relationship between bicycle infrastructure and accessibility to natural spaces </li>
                 <li> Weak strength of relationship between access to natural spaces and social index </li>
@@ -164,7 +164,7 @@ const london = {
     content: (
         <>
             <h1>Statistical summary of London</h1>
-            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for London based on comparison with data for all other UA cities. The summary includes initial descriptions of &quot;single&quot; and &quot;paired&quot; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &quot;target city&quot; for London , selected as the city with the best combined properties for all aspects for which London is worse than average.</p></div>
+            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for London based on comparison with data for all other UA cities. The summary includes initial descriptions of &ldquo;single&rdquo; and &ldquo;paired&rdquo; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &ldquo;target city&rdquo; for London , selected as the city with the best combined properties for all aspects for which London is worse than average.</p></div>
             <h2>Single variables</h2>
             <p>Values for these single variables can be compared with values for all other UA cities in the
                 <Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
@@ -188,12 +188,12 @@ const london = {
                     <a className={styles.linkStyle}>
                         &nbsp;compare page&nbsp;
                     </a></Link>
-                by clicking on &quot;paired&quot;, or detailed patterns for London viewed in the
+                by clicking on &ldquo;paired&rdquo;, or detailed patterns for London viewed in the
                 <Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
                     <a className={styles.linkStyle}>
                         &nbsp;map page
                     </a></Link>
-                , also clicking on &quot;paired&quot;.</p>
+                , also clicking on &ldquo;paired&rdquo;.</p>
             <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
                 <li> Extremely strong strength of relationship between population density and accessibility to natural spaces </li>
                 <li> Very pronounced strength of relationship between access to natural spaces and parking index </li>
@@ -233,7 +233,7 @@ const mannheim = {
     content: (
         <>
             <h1>Statistical summary of Mannheim</h1>
-            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Mannheim based on comparison with data for all other UA cities. The summary includes initial descriptions of &quot;single&quot; and &quot;paired&quot; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &quot;target city&quot; for Mannheim , selected as the city with the best combined properties for all aspects for which Mannheim is worse than average.</p></div>
+            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Mannheim based on comparison with data for all other UA cities. The summary includes initial descriptions of &ldquo;single&rdquo; and &ldquo;paired&rdquo; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &ldquo;target city&rdquo; for Mannheim , selected as the city with the best combined properties for all aspects for which Mannheim is worse than average.</p></div>
             <h2>Single variables</h2>
             <p>Values for these single variables can be compared with values for all other UA cities in the
                 <Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
@@ -267,12 +267,12 @@ const mannheim = {
                     <a className={styles.linkStyle}>
                         &nbsp;compare page&nbsp;
                     </a></Link>
-                by clicking on &quot;paired&quot;, or detailed patterns for Mannheim viewed in the
+                by clicking on &ldquo;paired&rdquo;, or detailed patterns for Mannheim viewed in the
                 <Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
                     <a className={styles.linkStyle}>
                         &nbsp;map page
                     </a></Link>
-                , also clicking on &quot;paired&quot;.</p>
+                , also clicking on &ldquo;paired&rdquo;.</p>
             <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
                 <li> Highly significant strength of relationship between bicycle infrastructure and social index </li>
             </ul>
@@ -325,7 +325,7 @@ const muenster = {
     content: (
         <>
             <h1>Statistical summary of Muenster</h1>
-            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Muenster based on comparison with data for all other UA cities. The summary includes initial descriptions of &quot;single&quot; and &quot;paired&quot; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &quot;target city&quot; for Muenster , selected as the city with the best combined properties for all aspects for which Muenster is worse than average.</p></div>
+            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Muenster based on comparison with data for all other UA cities. The summary includes initial descriptions of &ldquo;single&rdquo; and &ldquo;paired&rdquo; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &ldquo;target city&rdquo; for Muenster , selected as the city with the best combined properties for all aspects for which Muenster is worse than average.</p></div>
             <h2>Single variables</h2>
             <p>Values for these single variables can be compared with values for all other UA cities in the
                 <Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
@@ -362,12 +362,12 @@ const muenster = {
                     <a className={styles.linkStyle}>
                         &nbsp;compare page&nbsp;
                     </a></Link>
-                by clicking on &quot;paired&quot;, or detailed patterns for Muenster viewed in the
+                by clicking on &ldquo;paired&rdquo;, or detailed patterns for Muenster viewed in the
                 <Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
                     <a className={styles.linkStyle}>
                         &nbsp;map page
                     </a></Link>
-                , also clicking on &quot;paired&quot;.</p>
+                , also clicking on &ldquo;paired&rdquo;.</p>
             <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
                 <li> Highly significant strength of relationship between distance to nearest school and social index </li>
                 <li> Highly significant strength of relationship between bicycle infrastructure and social index </li>
@@ -427,7 +427,7 @@ const paris = {
     content: (
         <>
             <h1>Statistical summary of Paris</h1>
-            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Paris based on comparison with data for all other UA cities. The summary includes initial descriptions of &quot;single&quot; and &quot;paired&quot; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &quot;target city&quot; for Paris , selected as the city with the best combined properties for all aspects for which Paris is worse than average.</p></div>
+            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Paris based on comparison with data for all other UA cities. The summary includes initial descriptions of &ldquo;single&rdquo; and &ldquo;paired&rdquo; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &ldquo;target city&rdquo; for Paris , selected as the city with the best combined properties for all aspects for which Paris is worse than average.</p></div>
             <h2>Single variables</h2>
             <p>Values for these single variables can be compared with values for all other UA cities in the
                 <Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
@@ -467,12 +467,12 @@ const paris = {
                     <a className={styles.linkStyle}>
                         &nbsp;compare page&nbsp;
                     </a></Link>
-                by clicking on &quot;paired&quot;, or detailed patterns for Paris viewed in the
+                by clicking on &ldquo;paired&rdquo;, or detailed patterns for Paris viewed in the
                 <Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
                     <a className={styles.linkStyle}>
                         &nbsp;map page
                     </a></Link>
-                , also clicking on &quot;paired&quot;.</p>
+                , also clicking on &ldquo;paired&rdquo;.</p>
             <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
                 <li> Extremely strong strength of relationship between population density and distances to nearest schools </li>
                 <li> Strong strength of relationship between population density and parking index </li>
@@ -516,7 +516,7 @@ const philadelphia = {
     content: (
         <>
             <h1>Statistical summary of Philadelphia</h1>
-            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Philadelphia based on comparison with data for all other UA cities. The summary includes initial descriptions of &quot;single&quot; and &quot;paired&quot; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &quot;target city&quot; for Philadelphia , selected as the city with the best combined properties for all aspects for which Philadelphia is worse than average.</p></div>
+            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Philadelphia based on comparison with data for all other UA cities. The summary includes initial descriptions of &ldquo;single&rdquo; and &ldquo;paired&rdquo; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &ldquo;target city&rdquo; for Philadelphia , selected as the city with the best combined properties for all aspects for which Philadelphia is worse than average.</p></div>
             <h2>Single variables</h2>
             <p>Values for these single variables can be compared with values for all other UA cities in the
                 <Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
@@ -541,12 +541,12 @@ const philadelphia = {
                     <a className={styles.linkStyle}>
                         &nbsp;compare page&nbsp;
                     </a></Link>
-                by clicking on &quot;paired&quot;, or detailed patterns for Philadelphia viewed in the
+                by clicking on &ldquo;paired&rdquo;, or detailed patterns for Philadelphia viewed in the
                 <Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
                     <a className={styles.linkStyle}>
                         &nbsp;map page
                     </a></Link>
-                , also clicking on &quot;paired&quot;.</p>
+                , also clicking on &ldquo;paired&rdquo;.</p>
             <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
                 <li> Notable strength of relationship between transport and bicycle infrastructure </li>
             </ul>
@@ -590,7 +590,7 @@ const utrecht = {
     content: (
         <>
             <h1>Statistical summary of Utrecht</h1>
-            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Utrecht based on comparison with data for all other UA cities. The summary includes initial descriptions of &quot;single&quot; and &quot;paired&quot; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &quot;target city&quot; for Utrecht , selected as the city with the best combined properties for all aspects for which Utrecht is worse than average.</p></div>
+            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Utrecht based on comparison with data for all other UA cities. The summary includes initial descriptions of &ldquo;single&rdquo; and &ldquo;paired&rdquo; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &ldquo;target city&rdquo; for Utrecht , selected as the city with the best combined properties for all aspects for which Utrecht is worse than average.</p></div>
             <h2>Single variables</h2>
             <p>Values for these single variables can be compared with values for all other UA cities in the
                 <Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
@@ -629,12 +629,12 @@ const utrecht = {
                     <a className={styles.linkStyle}>
                         &nbsp;compare page&nbsp;
                     </a></Link>
-                by clicking on &quot;paired&quot;, or detailed patterns for Utrecht viewed in the
+                by clicking on &ldquo;paired&rdquo;, or detailed patterns for Utrecht viewed in the
                 <Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
                     <a className={styles.linkStyle}>
                         &nbsp;map page
                     </a></Link>
-                , also clicking on &quot;paired&quot;.</p>
+                , also clicking on &ldquo;paired&rdquo;.</p>
             <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
                 <li> Highly significant strength of relationship between bicycle infrastructure and accessibility to natural spaces </li>
                 <li> Highly significant strength of relationship between population density and distances to nearest schools </li>
@@ -675,7 +675,7 @@ const washington = {
     content: (
         <>
             <h1>Statistical summary of Washington</h1>
-            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Washington based on comparison with data for all other UA cities. The summary includes initial descriptions of &quot;single&quot; and &quot;paired&quot; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &quot;target city&quot; for Washington , selected as the city with the best combined properties for all aspects for which Washington is worse than average.</p></div>
+            <div className={styles.introPara}> <p>This in an automatically-generated summary of the properties of UA variables for Washington based on comparison with data for all other UA cities. The summary includes initial descriptions of &ldquo;single&rdquo; and &ldquo;paired&rdquo; variables, describing only those for which statistical properties are notably different from average properties for all other cities. This is followed by a section summarising the best &ldquo;target city&rdquo; for Washington , selected as the city with the best combined properties for all aspects for which Washington is worse than average.</p></div>
             <h2>Single variables</h2>
             <p>Values for these single variables can be compared with values for all other UA cities in the
                 <Link href='/compare' passHref legacyBehavior rel='noopener noreferrer'>
@@ -699,12 +699,12 @@ const washington = {
                     <a className={styles.linkStyle}>
                         &nbsp;compare page&nbsp;
                     </a></Link>
-                by clicking on &quot;paired&quot;, or detailed patterns for Washington viewed in the
+                by clicking on &ldquo;paired&rdquo;, or detailed patterns for Washington viewed in the
                 <Link href='/map' passHref legacyBehavior rel='noopener noreferrer'>
                     <a className={styles.linkStyle}>
                         &nbsp;map page
                     </a></Link>
-                , also clicking on &quot;paired&quot;.</p>
+                , also clicking on &ldquo;paired&rdquo;.</p>
             <p>The following aspects of paired variables are notably good in comparison to the average of all UA cities:</p><ul>
                 <li> Extremely strong strength of relationship between transport and bicycle infrastructure </li>
                 <li> Extremely strong strength of relationship between transport and distances to nearest schools </li>
