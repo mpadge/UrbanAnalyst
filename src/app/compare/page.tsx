@@ -29,10 +29,10 @@ export default function Home() {
 
     return (
         <>
-            <ButtonAppBar text={buttonTxt} />
-            <StatsPage />
-
             <main className={styles.main}>
+
+                <ButtonAppBar text={buttonTxt} />
+                <StatsPage />
 
                 <div className={styles.centerBig}>
                     <p className="text-center">

@@ -50,6 +50,16 @@ interface AxisProps {
 
 export default function BarChart (props: CompareProps) {
 
+    // Ref for width of flex column:
+    const flexColumnRef = useRef(null);
+    const [flexWidth, setFlexWidth] = useState<number | null>(null);
+    useEffect (() => {
+        if (flexColumnRef.current) {
+            const flexwidth = flexColumnRef.current.offsetWidth;
+            setFlexWidth(flexwidth);
+        }
+    }, [setFlexWidth]);
+
     const idxWashington = getIdxWashington(props.citiesArray);
     const [cityData, setCityData] = useState(props.citiesArray[idxWashington]);
 
@@ -101,16 +111,10 @@ export default function BarChart (props: CompareProps) {
 
     const size = useWindowSize();
 
-    const defaultWidth = 1000;
-    const defaultHeight = 700;
-    var widthTemp = defaultWidth;
-    var heightTemp = defaultHeight;
+    // const width = size.width ? size.width : 1000;
+    const width = flexWidth ? flexWidth : 1000;
+    const height = size.height ? size.height : 700;
     const margin = { top: 50, right: 95, bottom: 60, left: 50 };
-    if (size.width !== null) {
-        widthTemp = Math.min(widthTemp, size.width)
-    }
-    const width = widthTemp;
-    const height = heightTemp;
     const innerWidth = width - margin.right - 2 * margin.left;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -225,7 +229,7 @@ export default function BarChart (props: CompareProps) {
 
     return (
         <>
-            <div id="compare-page" className={styles.comparepage}>
+            <div id="compare-page" className={styles.comparepage} ref={flexColumnRef}>
 
                 <div id="compare-container" className={styles.compareplot} >
                     <Suspense fallback={<div>Loading...</div>}>

@@ -1,3 +1,9 @@
+.grid2080 {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    width: var(--max-width);
+}
+
 .comparepage {
     display: inline;
     align-items: center;

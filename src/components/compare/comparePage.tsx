@@ -9,7 +9,7 @@ import useWindowSize from '@/components/windowSize';
 
 import { getTourConfig } from '@/components/compare/tour/tourConfig';
 
-import styles from '@/styles/Home.module.css'
+import styles from '@/styles/compare.module.css';
 import tourStyles from '@/styles/tour.module.css';
 import getPreferredTourClass from '@/components/tourClass';
 
@@ -128,9 +128,8 @@ export default function Home() {
 
     return (
         <>
-            <main className={styles.main}>
+            <main className={styles.grid2080}>
 
-                <div className={styles.grid2080}>
                     <div>
                         <Control
                             layer = {layer}
@@ -148,7 +147,7 @@ export default function Home() {
                             handleTourOpen = {handleTourOpen}
                         />
                     </div>
-                    <div>
+                    <div id="compare-bar-chart">
                         <BarChart
                             layer1 = {layer}
                             layer2 = {layer2}
@@ -158,7 +157,6 @@ export default function Home() {
                             citiesArray = {CITY_DATA.citiesArray}
                         />
                     </div>
-                </div>
             </main>
             <Tour
                 onRequestClose={closeTour}
