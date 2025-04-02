@@ -35,7 +35,6 @@ export default function UABarChart () {
     useEffect(() => {
         LoadData(setData);
     }, []);
-    // console.log("----- data = " + JSON.stringify(data, null, 4));
 
     const [textColour, setTextColour] = useState('black');
 
@@ -45,7 +44,7 @@ export default function UABarChart () {
     const [width, setWidth] = useState<number>(size.width ? size.width : defaultWidth);
     const [height, setHeight] = useState<number>(size.height ? size.height : defaultHeight);
 
-    const xMin = 0;
+    const [xMin, setXMin] = useState<number>(0);
     const [xMax, setXMax] = useState<number>(2);
     const margin = { top: 50, right: 95, bottom: 60, left: 50 };
 
@@ -54,6 +53,12 @@ export default function UABarChart () {
 
             const rangeExpand = 1.5;
             const xMax = data.map((i) => i.score).reduce((a, b) => Math.max(a, b));
+            // Make xMin at least as far below 1 as xMax is above it:
+            const xMin = Math.min(
+                2 - xMax,
+                data.map((i) => i.score).reduce((a, b) => Math.min(a, b))
+            );
+            setXMin(xMin);
             setXMax(xMax);
 
             var widthTemp = defaultWidth;
@@ -86,7 +91,6 @@ export default function UABarChart () {
             // (here, xMax) is white. Expanding ensures that it is also a blue shade.
             const paletteExpand = 0.2;
             const xMaxExpand = xMax + paletteExpand * (xMax - xMin);
-            console.log("-----PALETTE DOMAIN = [" + xMin + ", " + xMaxExpand + "]")
             var colourPalette = d3
                 .scaleSequential()
                 .domain([ xMaxExpand, xMin])
@@ -166,11 +170,14 @@ export default function UABarChart () {
                 .attr("transform", `translate(0,${innerHeight})`)
                 .call(d3.axisBottom(xScale)
                     .tickSize(-innerHeight)
-                    .ticks(nTicks)
+                    .ticks(nTicks, ",f")
                     .tickPadding(xAxisPadding));
+                // The `.ticks formatting trick is from`
+                // https://d3js.org/d3-axis#axis_tickFormat
 
                 g.selectAll(".tick line")
                     .style("stroke", "#dcdcdb");
+
 
                 g.selectAll(".tick text")
                     .style("font-size", () => {

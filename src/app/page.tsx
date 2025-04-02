@@ -81,9 +81,10 @@ export default function Home() {
                         &ldquo;UA
                         Index&rdquo;, for which lower values are better than
                         higher values. Think travel times or unemployment
-                        statistics. The best city has the lowest UA Index.
-                        Scores of all current UA cities, ranked from best at
-                        the top, are:
+                        statistics. The best city has the lowest UA Index, with
+                        a score of 1 reflecting average scores in all
+                        individual components. Scores of all current UA cities,
+                        ranked from best at the top, are:
                     </p>
                 </div>
 
