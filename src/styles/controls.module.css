@@ -14,6 +14,21 @@
     width: var(--control-width-wide-outer);
 }
 
+.controlsFloat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    z-index: 10;
+    position: relative;
+    border-radius: 12px;
+    font-size: 14px;
+    top: 0;
+    left: 0;
+    margin-top: 80px;
+    width: var(--control-width-wide-outer);
+}
+
 .light {
     --controls-bg-color: rgba(238, 240, 241, 0.5);
     --controls-border-color: rgba(172, 175, 176, 0.3);

@@ -130,29 +130,35 @@ export default function Home() {
         <>
             <main className={styles.main}>
 
-                <BarChart
-                    layer1 = {layer}
-                    layer2 = {layer2}
-                    numLayers = {numLayers}
-                    meanVals = {meanVals}
-                    sortOpt = {sortOpt}
-                    citiesArray = {CITY_DATA.citiesArray}
-                />
-                <Control
-                    layer = {layer}
-                    layer2 = {layer2}
-                    numLayers = {numLayers}
-                    numLayersOptions = {numLayersOptions}
-                    meanVals = {meanVals}
-                    sortOpt = {sortOpt}
-                    citiesArray = {CITY_DATA.citiesArray}
-                    handleLayerChange = {handleLayerChange}
-                    handleLayer2Change = {handleLayer2Change}
-                    handleNumLayersChange = {handleNumLayersChange}
-                    handleMeanChange = {handleMeanChange}
-                    handleSortChange = {handleSortChange}
-                    handleTourOpen = {handleTourOpen}
-                />
+                <div className={styles.grid2080}>
+                    <div>
+                        <Control
+                            layer = {layer}
+                            layer2 = {layer2}
+                            numLayers = {numLayers}
+                            numLayersOptions = {numLayersOptions}
+                            meanVals = {meanVals}
+                            sortOpt = {sortOpt}
+                            citiesArray = {CITY_DATA.citiesArray}
+                            handleLayerChange = {handleLayerChange}
+                            handleLayer2Change = {handleLayer2Change}
+                            handleNumLayersChange = {handleNumLayersChange}
+                            handleMeanChange = {handleMeanChange}
+                            handleSortChange = {handleSortChange}
+                            handleTourOpen = {handleTourOpen}
+                        />
+                    </div>
+                    <div>
+                        <BarChart
+                            layer1 = {layer}
+                            layer2 = {layer2}
+                            numLayers = {numLayers}
+                            meanVals = {meanVals}
+                            sortOpt = {sortOpt}
+                            citiesArray = {CITY_DATA.citiesArray}
+                        />
+                    </div>
+                </div>
             </main>
             <Tour
                 onRequestClose={closeTour}
