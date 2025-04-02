@@ -45,7 +45,7 @@ export default function UABarChart () {
     const [width, setWidth] = useState<number>(size.width ? size.width : defaultWidth);
     const [height, setHeight] = useState<number>(size.height ? size.height : defaultHeight);
 
-    const xMin = 0;
+    const [xMin, setXMin] = useState<number>(0.01);
     const [xMax, setXMax] = useState<number>(2);
     const margin = { top: 50, right: 95, bottom: 60, left: 50 };
 
@@ -53,7 +53,9 @@ export default function UABarChart () {
         if (data) {
 
             const rangeExpand = 1.5;
+            const xMin = data.map((i) => i.score).reduce((a, b) => Math.min(a, b));
             const xMax = data.map((i) => i.score).reduce((a, b) => Math.max(a, b));
+            setXMin(xMin);
             setXMax(xMax);
 
             var widthTemp = defaultWidth;
@@ -86,7 +88,6 @@ export default function UABarChart () {
             // (here, xMax) is white. Expanding ensures that it is also a blue shade.
             const paletteExpand = 0.2;
             const xMaxExpand = xMax + paletteExpand * (xMax - xMin);
-            console.log("-----PALETTE DOMAIN = [" + xMin + ", " + xMaxExpand + "]")
             var colourPalette = d3
                 .scaleSequential()
                 .domain([ xMaxExpand, xMin])
@@ -97,7 +98,7 @@ export default function UABarChart () {
             const expandRHS = 1.05; // Expand right-hand edge beyond max observed value
             const xMax2 = Math.max(0,xMin) + (xMax - Math.max(0,xMin)) * expandRHS;
             const xScale = d3
-                .scaleLinear()
+                .scaleLog()
                 .domain([xMin, xMax2])
                 .range([xMin, innerWidth])
                 .nice();
@@ -166,11 +167,13 @@ export default function UABarChart () {
                 .attr("transform", `translate(0,${innerHeight})`)
                 .call(d3.axisBottom(xScale)
                     .tickSize(-innerHeight)
-                    .ticks(nTicks)
+                    .ticks(nTicks, ",f")
                     .tickPadding(xAxisPadding));
+                // The `.ticks formatting trick is from`
+                // https://d3js.org/d3-axis#axis_tickFormat
 
                 g.selectAll(".tick line")
-                    .style("stroke", "#dcdcdb");
+                    .style("stroke", "none");
 
                 g.selectAll(".tick text")
                     .style("font-size", () => {
