@@ -55,7 +55,7 @@ export default function BarChart (props: CompareProps) {
     const [flexWidth, setFlexWidth] = useState<number | null>(null);
     useEffect (() => {
         if (flexColumnRef.current) {
-            const flexwidth = flexColumnRef.current.offsetWidth;
+            const flexwidth = (flexColumnRef.current as HTMLDivElement)?.offsetWidth;
             setFlexWidth(flexwidth);
         }
     }, [setFlexWidth]);
