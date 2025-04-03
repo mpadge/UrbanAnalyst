@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef, Suspense } from 'react';
 import * as d3 from 'd3';
 import Link from 'next/link'
 
-import styles from '@/styles/compare.module.css';
 import useWindowSize from '@/components/windowSize';
 
 interface indexDataProps {
@@ -195,17 +194,9 @@ export default function UABarChart () {
 
     return (
         <>
-            <div id="ua-index-chart" className={styles.comparepage}>
+            <div id="ua-index-chart" align="center">
                 <svg width={width} height={height}>
-                    <g
-                        style={{
-                            transform: `translate(${margin.right}px, ${margin.top}px)`
-                        }}
-                        ref={svgRef}
-                        x={width / 2}
-                        y={height / 2}
-                    >
-                    </g>
+                    <g ref={svgRef}></g>
                 </svg>
 
             </div>
