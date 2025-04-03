@@ -95,15 +95,16 @@ export default function Home() {
                 <div className={styles.centerNormal}>
                     <p className="text-center">
                         Unlike most other city scoring and ranking systems,
-                        Urban Analyst measures the relationships between all
-                        parameters, importantly including relationships with
-                        social inequality. Good cities thus not only have, for
-                        example, better transport systems, greater availability
-                        of education, or easier access to nature, but all of
-                        these aspects are also developed in ways that counteract
-                        and reduce social inequality within a city. A good city
-                        has a transport system which works just as well, or
-                        better, for disadvantaged as for well-off residents.
+                        the UA index is formed not just from a collection of
+                        individual measures, but also from the relationships
+                        between all pairs of measures. This includes
+                        relationships with social inequality, and thus the UA
+                        index is only low for cities in which aspects such as
+                        transport systems, provision of education, or access to
+                        nature, are developed in ways that counteract and
+                        reduce social inequality within a city. A good city
+                        works just as well, or better, for disadvantaged as for
+                        well-off residents.
                         <br /><br />
 
                         To further understand differences between, and patterns
