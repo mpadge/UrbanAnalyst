@@ -130,14 +130,16 @@ export default function Home() {
         <>
             <main className={styles.main}>
 
-                <BarChart
-                    layer1 = {layer}
-                    layer2 = {layer2}
-                    numLayers = {numLayers}
-                    meanVals = {meanVals}
-                    sortOpt = {sortOpt}
-                    citiesArray = {CITY_DATA.citiesArray}
-                />
+                <div id="compare-page-bar-chart">
+                    <BarChart
+                        layer1 = {layer}
+                        layer2 = {layer2}
+                        numLayers = {numLayers}
+                        meanVals = {meanVals}
+                        sortOpt = {sortOpt}
+                        citiesArray = {CITY_DATA.citiesArray}
+                    />
+                </div>
                 <Control
                     layer = {layer}
                     layer2 = {layer2}

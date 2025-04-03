@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef, Suspense } from 'react';
 import * as d3 from 'd3';
 import Link from 'next/link'
 
-import styles from '@/styles/compare.module.css';
 import useWindowSize from '@/components/windowSize';
 
 interface indexDataProps {
@@ -39,10 +38,14 @@ export default function UABarChart () {
     const [textColour, setTextColour] = useState('black');
 
     const size = useWindowSize();
-    const defaultWidth = 1000;
-    const defaultHeight = 700;
-    const [width, setWidth] = useState<number>(size.width ? size.width : defaultWidth);
-    const [height, setHeight] = useState<number>(size.height ? size.height : defaultHeight);
+    const maxWidth = 1000;
+    const maxHeight = 700;
+    const [width, setWidth] = useState<number | null>(
+        size.width ? Math.min(size.width, maxWidth) : null
+    );
+    const [height, setHeight] = useState<number | null>(
+        size.height ? Math.min(size.height, maxHeight) : null
+    );
 
     const [xMin, setXMin] = useState<number>(0);
     const [xMax, setXMax] = useState<number>(2);
@@ -61,25 +64,20 @@ export default function UABarChart () {
             setXMin(xMin);
             setXMax(xMax);
 
-            var widthTemp = defaultWidth;
-            var heightTemp = defaultHeight;
-            if (size.width !== null) {
-                widthTemp = Math.min(widthTemp, size.width)
-            }
-            const width = widthTemp;
-            const height = heightTemp;
+            const width = size.width ? Math.min(size.width, maxWidth)  : null;
+            const height = size.height ? Math.min(size.height, maxHeight)  : null;
             setWidth(width);
             setHeight(height);
         }
-    }, [size, data, setWidth, setHeight, defaultWidth, defaultHeight, setXMax]);
+    }, [size, data, setWidth, setHeight, maxWidth, maxHeight, setXMax]);
 
     const svgRef = React.useRef<SVGSVGElement>(null);
 
     useEffect(() => {
         if (data) {
 
-            const innerWidth = width - margin.right - 2 * margin.left;
-            const innerHeight = height - margin.top - margin.bottom;
+            const innerWidth = width ? width - margin.right - 2 * margin.left : maxWidth;
+            const innerHeight = height ? height - margin.top - margin.bottom : maxHeight;
 
             const xAxisPadding = 10;
             const yAxisPadding = 10;
@@ -190,25 +188,14 @@ export default function UABarChart () {
             handleDrawXAxis(svg);
         }
 
-    }, [svgRef, data, width, height, xMin, xMax, textColour,
+    }, [svgRef, data, width, height, maxWidth, maxHeight, xMin, xMax, textColour,
             margin.top, margin.left, margin.bottom, margin.right]);
 
     return (
         <>
-            <div id="ua-index-chart" className={styles.comparepage}>
-                <svg width={width} height={height}>
-                    <g
-                        style={{
-                            transform: `translate(${margin.right}px, ${margin.top}px)`
-                        }}
-                        ref={svgRef}
-                        x={width / 2}
-                        y={height / 2}
-                    >
-                    </g>
-                </svg>
-
-            </div>
+            <svg width={Number(width)} height={Number(height)}>
+                <g ref={svgRef}></g>
+            </svg>
         </>
     )
 };
