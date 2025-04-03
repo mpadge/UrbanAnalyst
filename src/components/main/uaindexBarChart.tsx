@@ -194,12 +194,9 @@ export default function UABarChart () {
 
     return (
         <>
-            <div id="ua-index-chart" align="center">
-                <svg width={width} height={height}>
-                    <g ref={svgRef}></g>
-                </svg>
-
-            </div>
+            <svg width={width} height={height}>
+                <g ref={svgRef}></g>
+            </svg>
         </>
     )
 };
