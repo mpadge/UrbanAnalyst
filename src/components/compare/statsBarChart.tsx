@@ -111,12 +111,13 @@ export default function BarChart (props: CompareProps) {
 
     const size = useWindowSize();
 
-    // const width = size.width ? size.width : 1000;
-    const width = flexWidth ? flexWidth : 1000;
-    const height = size.height ? size.height : 700;
+    const maxWidth = 1000;
+    const defaultHeight = 700;
     const margin = { top: 50, right: 95, bottom: 60, left: 50 };
-    const innerWidth = width - margin.right - 2 * margin.left;
-    const innerHeight = height - margin.top - margin.bottom;
+    const width = size.width ? Math.min(size.width, maxWidth) : null;
+    const height = size.height ? size.height : null;
+    const innerWidth = width ? width - margin.right - 2 * margin.left : maxWidth;
+    const innerHeight = height ? height - margin.top - margin.bottom : defaultHeight;
 
     const xAxisPadding = 10;
     const yAxisPadding = 10;
@@ -128,8 +129,10 @@ export default function BarChart (props: CompareProps) {
     // (here, xMax) is white. Expanding ensures that it is also a blue shade.
     const paletteExpand = 0.2;
     const xMaxExpand = xMax + paletteExpand * (xMax - xMinActual);
-    var colourPalette = d3.scaleSequential().domain([ xMaxExpand, xMinActual ])
-    .interpolator(d3.interpolateBlues)
+    var colourPalette = d3
+        .scaleSequential()
+        .domain([ xMaxExpand, xMinActual ])
+        .interpolator(d3.interpolateBlues)
 
     const svgRef = React.useRef<SVGSVGElement>(null);
 
@@ -138,16 +141,16 @@ export default function BarChart (props: CompareProps) {
     const expandRHS = 1.05; // Expand right-hand edge beyond max observed value
     const xMax2 = Math.max(0,xMin) + (xMax - Math.max(0,xMin)) * expandRHS;
     const xScale = d3.scaleLinear()
-    .domain([xMin, xMax2])
-    .range([xMin, innerWidth])
-    .nice();
+        .domain([xMin, xMax2])
+        .range([xMin, innerWidth])
+        .nice();
 
     // Y-axis
     const yValue = (d: any) => d.city;
     const yScale = d3.scaleBand()
-    .domain(data.map(yValue))
-    .range([0, innerHeight])
-    .padding(0.2);
+        .domain(data.map(yValue))
+        .range([0, innerHeight])
+        .padding(0.2);
 
     useEffect(() => {
 
@@ -156,12 +159,15 @@ export default function BarChart (props: CompareProps) {
 
         const handleDrawBars = (svg: any, colourPalette: any) => {
             svg
+                .append("g")
+                .attr("transform", `translate(${margin.left}, 0)`)
                 .selectAll('rect')
                 .data(data)
                 .join('rect')
                 .attr('fill', (d: any) => colourPalette(d.value))
                 .attr('stroke-width', 1)
                 .attr('stroke', '#718096')
+                .attr('width', (d: any) => xScale(xValue(d)))
                 .attr('height', yScale.bandwidth())
                 .attr('y', (d: any) => yScale(yValue(d)))
                 .on('mouseover', function(this: SVGRectElement) {
@@ -173,13 +179,13 @@ export default function BarChart (props: CompareProps) {
                     })
                 })
                 .transition()
-                .duration(750)
-                .attr('width', (d: any) => xScale(xValue(d)));
+                .duration(750);
         };
 
         const handleDrawText = (svg: any) => {
             svg
                 .append("g")
+                .attr("transform", `translate(${margin.left}, 0)`)
                 .selectAll('text')
                 .data(data)
                 .join('text')
@@ -201,15 +207,16 @@ export default function BarChart (props: CompareProps) {
 
         const handleDrawXAxis = (svg: any) => {
             const g = svg
-            .append("g")
-            .attr("transform", `translate(0,${innerHeight})`)
-            .call(d3.axisBottom(xScale)
-                .tickSize(-innerHeight)
-                .ticks(nTicks)
-                .tickPadding(xAxisPadding));
+                .append("g")
+                .attr("transform", `translate(${margin.left}, ${innerHeight})`)
+                .call(d3.axisBottom(xScale)
+                    .tickSize(-innerHeight)
+                    .tickSizeOuter(0)
+                    .ticks(nTicks)
+                    .tickPadding(xAxisPadding));
 
             g.selectAll(".tick line")
-                .style("stroke", "#dcdcdb");
+                .style("stroke", "#bcbcbc");
 
             g.selectAll(".tick text")
                 .style("font-size", () => {
@@ -223,7 +230,8 @@ export default function BarChart (props: CompareProps) {
         handleDrawBars(svg, colourPalette);
         handleDrawText(svg);
 
-    }, [data, innerHeight, innerWidth, xScale, yScale, xMin, colourPalette, textColour]);
+    }, [data, innerHeight, innerWidth, xScale, yScale, xMin, margin.left,
+            colourPalette, textColour]);
 
     const inputRef = useRef()
 
@@ -233,14 +241,12 @@ export default function BarChart (props: CompareProps) {
 
                 <div id="compare-container" className={styles.compareplot} >
                     <Suspense fallback={<div>Loading...</div>}>
-                        <svg width={width} height={height}>
+                        <svg width={Number(width)} height={Number(height)}>
                             <g
-                                style={{
-                                    transform: `translate(${margin.right}px, ${margin.top}px)`
-                                }}
                                 ref={svgRef}
-                                x={width / 2}
-                                y={height / 2}
+                                style={{
+                                    transform: `translate(0, ${margin.top}px)`
+                                }}
                             >
                             </g>
                         </svg>

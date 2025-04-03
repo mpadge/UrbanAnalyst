@@ -11,7 +11,7 @@
     top: 0;
     left: 0;
     margin-top: 80px;
-    width: var(--control-width-wide-outer);
+    width: max(var(--control-width-wide-outer), 320);
 }
 
 .controlsFloat {
@@ -109,14 +109,14 @@
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
     .controls {
-        width: var(--control-width-med--outer);
+        width: max(var(--control-width-med--outer), 320);
     }
 }
 
 /* Mobile */
 @media (max-width: 700px) {
     .controls {
-        width: var(--control-width-narrow-outer);
+        width: max(var(--control-width-narros-outer), 320);
         min-width: 150px;
         font-size: 12px;
     }
