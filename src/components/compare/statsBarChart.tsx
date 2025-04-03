@@ -101,18 +101,13 @@ export default function BarChart (props: CompareProps) {
 
     const size = useWindowSize();
 
-    const defaultWidth = 1000;
+    const maxWidth = 1000;
     const defaultHeight = 700;
-    var widthTemp = defaultWidth;
-    var heightTemp = defaultHeight;
     const margin = { top: 50, right: 95, bottom: 60, left: 50 };
-    if (size.width !== null) {
-        widthTemp = Math.min(widthTemp, size.width)
-    }
-    const width = widthTemp;
-    const height = heightTemp;
-    const innerWidth = width - margin.right - 2 * margin.left;
-    const innerHeight = height - margin.top - margin.bottom;
+    const width = size.width ? Math.min(size.width, maxWidth) : null;
+    const height = size.height ? size.height : null;
+    const innerWidth = width ? width - margin.right - 2 * margin.left : maxWidth;
+    const innerHeight = height ? height - margin.top - margin.bottom : defaultHeight;
 
     const xAxisPadding = 10;
     const yAxisPadding = 10;
@@ -229,11 +224,8 @@ export default function BarChart (props: CompareProps) {
 
                 <div id="compare-container" className={styles.compareplot} >
                     <Suspense fallback={<div>Loading...</div>}>
-                        <svg width={width} height={height}>
-                            <g
-                                ref={svgRef}
-                            >
-                            </g>
+                        <svg width={Number(width)} height={Number(height)}>
+                            <g ref={svgRef}> </g>
                         </svg>
                     </Suspense>
                 </div>
