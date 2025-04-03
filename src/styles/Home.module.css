@@ -7,6 +7,12 @@
     min-height: 100vh;
 }
 
+.mainbarchart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .textLink {
     color: #3383ff;
 }

@@ -88,7 +88,7 @@ export default function Home() {
                     </p>
                 </div>
 
-                <div id="ua-index-chart">
+                <div id="ua-index-chart" className={styles.mainbarchart}>
                     <UABarChart />
                 </div>
 
