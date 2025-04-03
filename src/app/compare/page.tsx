@@ -2,7 +2,7 @@
 import type { Metadata, Viewport } from 'next';
 
 import ButtonAppBar from '@/components/appBar';
-import StatsPage from '@/components/compare/comparePage';
+import ComparePage from '@/components/compare/comparePage';
 
 export const metadata: Metadata = {
     title: 'UA',
@@ -28,7 +28,7 @@ export default function Home() {
     return (
         <>
         <ButtonAppBar text={buttonTxt} />
-        <StatsPage />
+        <ComparePage />
         </>
     )
 }

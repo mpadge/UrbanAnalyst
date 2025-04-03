@@ -231,12 +231,7 @@ export default function BarChart (props: CompareProps) {
                     <Suspense fallback={<div>Loading...</div>}>
                         <svg width={width} height={height}>
                             <g
-                                style={{
-                                    transform: `translate(${margin.right}px, ${margin.top}px)`
-                                }}
                                 ref={svgRef}
-                                x={width / 2}
-                                y={height / 2}
                             >
                             </g>
                         </svg>
