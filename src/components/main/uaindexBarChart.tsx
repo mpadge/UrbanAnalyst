@@ -8,7 +8,9 @@ import useWindowSize from '@/components/windowSize';
 
 interface indexDataProps {
     city: string,
-    score: number
+    all: number,
+    sing: number,
+    pair: number
 }
 
 async function LoadData(
@@ -55,11 +57,11 @@ export default function UABarChart () {
         if (data) {
 
             const rangeExpand = 1.5;
-            const xMax = data.map((i) => i.score).reduce((a, b) => Math.max(a, b));
+            const xMax = data.map((i) => i.all).reduce((a, b) => Math.max(a, b));
             // Make xMin at least as far below 1 as xMax is above it:
             const xMin = Math.min(
                 2 - xMax,
-                data.map((i) => i.score).reduce((a, b) => Math.min(a, b))
+                data.map((i) => i.all).reduce((a, b) => Math.min(a, b))
             );
             setXMin(xMin);
             setXMax(xMax);
@@ -95,7 +97,7 @@ export default function UABarChart () {
                 .interpolator(d3.interpolateBlues)
 
             // X-axis:
-            const xValue = (d: indexDataProps) => d.score;
+            const xValue = (d: indexDataProps) => d.all;
             const expandRHS = 1.05; // Expand right-hand edge beyond max observed value
             const xMax2 = Math.max(0,xMin) + (xMax - Math.max(0,xMin)) * expandRHS;
             const xScale = d3
@@ -120,7 +122,7 @@ export default function UABarChart () {
                     .selectAll('rect')
                     .data(data)
                     .join('rect')
-                    .attr('fill', (d: any) => colourPalette(d.score))
+                    .attr('fill', (d: any) => colourPalette(d.all))
                     .attr('stroke-width', 1)
                     .attr('stroke', '#718096')
                     .attr('height', yScale.bandwidth())
@@ -130,7 +132,7 @@ export default function UABarChart () {
                     })
                     .on('mouseout', function(this: SVGRectElement) {
                         d3.select(this).style('fill', (d: any) => {
-                            return colourPalette(d.score);
+                            return colourPalette(d.all);
                         })
                     })
                     .transition()
