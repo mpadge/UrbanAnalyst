@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import * as d3 from 'd3';
-import Link from 'next/link'
 
 import useWindowSize from '@/components/windowSize';
 
@@ -38,6 +37,13 @@ export default function UABarChart () {
     }, []);
 
     const [textColour, setTextColour] = useState('black');
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const darkMode: boolean = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            setTextColour(darkMode ? 'white' : 'black');
+        }
+    }, []);
+
 
     const size = useWindowSize();
     const maxWidth = 1000;
