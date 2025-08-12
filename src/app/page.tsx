@@ -60,8 +60,7 @@ export default function Home() {
                         Urban Analyst (UA) is a platform for interactive
                         visualisation and comparison of cities, including
                         transport systems, measures of accessibility, and
-                        socio-demographic conditions. This site allows full
-                        exploration of all of these factors, including detailed
+                        socio-demographic conditions. UA includes detailed
                         interactive spatial&nbsp;
                         <Link href="/map" rel="noopener noreferrer">
                             maps
@@ -74,7 +73,7 @@ export default function Home() {
                         <Link href="/transform" rel="noopener noreferrer">
                         transformed
                         </Link>
-                        &nbsp;to become more like other UA cities.
+                        &nbsp;to become more like other cities.
                         <br /><br />
 
                         All measurements are also combined into a single
