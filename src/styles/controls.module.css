@@ -115,7 +115,7 @@
     }
 
     .controlsTransform {
-        composes: controls;
+        /* composes: controls; */
         margin-top: 80px;
     }
 }
