@@ -113,9 +113,4 @@
         margin-top: 0.3rem;
         margin-bottom: 0.2rem;
     }
-
-    .controlsTransform {
-        composes: controls;
-        margin-top: 80px;
-    }
 }
