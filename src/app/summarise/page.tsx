@@ -8,8 +8,8 @@ import ButtonAppBar from '@/components/appBar';
 import SummarisePage from '@/components/summarise/summarisePage';
 
 export const metadata: Metadata = {
-    title: 'UA',
-    description: 'Urban Analyses for the world',
+    title: 'UrbanAnalyst',
+    description: 'UrbanAnalyst Summarise page',
     icons: '/ua.ico',
 }
 
