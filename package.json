@@ -10,7 +10,10 @@
         "start": "next start",
         "lint": "next lint",
         "docs": "typedoc --entryPointStrategy expand src/",
-        "docs-open": "xdg-open docs/index.html &"
+        "docs-open": "xdg-open docs/index.html &",
+        "test": "vitest",
+        "test:ui": "vitest --ui",
+        "test:run": "vitest run"
     },
     "dependencies": {
         "@emotion/react": "^11.11.4",
@@ -33,15 +36,23 @@
         "wasm": "file:pkg"
     },
     "devDependencies": {
+        "@testing-library/jest-dom": "^6.9.1",
+        "@testing-library/react": "^16.3.1",
+        "@testing-library/user-event": "^14.6.1",
         "@types/d3": "^7.4.3",
         "@types/node": "^20.11.20",
         "@types/react": "^18.2.58",
         "@types/react-dom": "^18.2.19",
+        "@vitejs/plugin-react": "^5.1.2",
+        "@vitest/browser": "^4.0.17",
+        "@vitest/ui": "^4.0.17",
         "autoprefixer": "^10",
         "eslint": "^8",
         "eslint-config-next": "^14.1.0",
+        "jsdom": "^27.4.0",
         "postcss": "^8",
         "typescript": "^5",
+        "vitest": "^4.0.17",
         "wasm-pack": "^0.12.1"
     }
 }
