@@ -75,11 +75,12 @@ const MIN_MENU_WIDTH = 600;
 
 export default function ButtonAppBar(props: ButtonAppProps) {
 
-    const [theme, setTheme] = useState(getPreferredTheme());
+    const [theme, setTheme] = useState(lightTheme);
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         setMounted(true);
+        setTheme(getPreferredTheme());
     }, []);
 
     const buttonInputs = props.text.map((i) => ({
@@ -95,8 +96,9 @@ export default function ButtonAppBar(props: ButtonAppProps) {
         value: "https://demo.urbananalyst.city",
     });
 
-    const width = useWindowSize().width;
-    const sizeString = width == null ? "medium" : (width < 700 ? "small" : "medium");
+    const windowSize = useWindowSize();
+    const width = windowSize.width;
+    const sizeString = !mounted || width == null ? "medium" : (width < 700 ? "small" : "medium");
 
     const [anchorNav, setAnchorNav] = useState<null | HTMLElement>(null);
 
@@ -153,7 +155,8 @@ export default function ButtonAppBar(props: ButtonAppProps) {
 
                         <Box sx={{ flexGrow: 1 }}>
                         </Box>
-                        {typeof width === "number" &&
+                        {mounted &&
+                            typeof width === "number" &&
                             width > MIN_MENU_WIDTH &&
                             buttonInputs.map((button) => (
                                 <Button key={button.key} color="inherit" href={button.value}>
