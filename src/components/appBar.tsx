@@ -75,11 +75,11 @@ const MIN_MENU_WIDTH = 600;
 
 export default function ButtonAppBar(props: ButtonAppProps) {
 
-    const [theme, setTheme] = useState(lightTheme);
+    const [theme, setTheme] = useState(getPreferredTheme());
+    const [mounted, setMounted] = useState(false);
+
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            setTheme(getPreferredTheme());
-        }
+        setMounted(true);
     }, []);
 
     const buttonInputs = props.text.map((i) => ({
@@ -110,7 +110,7 @@ export default function ButtonAppBar(props: ButtonAppProps) {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <ThemeProvider theme={theme}>
+            <ThemeProvider theme={mounted ? theme : lightTheme}>
                 <AppBar position="fixed" color="primary">
                     <Toolbar>
                         <Box sx={{ flexGrow: 0 }}>
