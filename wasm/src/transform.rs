@@ -21,15 +21,18 @@ use std::collections::HashMap;
 ///
 /// # Examples
 ///
+/// ```
 /// use nalgebra::DMatrix;
+/// use uamutations::transform::transform_invert_values;
 ///
-/// let values = DMatrix::from_vec(2, 2, vec![1.0, 2.0, 3.0, 4.0]);
-/// let varname = "bike_index".to_string();
-/// let result = transform_invert_values(&values, &varname);
-/// assert_eq!(result[(0, 0)], 0.9);
-/// assert_eq!(result[(1, 0)], 0.8);
-/// assert_eq!(result[(0, 1)], 0.3);
-/// assert_eq!(result[(1, 1)], 0.4);
+/// let mut values = DMatrix::from_vec(2, 2, vec![0.1, 0.2, 0.3, 0.4]);
+/// let varname = "bike_index";
+/// transform_invert_values(&mut values, varname);
+/// assert_eq!(values[(0, 0)], 0.9);
+/// assert_eq!(values[(1, 0)], 0.8);
+/// assert_eq!(values[(0, 1)], 0.3);
+/// assert_eq!(values[(1, 1)], 0.4);
+/// ```
 pub fn transform_invert_values(values: &mut DMatrix<f64>, varname: &str) {
     assert!(!values.is_empty(), "values must not be empty");
 
@@ -52,14 +55,13 @@ pub fn transform_invert_values(values: &mut DMatrix<f64>, varname: &str) {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use nalgebra::DMatrix;
 
     #[test]
     fn test_transform_invert_values() {
         let mut values = DMatrix::from_vec(2, 2, vec![0.1, 0.2, 0.3, 0.4]);
         let varname = "bike_index".to_string();
 
-        transform_values(&mut values, &varname);
+        transform_invert_values(&mut values, &varname);
 
         assert_eq!(values[(0, 0)], 0.9);
         assert_eq!(values[(1, 0)], 0.8);
