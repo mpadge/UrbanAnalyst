@@ -178,7 +178,7 @@ mod tests {
         let file1b = File::open(filename1).unwrap();
         let reader1b = BufReader::new(file1b);
         let result = std::panic::catch_unwind(|| {
-            readfile(reader1b, &vec!["nonexistent_var".to_string()], nentries);
+            readfile(reader1b, &["nonexistent_var".to_string()], nentries);
         });
         assert!(
             result.is_err(),
