@@ -148,7 +148,7 @@ pub fn write_file(sums: &DMatrix<f64>, filename: &str) {
 
     for i in 0..sums.nrows() {
         let row: Vec<f64> = sums.row(i).iter().cloned().collect();
-        let row_str: Vec<String> = row.iter().map(|&x| format!("{}", x)).collect();
+        let row_str: Vec<String> = row.iter().map(|&x| format!("{x}")).collect();
         writeln!(file, "{}", row_str.join(",")).expect("Unable to write to file");
     }
 }
