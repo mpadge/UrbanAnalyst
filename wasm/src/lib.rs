@@ -21,7 +21,7 @@ pub mod utils;
 ///
 /// * `fname1` - Path to local JSON file with data which are to be mutated.
 /// * `fname2` - Path to local JSON file with data of mutation target towards which first data are
-/// to be mutated.
+///   to be mutated.
 /// * `varname` - Name of variable in both `fname1` and `fname2` to be mutated.
 /// * `varextra` - Extra variables to be considered in the mutation.
 /// * `nentries` - The number of entries to be read from the JSON files.
@@ -95,12 +95,12 @@ pub fn uamutate(
 /// # Arguments
 ///
 /// * `values1` - The original values used as references for the distances; aggregated versions of
-/// these are also returned.
+///   these are also returned.
 /// * `dists` - A matrix of distances between entries in `values1` and closest values in `values2`.
 /// * `groups` - A vector of same length as `dists`, with 1-based indices of group numbers. There
-/// will generally be far fewer unique groups as there are entries in `dists`.
+///   will generally be far fewer unique groups as there are entries in `dists`.
 /// * `log_scale` - If true, distances are logged before being aggregated, with final values being
-/// 10 ^ mean (log10 (x)).
+///   10 ^ mean (log10 (x)).
 ///
 /// # Returns
 ///
@@ -187,9 +187,9 @@ fn aggregate_to_groups(
 ///
 /// * `dists` - A vector of distances between entries in `values1` and closest values in `values2`.
 /// * `groups` - A vector of same length as `dists`, with 1-based indices of group numbers. There
-/// will generally be far fewer unique groups as there are entries in `dists`.
+///   will generally be far fewer unique groups as there are entries in `dists`.
 /// * `log_scale` - If true, distances are logged before being aggregated, with final values being
-/// 10 ^ mean (log10 (x)).
+///   10 ^ mean (log10 (x)).
 ///
 /// # Returns
 ///

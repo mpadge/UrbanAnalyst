@@ -24,7 +24,7 @@ pub struct OrderingIndex {
 /// # Arguments
 ///
 /// * `values1` - An Array2 object which provides the reference values against which to sort
-/// `values2`.
+///   `values2`.
 /// * `values2` - An Array2 object which is to be sorted against `values1`.
 /// * `absolute` - A boolean indicating whether to calculate absolute differences.
 ///

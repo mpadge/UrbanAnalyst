@@ -206,7 +206,7 @@ const TransformComponent = (props: TransformProps) => {
      * ------ Effect #8 ------
      */
     const { setLayerRange, setLayerStartStop } = props;
-    useMemo(() => {
+    useEffect(() => {
         if (geoJSONcontent !== null) {
             const rangeLimits = getRangeLimits(geoJSONcontent, layer);
             const rangeSdLims = [rangeLimits[1], rangeLimits[2]];
@@ -219,7 +219,7 @@ const TransformComponent = (props: TransformProps) => {
     /**
      * ------ Effect #9 ------
      */
-    useMemo(() => {
+    useEffect(() => {
         if (geoJSONcontent !== null) {
             const this_layer = getGeoJsonLayer(geoJSONcontent, props.layerRange, layer, props.alpha);
             setGeoJsonLayer(this_layer);

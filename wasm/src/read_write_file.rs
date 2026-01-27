@@ -148,7 +148,7 @@ pub fn write_file(sums: &DMatrix<f64>, filename: &str) {
 
     for i in 0..sums.nrows() {
         let row: Vec<f64> = sums.row(i).iter().cloned().collect();
-        let row_str: Vec<String> = row.iter().map(|&x| format!("{}", x)).collect();
+        let row_str: Vec<String> = row.iter().map(|&x| format!("{x}")).collect();
         writeln!(file, "{}", row_str.join(",")).expect("Unable to write to file");
     }
 }
@@ -178,7 +178,7 @@ mod tests {
         let file1b = File::open(filename1).unwrap();
         let reader1b = BufReader::new(file1b);
         let result = std::panic::catch_unwind(|| {
-            readfile(reader1b, &vec!["nonexistent_var".to_string()], nentries);
+            readfile(reader1b, &["nonexistent_var".to_string()], nentries);
         });
         assert!(
             result.is_err(),

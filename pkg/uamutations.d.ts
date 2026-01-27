@@ -11,7 +11,7 @@
 *
 * * `fname1` - Path to local JSON file with data which are to be mutated.
 * * `fname2` - Path to local JSON file with data of mutation target towards which first data are
-* to be mutated.
+*   to be mutated.
 * * `varname` - Name of variable in both `fname1` and `fname2` to be mutated.
 * * `varextra` - Extra variables to be considered in the mutation.
 * * `nentries` - The number of entries to be read from the JSON files.

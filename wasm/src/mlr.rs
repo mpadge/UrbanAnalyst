@@ -71,21 +71,26 @@ pub fn mlr_beta(data: &DMatrix<f64>) -> Vec<f64> {
 /// # Arguments
 ///
 /// * `values1` - A 2D array where the first row is the variable to be adjusted and the remaining
-/// rows are the other variables.
+///   rows are the other variables.
 /// * `values2` - A 2D array with the same structure as `values1`, used to calculate the MLR
-/// coefficients for adjustment.
+///   coefficients for adjustment.
 ///
-/// * Example
-/// let mut v1 = array![[1.0, 2.0, 3.0, 4.0, 5.0], [2.1, 3.2, 4.1, 5.2, 5.9]];
+/// # Example
+///
+/// ```
+/// use nalgebra::DMatrix;
+/// use uamutations::mlr::adj_for_beta;
+/// let mut v1 = DMatrix::from_vec(5, 2, vec![1.0, 2.0, 3.0, 4.0, 5.0, 2.1, 3.2, 4.1, 5.2, 5.9]);
 /// let v1_orig = v1.clone();
-/// let v2 = array![[1.0, 2.0, 3.0, 4.0, 5.0], [3.1, 4.3, 5.3, 6.5, 7.3]];
+/// let v2 = DMatrix::from_vec(5, 2, vec![1.0, 2.0, 3.0, 4.0, 5.0, 3.1, 4.3, 5.3, 6.5, 7.3]);
 /// adj_for_beta(&mut v1, &v2);
 /// assert_ne!(v1, v1_orig, "v1 should differ from v1_orig");
 /// assert_eq!(
-///     v1.slice(s![1.., ..]),
-///     v1_orig.slice(s![1.., ..]),
-///     "Only the first row of v1 should be different"
+///     v1.column(1),
+///     v1_orig.column(1),
+///     "Only the first column of v1 should be different"
 /// );
+/// ```
 pub fn adj_for_beta(values1: &mut DMatrix<f64>, values2: &DMatrix<f64>) {
     let (mean1, sd1) = utils::mean_sd_dmat(values1);
 
