@@ -10,7 +10,7 @@ export const DEFAULT_MAP_CONFIG = {
 const berlin = {
     "name": "berlin",
     "nameFormatted": "Berlin",
-    "path": "/data/berlin/data.json",
+    "path": "/api/ghAggregateData?city=berlin&type=data",
     "social_index": "Overall Social Inequality Index (2022), from https://fbinter.stadt-berlin.de/fb/index.jsp. High values represent high social inequality.",
     "initialViewState": {
         "latitude": 52.505,
@@ -162,7 +162,7 @@ const berlin = {
 const hamburg = {
     "name": "hamburg",
     "nameFormatted": "Hamburg",
-    "path": "/data/hamburg/data.json",
+    "path": "/api/ghAggregateData?city=hamburg&type=data",
     "social_index": "Social Monitoring 'Integrated Urban Development' Overall Index, from https://www.metaver.de/trefferanzeige?docuuid=9499E840-3B3C-415A-8F35-856AEE649BCA",
     "initialViewState": {
         "latitude": 53.568,
@@ -314,7 +314,7 @@ const hamburg = {
 const london = {
     "name": "london",
     "nameFormatted": "London",
-    "path": "/data/london/data.json",
+    "path": "/api/ghAggregateData?city=london&type=data",
     "social_index": "Index of Multiple Deprivation (2019), from https://opendatacommunities.org/data/societal-wellbeing/imd2019/indices",
     "initialViewState": {
         "latitude": 51.505,
@@ -466,7 +466,7 @@ const london = {
 const mannheim = {
     "name": "mannheim",
     "nameFormatted": "Mannheim",
-    "path": "/data/mannheim/data.json",
+    "path": "/api/ghAggregateData?city=mannheim&type=data",
     "social_index": "Rates of unemployment, from https://www.gis-mannheim.de/mannheim/",
     "initialViewState": {
         "latitude": 49.489,
@@ -618,7 +618,7 @@ const mannheim = {
 const muenster = {
     "name": "muenster",
     "nameFormatted": "Münster",
-    "path": "/data/muenster/data.json",
+    "path": "/api/ghAggregateData?city=muenster&type=data",
     "social_index": "Rates of unemployment, from https://opendata.stadt-muenster.de/",
     "initialViewState": {
         "latitude": 51.964,
@@ -770,7 +770,7 @@ const muenster = {
 const paris = {
     "name": "paris",
     "nameFormatted": "Paris",
-    "path": "/data/paris/data.json",
+    "path": "/api/ghAggregateData?city=paris&type=data",
     "social_index": "Rates of unemployment, from https://opendata.apur.org/datasets/Apur::recensement-iris-emploi/",
     "initialViewState": {
         "latitude": 48.85,
@@ -922,7 +922,7 @@ const paris = {
 const philadelphia = {
     "name": "philadelphia",
     "nameFormatted": "Philadelphia",
-    "path": "/data/philadelphia/data.json",
+    "path": "/api/ghAggregateData?city=philadelphia&type=data",
     "social_index": "Hardship index, see https://github.com/UrbanAnalyst/us-hardship-index",
     "initialViewState": {
         "latitude": 39.999,
@@ -1124,7 +1124,7 @@ const philadelphia = {
 const utrecht = {
     "name": "utrecht",
     "nameFormatted": "Utrecht",
-    "path": "/data/utrecht/data.json",
+    "path": "/api/ghAggregateData?city=utrecht&type=data",
     "social_index": "Rates of unemployment, from Statistics Netherlands (https://www.cbs.nl)",
     "initialViewState": {
         "latitude": 52.094,
@@ -1276,7 +1276,7 @@ const utrecht = {
 const washington = {
     "name": "washington",
     "nameFormatted": "Washington DC",
-    "path": "/data/washington/data.json",
+    "path": "/api/ghAggregateData?city=washington&type=data",
     "social_index": "Hardship index, see https://github.com/UrbanAnalyst/us-hardship-index",
     "initialViewState": {
         "latitude": 38.908,
