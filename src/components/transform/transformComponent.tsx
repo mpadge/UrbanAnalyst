@@ -111,12 +111,12 @@ const TransformComponent = (props: TransformProps) => {
     /**
      * ------ Effect #1 ------
      */
-     useEffect(() => {
-         const mapPathSource = "/api/ghAggregateData?city=" + props.city + "&type=data";
-         setMapPathSource(mapPathSource);
-         // mapPathSourceRef.current = mapPathSource;
-         setData1(null);
-     }, [props.city, setData1]);
+    useEffect(() => {
+        const mapPathSource = "/api/ghAggregateData?city=" + props.city + "&type=data";
+        setMapPathSource(mapPathSource);
+        // mapPathSourceRef.current = mapPathSource;
+        setData1(null);
+    }, [props.city, setData1]);
 
     /**
      * Effect to load 'dataraw' point-based data for source and target cities.
@@ -128,7 +128,6 @@ const TransformComponent = (props: TransformProps) => {
      */
     useEffect(() => {
         setData1(null);
-        // Fetch data directly from the new API endpoint
         fetch(`/api/ghAggregateData?city=${props.city}`)
             .then(response => {
                 if (!response.ok) {
@@ -151,7 +150,6 @@ const TransformComponent = (props: TransformProps) => {
      */
     useEffect(() => {
         setData2(null);
-        // Fetch data directly from the new API endpoint
         fetch(`/api/ghAggregateData?city=${props.targetCity}`)
             .then(response => {
                 if (!response.ok) {
