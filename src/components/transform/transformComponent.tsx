@@ -128,18 +128,46 @@ const TransformComponent = (props: TransformProps) => {
      */
     useEffect(() => {
         setData1(null);
-        loadDataFunction(props.city, setData1);
-        dataLoadingComplete.current = true;
-        initialCalculate.current = true;
+        // Fetch data directly from the new API endpoint
+        fetch(`/api/ghAggregateData?city=${props.city}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setData1(data);
+                console.log("-----DATA1: " + JSON.stringify(data));
+                dataLoadingComplete.current = true;
+                initialCalculate.current = true;
+            })
+            .catch(error => {
+                console.error('Error fetching data for city:', props.city, error);
+            });
     }, [props.city, setData1]);
     /**
      * ------ Effect #3 ------
      */
     useEffect(() => {
         setData2(null);
-        loadDataFunction(props.targetCity, setData2);
-        dataLoadingComplete.current = true;
-        initialCalculate.current = true;
+        // Fetch data directly from the new API endpoint
+        fetch(`/api/ghAggregateData?city=${props.targetCity}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setData2(data);
+                console.log("-----DATA2: " + JSON.stringify(data));
+                dataLoadingComplete.current = true;
+                initialCalculate.current = true;
+            })
+            .catch(error => {
+                console.error('Error fetching data for target city:', props.targetCity, error);
+            });
     }, [props.targetCity, setData2]);
 
     /** Effect to pass 'data1', 'data2' to WASM mutation algorithm, and returnvector
