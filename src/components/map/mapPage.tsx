@@ -88,7 +88,7 @@ export default function MapPage() {
         transitionDuration: 2000,
         transitionInterpolator: new FlyToInterpolator()
     });
-    const [layer, setLayer] = useState("social_index");
+    const [layer, setLayer] = useState(DEFAULT_LAYER);
     const [layer2, setLayer2] = useState("");
     const [alpha, setAlpha] = useState(0.5);
     const [numLayers, setNumLayers] = useState("Single");
@@ -173,11 +173,11 @@ export default function MapPage() {
         localStorageHelpers.setItem("uaCityIdx", idx.toString());
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idx].dataRanges);
         if (!theseLayers.includes(layer)) {
-            setLayer("social_index");
+            setLayer(DEFAULT_LAYER);
             localStorageHelpers.removeItem('uaLayer');
         }
         if (!theseLayers.includes(layer2)) {
-            setLayer2("social_index");
+            setLayer2(DEFAULT_LAYER);
             localStorageHelpers.removeItem('uaLayer2');
         }
     }, [layer, layer2])
