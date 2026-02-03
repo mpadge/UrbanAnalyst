@@ -106,15 +106,12 @@ const TransformComponent = (props: TransformProps) => {
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
     const [geoJsonLayer, setGeoJsonLayer] = useState<any>(null)
 
-    const mapPathSourceRef = useRef(mapPathSource);
-
     /**
      * ------ Effect #1 ------
      */
     useEffect(() => {
         const mapPathSource = "/api/ghAggregateData?city=" + props.city + "&type=data";
         setMapPathSource(mapPathSource);
-        // mapPathSourceRef.current = mapPathSource;
         setData1(null);
     }, [props.city, setData1]);
 
@@ -128,44 +125,18 @@ const TransformComponent = (props: TransformProps) => {
      */
     useEffect(() => {
         setData1(null);
-        fetch(`/api/ghAggregateData?city=${props.city}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                setData1(data);
-                console.log("-----DATA1: " + JSON.stringify(data));
-                dataLoadingComplete.current = true;
-                initialCalculate.current = true;
-            })
-            .catch(error => {
-                console.error('Error fetching data for city:', props.city, error);
-            });
+        loadDataFunction(props.city, setData1);
+        dataLoadingComplete.current = true;
+        initialCalculate.current = true;
     }, [props.city, setData1]);
     /**
      * ------ Effect #3 ------
      */
     useEffect(() => {
         setData2(null);
-        fetch(`/api/ghAggregateData?city=${props.targetCity}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                setData2(data);
-                console.log("-----DATA2: " + JSON.stringify(data));
-                dataLoadingComplete.current = true;
-                initialCalculate.current = true;
-            })
-            .catch(error => {
-                console.error('Error fetching data for target city:', props.targetCity, error);
-            });
+        loadDataFunction(props.targetCity, setData2);
+        dataLoadingComplete.current = true;
+        initialCalculate.current = true;
     }, [props.targetCity, setData2]);
 
     /** Effect to pass 'data1', 'data2' to WASM mutation algorithm, and returnvector
