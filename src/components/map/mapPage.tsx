@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
 import { DeckGL } from "@deck.gl/react/typed";
 import { FlyToInterpolator } from "@deck.gl/core/typed";
@@ -160,7 +160,7 @@ export default function MapPage() {
         }
     }, [idx, layer, layer2, numLayers, cityLayers.length])
 
-    const handleIdxChange = (idx: number) => {
+    const handleIdxChange = useCallback((idx: number) => {
         setIdx(idx);
         setCityData(CITY_DATA.citiesArray[idx]);
         setViewState({
@@ -180,7 +180,7 @@ export default function MapPage() {
             setLayer2("social_index");
             localStorageHelpers.removeItem('uaLayer2');
         }
-    }
+    }, [layer, layer2])
     const handleAlphaChange = (alpha: number) => {
         setAlpha(alpha);
         localStorageHelpers.setItem("uaAlpha", alpha.toString());
