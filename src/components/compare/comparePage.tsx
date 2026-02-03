@@ -1,7 +1,7 @@
 "use client"
 
 import { NextPage } from "next";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import Control from '@/components/compare/control';
 import BarChart from '@/components/compare/statsBarChart';
 import Tour from '@/components/compare/tour/tour';
@@ -96,7 +96,7 @@ export default function Home() {
         const h = size?.height || 0;
         setHeight(h);
     }, [size])
-    const tourConfig = getTourConfig(width, height);
+    const tourConfig = useMemo(() => getTourConfig(width, height), [width, height]);
 
     const accentColor = "#5cb7b7";
     const [isTourOpen, setTourOpen] = useState(false);

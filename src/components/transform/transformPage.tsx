@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useCallback} from 'react';
+import { useEffect, useState, useCallback, useMemo} from 'react';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 
 import Control from '@/components/transform/control';
@@ -206,7 +206,7 @@ export default function TransformPage() {
         const h = size?.height || 0;
         setHeight(h);
     }, [size])
-    const tourConfig = getTourConfig(width, height);
+    const tourConfig = useMemo(() => getTourConfig(width, height), [width, height]);
 
     const accentColor = "#5cb7b7";
     const [isTourOpen, setTourOpen] = useState(false);

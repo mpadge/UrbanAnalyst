@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
 import { DeckGL } from "@deck.gl/react/typed";
 import { FlyToInterpolator } from "@deck.gl/core/typed";
@@ -187,7 +187,6 @@ export default function MapPage() {
 
     const handleViewStateChange = useCallback((pViewState: Partial<ViewState>) => {
         setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
-        //setViewState(pViewState);
     }, []);
 
     const handleLayerChange = useCallback((layer: DataRangeKeys) => {
@@ -225,7 +224,7 @@ export default function MapPage() {
         const h = size?.height || 0;
         setHeight(h);
     }, [size])
-    const tourConfig = getTourConfig(width, height);
+    const tourConfig = useMemo(() => getTourConfig(width, height), [width, height]);
 
     const accentColor = "#5cb7b7";
     const [isTourOpen, setTourOpen] = useState(false);
