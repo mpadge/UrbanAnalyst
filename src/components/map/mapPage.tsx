@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
 import { DeckGL } from "@deck.gl/react/typed";
 import { FlyToInterpolator } from "@deck.gl/core/typed";
@@ -17,6 +17,23 @@ import getPreferredTourClass from '@/components/tourClass';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
 import { CityDataProps, DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/interfaces';
+import { calculateLayerRanges } from '@/components/utils/layerUtils';
+import { localStorageHelpers, sessionStorageHelpers, loadInitialState } from '@/components/utils/localStorageUtils';
+
+const DEFAULT_LAYER = "social_index";
+
+const validateAndSetDefaultLayer = (
+    layer: string,
+    availableLayers: string[],
+    localStorageKey: string,
+    defaultLayer: string = DEFAULT_LAYER
+): string => {
+    if (!availableLayers.includes(layer)) {
+        localStorageHelpers.removeItem(localStorageKey);
+        return defaultLayer;
+    }
+    return layer;
+};
 
 /**
  * Definition of interface for `MapProps`. These are constructed in
@@ -35,19 +52,19 @@ import { CityDataProps, DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/
  */
 export interface MapProps {
     idx: number,
-    layer: string,
-    layer2: string,
-    numLayers: string,
+    layer: DataRangeKeys,
+    layer2: DataRangeKeys,
+    numLayers: "Single" | "Paired",
     alpha: number,
-    layerRange: number[],
-    layerStartStop: number[],
+    layerRange: [number, number],
+    layerStartStop: [number, number],
     viewState: ViewState,
     citiesArray: CityDataProps[],
     handleAlphaChange: (pAlpha: number) => void,
-    handleViewStateChange: (pViewState: ViewState) => void,
-    handleLayerChange: (layer: string) => void
-    handleLayer2Change: (layer2: string) => void
-    handleLayerRangeChange: (layerRange: number[]) => void,
+    handleViewStateChange: (pViewState: Partial<ViewState>) => void,
+    handleLayerChange: (layer: DataRangeKeys) => void,
+    handleLayer2Change: (layer2: DataRangeKeys) => void,
+    handleLayerRangeChange: (layerRange: [number, number]) => void,
 }
 
 /**
@@ -71,50 +88,26 @@ export default function MapPage() {
         transitionDuration: 2000,
         transitionInterpolator: new FlyToInterpolator()
     });
-    const [layer, setLayer] = useState("social_index");
-    const [layer2, setLayer2] = useState("");
+    const [layer, setLayer] = useState<DataRangeKeys>(DEFAULT_LAYER as DataRangeKeys);
+    const [layer2, setLayer2] = useState<DataRangeKeys>("" as DataRangeKeys);
     const [alpha, setAlpha] = useState(0.5);
-    const [numLayers, setNumLayers] = useState("Single");
-    const numLayersOptions = ["Single", "Paired"];
+    const [numLayers, setNumLayers] = useState<"Single" | "Paired">("Single");
+    const numLayersOptions: ("Single" | "Paired")[] = ["Single", "Paired"];
     const [cityLayers, setCityLayers] = useState<string[]>([]);
 
-    const [layerStartStop, setLayerStartStop] = useState<number[]>([0, 1]);
-    const [layerRange, setLayerRange] = useState<number[]>([0, 1]);
+    const [layerStartStop, setLayerStartStop] = useState<[number, number]>([0, 1]);
+    const [layerRange, setLayerRange] = useState<[number, number]>([0, 1]);
 
     useEffect(() => {
-        var idxLocal = 0;
-        var layerLocal = "social_index";
-        var layer2Local = "";
-        var numLayersLocal = "Single";
-        var alphaLocal = 0.5;
-        if (typeof window != "undefined") {
-            const storedIdx = localStorage.getItem('uaCityIdx');
-            if(storedIdx) { // convert to int
-                idxLocal = parseInt(storedIdx, 10);
-                if (isNaN(idxLocal)) {
-                    idxLocal = 0;
-                }
-            }
-            const storedLayer = localStorage.getItem('uaLayer');
-            if(storedLayer) {
-                layerLocal = storedLayer;
-            }
-            const storedLayer2 = localStorage.getItem('uaLayer2');
-            if(storedLayer2) {
-                layer2Local = storedLayer2;
-            }
-            const storedNumLayers = localStorage.getItem('uaNumLayers');
-            if(storedNumLayers) {
-                numLayersLocal = storedNumLayers;
-            }
-            const storedAlpha = localStorage.getItem('uaAlpha');
-            if(storedAlpha) {
-                alphaLocal = parseFloat(storedAlpha);
-                if (isNaN(alphaLocal)) {
-                    alphaLocal = 0.5;
-                }
-            }
-        }
+        const initialState = loadInitialState();
+        const {
+            idx: idxLocal,
+            layer: layerLocal,
+            layer2: layer2Local,
+            numLayers: numLayersLocal,
+            alpha: alphaLocal
+        } = initialState;
+
         setIdx(idxLocal);
         setCityData(CITY_DATA.citiesArray[idxLocal]);
         setViewState({
@@ -124,56 +117,50 @@ export default function MapPage() {
             transitionDuration: 2000,
             transitionInterpolator: new FlyToInterpolator()
         })
-        setLayer(layerLocal);
-        setLayer2(layer2Local);
-        setNumLayers(numLayersLocal);
+        setLayer(layerLocal as DataRangeKeys);
+        setLayer2(layer2Local as DataRangeKeys);
+        setNumLayers(numLayersLocal as "Single" | "Paired");
         setAlpha(alphaLocal);
 
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idxLocal].dataRanges);
         setCityLayers(theseLayers);
-        if (!theseLayers.includes(layerLocal)) {
-            layerLocal = "social_index";
-            setLayer(layerLocal);
-            localStorage.removeItem('uaLayer');
+
+        const validatedLayer = validateAndSetDefaultLayer(layerLocal, theseLayers, 'uaLayer');
+        const validatedLayer2 = validateAndSetDefaultLayer(layer2Local, theseLayers, 'uaLayer2');
+
+        if (validatedLayer !== layerLocal) setLayer(validatedLayer as DataRangeKeys);
+        if (validatedLayer2 !== layer2Local) setLayer2(validatedLayer2 as DataRangeKeys);
+
+        // layer_min/max values which can be adjusted with range slider.
+        const rangeData = calculateLayerRanges(
+            idxLocal,
+            validatedLayer,
+            validatedLayer2,
+            numLayersLocal,
+            CITY_DATA.citiesArray
+        );
+
+        setLayerRange([rangeData.layer_min, rangeData.layer_max]);
+        setLayerStartStop([rangeData.layer_start, rangeData.layer_stop]);
+    }, [])
+
+    useEffect(() => {
+        // Only run this effect after initialization is complete
+        if (cityLayers.length > 0) {
+            const rangeData = calculateLayerRanges(
+                idx,
+                layer,
+                layer2,
+                numLayers,
+                CITY_DATA.citiesArray
+            );
+
+            setLayerRange([rangeData.layer_min, rangeData.layer_max]);
+            setLayerStartStop([rangeData.layer_start, rangeData.layer_stop]);
         }
-        if (!theseLayers.includes(layer2Local)) {
-            layer2Local = "social_index";
-            setLayer2(layer2Local);
-            localStorage.removeItem('uaLayer2');
-        }
+    }, [idx, layer, layer2, numLayers, cityLayers.length])
 
-        // layer_min/max values which can be adjusted with range slider. This
-        // code is also repeated in mapLayer.tsx.
-        const layer1: string = layer.replace("\_", "").replace("index", "");
-        const layer2_repl: string = layer2.replace("\_", "").replace("index", "");
-        const paired_keys = Object.keys(CITY_DATA.citiesArray[idx].dataRangesPaired);
-
-        const these_layers =
-            paired_keys.includes(layer1 + "_" + layer2_repl) ?
-                layer1 + "_" + layer2_repl : layer2_repl + "_" + layer1;
-        const dual_layers: boolean = paired_keys.includes(these_layers);
-
-        const this_layer: string = numLayers == "Paired" && dual_layers ?
-            these_layers : layer;
-
-        const layer_start = numLayers == "Paired" && dual_layers ?
-            CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][0] :
-            CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][0];
-        const layer_min = numLayers == "Paired" && dual_layers ?
-            CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][1] :
-            CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][1];
-        const layer_max = numLayers == "Paired" && dual_layers ?
-            CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][2] :
-            CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][2];
-        const layer_stop = numLayers == "Paired" && dual_layers ?
-            CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][3] :
-            CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][3];
-
-        setLayerRange([layer_min, layer_max]);
-        setLayerStartStop([layer_start, layer_stop]);
-    }, [idx, layer, layer2, numLayers])
-
-    const handleIdxChange = (idx: number) => {
+    const handleIdxChange = useCallback((idx: number) => {
         setIdx(idx);
         setCityData(CITY_DATA.citiesArray[idx]);
         setViewState({
@@ -183,51 +170,43 @@ export default function MapPage() {
             transitionDuration: 2000,
             transitionInterpolator: new FlyToInterpolator()
         })
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaCityIdx", idx.toString());
-        }
+        localStorageHelpers.setItem("uaCityIdx", idx.toString());
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idx].dataRanges);
-        if (!theseLayers.includes(layer)) {
-            setLayer("social_index");
-            localStorage.removeItem('uaLayer');
-        }
-        if (!theseLayers.includes(layer2)) {
-            setLayer2("social_index");
-            localStorage.removeItem('uaLayer2');
-        }
-    }
-    const handleAlphaChange = (alpha: number) => {
-        setAlpha(alpha);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaAlpha", alpha.toString());
-        }
-    }
-    const handleViewStateChange = (pViewState: any) => {
-        setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
-        //setViewState(pViewState);
-    }
-    const handleLayerChange = (layer: string) => {
-        setLayer(layer);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaLayer", layer);
-        }
-    }
-    const handleLayer2Change = (layer2: string) => {
-        setLayer2(layer2);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaLayer2", layer2);
-        }
-    }
-    const handleNumLayersChange = (numLayers: string) => {
-        setNumLayers(numLayers);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaNumLayers", numLayers);
-        }
-    }
 
-    const handleLayerRangeChange = (layerRange: number[]) => {
+        const validatedLayer = validateAndSetDefaultLayer(layer, theseLayers, 'uaLayer');
+        const validatedLayer2 = validateAndSetDefaultLayer(layer2, theseLayers, 'uaLayer2');
+
+        if (validatedLayer !== layer) setLayer(validatedLayer as DataRangeKeys);
+        if (validatedLayer2 !== layer2) setLayer2(validatedLayer2 as DataRangeKeys);
+    }, [layer, layer2])
+
+    const handleAlphaChange = useCallback((alpha: number) => {
+        setAlpha(alpha);
+        localStorageHelpers.setItem("uaAlpha", alpha.toString());
+    }, []);
+
+    const handleViewStateChange = useCallback((pViewState: Partial<ViewState>) => {
+        setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
+    }, []);
+
+    const handleLayerChange = useCallback((layer: DataRangeKeys) => {
+        setLayer(layer);
+        localStorageHelpers.setItem("uaLayer", layer);
+    }, []);
+
+    const handleLayer2Change = useCallback((layer2: DataRangeKeys) => {
+        setLayer2(layer2);
+        localStorageHelpers.setItem("uaLayer2", layer2);
+    }, []);
+
+    const handleNumLayersChange = useCallback((numLayers: "Single" | "Paired") => {
+        setNumLayers(numLayers);
+        localStorageHelpers.setItem("uaNumLayers", numLayers);
+    }, []);
+
+    const handleLayerRangeChange = useCallback((layerRange: [number, number]) => {
         setLayerRange(layerRange);
-    }
+    }, []);
 
     // ----- TOUR start-----
     const [tourClass, setTourClass] = useState(tourStyles.tourhelperLight);
@@ -245,25 +224,23 @@ export default function MapPage() {
         const h = size?.height || 0;
         setHeight(h);
     }, [size])
-    const tourConfig = getTourConfig(width, height);
+    const tourConfig = useMemo(() => getTourConfig(width, height), [width, height]);
 
     const accentColor = "#5cb7b7";
     const [isTourOpen, setTourOpen] = useState(false);
 
-    const handleTourOpen = () => {
+    const handleTourOpen = useCallback(() => {
         setTourOpen(true);
-    };
+    }, []);
 
     // Use sessionStorage to only show tour once per session.
-    const closeTour = () => {
+    const closeTour = useCallback(() => {
         setTourOpen(false);
-        if (typeof window != "undefined") {
-            sessionStorage.setItem("uamaptour", "done");
-        }
-    };
+        sessionStorageHelpers.setItem("uamaptour", "done");
+    }, []);
 
     useEffect(() => {
-        if(!sessionStorage.getItem('uamaptour')) {
+        if(!sessionStorageHelpers.getItem('uamaptour')) {
             setTourOpen(true)
         }
     }, [])

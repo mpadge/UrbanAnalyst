@@ -8,7 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import { DefaultExtraLayers } from "@/components/transform/control";
-import { CityDataProps } from "@/data/interfaces";
+import { CityDataProps, DataRangeKeys } from "@/data/interfaces";
 import useWindowSize from "@/components/windowSize";
 import styles from '@/styles/controls.module.css';
 
@@ -17,8 +17,8 @@ interface LayerListProps {
     idx2: number,
     citiesArray: CityDataProps[],
     title: string,
-    layer: string,
-    handleLayerChange: (layer: string) => void,
+    layer: DataRangeKeys,
+    handleLayerChange: (layer: DataRangeKeys) => void,
     varnames: string[],
     setVarnames: (varnames: string[]) => void,
     cityLayers: string[],
@@ -77,8 +77,8 @@ export default function LayerList(props: LayerListProps) {
     }, [idx, idx2, citiesArray, setVarnames, findMatchingOption, options]);
 
     const handleChange = (event: SelectChangeEvent) => {
-        props.handleLayerChange(event.target.value as string);
-        setSelectedOption(event.target.value as string);
+        props.handleLayerChange(event.target.value as DataRangeKeys);
+        setSelectedOption(event.target.value as DataRangeKeys);
     };
 
     const width = useWindowSize().width;

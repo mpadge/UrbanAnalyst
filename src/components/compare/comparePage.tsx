@@ -1,7 +1,7 @@
 "use client"
 
 import { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import Control from '@/components/compare/control';
 import BarChart from '@/components/compare/statsBarChart';
 import Tour from '@/components/compare/tour/tour';
@@ -14,6 +14,8 @@ import tourStyles from '@/styles/tour.module.css';
 import getPreferredTourClass from '@/components/tourClass';
 
 import { CITY_DATA } from '@/data/citydata';
+import { DataRangeKeys } from '@/data/interfaces';
+import { localStorageHelpers, sessionStorageHelpers } from '@/components/utils/localStorageUtils';
 
 export default function Home() {
 
@@ -21,10 +23,10 @@ export default function Home() {
     // default index of [0] can be used.
     const [cityData, setCityData] = useState(CITY_DATA.citiesArray[0]);
 
-    const [layer, setLayer] = useState("transport"); // options[0] in layerlist.tsx
-    const [layer2, setLayer2] = useState("");
-    const [numLayers, setNumLayers] = useState("Single");
-    const numLayersOptions = ["Single", "Paired"];
+    const [layer, setLayer] = useState<DataRangeKeys>("transport" as DataRangeKeys);
+    const [layer2, setLayer2] = useState<DataRangeKeys>("" as DataRangeKeys);
+    const [numLayers, setNumLayers] = useState<"Single" | "Paired">("Single");
+    const numLayersOptions: ("Single" | "Paired")[] = ["Single", "Paired"];
 
     const [sortOpt, setSortOpt] = useState("increasing");
     const [meanVals, setMeanVals] = useState(true);
@@ -34,54 +36,46 @@ export default function Home() {
         var layer2Local = "";
         var numLayersLocal = "Single";
         var sortOptLocal = "increasing";
-        if (typeof window != "undefined") {
-            const storedLayer = localStorage.getItem('uaLayer');
-            if(storedLayer) {
-                layerLocal = storedLayer;
-            }
-            const storedLayer2 = localStorage.getItem('uaLayer2');
-            if(storedLayer2) {
-                layer2Local = storedLayer2;
-            }
-            const storedNumLayers = localStorage.getItem('uaNumLayers');
-            if(storedNumLayers) {
-                numLayersLocal = storedNumLayers;
-            }
-            const storedSortOpt = localStorage.getItem('uaCompareSortOpt');
-            if(storedSortOpt) {
-                sortOptLocal = storedSortOpt;
-            }
+
+        const storedLayer = localStorageHelpers.getItem('uaLayer');
+        if(storedLayer) {
+            layerLocal = storedLayer;
         }
-        setLayer(layerLocal);
-        setLayer2(layer2Local);
-        setNumLayers(numLayersLocal);
+        const storedLayer2 = localStorageHelpers.getItem('uaLayer2');
+        if(storedLayer2) {
+            layer2Local = storedLayer2;
+        }
+        const storedNumLayers = localStorageHelpers.getItem('uaNumLayers');
+        if(storedNumLayers) {
+            numLayersLocal = storedNumLayers;
+        }
+        const storedSortOpt = localStorageHelpers.getItem('uaCompareSortOpt');
+        if(storedSortOpt) {
+            sortOptLocal = storedSortOpt;
+        }
+
+        setLayer(layerLocal as DataRangeKeys);
+        setLayer2(layer2Local as DataRangeKeys);
+        setNumLayers(numLayersLocal as "Single" | "Paired");
         setSortOpt(sortOptLocal);
     }, [])
 
-    const handleLayerChange = (layer: string) => {
+    const handleLayerChange = useCallback((layer: DataRangeKeys) => {
         setLayer(layer);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaLayer", layer);
-        }
-    }
-    const handleLayer2Change = (layer2: string) => {
+        localStorageHelpers.setItem("uaLayer", layer);
+    }, []);
+    const handleLayer2Change = useCallback((layer2: DataRangeKeys) => {
         setLayer2(layer2);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaLayer2", layer2);
-        }
-    }
-    const handleNumLayersChange = (numLayers: string) => {
+        localStorageHelpers.setItem("uaLayer2", layer2);
+    }, []);
+    const handleNumLayersChange = useCallback((numLayers: "Single" | "Paired") => {
         setNumLayers(numLayers);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaNumLayers", numLayers);
-        }
-    }
-    const handleSortChange = (sortOpt: string) => {
-        setSortOpt (sortOpt)
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaCompareSortOpt", sortOpt);
-        }
-    }
+        localStorageHelpers.setItem("uaNumLayers", numLayers);
+    }, []);
+    const handleSortChange = useCallback((sortOpt: string) => {
+        setSortOpt(sortOpt)
+        localStorageHelpers.setItem("uaCompareSortOpt", sortOpt);
+    }, []);
     const handleMeanChange = (e: any) => {
         setMeanVals(!meanVals);
     }
@@ -102,7 +96,7 @@ export default function Home() {
         const h = size?.height || 0;
         setHeight(h);
     }, [size])
-    const tourConfig = getTourConfig(width, height);
+    const tourConfig = useMemo(() => getTourConfig(width, height), [width, height]);
 
     const accentColor = "#5cb7b7";
     const [isTourOpen, setTourOpen] = useState(false);
@@ -114,13 +108,11 @@ export default function Home() {
     // Use sessionStorage to only show tour once per session.
     const closeTour = () => {
         setTourOpen(false);
-        if (typeof window != "undefined") {
-            sessionStorage.setItem("uacomparetour", "done");
-        }
+        sessionStorageHelpers.setItem("uacomparetour", "done");
     };
 
     useEffect(() => {
-        if(!sessionStorage.getItem('uacomparetour')) {
+        if(!sessionStorageHelpers.getItem('uacomparetour')) {
             setTourOpen(true)
         }
     }, [])

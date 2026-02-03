@@ -8,11 +8,11 @@ import styles from '@/styles/controls.module.css';
 
 export default function SelectNumLayers(props: NumLayersProps) {
 
-    const [numLayers, setNumLayers] = useState<string | null>("Single");
+    const [numLayers, setNumLayers] = useState<("Single" | "Paired") | null>("Single");
 
     const handleNumLayersClick = (
         event: React.MouseEvent<HTMLElement>,
-        newNumLayers: string | null,
+        newNumLayers: ("Single" | "Paired") | null,
     ) => {
         setNumLayers(newNumLayers);
         if (newNumLayers) {

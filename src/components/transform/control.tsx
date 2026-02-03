@@ -24,18 +24,18 @@ import RangeSlider from '@/components/map/rangeSlider';
 import OutputLayers from '@/components/transform/outputLayers';
 import HelpButton from '@/components/helpButton';
 
-import { ViewState, CityDataProps } from "@/data/interfaces";
+import { ViewState, CityDataProps, DataRangeKeys } from "@/data/interfaces";
 
 const junctionFont = localFont({ src: '../../app/junction-regular.woff' })
 
 interface TransformControlProps {
     idx: number,
     idx2: number,
-    layer: string
+    layer: DataRangeKeys
     varnames: string[]
     alpha: number,
-    layerRange: number[]
-    layerStartStop: number[]
+    layerRange: [number, number]
+    layerStartStop: [number, number]
     citiesArray: CityDataProps[],
     cityLayers: string[],
     viewState: ViewState,
@@ -43,9 +43,9 @@ interface TransformControlProps {
     handleIdxChange: (pIdx: number) => void,
     handleIdx2Change: (pIdx2: number) => void,
     handleAlphaChange: (pAlpha: number) => void,
-    handleViewStateChange: (pViewState: ViewState) => void,
-    handleLayerChange: (layer: string) => void,
-    setLayerRange: (layerRange: number[]) => void,
+    handleViewStateChange: (pViewState: Partial<ViewState>) => void,
+    handleLayerChange: (layer: DataRangeKeys) => void,
+    setLayerRange: (layerRange: [number, number]) => void,
     setVarnames: (varnames: string[]) => void
     handleOutputLayerChange: (outputLayer: string) => void
     handleTourOpen: (isTourOpen: boolean) => void
@@ -186,7 +186,7 @@ export default function Control (props: TransformControlProps) {
             newValue = [value];
         } else {
             newValue=value;
-            props.setLayerRange(value);
+            props.setLayerRange(value as [number, number]);
         }
 
         setSliderValues(newValue);

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState} from 'react';
+import { useEffect, useState, useCallback, useMemo} from 'react';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 
 import Control from '@/components/transform/control';
@@ -13,6 +13,7 @@ import MapTransformDynamic from '@/components/transform/transformPageDynamic';
 import { getTourConfig } from '@/components/transform/tour/tourConfig';
 import { CITY_DATA } from '@/data/citydata';
 import { DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/interfaces';
+import { localStorageHelpers, sessionStorageHelpers } from '@/components/utils/localStorageUtils';
 
 import tourStyles from '@/styles/tour.module.css';
 import getPreferredTourClass from '@/components/tourClass';
@@ -41,18 +42,18 @@ import getPreferredTourClass from '@/components/tourClass';
 export interface TransformProps {
     idx: number
     idx2: number
-    layer: string
+    layer: DataRangeKeys
     varnames: string[]
     citiesArray: CityDataProps[],
     city: string
     targetCity: string
     viewState: ViewState
     alpha: number
-    layerRange: number[]
-    layerStartStop: number[]
+    layerRange: [number, number]
+    layerStartStop: [number, number]
     outputLayer: string
-    setLayerRange: (layerRange: number[]) => void
-    setLayerStartStop: (layerStartStop: number[]) => void
+    setLayerRange: (layerRange: [number, number]) => void
+    setLayerStartStop: (layerStartStop: [number, number]) => void
     handleOutputLayerChange: (outputLayer: string) => void
 }
 
@@ -74,11 +75,11 @@ export default function TransformPage() {
         transitionDuration: 2000,
         transitionInterpolator: new FlyToInterpolator()
     });
-    const [layer, setLayer] = useState("bike_index");
+    const [layer, setLayer] = useState<DataRangeKeys>("bike_index" as DataRangeKeys);
     const [alpha, setAlpha] = useState(0.5);
 
-    const [layerStartStop, setLayerStartStop] = useState<number[]>([0, 1]);
-    const [layerRange, setLayerRange] = useState<number[]>([0, 1]);
+    const [layerStartStop, setLayerStartStop] = useState<[number, number]>([0, 1]);
+    const [layerRange, setLayerRange] = useState<[number, number]>([0, 1]);
 
     const [varnames, setVarnames] = useState<string[]>([]);
     const [outputLayer, setOutputLayer] = useState<string>("relative");
@@ -89,33 +90,33 @@ export default function TransformPage() {
         var idx2Local = 1;
         var layerLocal = "transport";
         var alphaLocal = 0.5;
-        if (typeof window != "undefined") {
-            const storedIdx = localStorage.getItem('uaCityIdx');
-            if(storedIdx) { // convert to int
-                idxLocal = parseInt(storedIdx, 10);
-                if (isNaN(idxLocal)) {
-                    idxLocal = 0;
-                }
-            }
-            const storedIdx2 = localStorage.getItem('uaCityIdx2');
-            if(storedIdx2) { // convert to int
-                idx2Local = parseInt(storedIdx2, 10);
-                if (isNaN(idx2Local)) {
-                    idx2Local = 0;
-                }
-            }
-            const storedLayer = localStorage.getItem('uaLayer');
-            if(storedLayer) {
-                layerLocal = storedLayer;
-            }
-            const storedAlpha = localStorage.getItem('uaAlpha');
-            if(storedAlpha) {
-                alphaLocal = parseFloat(storedAlpha);
-                if (isNaN(alphaLocal)) {
-                    alphaLocal = 0.5;
-                }
+
+        const storedIdx = localStorageHelpers.getItem('uaCityIdx');
+        if(storedIdx) { // convert to int
+            idxLocal = parseInt(storedIdx, 10);
+            if (isNaN(idxLocal)) {
+                idxLocal = 0;
             }
         }
+        const storedIdx2 = localStorageHelpers.getItem('uaCityIdx2');
+        if(storedIdx2) { // convert to int
+            idx2Local = parseInt(storedIdx2, 10);
+            if (isNaN(idx2Local)) {
+                idx2Local = 0;
+            }
+        }
+        const storedLayer = localStorageHelpers.getItem('uaLayer');
+        if(storedLayer) {
+            layerLocal = storedLayer;
+        }
+        const storedAlpha = localStorageHelpers.getItem('uaAlpha');
+        if(storedAlpha) {
+            alphaLocal = parseFloat(storedAlpha);
+            if (isNaN(alphaLocal)) {
+                alphaLocal = 0.5;
+            }
+        }
+
         setIdx(idxLocal);
         setIdx2(idx2Local);
         setViewState({
@@ -125,7 +126,7 @@ export default function TransformPage() {
             transitionDuration: 2000,
             transitionInterpolator: new FlyToInterpolator()
         })
-        setLayer(layerLocal);
+        setLayer(layerLocal as DataRangeKeys);
         setAlpha(alphaLocal);
 
         // Names of all layers; only effect of `idxLocal` is to include
@@ -135,8 +136,8 @@ export default function TransformPage() {
         setCityLayers(theseLayers);
         if (!theseLayers.includes(layerLocal)) {
             layerLocal = "transport";
-            setLayer(layerLocal);
-            localStorage.removeItem('uaLayer');
+            setLayer(layerLocal as DataRangeKeys);
+            localStorageHelpers.removeItem('uaLayer');
         }
     }, [])
 
@@ -153,7 +154,7 @@ export default function TransformPage() {
     }, [idx, layer]);
 
     // -------- handlers for state variables --------
-    const handleIdxChange = (idx: number) => {
+    const handleIdxChange = useCallback((idx: number) => {
         setIdx(idx);
         setViewState({
             ...CITY_DATA.citiesArray[idx].initialViewState,
@@ -162,40 +163,32 @@ export default function TransformPage() {
             transitionDuration: 2000,
             transitionInterpolator: new FlyToInterpolator()
         })
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaCityIdx", idx.toString());
-        }
+        localStorageHelpers.setItem("uaCityIdx", idx.toString());
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idx].dataRanges);
         if (!theseLayers.includes(layer)) {
-            setLayer("transport");
-            localStorage.removeItem('uaLayer');
+            setLayer("transport" as DataRangeKeys);
+            localStorageHelpers.removeItem('uaLayer');
         }
-    }
-    const handleIdx2Change = (idx2: number) => {
+    }, [layer]);
+    const handleIdx2Change = useCallback((idx2: number) => {
         setIdx2(idx2);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaCityIdx2", idx2.toString());
-        }
-    }
-    const handleViewStateChange = (pViewState: any) => {
+        localStorageHelpers.setItem("uaCityIdx2", idx2.toString());
+    }, []);
+    const handleViewStateChange = useCallback((pViewState: Partial<ViewState>) => {
         setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
-    }
-    const handleLayerChange = (layer: string) => {
+    }, []);
+    const handleLayerChange = useCallback((layer: DataRangeKeys) => {
         setLayer(layer);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaLayer", layer);
-        }
-    }
+        localStorageHelpers.setItem("uaLayer", layer);
+    }, []);
 
-    const handleAlphaChange = (alpha: number) => {
+    const handleAlphaChange = useCallback((alpha: number) => {
         setAlpha(alpha);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaAlpha", alpha.toString());
-        }
-    }
-    const handleOutputLayerChange = (outputLayer: string) => {
+        localStorageHelpers.setItem("uaAlpha", alpha.toString());
+    }, []);
+    const handleOutputLayerChange = useCallback((outputLayer: string) => {
         setOutputLayer(outputLayer);
-    }
+    }, []);
 
     // ----- TOUR start-----
     const [tourClass, setTourClass] = useState(tourStyles.tourhelperLight);
@@ -213,7 +206,7 @@ export default function TransformPage() {
         const h = size?.height || 0;
         setHeight(h);
     }, [size])
-    const tourConfig = getTourConfig(width, height);
+    const tourConfig = useMemo(() => getTourConfig(width, height), [width, height]);
 
     const accentColor = "#5cb7b7";
     const [isTourOpen, setTourOpen] = useState(false);
@@ -225,13 +218,11 @@ export default function TransformPage() {
     // Use sessionStorage to only show tour once per session.
     const closeTour = () => {
         setTourOpen(false);
-        if (typeof window != "undefined") {
-            sessionStorage.setItem("uatransformtour", "done");
-        }
+        sessionStorageHelpers.setItem("uatransformtour", "done");
     };
 
     useEffect(() => {
-        if(!sessionStorage.getItem('uatransformtour')) {
+        if(!sessionStorageHelpers.getItem('uatransformtour')) {
             setTourOpen(true)
         }
     }, [])

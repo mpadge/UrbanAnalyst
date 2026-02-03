@@ -8,24 +8,22 @@ import 'd3-scale-chromatic';
 import { ViewState, CityDataProps } from "@/data/interfaces";
 
 import { MapProps } from "@/components/map/mapPage";
+import { calculateLayerRanges } from "@/components/utils/layerUtils";
 
 export default function MapLayer (props: MapProps) {
 
     const mapPath1 = props.citiesArray[props.idx].path;
     const mapPath2 = mapPath1.replace("type=data", "type=data2");
 
-    // This code also repeated in mapPage.tsx to calculate [layerMin, layerMax] props.
-    const layer1: string = props.layer.replace("\_", "").replace("index", "");
-    const layer2: string = props.layer2.replace("\_", "").replace("index", "");
-    const paired_keys = Object.keys(props.citiesArray[props.idx].dataRangesPaired);
-
-    const these_layers =
-        paired_keys.includes(layer1 + "_" + layer2) ?
-            layer1 + "_" + layer2 : layer2 + "_" + layer1;
-    const dual_layers: boolean = paired_keys.includes(these_layers);
-
-    const this_layer: string = props.numLayers == "Paired" && dual_layers ?
-        these_layers : props.layer;
+    const rangeData = calculateLayerRanges(
+        props.idx,
+        props.layer,
+        props.layer2,
+        props.numLayers,
+        props.citiesArray
+    );
+    const this_layer = rangeData.this_layer;
+    const dual_layers = rangeData.dual_layers;
 
     // palettes:
     // https://github.com/d3/d3-scale-chromatic

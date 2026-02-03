@@ -21,29 +21,29 @@ import RangeSlider from '@/components/map/rangeSlider';
 import ExplainButton from '@/components/map/explainButton';
 import HelpButton from '@/components/helpButton';
 
-import { ViewState, CityDataProps } from "@/data/interfaces";
+import { ViewState, CityDataProps, DataRangeKeys } from "@/data/interfaces";
 
 const junctionFont = localFont({ src: '../../app/junction-regular.woff' })
 
 interface MapControlProps {
     idx: number,
-    layer: string,
-    layer2: string,
-    numLayers: string,
-    numLayersOptions: string[],
+    layer: DataRangeKeys,
+    layer2: DataRangeKeys,
+    numLayers: "Single" | "Paired",
+    numLayersOptions: ("Single" | "Paired")[],
     alpha: number,
-    layerRange: number[],
-    layerStartStop: number[],
+    layerRange: [number, number],
+    layerStartStop: [number, number],
     citiesArray: CityDataProps[],
     cityLayers: string[],
     viewState: ViewState,
     handleIdxChange: (pIdx: number) => void,
-    handleNumLayersChange: (numLayers: string) => void,
+    handleNumLayersChange: (numLayers: "Single" | "Paired") => void,
     handleAlphaChange: (pAlpha: number) => void,
-    handleViewStateChange: (pViewState: ViewState) => void,
-    handleLayerChange: (layer: string) => void,
-    handleLayer2Change: (layer: string) => void,
-    handleLayerRangeChange: (layerRange: number[]) => void,
+    handleViewStateChange: (pViewState: Partial<ViewState>) => void,
+    handleLayerChange: (layer: DataRangeKeys) => void,
+    handleLayer2Change: (layer2: DataRangeKeys) => void,
+    handleLayerRangeChange: (layerRange: [number, number]) => void,
     handleTourOpen: (isTourOpen: boolean) => void
 }
 
@@ -97,7 +97,7 @@ export default function Control (props: MapControlProps) {
             newValue = [value];
         } else {
             newValue=value;
-            props.handleLayerRangeChange(value);
+            props.handleLayerRangeChange(value as [number, number]);
         }
 
         setSliderValues(newValue);

@@ -214,10 +214,10 @@ const TransformComponent = (props: TransformProps) => {
     useEffect(() => {
         if (geoJSONcontent !== null) {
             const rangeLimits = getRangeLimits(geoJSONcontent, layer);
-            const rangeSdLims = [rangeLimits[1], rangeLimits[2]];
-            const rangeMinMax = [rangeLimits[0], rangeLimits[3]];
+            const rangeSdLims: [number, number] = [rangeLimits[1], rangeLimits[2]];
+            const rangeMinMax: [number, number] = [rangeLimits[0], rangeLimits[3]];
             setLayerRange(rangeSdLims);
-            setLayerStartStop(rangeMinMax);;
+            setLayerStartStop(rangeMinMax);
         }
     }, [layer, geoJSONcontent, setLayerRange, setLayerStartStop]);
 
