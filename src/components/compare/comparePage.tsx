@@ -1,7 +1,7 @@
 "use client"
 
 import { NextPage } from "next";
-import { useState, lazy, Suspense } from "react";
+import { useState, lazy, Suspense, useMemo, useCallback } from "react";
 import { ChartSkeleton, ControlSkeleton } from '@/components/utils/loadingSkeletons';
 
 const Control = lazy(() => import('@/components/compare/control'));
@@ -18,37 +18,63 @@ import { useTourLogic } from '@/components/utils/tourUtils';
 export default function Home() {
 
     // cityData only used to obtain generic info not specific to any city, so
-    // default index of [0] can be used.
+    // default index of [0] can be used. Memoize to prevent unnecessary re-renders.
     const [cityData, setCityData] = useState(CITY_DATA.citiesArray[0]);
+    const cityDataMemoized = useMemo(() => cityData, [cityData]);
 
-    const numLayersOptions: ("Single" | "Paired")[] = ["Single", "Paired"];
+    const numLayersOptions: ("Single" | "Paired")[] = useMemo(() => ["Single", "Paired"], []);
 
     const { state, actions } = useCompareState();
     const { layer, layer2, numLayers, sortOpt, meanVals } = state;
 
     const { tourProps, handleTourOpen } = useTourLogic();
 
-    const handleLayerChange = (layer: DataRangeKeys) => {
-        actions.setLayer(layer);
-    };
-    
-    const handleLayer2Change = (layer2: DataRangeKeys) => {
-        actions.setLayer2(layer2);
-    };
-    
-    const handleNumLayersChange = (numLayers: "Single" | "Paired") => {
-        actions.setNumLayers(numLayers);
-    };
-    
-    const handleSortChange = (sortOpt: string) => {
-        actions.setSortOpt(sortOpt);
-    };
-    
-    const handleMeanChange = () => {
-        actions.toggleMeanVals();
-    };
+    const processedCitiesData = useMemo(() => {
+        return {
+            citiesArray: CITY_DATA.citiesArray,
+            citiesCount: CITY_DATA.citiesArray.length,
+            // Pre-compute city names for potential filters
+            cityNames: CITY_DATA.citiesArray.map(city => city.name)
+        };
+    }, [CITY_DATA.citiesArray]);
 
-    
+    const handleLayerChange = useCallback((layer: DataRangeKeys) => {
+        actions.setLayer(layer);
+    }, [actions]);
+
+    const handleLayer2Change = useCallback((layer2: DataRangeKeys) => {
+        actions.setLayer2(layer2);
+    }, [actions]);
+
+    const handleNumLayersChange = useCallback((numLayers: "Single" | "Paired") => {
+        actions.setNumLayers(numLayers);
+    }, [actions]);
+
+    const handleSortChange = useCallback((sortOpt: string) => {
+        actions.setSortOpt(sortOpt);
+    }, [actions]);
+
+    const handleMeanChange = useCallback(() => {
+        actions.toggleMeanVals();
+    }, [actions]);
+
+    const chartConfig = useMemo(() => ({
+        layer1: layer,
+        layer2: layer2,
+        numLayers: numLayers,
+        meanVals: meanVals,
+        sortOpt: sortOpt
+    }), [layer, layer2, numLayers, meanVals, sortOpt]);
+
+    const controlConfig = useMemo(() => ({
+        layer: layer,
+        layer2: layer2,
+        numLayers: numLayers,
+        numLayersOptions: numLayersOptions,
+        meanVals: meanVals,
+        sortOpt: sortOpt,
+        citiesArray: processedCitiesData.citiesArray
+    }), [layer, layer2, numLayers, meanVals, sortOpt, numLayersOptions, processedCitiesData.citiesArray]);
 
     return (
         <>
@@ -57,30 +83,20 @@ export default function Home() {
                 <div id="compare-page-bar-chart">
                     <Suspense fallback={<ChartSkeleton />}>
                         <BarChart
-                            layer1 = {layer}
-                            layer2 = {layer2}
-                            numLayers = {numLayers}
-                            meanVals = {meanVals}
-                            sortOpt = {sortOpt}
-                            citiesArray = {CITY_DATA.citiesArray}
+                            {...chartConfig}
+                            citiesArray={processedCitiesData.citiesArray}
                         />
                     </Suspense>
                 </div>
                 <Suspense fallback={<ControlSkeleton />}>
                     <Control
-                        layer = {layer}
-                        layer2 = {layer2}
-                        numLayers = {numLayers}
-                        numLayersOptions = {numLayersOptions}
-                        meanVals = {meanVals}
-                        sortOpt = {sortOpt}
-                        citiesArray = {CITY_DATA.citiesArray}
-                        handleLayerChange = {handleLayerChange}
-                        handleLayer2Change = {handleLayer2Change}
-                        handleNumLayersChange = {handleNumLayersChange}
-                        handleMeanChange = {handleMeanChange}
-                        handleSortChange = {handleSortChange}
-                        handleTourOpen = {handleTourOpen}
+                        {...controlConfig}
+                        handleLayerChange={handleLayerChange}
+                        handleLayer2Change={handleLayer2Change}
+                        handleNumLayersChange={handleNumLayersChange}
+                        handleMeanChange={handleMeanChange}
+                        handleSortChange={handleSortChange}
+                        handleTourOpen={handleTourOpen}
                     />
                 </Suspense>
             </main>
