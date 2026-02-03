@@ -133,16 +133,32 @@ export default function MapPage() {
 
         // layer_min/max values which can be adjusted with range slider.
         const rangeData = calculateLayerRanges(
-            idx,
-            layer,
-            layer2,
-            numLayers,
+            idxLocal,
+            validatedLayer,
+            validatedLayer2,
+            numLayersLocal,
             CITY_DATA.citiesArray
         );
 
         setLayerRange([rangeData.layer_min, rangeData.layer_max]);
         setLayerStartStop([rangeData.layer_start, rangeData.layer_stop]);
-    }, [idx, layer, layer2, numLayers])
+    }, [])
+
+    useEffect(() => {
+        // Only run this effect after initialization is complete
+        if (cityLayers.length > 0) {
+            const rangeData = calculateLayerRanges(
+                idx,
+                layer,
+                layer2,
+                numLayers,
+                CITY_DATA.citiesArray
+            );
+
+            setLayerRange([rangeData.layer_min, rangeData.layer_max]);
+            setLayerStartStop([rangeData.layer_start, rangeData.layer_stop]);
+        }
+    }, [idx, layer, layer2, numLayers, cityLayers.length])
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
