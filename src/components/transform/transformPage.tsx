@@ -5,6 +5,7 @@ import { FlyToInterpolator } from "@deck.gl/core/typed";
 import { ReactourProps } from 'reactour';
 
 import { TransformSkeleton, TransformControlSkeleton, TransformLegendSkeleton } from '@/components/utils/loadingSkeletons';
+import { ErrorBoundary, ComponentErrorSkeleton } from '@/components/utils/errorBoundary';
 
 const Control = lazy(() => import('@/components/transform/control'));
 const Legend = lazy(() => import('@/components/transform/legend'));
@@ -105,30 +106,38 @@ function TransformPagePresentation({
 }: TransformPagePresentationProps) {
     return (
         <>
-            <Suspense fallback={<TransformSkeleton />}>
-                <MapTransformDynamic {...transformConfig} />
-            </Suspense>
-            <Suspense fallback={<TransformControlSkeleton />}>
-                <Control
-                    {...controlConfig}
-                    handleIdxChange={handleIdxChange}
-                    handleIdx2Change={handleIdx2Change}
-                    handleAlphaChange={handleAlphaChange}
-                    handleViewStateChange={handleViewStateChange}
-                    handleLayerChange={handleLayerChange}
-                    setLayerRange={setLayerRange}
-                    setVarnames={setVarnames}
-                    handleOutputLayerChange={handleOutputLayerChange}
-                    handleTourOpen={handleTourOpen}
-                />
-            </Suspense>
-            <Suspense fallback={<TransformLegendSkeleton />}>
-                <Legend {...legendConfig} />
-            </Suspense>
-            {tourProps.isOpen && (
-                <Suspense fallback={null}>
-                    <Tour {...tourProps} />
+            <ErrorBoundary fallback={<ComponentErrorSkeleton />}>
+                <Suspense fallback={<TransformSkeleton />}>
+                    <MapTransformDynamic {...transformConfig} />
                 </Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary fallback={<TransformControlSkeleton />}>
+                <Suspense fallback={<TransformControlSkeleton />}>
+                    <Control
+                        {...controlConfig}
+                        handleIdxChange={handleIdxChange}
+                        handleIdx2Change={handleIdx2Change}
+                        handleAlphaChange={handleAlphaChange}
+                        handleViewStateChange={handleViewStateChange}
+                        handleLayerChange={handleLayerChange}
+                        setLayerRange={setLayerRange}
+                        setVarnames={setVarnames}
+                        handleOutputLayerChange={handleOutputLayerChange}
+                        handleTourOpen={handleTourOpen}
+                    />
+                </Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary fallback={<TransformLegendSkeleton />}>
+                <Suspense fallback={<TransformLegendSkeleton />}>
+                    <Legend {...legendConfig} />
+                </Suspense>
+            </ErrorBoundary>
+            {tourProps.isOpen && (
+                <ErrorBoundary fallback={null}>
+                    <Suspense fallback={null}>
+                        <Tour {...tourProps} />
+                    </Suspense>
+                </ErrorBoundary>
             )}
         </>
     );

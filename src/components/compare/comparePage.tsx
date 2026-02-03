@@ -2,6 +2,7 @@
 
 import { useState, lazy, Suspense, useMemo, useCallback } from "react";
 import { ChartSkeleton, ControlSkeleton } from '@/components/utils/loadingSkeletons';
+import { ErrorBoundary, ErrorSkeleton } from '@/components/utils/errorBoundary';
 
 const Control = lazy(() => import('@/components/compare/control'));
 const BarChart = lazy(() => import('@/components/compare/statsBarChart'));
@@ -59,29 +60,35 @@ function ComparePagePresentation({
         <>
             <main className={styles.main}>
                 <div id="compare-page-bar-chart">
-                    <Suspense fallback={<ChartSkeleton />}>
-                        <BarChart
-                            {...chartConfig}
-                            citiesArray={CITY_DATA.citiesArray}
+                    <ErrorBoundary fallback={<ErrorSkeleton />}>
+                        <Suspense fallback={<ChartSkeleton />}>
+                            <BarChart
+                                {...chartConfig}
+                                citiesArray={CITY_DATA.citiesArray}
+                            />
+                        </Suspense>
+                    </ErrorBoundary>
+                </div>
+                <ErrorBoundary fallback={<ControlSkeleton />}>
+                    <Suspense fallback={<ControlSkeleton />}>
+                        <Control
+                            {...controlConfig}
+                            handleLayerChange={handleLayerChange}
+                            handleLayer2Change={handleLayer2Change}
+                            handleNumLayersChange={handleNumLayersChange}
+                            handleMeanChange={handleMeanChange}
+                            handleSortChange={handleSortChange}
+                            handleTourOpen={handleTourOpen}
                         />
                     </Suspense>
-                </div>
-                <Suspense fallback={<ControlSkeleton />}>
-                    <Control
-                        {...controlConfig}
-                        handleLayerChange={handleLayerChange}
-                        handleLayer2Change={handleLayer2Change}
-                        handleNumLayersChange={handleNumLayersChange}
-                        handleMeanChange={handleMeanChange}
-                        handleSortChange={handleSortChange}
-                        handleTourOpen={handleTourOpen}
-                    />
-                </Suspense>
+                </ErrorBoundary>
             </main>
             {tourProps.isOpen && (
-                <Suspense fallback={null}>
-                    <Tour {...tourProps} />
-                </Suspense>
+                <ErrorBoundary fallback={null}>
+                    <Suspense fallback={null}>
+                        <Tour {...tourProps} />
+                    </Suspense>
+                </ErrorBoundary>
             )}
         </>
     );

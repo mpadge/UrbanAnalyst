@@ -8,6 +8,7 @@ import { Map } from "react-map-gl";
 import { ReactourProps } from 'reactour';
 
 import { MapSkeleton, MapControlSkeleton, MapLegendSkeleton } from '@/components/utils/loadingSkeletons';
+import { ErrorBoundary, ComponentErrorSkeleton } from '@/components/utils/errorBoundary';
 
 const Control = lazy(() => import('@/components/map/control'));
 const Legend = lazy(() => import('@/components/map/legend'));
@@ -121,38 +122,46 @@ function MapPagePresentation({
 }: MapPagePresentationProps) {
     return (
         <>
-            <Suspense fallback={<MapSkeleton />}>
-                <UTAMap
-                    {...mapConfig}
-                    handleAlphaChange={handleAlphaChange}
-                    handleViewStateChange={handleViewStateChange}
-                    handleLayerChange={handleLayerChange}
-                    handleLayer2Change={handleLayer2Change}
-                    handleLayerRangeChange={handleLayerRangeChange}
-                />
-            </Suspense>
-            <Suspense fallback={<MapControlSkeleton />}>
-                <Control
-                    {...controlConfig}
-                    handleIdxChange={handleIdxChange}
-                    handleNumLayersChange={handleNumLayersChange}
-                    handleAlphaChange={handleAlphaChange}
-                    handleViewStateChange={handleViewStateChange}
-                    handleLayerChange={handleLayerChange}
-                    handleLayer2Change={handleLayer2Change}
-                    handleLayerRangeChange={handleLayerRangeChange}
-                    handleTourOpen={handleTourOpen}
-                />
-            </Suspense>
-            <Suspense fallback={<MapLegendSkeleton />}>
-                <Legend
-                    {...legendConfig}
-                />
-            </Suspense>
-            {tourProps.isOpen && (
-                <Suspense fallback={null}>
-                    <Tour {...tourProps} />
+            <ErrorBoundary fallback={<ComponentErrorSkeleton />}>
+                <Suspense fallback={<MapSkeleton />}>
+                    <UTAMap
+                        {...mapConfig}
+                        handleAlphaChange={handleAlphaChange}
+                        handleViewStateChange={handleViewStateChange}
+                        handleLayerChange={handleLayerChange}
+                        handleLayer2Change={handleLayer2Change}
+                        handleLayerRangeChange={handleLayerRangeChange}
+                    />
                 </Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary fallback={<MapControlSkeleton />}>
+                <Suspense fallback={<MapControlSkeleton />}>
+                    <Control
+                        {...controlConfig}
+                        handleIdxChange={handleIdxChange}
+                        handleNumLayersChange={handleNumLayersChange}
+                        handleAlphaChange={handleAlphaChange}
+                        handleViewStateChange={handleViewStateChange}
+                        handleLayerChange={handleLayerChange}
+                        handleLayer2Change={handleLayer2Change}
+                        handleLayerRangeChange={handleLayerRangeChange}
+                        handleTourOpen={handleTourOpen}
+                    />
+                </Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary fallback={<MapLegendSkeleton />}>
+                <Suspense fallback={<MapLegendSkeleton />}>
+                    <Legend
+                        {...legendConfig}
+                    />
+                </Suspense>
+            </ErrorBoundary>
+            {tourProps.isOpen && (
+                <ErrorBoundary fallback={null}>
+                    <Suspense fallback={null}>
+                        <Tour {...tourProps} />
+                    </Suspense>
+                </ErrorBoundary>
             )}
         </>
     );
