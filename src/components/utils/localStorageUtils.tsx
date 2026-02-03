@@ -79,6 +79,9 @@ export const COMPARE_STORAGE_KEYS = {
     SORT_OPT: 'uaCompareSortOpt'
 } as const;
 
+// Import constants for use in state initialization
+import { LAYER_CONSTANTS } from './pageConstants';
+
 // Generic persisted state hook
 export function usePersistedState<T>(
     key: string,
@@ -145,9 +148,9 @@ function compareReducer(state: CompareState, action: CompareAction): CompareStat
 // Consolidated compare state hook
 export function useCompareState() {
     const initialState: CompareState = {
-        layer: (localStorageHelpers.getString(COMPARE_STORAGE_KEYS.LAYER, 'transport') as DataRangeKeys),
-        layer2: (localStorageHelpers.getString(COMPARE_STORAGE_KEYS.LAYER2, 'transport') as DataRangeKeys),
-        numLayers: (localStorageHelpers.getString(COMPARE_STORAGE_KEYS.NUM_LAYERS, 'Single') as "Single" | "Paired"),
+        layer: (localStorageHelpers.getString(COMPARE_STORAGE_KEYS.LAYER, LAYER_CONSTANTS.DEFAULT_TRANSPORT_LAYER) as DataRangeKeys),
+        layer2: (localStorageHelpers.getString(COMPARE_STORAGE_KEYS.LAYER2, LAYER_CONSTANTS.DEFAULT_TRANSPORT_LAYER) as DataRangeKeys),
+        numLayers: (localStorageHelpers.getString(COMPARE_STORAGE_KEYS.NUM_LAYERS, LAYER_CONSTANTS.MODE_SINGLE) as "Single" | "Paired"),
         sortOpt: localStorageHelpers.getString(COMPARE_STORAGE_KEYS.SORT_OPT, 'increasing'),
         meanVals: true
     };

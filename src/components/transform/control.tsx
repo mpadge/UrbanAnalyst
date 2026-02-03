@@ -25,6 +25,7 @@ import OutputLayers from '@/components/transform/outputLayers';
 import HelpButton from '@/components/helpButton';
 
 import { ViewState, CityDataProps, DataRangeKeys } from "@/data/interfaces";
+import type { OutputLayerType } from "@/components/utils/pageConstants";
 
 const junctionFont = localFont({ src: '../../app/junction-regular.woff' })
 
@@ -39,7 +40,7 @@ interface TransformControlProps {
     citiesArray: CityDataProps[],
     cityLayers: string[],
     viewState: ViewState,
-    outputLayer: string
+    outputLayer: OutputLayerType
     handleIdxChange: (pIdx: number) => void,
     handleIdx2Change: (pIdx2: number) => void,
     handleAlphaChange: (pAlpha: number) => void,
@@ -47,7 +48,7 @@ interface TransformControlProps {
     handleLayerChange: (layer: DataRangeKeys) => void,
     setLayerRange: (layerRange: [number, number]) => void,
     setVarnames: (varnames: string[]) => void
-    handleOutputLayerChange: (outputLayer: string) => void
+    handleOutputLayerChange: (outputLayer: OutputLayerType) => void
     handleTourOpen: (isTourOpen: boolean) => void
 }
 

@@ -9,10 +9,11 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import useWindowSize from "@/components/windowSize";
 import styles from '@/styles/controls.module.css';
+import type { OutputLayerType } from "@/components/utils/pageConstants";
 
 interface OutputLayerProps {
-    outputLayer: string,
-    handleOutputLayerChange: (outputLayer: string) => void,
+    outputLayer: OutputLayerType,
+    handleOutputLayerChange: (outputLayer: OutputLayerType) => void,
 }
 
 export default function OutputLayers(props: OutputLayerProps) {
@@ -28,7 +29,7 @@ export default function OutputLayers(props: OutputLayerProps) {
     const [selected, setSelected] = useState<string>("original");
 
     const handleChange = (event: SelectChangeEvent) => {
-        const val = event.target.value as string;
+        const val = event.target.value as OutputLayerType;
         if (val) {
             setSelected(val);
             props.handleOutputLayerChange(val);

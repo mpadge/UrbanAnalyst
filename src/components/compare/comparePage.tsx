@@ -14,6 +14,8 @@ import { CITY_DATA } from '@/data/citydata';
 import { DataRangeKeys } from '@/data/interfaces';
 import { useCompareState } from '@/components/utils/localStorageUtils';
 import { useTourLogic } from '@/components/utils/tourUtils';
+import { LAYER_CONSTANTS, NUM_LAYERS_OPTIONS } from '@/components/utils/pageConstants';
+import type { NumLayersMode, SortOption } from '@/components/utils/pageConstants';
 
 export default function Home() {
 
@@ -22,7 +24,7 @@ export default function Home() {
     const [cityData, setCityData] = useState(CITY_DATA.citiesArray[0]);
     const cityDataMemoized = useMemo(() => cityData, [cityData]);
 
-    const numLayersOptions: ("Single" | "Paired")[] = useMemo(() => ["Single", "Paired"], []);
+    const numLayersOptions: NumLayersMode[] = useMemo(() => [...NUM_LAYERS_OPTIONS], []);
 
     const { state, actions } = useCompareState();
     const { layer, layer2, numLayers, sortOpt, meanVals } = state;

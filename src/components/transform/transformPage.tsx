@@ -16,6 +16,8 @@ import { CITY_DATA } from '@/data/citydata';
 import { DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/interfaces';
 import { localStorageHelpers, sessionStorageHelpers } from '@/components/utils/localStorageUtils';
 import { useTransformTourLogic } from '@/components/utils/transformTourUtils';
+import { LAYER_CONSTANTS, OUTPUT_LAYER_TYPES } from '@/components/utils/pageConstants';
+import type { OutputLayerType } from '@/components/utils/pageConstants';
 
 
 /**
@@ -50,10 +52,10 @@ export interface TransformProps {
     alpha: number
     layerRange: [number, number]
     layerStartStop: [number, number]
-    outputLayer: string
+    outputLayer: OutputLayerType
     setLayerRange: (layerRange: [number, number]) => void
     setLayerStartStop: (layerStartStop: [number, number]) => void
-    handleOutputLayerChange: (outputLayer: string) => void
+    handleOutputLayerChange: (outputLayer: OutputLayerType) => void
 }
 
 /**
@@ -65,32 +67,34 @@ export interface TransformProps {
 export default function TransformPage() {
 
     // -------- state variables --------
-    const [idx, setIdx] = useState(0);
-    const [idx2, setIdx2] = useState(1); // Target City
+    const [idx, setIdx] = useState<number>(LAYER_CONSTANTS.DEFAULT_CITY_INDEX);
+    const [idx2, setIdx2] = useState<number>(LAYER_CONSTANTS.DEFAULT_TARGET_CITY_INDEX); // Target City
 
-    const [viewState, setViewState] = useState(() => ({
+const [viewState, setViewState] = useState<ViewState & {
+        transitionDuration: number;
+        transitionInterpolator: any;
+    }>(() => ({
         ...CITY_DATA.citiesArray[0].initialViewState,
-        pitch: 0,
-        bearing: 0,
-        transitionDuration: 2000,
+        pitch: LAYER_CONSTANTS.DEFAULT_PITCH,
+        bearing: LAYER_CONSTANTS.DEFAULT_BEARING,
+        transitionDuration: LAYER_CONSTANTS.DEFAULT_TRANSITION_DURATION,
         transitionInterpolator: new FlyToInterpolator()
     }));
+    const [layer, setLayer] = useState<DataRangeKeys>(LAYER_CONSTANTS.DEFAULT_BIKE_INDEX_LAYER);
+    const [alpha, setAlpha] = useState<number>(LAYER_CONSTANTS.DEFAULT_ALPHA);
 
-    const [layer, setLayer] = useState<DataRangeKeys>("bike_index" as DataRangeKeys);
-    const [alpha, setAlpha] = useState(0.5);
-
-    const [layerStartStop, setLayerStartStop] = useState<[number, number]>([0, 1]);
-    const [layerRange, setLayerRange] = useState<[number, number]>([0, 1]);
+    const [layerStartStop, setLayerStartStop] = useState<[number, number]>(LAYER_CONSTANTS.DEFAULT_LAYER_START_STOP);
+    const [layerRange, setLayerRange] = useState<[number, number]>(LAYER_CONSTANTS.DEFAULT_LAYER_RANGE);
 
     const [varnames, setVarnames] = useState<string[]>([]);
-    const [outputLayer, setOutputLayer] = useState<string>("relative");
+    const [outputLayer, setOutputLayer] = useState<OutputLayerType>(OUTPUT_LAYER_TYPES.RELATIVE);
     const [cityLayers, setCityLayers] = useState<string[]>([]);
 
     useEffect(() => {
-        var idxLocal = 0;
-        var idx2Local = 1;
-        var layerLocal = "transport";
-        var alphaLocal = 0.5;
+        var idxLocal: number = LAYER_CONSTANTS.DEFAULT_CITY_INDEX;
+        var idx2Local: number = LAYER_CONSTANTS.DEFAULT_TARGET_CITY_INDEX;
+        var layerLocal: string = LAYER_CONSTANTS.DEFAULT_TRANSPORT_LAYER;
+        var alphaLocal: number = LAYER_CONSTANTS.DEFAULT_ALPHA;
 
         const storedIdx = localStorageHelpers.getItem('uaCityIdx');
         if(storedIdx) { // convert to int
@@ -136,7 +140,7 @@ export default function TransformPage() {
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idxLocal].dataRanges);
         setCityLayers(theseLayers);
         if (!theseLayers.includes(layerLocal)) {
-            layerLocal = "transport";
+            layerLocal = LAYER_CONSTANTS.DEFAULT_TRANSPORT_LAYER;
             setLayer(layerLocal as DataRangeKeys);
             localStorageHelpers.removeItem('uaLayer');
         }
@@ -156,9 +160,9 @@ export default function TransformPage() {
 
     const createViewStateForCity = useCallback((cityIdx: number) => ({
         ...CITY_DATA.citiesArray[cityIdx].initialViewState,
-        pitch: 0,
-        bearing: 0,
-        transitionDuration: 2000,
+        pitch: LAYER_CONSTANTS.DEFAULT_PITCH,
+        bearing: LAYER_CONSTANTS.DEFAULT_BEARING,
+        transitionDuration: LAYER_CONSTANTS.DEFAULT_TRANSITION_DURATION,
         transitionInterpolator: new FlyToInterpolator()
     }), []);
 
@@ -175,7 +179,7 @@ export default function TransformPage() {
         localStorageHelpers.setItem("uaCityIdx", idx.toString());
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idx].dataRanges);
         if (!theseLayers.includes(layer)) {
-            setLayer("transport" as DataRangeKeys);
+            setLayer(LAYER_CONSTANTS.DEFAULT_TRANSPORT_LAYER);
             localStorageHelpers.removeItem('uaLayer');
         }
     }, [layer, createViewStateForCity]);
@@ -199,7 +203,7 @@ export default function TransformPage() {
         localStorageHelpers.setItem("uaAlpha", alpha.toString());
     }, []);
 
-    const handleOutputLayerChange = useCallback((outputLayer: string) => {
+    const handleOutputLayerChange = useCallback((outputLayer: OutputLayerType) => {
         setOutputLayer(outputLayer);
     }, []);
 

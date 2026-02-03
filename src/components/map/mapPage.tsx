@@ -18,8 +18,10 @@ import { CityDataProps, DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/
 import { calculateLayerRanges } from '@/components/utils/layerUtils';
 import { localStorageHelpers, sessionStorageHelpers, loadInitialState } from '@/components/utils/localStorageUtils';
 import { useMapTourLogic } from '@/components/utils/mapTourUtils';
+import { LAYER_CONSTANTS, NUM_LAYERS_OPTIONS } from '@/components/utils/pageConstants';
+import type { NumLayersMode } from '@/components/utils/pageConstants';
 
-const DEFAULT_LAYER = "social_index";
+const DEFAULT_LAYER = LAYER_CONSTANTS.DEFAULT_LAYER;
 
 const validateAndSetDefaultLayer = (
     layer: string,
@@ -81,24 +83,27 @@ export default function MapPage() {
 
     const cityData = useMemo(() => CITY_DATA.citiesArray[idx], [idx]);
 
-    const [viewState, setViewState] = useState(() => ({
+    const [viewState, setViewState] = useState<ViewState & {
+        transitionDuration: number;
+        transitionInterpolator: any;
+    }>(() => ({
         ...CITY_DATA.citiesArray[0].initialViewState,
-        pitch: 0,
-        bearing: 0,
-        transitionDuration: 2000,
+        pitch: LAYER_CONSTANTS.DEFAULT_PITCH,
+        bearing: LAYER_CONSTANTS.DEFAULT_BEARING,
+        transitionDuration: LAYER_CONSTANTS.DEFAULT_TRANSITION_DURATION,
         transitionInterpolator: new FlyToInterpolator()
     }));
 
-    const [layer, setLayer] = useState<DataRangeKeys>(DEFAULT_LAYER as DataRangeKeys);
+    const [layer, setLayer] = useState<DataRangeKeys>(DEFAULT_LAYER);
     const [layer2, setLayer2] = useState<DataRangeKeys>("" as DataRangeKeys);
-    const [alpha, setAlpha] = useState(0.5);
-    const [numLayers, setNumLayers] = useState<"Single" | "Paired">("Single");
+    const [alpha, setAlpha] = useState<number>(LAYER_CONSTANTS.DEFAULT_ALPHA);
+    const [numLayers, setNumLayers] = useState<"Single" | "Paired">(LAYER_CONSTANTS.MODE_SINGLE);
 
-    const numLayersOptions: ("Single" | "Paired")[] = useMemo(() => ["Single", "Paired"], []);
+    const numLayersOptions: NumLayersMode[] = useMemo(() => [...NUM_LAYERS_OPTIONS], []);
 
     const [cityLayers, setCityLayers] = useState<string[]>([]);
-    const [layerStartStop, setLayerStartStop] = useState<[number, number]>([0, 1]);
-    const [layerRange, setLayerRange] = useState<[number, number]>([0, 1]);
+    const [layerStartStop, setLayerStartStop] = useState<[number, number]>(LAYER_CONSTANTS.DEFAULT_LAYER_START_STOP);
+    const [layerRange, setLayerRange] = useState<[number, number]>(LAYER_CONSTANTS.DEFAULT_LAYER_RANGE);
 
     useEffect(() => {
         const initialState = loadInitialState();
@@ -113,9 +118,9 @@ export default function MapPage() {
         setIdx(idxLocal);
         setViewState({
             ...CITY_DATA.citiesArray[idxLocal].initialViewState,
-            pitch: 0,
-            bearing: 0,
-            transitionDuration: 2000,
+            pitch: LAYER_CONSTANTS.DEFAULT_PITCH,
+            bearing: LAYER_CONSTANTS.DEFAULT_BEARING,
+            transitionDuration: LAYER_CONSTANTS.DEFAULT_TRANSITION_DURATION,
             transitionInterpolator: new FlyToInterpolator()
         })
         setLayer(layerLocal as DataRangeKeys);
@@ -164,9 +169,9 @@ export default function MapPage() {
     // Memoize expensive calculations for city changes
     const createViewStateForCity = useCallback((cityIdx: number) => ({
         ...CITY_DATA.citiesArray[cityIdx].initialViewState,
-        pitch: 0,
-        bearing: 0,
-        transitionDuration: 2000,
+        pitch: LAYER_CONSTANTS.DEFAULT_PITCH,
+        bearing: LAYER_CONSTANTS.DEFAULT_BEARING,
+        transitionDuration: LAYER_CONSTANTS.DEFAULT_TRANSITION_DURATION,
         transitionInterpolator: new FlyToInterpolator()
     }), []);
 
