@@ -1,24 +1,24 @@
 "use client"
 
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState, useCallback, useMemo, lazy, Suspense } from "react";
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
 import { DeckGL } from "@deck.gl/react/typed";
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 import { Map } from "react-map-gl";
 
-import Control from '@/components/map/control';
-import Legend from '@/components/map/legend';
-import UTAMap from '@/components/map/map';
-import Tour from '@/components/map/tour/tour';
-import useWindowSize from '@/components/windowSize';
-import { getTourConfig } from '@/components/map/tour/tourConfig';
-import tourStyles from '@/styles/tour.module.css';
-import getPreferredTourClass from '@/components/tourClass';
+import { MapSkeleton, MapControlSkeleton, MapLegendSkeleton } from '@/components/utils/loadingSkeletons';
+
+// Lazy load heavy components for better performance
+const Control = lazy(() => import('@/components/map/control'));
+const Legend = lazy(() => import('@/components/map/legend'));
+const UTAMap = lazy(() => import('@/components/map/map'));
+const Tour = lazy(() => import('@/components/map/tour/tour'));
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
 import { CityDataProps, DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/interfaces';
 import { calculateLayerRanges } from '@/components/utils/layerUtils';
 import { localStorageHelpers, sessionStorageHelpers, loadInitialState } from '@/components/utils/localStorageUtils';
+import { useMapTourLogic } from '@/components/utils/mapTourUtils';
 
 const DEFAULT_LAYER = "social_index";
 
@@ -208,102 +208,68 @@ export default function MapPage() {
         setLayerRange(layerRange);
     }, []);
 
-    // ----- TOUR start-----
-    const [tourClass, setTourClass] = useState(tourStyles.tourhelperLight);
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            setTourClass(getPreferredTourClass());
-        }
-    }, []);
-    const [width, setWidth] = useState(0);
-    const [height, setHeight] = useState(0);
-    const size = useWindowSize();
-    useEffect(() => {
-        const w = size?.width || 0;
-        setWidth(w);
-        const h = size?.height || 0;
-        setHeight(h);
-    }, [size])
-    const tourConfig = useMemo(() => getTourConfig(width, height), [width, height]);
-
-    const accentColor = "#5cb7b7";
-    const [isTourOpen, setTourOpen] = useState(false);
-
-    const handleTourOpen = useCallback(() => {
-        setTourOpen(true);
-    }, []);
-
-    // Use sessionStorage to only show tour once per session.
-    const closeTour = useCallback(() => {
-        setTourOpen(false);
-        sessionStorageHelpers.setItem("uamaptour", "done");
-    }, []);
-
-    useEffect(() => {
-        if(!sessionStorageHelpers.getItem('uamaptour')) {
-            setTourOpen(true)
-        }
-    }, [])
-    // ----- TOUR end-----
+    // Use map tour logic hook
+    const { tourProps, handleTourOpen } = useMapTourLogic();
 
     return (
         <>
-            <UTAMap
-                idx = {idx}
-                layer = {layer}
-                layer2 = {layer2}
-                numLayers = {numLayers}
-                alpha = {alpha}
-                layerRange = {layerRange}
-                layerStartStop = {layerStartStop}
-                citiesArray = {CITY_DATA.citiesArray}
-                viewState = {viewState}
-                handleAlphaChange = {handleAlphaChange}
-                handleViewStateChange = {handleViewStateChange}
-                handleLayerChange = {handleLayerChange}
-                handleLayer2Change = {handleLayer2Change}
-                handleLayerRangeChange = {handleLayerRangeChange}
-            />
-            <Control
-                idx = {idx}
-                layer = {layer}
-                layer2 = {layer2}
-                numLayers = {numLayers}
-                numLayersOptions = {numLayersOptions}
-                alpha = {alpha}
-                layerRange = {layerRange}
-                layerStartStop = {layerStartStop}
-                citiesArray = {CITY_DATA.citiesArray}
-                cityLayers = {cityLayers}
-                viewState = {viewState}
-                handleIdxChange = {handleIdxChange}
-                handleNumLayersChange = {handleNumLayersChange}
-                handleAlphaChange = {handleAlphaChange}
-                handleViewStateChange = {handleViewStateChange}
-                handleLayerChange = {handleLayerChange}
-                handleLayer2Change = {handleLayer2Change}
-                handleLayerRangeChange = {handleLayerRangeChange}
-                handleTourOpen = {handleTourOpen}
-            />
-            <Legend
-                idx = {idx}
-                layerRange = {layerRange}
-                layer = {layer}
-                layer2 = {layer2}
-                numLayers = {numLayers}
-                alpha = {alpha}
-                citiesArray = {CITY_DATA.citiesArray}
-            />
-            <Tour
-                onRequestClose={closeTour}
-                disableInteraction={false}
-                steps={tourConfig}
-                isOpen={isTourOpen}
-                maskClassName={tourStyles.tourmask}
-                className={tourClass}
-                rounded={5}
-                accentColor={accentColor}
-            />
+            <Suspense fallback={<MapSkeleton />}>
+                <UTAMap
+                    idx = {idx}
+                    layer = {layer}
+                    layer2 = {layer2}
+                    numLayers = {numLayers}
+                    alpha = {alpha}
+                    layerRange = {layerRange}
+                    layerStartStop = {layerStartStop}
+                    citiesArray = {CITY_DATA.citiesArray}
+                    viewState = {viewState}
+                    handleAlphaChange = {handleAlphaChange}
+                    handleViewStateChange = {handleViewStateChange}
+                    handleLayerChange = {handleLayerChange}
+                    handleLayer2Change = {handleLayer2Change}
+                    handleLayerRangeChange = {handleLayerRangeChange}
+                />
+            </Suspense>
+            <Suspense fallback={<MapControlSkeleton />}>
+                <Control
+                    idx = {idx}
+                    layer = {layer}
+                    layer2 = {layer2}
+                    numLayers = {numLayers}
+                    numLayersOptions = {numLayersOptions}
+                    alpha = {alpha}
+                    layerRange = {layerRange}
+                    layerStartStop = {layerStartStop}
+                    citiesArray = {CITY_DATA.citiesArray}
+                    cityLayers = {cityLayers}
+                    viewState = {viewState}
+                    handleIdxChange = {handleIdxChange}
+                    handleNumLayersChange = {handleNumLayersChange}
+                    handleAlphaChange = {handleAlphaChange}
+                    handleViewStateChange = {handleViewStateChange}
+                    handleLayerChange = {handleLayerChange}
+                    handleLayer2Change = {handleLayer2Change}
+                    handleLayerRangeChange = {handleLayerRangeChange}
+                    handleTourOpen = {handleTourOpen}
+                />
+            </Suspense>
+            <Suspense fallback={<MapLegendSkeleton />}>
+                <Legend
+                    idx = {idx}
+                    layerRange = {layerRange}
+                    layer = {layer}
+                    layer2 = {layer2}
+                    numLayers = {numLayers}
+                    alpha = {alpha}
+                    citiesArray = {CITY_DATA.citiesArray}
+                />
+            </Suspense>
+            {tourProps.isOpen && (
+                <Suspense fallback={null}>
+                    <Tour {...tourProps} />
+                </Suspense>
+            )}
         </>
     )
 }

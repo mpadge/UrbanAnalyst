@@ -1,22 +1,21 @@
 "use client"
 
-import { useEffect, useState, useCallback, useMemo} from 'react';
+import { useEffect, useState, useCallback, useMemo, lazy, Suspense} from 'react';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 
-import Control from '@/components/transform/control';
-import Legend from '@/components/transform/legend';
-import Tour from '@/components/transform/tour/tour';
-import useWindowSize from '@/components/windowSize';
+import { TransformSkeleton, TransformControlSkeleton, TransformLegendSkeleton } from '@/components/utils/loadingSkeletons';
+
+const Control = lazy(() => import('@/components/transform/control'));
+const Legend = lazy(() => import('@/components/transform/legend'));
+const MapTransformDynamic = lazy(() => import('@/components/transform/transformPageDynamic'));
+const Tour = lazy(() => import('@/components/transform/tour/tour'));
 
 import { CityDataProps } from "@/data/interfaces";
-import MapTransformDynamic from '@/components/transform/transformPageDynamic';
 import { getTourConfig } from '@/components/transform/tour/tourConfig';
 import { CITY_DATA } from '@/data/citydata';
 import { DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/interfaces';
 import { localStorageHelpers, sessionStorageHelpers } from '@/components/utils/localStorageUtils';
-
-import tourStyles from '@/styles/tour.module.css';
-import getPreferredTourClass from '@/components/tourClass';
+import { useTransformTourLogic } from '@/components/utils/transformTourUtils';
 
 
 /**
@@ -190,100 +189,65 @@ export default function TransformPage() {
         setOutputLayer(outputLayer);
     }, []);
 
-    // ----- TOUR start-----
-    const [tourClass, setTourClass] = useState(tourStyles.tourhelperLight);
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            setTourClass(getPreferredTourClass());
-        }
-    }, []);
-    const [width, setWidth] = useState(0);
-    const [height, setHeight] = useState(0);
-    const size = useWindowSize();
-    useEffect(() => {
-        const w = size?.width || 0;
-        setWidth(w);
-        const h = size?.height || 0;
-        setHeight(h);
-    }, [size])
-    const tourConfig = useMemo(() => getTourConfig(width, height), [width, height]);
-
-    const accentColor = "#5cb7b7";
-    const [isTourOpen, setTourOpen] = useState(false);
-
-    const handleTourOpen = () => {
-        setTourOpen(true);
-    };
-
-    // Use sessionStorage to only show tour once per session.
-    const closeTour = () => {
-        setTourOpen(false);
-        sessionStorageHelpers.setItem("uatransformtour", "done");
-    };
-
-    useEffect(() => {
-        if(!sessionStorageHelpers.getItem('uatransformtour')) {
-            setTourOpen(true)
-        }
-    }, [])
-    // ----- TOUR end-----
+    const { tourProps, handleTourOpen } = useTransformTourLogic();
 
     return (
         <>
-            <MapTransformDynamic
-                idx={idx}
-                idx2={idx2}
-                layer={layer}
-                varnames={varnames}
-                citiesArray = {CITY_DATA.citiesArray}
-                city = {CITY_DATA.citiesArray[idx].name}
-                targetCity = {CITY_DATA.citiesArray[idx2].name}
-                viewState = {viewState}
-                alpha = {alpha}
-                layerRange = {layerRange}
-                layerStartStop = {layerStartStop}
-                outputLayer={outputLayer}
-                setLayerRange={setLayerRange}
-                setLayerStartStop={setLayerStartStop}
-                handleOutputLayerChange={handleOutputLayerChange}
-            />
-            <Control
-                idx={idx}
-                idx2={idx2}
-                layer={layer}
-                varnames={varnames}
-                alpha={alpha}
-                layerRange = {layerRange}
-                layerStartStop = {layerStartStop}
-                citiesArray={CITY_DATA.citiesArray}
-                cityLayers={cityLayers}
-                viewState={viewState}
-                outputLayer={outputLayer}
-                handleIdxChange={handleIdxChange}
-                handleIdx2Change={handleIdx2Change}
-                handleAlphaChange={handleAlphaChange}
-                handleViewStateChange={handleViewStateChange}
-                handleLayerChange={handleLayerChange}
-                setLayerRange={setLayerRange}
-                setVarnames={setVarnames}
-                handleOutputLayerChange={handleOutputLayerChange}
-                handleTourOpen = {handleTourOpen}
-            />
-            <Legend
-                layerRange={layerRange}
-                alpha={alpha}
-                layer_name={layer}
-            />
-            <Tour
-                onRequestClose={closeTour}
-                disableInteraction={false}
-                steps={tourConfig}
-                isOpen={isTourOpen}
-                maskClassName={tourStyles.tourmask}
-                className={tourClass}
-                rounded={5}
-                accentColor={accentColor}
-            />
+            <Suspense fallback={<TransformSkeleton />}>
+                <MapTransformDynamic
+                    idx={idx}
+                    idx2={idx2}
+                    layer={layer}
+                    varnames={varnames}
+                    citiesArray = {CITY_DATA.citiesArray}
+                    city = {CITY_DATA.citiesArray[idx].name}
+                    targetCity = {CITY_DATA.citiesArray[idx2].name}
+                    viewState = {viewState}
+                    alpha = {alpha}
+                    layerRange = {layerRange}
+                    layerStartStop = {layerStartStop}
+                    outputLayer={outputLayer}
+                    setLayerRange={setLayerRange}
+                    setLayerStartStop={setLayerStartStop}
+                    handleOutputLayerChange={handleOutputLayerChange}
+                />
+            </Suspense>
+            <Suspense fallback={<TransformControlSkeleton />}>
+                <Control
+                    idx={idx}
+                    idx2={idx2}
+                    layer={layer}
+                    varnames={varnames}
+                    alpha={alpha}
+                    layerRange = {layerRange}
+                    layerStartStop = {layerStartStop}
+                    citiesArray={CITY_DATA.citiesArray}
+                    cityLayers={cityLayers}
+                    viewState={viewState}
+                    outputLayer={outputLayer}
+                    handleIdxChange={handleIdxChange}
+                    handleIdx2Change={handleIdx2Change}
+                    handleAlphaChange={handleAlphaChange}
+                    handleViewStateChange={handleViewStateChange}
+                    handleLayerChange={handleLayerChange}
+                    setLayerRange={setLayerRange}
+                    setVarnames={setVarnames}
+                    handleOutputLayerChange={handleOutputLayerChange}
+                    handleTourOpen = {handleTourOpen}
+                />
+            </Suspense>
+            <Suspense fallback={<TransformLegendSkeleton />}>
+                <Legend
+                    layerRange={layerRange}
+                    alpha={alpha}
+                    layer_name={layer}
+                />
+            </Suspense>
+            {tourProps.isOpen && (
+                <Suspense fallback={null}>
+                    <Tour {...tourProps} />
+                </Suspense>
+            )}
         </>
     )
 }
