@@ -67,13 +67,15 @@ export default function TransformPage() {
     // -------- state variables --------
     const [idx, setIdx] = useState(0);
     const [idx2, setIdx2] = useState(1); // Target City
-    const [viewState, setViewState] = useState({
-        ...CITY_DATA.citiesArray[idx].initialViewState,
+
+    const [viewState, setViewState] = useState(() => ({
+        ...CITY_DATA.citiesArray[0].initialViewState,
         pitch: 0,
         bearing: 0,
         transitionDuration: 2000,
         transitionInterpolator: new FlyToInterpolator()
-    });
+    }));
+
     const [layer, setLayer] = useState<DataRangeKeys>("bike_index" as DataRangeKeys);
     const [alpha, setAlpha] = useState(0.5);
 
@@ -152,30 +154,41 @@ export default function TransformPage() {
         setLayerStartStop([layer_start, layer_stop]);
     }, [idx, layer]);
 
+    const createViewStateForCity = useCallback((cityIdx: number) => ({
+        ...CITY_DATA.citiesArray[cityIdx].initialViewState,
+        pitch: 0,
+        bearing: 0,
+        transitionDuration: 2000,
+        transitionInterpolator: new FlyToInterpolator()
+    }), []);
+
+    const citiesData = useMemo(() => ({
+        citiesArray: CITY_DATA.citiesArray,
+        citiesCount: CITY_DATA.citiesArray.length,
+        cityNames: CITY_DATA.citiesArray.map(city => city.name)
+    }), [CITY_DATA.citiesArray]);
+
     // -------- handlers for state variables --------
     const handleIdxChange = useCallback((idx: number) => {
         setIdx(idx);
-        setViewState({
-            ...CITY_DATA.citiesArray[idx].initialViewState,
-            pitch: 0,
-            bearing: 0,
-            transitionDuration: 2000,
-            transitionInterpolator: new FlyToInterpolator()
-        })
+        setViewState(createViewStateForCity(idx));
         localStorageHelpers.setItem("uaCityIdx", idx.toString());
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idx].dataRanges);
         if (!theseLayers.includes(layer)) {
             setLayer("transport" as DataRangeKeys);
             localStorageHelpers.removeItem('uaLayer');
         }
-    }, [layer]);
+    }, [layer, createViewStateForCity]);
+
     const handleIdx2Change = useCallback((idx2: number) => {
         setIdx2(idx2);
         localStorageHelpers.setItem("uaCityIdx2", idx2.toString());
     }, []);
+
     const handleViewStateChange = useCallback((pViewState: Partial<ViewState>) => {
         setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
     }, []);
+
     const handleLayerChange = useCallback((layer: DataRangeKeys) => {
         setLayer(layer);
         localStorageHelpers.setItem("uaLayer", layer);
@@ -185,46 +198,59 @@ export default function TransformPage() {
         setAlpha(alpha);
         localStorageHelpers.setItem("uaAlpha", alpha.toString());
     }, []);
+
     const handleOutputLayerChange = useCallback((outputLayer: string) => {
         setOutputLayer(outputLayer);
     }, []);
 
     const { tourProps, handleTourOpen } = useTransformTourLogic();
 
+    const transformConfig = useMemo(() => ({
+        idx,
+        idx2,
+        layer,
+        varnames,
+        citiesArray: citiesData.citiesArray,
+        city: citiesData.citiesArray[idx].name,
+        targetCity: citiesData.citiesArray[idx2].name,
+        viewState,
+        alpha,
+        layerRange,
+        layerStartStop,
+        outputLayer,
+        setLayerRange,
+        setLayerStartStop,
+        handleOutputLayerChange
+    }), [idx, idx2, layer, varnames, citiesData, viewState, alpha, layerRange, layerStartStop, outputLayer, setLayerRange, setLayerStartStop, handleOutputLayerChange]);
+
+    const controlConfig = useMemo(() => ({
+        idx,
+        idx2,
+        layer,
+        varnames,
+        alpha,
+        layerRange,
+        layerStartStop,
+        citiesArray: citiesData.citiesArray,
+        cityLayers,
+        viewState,
+        outputLayer
+    }), [idx, idx2, layer, varnames, citiesData, cityLayers, viewState, alpha, layerRange, layerStartStop, outputLayer]);
+
+    const legendConfig = useMemo(() => ({
+        layerRange,
+        alpha,
+        layer_name: layer
+    }), [layerRange, alpha, layer]);
+
     return (
         <>
             <Suspense fallback={<TransformSkeleton />}>
-                <MapTransformDynamic
-                    idx={idx}
-                    idx2={idx2}
-                    layer={layer}
-                    varnames={varnames}
-                    citiesArray = {CITY_DATA.citiesArray}
-                    city = {CITY_DATA.citiesArray[idx].name}
-                    targetCity = {CITY_DATA.citiesArray[idx2].name}
-                    viewState = {viewState}
-                    alpha = {alpha}
-                    layerRange = {layerRange}
-                    layerStartStop = {layerStartStop}
-                    outputLayer={outputLayer}
-                    setLayerRange={setLayerRange}
-                    setLayerStartStop={setLayerStartStop}
-                    handleOutputLayerChange={handleOutputLayerChange}
-                />
+                <MapTransformDynamic {...transformConfig} />
             </Suspense>
             <Suspense fallback={<TransformControlSkeleton />}>
                 <Control
-                    idx={idx}
-                    idx2={idx2}
-                    layer={layer}
-                    varnames={varnames}
-                    alpha={alpha}
-                    layerRange = {layerRange}
-                    layerStartStop = {layerStartStop}
-                    citiesArray={CITY_DATA.citiesArray}
-                    cityLayers={cityLayers}
-                    viewState={viewState}
-                    outputLayer={outputLayer}
+                    {...controlConfig}
                     handleIdxChange={handleIdxChange}
                     handleIdx2Change={handleIdx2Change}
                     handleAlphaChange={handleAlphaChange}
@@ -233,15 +259,11 @@ export default function TransformPage() {
                     setLayerRange={setLayerRange}
                     setVarnames={setVarnames}
                     handleOutputLayerChange={handleOutputLayerChange}
-                    handleTourOpen = {handleTourOpen}
+                    handleTourOpen={handleTourOpen}
                 />
             </Suspense>
             <Suspense fallback={<TransformLegendSkeleton />}>
-                <Legend
-                    layerRange={layerRange}
-                    alpha={alpha}
-                    layer_name={layer}
-                />
+                <Legend {...legendConfig} />
             </Suspense>
             {tourProps.isOpen && (
                 <Suspense fallback={null}>
