@@ -2,8 +2,10 @@
 
 import { useEffect, useState, useCallback, useMemo, lazy, Suspense} from 'react';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
+import { ReactourProps } from 'reactour';
 
 import { TransformSkeleton, TransformControlSkeleton, TransformLegendSkeleton } from '@/components/utils/loadingSkeletons';
+import { ErrorBoundary, ComponentErrorSkeleton } from '@/components/utils/errorBoundary';
 
 const Control = lazy(() => import('@/components/transform/control'));
 const Legend = lazy(() => import('@/components/transform/legend'));
@@ -16,28 +18,9 @@ import { CITY_DATA } from '@/data/citydata';
 import { DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/interfaces';
 import { localStorageHelpers, sessionStorageHelpers } from '@/components/utils/localStorageUtils';
 import { useTransformTourLogic } from '@/components/utils/transformTourUtils';
+import { LAYER_CONSTANTS, OUTPUT_LAYER_TYPES } from '@/components/utils/pageConstants';
+import type { OutputLayerType } from '@/components/utils/pageConstants';
 
-
-/**
- * Definition of interface for `TransformProps`. These are constructed in
- * {@link TransformPage} and passed through to `TransformDynamic`, which
- * passes straight through to `TransformComponent`. Individual props are:
- *
- * - `idx`: The integer defining the city from the full `CITY_DATA.citiesArray`.
- * - `idx2`: The equivalent integer defining the *target* city.
- * - `layer`: The string defining the single layer to be transformed.
- * - `varnames`: Array of variable names also passed to the transform algorith,
- *   so transformation of `layer` also minimises the multi-variate distance to
- *   all variables defined here.
- * - `citiesArray`: Static array of all data for all cities, read from main
- *   `/data` directory.
- * - `city`: String representing name of city, read from `citiesArray[idx]`.
- * - `targetCity`: Equivalent string for target city.
- * - `alpha`: Opacity for visual plotting of DeckGL layer.
- * - `layerRange`: Not yet fully implemented.
- * - `outputLayer`: Control for which layer should appear on main `transform`
- *   page: "Original", "Transformed", "Absolute", or "Relative".
- */
 export interface TransformProps {
     idx: number
     idx2: number
@@ -50,57 +33,156 @@ export interface TransformProps {
     alpha: number
     layerRange: [number, number]
     layerStartStop: [number, number]
-    outputLayer: string
+    outputLayer: OutputLayerType
     setLayerRange: (layerRange: [number, number]) => void
     setLayerStartStop: (layerStartStop: [number, number]) => void
-    handleOutputLayerChange: (outputLayer: string) => void
+    handleOutputLayerChange: (outputLayer: OutputLayerType) => void
 }
 
-/**
- * Main Transform Page component
- *
- * @remark This uses the {@link TransformProps} interface to construct all
- * props and pass on to both `transformComponent` and `control`.
- */
+interface TransformPagePresentationProps {
+    transformConfig: {
+        idx: number;
+        idx2: number;
+        layer: DataRangeKeys;
+        varnames: string[];
+        citiesArray: CityDataProps[];
+        city: string;
+        targetCity: string;
+        viewState: ViewState;
+        alpha: number;
+        layerRange: [number, number];
+        layerStartStop: [number, number];
+        outputLayer: OutputLayerType;
+        setLayerRange: (layerRange: [number, number]) => void;
+        setLayerStartStop: (layerStartStop: [number, number]) => void;
+        handleOutputLayerChange: (outputLayer: OutputLayerType) => void;
+    };
+    controlConfig: {
+        idx: number;
+        idx2: number;
+        layer: DataRangeKeys;
+        varnames: string[];
+        alpha: number;
+        layerRange: [number, number];
+        layerStartStop: [number, number];
+        citiesArray: CityDataProps[];
+        cityLayers: string[];
+        viewState: ViewState;
+        outputLayer: OutputLayerType;
+    };
+    legendConfig: {
+        layerRange: [number, number];
+        alpha: number;
+        layer_name: string;
+    };
+    handleIdxChange: (idx: number) => void;
+    handleIdx2Change: (idx2: number) => void;
+    handleViewStateChange: (pViewState: Partial<ViewState>) => void;
+    handleLayerChange: (layer: DataRangeKeys) => void;
+    handleAlphaChange: (alpha: number) => void;
+    setLayerRange: (layerRange: [number, number]) => void;
+    setLayerStartStop: (layerStartStop: [number, number]) => void;
+    setVarnames: (varnames: string[]) => void;
+    handleOutputLayerChange: (outputLayer: OutputLayerType) => void;
+    tourProps: ReactourProps;
+    handleTourOpen: () => void;
+}
+
+function TransformPagePresentation({
+    transformConfig,
+    controlConfig,
+    legendConfig,
+    handleIdxChange,
+    handleIdx2Change,
+    handleViewStateChange,
+    handleLayerChange,
+    handleAlphaChange,
+    setLayerRange,
+    setLayerStartStop,
+    setVarnames,
+    handleOutputLayerChange,
+    tourProps,
+    handleTourOpen
+}: TransformPagePresentationProps) {
+    return (
+        <>
+            <ErrorBoundary fallback={<ComponentErrorSkeleton />}>
+                <Suspense fallback={<TransformSkeleton />}>
+                    <MapTransformDynamic {...transformConfig} />
+                </Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary fallback={<TransformControlSkeleton />}>
+                <Suspense fallback={<TransformControlSkeleton />}>
+                    <Control
+                        {...controlConfig}
+                        handleIdxChange={handleIdxChange}
+                        handleIdx2Change={handleIdx2Change}
+                        handleAlphaChange={handleAlphaChange}
+                        handleViewStateChange={handleViewStateChange}
+                        handleLayerChange={handleLayerChange}
+                        setLayerRange={setLayerRange}
+                        setVarnames={setVarnames}
+                        handleOutputLayerChange={handleOutputLayerChange}
+                        handleTourOpen={handleTourOpen}
+                    />
+                </Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary fallback={<TransformLegendSkeleton />}>
+                <Suspense fallback={<TransformLegendSkeleton />}>
+                    <Legend {...legendConfig} />
+                </Suspense>
+            </ErrorBoundary>
+            {tourProps.isOpen && (
+                <ErrorBoundary fallback={null}>
+                    <Suspense fallback={null}>
+                        <Tour {...tourProps} />
+                    </Suspense>
+                </ErrorBoundary>
+            )}
+        </>
+    );
+}
+
 export default function TransformPage() {
 
-    // -------- state variables --------
-    const [idx, setIdx] = useState(0);
-    const [idx2, setIdx2] = useState(1); // Target City
+    const [idx, setIdx] = useState<number>(LAYER_CONSTANTS.DEFAULT_CITY_INDEX);
+    const [idx2, setIdx2] = useState<number>(LAYER_CONSTANTS.DEFAULT_TARGET_CITY_INDEX);
 
-    const [viewState, setViewState] = useState(() => ({
+    const [viewState, setViewState] = useState<ViewState & {
+        transitionDuration: number;
+        transitionInterpolator: any;
+    }>(() => ({
         ...CITY_DATA.citiesArray[0].initialViewState,
-        pitch: 0,
-        bearing: 0,
-        transitionDuration: 2000,
+        pitch: LAYER_CONSTANTS.DEFAULT_PITCH,
+        bearing: LAYER_CONSTANTS.DEFAULT_BEARING,
+        transitionDuration: LAYER_CONSTANTS.DEFAULT_TRANSITION_DURATION,
         transitionInterpolator: new FlyToInterpolator()
     }));
+    const [layer, setLayer] = useState<DataRangeKeys>(LAYER_CONSTANTS.DEFAULT_BIKE_INDEX_LAYER);
+    const [alpha, setAlpha] = useState<number>(LAYER_CONSTANTS.DEFAULT_ALPHA);
 
-    const [layer, setLayer] = useState<DataRangeKeys>("bike_index" as DataRangeKeys);
-    const [alpha, setAlpha] = useState(0.5);
-
-    const [layerStartStop, setLayerStartStop] = useState<[number, number]>([0, 1]);
-    const [layerRange, setLayerRange] = useState<[number, number]>([0, 1]);
+    const [layerStartStop, setLayerStartStop] = useState<[number, number]>(LAYER_CONSTANTS.DEFAULT_LAYER_START_STOP);
+    const [layerRange, setLayerRange] = useState<[number, number]>(LAYER_CONSTANTS.DEFAULT_LAYER_RANGE);
 
     const [varnames, setVarnames] = useState<string[]>([]);
-    const [outputLayer, setOutputLayer] = useState<string>("relative");
+    const [outputLayer, setOutputLayer] = useState<OutputLayerType>(OUTPUT_LAYER_TYPES.RELATIVE);
     const [cityLayers, setCityLayers] = useState<string[]>([]);
 
     useEffect(() => {
-        var idxLocal = 0;
-        var idx2Local = 1;
-        var layerLocal = "transport";
-        var alphaLocal = 0.5;
+        var idxLocal: number = LAYER_CONSTANTS.DEFAULT_CITY_INDEX;
+        var idx2Local: number = LAYER_CONSTANTS.DEFAULT_TARGET_CITY_INDEX;
+        var layerLocal: string = LAYER_CONSTANTS.DEFAULT_TRANSPORT_LAYER;
+        var alphaLocal: number = LAYER_CONSTANTS.DEFAULT_ALPHA;
 
         const storedIdx = localStorageHelpers.getItem('uaCityIdx');
-        if(storedIdx) { // convert to int
+        if(storedIdx) {
             idxLocal = parseInt(storedIdx, 10);
             if (isNaN(idxLocal)) {
                 idxLocal = 0;
             }
         }
         const storedIdx2 = localStorageHelpers.getItem('uaCityIdx2');
-        if(storedIdx2) { // convert to int
+        if(storedIdx2) {
             idx2Local = parseInt(storedIdx2, 10);
             if (isNaN(idx2Local)) {
                 idx2Local = 0;
@@ -130,21 +212,16 @@ export default function TransformPage() {
         setLayer(layerLocal as DataRangeKeys);
         setAlpha(alphaLocal);
 
-        // Names of all layers; only effect of `idxLocal` is to include
-        // additional layers such as those in US data, but otherwise has no
-        // effect here:
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idxLocal].dataRanges);
         setCityLayers(theseLayers);
         if (!theseLayers.includes(layerLocal)) {
-            layerLocal = "transport";
+            layerLocal = LAYER_CONSTANTS.DEFAULT_TRANSPORT_LAYER;
             setLayer(layerLocal as DataRangeKeys);
             localStorageHelpers.removeItem('uaLayer');
         }
     }, [])
 
     useEffect(() => {
-        // layer_min/max values which can be adjusted with range slider. This
-        // code is also repeated in mapPage.tsx and mapLayer.tsx.
         const layer_start = CITY_DATA.citiesArray[idx].dataRanges[layer as DataRangeKeys][0];
         const layer_min = CITY_DATA.citiesArray[idx].dataRanges[layer as DataRangeKeys][1];
         const layer_max = CITY_DATA.citiesArray[idx].dataRanges[layer as DataRangeKeys][2];
@@ -156,9 +233,9 @@ export default function TransformPage() {
 
     const createViewStateForCity = useCallback((cityIdx: number) => ({
         ...CITY_DATA.citiesArray[cityIdx].initialViewState,
-        pitch: 0,
-        bearing: 0,
-        transitionDuration: 2000,
+        pitch: LAYER_CONSTANTS.DEFAULT_PITCH,
+        bearing: LAYER_CONSTANTS.DEFAULT_BEARING,
+        transitionDuration: LAYER_CONSTANTS.DEFAULT_TRANSITION_DURATION,
         transitionInterpolator: new FlyToInterpolator()
     }), []);
 
@@ -168,14 +245,13 @@ export default function TransformPage() {
         cityNames: CITY_DATA.citiesArray.map(city => city.name)
     }), [CITY_DATA.citiesArray]);
 
-    // -------- handlers for state variables --------
     const handleIdxChange = useCallback((idx: number) => {
         setIdx(idx);
         setViewState(createViewStateForCity(idx));
         localStorageHelpers.setItem("uaCityIdx", idx.toString());
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idx].dataRanges);
         if (!theseLayers.includes(layer)) {
-            setLayer("transport" as DataRangeKeys);
+            setLayer(LAYER_CONSTANTS.DEFAULT_TRANSPORT_LAYER);
             localStorageHelpers.removeItem('uaLayer');
         }
     }, [layer, createViewStateForCity]);
@@ -199,7 +275,7 @@ export default function TransformPage() {
         localStorageHelpers.setItem("uaAlpha", alpha.toString());
     }, []);
 
-    const handleOutputLayerChange = useCallback((outputLayer: string) => {
+    const handleOutputLayerChange = useCallback((outputLayer: OutputLayerType) => {
         setOutputLayer(outputLayer);
     }, []);
 
@@ -244,32 +320,21 @@ export default function TransformPage() {
     }), [layerRange, alpha, layer]);
 
     return (
-        <>
-            <Suspense fallback={<TransformSkeleton />}>
-                <MapTransformDynamic {...transformConfig} />
-            </Suspense>
-            <Suspense fallback={<TransformControlSkeleton />}>
-                <Control
-                    {...controlConfig}
-                    handleIdxChange={handleIdxChange}
-                    handleIdx2Change={handleIdx2Change}
-                    handleAlphaChange={handleAlphaChange}
-                    handleViewStateChange={handleViewStateChange}
-                    handleLayerChange={handleLayerChange}
-                    setLayerRange={setLayerRange}
-                    setVarnames={setVarnames}
-                    handleOutputLayerChange={handleOutputLayerChange}
-                    handleTourOpen={handleTourOpen}
-                />
-            </Suspense>
-            <Suspense fallback={<TransformLegendSkeleton />}>
-                <Legend {...legendConfig} />
-            </Suspense>
-            {tourProps.isOpen && (
-                <Suspense fallback={null}>
-                    <Tour {...tourProps} />
-                </Suspense>
-            )}
-        </>
-    )
+        <TransformPagePresentation
+            transformConfig={transformConfig}
+            controlConfig={controlConfig}
+            legendConfig={legendConfig}
+            handleIdxChange={handleIdxChange}
+            handleIdx2Change={handleIdx2Change}
+            handleViewStateChange={handleViewStateChange}
+            handleLayerChange={handleLayerChange}
+            handleAlphaChange={handleAlphaChange}
+            setLayerRange={setLayerRange}
+            setLayerStartStop={setLayerStartStop}
+            setVarnames={setVarnames}
+            handleOutputLayerChange={handleOutputLayerChange}
+            tourProps={tourProps}
+            handleTourOpen={handleTourOpen}
+        />
+    );
 }
