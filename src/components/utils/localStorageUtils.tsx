@@ -1,3 +1,4 @@
+import { useState, useReducer } from 'react';
 import { DataRangeKeys, Data2RangeKeys, CityDataProps } from '@/data/interfaces';
 
 export const localStorageHelpers = {
@@ -69,3 +70,113 @@ export function loadInitialState() {
         alpha: localStorageHelpers.getFloat('uaAlpha', 0.5)
     };
 }
+
+// Storage keys for compare page
+export const COMPARE_STORAGE_KEYS = {
+    LAYER: 'uaLayer',
+    LAYER2: 'uaLayer2', 
+    NUM_LAYERS: 'uaNumLayers',
+    SORT_OPT: 'uaCompareSortOpt'
+} as const;
+
+// Generic persisted state hook
+export function usePersistedState<T>(
+    key: string,
+    defaultValue: T
+): [T, (value: T) => void] {
+    const [state, setState] = useState<T>(() => {
+        if (typeof window !== "undefined") {
+            const stored = localStorageHelpers.getItem(key);
+            if (stored) {
+                try {
+                    return JSON.parse(stored) as T;
+                } catch {
+                    return defaultValue;
+                }
+            }
+        }
+        return defaultValue;
+    });
+
+    const setPersistedState = (value: T) => {
+        setState(value);
+        if (typeof window !== "undefined") {
+            localStorageHelpers.setItem(key, JSON.stringify(value));
+        }
+    };
+
+    return [state, setPersistedState];
+}
+
+// Compare state interface
+interface CompareState {
+    layer: DataRangeKeys;
+    layer2: DataRangeKeys;
+    numLayers: "Single" | "Paired";
+    sortOpt: string;
+    meanVals: boolean;
+}
+
+// Compare state reducer
+type CompareAction = 
+    | { type: "SET_LAYER"; payload: DataRangeKeys }
+    | { type: "SET_LAYER2"; payload: DataRangeKeys }
+    | { type: "SET_NUM_LAYERS"; payload: "Single" | "Paired" }
+    | { type: "SET_SORT_OPT"; payload: string }
+    | { type: "TOGGLE_MEAN_VALS" };
+
+function compareReducer(state: CompareState, action: CompareAction): CompareState {
+    switch (action.type) {
+        case "SET_LAYER":
+            return { ...state, layer: action.payload };
+        case "SET_LAYER2":
+            return { ...state, layer2: action.payload };
+        case "SET_NUM_LAYERS":
+            return { ...state, numLayers: action.payload };
+        case "SET_SORT_OPT":
+            return { ...state, sortOpt: action.payload };
+        case "TOGGLE_MEAN_VALS":
+            return { ...state, meanVals: !state.meanVals };
+        default:
+            return state;
+    }
+}
+
+// Consolidated compare state hook
+export function useCompareState() {
+    const initialState: CompareState = {
+        layer: (localStorageHelpers.getString(COMPARE_STORAGE_KEYS.LAYER, 'transport') as DataRangeKeys),
+        layer2: (localStorageHelpers.getString(COMPARE_STORAGE_KEYS.LAYER2, 'transport') as DataRangeKeys),
+        numLayers: (localStorageHelpers.getString(COMPARE_STORAGE_KEYS.NUM_LAYERS, 'Single') as "Single" | "Paired"),
+        sortOpt: localStorageHelpers.getString(COMPARE_STORAGE_KEYS.SORT_OPT, 'increasing'),
+        meanVals: true
+    };
+
+    const [state, dispatch] = useReducer(compareReducer, initialState);
+
+    const actions = {
+        setLayer: (layer: DataRangeKeys) => {
+            localStorageHelpers.setItem(COMPARE_STORAGE_KEYS.LAYER, layer);
+            dispatch({ type: "SET_LAYER", payload: layer });
+        },
+        setLayer2: (layer2: DataRangeKeys) => {
+            localStorageHelpers.setItem(COMPARE_STORAGE_KEYS.LAYER2, layer2);
+            dispatch({ type: "SET_LAYER2", payload: layer2 });
+        },
+        setNumLayers: (numLayers: "Single" | "Paired") => {
+            localStorageHelpers.setItem(COMPARE_STORAGE_KEYS.NUM_LAYERS, numLayers);
+            dispatch({ type: "SET_NUM_LAYERS", payload: numLayers });
+        },
+        setSortOpt: (sortOpt: string) => {
+            localStorageHelpers.setItem(COMPARE_STORAGE_KEYS.SORT_OPT, sortOpt);
+            dispatch({ type: "SET_SORT_OPT", payload: sortOpt });
+        },
+        toggleMeanVals: () => {
+            dispatch({ type: "TOGGLE_MEAN_VALS" });
+        }
+    };
+
+    return { state, actions };
+}
+
+
