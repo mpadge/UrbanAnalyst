@@ -20,6 +20,21 @@ import { CityDataProps, DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/
 import { calculateLayerRanges } from '@/components/utils/layerUtils';
 import { localStorageHelpers, sessionStorageHelpers, loadInitialState } from '@/components/utils/localStorageUtils';
 
+const DEFAULT_LAYER = "social_index";
+
+const validateAndSetDefaultLayer = (
+    layer: string,
+    availableLayers: string[],
+    localStorageKey: string,
+    defaultLayer: string = DEFAULT_LAYER
+): string => {
+    if (!availableLayers.includes(layer)) {
+        localStorageHelpers.removeItem(localStorageKey);
+        return defaultLayer;
+    }
+    return layer;
+};
+
 /**
  * Definition of interface for `MapProps`. These are constructed in
  * here and passed through to {@link map}. Individual props are:
@@ -109,14 +124,12 @@ export default function MapPage() {
 
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idxLocal].dataRanges);
         setCityLayers(theseLayers);
-        if (!theseLayers.includes(layerLocal)) {
-            setLayer("social_index");
-            localStorageHelpers.removeItem('uaLayer');
-        }
-        if (!theseLayers.includes(layer2Local)) {
-            setLayer2("social_index");
-            localStorageHelpers.removeItem('uaLayer2');
-        }
+
+        const validatedLayer = validateAndSetDefaultLayer(layerLocal, theseLayers, 'uaLayer');
+        const validatedLayer2 = validateAndSetDefaultLayer(layer2Local, theseLayers, 'uaLayer2');
+
+        if (validatedLayer !== layerLocal) setLayer(validatedLayer);
+        if (validatedLayer2 !== layer2Local) setLayer2(validatedLayer2);
 
         // layer_min/max values which can be adjusted with range slider.
         const rangeData = calculateLayerRanges(
