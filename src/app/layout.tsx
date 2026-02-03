@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: 'UA',
     description: 'Urban Analyses for the World',
     icons: {
-        icon: '/icon.ico',
+        icon: '/favicon.ico',
     },
 }
 
