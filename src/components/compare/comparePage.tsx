@@ -1,6 +1,5 @@
 "use client"
 
-import { NextPage } from "next";
 import { useState, lazy, Suspense, useMemo, useCallback } from "react";
 import { ChartSkeleton, ControlSkeleton } from '@/components/utils/loadingSkeletons';
 
@@ -17,11 +16,80 @@ import { useTourLogic } from '@/components/utils/tourUtils';
 import { LAYER_CONSTANTS, NUM_LAYERS_OPTIONS } from '@/components/utils/pageConstants';
 import type { NumLayersMode, SortOption } from '@/components/utils/pageConstants';
 
-export default function Home() {
+import type { ReactourProps } from 'reactour';
 
-    // cityData only used to obtain generic info not specific to any city, so
-    // default index of [0] can be used. Memoize to prevent unnecessary re-renders.
-    const [cityData, setCityData] = useState(CITY_DATA.citiesArray[0]);
+interface ComparePagePresentationProps {
+    chartConfig: {
+        layer1: DataRangeKeys;
+        layer2: DataRangeKeys;
+        numLayers: "Single" | "Paired";
+        meanVals: boolean;
+        sortOpt: string;
+    };
+    controlConfig: {
+        layer: DataRangeKeys;
+        layer2: DataRangeKeys;
+        numLayers: "Single" | "Paired";
+        numLayersOptions: NumLayersMode[];
+        meanVals: boolean;
+        sortOpt: string;
+        citiesArray: typeof CITY_DATA.citiesArray;
+    };
+    handleLayerChange: (layer: DataRangeKeys) => void;
+    handleLayer2Change: (layer2: DataRangeKeys) => void;
+    handleNumLayersChange: (numLayers: "Single" | "Paired") => void;
+    handleMeanChange: () => void;
+    handleSortChange: (sortOpt: string) => void;
+    tourProps: ReactourProps;
+    handleTourOpen: () => void;
+}
+
+function ComparePagePresentation({
+    chartConfig,
+    controlConfig,
+    handleLayerChange,
+    handleLayer2Change,
+    handleNumLayersChange,
+    handleMeanChange,
+    handleSortChange,
+    tourProps,
+    handleTourOpen
+}: ComparePagePresentationProps) {
+    return (
+        <>
+            <main className={styles.main}>
+                <div id="compare-page-bar-chart">
+                    <Suspense fallback={<ChartSkeleton />}>
+                        <BarChart
+                            {...chartConfig}
+                            citiesArray={CITY_DATA.citiesArray}
+                        />
+                    </Suspense>
+                </div>
+                <Suspense fallback={<ControlSkeleton />}>
+                    <Control
+                        {...controlConfig}
+                        handleLayerChange={handleLayerChange}
+                        handleLayer2Change={handleLayer2Change}
+                        handleNumLayersChange={handleNumLayersChange}
+                        handleMeanChange={handleMeanChange}
+                        handleSortChange={handleSortChange}
+                        handleTourOpen={handleTourOpen}
+                    />
+                </Suspense>
+            </main>
+            {tourProps.isOpen && (
+                <Suspense fallback={null}>
+                    <Tour {...tourProps} />
+                </Suspense>
+            )}
+        </>
+    );
+}
+
+export default function ComparePage() {
+
+    const [cityData] = useState(CITY_DATA.citiesArray[0]);
     const cityDataMemoized = useMemo(() => cityData, [cityData]);
 
     const numLayersOptions: NumLayersMode[] = useMemo(() => [...NUM_LAYERS_OPTIONS], []);
@@ -35,7 +103,6 @@ export default function Home() {
         return {
             citiesArray: CITY_DATA.citiesArray,
             citiesCount: CITY_DATA.citiesArray.length,
-            // Pre-compute city names for potential filters
             cityNames: CITY_DATA.citiesArray.map(city => city.name)
         };
     }, [CITY_DATA.citiesArray]);
@@ -79,34 +146,16 @@ export default function Home() {
     }), [layer, layer2, numLayers, meanVals, sortOpt, numLayersOptions, processedCitiesData.citiesArray]);
 
     return (
-        <>
-            <main className={styles.main}>
-
-                <div id="compare-page-bar-chart">
-                    <Suspense fallback={<ChartSkeleton />}>
-                        <BarChart
-                            {...chartConfig}
-                            citiesArray={processedCitiesData.citiesArray}
-                        />
-                    </Suspense>
-                </div>
-                <Suspense fallback={<ControlSkeleton />}>
-                    <Control
-                        {...controlConfig}
-                        handleLayerChange={handleLayerChange}
-                        handleLayer2Change={handleLayer2Change}
-                        handleNumLayersChange={handleNumLayersChange}
-                        handleMeanChange={handleMeanChange}
-                        handleSortChange={handleSortChange}
-                        handleTourOpen={handleTourOpen}
-                    />
-                </Suspense>
-            </main>
-            {tourProps.isOpen && (
-                <Suspense fallback={null}>
-                    <Tour {...tourProps} />
-                </Suspense>
-            )}
-        </>
-    )
+        <ComparePagePresentation
+            chartConfig={chartConfig}
+            controlConfig={controlConfig}
+            handleLayerChange={handleLayerChange}
+            handleLayer2Change={handleLayer2Change}
+            handleNumLayersChange={handleNumLayersChange}
+            handleMeanChange={handleMeanChange}
+            handleSortChange={handleSortChange}
+            tourProps={tourProps}
+            handleTourOpen={handleTourOpen}
+        />
+    );
 }
