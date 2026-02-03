@@ -172,14 +172,12 @@ export default function MapPage() {
         })
         localStorageHelpers.setItem("uaCityIdx", idx.toString());
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idx].dataRanges);
-        if (!theseLayers.includes(layer)) {
-            setLayer(DEFAULT_LAYER);
-            localStorageHelpers.removeItem('uaLayer');
-        }
-        if (!theseLayers.includes(layer2)) {
-            setLayer2(DEFAULT_LAYER);
-            localStorageHelpers.removeItem('uaLayer2');
-        }
+
+        const validatedLayer = validateAndSetDefaultLayer(layer, theseLayers, 'uaLayer');
+        const validatedLayer2 = validateAndSetDefaultLayer(layer2, theseLayers, 'uaLayer2');
+
+        if (validatedLayer !== layer) setLayer(validatedLayer);
+        if (validatedLayer2 !== layer2) setLayer2(validatedLayer2);
     }, [layer, layer2])
     const handleAlphaChange = (alpha: number) => {
         setAlpha(alpha);
