@@ -1,10 +1,12 @@
 "use client"
 
 import { NextPage } from "next";
-import { useState } from "react";
-import Control from '@/components/compare/control';
-import BarChart from '@/components/compare/statsBarChart';
-import Tour from '@/components/compare/tour/tour';
+import { useState, lazy, Suspense } from "react";
+import { ChartSkeleton, ControlSkeleton } from '@/components/utils/loadingSkeletons';
+
+const Control = lazy(() => import('@/components/compare/control'));
+const BarChart = lazy(() => import('@/components/compare/statsBarChart'));
+const Tour = lazy(() => import('@/components/compare/tour/tour'));
 
 import styles from '@/styles/Home.module.css';
 
@@ -53,32 +55,40 @@ export default function Home() {
             <main className={styles.main}>
 
                 <div id="compare-page-bar-chart">
-                    <BarChart
-                        layer1 = {layer}
+                    <Suspense fallback={<ChartSkeleton />}>
+                        <BarChart
+                            layer1 = {layer}
+                            layer2 = {layer2}
+                            numLayers = {numLayers}
+                            meanVals = {meanVals}
+                            sortOpt = {sortOpt}
+                            citiesArray = {CITY_DATA.citiesArray}
+                        />
+                    </Suspense>
+                </div>
+                <Suspense fallback={<ControlSkeleton />}>
+                    <Control
+                        layer = {layer}
                         layer2 = {layer2}
                         numLayers = {numLayers}
+                        numLayersOptions = {numLayersOptions}
                         meanVals = {meanVals}
                         sortOpt = {sortOpt}
                         citiesArray = {CITY_DATA.citiesArray}
+                        handleLayerChange = {handleLayerChange}
+                        handleLayer2Change = {handleLayer2Change}
+                        handleNumLayersChange = {handleNumLayersChange}
+                        handleMeanChange = {handleMeanChange}
+                        handleSortChange = {handleSortChange}
+                        handleTourOpen = {handleTourOpen}
                     />
-                </div>
-                <Control
-                    layer = {layer}
-                    layer2 = {layer2}
-                    numLayers = {numLayers}
-                    numLayersOptions = {numLayersOptions}
-                    meanVals = {meanVals}
-                    sortOpt = {sortOpt}
-                    citiesArray = {CITY_DATA.citiesArray}
-                    handleLayerChange = {handleLayerChange}
-                    handleLayer2Change = {handleLayer2Change}
-                    handleNumLayersChange = {handleNumLayersChange}
-                    handleMeanChange = {handleMeanChange}
-                    handleSortChange = {handleSortChange}
-                    handleTourOpen = {handleTourOpen}
-                />
+                </Suspense>
             </main>
-            <Tour {...tourProps} />
+            {tourProps.isOpen && (
+                <Suspense fallback={null}>
+                    <Tour {...tourProps} />
+                </Suspense>
+            )}
         </>
     )
 }
