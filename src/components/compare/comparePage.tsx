@@ -14,6 +14,7 @@ import tourStyles from '@/styles/tour.module.css';
 import getPreferredTourClass from '@/components/tourClass';
 
 import { CITY_DATA } from '@/data/citydata';
+import { localStorageHelpers, sessionStorageHelpers } from '@/components/utils/localStorageUtils';
 
 export default function Home() {
 
@@ -34,24 +35,24 @@ export default function Home() {
         var layer2Local = "";
         var numLayersLocal = "Single";
         var sortOptLocal = "increasing";
-        if (typeof window != "undefined") {
-            const storedLayer = localStorage.getItem('uaLayer');
-            if(storedLayer) {
-                layerLocal = storedLayer;
-            }
-            const storedLayer2 = localStorage.getItem('uaLayer2');
-            if(storedLayer2) {
-                layer2Local = storedLayer2;
-            }
-            const storedNumLayers = localStorage.getItem('uaNumLayers');
-            if(storedNumLayers) {
-                numLayersLocal = storedNumLayers;
-            }
-            const storedSortOpt = localStorage.getItem('uaCompareSortOpt');
-            if(storedSortOpt) {
-                sortOptLocal = storedSortOpt;
-            }
+
+        const storedLayer = localStorageHelpers.getItem('uaLayer');
+        if(storedLayer) {
+            layerLocal = storedLayer;
         }
+        const storedLayer2 = localStorageHelpers.getItem('uaLayer2');
+        if(storedLayer2) {
+            layer2Local = storedLayer2;
+        }
+        const storedNumLayers = localStorageHelpers.getItem('uaNumLayers');
+        if(storedNumLayers) {
+            numLayersLocal = storedNumLayers;
+        }
+        const storedSortOpt = localStorageHelpers.getItem('uaCompareSortOpt');
+        if(storedSortOpt) {
+            sortOptLocal = storedSortOpt;
+        }
+
         setLayer(layerLocal);
         setLayer2(layer2Local);
         setNumLayers(numLayersLocal);
@@ -60,27 +61,19 @@ export default function Home() {
 
     const handleLayerChange = (layer: string) => {
         setLayer(layer);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaLayer", layer);
-        }
+        localStorageHelpers.setItem("uaLayer", layer);
     }
     const handleLayer2Change = (layer2: string) => {
         setLayer2(layer2);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaLayer2", layer2);
-        }
+        localStorageHelpers.setItem("uaLayer2", layer2);
     }
     const handleNumLayersChange = (numLayers: string) => {
         setNumLayers(numLayers);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaNumLayers", numLayers);
-        }
+        localStorageHelpers.setItem("uaNumLayers", numLayers);
     }
     const handleSortChange = (sortOpt: string) => {
         setSortOpt (sortOpt)
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaCompareSortOpt", sortOpt);
-        }
+        localStorageHelpers.setItem("uaCompareSortOpt", sortOpt);
     }
     const handleMeanChange = (e: any) => {
         setMeanVals(!meanVals);
@@ -114,13 +107,11 @@ export default function Home() {
     // Use sessionStorage to only show tour once per session.
     const closeTour = () => {
         setTourOpen(false);
-        if (typeof window != "undefined") {
-            sessionStorage.setItem("uacomparetour", "done");
-        }
+        sessionStorageHelpers.setItem("uacomparetour", "done");
     };
 
     useEffect(() => {
-        if(!sessionStorage.getItem('uacomparetour')) {
+        if(!sessionStorageHelpers.getItem('uacomparetour')) {
             setTourOpen(true)
         }
     }, [])
