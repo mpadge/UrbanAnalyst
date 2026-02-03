@@ -6,6 +6,7 @@ import Control from '@/components/summarise/control';
 import useWindowSize from '@/components/windowSize';
 import styles from '@/styles/summarise.module.css';
 import Content from '@/components/summarise/citySummaryData';
+import { localStorageHelpers } from '@/components/utils/localStorageUtils';
 
 export default function SummarisePage() {
 
@@ -13,13 +14,11 @@ export default function SummarisePage() {
 
     useEffect(() => {
         var idxLocal = 0;
-        if (typeof window != "undefined") {
-            const storedIdx = localStorage.getItem('uaCityIdx');
-            if(storedIdx) {
-                idxLocal = parseInt(storedIdx, 10);
-                if (isNaN(idxLocal)) {
-                    idxLocal = 0;
-                }
+        const storedIdx = localStorageHelpers.getItem('uaCityIdx');
+        if(storedIdx) {
+            idxLocal = parseInt(storedIdx, 10);
+            if (isNaN(idxLocal)) {
+                idxLocal = 0;
             }
         }
         setIdx(idxLocal);
@@ -32,9 +31,7 @@ export default function SummarisePage() {
 
     const handleIdxChange = (idx: number) => {
         setIdx(idx);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaCityIdx", idx.toString());
-        }
+        localStorageHelpers.setItem("uaCityIdx", idx.toString());
     }
 
     return (
