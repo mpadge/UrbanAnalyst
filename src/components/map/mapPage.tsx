@@ -229,15 +229,15 @@ export default function MapPage() {
     const accentColor = "#5cb7b7";
     const [isTourOpen, setTourOpen] = useState(false);
 
-    const handleTourOpen = () => {
+    const handleTourOpen = useCallback(() => {
         setTourOpen(true);
-    };
+    }, []);
 
     // Use sessionStorage to only show tour once per session.
-    const closeTour = () => {
+    const closeTour = useCallback(() => {
         setTourOpen(false);
         sessionStorageHelpers.setItem("uamaptour", "done");
-    };
+    }, []);
 
     useEffect(() => {
         if(!sessionStorageHelpers.getItem('uamaptour')) {
