@@ -18,6 +18,7 @@ import getPreferredTourClass from '@/components/tourClass';
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
 import { CityDataProps, DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/interfaces';
 import { calculateLayerRanges } from '@/components/utils/layerUtils';
+import { localStorageHelpers, sessionStorageHelpers, loadInitialState } from '@/components/utils/localStorageUtils';
 
 /**
  * Definition of interface for `MapProps`. These are constructed in
@@ -83,39 +84,15 @@ export default function MapPage() {
     const [layerRange, setLayerRange] = useState<number[]>([0, 1]);
 
     useEffect(() => {
-        var idxLocal = 0;
-        var layerLocal = "social_index";
-        var layer2Local = "";
-        var numLayersLocal = "Single";
-        var alphaLocal = 0.5;
-        if (typeof window != "undefined") {
-            const storedIdx = localStorage.getItem('uaCityIdx');
-            if(storedIdx) { // convert to int
-                idxLocal = parseInt(storedIdx, 10);
-                if (isNaN(idxLocal)) {
-                    idxLocal = 0;
-                }
-            }
-            const storedLayer = localStorage.getItem('uaLayer');
-            if(storedLayer) {
-                layerLocal = storedLayer;
-            }
-            const storedLayer2 = localStorage.getItem('uaLayer2');
-            if(storedLayer2) {
-                layer2Local = storedLayer2;
-            }
-            const storedNumLayers = localStorage.getItem('uaNumLayers');
-            if(storedNumLayers) {
-                numLayersLocal = storedNumLayers;
-            }
-            const storedAlpha = localStorage.getItem('uaAlpha');
-            if(storedAlpha) {
-                alphaLocal = parseFloat(storedAlpha);
-                if (isNaN(alphaLocal)) {
-                    alphaLocal = 0.5;
-                }
-            }
-        }
+        const initialState = loadInitialState();
+        const {
+            idx: idxLocal,
+            layer: layerLocal,
+            layer2: layer2Local,
+            numLayers: numLayersLocal,
+            alpha: alphaLocal
+        } = initialState;
+
         setIdx(idxLocal);
         setCityData(CITY_DATA.citiesArray[idxLocal]);
         setViewState({
@@ -133,14 +110,12 @@ export default function MapPage() {
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idxLocal].dataRanges);
         setCityLayers(theseLayers);
         if (!theseLayers.includes(layerLocal)) {
-            layerLocal = "social_index";
-            setLayer(layerLocal);
-            localStorage.removeItem('uaLayer');
+            setLayer("social_index");
+            localStorageHelpers.removeItem('uaLayer');
         }
         if (!theseLayers.includes(layer2Local)) {
-            layer2Local = "social_index";
-            setLayer2(layer2Local);
-            localStorage.removeItem('uaLayer2');
+            setLayer2("social_index");
+            localStorageHelpers.removeItem('uaLayer2');
         }
 
         // layer_min/max values which can be adjusted with range slider.
@@ -166,24 +141,20 @@ export default function MapPage() {
             transitionDuration: 2000,
             transitionInterpolator: new FlyToInterpolator()
         })
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaCityIdx", idx.toString());
-        }
+        localStorageHelpers.setItem("uaCityIdx", idx.toString());
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idx].dataRanges);
         if (!theseLayers.includes(layer)) {
             setLayer("social_index");
-            localStorage.removeItem('uaLayer');
+            localStorageHelpers.removeItem('uaLayer');
         }
         if (!theseLayers.includes(layer2)) {
             setLayer2("social_index");
-            localStorage.removeItem('uaLayer2');
+            localStorageHelpers.removeItem('uaLayer2');
         }
     }
     const handleAlphaChange = (alpha: number) => {
         setAlpha(alpha);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaAlpha", alpha.toString());
-        }
+        localStorageHelpers.setItem("uaAlpha", alpha.toString());
     }
     const handleViewStateChange = (pViewState: any) => {
         setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
@@ -191,21 +162,15 @@ export default function MapPage() {
     }
     const handleLayerChange = (layer: string) => {
         setLayer(layer);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaLayer", layer);
-        }
+        localStorageHelpers.setItem("uaLayer", layer);
     }
     const handleLayer2Change = (layer2: string) => {
         setLayer2(layer2);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaLayer2", layer2);
-        }
+        localStorageHelpers.setItem("uaLayer2", layer2);
     }
     const handleNumLayersChange = (numLayers: string) => {
         setNumLayers(numLayers);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaNumLayers", numLayers);
-        }
+        localStorageHelpers.setItem("uaNumLayers", numLayers);
     }
 
     const handleLayerRangeChange = (layerRange: number[]) => {
@@ -240,13 +205,11 @@ export default function MapPage() {
     // Use sessionStorage to only show tour once per session.
     const closeTour = () => {
         setTourOpen(false);
-        if (typeof window != "undefined") {
-            sessionStorage.setItem("uamaptour", "done");
-        }
+        sessionStorageHelpers.setItem("uamaptour", "done");
     };
 
     useEffect(() => {
-        if(!sessionStorage.getItem('uamaptour')) {
+        if(!sessionStorageHelpers.getItem('uamaptour')) {
             setTourOpen(true)
         }
     }, [])
