@@ -45,8 +45,8 @@ export interface MapProps {
     citiesArray: CityDataProps[],
     handleAlphaChange: (pAlpha: number) => void,
     handleViewStateChange: (pViewState: ViewState) => void,
-    handleLayerChange: (layer: string) => void
-    handleLayer2Change: (layer2: string) => void
+    handleLayerChange: (layer: string) => void,
+    handleLayer2Change: (layer2: string) => void,
     handleLayerRangeChange: (layerRange: number[]) => void,
 }
 
