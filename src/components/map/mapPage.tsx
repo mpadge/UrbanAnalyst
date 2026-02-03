@@ -179,30 +179,35 @@ export default function MapPage() {
         if (validatedLayer !== layer) setLayer(validatedLayer);
         if (validatedLayer2 !== layer2) setLayer2(validatedLayer2);
     }, [layer, layer2])
-    const handleAlphaChange = (alpha: number) => {
+
+    const handleAlphaChange = useCallback((alpha: number) => {
         setAlpha(alpha);
         localStorageHelpers.setItem("uaAlpha", alpha.toString());
-    }
-    const handleViewStateChange = (pViewState: any) => {
+    }, []);
+
+    const handleViewStateChange = useCallback((pViewState: any) => {
         setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
         //setViewState(pViewState);
-    }
-    const handleLayerChange = (layer: string) => {
+    }, []);
+
+    const handleLayerChange = useCallback((layer: string) => {
         setLayer(layer);
         localStorageHelpers.setItem("uaLayer", layer);
-    }
-    const handleLayer2Change = (layer2: string) => {
+    }, []);
+
+    const handleLayer2Change = useCallback((layer2: string) => {
         setLayer2(layer2);
         localStorageHelpers.setItem("uaLayer2", layer2);
-    }
-    const handleNumLayersChange = (numLayers: string) => {
+    }, []);
+
+    const handleNumLayersChange = useCallback((numLayers: string) => {
         setNumLayers(numLayers);
         localStorageHelpers.setItem("uaNumLayers", numLayers);
-    }
+    }, []);
 
-    const handleLayerRangeChange = (layerRange: number[]) => {
+    const handleLayerRangeChange = useCallback((layerRange: number[]) => {
         setLayerRange(layerRange);
-    }
+    }, []);
 
     // ----- TOUR start-----
     const [tourClass, setTourClass] = useState(tourStyles.tourhelperLight);
