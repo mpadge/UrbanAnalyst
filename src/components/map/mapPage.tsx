@@ -5,6 +5,7 @@ import { GeoJsonLayer } from "@deck.gl/layers/typed";
 import { DeckGL } from "@deck.gl/react/typed";
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 import { Map } from "react-map-gl";
+import { ReactourProps } from 'reactour';
 
 import { MapSkeleton, MapControlSkeleton, MapLegendSkeleton } from '@/components/utils/loadingSkeletons';
 
@@ -36,47 +37,127 @@ const validateAndSetDefaultLayer = (
     return layer;
 };
 
-/**
- * Definition of interface for `MapProps`. These are constructed in
- * here and passed through to {@link map}. Individual props are:
- *
- * - `idx`: The integer defining the city from the full `CITY_DATA.citiesArray`.
- * - `layer`: The string defining the single layer to be diplayed.
- * - `layer2`: The string defining the optional paired layer to be used to
- *    display pairwise relationship.
- * - `numLayers`: String equal to either "single" or "paired".
- * - `alpha`: Opacity of rendered map (0 - 1).
- * - `layerRange`: Range of values to be plotted on map; obtained from the
- *   `rangeSlider` input.
- * - `layerStartStop`: Range of values spanned by `layerRange` slider. These are
- *   defined on page load, and fixed from then on.
- */
 export interface MapProps {
-    idx: number,
-    layer: DataRangeKeys,
-    layer2: DataRangeKeys,
-    numLayers: "Single" | "Paired",
-    alpha: number,
-    layerRange: [number, number],
-    layerStartStop: [number, number],
-    viewState: ViewState,
-    citiesArray: CityDataProps[],
-    handleAlphaChange: (pAlpha: number) => void,
-    handleViewStateChange: (pViewState: Partial<ViewState>) => void,
-    handleLayerChange: (layer: DataRangeKeys) => void,
-    handleLayer2Change: (layer2: DataRangeKeys) => void,
-    handleLayerRangeChange: (layerRange: [number, number]) => void,
+    idx: number;
+    layer: DataRangeKeys;
+    layer2: DataRangeKeys;
+    numLayers: "Single" | "Paired";
+    alpha: number;
+    layerRange: [number, number];
+    layerStartStop: [number, number];
+    viewState: ViewState;
+    citiesArray: CityDataProps[];
+    handleAlphaChange: (pAlpha: number) => void;
+    handleViewStateChange: (pViewState: Partial<ViewState>) => void;
+    handleLayerChange: (layer: DataRangeKeys) => void;
+    handleLayer2Change: (layer2: DataRangeKeys) => void;
+    handleLayerRangeChange: (layerRange: [number, number]) => void;
 }
 
-/**
- * Main Map Page component
- *
- * This constructs all state variables passed on as `MapProps` to the actual
- * `map.tsx` which renders to DeckGL and underlying map components.
- *
- * The only additional state variables not defined as part of `MapProps`
- * are those related to the ReactTour components.
- */
+interface MapPagePresentationProps {
+    mapConfig: {
+        idx: number;
+        layer: DataRangeKeys;
+        layer2: DataRangeKeys;
+        numLayers: "Single" | "Paired";
+        alpha: number;
+        layerRange: [number, number];
+        layerStartStop: [number, number];
+        citiesArray: CityDataProps[];
+        viewState: ViewState & {
+            transitionDuration: number;
+            transitionInterpolator: any;
+        };
+    };
+    controlConfig: {
+        idx: number;
+        layer: DataRangeKeys;
+        layer2: DataRangeKeys;
+        numLayers: "Single" | "Paired";
+        numLayersOptions: NumLayersMode[];
+        alpha: number;
+        layerRange: [number, number];
+        layerStartStop: [number, number];
+        citiesArray: CityDataProps[];
+        cityLayers: string[];
+        viewState: ViewState & {
+            transitionDuration: number;
+            transitionInterpolator: any;
+        };
+    };
+    legendConfig: {
+        idx: number;
+        layerRange: [number, number];
+        layer: DataRangeKeys;
+        layer2: DataRangeKeys;
+        numLayers: "Single" | "Paired";
+        alpha: number;
+        citiesArray: CityDataProps[];
+    };
+    handleAlphaChange: (alpha: number) => void;
+    handleViewStateChange: (pViewState: Partial<ViewState>) => void;
+    handleLayerChange: (layer: DataRangeKeys) => void;
+    handleLayer2Change: (layer2: DataRangeKeys) => void;
+    handleLayerRangeChange: (layerRange: [number, number]) => void;
+    handleIdxChange: (idx: number) => void;
+    handleNumLayersChange: (numLayers: "Single" | "Paired") => void;
+    tourProps: ReactourProps;
+    handleTourOpen: () => void;
+}
+
+function MapPagePresentation({
+    mapConfig,
+    controlConfig,
+    legendConfig,
+    handleAlphaChange,
+    handleViewStateChange,
+    handleLayerChange,
+    handleLayer2Change,
+    handleLayerRangeChange,
+    handleIdxChange,
+    handleNumLayersChange,
+    tourProps,
+    handleTourOpen
+}: MapPagePresentationProps) {
+    return (
+        <>
+            <Suspense fallback={<MapSkeleton />}>
+                <UTAMap
+                    {...mapConfig}
+                    handleAlphaChange={handleAlphaChange}
+                    handleViewStateChange={handleViewStateChange}
+                    handleLayerChange={handleLayerChange}
+                    handleLayer2Change={handleLayer2Change}
+                    handleLayerRangeChange={handleLayerRangeChange}
+                />
+            </Suspense>
+            <Suspense fallback={<MapControlSkeleton />}>
+                <Control
+                    {...controlConfig}
+                    handleIdxChange={handleIdxChange}
+                    handleNumLayersChange={handleNumLayersChange}
+                    handleAlphaChange={handleAlphaChange}
+                    handleViewStateChange={handleViewStateChange}
+                    handleLayerChange={handleLayerChange}
+                    handleLayer2Change={handleLayer2Change}
+                    handleLayerRangeChange={handleLayerRangeChange}
+                    handleTourOpen={handleTourOpen}
+                />
+            </Suspense>
+            <Suspense fallback={<MapLegendSkeleton />}>
+                <Legend
+                    {...legendConfig}
+                />
+            </Suspense>
+            {tourProps.isOpen && (
+                <Suspense fallback={null}>
+                    <Tour {...tourProps} />
+                </Suspense>
+            )}
+        </>
+    );
+}
+
 export default function MapPage() {
 
     const [idx, setIdx] = useState(0);
@@ -137,7 +218,6 @@ export default function MapPage() {
         if (validatedLayer !== layerLocal) setLayer(validatedLayer as DataRangeKeys);
         if (validatedLayer2 !== layer2Local) setLayer2(validatedLayer2 as DataRangeKeys);
 
-        // layer_min/max values which can be adjusted with range slider.
         const rangeData = calculateLayerRanges(
             idxLocal,
             validatedLayer,
@@ -151,7 +231,6 @@ export default function MapPage() {
     }, [])
 
     useEffect(() => {
-        // Only run this effect after initialization is complete
         if (cityLayers.length > 0) {
             const rangeData = calculateLayerRanges(
                 idx,
@@ -166,7 +245,6 @@ export default function MapPage() {
         }
     }, [idx, layer, layer2, numLayers, cityLayers.length])
 
-    // Memoize expensive calculations for city changes
     const createViewStateForCity = useCallback((cityIdx: number) => ({
         ...CITY_DATA.citiesArray[cityIdx].initialViewState,
         pitch: LAYER_CONSTANTS.DEFAULT_PITCH,
@@ -255,40 +333,19 @@ export default function MapPage() {
     }), [idx, layerRange, layer, layer2, numLayers, alpha]);
 
     return (
-        <>
-            <Suspense fallback={<MapSkeleton />}>
-                <UTAMap
-                    {...mapConfig}
-                    handleAlphaChange={handleAlphaChange}
-                    handleViewStateChange={handleViewStateChange}
-                    handleLayerChange={handleLayerChange}
-                    handleLayer2Change={handleLayer2Change}
-                    handleLayerRangeChange={handleLayerRangeChange}
-                />
-            </Suspense>
-            <Suspense fallback={<MapControlSkeleton />}>
-                <Control
-                    {...controlConfig}
-                    handleIdxChange={handleIdxChange}
-                    handleNumLayersChange={handleNumLayersChange}
-                    handleAlphaChange={handleAlphaChange}
-                    handleViewStateChange={handleViewStateChange}
-                    handleLayerChange={handleLayerChange}
-                    handleLayer2Change={handleLayer2Change}
-                    handleLayerRangeChange={handleLayerRangeChange}
-                    handleTourOpen={handleTourOpen}
-                />
-            </Suspense>
-            <Suspense fallback={<MapLegendSkeleton />}>
-                <Legend
-                    {...legendConfig}
-                />
-            </Suspense>
-            {tourProps.isOpen && (
-                <Suspense fallback={null}>
-                    <Tour {...tourProps} />
-                </Suspense>
-            )}
-        </>
-    )
+        <MapPagePresentation
+            mapConfig={mapConfig}
+            controlConfig={controlConfig}
+            legendConfig={legendConfig}
+            handleAlphaChange={handleAlphaChange}
+            handleViewStateChange={handleViewStateChange}
+            handleLayerChange={handleLayerChange}
+            handleLayer2Change={handleLayer2Change}
+            handleLayerRangeChange={handleLayerRangeChange}
+            handleIdxChange={handleIdxChange}
+            handleNumLayersChange={handleNumLayersChange}
+            tourProps={tourProps}
+            handleTourOpen={handleTourOpen}
+        />
+    );
 }
