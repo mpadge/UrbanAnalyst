@@ -13,6 +13,7 @@ import MapTransformDynamic from '@/components/transform/transformPageDynamic';
 import { getTourConfig } from '@/components/transform/tour/tourConfig';
 import { CITY_DATA } from '@/data/citydata';
 import { DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/interfaces';
+import { localStorageHelpers, sessionStorageHelpers } from '@/components/utils/localStorageUtils';
 
 import tourStyles from '@/styles/tour.module.css';
 import getPreferredTourClass from '@/components/tourClass';
@@ -89,33 +90,33 @@ export default function TransformPage() {
         var idx2Local = 1;
         var layerLocal = "transport";
         var alphaLocal = 0.5;
-        if (typeof window != "undefined") {
-            const storedIdx = localStorage.getItem('uaCityIdx');
-            if(storedIdx) { // convert to int
-                idxLocal = parseInt(storedIdx, 10);
-                if (isNaN(idxLocal)) {
-                    idxLocal = 0;
-                }
-            }
-            const storedIdx2 = localStorage.getItem('uaCityIdx2');
-            if(storedIdx2) { // convert to int
-                idx2Local = parseInt(storedIdx2, 10);
-                if (isNaN(idx2Local)) {
-                    idx2Local = 0;
-                }
-            }
-            const storedLayer = localStorage.getItem('uaLayer');
-            if(storedLayer) {
-                layerLocal = storedLayer;
-            }
-            const storedAlpha = localStorage.getItem('uaAlpha');
-            if(storedAlpha) {
-                alphaLocal = parseFloat(storedAlpha);
-                if (isNaN(alphaLocal)) {
-                    alphaLocal = 0.5;
-                }
+
+        const storedIdx = localStorageHelpers.getItem('uaCityIdx');
+        if(storedIdx) { // convert to int
+            idxLocal = parseInt(storedIdx, 10);
+            if (isNaN(idxLocal)) {
+                idxLocal = 0;
             }
         }
+        const storedIdx2 = localStorageHelpers.getItem('uaCityIdx2');
+        if(storedIdx2) { // convert to int
+            idx2Local = parseInt(storedIdx2, 10);
+            if (isNaN(idx2Local)) {
+                idx2Local = 0;
+            }
+        }
+        const storedLayer = localStorageHelpers.getItem('uaLayer');
+        if(storedLayer) {
+            layerLocal = storedLayer;
+        }
+        const storedAlpha = localStorageHelpers.getItem('uaAlpha');
+        if(storedAlpha) {
+            alphaLocal = parseFloat(storedAlpha);
+            if (isNaN(alphaLocal)) {
+                alphaLocal = 0.5;
+            }
+        }
+
         setIdx(idxLocal);
         setIdx2(idx2Local);
         setViewState({
@@ -136,7 +137,7 @@ export default function TransformPage() {
         if (!theseLayers.includes(layerLocal)) {
             layerLocal = "transport";
             setLayer(layerLocal);
-            localStorage.removeItem('uaLayer');
+            localStorageHelpers.removeItem('uaLayer');
         }
     }, [])
 
@@ -162,36 +163,28 @@ export default function TransformPage() {
             transitionDuration: 2000,
             transitionInterpolator: new FlyToInterpolator()
         })
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaCityIdx", idx.toString());
-        }
+        localStorageHelpers.setItem("uaCityIdx", idx.toString());
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idx].dataRanges);
         if (!theseLayers.includes(layer)) {
             setLayer("transport");
-            localStorage.removeItem('uaLayer');
+            localStorageHelpers.removeItem('uaLayer');
         }
     }
     const handleIdx2Change = (idx2: number) => {
         setIdx2(idx2);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaCityIdx2", idx2.toString());
-        }
+        localStorageHelpers.setItem("uaCityIdx2", idx2.toString());
     }
     const handleViewStateChange = (pViewState: any) => {
         setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
     }
     const handleLayerChange = (layer: string) => {
         setLayer(layer);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaLayer", layer);
-        }
+        localStorageHelpers.setItem("uaLayer", layer);
     }
 
     const handleAlphaChange = (alpha: number) => {
         setAlpha(alpha);
-        if (typeof window != "undefined") {
-            localStorage.setItem("uaAlpha", alpha.toString());
-        }
+        localStorageHelpers.setItem("uaAlpha", alpha.toString());
     }
     const handleOutputLayerChange = (outputLayer: string) => {
         setOutputLayer(outputLayer);
@@ -225,13 +218,11 @@ export default function TransformPage() {
     // Use sessionStorage to only show tour once per session.
     const closeTour = () => {
         setTourOpen(false);
-        if (typeof window != "undefined") {
-            sessionStorage.setItem("uatransformtour", "done");
-        }
+        sessionStorageHelpers.setItem("uatransformtour", "done");
     };
 
     useEffect(() => {
-        if(!sessionStorage.getItem('uatransformtour')) {
+        if(!sessionStorageHelpers.getItem('uatransformtour')) {
             setTourOpen(true)
         }
     }, [])
