@@ -17,6 +17,7 @@ import getPreferredTourClass from '@/components/tourClass';
 
 import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
 import { CityDataProps, DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/interfaces';
+import { calculateLayerRanges } from '@/components/utils/layerUtils';
 
 /**
  * Definition of interface for `MapProps`. These are constructed in
@@ -142,35 +143,17 @@ export default function MapPage() {
             localStorage.removeItem('uaLayer2');
         }
 
-        // layer_min/max values which can be adjusted with range slider. This
-        // code is also repeated in mapLayer.tsx.
-        const layer1: string = layer.replace("\_", "").replace("index", "");
-        const layer2_repl: string = layer2.replace("\_", "").replace("index", "");
-        const paired_keys = Object.keys(CITY_DATA.citiesArray[idx].dataRangesPaired);
+        // layer_min/max values which can be adjusted with range slider.
+        const rangeData = calculateLayerRanges(
+            idx,
+            layer,
+            layer2,
+            numLayers,
+            CITY_DATA.citiesArray
+        );
 
-        const these_layers =
-            paired_keys.includes(layer1 + "_" + layer2_repl) ?
-                layer1 + "_" + layer2_repl : layer2_repl + "_" + layer1;
-        const dual_layers: boolean = paired_keys.includes(these_layers);
-
-        const this_layer: string = numLayers == "Paired" && dual_layers ?
-            these_layers : layer;
-
-        const layer_start = numLayers == "Paired" && dual_layers ?
-            CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][0] :
-            CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][0];
-        const layer_min = numLayers == "Paired" && dual_layers ?
-            CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][1] :
-            CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][1];
-        const layer_max = numLayers == "Paired" && dual_layers ?
-            CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][2] :
-            CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][2];
-        const layer_stop = numLayers == "Paired" && dual_layers ?
-            CITY_DATA.citiesArray[idx].dataRangesPaired[these_layers as Data2RangeKeys][3] :
-            CITY_DATA.citiesArray[idx].dataRanges[this_layer as DataRangeKeys][3];
-
-        setLayerRange([layer_min, layer_max]);
-        setLayerStartStop([layer_start, layer_stop]);
+        setLayerRange([rangeData.layer_min, rangeData.layer_max]);
+        setLayerStartStop([rangeData.layer_start, rangeData.layer_stop]);
     }, [idx, layer, layer2, numLayers])
 
     const handleIdxChange = (idx: number) => {
