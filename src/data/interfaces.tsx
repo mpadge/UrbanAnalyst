@@ -62,8 +62,8 @@ export interface CitiesDataProps {
 }
 
 export interface LayerListProps {
-    layer: string,
-    handleLayerChange: (layer: string) => void
+    layer: DataRangeKeys,
+    handleLayerChange: (layer: DataRangeKeys) => void
 }
 
 export interface LayersListProps {
@@ -73,9 +73,9 @@ export interface LayersListProps {
 }
 
 export interface NumLayersProps {
-    numLayers: string,
-    numLayersOptions: string[],
-    handleNumLayersChange: (layer: string) => void
+    numLayers: "Single" | "Paired",
+    numLayersOptions: ("Single" | "Paired")[],
+    handleNumLayersChange: (numLayers: "Single" | "Paired") => void
 }
 
 export interface ExplainButtonProps {

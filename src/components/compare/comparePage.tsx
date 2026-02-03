@@ -1,7 +1,7 @@
 "use client"
 
 import { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Control from '@/components/compare/control';
 import BarChart from '@/components/compare/statsBarChart';
 import Tour from '@/components/compare/tour/tour';
@@ -14,6 +14,7 @@ import tourStyles from '@/styles/tour.module.css';
 import getPreferredTourClass from '@/components/tourClass';
 
 import { CITY_DATA } from '@/data/citydata';
+import { DataRangeKeys } from '@/data/interfaces';
 import { localStorageHelpers, sessionStorageHelpers } from '@/components/utils/localStorageUtils';
 
 export default function Home() {
@@ -22,10 +23,10 @@ export default function Home() {
     // default index of [0] can be used.
     const [cityData, setCityData] = useState(CITY_DATA.citiesArray[0]);
 
-    const [layer, setLayer] = useState("transport"); // options[0] in layerlist.tsx
-    const [layer2, setLayer2] = useState("");
-    const [numLayers, setNumLayers] = useState("Single");
-    const numLayersOptions = ["Single", "Paired"];
+    const [layer, setLayer] = useState<DataRangeKeys>("transport" as DataRangeKeys);
+    const [layer2, setLayer2] = useState<DataRangeKeys>("" as DataRangeKeys);
+    const [numLayers, setNumLayers] = useState<"Single" | "Paired">("Single");
+    const numLayersOptions: ("Single" | "Paired")[] = ["Single", "Paired"];
 
     const [sortOpt, setSortOpt] = useState("increasing");
     const [meanVals, setMeanVals] = useState(true);
@@ -53,28 +54,28 @@ export default function Home() {
             sortOptLocal = storedSortOpt;
         }
 
-        setLayer(layerLocal);
-        setLayer2(layer2Local);
-        setNumLayers(numLayersLocal);
+        setLayer(layerLocal as DataRangeKeys);
+        setLayer2(layer2Local as DataRangeKeys);
+        setNumLayers(numLayersLocal as "Single" | "Paired");
         setSortOpt(sortOptLocal);
     }, [])
 
-    const handleLayerChange = (layer: string) => {
+    const handleLayerChange = useCallback((layer: DataRangeKeys) => {
         setLayer(layer);
         localStorageHelpers.setItem("uaLayer", layer);
-    }
-    const handleLayer2Change = (layer2: string) => {
+    }, []);
+    const handleLayer2Change = useCallback((layer2: DataRangeKeys) => {
         setLayer2(layer2);
         localStorageHelpers.setItem("uaLayer2", layer2);
-    }
-    const handleNumLayersChange = (numLayers: string) => {
+    }, []);
+    const handleNumLayersChange = useCallback((numLayers: "Single" | "Paired") => {
         setNumLayers(numLayers);
         localStorageHelpers.setItem("uaNumLayers", numLayers);
-    }
-    const handleSortChange = (sortOpt: string) => {
-        setSortOpt (sortOpt)
+    }, []);
+    const handleSortChange = useCallback((sortOpt: string) => {
+        setSortOpt(sortOpt)
         localStorageHelpers.setItem("uaCompareSortOpt", sortOpt);
-    }
+    }, []);
     const handleMeanChange = (e: any) => {
         setMeanVals(!meanVals);
     }

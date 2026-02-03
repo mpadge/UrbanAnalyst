@@ -8,12 +8,13 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import useWindowSize from "@/components/windowSize";
+import { DataRangeKeys } from '@/data/interfaces';
 import styles from '@/styles/controls.module.css';
 
 interface LayerListProps {
     title: string,
-    layer: string,
-    handleLayerChange: (layer: string) => void,
+    layer: DataRangeKeys,
+    handleLayerChange: (layer: DataRangeKeys) => void,
     cityLayers: string[],
 }
 
@@ -68,8 +69,8 @@ export default function LayerList(props: LayerListProps) {
     }, [props.layer, findMatchingOption, options]);
 
     const handleChange = (event: SelectChangeEvent) => {
-        props.handleLayerChange(event.target.value as string);
-        setSelectedOption(event.target.value as string);
+        props.handleLayerChange(event.target.value as DataRangeKeys);
+        setSelectedOption(event.target.value as DataRangeKeys);
     };
 
     const width = useWindowSize().width;

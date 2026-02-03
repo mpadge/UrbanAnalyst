@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState} from 'react';
+import { useEffect, useState, useCallback} from 'react';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 
 import Control from '@/components/transform/control';
@@ -42,18 +42,18 @@ import getPreferredTourClass from '@/components/tourClass';
 export interface TransformProps {
     idx: number
     idx2: number
-    layer: string
+    layer: DataRangeKeys
     varnames: string[]
     citiesArray: CityDataProps[],
     city: string
     targetCity: string
     viewState: ViewState
     alpha: number
-    layerRange: number[]
-    layerStartStop: number[]
+    layerRange: [number, number]
+    layerStartStop: [number, number]
     outputLayer: string
-    setLayerRange: (layerRange: number[]) => void
-    setLayerStartStop: (layerStartStop: number[]) => void
+    setLayerRange: (layerRange: [number, number]) => void
+    setLayerStartStop: (layerStartStop: [number, number]) => void
     handleOutputLayerChange: (outputLayer: string) => void
 }
 
@@ -75,11 +75,11 @@ export default function TransformPage() {
         transitionDuration: 2000,
         transitionInterpolator: new FlyToInterpolator()
     });
-    const [layer, setLayer] = useState("bike_index");
+    const [layer, setLayer] = useState<DataRangeKeys>("bike_index" as DataRangeKeys);
     const [alpha, setAlpha] = useState(0.5);
 
-    const [layerStartStop, setLayerStartStop] = useState<number[]>([0, 1]);
-    const [layerRange, setLayerRange] = useState<number[]>([0, 1]);
+    const [layerStartStop, setLayerStartStop] = useState<[number, number]>([0, 1]);
+    const [layerRange, setLayerRange] = useState<[number, number]>([0, 1]);
 
     const [varnames, setVarnames] = useState<string[]>([]);
     const [outputLayer, setOutputLayer] = useState<string>("relative");
@@ -126,7 +126,7 @@ export default function TransformPage() {
             transitionDuration: 2000,
             transitionInterpolator: new FlyToInterpolator()
         })
-        setLayer(layerLocal);
+        setLayer(layerLocal as DataRangeKeys);
         setAlpha(alphaLocal);
 
         // Names of all layers; only effect of `idxLocal` is to include
@@ -136,7 +136,7 @@ export default function TransformPage() {
         setCityLayers(theseLayers);
         if (!theseLayers.includes(layerLocal)) {
             layerLocal = "transport";
-            setLayer(layerLocal);
+            setLayer(layerLocal as DataRangeKeys);
             localStorageHelpers.removeItem('uaLayer');
         }
     }, [])
@@ -154,7 +154,7 @@ export default function TransformPage() {
     }, [idx, layer]);
 
     // -------- handlers for state variables --------
-    const handleIdxChange = (idx: number) => {
+    const handleIdxChange = useCallback((idx: number) => {
         setIdx(idx);
         setViewState({
             ...CITY_DATA.citiesArray[idx].initialViewState,
@@ -166,29 +166,29 @@ export default function TransformPage() {
         localStorageHelpers.setItem("uaCityIdx", idx.toString());
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idx].dataRanges);
         if (!theseLayers.includes(layer)) {
-            setLayer("transport");
+            setLayer("transport" as DataRangeKeys);
             localStorageHelpers.removeItem('uaLayer');
         }
-    }
-    const handleIdx2Change = (idx2: number) => {
+    }, [layer]);
+    const handleIdx2Change = useCallback((idx2: number) => {
         setIdx2(idx2);
         localStorageHelpers.setItem("uaCityIdx2", idx2.toString());
-    }
-    const handleViewStateChange = (pViewState: any) => {
+    }, []);
+    const handleViewStateChange = useCallback((pViewState: Partial<ViewState>) => {
         setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
-    }
-    const handleLayerChange = (layer: string) => {
+    }, []);
+    const handleLayerChange = useCallback((layer: DataRangeKeys) => {
         setLayer(layer);
         localStorageHelpers.setItem("uaLayer", layer);
-    }
+    }, []);
 
-    const handleAlphaChange = (alpha: number) => {
+    const handleAlphaChange = useCallback((alpha: number) => {
         setAlpha(alpha);
         localStorageHelpers.setItem("uaAlpha", alpha.toString());
-    }
-    const handleOutputLayerChange = (outputLayer: string) => {
+    }, []);
+    const handleOutputLayerChange = useCallback((outputLayer: string) => {
         setOutputLayer(outputLayer);
-    }
+    }, []);
 
     // ----- TOUR start-----
     const [tourClass, setTourClass] = useState(tourStyles.tourhelperLight);

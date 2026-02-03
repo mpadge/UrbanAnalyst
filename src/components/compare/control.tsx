@@ -18,22 +18,22 @@ import MeanVarButtons from '@/components/compare/meanVar';
 import HelpButton from '@/components/helpButton';
 
 import styles from '@/styles/controls.module.css';
-import { CityDataProps } from "@/data/interfaces";
+import { CityDataProps, DataRangeKeys } from "@/data/interfaces";
 import { getIdxWashington } from '@/components/headingText';
 
 const junctionFont = localFont({ src: '../../app/junction-regular.woff' })
 
 interface CompareControlProps {
-    layer: string,
-    layer2: string,
-    numLayers: string,
-    numLayersOptions: string[],
+    layer: DataRangeKeys,
+    layer2: DataRangeKeys,
+    numLayers: "Single" | "Paired",
+    numLayersOptions: ("Single" | "Paired")[],
     meanVals: boolean,
     sortOpt: string,
     citiesArray: CityDataProps[],
-    handleLayerChange: (layer: string) => void,
-    handleLayer2Change: (layer2: string) => void,
-    handleNumLayersChange: (numLayers: string) => void,
+    handleLayerChange: (layer: DataRangeKeys) => void,
+    handleLayer2Change: (layer2: DataRangeKeys) => void,
+    handleNumLayersChange: (numLayers: "Single" | "Paired") => void,
     handleMeanChange: (meanVals: boolean) => void,
     handleSortChange: (sortOpt: string) => void,
     handleTourOpen: (isTourOpen: boolean) => void
@@ -131,7 +131,7 @@ export default function Control (props: CompareControlProps) {
                                 <Stack spacing={1} alignItems="center" marginBottom="0px">
                                     <MeanVarButtons
                                         meanVals = {props.meanVals}
-                                        singleLayer = {props.numLayers != "Paired"}
+                                        singleLayer = {props.numLayers === "Single"}
                                         handleMeanChange = {props.handleMeanChange}
                                     />
                                 </Stack>

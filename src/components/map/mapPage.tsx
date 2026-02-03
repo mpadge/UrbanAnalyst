@@ -52,19 +52,19 @@ const validateAndSetDefaultLayer = (
  */
 export interface MapProps {
     idx: number,
-    layer: string,
-    layer2: string,
-    numLayers: string,
+    layer: DataRangeKeys,
+    layer2: DataRangeKeys,
+    numLayers: "Single" | "Paired",
     alpha: number,
-    layerRange: number[],
-    layerStartStop: number[],
+    layerRange: [number, number],
+    layerStartStop: [number, number],
     viewState: ViewState,
     citiesArray: CityDataProps[],
     handleAlphaChange: (pAlpha: number) => void,
-    handleViewStateChange: (pViewState: ViewState) => void,
-    handleLayerChange: (layer: string) => void,
-    handleLayer2Change: (layer2: string) => void,
-    handleLayerRangeChange: (layerRange: number[]) => void,
+    handleViewStateChange: (pViewState: Partial<ViewState>) => void,
+    handleLayerChange: (layer: DataRangeKeys) => void,
+    handleLayer2Change: (layer2: DataRangeKeys) => void,
+    handleLayerRangeChange: (layerRange: [number, number]) => void,
 }
 
 /**
@@ -88,15 +88,15 @@ export default function MapPage() {
         transitionDuration: 2000,
         transitionInterpolator: new FlyToInterpolator()
     });
-    const [layer, setLayer] = useState(DEFAULT_LAYER);
-    const [layer2, setLayer2] = useState("");
+    const [layer, setLayer] = useState<DataRangeKeys>(DEFAULT_LAYER as DataRangeKeys);
+    const [layer2, setLayer2] = useState<DataRangeKeys>("" as DataRangeKeys);
     const [alpha, setAlpha] = useState(0.5);
-    const [numLayers, setNumLayers] = useState("Single");
-    const numLayersOptions = ["Single", "Paired"];
+    const [numLayers, setNumLayers] = useState<"Single" | "Paired">("Single");
+    const numLayersOptions: ("Single" | "Paired")[] = ["Single", "Paired"];
     const [cityLayers, setCityLayers] = useState<string[]>([]);
 
-    const [layerStartStop, setLayerStartStop] = useState<number[]>([0, 1]);
-    const [layerRange, setLayerRange] = useState<number[]>([0, 1]);
+    const [layerStartStop, setLayerStartStop] = useState<[number, number]>([0, 1]);
+    const [layerRange, setLayerRange] = useState<[number, number]>([0, 1]);
 
     useEffect(() => {
         const initialState = loadInitialState();
@@ -117,9 +117,9 @@ export default function MapPage() {
             transitionDuration: 2000,
             transitionInterpolator: new FlyToInterpolator()
         })
-        setLayer(layerLocal);
-        setLayer2(layer2Local);
-        setNumLayers(numLayersLocal);
+        setLayer(layerLocal as DataRangeKeys);
+        setLayer2(layer2Local as DataRangeKeys);
+        setNumLayers(numLayersLocal as "Single" | "Paired");
         setAlpha(alphaLocal);
 
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idxLocal].dataRanges);
@@ -128,8 +128,8 @@ export default function MapPage() {
         const validatedLayer = validateAndSetDefaultLayer(layerLocal, theseLayers, 'uaLayer');
         const validatedLayer2 = validateAndSetDefaultLayer(layer2Local, theseLayers, 'uaLayer2');
 
-        if (validatedLayer !== layerLocal) setLayer(validatedLayer);
-        if (validatedLayer2 !== layer2Local) setLayer2(validatedLayer2);
+        if (validatedLayer !== layerLocal) setLayer(validatedLayer as DataRangeKeys);
+        if (validatedLayer2 !== layer2Local) setLayer2(validatedLayer2 as DataRangeKeys);
 
         // layer_min/max values which can be adjusted with range slider.
         const rangeData = calculateLayerRanges(
@@ -176,8 +176,8 @@ export default function MapPage() {
         const validatedLayer = validateAndSetDefaultLayer(layer, theseLayers, 'uaLayer');
         const validatedLayer2 = validateAndSetDefaultLayer(layer2, theseLayers, 'uaLayer2');
 
-        if (validatedLayer !== layer) setLayer(validatedLayer);
-        if (validatedLayer2 !== layer2) setLayer2(validatedLayer2);
+        if (validatedLayer !== layer) setLayer(validatedLayer as DataRangeKeys);
+        if (validatedLayer2 !== layer2) setLayer2(validatedLayer2 as DataRangeKeys);
     }, [layer, layer2])
 
     const handleAlphaChange = useCallback((alpha: number) => {
@@ -185,27 +185,27 @@ export default function MapPage() {
         localStorageHelpers.setItem("uaAlpha", alpha.toString());
     }, []);
 
-    const handleViewStateChange = useCallback((pViewState: any) => {
+    const handleViewStateChange = useCallback((pViewState: Partial<ViewState>) => {
         setViewState((prevViewState) => { return { ...prevViewState, ...pViewState }; });
         //setViewState(pViewState);
     }, []);
 
-    const handleLayerChange = useCallback((layer: string) => {
+    const handleLayerChange = useCallback((layer: DataRangeKeys) => {
         setLayer(layer);
         localStorageHelpers.setItem("uaLayer", layer);
     }, []);
 
-    const handleLayer2Change = useCallback((layer2: string) => {
+    const handleLayer2Change = useCallback((layer2: DataRangeKeys) => {
         setLayer2(layer2);
         localStorageHelpers.setItem("uaLayer2", layer2);
     }, []);
 
-    const handleNumLayersChange = useCallback((numLayers: string) => {
+    const handleNumLayersChange = useCallback((numLayers: "Single" | "Paired") => {
         setNumLayers(numLayers);
         localStorageHelpers.setItem("uaNumLayers", numLayers);
     }, []);
 
-    const handleLayerRangeChange = useCallback((layerRange: number[]) => {
+    const handleLayerRangeChange = useCallback((layerRange: [number, number]) => {
         setLayerRange(layerRange);
     }, []);
 
