@@ -5,7 +5,7 @@ export async function GET(request: NextRequest): Promise<Response> {
     const city = searchParams.get('city');
 
     // https://docs.github.com/en/rest/repos/contents?apiVersion=2022-11-28#get-repository-content
-    const url = `https://api.github.com/repos/mpadge/CityDataPrivate/contents/${city}/dataraw.json`;
+    const url = `https://api.github.com/repos/mpadge/UACityDataPrivate/contents/${city}/dataraw.json`;
     const response = await fetch(url, {
         method: 'GET',
         cache: 'no-store',

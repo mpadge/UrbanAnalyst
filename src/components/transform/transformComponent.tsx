@@ -110,7 +110,7 @@ const TransformComponent = (props: TransformProps) => {
      * ------ Effect #1 ------
      */
     useEffect(() => {
-        const mapPathSource = "/data/" + props.city + "/data.json";
+        const mapPathSource = "/api/ghAggregateData?city=" + props.city + "&type=data";
         setMapPathSource(mapPathSource);
         setData1(null);
     }, [props.city, setData1]);
@@ -186,10 +186,15 @@ const TransformComponent = (props: TransformProps) => {
      * ------ Effect #7 to load map data for source city, and replace specified
      * ------ column with 'transformDataOneCol' from previous effect:
      */
-    useMemo(() => {
+    useEffect(() => {
         if (transformDataOneCol) {
             fetch(mapPathSource)
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     data.features.forEach((feature: any, index: number) => {
                         if (transformDataOneCol) { // needed here because 'transformDataOneCol' can still be null
