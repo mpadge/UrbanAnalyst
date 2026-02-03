@@ -8,7 +8,6 @@ import { Map } from "react-map-gl";
 
 import { MapSkeleton, MapControlSkeleton, MapLegendSkeleton } from '@/components/utils/loadingSkeletons';
 
-// Lazy load heavy components for better performance
 const Control = lazy(() => import('@/components/map/control'));
 const Legend = lazy(() => import('@/components/map/legend'));
 const UTAMap = lazy(() => import('@/components/map/map'));
@@ -80,21 +79,24 @@ export default function MapPage() {
 
     const [idx, setIdx] = useState(0);
 
-    const [cityData, setCityData] = useState(CITY_DATA.citiesArray[idx]);
-    const [viewState, setViewState] = useState({
-        ...CITY_DATA.citiesArray[idx].initialViewState,
+    const cityData = useMemo(() => CITY_DATA.citiesArray[idx], [idx]);
+
+    const [viewState, setViewState] = useState(() => ({
+        ...CITY_DATA.citiesArray[0].initialViewState,
         pitch: 0,
         bearing: 0,
         transitionDuration: 2000,
         transitionInterpolator: new FlyToInterpolator()
-    });
+    }));
+
     const [layer, setLayer] = useState<DataRangeKeys>(DEFAULT_LAYER as DataRangeKeys);
     const [layer2, setLayer2] = useState<DataRangeKeys>("" as DataRangeKeys);
     const [alpha, setAlpha] = useState(0.5);
     const [numLayers, setNumLayers] = useState<"Single" | "Paired">("Single");
-    const numLayersOptions: ("Single" | "Paired")[] = ["Single", "Paired"];
-    const [cityLayers, setCityLayers] = useState<string[]>([]);
 
+    const numLayersOptions: ("Single" | "Paired")[] = useMemo(() => ["Single", "Paired"], []);
+
+    const [cityLayers, setCityLayers] = useState<string[]>([]);
     const [layerStartStop, setLayerStartStop] = useState<[number, number]>([0, 1]);
     const [layerRange, setLayerRange] = useState<[number, number]>([0, 1]);
 
@@ -109,7 +111,6 @@ export default function MapPage() {
         } = initialState;
 
         setIdx(idxLocal);
-        setCityData(CITY_DATA.citiesArray[idxLocal]);
         setViewState({
             ...CITY_DATA.citiesArray[idxLocal].initialViewState,
             pitch: 0,
@@ -160,16 +161,18 @@ export default function MapPage() {
         }
     }, [idx, layer, layer2, numLayers, cityLayers.length])
 
+    // Memoize expensive calculations for city changes
+    const createViewStateForCity = useCallback((cityIdx: number) => ({
+        ...CITY_DATA.citiesArray[cityIdx].initialViewState,
+        pitch: 0,
+        bearing: 0,
+        transitionDuration: 2000,
+        transitionInterpolator: new FlyToInterpolator()
+    }), []);
+
     const handleIdxChange = useCallback((idx: number) => {
         setIdx(idx);
-        setCityData(CITY_DATA.citiesArray[idx]);
-        setViewState({
-            ...CITY_DATA.citiesArray[idx].initialViewState,
-            pitch: 0,
-            bearing: 0,
-            transitionDuration: 2000,
-            transitionInterpolator: new FlyToInterpolator()
-        })
+        setViewState(createViewStateForCity(idx));
         localStorageHelpers.setItem("uaCityIdx", idx.toString());
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idx].dataRanges);
 
@@ -178,7 +181,7 @@ export default function MapPage() {
 
         if (validatedLayer !== layer) setLayer(validatedLayer as DataRangeKeys);
         if (validatedLayer2 !== layer2) setLayer2(validatedLayer2 as DataRangeKeys);
-    }, [layer, layer2])
+    }, [layer, layer2, createViewStateForCity]);
 
     const handleAlphaChange = useCallback((alpha: number) => {
         setAlpha(alpha);
@@ -208,61 +211,72 @@ export default function MapPage() {
         setLayerRange(layerRange);
     }, []);
 
-    // Use map tour logic hook
     const { tourProps, handleTourOpen } = useMapTourLogic();
+
+    const mapConfig = useMemo(() => ({
+        idx,
+        layer,
+        layer2,
+        numLayers,
+        alpha,
+        layerRange,
+        layerStartStop,
+        citiesArray: CITY_DATA.citiesArray,
+        viewState
+    }), [idx, layer, layer2, numLayers, alpha, layerRange, layerStartStop, viewState]);
+
+    const controlConfig = useMemo(() => ({
+        idx,
+        layer,
+        layer2,
+        numLayers,
+        numLayersOptions,
+        alpha,
+        layerRange,
+        layerStartStop,
+        citiesArray: CITY_DATA.citiesArray,
+        cityLayers,
+        viewState
+    }), [idx, layer, layer2, numLayers, numLayersOptions, alpha, layerRange, layerStartStop, cityLayers, viewState]);
+
+    const legendConfig = useMemo(() => ({
+        idx,
+        layerRange,
+        layer,
+        layer2,
+        numLayers,
+        alpha,
+        citiesArray: CITY_DATA.citiesArray
+    }), [idx, layerRange, layer, layer2, numLayers, alpha]);
 
     return (
         <>
             <Suspense fallback={<MapSkeleton />}>
                 <UTAMap
-                    idx = {idx}
-                    layer = {layer}
-                    layer2 = {layer2}
-                    numLayers = {numLayers}
-                    alpha = {alpha}
-                    layerRange = {layerRange}
-                    layerStartStop = {layerStartStop}
-                    citiesArray = {CITY_DATA.citiesArray}
-                    viewState = {viewState}
-                    handleAlphaChange = {handleAlphaChange}
-                    handleViewStateChange = {handleViewStateChange}
-                    handleLayerChange = {handleLayerChange}
-                    handleLayer2Change = {handleLayer2Change}
-                    handleLayerRangeChange = {handleLayerRangeChange}
+                    {...mapConfig}
+                    handleAlphaChange={handleAlphaChange}
+                    handleViewStateChange={handleViewStateChange}
+                    handleLayerChange={handleLayerChange}
+                    handleLayer2Change={handleLayer2Change}
+                    handleLayerRangeChange={handleLayerRangeChange}
                 />
             </Suspense>
             <Suspense fallback={<MapControlSkeleton />}>
                 <Control
-                    idx = {idx}
-                    layer = {layer}
-                    layer2 = {layer2}
-                    numLayers = {numLayers}
-                    numLayersOptions = {numLayersOptions}
-                    alpha = {alpha}
-                    layerRange = {layerRange}
-                    layerStartStop = {layerStartStop}
-                    citiesArray = {CITY_DATA.citiesArray}
-                    cityLayers = {cityLayers}
-                    viewState = {viewState}
-                    handleIdxChange = {handleIdxChange}
-                    handleNumLayersChange = {handleNumLayersChange}
-                    handleAlphaChange = {handleAlphaChange}
-                    handleViewStateChange = {handleViewStateChange}
-                    handleLayerChange = {handleLayerChange}
-                    handleLayer2Change = {handleLayer2Change}
-                    handleLayerRangeChange = {handleLayerRangeChange}
-                    handleTourOpen = {handleTourOpen}
+                    {...controlConfig}
+                    handleIdxChange={handleIdxChange}
+                    handleNumLayersChange={handleNumLayersChange}
+                    handleAlphaChange={handleAlphaChange}
+                    handleViewStateChange={handleViewStateChange}
+                    handleLayerChange={handleLayerChange}
+                    handleLayer2Change={handleLayer2Change}
+                    handleLayerRangeChange={handleLayerRangeChange}
+                    handleTourOpen={handleTourOpen}
                 />
             </Suspense>
             <Suspense fallback={<MapLegendSkeleton />}>
                 <Legend
-                    idx = {idx}
-                    layerRange = {layerRange}
-                    layer = {layer}
-                    layer2 = {layer2}
-                    numLayers = {numLayers}
-                    alpha = {alpha}
-                    citiesArray = {CITY_DATA.citiesArray}
+                    {...legendConfig}
                 />
             </Suspense>
             {tourProps.isOpen && (
