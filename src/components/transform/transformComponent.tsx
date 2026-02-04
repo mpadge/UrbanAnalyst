@@ -105,6 +105,9 @@ const TransformComponent = (props: TransformProps) => {
     const [transformDataOneCol, setTransformDataOneCol] = useState<number[] | null>(null);
     const [geoJSONcontent, setGeoJSONcontent] = useState<any>(null)
     const [geoJsonLayer, setGeoJsonLayer] = useState<any>(null)
+    const cachedGeoJsonData = useRef<{[key: string]: any}>({});
+    const cachedData1 = useRef<{[key: string]: number | null}>({});
+    const cachedData2 = useRef<{[key: string]: number | null}>({});
 
     /**
      * ------ Effect #1 ------
@@ -124,8 +127,15 @@ const TransformComponent = (props: TransformProps) => {
      * ------ Effect #2 ------
      */
     useEffect(() => {
-        setData1(null);
-        loadDataFunction(props.city, setData1);
+        if (cachedData1.current[props.city] !== undefined) {
+            setData1(cachedData1.current[props.city]);
+        } else {
+            setData1(null);
+            loadDataFunction(props.city, (data: number | null) => {
+                cachedData1.current[props.city] = data;
+                setData1(data);
+            });
+        }
         dataLoadingComplete.current = true;
         initialCalculate.current = true;
     }, [props.city, setData1]);
@@ -133,8 +143,15 @@ const TransformComponent = (props: TransformProps) => {
      * ------ Effect #3 ------
      */
     useEffect(() => {
-        setData2(null);
-        loadDataFunction(props.targetCity, setData2);
+        if (cachedData2.current[props.targetCity] !== undefined) {
+            setData2(cachedData2.current[props.targetCity]);
+        } else {
+            setData2(null);
+            loadDataFunction(props.targetCity, (data: number | null) => {
+                cachedData2.current[props.targetCity] = data;
+                setData2(data);
+            });
+        }
         dataLoadingComplete.current = true;
         initialCalculate.current = true;
     }, [props.targetCity, setData2]);
@@ -188,22 +205,26 @@ const TransformComponent = (props: TransformProps) => {
      */
     useEffect(() => {
         if (transformDataOneCol) {
-            fetch(mapPathSource)
-                .then(response => {
+            const loadGeoJson = async () => {
+                let geoJsonData;
+                if (cachedGeoJsonData.current[mapPathSource]) {
+                    geoJsonData = cachedGeoJsonData.current[mapPathSource];
+                } else {
+                    const response = await fetch(mapPathSource);
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
-                    return response.json();
-                })
-                .then(data => {
-                    data.features.forEach((feature: any, index: number) => {
-                        if (transformDataOneCol) { // needed here because 'transformDataOneCol' can still be null
-                            feature.properties[layer] = transformDataOneCol[index];
-                        }
-                    });
-                    setGeoJSONcontent(data);
-                })
-                .catch((error) => console.error('Error:', error));
+                    geoJsonData = await response.json();
+                    cachedGeoJsonData.current[mapPathSource] = geoJsonData;
+                }
+
+                const data = JSON.parse(JSON.stringify(geoJsonData));
+                data.features.forEach((feature: any, index: number) => {
+                    feature.properties[layer] = transformDataOneCol[index];
+                });
+                setGeoJSONcontent(data);
+            };
+            loadGeoJson();
         }
     }, [mapPathSource, transformDataOneCol, layer]);
 
