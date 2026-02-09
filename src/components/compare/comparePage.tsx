@@ -112,7 +112,7 @@ export default function ComparePage() {
             citiesCount: CITY_DATA.citiesArray.length,
             cityNames: CITY_DATA.citiesArray.map(city => city.name)
         };
-    }, [CITY_DATA.citiesArray]);
+    }, []);
 
     const handleLayerChange = useCallback((layer: DataRangeKeys) => {
         actions.setLayer(layer);
