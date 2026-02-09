@@ -243,7 +243,7 @@ export default function TransformPage() {
         citiesArray: CITY_DATA.citiesArray,
         citiesCount: CITY_DATA.citiesArray.length,
         cityNames: CITY_DATA.citiesArray.map(city => city.name)
-    }), [CITY_DATA.citiesArray]);
+    }), []);
 
     const handleIdxChange = useCallback((idx: number) => {
         setIdx(idx);
