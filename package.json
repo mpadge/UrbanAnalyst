@@ -8,7 +8,7 @@
         "build:wasm": "wasm-pack build wasm --release --target web --out-dir ../pkg && cp ./pkg/*.wasm ./public/pkg/",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint",
+        "lint": "eslint . --no-error-on-unmatched-pattern",
         "docs": "typedoc --entryPointStrategy expand src/",
         "docs-open": "xdg-open docs/index.html &",
         "test": "vitest",
