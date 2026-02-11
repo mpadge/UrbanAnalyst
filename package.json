@@ -3,6 +3,11 @@
     "version": "0.2.2",
     "private": true,
     "license": "MIT",
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
     "scripts": {
         "dev": "next dev",
         "build:wasm": "wasm-pack build wasm --release --target web --out-dir ../pkg && cp ./pkg/*.wasm ./public/pkg/",
@@ -13,7 +18,8 @@
         "docs-open": "xdg-open docs/index.html &",
         "test": "vitest",
         "test:ui": "vitest --ui",
-        "test:run": "vitest run"
+        "test:run": "vitest run",
+        "prepare": "husky"
     },
     "dependencies": {
         "@emotion/cache": "^11.14.0",
@@ -52,7 +58,9 @@
         "autoprefixer": "^10",
         "eslint": "^8",
         "eslint-config-next": "^14.1.0",
+        "husky": "^9.1.7",
         "jsdom": "^27.4.0",
+        "lint-staged": "^16.2.7",
         "postcss": "^8",
         "typescript": "^5",
         "vitest": "^4.0.17",
