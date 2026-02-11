@@ -21,11 +21,15 @@ vi.mock('@mui/material/AppBar', () => ({
 }))
 
 vi.mock('@mui/material/Box', () => ({
-  default: ({ children, sx, ...props }: any) => (
-    <div {...props} style={sx} data-testid="mui-box">
-      {children}
-    </div>
-  )
+  default: (props: any) => {
+    const { children, sx, ...rest } = props
+    const { key, ...cleanRest } = rest
+    return (
+      <div style={sx} data-testid="mui-box" {...cleanRest}>
+        {children}
+      </div>
+    )
+  }
 }))
 
 vi.mock('@mui/material/Toolbar', () => ({
@@ -35,42 +39,55 @@ vi.mock('@mui/material/Toolbar', () => ({
 }))
 
 vi.mock('@mui/material/Typography', () => ({
-  default: ({ children, textAlign, ...props }: any) => (
-    <div {...props} data-text-align={textAlign}>
-      {children}
-    </div>
-  )
+  default: (props: any) => {
+    const { children, textAlign, ...rest } = props
+    const { key, ...cleanRest } = rest
+    return (
+      <div data-text-align={textAlign} {...cleanRest}>
+        {children}
+      </div>
+    )
+  }
 }))
 
 vi.mock('@mui/material/Button', () => ({
-  default: ({ children, color, href, key }: any) => (
-    <div key={key} data-color={color} data-href={href} role="button">
-      {children}
-    </div>
-  )
+  default: (props: any) => {
+    const { children, color, href, ...rest } = props
+    const { key, ...cleanRest } = rest
+    return (
+      <div data-color={color} data-href={href} role="button" {...cleanRest}>
+        {children}
+      </div>
+    )
+  }
 }))
 
 vi.mock('@mui/material/IconButton', () => ({
-  default: ({ children, size, edge, color, onClick, sx, 'aria-label': ariaLabel }: any) => (
-    <button
-      data-size={size}
-      data-edge={edge}
-      data-color={color}
-      onClick={onClick}
-      aria-label={ariaLabel}
-      style={sx}
-    >
-      {children}
-    </button>
-  )
+  default: (props: any) => {
+    const { children, size, edge, color, onClick, sx, 'aria-label': ariaLabel, ...rest } = props
+    const { key, ...cleanRest } = rest
+    return (
+      <button
+        data-size={size}
+        data-edge={edge}
+        data-color={color}
+        onClick={onClick}
+        aria-label={ariaLabel}
+        style={sx}
+        {...cleanRest}
+      >
+        {children}
+      </button>
+    )
+  }
 }))
 
 vi.mock('@mui/material/Menu', () => ({
-  default: ({ children, anchorEl, open, onClose, ...props }: any) => {
-    // Filter out React-specific props that shouldn't go to DOM
-    const { anchorOrigin, keepMounted, transformOrigin, ...domProps } = props
+  default: (props: any) => {
+    const { children, anchorEl, open, onClose, ...domProps } = props
+    const { anchorOrigin, keepMounted, transformOrigin, key, ...rest } = domProps
     return (
-      <div {...domProps} data-open={open} data-testid="menu">
+      <div data-open={open} data-testid="menu" {...rest}>
         {open ? children : null}
       </div>
     )
@@ -78,11 +95,15 @@ vi.mock('@mui/material/Menu', () => ({
 }))
 
 vi.mock('@mui/material/MenuItem', () => ({
-  default: ({ children, onClick, component, href, key }: any) => (
-    <div key={key} onClick={onClick} data-href={href} data-testid="menu-item">
-      {children}
-    </div>
-  )
+  default: (props: any) => {
+    const { children, onClick, component, href, ...rest } = props
+    const { key, ...cleanRest } = rest
+    return (
+      <div onClick={onClick} data-href={href} data-testid="menu-item" {...cleanRest}>
+        {children}
+      </div>
+    )
+  }
 }))
 
 vi.mock('@mui/material/SvgIcon', () => ({
