@@ -1,4 +1,3 @@
-import Image from "next/image"
 import Link from 'next/link'
 import type { Metadata, Viewport } from 'next';
 
@@ -16,7 +15,7 @@ export const viewport: Viewport = {
     initialScale: 1.0,
 }
 
-export default function Home() {
+export default function Home(): JSX.Element {
 
     const buttonTxt = [
         "home",
