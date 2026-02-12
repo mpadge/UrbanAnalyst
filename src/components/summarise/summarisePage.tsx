@@ -3,12 +3,11 @@
 import { useEffect, useState } from "react";
 
 import Control from '@/components/summarise/control';
-import useWindowSize from '@/components/windowSize';
 import styles from '@/styles/summarise.module.css';
 import Content from '@/components/summarise/citySummaryData';
 import { localStorageHelpers } from '@/components/utils/localStorageUtils';
 
-export default function SummarisePage() {
+export default function SummarisePage(): JSX.Element {
 
     const [idx, setIdx] = useState(0);
 
@@ -26,7 +25,7 @@ export default function SummarisePage() {
 
     const contentArray = Content();
 
-    const contentNames = contentArray.map(element => element.name);
+    const _contentNames = contentArray.map(element => element.name);
     const contentHtml = contentArray.map(element => element.content);
 
     const handleIdxChange = (idx: number) => {
