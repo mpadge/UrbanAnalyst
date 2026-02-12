@@ -5,15 +5,13 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 
-import styles from '@/styles/controls.module.css';
-
 interface meanVarProps {
     meanVals: boolean,
     singleLayer: boolean,
     handleMeanChange: (mn: boolean) => void
 }
 
-export default function MeanVarButtons(props: meanVarProps) {
+export default function MeanVarButtons(props: meanVarProps): JSX.Element {
 
     const [mean, setMean] = useState(true);
     useEffect(() => {
@@ -21,7 +19,7 @@ export default function MeanVarButtons(props: meanVarProps) {
         setMean(meanState);
     }, [props.meanVals, props.singleLayer]);
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
         setMean((event.target as HTMLInputElement).value === "average");
         props.handleMeanChange(mean);
     }

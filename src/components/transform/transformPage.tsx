@@ -13,10 +13,9 @@ const MapTransformDynamic = lazy(() => import('@/components/transform/transformP
 const Tour = lazy(() => import('@/components/transform/tour/tour'));
 
 import { CityDataProps } from "@/data/interfaces";
-import { getTourConfig } from '@/components/transform/tour/tourConfig';
 import { CITY_DATA } from '@/data/citydata';
-import { DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/interfaces';
-import { localStorageHelpers, sessionStorageHelpers } from '@/components/utils/localStorageUtils';
+import { DataRangeKeys, ViewState } from '@/data/interfaces';
+import { localStorageHelpers } from '@/components/utils/localStorageUtils';
 import { useTransformTourLogic } from '@/components/utils/transformTourUtils';
 import { LAYER_CONSTANTS, OUTPUT_LAYER_TYPES } from '@/components/utils/pageConstants';
 import type { OutputLayerType } from '@/components/utils/pageConstants';
@@ -98,12 +97,13 @@ function TransformPagePresentation({
     handleLayerChange,
     handleAlphaChange,
     setLayerRange,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setLayerStartStop,
     setVarnames,
     handleOutputLayerChange,
     tourProps,
     handleTourOpen
-}: TransformPagePresentationProps) {
+}: TransformPagePresentationProps): JSX.Element {
     return (
         <>
             <ErrorBoundary fallback={<ComponentErrorSkeleton />}>
@@ -143,7 +143,7 @@ function TransformPagePresentation({
     );
 }
 
-export default function TransformPage() {
+export default function TransformPage(): JSX.Element {
 
     const [idx, setIdx] = useState<number>(LAYER_CONSTANTS.DEFAULT_CITY_INDEX);
     const [idx2, setIdx2] = useState<number>(LAYER_CONSTANTS.DEFAULT_TARGET_CITY_INDEX);

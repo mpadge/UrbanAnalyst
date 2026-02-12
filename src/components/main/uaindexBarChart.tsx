@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect, useRef, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as d3 from 'd3';
 
 import useWindowSize from '@/components/windowSize';
@@ -14,22 +14,26 @@ interface indexDataProps {
 
 async function LoadData(
     setData: (data: [indexDataProps]) => void,
-) {
+): Promise<void> {
     const dataSourcePath = "/data/ua-index.json";
     const data = await fetch(dataSourcePath)
         .then(response => response.json())
-        .catch((error) => console.error('Error fetching UA index data:', error));
+        .catch((error) => {
+            // eslint-disable-next-line no-console
+            console.error('Error fetching UA index data:', error);
+            return [];
+        });
 
     setData(data);
 
-    return null;
+    return;
 }
 
-function capitalizeFirstLetter(str: string) {
+function capitalizeFirstLetter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export default function UABarChart () {
+export default function UABarChart (): JSX.Element {
 
     const [data, setData] = useState<[indexDataProps] | null>(null);
     useEffect(() => {
@@ -62,7 +66,6 @@ export default function UABarChart () {
     useEffect(() => {
         if (data) {
 
-            const rangeExpand = 1.5;
             const xMax = data.map((i) => i.all).reduce((a, b) => Math.max(a, b));
             // Make xMin at least as far below 1 as xMax is above it:
             const xMin = Math.min(
@@ -88,8 +91,6 @@ export default function UABarChart () {
             const innerHeight = height ? height - margin.top - margin.bottom : maxHeight;
 
             const xAxisPadding = 10;
-            const yAxisPadding = 10;
-            const yTickSize = 0;
 
             // palettes:
             // https://github.com/d3/d3-scale-chromatic
@@ -103,7 +104,7 @@ export default function UABarChart () {
                 .interpolator(d3.interpolateBlues)
 
             // X-axis:
-            const xValue = (d: indexDataProps) => d.all;
+            const xValue = (d: indexDataProps): number => d.all;
             const expandRHS = 1.05; // Expand right-hand edge beyond max observed value
             const xMax2 = Math.max(0,xMin) + (xMax - Math.max(0,xMin)) * expandRHS;
             const xScale = d3
@@ -113,7 +114,7 @@ export default function UABarChart () {
                 .nice();
 
             // Y-axis
-            const yValue = (d: indexDataProps) => d.city;
+            const yValue = (d: indexDataProps): string => d.city;
             const yScale = d3
                 .scaleBand()
                 .domain(data.map(yValue))
@@ -123,7 +124,7 @@ export default function UABarChart () {
             const svg = d3.select(svgRef.current as any);
             svg.selectAll('*').remove();
 
-            const handleDrawBars = (svg: any, colourPalette: any) => {
+            const handleDrawBars = (svg: any, colourPalette: any): void => {
                 svg
                     .selectAll('rect')
                     .data(data)
@@ -146,7 +147,7 @@ export default function UABarChart () {
                     .attr('width', (d: any) => xScale(xValue(d)));
             };
 
-            const handleDrawText = (svg: any) => {
+            const handleDrawText = (svg: any): void => {
                 svg
                     .append("g")
                     .selectAll('text')
@@ -170,7 +171,7 @@ export default function UABarChart () {
 
             const nTicks = (innerWidth < 700 || xMin > 0) ? 4 : 8;
 
-            const handleDrawXAxis = (svg: any) => {
+            const handleDrawXAxis = (svg: any): void => {
                 const g = svg
                 .append("g")
                 .attr("transform", `translate(0,${innerHeight})`)

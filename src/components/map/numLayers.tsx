@@ -4,16 +4,15 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 import { NumLayersProps } from "@/data/interfaces";
-import styles from '@/styles/controls.module.css';
 
-export default function SelectNumLayers(props: NumLayersProps) {
+export default function SelectNumLayers(props: NumLayersProps): JSX.Element {
 
     const [numLayers, setNumLayers] = useState<("Single" | "Paired") | null>("Single");
 
     const handleNumLayersClick = (
         event: React.MouseEvent<HTMLElement>,
         newNumLayers: ("Single" | "Paired") | null,
-    ) => {
+    ): void => {
         setNumLayers(newNumLayers);
         if (newNumLayers) {
             props.handleNumLayersChange(newNumLayers);

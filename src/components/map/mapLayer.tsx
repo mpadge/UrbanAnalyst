@@ -1,16 +1,11 @@
-import { NextPage } from "next";
-import { useState, Suspense } from "react";
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
-import { FlyToInterpolator } from "@deck.gl/core/typed";
 import * as d3 from 'd3';
 import 'd3-scale-chromatic';
-
-import { ViewState, CityDataProps } from "@/data/interfaces";
 
 import { MapProps } from "@/components/map/mapPage";
 import { calculateLayerRanges } from "@/components/utils/layerUtils";
 
-export default function MapLayer (props: MapProps) {
+export default function MapLayer(props: MapProps): any[] {
 
     const mapPath1 = props.citiesArray[props.idx].path;
     const mapPath2 = mapPath1.replace("type=data", "type=data2");
@@ -42,7 +37,8 @@ export default function MapLayer (props: MapProps) {
             stroked: true,
             getLineWidth: 10,
             getLineColor: [122, 122, 122],
-            getFillColor: d => {
+            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+            getFillColor: (d) => {
                 var layerval = Math.max (props.layerRange[0], Math.min (props.layerRange[1], d.properties?.[this_layer]));
                 const layerIsNaN = isNaN(layerval)
                 if (layerIsNaN) {

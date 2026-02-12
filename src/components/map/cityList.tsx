@@ -9,7 +9,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import { ViewState, CityDataProps } from "@/data/interfaces";
 import useWindowSize from "@/components/windowSize";
-import styles from '@/styles/controls.module.css';
 
 interface CityListProps {
     idx: number,
@@ -19,7 +18,7 @@ interface CityListProps {
     handleViewStateChange: (pViewState: ViewState) => void
 }
 
-export default function CityList(props: CityListProps) {
+export default function CityList(props: CityListProps): JSX.Element {
 
     const options = props.citiesArray.map((city, index) => ({
         value: String(index),
@@ -48,7 +47,7 @@ export default function CityList(props: CityListProps) {
         }
     }, [findMatchingOption, options]);
 
-    const handleChange = (event: SelectChangeEvent) => {
+    const handleChange = (event: SelectChangeEvent): void => {
         const val = event.target.value as string;
         if (val) {
             setSelectedOption(val);

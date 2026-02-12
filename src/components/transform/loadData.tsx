@@ -1,4 +1,4 @@
-export async function loadDataFunction(city: string, handleDataChange: (data: number) => void) {
+export async function loadDataFunction(city: string, handleDataChange: (data: number) => void): Promise<void> {
     const response = await fetch(`/api/ghHiResData?city=${city}`);
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

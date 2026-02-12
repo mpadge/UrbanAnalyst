@@ -1,13 +1,8 @@
 import { useState, useEffect } from 'react';
 
-export default function useWindowSize() {
+export default function useWindowSize(): { width: number | null; height: number | null } {
 
-    interface WindowSizeProps {
-        width: number;
-        height: number;
-    }
-
-    const [windowSize, setWindowSize] = useState<{width: number | null, height: number | null}>({
+    const [windowSize, setWindowSize] = useState<{ width: number | null; height: number | null }>({
         width: null,
         height: null
     });
@@ -19,12 +14,8 @@ export default function useWindowSize() {
         });
     }, []);
 
-    function isNumber(x: any): x is number {
-        return typeof x === "number";
-    }
-
     useEffect(() => {
-        function handleResize() {
+        function handleResize(): void {
             setWindowSize({
                 width: window.innerWidth,
                 height: window.innerHeight,
@@ -33,8 +24,8 @@ export default function useWindowSize() {
 
         window.addEventListener("resize", handleResize);
 
-        return () => window.removeEventListener("resize", handleResize);
-    }, []); // Empty array ensures that effect is only run on mount
+        return (): void => window.removeEventListener("resize", handleResize);
+    }, []);
 
     return windowSize;
 }

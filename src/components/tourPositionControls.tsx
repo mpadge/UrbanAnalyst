@@ -17,7 +17,7 @@ const w_med_small = 300;
 const w_narrow_small = 250; // Only used in maxWidth, not posControls.
 
 
-export function posControlsX(width: number, near = "controls") {
+export function posControlsX(width: number, near = "controls"): string {
     var left;
     if (width > 1120) {
         if (near == "controls") {
@@ -46,7 +46,7 @@ export function posControlsX(width: number, near = "controls") {
     return left;
 }
 
-export function posControlsY(width: number, height: number, near = "controls") {
+export function posControlsY(width: number, height: number, near = "controls"): string {
     var top;
     if (width > 1120) {
         if (near == "controls") {
@@ -75,7 +75,7 @@ export function posControlsY(width: number, height: number, near = "controls") {
     return top;
 }
 
-export function maxWidth(width: number, wide = false) {
+export function maxWidth(width: number, wide = false): number {
     var w;
     if (width > 1120) {
         if (wide) {

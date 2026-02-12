@@ -11,7 +11,7 @@ vi.mock('@/components/tourClass', () => ({
 }))
 
 vi.mock('@/components/map/tour/tourConfig', () => ({
-    getTourConfig: vi.fn((width, height) => [
+    getTourConfig: vi.fn((_width: number, _height: number) => [
         { selector: '[data-tour="step1"]', content: 'Map Step 1' },
         { selector: '[data-tour="step2"]', content: 'Map Step 2' }
     ])

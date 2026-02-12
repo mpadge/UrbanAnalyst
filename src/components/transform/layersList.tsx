@@ -2,22 +2,15 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Chip from '@mui/material/Chip';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import ResetButton from "@/components/transform/resetButton";
-import styles from "@/styles/controls.module.css";
 
 import { DefaultExtraLayers } from "@/components/transform/control";
 import { CityDataProps } from "@/data/interfaces";
@@ -50,7 +43,7 @@ interface LayersListProps {
  * Function to select extra layers to be included in transformation
  * calculation.
  */
-export default function LayersList(props: LayersListProps) {
+export default function LayersList(props: LayersListProps): JSX.Element {
 
     const options = useMemo(
         () => [
@@ -78,7 +71,7 @@ export default function LayersList(props: LayersListProps) {
     // `FormControlLabel`.
     type AccType = { [key: string]: boolean };
     const [checked, setChecked] = useState<AccType>({});
-    const handleCheckboxChange = (event: any, value: any) => {
+    const handleCheckboxChange = (event: any, value: any): void => {
         const isChecked = event.target.checked;
         setChecked(prevChecked => ({
             ...prevChecked,
@@ -112,7 +105,7 @@ export default function LayersList(props: LayersListProps) {
         setVarnames(varnames);
     }, [checked, setVarnames, reducedOptions]);
 
-    const handleReset = () => {
+    const handleReset = (): void => {
         const { idx, idx2, layer, citiesArray } = props;
         const varnames = DefaultExtraLayers({ idx, idx2, layer, citiesArray });
         props.setVarnames(varnames);

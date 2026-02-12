@@ -8,7 +8,6 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import useWindowSize from "@/components/windowSize";
-import styles from '@/styles/controls.module.css';
 import type { OutputLayerType } from "@/components/utils/pageConstants";
 
 interface OutputLayerProps {
@@ -16,7 +15,7 @@ interface OutputLayerProps {
     handleOutputLayerChange: (outputLayer: OutputLayerType) => void,
 }
 
-export default function OutputLayers(props: OutputLayerProps) {
+export default function OutputLayers(props: OutputLayerProps): JSX.Element {
 
     const options = [
         { value: "original", label: "Original" },
@@ -25,10 +24,9 @@ export default function OutputLayers(props: OutputLayerProps) {
         { value: "relative", label: "Relative" }
     ];
 
-    const searchable = false;
     const [selected, setSelected] = useState<string>("original");
 
-    const handleChange = (event: SelectChangeEvent) => {
+    const handleChange = (event: SelectChangeEvent): void => {
         const val = event.target.value as OutputLayerType;
         if (val) {
             setSelected(val);

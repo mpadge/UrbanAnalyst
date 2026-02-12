@@ -1,6 +1,5 @@
 "use client"
 
-import useWindowSize from '@/components/windowSize';
 import { posControlsX, posControlsY, maxWidth } from "@/components/tourPositionControls";
 import { controlBoxText1, controlBoxText2, navText } from "@/components/compare/tour/tourText";
 
@@ -8,7 +7,7 @@ const tourPanelBackgroundColour = '#9cf7f7';
 const tourPanelBorderRadiusWide = '20px';
 const tourPanelBorderRadiusNarrow = '10px';
 
-export const getTourConfig = (width: number, height: number) => [
+export const getTourConfig = (width: number, height: number): any[] => [
     {    
         content: (
             <div>

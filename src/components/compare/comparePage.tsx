@@ -14,8 +14,8 @@ import { CITY_DATA } from '@/data/citydata';
 import { DataRangeKeys } from '@/data/interfaces';
 import { useCompareState } from '@/components/utils/localStorageUtils';
 import { useTourLogic } from '@/components/utils/tourUtils';
-import { LAYER_CONSTANTS, NUM_LAYERS_OPTIONS } from '@/components/utils/pageConstants';
-import type { NumLayersMode, SortOption } from '@/components/utils/pageConstants';
+import { NUM_LAYERS_OPTIONS } from '@/components/utils/pageConstants';
+import type { NumLayersMode } from '@/components/utils/pageConstants';
 
 import type { ReactourProps } from 'reactour';
 
@@ -55,7 +55,7 @@ function ComparePagePresentation({
     handleSortChange,
     tourProps,
     handleTourOpen
-}: ComparePagePresentationProps) {
+}: ComparePagePresentationProps): JSX.Element {
     return (
         <>
             <main className={styles.main}>
@@ -94,10 +94,9 @@ function ComparePagePresentation({
     );
 }
 
-export default function ComparePage() {
+export default function ComparePage(): JSX.Element {
 
-    const [cityData] = useState(CITY_DATA.citiesArray[0]);
-    const cityDataMemoized = useMemo(() => cityData, [cityData]);
+    const [_cityData] = useState(CITY_DATA.citiesArray[0]);
 
     const numLayersOptions: NumLayersMode[] = useMemo(() => [...NUM_LAYERS_OPTIONS], []);
 

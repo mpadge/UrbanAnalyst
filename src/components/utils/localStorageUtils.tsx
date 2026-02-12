@@ -1,5 +1,5 @@
 import { useState, useReducer } from 'react';
-import { DataRangeKeys, Data2RangeKeys, CityDataProps } from '@/data/interfaces';
+import { DataRangeKeys } from '@/data/interfaces';
 
 export const localStorageHelpers = {
 
@@ -61,7 +61,7 @@ export const sessionStorageHelpers = {
     }
 };
 
-export function loadInitialState() {
+export function loadInitialState(): { idx: number; layer: string; layer2: string; numLayers: string; alpha: number } {
     return {
         idx: localStorageHelpers.getInt('uaCityIdx', 0),
         layer: localStorageHelpers.getString('uaLayer', 'social_index'),
@@ -101,7 +101,7 @@ export function usePersistedState<T>(
         return defaultValue;
     });
 
-    const setPersistedState = (value: T) => {
+    const setPersistedState = (value: T): void => {
         setState(value);
         if (typeof window !== "undefined") {
             localStorageHelpers.setItem(key, JSON.stringify(value));
@@ -146,7 +146,16 @@ function compareReducer(state: CompareState, action: CompareAction): CompareStat
 }
 
 // Consolidated compare state hook
-export function useCompareState() {
+export function useCompareState(): {
+    state: CompareState;
+    actions: {
+        setLayer: (layer: DataRangeKeys) => void;
+        setLayer2: (layer2: DataRangeKeys) => void;
+        setNumLayers: (numLayers: "Single" | "Paired") => void;
+        setSortOpt: (sortOpt: string) => void;
+        toggleMeanVals: () => void
+    }
+} {
     const initialState: CompareState = {
         layer: (localStorageHelpers.getString(COMPARE_STORAGE_KEYS.LAYER, LAYER_CONSTANTS.DEFAULT_TRANSPORT_LAYER) as DataRangeKeys),
         layer2: (localStorageHelpers.getString(COMPARE_STORAGE_KEYS.LAYER2, LAYER_CONSTANTS.DEFAULT_TRANSPORT_LAYER) as DataRangeKeys),
@@ -158,23 +167,23 @@ export function useCompareState() {
     const [state, dispatch] = useReducer(compareReducer, initialState);
 
     const actions = {
-        setLayer: (layer: DataRangeKeys) => {
+        setLayer: (layer: DataRangeKeys): void => {
             localStorageHelpers.setItem(COMPARE_STORAGE_KEYS.LAYER, layer);
             dispatch({ type: "SET_LAYER", payload: layer });
         },
-        setLayer2: (layer2: DataRangeKeys) => {
+        setLayer2: (layer2: DataRangeKeys): void => {
             localStorageHelpers.setItem(COMPARE_STORAGE_KEYS.LAYER2, layer2);
             dispatch({ type: "SET_LAYER2", payload: layer2 });
         },
-        setNumLayers: (numLayers: "Single" | "Paired") => {
+        setNumLayers: (numLayers: "Single" | "Paired"): void => {
             localStorageHelpers.setItem(COMPARE_STORAGE_KEYS.NUM_LAYERS, numLayers);
             dispatch({ type: "SET_NUM_LAYERS", payload: numLayers });
         },
-        setSortOpt: (sortOpt: string) => {
+        setSortOpt: (sortOpt: string): void => {
             localStorageHelpers.setItem(COMPARE_STORAGE_KEYS.SORT_OPT, sortOpt);
             dispatch({ type: "SET_SORT_OPT", payload: sortOpt });
         },
-        toggleMeanVals: () => {
+        toggleMeanVals: (): void => {
             dispatch({ type: "TOGGLE_MEAN_VALS" });
         }
     };

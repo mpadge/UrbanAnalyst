@@ -1,6 +1,5 @@
 
-import { ChangeEvent, SyntheticEvent, SetStateAction, useEffect, useState } from 'react';
-import Link from 'next/link'
+import { useEffect, useState } from 'react';
 import Image from "next/image"
 import localFont from 'next/font/local'
 
@@ -47,20 +46,16 @@ interface MapControlProps {
     handleTourOpen: (isTourOpen: boolean) => void
 }
 
-const RootSpacing = styled('div')(({ theme }) => ({
+const RootSpacing = styled('div')((_theme) => ({
     width: '100%',
     marginTop: '12px',
     marginBottom: '0px',
 }));
 
-export default function Control (props: MapControlProps) {
-
-    const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
-
-    const cityNames = props.citiesArray.map((item) => item.name);
+export default function Control (props: MapControlProps): JSX.Element {
 
     const [hideControls, setHideControls] = useState(false);
-    const handleControlsVisibility = (pHideControls: boolean) => {
+    const handleControlsVisibility = (pHideControls: boolean): void => {
         setHideControls(pHideControls);
     }
     const [uaLogo, setUaLogo] = useState('/ua.svg');
@@ -87,10 +82,10 @@ export default function Control (props: MapControlProps) {
         multiplier *= 10;
     }
     const handleSliderValuesChange = (
-        event: Event,
+        _event: Event,
         value: number | number [],
-        activeThumb: number
-    ) => {
+        _activeThumb: number
+    ): void => {
 
         let newValue: number[];
         if (typeof value === 'number') {

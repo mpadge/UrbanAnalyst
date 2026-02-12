@@ -1,16 +1,13 @@
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
-import styles from '@/styles/controls.module.css';
-
 interface ResetButtonProps {
     handleReset: () => void
 }
 
-export default function ResetButton (props: ResetButtonProps) {
+export default function ResetButton (props: ResetButtonProps): JSX.Element {
 
-    var buttonStyle: any = styles.explainbuttonOff;
-    var buttonText: string = "Reset";
+    const buttonText: string = "Reset";
 
     return (
         <Stack alignItems="center">

@@ -1,11 +1,9 @@
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link'
 import Image from "next/image"
 import localFont from 'next/font/local'
 
 import { styled } from '@mui/material/styles';
-import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
@@ -39,24 +37,24 @@ interface CompareControlProps {
     handleTourOpen: (isTourOpen: boolean) => void
 }
 
-const LayerSpacing = styled('div')(({ theme }) => ({
+const LayerSpacing = styled('div')((_theme: any) => ({
     width: '100%',
     marginTop: '0px',
     marginBottom: '8px',
 }));
 
-const SortOrderSpacing = styled('div')(({ theme }) => ({
+const SortOrderSpacing = styled('div')((_theme: any) => ({
     width: '100%',
     marginTop: '0px',
     marginBottom: '12px',
 }));
 
-export default function Control (props: CompareControlProps) {
+export default function Control(props: CompareControlProps): JSX.Element {
 
-    const cityNames = props.citiesArray.map((item) => item.name);
+    const _cityNames = props.citiesArray.map((item) => item.name);
 
     const [hideControls, setHideControls] = useState(false);
-    const handleControlsVisibility = (pHideControls: boolean) => {
+    const handleControlsVisibility = (pHideControls: boolean): void => {
         setHideControls(pHideControls);
     }
     const [controlStyle, setControStyle] = useState(styles.light);

@@ -1,6 +1,5 @@
 
-import { useEffect, useState, useRef } from 'react';
-import Link from 'next/link'
+import { useEffect, useState } from 'react';
 import Image from "next/image"
 import localFont from 'next/font/local'
 
@@ -17,10 +16,10 @@ interface SummariseControlProps {
 }
 
 
-export default function Control (props: SummariseControlProps) {
+export default function Control (props: SummariseControlProps): JSX.Element {
 
     const [hideControls, setHideControls] = useState(false);
-    const handleControlsVisibility = (pHideControls: boolean) => {
+    const handleControlsVisibility = (pHideControls: boolean): void => {
         setHideControls(pHideControls);
     }
     const [controlStyle, setControStyle] = useState(styles.light);

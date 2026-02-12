@@ -18,7 +18,7 @@ export const viewport: Viewport = {
 
 import TransformPage from '@/components/transform/transformPage';
 
-export default function Home() {
+export default function Home(): JSX.Element {
 
     const buttonTxt = [
         "home",

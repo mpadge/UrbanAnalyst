@@ -1,5 +1,4 @@
 
-import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import styles from '@/styles/sliders.module.css';
@@ -11,9 +10,9 @@ interface OpacitySliderProps {
     handleAlphaChange: (pAlpha: number) => void
 }
 
-export default function OpacitySlider (props: OpacitySliderProps) {
+export default function OpacitySlider(props: OpacitySliderProps): JSX.Element {
 
-    const getBackgroundSize = () => {
+    const getBackgroundSize = (): { backgroundSize: string } => {
         return {
             backgroundSize: `${(props.alpha * 100)}% 100%`,
         };

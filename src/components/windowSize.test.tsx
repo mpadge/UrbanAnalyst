@@ -3,7 +3,7 @@ import { renderHook, act } from '@testing-library/react'
 import useWindowSize from '@/components/windowSize'
 
 // Mock window object
-const mockWindow = {
+const _mockWindow = {
   innerWidth: 1024,
   innerHeight: 768,
   addEventListener: vi.fn(),
@@ -118,8 +118,7 @@ describe('useWindowSize', () => {
   })
 
   it('returns null values before initial effect runs', () => {
-    // Mock the initial useEffect to not run immediately
-    const originalUseEffect = vi.fn()
+    const _originalUseEffect = vi.fn()
     
     // This test is more conceptual since useEffect runs synchronously in
     // testing but can verify the hook structure

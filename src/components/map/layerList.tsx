@@ -9,7 +9,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import useWindowSize from "@/components/windowSize";
 import { DataRangeKeys } from '@/data/interfaces';
-import styles from '@/styles/controls.module.css';
 
 interface LayerListProps {
     title: string,
@@ -19,7 +18,7 @@ interface LayerListProps {
 }
 
 
-export default function LayerList(props: LayerListProps) {
+export default function LayerList(props: LayerListProps): JSX.Element {
 
     const options = useMemo (() => {
         const allOptions = [
@@ -46,8 +45,6 @@ export default function LayerList(props: LayerListProps) {
         return filteredOptions.length > 0 ? filteredOptions : allOptions;
     }, [props.cityLayers]);
 
-    const [isSearchable, setIsSearchable] = useState(true);
-
     // findMatchingOption returns the *value* of the option:
     const findMatchingOption = useCallback(() => {
         var op = "social_index";
@@ -68,7 +65,7 @@ export default function LayerList(props: LayerListProps) {
         }
     }, [props.layer, findMatchingOption, options]);
 
-    const handleChange = (event: SelectChangeEvent) => {
+    const handleChange = (event: SelectChangeEvent): void => {
         props.handleLayerChange(event.target.value as DataRangeKeys);
         setSelectedOption(event.target.value as DataRangeKeys);
     };

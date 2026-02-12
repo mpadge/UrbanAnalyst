@@ -1,11 +1,8 @@
 "use client"
 
 import { useEffect, useState, useCallback, useMemo, lazy, Suspense } from "react";
-import { GeoJsonLayer } from "@deck.gl/layers/typed";
-import { DeckGL } from "@deck.gl/react/typed";
-import { FlyToInterpolator } from "@deck.gl/core/typed";
-import { Map } from "react-map-gl";
 import { ReactourProps } from 'reactour';
+import { FlyToInterpolator } from "@deck.gl/core/typed";
 
 import { MapSkeleton, MapControlSkeleton, MapLegendSkeleton } from '@/components/utils/loadingSkeletons';
 import { ErrorBoundary, ComponentErrorSkeleton } from '@/components/utils/errorBoundary';
@@ -15,10 +12,10 @@ const Legend = lazy(() => import('@/components/map/legend'));
 const UTAMap = lazy(() => import('@/components/map/map'));
 const Tour = lazy(() => import('@/components/map/tour/tour'));
 
-import { CITY_DATA, DEFAULT_MAP_CONFIG } from '@/data/citydata';
-import { CityDataProps, DataRangeKeys, Data2RangeKeys, ViewState } from '@/data/interfaces';
+import { CITY_DATA } from '@/data/citydata';
+import { CityDataProps, DataRangeKeys, ViewState } from '@/data/interfaces';
 import { calculateLayerRanges } from '@/components/utils/layerUtils';
-import { localStorageHelpers, sessionStorageHelpers, loadInitialState } from '@/components/utils/localStorageUtils';
+import { localStorageHelpers, loadInitialState } from '@/components/utils/localStorageUtils';
 import { useMapTourLogic } from '@/components/utils/mapTourUtils';
 import { LAYER_CONSTANTS, NUM_LAYERS_OPTIONS } from '@/components/utils/pageConstants';
 import type { NumLayersMode } from '@/components/utils/pageConstants';
@@ -119,7 +116,7 @@ function MapPagePresentation({
     handleNumLayersChange,
     tourProps,
     handleTourOpen
-}: MapPagePresentationProps) {
+}: MapPagePresentationProps): JSX.Element {
     return (
         <>
             <ErrorBoundary fallback={<ComponentErrorSkeleton />}>
@@ -167,11 +164,9 @@ function MapPagePresentation({
     );
 }
 
-export default function MapPage() {
+export default function MapPage(): JSX.Element {
 
     const [idx, setIdx] = useState(0);
-
-    const cityData = useMemo(() => CITY_DATA.citiesArray[idx], [idx]);
 
     const [viewState, setViewState] = useState<ViewState & {
         transitionDuration: number;

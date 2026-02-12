@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { renderHook, act, waitFor } from '@testing-library/react'
+import { renderHook, waitFor } from '@testing-library/react'
 import { useTourLogic } from '@/components/utils/tourUtils'
 
 vi.mock('@/components/windowSize', () => ({
@@ -11,7 +11,7 @@ vi.mock('@/components/tourClass', () => ({
 }))
 
 vi.mock('@/components/compare/tour/tourConfig', () => ({
-    getTourConfig: vi.fn((width, height) => [
+    getTourConfig: vi.fn((_width: number, _height: number) => [
         { selector: '[data-tour="step1"]', content: 'Step 1' },
         { selector: '[data-tour="step2"]', content: 'Step 2' }
     ])

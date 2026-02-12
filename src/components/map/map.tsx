@@ -1,12 +1,9 @@
-import { NextPage } from "next";
 import { useEffect, useState, Suspense } from "react";
 import { DeckGL } from "@deck.gl/react/typed";
-import { FlyToInterpolator } from "@deck.gl/core/typed";
 import { Map } from "react-map-gl";
 
 import mapLayer from '@/components/map/mapLayer'
 
-import { ViewState, CityDataProps } from "@/data/interfaces";
 import { MapProps } from "@/components/map/mapPage";
 
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
@@ -22,20 +19,13 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
  * `mapLayer.tsx`. That function must first be called to obtain the layer before
  * passing to final DOM elements in return body of this function.
  */
-export default function UTAMap (props: MapProps) {
+export default function UTAMap(props: MapProps): JSX.Element {
 
     const this_layer = mapLayer(props);
     const [layer, setLayer] = useState(this_layer);
     useEffect(() => {
-        const this_layer = mapLayer(props);
         setLayer(mapLayer(props));
     }, [props]);
-
-    const [viewState, setViewState] = useState({
-        ...props.viewState,
-        transitionDuration: 2000,
-        transitionInterpolator: new FlyToInterpolator()
-    });
 
 
     return (

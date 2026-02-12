@@ -1,8 +1,7 @@
-import { useMemo, useEffect, useRef, useState} from 'react';
+import { useEffect, useRef, useState} from 'react';
 import { DeckGL } from "@deck.gl/react/typed";
 import { Map } from "react-map-gl";
 
-import { ViewState } from "@/data/interfaces";
 import { loadDataFunction } from '@/components/transform/loadData';
 import { transformDataFunction, transformDataSelectCol } from '@/components/transform/callTransform';
 import { getGeoJsonLayer } from '@/components/transform/geoJsonLayer';
@@ -94,7 +93,7 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
  * @return The rendered `DeckGL` page using data from `geoJsonLayer`, and underlying base map.
  *
  */
-const TransformComponent = (props: TransformProps) => {
+const TransformComponent = (props: TransformProps): JSX.Element => {
     /**
      * -------- state variables --------
      */
@@ -176,7 +175,7 @@ const TransformComponent = (props: TransformProps) => {
      */
     useEffect(() => {
         if (initialCalculate.current && dataLoadingComplete.current && data1 !== null && data2 !== null) {
-            const uniqueVarNames = Object.keys(
+            const _uniqueVarNames = Object.keys(
                 varnames.reduce((acc: StringAcc, name) => {
                     acc[name] = true;
                     return acc;
@@ -205,7 +204,7 @@ const TransformComponent = (props: TransformProps) => {
      */
     useEffect(() => {
         if (transformDataOneCol) {
-            const loadGeoJson = async () => {
+            const loadGeoJson = async (): Promise<void> => {
                 let geoJsonData;
                 if (cachedGeoJsonData.current[mapPathSource]) {
                     geoJsonData = cachedGeoJsonData.current[mapPathSource];

@@ -9,7 +9,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import useWindowSize from "@/components/windowSize";
 import { DataRangeKeys } from '@/data/interfaces';
-import styles from '@/styles/controls.module.css';
 
 interface LayerListProps { // different from same defined in data/interfaces
     title: string,
@@ -18,7 +17,7 @@ interface LayerListProps { // different from same defined in data/interfaces
     handleLayerChange: (layer: DataRangeKeys) => void
 }
 
-export default function LayerList(props: LayerListProps) {
+export default function LayerList(props: LayerListProps): JSX.Element {
 
     const options = useMemo (() => [
         { value: "social_index", label: "Social" },
@@ -64,7 +63,7 @@ export default function LayerList(props: LayerListProps) {
         }
     }, [props.layer, findMatchingOption, reducedOptions]);
 
-    const handleChange = (event: SelectChangeEvent) => {
+    const handleChange = (event: SelectChangeEvent): void => {
         props.handleLayerChange(event.target.value as DataRangeKeys);
         setSelectedOption(event.target.value as DataRangeKeys);
     };
