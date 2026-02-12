@@ -41,7 +41,7 @@ export function useTourLogic(): {
 
     const tourConfig = useMemo(() => getTourConfig(width, height), [width, height]);
 
-    const handleTourOpen = () => {
+    const handleTourOpen = (): void => {
         setTourOpen(true);
     };
 
