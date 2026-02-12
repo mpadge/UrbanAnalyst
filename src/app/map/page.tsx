@@ -18,7 +18,7 @@ export const viewport: Viewport = {
 
 import MapPage from '@/components/map/mapPage';
 
-export default function Home() {
+export default function Home(): JSX.Element {
 
     const buttonTxt = [
         "home",

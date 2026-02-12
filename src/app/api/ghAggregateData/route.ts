@@ -30,8 +30,8 @@ export async function GET(request: NextRequest): Promise<Response> {
 
         const data = await response.json();
         return Response.json(data);
-    } catch (error) {
-        console.error('Error fetching city map data:', error);
+    } catch {
+        // console.error('Error fetching city map data:', error);
         return Response.json({ error: 'Failed to fetch city map data' }, { status: 500 });
     }
 }
