@@ -8,14 +8,13 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import useWindowSize from "@/components/windowSize";
-import styles from '@/styles/controls.module.css';
 
 interface SortOrderListProps {
     sortOpt: string,
     handleSortChange: (sortOpt: string) => void
 }
 
-export default function SortOrderList(props: SortOrderListProps) {
+export default function SortOrderList(props: SortOrderListProps): JSX.Element {
 
     const title = "Sort Order";
 
@@ -36,7 +35,7 @@ export default function SortOrderList(props: SortOrderListProps) {
 
     const [selectedOption, setSelectedOption] = useState(findMatchingOption());
 
-    const handleChange = (event: SelectChangeEvent) => {
+    const handleChange = (event: SelectChangeEvent): void => {
         setSelectedOption(event.target.value as string);
         props.handleSortChange(event.target.value as string);
     };
