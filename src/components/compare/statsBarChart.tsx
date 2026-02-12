@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import * as d3 from 'd3';
-import Link from 'next/link'
 
 import styles from '@/styles/compare.module.css';
 import useWindowSize from '@/components/windowSize';
@@ -18,40 +17,10 @@ interface CompareProps {
     citiesArray: CityDataProps[]
 }
 
-interface CityStatsProps {
-    social_index: number[],
-    times_rel: number[],
-    times_abs: number[],
-    transfers: number[],
-    intervals: number[],
-    transport: number[],
-    popdens: number[],
-    school_dist: number[],
-    bike_index: number[],
-    natural: number[],
-    parking: number[],
-    rent: number[],
-    value: number[],
-}
-
-
-// fill: #ec008b;
-// fill: #e46aa7;
-
-interface GroupProps {
-    right: number,
-    top: number
-}
-
-interface AxisProps {
-    axisType: string,
-    innerHeight?: number
-}
-
-export default function BarChart (props: CompareProps) {
+export default function BarChart(props: CompareProps): JSX.Element {
 
     const idxWashington = getIdxWashington(props.citiesArray);
-    const [cityData, setCityData] = useState(props.citiesArray[idxWashington]);
+    const [_, _setCityData] = useState(props.citiesArray[idxWashington]);
 
     const meanValIndex = props.meanVals ? 0 : 1;
 
@@ -110,8 +79,8 @@ export default function BarChart (props: CompareProps) {
     const innerHeight = height ? height - margin.top - margin.bottom : defaultHeight;
 
     const xAxisPadding = 10;
-    const yAxisPadding = 10;
-    const yTickSize = 0;
+    const _yAxisPadding = 10;
+    const _yTickSize = 0;
 
     // palettes:
     // https://github.com/d3/d3-scale-chromatic
@@ -127,7 +96,7 @@ export default function BarChart (props: CompareProps) {
     const svgRef = React.useRef<SVGSVGElement>(null);
 
     // X-axis:
-    const xValue = (d: any) => d.value;
+    const xValue = (d: any): number => d.value;
     const expandRHS = 1.05; // Expand right-hand edge beyond max observed value
     const xMax2 = Math.max(0,xMin) + (xMax - Math.max(0,xMin)) * expandRHS;
     const xScale = d3.scaleLinear()
@@ -136,7 +105,7 @@ export default function BarChart (props: CompareProps) {
         .nice();
 
     // Y-axis
-    const yValue = (d: any) => d.city;
+    const yValue = (d: any): string => d.city;
     const yScale = d3.scaleBand()
         .domain(data.map(yValue))
         .range([0, innerHeight])
@@ -147,7 +116,7 @@ export default function BarChart (props: CompareProps) {
         const svg = d3.select(svgRef.current as any);
         svg.selectAll('*').remove();
 
-        const handleDrawBars = (svg: any, colourPalette: any) => {
+        const handleDrawBars = (svg: any, colourPalette: any): void => {
             svg
                 .append("g")
                 .attr("transform", `translate(${margin.left}, 0)`)
@@ -172,7 +141,7 @@ export default function BarChart (props: CompareProps) {
                 .duration(750);
         };
 
-        const handleDrawText = (svg: any) => {
+        const handleDrawText = (svg: any): void => {
             svg
                 .append("g")
                 .attr("transform", `translate(${margin.left}, 0)`)
@@ -195,7 +164,7 @@ export default function BarChart (props: CompareProps) {
                 .text((d: any) => d.city)
         };
 
-        const handleDrawXAxis = (svg: any) => {
+        const handleDrawXAxis = (svg: any): void => {
             const g = svg
                 .append("g")
                 .attr("transform", `translate(${margin.left}, ${innerHeight})`)
@@ -223,7 +192,7 @@ export default function BarChart (props: CompareProps) {
     }, [data, innerHeight, innerWidth, xScale, yScale, xMin, margin.left,
             colourPalette, textColour]);
 
-    const inputRef = useRef()
+    const _inputRef = useRef<HTMLInputElement>(null);
 
     return (
         <>
