@@ -17,7 +17,15 @@ export function calculateLayerRanges(
     layer2: string,
     numLayers: string,
     citiesArray: CityDataProps[]
-) {
+): {
+    this_layer: string;
+    layer_start: number;
+    layer_min: number;
+    layer_max: number;
+    layer_stop: number;
+    dual_layers: boolean;
+    these_layers: string;
+} {
     const layer1: string = layer.replace("\_", "").replace("index", "");
     const layer2_repl: string = layer2.replace("\_", "").replace("index", "");
     const paired_keys = Object.keys(citiesArray[idx].dataRangesPaired);

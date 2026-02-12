@@ -6,7 +6,19 @@ import { sessionStorageHelpers } from './localStorageUtils';
 import tourStyles from '@/styles/tour.module.css';
 
 // Map tour logic hook
-export function useMapTourLogic() {
+export function useMapTourLogic(): {
+    tourProps: {
+        onRequestClose: () => void;
+        disableInteraction: boolean;
+        steps: ReturnType<typeof getTourConfig>;
+        isOpen: boolean;
+        maskClassName: string;
+        className: string;
+        rounded: number;
+        accentColor: string;
+    };
+    handleTourOpen: () => void;
+} {
     const [tourClass, setTourClass] = useState(tourStyles.tourhelperLight);
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
@@ -38,7 +50,7 @@ export function useMapTourLogic() {
     };
 
     // Use sessionStorage to only show tour once per session.
-    const closeTour = () => {
+    const closeTour = (): void => {
         setTourOpen(false);
         sessionStorageHelpers.setItem("uamaptour", "done");
     };

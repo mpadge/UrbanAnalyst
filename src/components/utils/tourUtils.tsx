@@ -5,7 +5,19 @@ import { getTourConfig } from '@/components/compare/tour/tourConfig';
 import { sessionStorageHelpers } from './localStorageUtils';
 import tourStyles from '@/styles/tour.module.css';
 
-export function useTourLogic() {
+export function useTourLogic(): {
+    tourProps: {
+        onRequestClose: () => void;
+        disableInteraction: boolean;
+        steps: ReturnType<typeof getTourConfig>;
+        isOpen: boolean;
+        maskClassName: string;
+        className: string;
+        rounded: number;
+        accentColor: string;
+    };
+    handleTourOpen: () => void;
+} {
     const [tourClass, setTourClass] = useState(tourStyles.tourhelperLight);
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
@@ -33,7 +45,7 @@ export function useTourLogic() {
         setTourOpen(true);
     };
 
-    const closeTour = () => {
+    const closeTour = (): void => {
         setTourOpen(false);
         sessionStorageHelpers.setItem("uacomparetour", "done");
     };

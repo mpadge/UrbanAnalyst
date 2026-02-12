@@ -23,16 +23,15 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
         return { hasError: true, error };
     }
 
-    componentDidCatch(error: Error, errorInfo: { componentStack: string }) {
-        console.error('ErrorBoundary caught an error:', error, errorInfo);
+    componentDidCatch(_error: Error, _errorInfo: { componentStack: string }): void {
     }
 
-    handleRetry = () => {
+    handleRetry = (): void => {
         this.setState({ hasError: false, error: null });
         window.location.reload();
     };
 
-    render() {
+    render(): ReactNode {
         if (this.state.hasError) {
             if (this.props.fallback) {
                 return this.props.fallback;
@@ -68,7 +67,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     }
 }
 
-export const ErrorSkeleton = () => (
+export const ErrorSkeleton = (): JSX.Element => (
     <Box
         sx={{
             width: '100%',
@@ -88,7 +87,7 @@ export const ErrorSkeleton = () => (
     </Box>
 );
 
-export const ComponentErrorSkeleton = () => (
+export const ComponentErrorSkeleton = (): JSX.Element => (
     <Box
         sx={{
             width: '100vw',

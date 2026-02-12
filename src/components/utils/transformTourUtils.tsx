@@ -38,7 +38,7 @@ export function useTransformTourLogic() {
     };
 
     // Use sessionStorage to only show tour once per session.
-    const closeTour = () => {
+    const closeTour = (): void => {
         setTourOpen(false);
         sessionStorageHelpers.setItem("uatransformtour", "done");
     };
