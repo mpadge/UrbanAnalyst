@@ -9,11 +9,11 @@ import useWindowSize from '@/components/windowSize'
 // Mock dependencies
 vi.mock('@/components/windowSize')
 vi.mock('@/components/uaSvgLogo', () => ({
-  SvgComponent: () => <div data-testid="svg-logo" />
+  SvgComponent: (): JSX.Element => <div data-testid="svg-logo" />
 }))
 
 vi.mock('@mui/material/AppBar', () => ({
-  default: ({ children, position, color }: any) => (
+  default: ({ children, position, color }: any): JSX.Element => (
     <div data-position={position} data-color={color} data-testid="app-bar">
       {children}
     </div>
@@ -21,7 +21,7 @@ vi.mock('@mui/material/AppBar', () => ({
 }))
 
 vi.mock('@mui/material/Box', () => ({
-  default: (props: any) => {
+  default: (props: any): JSX.Element => {
     const { children, sx, ...rest } = props
     const { key: _key, ...cleanRest } = rest
     return (
@@ -33,13 +33,13 @@ vi.mock('@mui/material/Box', () => ({
 }))
 
 vi.mock('@mui/material/Toolbar', () => ({
-  default: ({ children }: any) => (
+  default: ({ children }: any): JSX.Element => (
     <div data-testid="toolbar">{children}</div>
   )
 }))
 
 vi.mock('@mui/material/Typography', () => ({
-  default: (props: any) => {
+  default: (props: any): JSX.Element => {
     const { children, textAlign, ...rest } = props
     const { key: _key, ...cleanRest } = rest
     return (
@@ -51,7 +51,7 @@ vi.mock('@mui/material/Typography', () => ({
 }))
 
 vi.mock('@mui/material/Button', () => ({
-  default: (props: any) => {
+  default: (props: any): JSX.Element => {
     const { children, color, href, ...rest } = props
     const { key: _key, ...cleanRest } = rest
     return (
@@ -63,7 +63,7 @@ vi.mock('@mui/material/Button', () => ({
 }))
 
 vi.mock('@mui/material/IconButton', () => ({
-  default: (props: any) => {
+  default: (props: any): JSX.Element => {
     const { children, size, edge, color, onClick, sx, 'aria-label': ariaLabel, ...rest } = props
     const { key: _key, ...cleanRest } = rest
     return (
@@ -83,7 +83,7 @@ vi.mock('@mui/material/IconButton', () => ({
 }))
 
 vi.mock('@mui/material/Menu', () => ({
-  default: (props: any) => {
+  default: (props: any): JSX.Element => {
     const { children, anchorEl: _anchorEl, open, onClose: _onClose, ...domProps } = props
     const { anchorOrigin: _anchorOrigin, keepMounted: _keepMounted, transformOrigin: _transformOrigin, key: _key, ...rest } = domProps
     return (
@@ -95,7 +95,7 @@ vi.mock('@mui/material/Menu', () => ({
 }))
 
 vi.mock('@mui/material/MenuItem', () => ({
-  default: (props: any) => {
+  default: (props: any): JSX.Element => {
     const { children, onClick, component: _component, href, ...rest } = props
     const { key: _key, ...cleanRest } = rest
     return (
@@ -107,7 +107,7 @@ vi.mock('@mui/material/MenuItem', () => ({
 }))
 
 vi.mock('@mui/material/SvgIcon', () => ({
-  default: ({ children, component: _component }: any) => (
+  default: ({ children, component: _component }: any): JSX.Element => (
     <div data-testid="svg-icon">
       {children}
     </div>
@@ -115,12 +115,12 @@ vi.mock('@mui/material/SvgIcon', () => ({
 }))
 
 vi.mock('@mui/material/styles', () => ({
-  createTheme: (theme: any) => ({ ...theme, __theme: true }),
-  ThemeProvider: ({ children, theme }: any) => <div data-theme={theme.__theme}>{children}</div>
+  createTheme: (theme: any): object => ({ ...theme, __theme: true }),
+  ThemeProvider: ({ children, theme }: any): JSX.Element => <div data-theme={theme.__theme}>{children}</div>
 }))
 
 vi.mock('@mui/icons-material/Menu', () => ({
-  default: () => <div data-testid="menu-icon" />
+  default: (): JSX.Element => <div data-testid="menu-icon" />
 }))
 
 const mockUseWindowSize = vi.mocked(useWindowSize)

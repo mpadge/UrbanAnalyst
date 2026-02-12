@@ -4,7 +4,7 @@ import HelpButton from '@/components/helpButton'
 
 // Mock MUI components
 vi.mock('@mui/material/Button', () => ({
-  default: ({ children, onClick, size, variant }: any) => (
+  default: ({ children, onClick, size, variant }: any): JSX.Element => (
     <button 
       onClick={onClick} 
       data-size={size} 
@@ -17,7 +17,7 @@ vi.mock('@mui/material/Button', () => ({
 }))
 
 vi.mock('@mui/material/Stack', () => ({
-  default: ({ children, alignItems }: any) => (
+  default: ({ children, alignItems }: any): JSX.Element => (
     <div data-align-items={alignItems} data-testid="help-stack">
       {children}
     </div>

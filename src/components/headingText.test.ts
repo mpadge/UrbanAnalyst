@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { HeadingTextOneLayer, getIdxWashington, HeadingText } from '@/components/headingText'
+import { HeadingTextOneLayer, getIdxWashington } from '@/components/headingText'
 
 describe('headingText', () => {
   describe('HeadingTextOneLayer', () => {
