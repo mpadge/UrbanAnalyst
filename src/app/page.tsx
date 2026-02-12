@@ -11,7 +11,6 @@ import transformImage from '@/images/ua.png';
 
 import styles from '@/styles/Home.module.css'
 import ButtonAppBar from '@/components/appBar';
-import { ButtonAppProps } from '@/data/interfaces';
 import UABarChart from '@/components/main/uaindexBarChart';
 
 /**
@@ -34,7 +33,7 @@ export const viewport: Viewport = {
 /**
  * Main page for entire site.
  */
-export default function Home() {
+export default function Home(): JSX.Element {
 
     const buttonTxt = [
         "summarise",

@@ -6,12 +6,12 @@ import { CityDataProps } from "@/data/interfaces";
  * US census variables, this needs to be a US city. This function returns the
  * index of Washingtone DC.
  */
-export function getIdxWashington(props: CityDataProps[]) {
+export function getIdxWashington(props: CityDataProps[]): number {
     return props.findIndex((item) => item.name === "washington");
 }
 
 
-export function HeadingTextOneLayer (layer: string) {
+export function HeadingTextOneLayer (layer: string): string {
 
     var heading: string = "";
 
@@ -53,7 +53,7 @@ export function HeadingTextOneLayer (layer: string) {
 // This is currently only used in maps. The stats layer also uses intermediate
 // values of "dual_layers" and "this_layer", so uses explicit versions of these
 // lines.
-export function HeadingText (layer: string, layer2: string, numLayers: string, citiesArray: CityDataProps[]) {
+export function HeadingText (layer: string, layer2: string, numLayers: string, citiesArray: CityDataProps[]): string {
 
     const idxWashington = getIdxWashington (citiesArray);
 
@@ -64,7 +64,7 @@ export function HeadingText (layer: string, layer2: string, numLayers: string, c
         paired_keys.includes(layer1 + "_" + layer2fmt) ?
             layer1 + "_" + layer2fmt : layer2fmt + "_" + layer1;
     const dual_layers: boolean = paired_keys.includes(these_layers);
-    const this_layer: string = numLayers == "Paired" && dual_layers ?
+    const _this_layer: string = numLayers == "Paired" && dual_layers ?
         these_layers : layer;
 
     const heading: string = numLayers == "Paired" && dual_layers ?

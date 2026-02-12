@@ -13,7 +13,6 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import SvgIcon from '@mui/material/SvgIcon';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { indigo, blue, teal, pink } from '@mui/material/colors';
 
 import useWindowSize from "@/components/windowSize";
 import { ButtonAppProps } from '@/data/interfaces';
@@ -53,13 +52,13 @@ const darkTheme = createTheme({
     },
 });
 
-function getPreferredTheme() {
+function getPreferredTheme(): typeof lightTheme | typeof darkTheme {
     const prefersDarkScheme = typeof window != "undefined" ?
         window.matchMedia('(prefers-color-scheme: dark)').matches : false;
     return prefersDarkScheme ? darkTheme : lightTheme;
 }
 
-function getHref(s: string) {
+function getHref(s: string): string {
     if (s == "home") {
         return "/";
     } else {
@@ -67,13 +66,13 @@ function getHref(s: string) {
     }
 }
 
-function capitaliseFirst(s: string) {
+function capitaliseFirst(s: string): string {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
 const MIN_MENU_WIDTH = 600;
 
-export default function ButtonAppBar(props: ButtonAppProps) {
+export default function ButtonAppBar(props: ButtonAppProps): JSX.Element {
 
     const [theme, setTheme] = useState(lightTheme);
     const [mounted, setMounted] = useState(false);
@@ -102,11 +101,11 @@ export default function ButtonAppBar(props: ButtonAppProps) {
 
     const [anchorNav, setAnchorNav] = useState<null | HTMLElement>(null);
 
-    const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
+    const handleOpenNavMenu = (event: MouseEvent<HTMLElement>): void => {
         setAnchorNav(event.currentTarget);
     };
 
-    const handleCloseNavMenu = () => {
+    const handleCloseNavMenu = (): void => {
         setAnchorNav(null);
     };
 

@@ -5,7 +5,7 @@ interface HelpButtonProps {
     handleTourOpen: (isTourOpen: boolean) => void
 }
 
-export default function HelpButton (props: HelpButtonProps) {
+export default function HelpButton (props: HelpButtonProps): JSX.Element {
 
     var buttonText: string = "Help";
 

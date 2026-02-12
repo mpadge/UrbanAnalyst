@@ -1,5 +1,3 @@
-import { vi } from 'vitest'
-
 // Suppress React warnings during tests
 const originalWarn = console.warn
 const originalError = console.error
