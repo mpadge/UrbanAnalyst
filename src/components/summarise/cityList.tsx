@@ -8,8 +8,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-import { ViewState, CityDataProps } from "@/data/interfaces";
-import styles from '@/styles/controls.module.css';
 import Content from '@/components/summarise/citySummaryData';
 
 interface CityListProps {
@@ -17,7 +15,7 @@ interface CityListProps {
     handleIdxChange: (pIdx: number) => void,
 }
 
-export default function CityList(props: CityListProps) {
+export default function CityList(props: CityListProps): JSX.Element {
 
     const contentArray = Content();
     const options = contentArray.map((city, index) => ({
@@ -47,7 +45,7 @@ export default function CityList(props: CityListProps) {
         }
     }, [findMatchingOption, options]);
 
-    const handleChange = (event: SelectChangeEvent) => {
+    const handleChange = (event: SelectChangeEvent): void => {
         const val = event.target.value as string;
         if (val) {
             setSelectedOption(val);

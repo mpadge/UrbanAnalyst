@@ -28,7 +28,7 @@ export default function SummarisePage(): JSX.Element {
     const _contentNames = contentArray.map(element => element.name);
     const contentHtml = contentArray.map(element => element.content);
 
-    const handleIdxChange = (idx: number) => {
+    const handleIdxChange = (idx: number): void => {
         setIdx(idx);
         localStorageHelpers.setItem("uaCityIdx", idx.toString());
     }

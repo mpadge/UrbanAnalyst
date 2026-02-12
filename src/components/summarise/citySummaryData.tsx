@@ -704,8 +704,14 @@ const washington = {
     )
 };
 
-const contentArray = [berlin, hamburg, london, mannheim, muenster, paris, philadelphia, utrecht, washington];
+interface CitySummary {
+    name: string;
+    nameFormatted: string;
+    content: JSX.Element;
+}
 
-export default function Content() {
+const contentArray: CitySummary[] = [berlin, hamburg, london, mannheim, muenster, paris, philadelphia, utrecht, washington];
+
+export default function Content(): CitySummary[] {
     return contentArray;
 }
