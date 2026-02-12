@@ -15,7 +15,7 @@ export default function useWindowSize(): { width: number | null; height: number 
     }, []);
 
     useEffect(() => {
-        function handleResize() {
+        function handleResize(): void {
             setWindowSize({
                 width: window.innerWidth,
                 height: window.innerHeight,
@@ -24,7 +24,7 @@ export default function useWindowSize(): { width: number | null; height: number 
 
         window.addEventListener("resize", handleResize);
 
-        return () => window.removeEventListener("resize", handleResize);
+        return (): void => window.removeEventListener("resize", handleResize);
     }, []);
 
     return windowSize;

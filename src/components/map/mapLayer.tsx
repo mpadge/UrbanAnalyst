@@ -37,6 +37,7 @@ export default function MapLayer(props: MapProps): any[] {
             stroked: true,
             getLineWidth: 10,
             getLineColor: [122, 122, 122],
+            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
             getFillColor: (d) => {
                 var layerval = Math.max (props.layerRange[0], Math.min (props.layerRange[1], d.properties?.[this_layer]));
                 const layerIsNaN = isNaN(layerval)
