@@ -1,5 +1,5 @@
 
-export function controlBoxText1 (wide = true) {
+export function controlBoxText1 (wide = true): JSX.Element {
     const line1 = wide ?
         `This is the "control center" to choose cities and data layers to be transformed.` :
         `On the left side is the "control center" to choose cities and data layers to be transformed.`;
@@ -26,7 +26,7 @@ export function controlBoxText1 (wide = true) {
     )
 }
 
-export function controlBoxText4 () {
+export function controlBoxText4 (): JSX.Element {
 
     return (
         <div>
@@ -46,7 +46,7 @@ export function controlBoxText4 () {
     )
 }
 
-export function legendText(wide = true) {
+export function legendText(wide = true): JSX.Element {
     const txt = wide ?
         `Each transformation layer has a legend here, for which yellow colors are generally better, and blue colors worse.` :
         `Each transformation layer has a legend in the lower-left corner, for which more yellow colors are generally better.`;
@@ -60,7 +60,7 @@ export function legendText(wide = true) {
     )
 }
 
-export function navText(goTo: (stepIndex: number) => void, wide = true) {
+export function navText(goTo: (stepIndex: number) => void, wide = true): JSX.Element {
     const line1 = wide ?
         `Finally, these menu items navigate to other Urban Analyst pages.` :
         `Finally, the menu items navigate to other Urban Analyst pages.`;
