@@ -3,7 +3,7 @@ import 'd3-scale-chromatic';
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
 
 
-export function getGeoJsonLayer(geoJSONcontent: any, layerRange: number[], varname: string, alpha: number) {
+export function getGeoJsonLayer(geoJSONcontent: any, layerRange: number[], varname: string, alpha: number): any[] {
 
     let Color = d3
         .scaleSequential()
@@ -18,6 +18,7 @@ export function getGeoJsonLayer(geoJSONcontent: any, layerRange: number[], varna
             stroked: true,
             getLineWidth: 10,
             getLineColor: [122, 122, 122],
+            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
             getFillColor: d => {
                 var layerval = Math.max (layerRange[0], Math.min (layerRange[1], d.properties?.[varname]));
                 if (isNaN(layerval)) {

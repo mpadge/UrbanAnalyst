@@ -7,7 +7,7 @@ const tourPanelBackgroundColour = '#9cf7f7';
 const tourPanelBorderRadiusWide = '20px';
 const tourPanelBorderRadiusNarrow = '10px';
 
-export const getTourConfig = (width: number, height: number) => [{
+export const getTourConfig = (width: number, height: number): any[] => [{
         content: () => (
             <div>
                 <h2>Urban Analyst</h2>

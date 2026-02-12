@@ -9,7 +9,7 @@ const nentries = Number(process.env.NEXT_PUBLIC_NUM_TRANSFORM_SAMPLES) || 10000;
  * is always a simple length = first of the two options, and is used just to
  * assert that that length matches value expected from map data.
  */
-const JSONObjectSize = (obj: any) => {
+const _JSONObjectSize = (obj: any): number => {
     let numItems: number = 0;
     if (Array.isArray(obj)) {
         numItems = obj.length;
@@ -32,8 +32,8 @@ export async function transformDataFunction(
     varnames: string[],
     setTransformDataAll: (data: any) => void,
     onComplete: () => void
-) {
-
+): Promise<void> {
+    /* eslint-disable no-console */
     try {
         if (!data1 || !data2) {
             throw new Error('Data1 or Data2 is null/undefined');
@@ -53,7 +53,7 @@ export async function transformDataFunction(
         const bytes = await wasmResponse.arrayBuffer();
 
         try {
-            const wasm_binary = wasm_js.initSync(bytes);
+            const _wasm_binary = wasm_js.initSync(bytes);
 
             const varname = varnames.join(",");
             const data1js = JSON.stringify(data1);
@@ -120,7 +120,7 @@ export async function transformDataSelectCol(
     transformDataAll: Array<any> | null,
     outputLayer: string,
     setTransformDataOneCol: (data: any) => void
-) {
+): Promise<void> {
     type Row = number[];
 
     let outputCol;

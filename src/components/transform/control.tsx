@@ -1,6 +1,5 @@
 
-import { SyntheticEvent, useCallback, useEffect, useState, useRef } from 'react';
-import Link from 'next/link'
+import { useEffect, useState, useRef } from 'react';
 import Image from "next/image"
 import localFont from 'next/font/local'
 
@@ -18,7 +17,6 @@ import CityList from '@/components/transform/cityList';
 import LayersList from '@/components/transform/layersList';
 import TargetCityList from '@/components/transform/targetCityList';
 import LayerList from '@/components/transform/layerList';
-import SelectNumLayers from '@/components/map/numLayers';
 import OpacitySlider from '@/components/map/opacitySlider';
 import RangeSlider from '@/components/map/rangeSlider';
 import OutputLayers from '@/components/transform/outputLayers';
@@ -59,13 +57,13 @@ interface DefaultExtraLayersProps {
     citiesArray: CityDataProps[]
 }
 
-const RootSpacing = styled('div')(({ theme }) => ({
+const RootSpacing = styled('div')((_theme) => ({
     width: '100%',
     marginTop: '12px',
     marginBottom: '0px',
 }));
 
-export function DefaultExtraLayers (props: DefaultExtraLayersProps) {
+export function DefaultExtraLayers (props: DefaultExtraLayersProps): string[] {
 
     const source_city_values =
     Object.entries(props.citiesArray[props.idx].stats_single);
@@ -113,19 +111,10 @@ export function DefaultExtraLayers (props: DefaultExtraLayersProps) {
 }
 
 
-export default function Control (props: TransformControlProps) {
-
-    const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
-
-    const cityNames = props.citiesArray.map((item) => item.name);
-
-    const [showLayersDialog, setShowLayerssDialog] = useState(false);
-    const handleLayersDialogVisibility = useCallback((showLayersDialog: boolean) => {
-        setShowLayerssDialog(showLayersDialog => !showLayersDialog);
-    }, []);
+export default function Control (props: TransformControlProps): JSX.Element {
 
     const [hideControls, setHideControls] = useState(false);
-    const handleControlsVisibility = (pHideControls: boolean) => {
+    const handleControlsVisibility = (pHideControls: boolean): void => {
         setHideControls(pHideControls);
     }
     const [uaLogo, setUaLogo] = useState('/ua.svg');
@@ -136,7 +125,7 @@ export default function Control (props: TransformControlProps) {
         }
     }, []);
 
-    const [defaultVarnames, setDefaultVarnames] = useState(props.varnames);
+    const [_defaultVarnames, setDefaultVarnames] = useState(props.varnames);
 
     // Effect to set default "Extra layers" as all those with better values:
     const initialSetDefaultValues = useRef(false);
@@ -152,11 +141,11 @@ export default function Control (props: TransformControlProps) {
 
     const [openExtraLayers, setOpenExtraLayers] = useState(false);
 
-    const handleClickOpenExtraLayers = () => {
+    const handleClickOpenExtraLayers = (): void => {
         setOpenExtraLayers(true);
     };
 
-    const handleCloseExtraLayers = () => {
+    const handleCloseExtraLayers = (): void => {
         setOpenExtraLayers(false);
     };
 
@@ -177,10 +166,10 @@ export default function Control (props: TransformControlProps) {
         multiplier *= 10;
     }
     const handleSliderValuesChange = (
-        event: Event,
+        _event: Event,
         value: number | number [],
-        activeThumb: number
-    ) => {
+        _activeThumb: number
+    ): void => {
 
         let newValue: number[];
         if (typeof value === 'number') {

@@ -10,7 +10,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { DefaultExtraLayers } from "@/components/transform/control";
 import { CityDataProps, DataRangeKeys } from "@/data/interfaces";
 import useWindowSize from "@/components/windowSize";
-import styles from '@/styles/controls.module.css';
 
 interface LayerListProps {
     idx: number,
@@ -25,7 +24,7 @@ interface LayerListProps {
 }
 
 
-export default function LayerList(props: LayerListProps) {
+export default function LayerList(props: LayerListProps): JSX.Element {
 
     const options = useMemo (() => {
         const allOptions = [
@@ -51,8 +50,6 @@ export default function LayerList(props: LayerListProps) {
         return filteredOptions.length > 0 ? filteredOptions : allOptions;
     }, [props.cityLayers]);
 
-    const [isSearchable, setIsSearchable] = useState(true);
-
     // findMatchingOption returns the *value* of the option:
     const findMatchingOption = useCallback(() => {
         var op = "transport";
@@ -64,19 +61,19 @@ export default function LayerList(props: LayerListProps) {
     }, [options, props.layer]);
 
     const [selectedOption, setSelectedOption] = useState(findMatchingOption());
-    const { idx, idx2, layer, citiesArray, setVarnames } = props;
+    const { idx, idx2, citiesArray, setVarnames } = props;
     useEffect(() => {
         const this_option = findMatchingOption();
         if (this_option) {
             setSelectedOption(this_option);
-            const layer = this_option;
-            setVarnames(DefaultExtraLayers({ idx, idx2, layer, citiesArray }));
+            const _layer = this_option;
+            setVarnames(DefaultExtraLayers({ idx, idx2, layer: _layer, citiesArray }));
         } else {
             setSelectedOption(options[0].value);
         }
     }, [idx, idx2, citiesArray, setVarnames, findMatchingOption, options]);
 
-    const handleChange = (event: SelectChangeEvent) => {
+    const handleChange = (event: SelectChangeEvent): void => {
         props.handleLayerChange(event.target.value as DataRangeKeys);
         setSelectedOption(event.target.value as DataRangeKeys);
     };
