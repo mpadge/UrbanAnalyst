@@ -1,7 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import * as d3 from 'd3';
-import Link from 'next/link'
 import styles from '@/styles/legend.module.css';
 import { CityDataProps } from "@/data/interfaces";
 
@@ -15,17 +14,13 @@ interface LegendProps {
     citiesArray: CityDataProps[]
 }
 
-export default function Legend (props: LegendProps) {
-
-    const [cityData, setCityData] = useState(props.citiesArray[props.idx]);
-
-    const cityNames = props.citiesArray.map((item) => item.name);
+export default function Legend(props: LegendProps): JSX.Element {
 
     const svgRef = React.useRef<SVGSVGElement>(null);
 
     useEffect(() => {
 
-        function update(svg: any, layerRange: any, layer_name: string, alpha: number) {
+        function update(svg: any, layerRange: any, layer_name: string, alpha: number): void {
 
             svg.selectAll("rect").remove();
             svg.selectAll("text").remove();
@@ -39,7 +34,7 @@ export default function Legend (props: LegendProps) {
             const marginBottom = 16 + tickSize;
             const marginLeft = 0;
 
-            var t = d3.transition()
+            const _t = d3.transition()
             .duration(750);
 
             // scaleband controls the ticks, which can be on linear or log scales:
@@ -65,7 +60,7 @@ export default function Legend (props: LegendProps) {
             .rangeRound([marginLeft, width - marginRight]);
             var scalecolors = scalebandColors.ticks(nColors)
 
-            let tickAdjust = (g: any) => {
+            let tickAdjust = (g: any): void => {
                 g.selectAll(".tick line")
                     .attr("y1", marginTop + marginBottom - height)
                     .attr("stroke", 'black');
@@ -81,7 +76,7 @@ export default function Legend (props: LegendProps) {
             .domain([layerRange[1], layerRange[0]])
             .interpolator(d3.interpolateViridis);
 
-            var rect = svg.append("g")
+            var _rect = svg.append("g")
             .call((g: any) => g.select(".domain").remove())
             .selectAll("rect")
             .data(scalecolors)
@@ -93,7 +88,7 @@ export default function Legend (props: LegendProps) {
             .attr("fill", Color)
             .attr("opacity", 1 - alpha);
 
-            var tick = svg.append("g")
+            var _tick = svg.append("g")
             .attr("transform", `translate(0,${height - marginBottom + 5})`)
             .join("tick")
             .attr("transform", `translate(0,${height - marginBottom + 5})`)
@@ -103,7 +98,7 @@ export default function Legend (props: LegendProps) {
                 .tickSizeOuter(0))
             .call(tickAdjust);
 
-            var text = svg.append("g")
+            var _text = svg.append("g")
             .call((g: any) => g.select(".domain").remove())
             .call((g: any) => g.append("text")
                 .attr("transform", `translate(0,${height - marginBottom + 5})`)

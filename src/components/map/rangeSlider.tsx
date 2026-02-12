@@ -1,5 +1,4 @@
 
-import { ChangeEvent, SyntheticEvent, SetStateAction, useState } from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 
@@ -18,7 +17,7 @@ interface RangeSliderProps {
     ) => void,
 }
 
-export default function RangeSlider(props: RangeSliderProps) {
+export default function RangeSlider(props: RangeSliderProps): JSX.Element {
 
     const width = useWindowSize().width;
     const sizeString = width == null ? "medium" : (width < 700 ? "small" : "medium");

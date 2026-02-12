@@ -6,11 +6,9 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-
-import styles from '@/styles/controls.module.css';
 import { GetLayerText } from "@/components/explainLayer";
 import { CityDataProps, ExplainButtonProps } from "@/data/interfaces";
-import { HeadingTextOneLayer, HeadingText } from "@/components/headingText";
+import { HeadingText } from "@/components/headingText";
 
 export interface ExplainProps {
     open: boolean,
@@ -23,10 +21,10 @@ export interface ExplainProps {
     citiesArray: CityDataProps[]
 }
 
-export function ExplainLayerDialog(props: ExplainProps) {
+export function ExplainLayerDialog(props: ExplainProps): JSX.Element {
     const { onClose, open } = props;
 
-    const handleClose = () => {
+    const handleClose = (): void => {
         onClose();
     };
 
@@ -59,15 +57,15 @@ export function ExplainLayerDialog(props: ExplainProps) {
     );
 }
 
-export default function ExplainButton (props: ExplainButtonProps) {
+export default function ExplainButton(props: ExplainButtonProps): JSX.Element {
 
     const [open, setOpen] = useState(false);
 
-    const handleClickOpen = () => {
+    const handleClickOpen = (): void => {
         setOpen(true);
     };
 
-    const handleClose = () => {
+    const handleClose = (): void => {
         setOpen(false);
     };
 
