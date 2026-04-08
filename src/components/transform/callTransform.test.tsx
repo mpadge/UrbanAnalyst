@@ -89,6 +89,8 @@ describe('transformDataFunction', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     vi.stubEnv('NEXT_PUBLIC_NUM_TRANSFORM_SAMPLES', '10000')
+    vi.spyOn(console, 'error').mockImplementation(() => {})
+    vi.spyOn(console, 'log').mockImplementation(() => {})
   })
 
   it('throws error when data1 is null', async () => {
