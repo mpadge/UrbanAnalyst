@@ -9,9 +9,10 @@ vi.mock('@/components/appBar', () => ({
 }))
 
 vi.mock('next/image', () => ({
-  default: ({ src, alt, ...props }: any) => (
-    <img src={typeof src === 'object' ? src.src : src} alt={alt} {...props} />
-  )
+  default: ({ src, alt, ...props }: { src: unknown; alt: string; [key: string]: unknown }) => {
+    const { fill: _fill, priority: _priority, ...rest } = props
+    return <img src={typeof src === 'object' ? (src as { src: string }).src : src as string} alt={alt} {...rest} />
+  }
 }))
 
 vi.mock('@/components/main/uaindexBarChart', () => ({
