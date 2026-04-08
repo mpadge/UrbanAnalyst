@@ -8,13 +8,15 @@ vi.mock('@/components/appBar', () => ({
   )
 }))
 
+vi.mock('next/image', () => ({
+  default: ({ src, alt, ...props }: any) => (
+    <img src={typeof src === 'object' ? src.src : src} alt={alt} {...props} />
+  )
+}))
+
 vi.mock('@/components/main/uaindexBarChart', () => ({
   default: (): JSX.Element => <div data-testid="ua-bar-chart" />
 }))
-
-vi.mock('@/images/compare.png', () => ({ default: {} }))
-vi.mock('@/images/map.png', () => ({ default: {} }))
-vi.mock('@/images/ua.png', () => ({ default: {} }))
 
 describe('Home Page', () => {
   beforeEach(() => {
