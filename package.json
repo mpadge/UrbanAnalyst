@@ -64,6 +64,6 @@
         "postcss": "^8.5.9",
         "typescript": "^6.0.2",
         "vitest": "^4.0.17",
-        "wasm-pack": "^0.12.1"
+        "wasm-pack": "^0.14.0"
     }
 }
