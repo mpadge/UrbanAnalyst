@@ -20,8 +20,17 @@ dev: ## Start dev server
 test: ## Run all tests
 	$(ENGINE) run test
 
+outdated: ## Show 'npm outdated' packages
+	$(ENGINE) outdated || true
+
 build: ## Build site
 	$(ENGINE) run build
+
+update: ## Update a package: make update pkg=<package-name>
+	$(ENGINE) i $(pkg)@latest
+	$(ENGINE) install
+	$(ENGINE) run build
+	$(ENGINE) run test
 
 iv: ## Generate iv key
 	@openssl rand -hex 16 > public/data/iv.txt
