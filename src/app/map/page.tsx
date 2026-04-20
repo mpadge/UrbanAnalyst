@@ -4,8 +4,8 @@ import type { Metadata, Viewport } from 'next';
 import ButtonAppBar from '@/components/appBar';
 
 export const metadata: Metadata = {
-    title: 'UA',
-    description: 'Maps for Urban Analyst',
+    title: 'UrbanAnalyst',
+    description: 'UrbanAnalyst Map page',
     icons: '/ua.ico',
 }
 
