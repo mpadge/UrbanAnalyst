@@ -1,5 +1,6 @@
 {
   "name": "uamutations",
+  "type": "module",
   "collaborators": [
     "Mark Padgham <mark.padgham@email.com>"
   ],
@@ -15,7 +16,7 @@
     "uamutations.js",
     "uamutations.d.ts"
   ],
-  "module": "uamutations.js",
+  "main": "uamutations.js",
   "types": "uamutations.d.ts",
   "sideEffects": [
     "./snippets/*"
