@@ -40,7 +40,8 @@ export default function Home(): JSX.Element {
         "compare",
         "map",
         "transform",
-        "about"
+        "about",
+        "services"
     ]
 
     return (
@@ -262,15 +263,16 @@ export default function Home(): JSX.Element {
                             href="https://demo.urbananalyst.city" >
                             demonstration pages
                         </Link>.
-                        City-specific Urban Analyst sites can be customized for any 
+                        City-specific Urban Analyst sites can be customized for any
                         conceivable needs. To find out more, check out the&nbsp;
                         <Link className = {styles.textLink}
                             href="https://demo.urbananalyst.city" >
                             demonstration pages
                         </Link>,
-                        or email&nbsp;
-                        <Link href="mailto:info@urbananalyst.city" rel="noopener noreferrer">
-                            info@urbananalyst.city
+                        or visit the&nbsp;
+                        <Link className = {styles.textLink}
+                            href="/services">
+                            services page
                         </Link>
                         .
                     </p>
@@ -284,12 +286,12 @@ export default function Home(): JSX.Element {
 
                 <div className={styles.centerNormal}>
                     <p className="text-center">
-                        To request the addition of a particular city, email us
-                        at&nbsp;
-                        <Link href="mailto:info@urbananalyst.city" rel="noopener noreferrer">
-                            info@urbananalyst.city
+                        To request the addition of a particular city, visit the&nbsp;
+                        <Link className = {styles.textLink}
+                            href="/services">
+                            services page
                         </Link>
-                        . Or open an issue on
+                        &nbsp;or open an issue on
                         <a className = {styles.textLink}
                             href="https://github.com/mpadge/UrbanAnalyst/issues"
                             target="_blank"
