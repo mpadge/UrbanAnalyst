@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from 'next/navigation';
 
 import Control from '@/components/summarise/control';
 import styles from '@/styles/summarise.module.css';
@@ -9,12 +10,25 @@ import { localStorageHelpers } from '@/components/utils/localStorageUtils';
 
 export default function SummarisePage(): JSX.Element {
 
-    const [idx, setIdx] = useState(() => {
+    const searchParams = useSearchParams();
+    const [urlData] = useState<{ hasFullQuery: boolean; idx: number }>(() => {
+        if (searchParams?.has('idx')) {
+            const urlIdx = parseInt(searchParams.get('idx')!, 10);
+            const val = isNaN(urlIdx) ? 0 : urlIdx;
+            localStorageHelpers.setItem('uaCityIdx', val.toString());
+            return { hasFullQuery: true, idx: val };
+        }
         const stored = localStorageHelpers.getItem('uaCityIdx');
-        if (!stored) return 0;
-        const parsed = parseInt(stored, 10);
-        return isNaN(parsed) ? 0 : parsed;
+        const parsed = parseInt(stored ?? '', 10);
+        return { hasFullQuery: false, idx: isNaN(parsed) ? 0 : parsed };
     });
+    const hasFullQuery = urlData.hasFullQuery;
+    const [idx, setIdx] = useState(urlData.idx);
+
+    useEffect(() => {
+        if (hasFullQuery) return;
+        window.history.replaceState(null, '', `?idx=${idx}`);
+    }, [hasFullQuery, idx]);
 
     const contentArray = Content();
 

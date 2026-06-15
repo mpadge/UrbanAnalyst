@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import type { Metadata, Viewport } from 'next';
 
 import styles from '@/styles/summarise.module.css'
@@ -31,7 +32,9 @@ export default function Home(): JSX.Element {
             <ButtonAppBar text={buttonTxt} />
             <main className={styles.main}>
 
-                <SummarisePage />
+                <Suspense fallback={null}>
+                    <SummarisePage />
+                </Suspense>
 
             </main>
         </>
