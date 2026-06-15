@@ -15,7 +15,6 @@ function patch(file, from, to) {
     if (src.includes(to)) return; // already patched
     if (!src.includes(from)) return; // nothing to patch
     fs.writeFileSync(full, src.replace(from, to));
-    console.log(`patched ${file}`);
 }
 
 patch(

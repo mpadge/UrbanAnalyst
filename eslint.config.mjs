@@ -42,6 +42,8 @@ export default defineConfig([
                 argsIgnorePattern: "^_",
                 varsIgnorePattern: "^_",
             }],
+            "@typescript-eslint/explicit-function-return-type": "off",
+            "@next/next/no-img-element": "off",
         },
     },
 ]);
