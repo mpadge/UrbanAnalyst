@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, lazy, Suspense, useMemo, useCallback, useEffect } from "react";
+import { useState, lazy, Suspense, useMemo, useCallback, useEffect } from "react";
 import { useSearchParams } from 'next/navigation';
 import { ChartSkeleton, ControlSkeleton } from '@/components/utils/loadingSkeletons';
 import { ErrorBoundary, ErrorSkeleton } from '@/components/utils/errorBoundary';
@@ -104,19 +104,19 @@ export default function ComparePage(): JSX.Element {
     const numLayersOptions: NumLayersMode[] = useMemo(() => [...NUM_LAYERS_OPTIONS], []);
 
     const searchParams = useSearchParams();
-    // Capture URL mode on the initial render only. Next.js patches replaceState, so
-    // useSearchParams() would otherwise update after the first URL write and flip
-    // hasFullQuery to true, breaking subsequent URL updates from state changes.
-    const hasFullQuery = useRef(COMPARE_QUERY_KEYS.every(k => searchParams.has(k))).current;
-    const urlOverrides = useRef<Partial<CompareState> | undefined>(
-        hasFullQuery ? {
+    // Capture URL params on the initial render only via lazy useState. Next.js patches
+    // replaceState, so useSearchParams() would otherwise update after the first URL write
+    // and flip hasFullQuery to true, breaking subsequent URL updates from state changes.
+    const [urlOverrides] = useState<Partial<CompareState> | undefined>(() =>
+        COMPARE_QUERY_KEYS.every(k => searchParams.has(k)) ? {
             layer: searchParams.get('layer') as DataRangeKeys,
             layer2: searchParams.get('layer2') as DataRangeKeys,
             numLayers: searchParams.get('numLayers') as "Single" | "Paired",
             sortOpt: searchParams.get('sortOpt')!,
             meanVals: searchParams.get('meanVals') === 'true'
         } : undefined
-    ).current;
+    );
+    const hasFullQuery = urlOverrides !== undefined;
 
     const { state, actions } = useCompareState(urlOverrides);
     const { layer, layer2, numLayers, sortOpt, meanVals } = state;
