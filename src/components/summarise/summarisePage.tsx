@@ -11,10 +11,13 @@ import { localStorageHelpers } from '@/components/utils/localStorageUtils';
 export default function SummarisePage(): JSX.Element {
 
     const searchParams = useSearchParams();
+    const contentArray = Content();
+
     const [urlData] = useState<{ hasFullQuery: boolean; idx: number }>(() => {
-        if (searchParams?.has('idx')) {
-            const urlIdx = parseInt(searchParams.get('idx')!, 10);
-            const val = isNaN(urlIdx) ? 0 : urlIdx;
+        if (searchParams?.has('city')) {
+            const cityName = searchParams.get('city')!;
+            const found = Content().findIndex(c => c.name === cityName);
+            const val = found >= 0 ? found : 0;
             localStorageHelpers.setItem('uaCityIdx', val.toString());
             return { hasFullQuery: true, idx: val };
         }
@@ -27,12 +30,10 @@ export default function SummarisePage(): JSX.Element {
 
     useEffect(() => {
         if (hasFullQuery) return;
-        window.history.replaceState(null, '', `?idx=${idx}`);
-    }, [hasFullQuery, idx]);
+        const cityName = contentArray[idx]?.name ?? '';
+        window.history.replaceState(null, '', `?city=${cityName}`);
+    }, [hasFullQuery, idx, contentArray]);
 
-    const contentArray = Content();
-
-    const _contentNames = contentArray.map(element => element.name);
     const contentHtml = contentArray.map(element => element.content);
 
     const handleIdxChange = (idx: number): void => {
