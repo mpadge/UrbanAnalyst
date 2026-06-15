@@ -190,6 +190,7 @@ export default function MapPage(): JSX.Element {
     const [layerStartStop, setLayerStartStop] = useState<[number, number]>(LAYER_CONSTANTS.DEFAULT_LAYER_START_STOP);
     const [layerRange, setLayerRange] = useState<[number, number]>(LAYER_CONSTANTS.DEFAULT_LAYER_RANGE);
 
+    /* eslint-disable react-hooks/set-state-in-effect */
     useEffect(() => {
         const initialState = loadInitialState();
         const {
@@ -233,7 +234,9 @@ export default function MapPage(): JSX.Element {
         setLayerRange([rangeData.layer_min, rangeData.layer_max]);
         setLayerStartStop([rangeData.layer_start, rangeData.layer_stop]);
     }, [])
+    /* eslint-enable react-hooks/set-state-in-effect */
 
+    /* eslint-disable react-hooks/set-state-in-effect */
     useEffect(() => {
         if (cityLayers.length > 0) {
             const rangeData = calculateLayerRanges(
@@ -248,6 +251,7 @@ export default function MapPage(): JSX.Element {
             setLayerStartStop([rangeData.layer_start, rangeData.layer_stop]);
         }
     }, [idx, layer, layer2, numLayers, cityLayers.length])
+    /* eslint-enable react-hooks/set-state-in-effect */
 
     const createViewStateForCity = useCallback((cityIdx: number) => ({
         ...CITY_DATA.citiesArray[cityIdx].initialViewState,
