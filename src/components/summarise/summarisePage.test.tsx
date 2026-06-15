@@ -18,6 +18,7 @@ vi.mock('@/components/utils/localStorageUtils', () => ({
     getItem: vi.fn(() => null),
     setItem: vi.fn(),
   },
+  fetchIpDefaultCityIdx: vi.fn(() => Promise.resolve(0)),
 }))
 
 describe('SummarisePage', () => {

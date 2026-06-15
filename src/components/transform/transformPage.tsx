@@ -16,6 +16,7 @@ import { CityDataProps } from "@/data/interfaces";
 import { CITY_DATA } from '@/data/citydata';
 import { DataRangeKeys, ViewState } from '@/data/interfaces';
 import { localStorageHelpers } from '@/components/utils/localStorageUtils';
+import { useIpCityDefault } from '@/components/utils/useIpCityDefault';
 import { useTransformTourLogic } from '@/components/utils/transformTourUtils';
 import { LAYER_CONSTANTS, OUTPUT_LAYER_TYPES } from '@/components/utils/pageConstants';
 import type { OutputLayerType } from '@/components/utils/pageConstants';
@@ -281,6 +282,11 @@ export default function TransformPage(): JSX.Element {
         transitionDuration: LAYER_CONSTANTS.DEFAULT_TRANSITION_DURATION,
         transitionInterpolator: new FlyToInterpolator()
     }), []);
+
+    useIpCityDefault((detectedIdx) => {
+        setIdx(detectedIdx);
+        setViewState(createViewStateForCity(detectedIdx));
+    });
 
     const citiesData = useMemo(() => ({
         citiesArray: CITY_DATA.citiesArray,

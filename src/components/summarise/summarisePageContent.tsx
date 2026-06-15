@@ -7,6 +7,7 @@ import Control from '@/components/summarise/control';
 import styles from '@/styles/summarise.module.css';
 import Content from '@/components/summarise/citySummaryData';
 import { localStorageHelpers } from '@/components/utils/localStorageUtils';
+import { useIpCityDefault } from '@/components/utils/useIpCityDefault';
 
 export default function SummarisePageContent(): JSX.Element {
 
@@ -27,6 +28,8 @@ export default function SummarisePageContent(): JSX.Element {
     });
     const hasFullQuery = urlData.hasFullQuery;
     const [idx, setIdx] = useState(urlData.idx);
+
+    useIpCityDefault(setIdx);
 
     useEffect(() => {
         if (hasFullQuery) return;
