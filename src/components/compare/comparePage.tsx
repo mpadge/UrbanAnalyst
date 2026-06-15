@@ -108,11 +108,11 @@ export default function ComparePage(): JSX.Element {
     // replaceState, so useSearchParams() would otherwise update after the first URL write
     // and flip hasFullQuery to true, breaking subsequent URL updates from state changes.
     const [urlOverrides] = useState<Partial<CompareState> | undefined>(() =>
-        COMPARE_QUERY_KEYS.every(k => searchParams.has(k)) ? {
+        searchParams && COMPARE_QUERY_KEYS.every(k => searchParams.has(k)) ? {
             layer: searchParams.get('layer') as DataRangeKeys,
             layer2: searchParams.get('layer2') as DataRangeKeys,
             numLayers: searchParams.get('numLayers') as "Single" | "Paired",
-            sortOpt: searchParams.get('sortOpt')!,
+            sortOpt: searchParams.get('sortOpt') ?? '',
             meanVals: searchParams.get('meanVals') === 'true'
         } : undefined
     );
