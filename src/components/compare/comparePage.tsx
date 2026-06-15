@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, lazy, Suspense, useMemo, useCallback } from "react";
+import { useState, useRef, lazy, Suspense, useMemo, useCallback, useEffect } from "react";
+import { useSearchParams } from 'next/navigation';
 import { ChartSkeleton, ControlSkeleton } from '@/components/utils/loadingSkeletons';
 import { ErrorBoundary, ErrorSkeleton } from '@/components/utils/errorBoundary';
 
@@ -12,7 +13,7 @@ import styles from '@/styles/Home.module.css';
 
 import { CITY_DATA } from '@/data/citydata';
 import { DataRangeKeys } from '@/data/interfaces';
-import { useCompareState } from '@/components/utils/localStorageUtils';
+import { useCompareState, type CompareState } from '@/components/utils/localStorageUtils';
 import { useTourLogic } from '@/components/utils/tourUtils';
 import { NUM_LAYERS_OPTIONS } from '@/components/utils/pageConstants';
 import type { NumLayersMode } from '@/components/utils/pageConstants';
@@ -94,16 +95,45 @@ function ComparePagePresentation({
     );
 }
 
+const COMPARE_QUERY_KEYS = ['layer', 'layer2', 'numLayers', 'sortOpt', 'meanVals'] as const;
+
 export default function ComparePage(): JSX.Element {
 
     const [_cityData] = useState(CITY_DATA.citiesArray[0]);
 
     const numLayersOptions: NumLayersMode[] = useMemo(() => [...NUM_LAYERS_OPTIONS], []);
 
-    const { state, actions } = useCompareState();
+    const searchParams = useSearchParams();
+    // Capture URL mode on the initial render only. Next.js patches replaceState, so
+    // useSearchParams() would otherwise update after the first URL write and flip
+    // hasFullQuery to true, breaking subsequent URL updates from state changes.
+    const hasFullQuery = useRef(COMPARE_QUERY_KEYS.every(k => searchParams.has(k))).current;
+    const urlOverrides = useRef<Partial<CompareState> | undefined>(
+        hasFullQuery ? {
+            layer: searchParams.get('layer') as DataRangeKeys,
+            layer2: searchParams.get('layer2') as DataRangeKeys,
+            numLayers: searchParams.get('numLayers') as "Single" | "Paired",
+            sortOpt: searchParams.get('sortOpt')!,
+            meanVals: searchParams.get('meanVals') === 'true'
+        } : undefined
+    ).current;
+
+    const { state, actions } = useCompareState(urlOverrides);
     const { layer, layer2, numLayers, sortOpt, meanVals } = state;
 
     const { tourProps, handleTourOpen } = useTourLogic();
+
+    useEffect(() => {
+        if (hasFullQuery) return;
+        const params = new URLSearchParams({
+            layer,
+            layer2,
+            numLayers,
+            sortOpt,
+            meanVals: String(meanVals)
+        });
+        window.history.replaceState(null, '', `?${params.toString()}`);
+    }, [hasFullQuery, layer, layer2, numLayers, sortOpt, meanVals]);
 
     const processedCitiesData = useMemo(() => {
         return {

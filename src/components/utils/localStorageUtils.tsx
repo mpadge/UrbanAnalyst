@@ -74,9 +74,10 @@ export function loadInitialState(): { idx: number; layer: string; layer2: string
 // Storage keys for compare page
 export const COMPARE_STORAGE_KEYS = {
     LAYER: 'uaLayer',
-    LAYER2: 'uaLayer2', 
+    LAYER2: 'uaLayer2',
     NUM_LAYERS: 'uaNumLayers',
-    SORT_OPT: 'uaCompareSortOpt'
+    SORT_OPT: 'uaCompareSortOpt',
+    MEAN_VALS: 'uaCompareMeanVals'
 } as const;
 
 // Import constants for use in state initialization
@@ -112,7 +113,7 @@ export function usePersistedState<T>(
 }
 
 // Compare state interface
-interface CompareState {
+export interface CompareState {
     layer: DataRangeKeys;
     layer2: DataRangeKeys;
     numLayers: "Single" | "Paired";
@@ -146,7 +147,7 @@ function compareReducer(state: CompareState, action: CompareAction): CompareStat
 }
 
 // Consolidated compare state hook
-export function useCompareState(): {
+export function useCompareState(initialOverrides?: Partial<CompareState>): {
     state: CompareState;
     actions: {
         setLayer: (layer: DataRangeKeys) => void;
@@ -156,15 +157,27 @@ export function useCompareState(): {
         toggleMeanVals: () => void
     }
 } {
-    const initialState: CompareState = {
-        layer: (localStorageHelpers.getString(COMPARE_STORAGE_KEYS.LAYER, LAYER_CONSTANTS.DEFAULT_TRANSPORT_LAYER) as DataRangeKeys),
-        layer2: (localStorageHelpers.getString(COMPARE_STORAGE_KEYS.LAYER2, LAYER_CONSTANTS.DEFAULT_TRANSPORT_LAYER) as DataRangeKeys),
-        numLayers: (localStorageHelpers.getString(COMPARE_STORAGE_KEYS.NUM_LAYERS, LAYER_CONSTANTS.MODE_SINGLE) as "Single" | "Paired"),
-        sortOpt: localStorageHelpers.getString(COMPARE_STORAGE_KEYS.SORT_OPT, 'increasing'),
-        meanVals: true
-    };
-
-    const [state, dispatch] = useReducer(compareReducer, initialState);
+    const [state, dispatch] = useReducer(
+        compareReducer,
+        initialOverrides,
+        (overrides): CompareState => {
+            const s: CompareState = {
+                layer: (overrides?.layer ?? localStorageHelpers.getString(COMPARE_STORAGE_KEYS.LAYER, LAYER_CONSTANTS.DEFAULT_TRANSPORT_LAYER)) as DataRangeKeys,
+                layer2: (overrides?.layer2 ?? localStorageHelpers.getString(COMPARE_STORAGE_KEYS.LAYER2, LAYER_CONSTANTS.DEFAULT_TRANSPORT_LAYER)) as DataRangeKeys,
+                numLayers: (overrides?.numLayers ?? localStorageHelpers.getString(COMPARE_STORAGE_KEYS.NUM_LAYERS, LAYER_CONSTANTS.MODE_SINGLE)) as "Single" | "Paired",
+                sortOpt: overrides?.sortOpt ?? localStorageHelpers.getString(COMPARE_STORAGE_KEYS.SORT_OPT, 'increasing'),
+                meanVals: overrides?.meanVals ?? (localStorageHelpers.getString(COMPARE_STORAGE_KEYS.MEAN_VALS, 'true') === 'true')
+            };
+            if (overrides) {
+                if (overrides.layer !== undefined) localStorageHelpers.setItem(COMPARE_STORAGE_KEYS.LAYER, overrides.layer);
+                if (overrides.layer2 !== undefined) localStorageHelpers.setItem(COMPARE_STORAGE_KEYS.LAYER2, overrides.layer2);
+                if (overrides.numLayers !== undefined) localStorageHelpers.setItem(COMPARE_STORAGE_KEYS.NUM_LAYERS, overrides.numLayers);
+                if (overrides.sortOpt !== undefined) localStorageHelpers.setItem(COMPARE_STORAGE_KEYS.SORT_OPT, overrides.sortOpt);
+                if (overrides.meanVals !== undefined) localStorageHelpers.setItem(COMPARE_STORAGE_KEYS.MEAN_VALS, String(overrides.meanVals));
+            }
+            return s;
+        }
+    );
 
     const actions = {
         setLayer: (layer: DataRangeKeys): void => {
@@ -184,6 +197,7 @@ export function useCompareState(): {
             dispatch({ type: "SET_SORT_OPT", payload: sortOpt });
         },
         toggleMeanVals: (): void => {
+            localStorageHelpers.setItem(COMPARE_STORAGE_KEYS.MEAN_VALS, String(!state.meanVals));
             dispatch({ type: "TOGGLE_MEAN_VALS" });
         }
     };
