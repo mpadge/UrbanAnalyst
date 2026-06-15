@@ -16,6 +16,7 @@ import { CITY_DATA } from '@/data/citydata';
 import { CityDataProps, DataRangeKeys, ViewState } from '@/data/interfaces';
 import { calculateLayerRanges } from '@/components/utils/layerUtils';
 import { localStorageHelpers, loadInitialState } from '@/components/utils/localStorageUtils';
+import { useIpCityDefault } from '@/components/utils/useIpCityDefault';
 import { useMapTourLogic } from '@/components/utils/mapTourUtils';
 import { LAYER_CONSTANTS, NUM_LAYERS_OPTIONS } from '@/components/utils/pageConstants';
 import type { NumLayersMode } from '@/components/utils/pageConstants';
@@ -300,6 +301,13 @@ export default function MapPageContent(): JSX.Element {
         transitionDuration: LAYER_CONSTANTS.DEFAULT_TRANSITION_DURATION,
         transitionInterpolator: new FlyToInterpolator()
     }), []);
+
+    useIpCityDefault((detectedIdx) => {
+        setIdx(detectedIdx);
+        setViewState(createViewStateForCity(detectedIdx));
+        const theseLayers = Object.keys(CITY_DATA.citiesArray[detectedIdx].dataRanges);
+        setCityLayers(theseLayers);
+    });
 
     const handleIdxChange = useCallback((idx: number) => {
         setIdx(idx);

@@ -1,5 +1,13 @@
 import { useState, useReducer } from 'react';
 import { DataRangeKeys } from '@/data/interfaces';
+import { findNearestCityIdx } from '@/data/citydata';
+
+export async function fetchIpDefaultCityIdx(): Promise<number> {
+    const res = await fetch('/api/geoip');
+    const json = await res.json();
+    if (typeof json.latitude !== 'number' || typeof json.longitude !== 'number') return 0;
+    return findNearestCityIdx(json.latitude as number, json.longitude as number);
+}
 
 export const localStorageHelpers = {
 

@@ -1478,3 +1478,14 @@ const washington = {
 export const CITY_DATA = {
     "citiesArray": [berlin, hamburg, london, mannheim, muenster, paris, philadelphia, utrecht, washington],
 };
+
+export function findNearestCityIdx(lat: number, lon: number): number {
+    return CITY_DATA.citiesArray.reduce((bestIdx, city, i) => {
+        const dLat = city.initialViewState.latitude - lat;
+        const dLon = city.initialViewState.longitude - lon;
+        const best = CITY_DATA.citiesArray[bestIdx].initialViewState;
+        const bLat = best.latitude - lat;
+        const bLon = best.longitude - lon;
+        return (dLat * dLat + dLon * dLon) < (bLat * bLat + bLon * bLon) ? i : bestIdx;
+    }, 0);
+}
