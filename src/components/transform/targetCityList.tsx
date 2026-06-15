@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -33,22 +33,11 @@ export default function TargetCityList(props: CityListProps): JSX.Element {
         }
         return op;
     }, [options, props.idx2]);
-    const [selectedOption, setSelectedOption] = useState(findMatchingOption());
-
-    // This is necessary to ensure localStorage values are correctly set on initial load:
-    useEffect(() => {
-        const this_option = findMatchingOption();
-        if (this_option) {
-            setSelectedOption(this_option);
-        } else {
-            setSelectedOption(options[0].value);
-        }
-    }, [findMatchingOption, options]);
+    const selectedOption = findMatchingOption();
 
     const handleChange = (event: SelectChangeEvent): void => {
         const val = event.target.value as string;
         if (val) {
-            setSelectedOption(val);
             const opInt = parseInt(val);
             props.handleIdx2Change(opInt);
         }
