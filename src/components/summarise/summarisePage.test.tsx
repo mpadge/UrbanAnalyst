@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import SummarisePage from '@/components/summarise/summarisePage'
+import SummarisePage from '@/components/summarise/summarisePageContent'
 
 vi.mock('@/components/summarise/control', () => ({
   default: () => <div data-testid="summarise-control" />
