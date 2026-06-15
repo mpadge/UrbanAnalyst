@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import useWindowSize from '@/components/windowSize';
 import getPreferredTourClass from '@/components/tourClass';
 import { getTourConfig } from '@/components/compare/tour/tourConfig';
@@ -18,26 +18,17 @@ export function useTourLogic(): {
     };
     handleTourOpen: () => void;
 } {
-    const [tourClass, setTourClass] = useState(tourStyles.tourhelperLight);
-    const [width, setWidth] = useState(0);
-    const [height, setHeight] = useState(0);
+    const [tourClass] = useState(() =>
+        typeof window !== 'undefined' ? getPreferredTourClass() : tourStyles.tourhelperLight
+    );
     const size = useWindowSize();
-    const [isTourOpen, setTourOpen] = useState(false);
+    const width = size?.width || 0;
+    const height = size?.height || 0;
+    const [isTourOpen, setTourOpen] = useState(() =>
+        typeof window !== 'undefined' && !sessionStorageHelpers.getItem('uacomparetour')
+    );
 
     const accentColor = "#5cb7b7";
-
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            setTourClass(getPreferredTourClass());
-        }
-    }, []);
-
-    useEffect(() => {
-        const w = size?.width || 0;
-        setWidth(w);
-        const h = size?.height || 0;
-        setHeight(h);
-    }, [size]);
 
     const tourConfig = useMemo(() => getTourConfig(width, height), [width, height]);
 
@@ -49,12 +40,6 @@ export function useTourLogic(): {
         setTourOpen(false);
         sessionStorageHelpers.setItem("uacomparetour", "done");
     };
-
-    useEffect(() => {
-        if(!sessionStorageHelpers.getItem('uacomparetour')) {
-            setTourOpen(true)
-        }
-    }, []);
 
     return {
         tourProps: {
