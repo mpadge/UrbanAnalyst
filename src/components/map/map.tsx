@@ -4,7 +4,7 @@ import { Map } from "react-map-gl";
 
 import mapLayer from '@/components/map/mapLayer'
 
-import { MapProps } from "@/components/map/mapPage";
+import { MapProps } from "@/components/map/mapPageContent";
 
 const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 

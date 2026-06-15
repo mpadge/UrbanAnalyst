@@ -1,4 +1,5 @@
 
+import { Suspense } from 'react';
 import type { Metadata, Viewport } from 'next';
 
 import ButtonAppBar from '@/components/appBar';
@@ -28,7 +29,9 @@ export default function Home(): JSX.Element {
     return (
         <>
         <ButtonAppBar text={buttonTxt} />
-        <ComparePage />
+        <Suspense fallback={null}>
+            <ComparePage />
+        </Suspense>
         </>
     )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useCallback, useMemo, lazy, Suspense} from 'react';
+import { useEffect, useRef, useState, useCallback, useMemo, lazy, Suspense} from 'react';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 import { ReactourProps } from 'reactour';
 
@@ -19,6 +19,8 @@ import { localStorageHelpers } from '@/components/utils/localStorageUtils';
 import { useTransformTourLogic } from '@/components/utils/transformTourUtils';
 import { LAYER_CONSTANTS, OUTPUT_LAYER_TYPES } from '@/components/utils/pageConstants';
 import type { OutputLayerType } from '@/components/utils/pageConstants';
+
+const TRANSFORM_QUERY_KEYS = ['city', 'targetCity', 'layer', 'outputLayer'] as const;
 
 export interface TransformProps {
     idx: number
@@ -168,37 +170,54 @@ export default function TransformPage(): JSX.Element {
     const [outputLayer, setOutputLayer] = useState<OutputLayerType>(OUTPUT_LAYER_TYPES.RELATIVE);
     const [cityLayers, setCityLayers] = useState<string[]>([]);
 
+    const fromUrl = useRef<boolean | null>(null);
+
     /* eslint-disable react-hooks/set-state-in-effect */
     useEffect(() => {
-        var idxLocal: number = LAYER_CONSTANTS.DEFAULT_CITY_INDEX;
-        var idx2Local: number = LAYER_CONSTANTS.DEFAULT_TARGET_CITY_INDEX;
-        var layerLocal: string = LAYER_CONSTANTS.DEFAULT_TRANSPORT_LAYER;
-        var alphaLocal: number = LAYER_CONSTANTS.DEFAULT_ALPHA;
+        const params = new URLSearchParams(window.location.search);
+        const hasFullQuery = TRANSFORM_QUERY_KEYS.every(k => params.has(k));
+        fromUrl.current = hasFullQuery;
 
-        const storedIdx = localStorageHelpers.getItem('uaCityIdx');
-        if(storedIdx) {
-            idxLocal = parseInt(storedIdx, 10);
-            if (isNaN(idxLocal)) {
-                idxLocal = 0;
-            }
-        }
-        const storedIdx2 = localStorageHelpers.getItem('uaCityIdx2');
-        if(storedIdx2) {
-            idx2Local = parseInt(storedIdx2, 10);
-            if (isNaN(idx2Local)) {
-                idx2Local = 0;
-            }
-        }
-        const storedLayer = localStorageHelpers.getItem('uaLayer');
-        if(storedLayer) {
-            layerLocal = storedLayer;
-        }
+        let idxLocal: number;
+        let idx2Local: number;
+        let layerLocal: string;
+        let alphaLocal: number = LAYER_CONSTANTS.DEFAULT_ALPHA;
+        let outputLayerLocal: OutputLayerType;
+
         const storedAlpha = localStorageHelpers.getItem('uaAlpha');
-        if(storedAlpha) {
-            alphaLocal = parseFloat(storedAlpha);
-            if (isNaN(alphaLocal)) {
-                alphaLocal = 0.5;
+        if (storedAlpha) {
+            const parsed = parseFloat(storedAlpha);
+            if (!isNaN(parsed)) alphaLocal = parsed;
+        }
+
+        if (hasFullQuery) {
+            const cityName = params.get('city')!;
+            const targetCityName = params.get('targetCity')!;
+            idxLocal = Math.max(0, CITY_DATA.citiesArray.findIndex(c => c.name === cityName));
+            idx2Local = Math.max(0, CITY_DATA.citiesArray.findIndex(c => c.name === targetCityName));
+            layerLocal = params.get('layer')!;
+            outputLayerLocal = params.get('outputLayer') as OutputLayerType;
+            localStorageHelpers.setItem('uaCityIdx', idxLocal.toString());
+            localStorageHelpers.setItem('uaCityIdx2', idx2Local.toString());
+            localStorageHelpers.setItem('uaLayer', layerLocal);
+        } else {
+            idxLocal = LAYER_CONSTANTS.DEFAULT_CITY_INDEX;
+            idx2Local = LAYER_CONSTANTS.DEFAULT_TARGET_CITY_INDEX;
+            layerLocal = LAYER_CONSTANTS.DEFAULT_TRANSPORT_LAYER;
+            outputLayerLocal = OUTPUT_LAYER_TYPES.RELATIVE;
+
+            const storedIdx = localStorageHelpers.getItem('uaCityIdx');
+            if (storedIdx) {
+                const parsed = parseInt(storedIdx, 10);
+                if (!isNaN(parsed)) idxLocal = parsed;
             }
+            const storedIdx2 = localStorageHelpers.getItem('uaCityIdx2');
+            if (storedIdx2) {
+                const parsed = parseInt(storedIdx2, 10);
+                if (!isNaN(parsed)) idx2Local = parsed;
+            }
+            const storedLayer = localStorageHelpers.getItem('uaLayer');
+            if (storedLayer) layerLocal = storedLayer;
         }
 
         setIdx(idxLocal);
@@ -209,9 +228,10 @@ export default function TransformPage(): JSX.Element {
             bearing: 0,
             transitionDuration: 2000,
             transitionInterpolator: new FlyToInterpolator()
-        })
+        });
         setLayer(layerLocal as DataRangeKeys);
         setAlpha(alphaLocal);
+        setOutputLayer(outputLayerLocal!);
 
         const theseLayers = Object.keys(CITY_DATA.citiesArray[idxLocal].dataRanges);
         setCityLayers(theseLayers);
@@ -220,6 +240,14 @@ export default function TransformPage(): JSX.Element {
             setLayer(layerLocal as DataRangeKeys);
             localStorageHelpers.removeItem('uaLayer');
         }
+
+        const canonicalParams = new URLSearchParams({
+            city: CITY_DATA.citiesArray[idxLocal].name,
+            targetCity: CITY_DATA.citiesArray[idx2Local].name,
+            layer: layerLocal,
+            outputLayer: outputLayerLocal!
+        });
+        window.history.replaceState(null, '', `?${canonicalParams.toString()}`);
     }, [])
     /* eslint-enable react-hooks/set-state-in-effect */
 
@@ -234,6 +262,17 @@ export default function TransformPage(): JSX.Element {
         setLayerStartStop([layer_start, layer_stop]);
     }, [idx, layer]);
     /* eslint-enable react-hooks/set-state-in-effect */
+
+    useEffect(() => {
+        if (fromUrl.current !== false || !cityLayers.length) return;
+        const params = new URLSearchParams({
+            city: CITY_DATA.citiesArray[idx]?.name ?? '',
+            targetCity: CITY_DATA.citiesArray[idx2]?.name ?? '',
+            layer,
+            outputLayer
+        });
+        window.history.replaceState(null, '', `?${params.toString()}`);
+    }, [idx, idx2, layer, outputLayer, cityLayers.length]);
 
     const createViewStateForCity = useCallback((cityIdx: number) => ({
         ...CITY_DATA.citiesArray[cityIdx].initialViewState,
