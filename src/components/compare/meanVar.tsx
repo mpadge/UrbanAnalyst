@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent } from 'react';
 
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -13,15 +13,8 @@ interface meanVarProps {
 
 export default function MeanVarButtons(props: meanVarProps): JSX.Element {
 
-    const [mean, setMean] = useState(true);
-    useEffect(() => {
-        const meanState = props.meanVals || !props.singleLayer;
-        setMean(meanState);
-    }, [props.meanVals, props.singleLayer]);
-
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        setMean((event.target as HTMLInputElement).value === "average");
-        props.handleMeanChange(mean);
+        props.handleMeanChange((event.target as HTMLInputElement).value === "average");
     }
 
     return (
