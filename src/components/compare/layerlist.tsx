@@ -1,5 +1,5 @@
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -52,20 +52,10 @@ export default function LayerList(props: LayerListProps): JSX.Element {
         return op;
     }, [reducedOptions, props.layer]);
 
-    const [selectedOption, setSelectedOption] = useState(findMatchingOption());
-
-    useEffect(() => {
-        const this_option = findMatchingOption();
-        if (this_option) {
-            setSelectedOption(this_option);
-        } else {
-            setSelectedOption("transport");
-        }
-    }, [props.layer, findMatchingOption, reducedOptions]);
+    const selectedOption = findMatchingOption();
 
     const handleChange = (event: SelectChangeEvent): void => {
         props.handleLayerChange(event.target.value as DataRangeKeys);
-        setSelectedOption(event.target.value as DataRangeKeys);
     };
 
     const width = useWindowSize().width;

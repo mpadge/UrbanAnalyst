@@ -111,11 +111,13 @@ const TransformComponent = (props: TransformProps): JSX.Element => {
     /**
      * ------ Effect #1 ------
      */
+    /* eslint-disable react-hooks/set-state-in-effect */
     useEffect(() => {
         const mapPathSource = "/api/ghAggregateData?city=" + props.city + "&type=data";
         setMapPathSource(mapPathSource);
         setData1(null);
     }, [props.city, setData1]);
+    /* eslint-enable react-hooks/set-state-in-effect */
 
     /**
      * Effect to load 'dataraw' point-based data for source and target cities.
@@ -244,12 +246,14 @@ const TransformComponent = (props: TransformProps): JSX.Element => {
     /**
      * ------ Effect #9 ------
      */
+    /* eslint-disable react-hooks/set-state-in-effect */
     useEffect(() => {
         if (geoJSONcontent !== null) {
             const this_layer = getGeoJsonLayer(geoJSONcontent, props.layerRange, layer, props.alpha);
             setGeoJsonLayer(this_layer);
         }
     }, [props.layerRange, layer, props.alpha, geoJSONcontent]);
+    /* eslint-enable react-hooks/set-state-in-effect */
 
     return (
         <>

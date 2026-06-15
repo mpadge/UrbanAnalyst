@@ -1,5 +1,5 @@
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -33,21 +33,11 @@ export default function SortOrderList(props: SortOrderListProps): JSX.Element {
         return op;
     }, [options, props.sortOpt]);
 
-    const [selectedOption, setSelectedOption] = useState(findMatchingOption());
+    const selectedOption = findMatchingOption();
 
     const handleChange = (event: SelectChangeEvent): void => {
-        setSelectedOption(event.target.value as string);
         props.handleSortChange(event.target.value as string);
     };
-
-    useEffect(() => {
-        const this_option = findMatchingOption();
-        if (this_option) {
-            setSelectedOption(this_option);
-        } else {
-            setSelectedOption(options[0].value);
-        }
-    }, [props.sortOpt, findMatchingOption, options]);
 
     const width = useWindowSize().width;
     const sizeString = width == null ? "medium" : (width < 700 ? "small" : "medium");

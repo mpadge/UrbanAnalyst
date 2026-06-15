@@ -74,13 +74,11 @@ const MIN_MENU_WIDTH = 600;
 
 export default function ButtonAppBar(props: ButtonAppProps): JSX.Element {
 
-    const [theme, setTheme] = useState(lightTheme);
+    const [theme] = useState(() => getPreferredTheme());
     const [mounted, setMounted] = useState(false);
 
-    useEffect(() => {
-        setMounted(true);
-        setTheme(getPreferredTheme());
-    }, []);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    useEffect(() => { setMounted(true); }, []);
 
     const buttonInputs = props.text.map((i) => ({
         key: capitaliseFirst(i),

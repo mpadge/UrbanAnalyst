@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import useWindowSize from '@/components/windowSize';
 import getPreferredTourClass from '@/components/tourClass';
 import { getTourConfig } from '@/components/map/tour/tourConfig';
@@ -19,48 +19,28 @@ export function useMapTourLogic(): {
     };
     handleTourOpen: () => void;
 } {
-    const [tourClass, setTourClass] = useState(tourStyles.tourhelperLight);
-    const [width, setWidth] = useState(0);
-    const [height, setHeight] = useState(0);
+    const [tourClass] = useState(() =>
+        typeof window !== 'undefined' ? getPreferredTourClass() : tourStyles.tourhelperLight
+    );
     const size = useWindowSize();
-    const [isTourOpen, setTourOpen] = useState(false);
+    const width = size?.width || 0;
+    const height = size?.height || 0;
+    const [isTourOpen, setTourOpen] = useState(() =>
+        typeof window !== 'undefined' && !sessionStorageHelpers.getItem('uamaptour')
+    );
 
     const accentColor = "#5cb7b7";
 
-    // Initialize tour class
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            setTourClass(getPreferredTourClass());
-        }
-    }, []);
-
-    // Update window size
-    useEffect(() => {
-        const w = size?.width || 0;
-        setWidth(w);
-        const h = size?.height || 0;
-        setHeight(h);
-    }, [size]);
-
-    // Tour configuration
     const tourConfig = useMemo(() => getTourConfig(width, height), [width, height]);
 
     const handleTourOpen = (): void => {
         setTourOpen(true);
     };
 
-    // Use sessionStorage to only show tour once per session.
     const closeTour = (): void => {
         setTourOpen(false);
         sessionStorageHelpers.setItem("uamaptour", "done");
     };
-
-    // Auto-show tour for new sessions
-    useEffect(() => {
-        if(!sessionStorageHelpers.getItem('uamaptour')) {
-            setTourOpen(true)
-        }
-    }, []);
 
     return {
         tourProps: {

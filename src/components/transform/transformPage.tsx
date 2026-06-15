@@ -168,6 +168,7 @@ export default function TransformPage(): JSX.Element {
     const [outputLayer, setOutputLayer] = useState<OutputLayerType>(OUTPUT_LAYER_TYPES.RELATIVE);
     const [cityLayers, setCityLayers] = useState<string[]>([]);
 
+    /* eslint-disable react-hooks/set-state-in-effect */
     useEffect(() => {
         var idxLocal: number = LAYER_CONSTANTS.DEFAULT_CITY_INDEX;
         var idx2Local: number = LAYER_CONSTANTS.DEFAULT_TARGET_CITY_INDEX;
@@ -220,7 +221,9 @@ export default function TransformPage(): JSX.Element {
             localStorageHelpers.removeItem('uaLayer');
         }
     }, [])
+    /* eslint-enable react-hooks/set-state-in-effect */
 
+    /* eslint-disable react-hooks/set-state-in-effect */
     useEffect(() => {
         const layer_start = CITY_DATA.citiesArray[idx].dataRanges[layer as DataRangeKeys][0];
         const layer_min = CITY_DATA.citiesArray[idx].dataRanges[layer as DataRangeKeys][1];
@@ -230,6 +233,7 @@ export default function TransformPage(): JSX.Element {
         setLayerRange([layer_min, layer_max]);
         setLayerStartStop([layer_start, layer_stop]);
     }, [idx, layer]);
+    /* eslint-enable react-hooks/set-state-in-effect */
 
     const createViewStateForCity = useCallback((cityIdx: number) => ({
         ...CITY_DATA.citiesArray[cityIdx].initialViewState,

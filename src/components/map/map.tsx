@@ -1,4 +1,4 @@
-import { useEffect, useState, Suspense } from "react";
+import { Suspense } from "react";
 import { DeckGL } from "@deck.gl/react/typed";
 import { Map } from "react-map-gl";
 
@@ -21,11 +21,7 @@ const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
  */
 export default function UTAMap(props: MapProps): JSX.Element {
 
-    const this_layer = mapLayer(props);
-    const [layer, setLayer] = useState(this_layer);
-    useEffect(() => {
-        setLayer(mapLayer(props));
-    }, [props]);
+    const layer = mapLayer(props);
 
 
     return (
