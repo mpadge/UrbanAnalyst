@@ -4,9 +4,15 @@ import type { Metadata, Viewport } from 'next';
 import ButtonAppBar from '@/components/appBar';
 
 export const metadata: Metadata = {
-    title: 'UA',
-    description: 'Maps for Urban Analyst',
+    title: 'UA | Transform',
+    description: 'Transform cities with Urban Analyst',
     icons: '/ua.ico',
+    openGraph: {
+        title: 'Urban Analyst | Transform',
+        description: 'Analyse how any city could be transformed to become more like another.',
+        url: 'https://urbananalyst.city/transform',
+        images: [{ url: '/og-map.png', width: 1200, height: 630, alt: 'Urban Analyst Transform' }],
+    },
 }
 
 export const viewport: Viewport = {
