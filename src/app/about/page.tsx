@@ -12,7 +12,7 @@ export const metadata: Metadata = {
         title: 'Urban Analyst | About',
         description: 'About Urban Analyst — interactive visualisation and comparison of cities worldwide.',
         url: 'https://urbananalyst.city/about',
-        images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Urban Analyst' }],
+        images: [{ url: '/og-map.png', width: 1200, height: 630, alt: 'Urban Analyst' }],
     },
 }
 

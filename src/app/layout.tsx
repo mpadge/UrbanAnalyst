@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         description: 'Urban Analyses for the World',
         url: 'https://urbananalyst.city',
         siteName: 'Urban Analyst',
-        images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Urban Analyst' }],
+        images: [{ url: '/og-map.png', width: 1200, height: 630, alt: 'Urban Analyst' }],
         locale: 'en_US',
         type: 'website',
     },
