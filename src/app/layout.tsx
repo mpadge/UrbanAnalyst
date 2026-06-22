@@ -11,7 +11,11 @@ const junctionFont = localFont({ src: './junction-light.woff' })
 export const metadata: Metadata = {
     title: 'Urban Analyst',
     description: 'Urban Analyses for the World',
-    metadataBase: new URL('https://urbananalyst.city'),
+    metadataBase: new URL(
+        process.env.VERCEL_URL
+            ? `https://${process.env.VERCEL_URL}`
+            : 'https://urbananalyst.city'
+    ),
     icons: {
         icon: '/favicon.ico',
     },
