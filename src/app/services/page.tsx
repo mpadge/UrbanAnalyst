@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Link from 'next/link'
 import styles from '@/styles/services.module.css';
 import ButtonAppBar from '@/components/appBar';
 import ContactForm from '@/components/services/contactForm';
@@ -29,10 +30,17 @@ export default function ServicesPage(): JSX.Element {
 
                 <div className={styles.centerNormal}>
                     <p>
-                        Urban Analyst can analyse any city in the world and deliver a
-                        full-resolution hosted site at&nbsp;
-                        <em>&lt;yourcity&gt;.urbananalyst.city</em>. Sites can be
-                        public or private. The same engine that powers the main
+                        Urban Analyst can analyse any city in the world, and
+                        deliver a full-resolution hosted site like&nbsp;
+                        <Link
+                            href="https://demo.urbananalyst.city"
+                            rel="noopener noreferrer"
+                        >
+                        demo.urbananalyst.city
+                        </Link>
+                        , but at
+                        &nbsp;<em>&lt;yourcity&gt;.urbananalyst.city</em>.
+                        The same engine that powers the main
                         platform can also be directed at almost any question involving
                         urban movement, accessibility, or the spatial distribution
                         of urban activity — from transport planning to retail site
