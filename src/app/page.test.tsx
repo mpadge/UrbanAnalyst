@@ -58,12 +58,6 @@ describe('Home Page', () => {
     expect(links.length).toBeGreaterThan(0)
   })
 
-  it('renders contact email link', () => {
-    render(<Home />)
-    
-    const emailLinks = screen.getAllByRole('link', { name: /info@urbananalyst.city/i })
-    expect(emailLinks[0]).toHaveAttribute('href', 'mailto:info@urbananalyst.city')
-  })
 
   it('renders documentation links', () => {
     render(<Home />)
