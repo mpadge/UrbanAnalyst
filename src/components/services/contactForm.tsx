@@ -2,6 +2,7 @@
 
 import React, { useState, FormEvent } from 'react';
 import styles from '@/styles/services.module.css';
+import Link from 'next/link';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
@@ -38,7 +39,16 @@ export default function ContactForm(): React.JSX.Element {
     if (status === 'success') {
         return (
             <div className={styles.successMessage}>
-                <p>Thanks — we&apos;ll be in touch shortly.</p>
+                <p>Thanks — we&apos;ll be in touch shortly, or you can email &#8202;
+                    <Link
+                        href="mailto:info@urbananalyst.city"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        info@urbananalyst.city
+                    </Link>
+                    .
+                </p>
             </div>
         );
     }

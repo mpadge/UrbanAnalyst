@@ -209,10 +209,18 @@
     opacity: 0.85;
 }
 
+.successMessage a {
+    color: rgb(30, 144, 255);
+}
+
 .errorMessage {
     font-size: 1.2rem;
     font-weight: 300;
     color: #c0392b;
+}
+
+.errorMessage a {
+    color: rgb(30, 144, 255);
 }
 
 /* Mobile */
