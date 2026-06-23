@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from "next/image"
 import localFont from 'next/font/local'
 
@@ -57,20 +57,9 @@ export default function Control(props: CompareControlProps): JSX.Element {
     const handleControlsVisibility = (pHideControls: boolean): void => {
         setHideControls(pHideControls);
     }
-    const [controlStyle, setControStyle] = useState(styles.light);
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            setControStyle(dark ? styles.dark : styles.light);
-        }
-    }, []);
-    const [uaLogo, setUaLogo] = useState('/ua.svg');
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            setUaLogo(dark ? '/ua-dark.svg' : 'ua.svg');
-        }
-    }, []);
+    const isDark = typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const [controlStyle] = useState(isDark ? styles.dark : styles.light);
+    const [uaLogo] = useState(isDark ? '/ua-dark.svg' : 'ua.svg');
 
     const IdxWashington = getIdxWashington(props.citiesArray);
 

@@ -17,9 +17,15 @@ import UABarChart from '@/components/main/uaindexBarChart';
  * NextJS metadata for main page
  */
 export const metadata: Metadata = {
-    title: 'UA',
+    title: 'Urban Analyst',
     description: 'Urban Analyses for the world',
     icons: '/ua.ico',
+    openGraph: {
+        title: 'Urban Analyst',
+        description: 'Interactive visualisation and comparison of cities worldwide.',
+        url: 'https://urbananalyst.city',
+        images: [{ url: '/og-map.png', width: 1200, height: 630, alt: 'Urban Analyst' }],
+    },
 }
 
 /**

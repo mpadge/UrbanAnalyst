@@ -7,7 +7,8 @@ vi.mock('@/components/utils/localStorageUtils', () => ({
     getItem: vi.fn(() => null),
     setItem: vi.fn(),
     removeItem: vi.fn()
-  }
+  },
+  fetchIpDefaultCityIdx: vi.fn(() => Promise.resolve(0)),
 }))
 
 vi.mock('@/components/utils/transformTourUtils', () => ({

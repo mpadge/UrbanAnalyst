@@ -58,18 +58,14 @@ export default function Control (props: MapControlProps): JSX.Element {
     const handleControlsVisibility = (pHideControls: boolean): void => {
         setHideControls(pHideControls);
     }
-    const [uaLogo, setUaLogo] = useState('/ua.svg');
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            setUaLogo(dark ? '/ua-dark.svg' : 'ua.svg');
-        }
-    }, []);
+    const [uaLogo] = useState(
+        typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? '/ua-dark.svg' : 'ua.svg'
+    );
 
     const [sliderValues, setSliderValues] = useState<number[]>(props.layerRange);
-    useEffect(() => {
-        setSliderValues(props.layerRange);
-    }, [props.layerRange]);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    useEffect(() => { setSliderValues(props.layerRange); }, [props.layerRange]);
 
     var step = Math.floor(props.layerStartStop[1] - props.layerStartStop[0]) / 20;
     var multiplier = 10;

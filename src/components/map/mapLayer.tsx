@@ -2,7 +2,7 @@ import { GeoJsonLayer } from "@deck.gl/layers/typed";
 import * as d3 from 'd3';
 import 'd3-scale-chromatic';
 
-import { MapProps } from "@/components/map/mapPage";
+import { MapProps } from "@/components/map/mapPageContent";
 import { calculateLayerRanges } from "@/components/utils/layerUtils";
 
 export default function MapLayer(props: MapProps): any[] {
