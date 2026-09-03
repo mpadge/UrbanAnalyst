@@ -8,9 +8,10 @@ export function useIpCityDefault(onResolve: (idx: number) => void): void {
     useEffect(() => { callbackRef.current = onResolve; });
 
     useEffect(() => {
-        // '0' means either "never detected" or "failed detection" — treat both as unset
+        // A stored value of '0' is a legitimate city index (e.g. Berlin), not "unset" —
+        // only a genuinely absent key means no city has been resolved yet.
         const stored = localStorageHelpers.getItem('uaCityIdx');
-        if (stored !== null && stored !== '0') return;
+        if (stored !== null) return;
         fetchIpDefaultCityIdx()
             .then(idx => {
                 if (idx > 0) {
