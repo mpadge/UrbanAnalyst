@@ -15,7 +15,7 @@ export async function GET(request: NextRequest): Promise<Response> {
     try {
         const response = await fetch(url, {
             method: 'GET',
-            cache: 'no-store',
+            next: { revalidate: 3600 },
             headers: {
                 'Accept': 'application/vnd.github.raw+json',
                 'Content-Type': 'application/json',
@@ -29,7 +29,9 @@ export async function GET(request: NextRequest): Promise<Response> {
         }
 
         const data = await response.json();
-        return Response.json(data);
+        return Response.json(data, {
+            headers: { 'Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400' }
+        });
     } catch {
         // console.error('Error fetching city map data:', error);
         return Response.json({ error: 'Failed to fetch city map data' }, { status: 500 });
