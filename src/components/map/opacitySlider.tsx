@@ -30,7 +30,7 @@ export default function OpacitySlider(props: OpacitySliderProps): JSX.Element {
                         min={0}
                         max={1}
                         value={props.alpha}
-                        step={0.1}
+                        step={0.05}
                         style={getBackgroundSize()}
                         aria-label="Default"
                         valueLabelDisplay="auto"
