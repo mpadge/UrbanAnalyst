@@ -1,5 +1,8 @@
 import { type NextRequest } from 'next/server'
 
+// Large city files (e.g. London, > 60MB) take a while to stream through:
+export const maxDuration = 60;
+
 export async function GET(request: NextRequest): Promise<Response> {
     const { searchParams } = new URL(request.url)
     const city = searchParams.get('city');
