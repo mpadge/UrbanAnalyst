@@ -15,7 +15,7 @@ export async function GET(request: NextRequest): Promise<Response> {
     try {
         const response = await fetch(url, {
             method: 'GET',
-            next: { revalidate: 3600 },
+            cache: 'no-store',
             headers: {
                 'Accept': 'application/vnd.github.raw+json',
                 'Content-Type': 'application/json',
@@ -28,9 +28,13 @@ export async function GET(request: NextRequest): Promise<Response> {
             throw new Error(`GitHub API error: ${response.status}`);
         }
 
-        const data = await response.json();
-        return Response.json(data, {
-            headers: { 'Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400' }
+        // Stream the upstream body through rather than parsing it: some city
+        // files are > 60MB, beyond Vercel's buffered response limit.
+        return new Response(response.body, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400'
+            }
         });
     } catch {
         // console.error('Error fetching city map data:', error);
