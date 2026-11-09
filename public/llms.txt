@@ -1,0 +1,23 @@
+# Urban Analyst
+
+> Urban Analyst (UA) is a platform for interactive visualisation and comparison of cities worldwide, covering transport systems, measures of accessibility, and socio-demographic conditions. All measures are combined into a single "UA Index" (lower is better; 1 = average across all components), which also accounts for relationships between measures, including relationships with social inequality. Free to use, no account required. Open source, with code in the UrbanAnalyst GitHub organisation.
+
+## Site
+
+- [Home](https://urbananalyst.city/): Overview of the platform and a ranked bar chart of UA Index scores for all current cities.
+- [Summarise](https://urbananalyst.city/summarise): Summary of analyses for any chosen city, including the best target city and the ways the city could improve to become more like it.
+- [Compare](https://urbananalyst.city/compare): Statistics for every UA city, both for each measured parameter and for relationships between parameters.
+- [Map](https://urbananalyst.city/map): Interactive spatial maps of each city, for individual parameters and relationships between them.
+- [Transform](https://urbananalyst.city/transform): Analyses of how any city could be transformed to become more like any other city.
+- [About](https://urbananalyst.city/about): What the platform is and who made it.
+- [Services](https://urbananalyst.city/services): Bespoke services for organisations: City Platform, Bespoke Analytics, and Longitudinal monitoring, plus commercial licensing of the GPL-3 components on request.
+
+## Documentation and source
+
+- [Documentation](https://docs.urbananalyst.city): Full details of the data, methods, and use of the platform.
+- [Site source code](https://github.com/mpadge/UrbanAnalyst): Next.js source for this site.
+- [UrbanAnalyst GitHub organisation](https://github.com/UrbanAnalyst): All associated open-source analysis code.
+
+## Notes
+
+- The Map, Compare, and Transform pages are interactive, client-rendered applications; their content is not available as static text.
