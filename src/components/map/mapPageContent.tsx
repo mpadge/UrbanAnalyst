@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState, useCallback, useMemo, lazy, Suspense } from "react";
-import { ReactourProps } from 'reactour';
+import type { UATourProps } from '@/components/tour/tourWrapper';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 
 import { MapSkeleton, MapControlSkeleton, MapLegendSkeleton } from '@/components/utils/loadingSkeletons';
@@ -10,7 +10,7 @@ import { ErrorBoundary, ComponentErrorSkeleton } from '@/components/utils/errorB
 const Control = lazy(() => import('@/components/map/control'));
 const Legend = lazy(() => import('@/components/map/legend'));
 const UTAMap = lazy(() => import('@/components/map/map'));
-const Tour = lazy(() => import('@/components/map/tour/tour'));
+const Tour = lazy(() => import('@/components/tour/tour'));
 
 import { CITY_DATA } from '@/data/citydata';
 import { CityDataProps, DataRangeKeys, ViewState } from '@/data/interfaces';
@@ -102,7 +102,7 @@ interface MapPagePresentationProps {
     handleLayerRangeChange: (layerRange: [number, number]) => void;
     handleIdxChange: (idx: number) => void;
     handleNumLayersChange: (numLayers: "Single" | "Paired") => void;
-    tourProps: ReactourProps;
+    tourProps: UATourProps;
     handleTourOpen: () => void;
 }
 
@@ -119,7 +119,7 @@ function MapPagePresentation({
     handleNumLayersChange,
     tourProps,
     handleTourOpen
-}: MapPagePresentationProps): JSX.Element {
+}: MapPagePresentationProps): React.JSX.Element {
     return (
         <>
             <ErrorBoundary fallback={<ComponentErrorSkeleton />}>
@@ -167,7 +167,7 @@ function MapPagePresentation({
     );
 }
 
-export default function MapPageContent(): JSX.Element {
+export default function MapPageContent(): React.JSX.Element {
 
     const [idx, setIdx] = useState(0);
 

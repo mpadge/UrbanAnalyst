@@ -7,7 +7,7 @@ import { ErrorBoundary, ErrorSkeleton } from '@/components/utils/errorBoundary';
 
 const Control = lazy(() => import('@/components/compare/control'));
 const BarChart = lazy(() => import('@/components/compare/statsBarChart'));
-const Tour = lazy(() => import('@/components/compare/tour/tour'));
+const Tour = lazy(() => import('@/components/tour/tour'));
 
 import styles from '@/styles/Home.module.css';
 
@@ -18,7 +18,7 @@ import { useTourLogic } from '@/components/utils/tourUtils';
 import { NUM_LAYERS_OPTIONS } from '@/components/utils/pageConstants';
 import type { NumLayersMode } from '@/components/utils/pageConstants';
 
-import type { ReactourProps } from 'reactour';
+import type { UATourProps } from '@/components/tour/tourWrapper';
 
 interface ComparePagePresentationProps {
     chartConfig: {
@@ -42,7 +42,7 @@ interface ComparePagePresentationProps {
     handleNumLayersChange: (numLayers: "Single" | "Paired") => void;
     handleMeanChange: () => void;
     handleSortChange: (sortOpt: string) => void;
-    tourProps: ReactourProps;
+    tourProps: UATourProps;
     handleTourOpen: () => void;
 }
 
@@ -56,7 +56,7 @@ function ComparePagePresentation({
     handleSortChange,
     tourProps,
     handleTourOpen
-}: ComparePagePresentationProps): JSX.Element {
+}: ComparePagePresentationProps): React.JSX.Element {
     return (
         <>
             <main className={styles.main}>
@@ -97,7 +97,7 @@ function ComparePagePresentation({
 
 const COMPARE_QUERY_KEYS = ['layer', 'layer2', 'numLayers', 'sortOpt', 'meanVals'] as const;
 
-export default function ComparePage(): JSX.Element {
+export default function ComparePage(): React.JSX.Element {
 
     const [_cityData] = useState(CITY_DATA.citiesArray[0]);
 

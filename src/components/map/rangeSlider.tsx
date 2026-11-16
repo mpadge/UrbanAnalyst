@@ -17,7 +17,7 @@ interface RangeSliderProps {
     ) => void,
 }
 
-export default function RangeSlider(props: RangeSliderProps): JSX.Element {
+export default function RangeSlider(props: RangeSliderProps): React.JSX.Element {
 
     const width = useWindowSize().width;
     const sizeString = width == null ? "medium" : (width < 700 ? "small" : "medium");

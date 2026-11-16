@@ -707,7 +707,7 @@ const washington = {
 interface CitySummary {
     name: string;
     nameFormatted: string;
-    content: JSX.Element;
+    content: React.JSX.Element;
 }
 
 const contentArray: CitySummary[] = [berlin, hamburg, london, mannheim, muenster, paris, philadelphia, utrecht, washington];

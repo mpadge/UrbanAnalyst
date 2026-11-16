@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import Home from '@/app/page'
 
 vi.mock('@/components/appBar', () => ({
-  default: ({ text }: { text: string[] }): JSX.Element => (
+  default: ({ text }: { text: string[] }): React.JSX.Element => (
     <div data-testid="app-bar">{text.join(',')}</div>
   )
 }))
@@ -16,7 +16,7 @@ vi.mock('next/image', () => ({
 }))
 
 vi.mock('@/components/main/uaindexBarChart', () => ({
-  default: (): JSX.Element => <div data-testid="ua-bar-chart" />
+  default: (): React.JSX.Element => <div data-testid="ua-bar-chart" />
 }))
 
 describe('Home Page', () => {

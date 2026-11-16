@@ -9,7 +9,7 @@ interface LegendProps {
     layer_name: string
 }
 
-export default function Legend (props: LegendProps): JSX.Element {
+export default function Legend (props: LegendProps): React.JSX.Element {
 
     function update(svg: any, layerRange: any, layer_name: string, alpha: number): void {
 

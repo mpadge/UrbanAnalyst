@@ -17,7 +17,7 @@ interface LayerListProps { // different from same defined in data/interfaces
     handleLayerChange: (layer: DataRangeKeys) => void
 }
 
-export default function LayerList(props: LayerListProps): JSX.Element {
+export default function LayerList(props: LayerListProps): React.JSX.Element {
 
     const options = useMemo (() => [
         { value: "social_index", label: "Social" },

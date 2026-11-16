@@ -16,7 +16,7 @@ interface CityListProps {
     handleIdx2Change: (Idx2: number) => void,
 }
 
-export default function TargetCityList(props: CityListProps): JSX.Element {
+export default function TargetCityList(props: CityListProps): React.JSX.Element {
 
     const options = props.citiesArray.map((city, index) => ({
         value: String(index),

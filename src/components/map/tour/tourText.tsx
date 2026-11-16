@@ -1,5 +1,5 @@
 
-export function controlBoxText(wide = true): JSX.Element {
+export function controlBoxText(wide = true): React.JSX.Element {
     const line1 = wide ?
         `This is the "control center" to choose cities and data layers.` :
         `On the left side is the "control center" to choose cities and data layers.`;
@@ -31,7 +31,7 @@ export function controlBoxText(wide = true): JSX.Element {
     )
 }
 
-export function legendText(wide = true): JSX.Element {
+export function legendText(wide = true): React.JSX.Element {
     const txt = wide ?
         `Each layer has a legend here, for which yellow colors are generally better, and blue colors worse.` :
         `Each layer has a legend in the lower-left corner, for which more yellow colors are generally better.`;
@@ -45,32 +45,3 @@ export function legendText(wide = true): JSX.Element {
     )
 }
 
-export function navText(goTo: (stepIndex: number) => void, wide = true): JSX.Element {
-    const line1 = wide ?
-        `Finally, these menu items navigate to other Urban Analyst pages.` :
-        `Finally, the menu items navigate to other Urban Analyst pages.`;
-
-    return (
-        <div>
-            <h2>Navigation</h2>
-            <br />
-            {line1}
-            <br />
-            <br />
-            <button color="primary"
-                onClick={() => goTo(0)}
-                style={{
-                    display: "block",
-                    margin: "1em auto",
-                    border: '1px solid #f7f7f7',
-                    background: '#bdbcbb',
-                    padding: '.3em .7em',
-                    fontSize: 'inherit',
-                    cursor: 'pointer',
-                }}
-            >
-                Go back to step 1
-            </button>
-        </div>
-    )
-}

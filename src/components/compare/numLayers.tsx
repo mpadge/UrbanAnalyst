@@ -6,7 +6,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 import { NumLayersProps } from "@/data/interfaces";
 
-export default function SelectNumLayers(props: NumLayersProps): JSX.Element {
+export default function SelectNumLayers(props: NumLayersProps): React.JSX.Element {
 
     const [numLayers, setNumLayers] = useState<("Single" | "Paired") | null>("Single");
 

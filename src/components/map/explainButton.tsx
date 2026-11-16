@@ -21,7 +21,7 @@ export interface ExplainProps {
     citiesArray: CityDataProps[]
 }
 
-export function ExplainLayerDialog(props: ExplainProps): JSX.Element {
+export function ExplainLayerDialog(props: ExplainProps): React.JSX.Element {
     const { onClose, open } = props;
 
     const handleClose = (): void => {
@@ -57,7 +57,7 @@ export function ExplainLayerDialog(props: ExplainProps): JSX.Element {
     );
 }
 
-export default function ExplainButton(props: ExplainButtonProps): JSX.Element {
+export default function ExplainButton(props: ExplainButtonProps): React.JSX.Element {
 
     const [open, setOpen] = useState(false);
 

@@ -3,13 +3,13 @@ import { render, screen } from '@testing-library/react'
 import Home from '@/app/transform/page'
 
 vi.mock('@/components/appBar', () => ({
-  default: ({ text }: { text: string[] }): JSX.Element => (
+  default: ({ text }: { text: string[] }): React.JSX.Element => (
     <div data-testid="app-bar">{text.join(',')}</div>
   )
 }))
 
 vi.mock('@/components/transform/transformPage', () => ({
-  default: (): JSX.Element => <div data-testid="transform-page" />
+  default: (): React.JSX.Element => <div data-testid="transform-page" />
 }))
 
 describe('Transform Page', () => {

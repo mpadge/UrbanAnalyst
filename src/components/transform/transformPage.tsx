@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback, useMemo, lazy, Suspense} from 'react';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
-import { ReactourProps } from 'reactour';
+import type { UATourProps } from '@/components/tour/tourWrapper';
 
 import { TransformSkeleton, TransformControlSkeleton, TransformLegendSkeleton } from '@/components/utils/loadingSkeletons';
 import { ErrorBoundary, ComponentErrorSkeleton } from '@/components/utils/errorBoundary';
@@ -10,7 +10,7 @@ import { ErrorBoundary, ComponentErrorSkeleton } from '@/components/utils/errorB
 const Control = lazy(() => import('@/components/transform/control'));
 const Legend = lazy(() => import('@/components/transform/legend'));
 const MapTransformDynamic = lazy(() => import('@/components/transform/transformPageDynamic'));
-const Tour = lazy(() => import('@/components/transform/tour/tour'));
+const Tour = lazy(() => import('@/components/tour/tour'));
 
 import { CityDataProps } from "@/data/interfaces";
 import { CITY_DATA } from '@/data/citydata';
@@ -86,7 +86,7 @@ interface TransformPagePresentationProps {
     setLayerStartStop: (layerStartStop: [number, number]) => void;
     setVarnames: (varnames: string[]) => void;
     handleOutputLayerChange: (outputLayer: OutputLayerType) => void;
-    tourProps: ReactourProps;
+    tourProps: UATourProps;
     handleTourOpen: () => void;
 }
 
@@ -106,7 +106,7 @@ function TransformPagePresentation({
     handleOutputLayerChange,
     tourProps,
     handleTourOpen
-}: TransformPagePresentationProps): JSX.Element {
+}: TransformPagePresentationProps): React.JSX.Element {
     return (
         <>
             <ErrorBoundary fallback={<ComponentErrorSkeleton />}>
@@ -146,7 +146,7 @@ function TransformPagePresentation({
     );
 }
 
-export default function TransformPage(): JSX.Element {
+export default function TransformPage(): React.JSX.Element {
 
     const [idx, setIdx] = useState<number>(LAYER_CONSTANTS.DEFAULT_CITY_INDEX);
     const [idx2, setIdx2] = useState<number>(LAYER_CONSTANTS.DEFAULT_TARGET_CITY_INDEX);

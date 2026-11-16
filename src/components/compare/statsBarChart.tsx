@@ -17,7 +17,7 @@ interface CompareProps {
     citiesArray: CityDataProps[]
 }
 
-export default function BarChart(props: CompareProps): JSX.Element {
+export default function BarChart(props: CompareProps): React.JSX.Element {
 
     const idxWashington = getIdxWashington(props.citiesArray);
     const [_, _setCityData] = useState(props.citiesArray[idxWashington]);

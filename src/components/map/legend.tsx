@@ -14,7 +14,7 @@ interface LegendProps {
     citiesArray: CityDataProps[]
 }
 
-export default function Legend(props: LegendProps): JSX.Element {
+export default function Legend(props: LegendProps): React.JSX.Element {
 
     const svgRef = React.useRef<SVGSVGElement>(null);
 

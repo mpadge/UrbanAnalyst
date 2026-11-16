@@ -18,7 +18,7 @@ interface LayerListProps {
 }
 
 
-export default function LayerList(props: LayerListProps): JSX.Element {
+export default function LayerList(props: LayerListProps): React.JSX.Element {
 
     const options = useMemo (() => {
         const allOptions = [

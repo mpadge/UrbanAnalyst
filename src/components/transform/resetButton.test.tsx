@@ -3,13 +3,13 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import ResetButton from '@/components/transform/resetButton'
 
 vi.mock('@mui/material/Button', () => ({
-  default: ({ children, onClick, variant }: any): JSX.Element => (
+  default: ({ children, onClick, variant }: any): React.JSX.Element => (
     <button onClick={onClick} data-variant={variant}>{children}</button>
   )
 }))
 
 vi.mock('@mui/material/Stack', () => ({
-  default: ({ children, alignItems }: any): JSX.Element => (
+  default: ({ children, alignItems }: any): React.JSX.Element => (
     <div data-align-items={alignItems}>{children}</div>
   )
 }))

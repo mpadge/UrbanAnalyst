@@ -93,7 +93,7 @@ const MAP_STYLE = `https://api.protomaps.com/styles/v5/grayscale/en.json?key=${p
  * @return The rendered `DeckGL` page using data from `geoJsonLayer`, and underlying base map.
  *
  */
-const TransformComponent = (props: TransformProps): JSX.Element => {
+const TransformComponent = (props: TransformProps): React.JSX.Element => {
     /**
      * -------- state variables --------
      */

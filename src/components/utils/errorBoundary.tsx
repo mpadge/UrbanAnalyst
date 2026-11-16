@@ -67,7 +67,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     }
 }
 
-export const ErrorSkeleton = (): JSX.Element => (
+export const ErrorSkeleton = (): React.JSX.Element => (
     <Box
         sx={{
             width: '100%',
@@ -87,7 +87,7 @@ export const ErrorSkeleton = (): JSX.Element => (
     </Box>
 );
 
-export const ComponentErrorSkeleton = (): JSX.Element => (
+export const ComponentErrorSkeleton = (): React.JSX.Element => (
     <Box
         sx={{
             width: '100vw',

@@ -15,7 +15,7 @@ interface OutputLayerProps {
     handleOutputLayerChange: (outputLayer: OutputLayerType) => void,
 }
 
-export default function OutputLayers(props: OutputLayerProps): JSX.Element {
+export default function OutputLayers(props: OutputLayerProps): React.JSX.Element {
 
     const options = [
         { value: "original", label: "Original" },

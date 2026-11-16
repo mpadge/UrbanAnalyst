@@ -19,7 +19,7 @@ const MAP_STYLE = `https://api.protomaps.com/styles/v5/grayscale/en.json?key=${p
  * `mapLayer.tsx`. That function must first be called to obtain the layer before
  * passing to final DOM elements in return body of this function.
  */
-export default function UTAMap(props: MapProps): JSX.Element {
+export default function UTAMap(props: MapProps): React.JSX.Element {
 
     const layer = mapLayer(props);
 

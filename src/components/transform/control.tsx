@@ -111,7 +111,7 @@ export function DefaultExtraLayers (props: DefaultExtraLayersProps): string[] {
 }
 
 
-export default function Control (props: TransformControlProps): JSX.Element {
+export default function Control (props: TransformControlProps): React.JSX.Element {
 
     const [hideControls, setHideControls] = useState(false);
     const handleControlsVisibility = (pHideControls: boolean): void => {

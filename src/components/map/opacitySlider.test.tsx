@@ -7,13 +7,13 @@ vi.mock('@/components/windowSize', () => ({
 }))
 
 vi.mock('@mui/material/Box', () => ({
-  default: ({ children, className }: any): JSX.Element => (
+  default: ({ children, className }: any): React.JSX.Element => (
     <div className={className}>{children}</div>
   )
 }))
 
 vi.mock('@mui/material/Slider', () => ({
-  default: (props: any): JSX.Element => (
+  default: (props: any): React.JSX.Element => (
     <input 
       type="range" 
       data-min={props.min}
