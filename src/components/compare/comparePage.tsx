@@ -18,7 +18,7 @@ import { useTourLogic } from '@/components/utils/tourUtils';
 import { NUM_LAYERS_OPTIONS } from '@/components/utils/pageConstants';
 import type { NumLayersMode } from '@/components/utils/pageConstants';
 
-import type { ReactourProps } from 'reactour';
+import type { UATourProps } from '@/components/tour/tourWrapper';
 
 interface ComparePagePresentationProps {
     chartConfig: {
@@ -42,7 +42,7 @@ interface ComparePagePresentationProps {
     handleNumLayersChange: (numLayers: "Single" | "Paired") => void;
     handleMeanChange: () => void;
     handleSortChange: (sortOpt: string) => void;
-    tourProps: ReactourProps;
+    tourProps: UATourProps;
     handleTourOpen: () => void;
 }
 

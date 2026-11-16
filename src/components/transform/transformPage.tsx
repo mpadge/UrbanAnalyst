@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback, useMemo, lazy, Suspense} from 'react';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
-import { ReactourProps } from 'reactour';
+import type { UATourProps } from '@/components/tour/tourWrapper';
 
 import { TransformSkeleton, TransformControlSkeleton, TransformLegendSkeleton } from '@/components/utils/loadingSkeletons';
 import { ErrorBoundary, ComponentErrorSkeleton } from '@/components/utils/errorBoundary';
@@ -86,7 +86,7 @@ interface TransformPagePresentationProps {
     setLayerStartStop: (layerStartStop: [number, number]) => void;
     setVarnames: (varnames: string[]) => void;
     handleOutputLayerChange: (outputLayer: OutputLayerType) => void;
-    tourProps: ReactourProps;
+    tourProps: UATourProps;
     handleTourOpen: () => void;
 }
 

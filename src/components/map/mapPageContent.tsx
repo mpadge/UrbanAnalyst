@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState, useCallback, useMemo, lazy, Suspense } from "react";
-import { ReactourProps } from 'reactour';
+import type { UATourProps } from '@/components/tour/tourWrapper';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 
 import { MapSkeleton, MapControlSkeleton, MapLegendSkeleton } from '@/components/utils/loadingSkeletons';
@@ -102,7 +102,7 @@ interface MapPagePresentationProps {
     handleLayerRangeChange: (layerRange: [number, number]) => void;
     handleIdxChange: (idx: number) => void;
     handleNumLayersChange: (numLayers: "Single" | "Paired") => void;
-    tourProps: ReactourProps;
+    tourProps: UATourProps;
     handleTourOpen: () => void;
 }
 

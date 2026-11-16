@@ -1,8 +1,7 @@
 import dynamic from 'next/dynamic';
 
-const Tour = dynamic(() => import('reactour').then((mod) => mod.default), {
+const Tour = dynamic(() => import('@/components/tour/tourWrapper'), {
     ssr: false,
-
 });
 
 export default Tour;

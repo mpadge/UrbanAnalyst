@@ -29,7 +29,7 @@
         "@mui/icons-material": "^5.16.6",
         "@mui/material": "^5.15.20",
         "@mui/material-nextjs": "^7.3.7",
-        "@types/reactour": "^1.18.5",
+        "@reactour/tour": "^3.8.0",
         "@vercel/analytics": "^2.0.1",
         "@vercel/speed-insights": "^2.1.0",
         "d3": "^7.8.5",
@@ -40,7 +40,6 @@
         "react-dom": "^19.3.1",
         "react-map-gl": "^7.1.7",
         "react-select": "^5.10.2",
-        "reactour": "^1.19.4",
         "sharp": "^0.34.5",
         "wasm": "file:pkg"
     },
@@ -69,11 +68,5 @@
         "typescript": "^6.0.2",
         "vitest": "^4.0.17",
         "wasm-pack": "^0.15.0"
-    },
-    "overrides": {
-        "reactour": {
-            "react": "$react",
-            "react-dom": "$react-dom"
-        }
     }
 }
