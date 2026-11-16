@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState} from 'react';
 import { DeckGL } from "@deck.gl/react/typed";
-import { Map } from "react-map-gl";
+import { Map } from "react-map-gl/maplibre";
 
 import { loadDataFunction } from '@/components/transform/loadData';
 import { transformDataFunction, transformDataSelectCol } from '@/components/transform/callTransform';
@@ -12,8 +12,8 @@ interface StringAcc {
     [key: string]: boolean;
 }
 
-const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
-const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
+// const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
+const MAP_STYLE = `https://api.protomaps.com/styles/v5/grayscale/en.json?key=${process.env.NEXT_PUBLIC_PROTOMAPS_KEY}`
 
 /**
  * The main component controlling the transformation algorithm and storing the data.
@@ -266,7 +266,6 @@ const TransformComponent = (props: TransformProps): JSX.Element => {
             >
                 <Map
                     mapStyle={MAP_STYLE}
-                    mapboxAccessToken={MapboxAccessToken}
                 >
                 </Map>
             </DeckGL>
