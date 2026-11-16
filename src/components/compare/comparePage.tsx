@@ -7,7 +7,7 @@ import { ErrorBoundary, ErrorSkeleton } from '@/components/utils/errorBoundary';
 
 const Control = lazy(() => import('@/components/compare/control'));
 const BarChart = lazy(() => import('@/components/compare/statsBarChart'));
-const Tour = lazy(() => import('@/components/compare/tour/tour'));
+const Tour = lazy(() => import('@/components/tour/tour'));
 
 import styles from '@/styles/Home.module.css';
 

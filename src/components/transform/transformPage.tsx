@@ -10,7 +10,7 @@ import { ErrorBoundary, ComponentErrorSkeleton } from '@/components/utils/errorB
 const Control = lazy(() => import('@/components/transform/control'));
 const Legend = lazy(() => import('@/components/transform/legend'));
 const MapTransformDynamic = lazy(() => import('@/components/transform/transformPageDynamic'));
-const Tour = lazy(() => import('@/components/transform/tour/tour'));
+const Tour = lazy(() => import('@/components/tour/tour'));
 
 import { CityDataProps } from "@/data/interfaces";
 import { CITY_DATA } from '@/data/citydata';

@@ -1,34 +1,13 @@
 "use client"
 
+import { introStep, navStep } from "@/components/tour/tourSteps";
+import { panelStyle } from "@/components/tour/tourStyle";
 import { posControlsX, posControlsY, maxWidth } from "@/components/tourPositionControls";
-import { controlBoxText, legendText, navText } from "@/components/map/tour/tourText";
+import { controlBoxText, legendText } from "@/components/map/tour/tourText";
 
-const tourPanelBackgroundColour = '#9cf7f7';
-const tourPanelBorderRadiusWide = '20px';
-const tourPanelBorderRadiusNarrow = '10px';
 
 export const getTourConfig = (width: number, height: number): any[] => [
-    {    
-        content: (
-            <div>
-                <h2>Urban Analyst</h2>
-                <br />
-                This guided tour can be closed by clicking anywhere outside
-                these boxes, and re-started any time by clicking on the
-                <q>Help</q> button on the left.
-                <br />
-                <br />
-                If you&apos;ve got a keyboard, you can step through with arrow
-                keys, and close with <q>Escape</q>. Press an arrow now to
-                start...
-            </div>
-        ),
-        style: {
-            backgroundColor: tourPanelBackgroundColour,
-            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
-            maxWidth: maxWidth(width, true),
-        }
-    },
+    introStep(width),
     {
         content: (
             <div>
@@ -40,8 +19,7 @@ export const getTourConfig = (width: number, height: number): any[] => [
             </div>
         ),
         style: {
-            backgroundColor: tourPanelBackgroundColour,
-            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
+            ...panelStyle(width),
             left: posControlsX(width, "nav"),
             width: maxWidth(width),
         }
@@ -51,8 +29,7 @@ export const getTourConfig = (width: number, height: number): any[] => [
         style: {
             left: posControlsX(width, "controls"),
             top: posControlsY(width, height, "controls"),
-            backgroundColor: tourPanelBackgroundColour,
-            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
+            ...panelStyle(width),
             maxWidth: maxWidth(width, true),
         }
     },
@@ -70,8 +47,7 @@ export const getTourConfig = (width: number, height: number): any[] => [
         style: {
             left: posControlsX(width, "controls"),
             top: posControlsY(width, height, "controls"),
-            backgroundColor: tourPanelBackgroundColour,
-            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
+            ...panelStyle(width),
             maxWidth: maxWidth(width, true),
         }
     },
@@ -81,22 +57,10 @@ export const getTourConfig = (width: number, height: number): any[] => [
             width: maxWidth(width),
             left: posControlsX(width, "legend"),
             top: posControlsY(width, height, "legend"),
-            backgroundColor: tourPanelBackgroundColour,
-            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
+            ...panelStyle(width),
         }
     },
-    {
-        content: ({ goTo }: { goTo: (stepIndex: number) => void }) => (
-            navText(goTo, width > 700)
-        ),
-        style: {
-            backgroundColor: tourPanelBackgroundColour,
-            borderRadius: width > 700 ? tourPanelBorderRadiusWide : tourPanelBorderRadiusNarrow,
-            left: posControlsX(width, "nav"),
-            top: posControlsY(width, height, "nav"),
-            width: maxWidth(width),
-        },
-    },
+    navStep(width, height),
 
 ];
 
