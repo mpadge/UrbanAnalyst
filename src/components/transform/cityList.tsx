@@ -17,7 +17,7 @@ interface CityListProps {
     handleViewStateChange: (pViewState: ViewState) => void
 }
 
-export default function CityList(props: CityListProps): JSX.Element {
+export default function CityList(props: CityListProps): React.JSX.Element {
 
     const options = props.citiesArray.map((city, index) => ({
         value: String(index),

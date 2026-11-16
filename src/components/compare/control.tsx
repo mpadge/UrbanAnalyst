@@ -49,7 +49,7 @@ const SortOrderSpacing = styled('div')((_theme: any) => ({
     marginBottom: '12px',
 }));
 
-export default function Control(props: CompareControlProps): JSX.Element {
+export default function Control(props: CompareControlProps): React.JSX.Element {
 
     const _cityNames = props.citiesArray.map((item) => item.name);
 

@@ -24,7 +24,7 @@ export const viewport: Viewport = {
 
 import TransformPage from '@/components/transform/transformPage';
 
-export default function Home(): JSX.Element {
+export default function Home(): React.JSX.Element {
 
     const buttonTxt = [
         "home",

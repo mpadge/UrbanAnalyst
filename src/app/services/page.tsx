@@ -15,7 +15,7 @@ export const viewport: Viewport = {
     initialScale: 1.0,
 }
 
-export default function ServicesPage(): JSX.Element {
+export default function ServicesPage(): React.JSX.Element {
 
     const buttonTxt = ["home", "summarise", "compare", "map", "transform", "about"]
 

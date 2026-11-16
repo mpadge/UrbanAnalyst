@@ -16,7 +16,7 @@ interface SummariseControlProps {
 }
 
 
-export default function Control (props: SummariseControlProps): JSX.Element {
+export default function Control (props: SummariseControlProps): React.JSX.Element {
 
     const [hideControls, setHideControls] = useState(false);
     const handleControlsVisibility = (pHideControls: boolean): void => {

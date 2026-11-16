@@ -10,7 +10,7 @@ interface OpacitySliderProps {
     handleAlphaChange: (pAlpha: number) => void
 }
 
-export default function OpacitySlider(props: OpacitySliderProps): JSX.Element {
+export default function OpacitySlider(props: OpacitySliderProps): React.JSX.Element {
 
     const getBackgroundSize = (): { backgroundSize: string } => {
         return {

@@ -5,7 +5,7 @@ interface ResetButtonProps {
     handleReset: () => void
 }
 
-export default function ResetButton (props: ResetButtonProps): JSX.Element {
+export default function ResetButton (props: ResetButtonProps): React.JSX.Element {
 
     const buttonText: string = "Reset";
 

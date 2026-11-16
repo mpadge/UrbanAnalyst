@@ -33,7 +33,7 @@ function capitalizeFirstLetter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export default function UABarChart (): JSX.Element {
+export default function UABarChart (): React.JSX.Element {
 
     const [data, setData] = useState<[indexDataProps] | null>(null);
     useEffect(() => {

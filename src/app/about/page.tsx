@@ -21,7 +21,7 @@ export const viewport: Viewport = {
     initialScale: 1.0,
 }
 
-export default function Home(): JSX.Element {
+export default function Home(): React.JSX.Element {
 
     const buttonTxt = [
         "home",

@@ -3,13 +3,13 @@ import { render, screen } from '@testing-library/react'
 import SelectNumLayers from '@/components/map/numLayers'
 
 vi.mock('@mui/material/ToggleButton', () => ({
-  default: ({ children, value }: any): JSX.Element => (
+  default: ({ children, value }: any): React.JSX.Element => (
     <button data-value={value}>{children}</button>
   )
 }))
 
 vi.mock('@mui/material/ToggleButtonGroup', () => ({
-  default: ({ children, value, exclusive }: any): JSX.Element => (
+  default: ({ children, value, exclusive }: any): React.JSX.Element => (
     <div data-value={value} data-exclusive={exclusive}>{children}</div>
   )
 }))

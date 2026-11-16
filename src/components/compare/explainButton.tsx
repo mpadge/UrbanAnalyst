@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack';
 import { ExplainButtonProps } from "@/data/interfaces";
 import { ExplainLayerDialog } from "@/components/map/explainButton";
 
-export default function ExplainButton(props: ExplainButtonProps): JSX.Element {
+export default function ExplainButton(props: ExplainButtonProps): React.JSX.Element {
 
     const [open, setOpen] = useState(false);
 

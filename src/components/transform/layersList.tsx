@@ -43,7 +43,7 @@ interface LayersListProps {
  * Function to select extra layers to be included in transformation
  * calculation.
  */
-export default function LayersList(props: LayersListProps): JSX.Element {
+export default function LayersList(props: LayersListProps): React.JSX.Element {
 
     const options = useMemo(
         () => [

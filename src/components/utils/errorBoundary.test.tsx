@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { ErrorBoundary, ErrorSkeleton, ComponentErrorSkeleton } from '@/components/utils/errorBoundary'
 
-const ThrowError = ({ shouldThrow }: { shouldThrow: boolean }): JSX.Element => {
+const ThrowError = ({ shouldThrow }: { shouldThrow: boolean }): React.JSX.Element => {
     if (shouldThrow) {
         throw new Error('Test error')
     }

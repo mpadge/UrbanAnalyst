@@ -119,7 +119,7 @@ function MapPagePresentation({
     handleNumLayersChange,
     tourProps,
     handleTourOpen
-}: MapPagePresentationProps): JSX.Element {
+}: MapPagePresentationProps): React.JSX.Element {
     return (
         <>
             <ErrorBoundary fallback={<ComponentErrorSkeleton />}>
@@ -167,7 +167,7 @@ function MapPagePresentation({
     );
 }
 
-export default function MapPageContent(): JSX.Element {
+export default function MapPageContent(): React.JSX.Element {
 
     const [idx, setIdx] = useState(0);
 

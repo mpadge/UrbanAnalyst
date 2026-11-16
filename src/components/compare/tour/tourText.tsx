@@ -1,4 +1,4 @@
-export function controlBoxText1(wide = true): JSX.Element {
+export function controlBoxText1(wide = true): React.JSX.Element {
     const line1 = wide ?
         `This is the "control center" to choose cities and data layers.` :
         `On the left side is the "control center" to choose cities and data layers.`;
@@ -30,7 +30,7 @@ export function controlBoxText1(wide = true): JSX.Element {
     )
 }
 
-export function controlBoxText2(): JSX.Element {
+export function controlBoxText2(): React.JSX.Element {
     return (
         <div>
             <h2>Controls</h2>
@@ -46,7 +46,7 @@ export function controlBoxText2(): JSX.Element {
     )
 }
 
-export function navText(goTo: (stepIndex: number) => void, wide = true): JSX.Element {
+export function navText(goTo: (stepIndex: number) => void, wide = true): React.JSX.Element {
     const line1 = wide ?
         `Finally, these menu items navigate to other Urban Analyst pages.` :
         `Finally, the menu items navigate to other Urban Analyst pages.`;

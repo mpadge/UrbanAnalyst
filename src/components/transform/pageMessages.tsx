@@ -9,7 +9,7 @@ interface MsgProps {
     msg: string,
 }
 
-export default function TransformMsgs (props: MsgProps): JSX.Element {
+export default function TransformMsgs (props: MsgProps): React.JSX.Element {
 
     const svgRef = React.useRef<SVGSVGElement>(null);
 

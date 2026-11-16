@@ -14,7 +14,7 @@ interface SortOrderListProps {
     handleSortChange: (sortOpt: string) => void
 }
 
-export default function SortOrderList(props: SortOrderListProps): JSX.Element {
+export default function SortOrderList(props: SortOrderListProps): React.JSX.Element {
 
     const title = "Sort Order";
 

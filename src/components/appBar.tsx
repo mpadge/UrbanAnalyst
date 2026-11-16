@@ -72,7 +72,7 @@ function capitaliseFirst(s: string): string {
 
 const MIN_MENU_WIDTH = 600;
 
-export default function ButtonAppBar(props: ButtonAppProps): JSX.Element {
+export default function ButtonAppBar(props: ButtonAppProps): React.JSX.Element {
 
     const [theme] = useState(() => getPreferredTheme());
     const [mounted, setMounted] = useState(false);

@@ -56,7 +56,7 @@ function ComparePagePresentation({
     handleSortChange,
     tourProps,
     handleTourOpen
-}: ComparePagePresentationProps): JSX.Element {
+}: ComparePagePresentationProps): React.JSX.Element {
     return (
         <>
             <main className={styles.main}>
@@ -97,7 +97,7 @@ function ComparePagePresentation({
 
 const COMPARE_QUERY_KEYS = ['layer', 'layer2', 'numLayers', 'sortOpt', 'meanVals'] as const;
 
-export default function ComparePage(): JSX.Element {
+export default function ComparePage(): React.JSX.Element {
 
     const [_cityData] = useState(CITY_DATA.citiesArray[0]);
 

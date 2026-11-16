@@ -3,13 +3,13 @@ import { render, screen } from '@testing-library/react'
 import Home from '@/app/map/page'
 
 vi.mock('@/components/appBar', () => ({
-  default: ({ text }: { text: string[] }): JSX.Element => (
+  default: ({ text }: { text: string[] }): React.JSX.Element => (
     <div data-testid="app-bar">{text.join(',')}</div>
   )
 }))
 
 vi.mock('@/components/map/mapPage', () => ({
-  default: (): JSX.Element => <div data-testid="map-page" />
+  default: (): React.JSX.Element => <div data-testid="map-page" />
 }))
 
 describe('Map Page', () => {

@@ -52,7 +52,7 @@ const RootSpacing = styled('div')((_theme) => ({
     marginBottom: '0px',
 }));
 
-export default function Control (props: MapControlProps): JSX.Element {
+export default function Control (props: MapControlProps): React.JSX.Element {
 
     const [hideControls, setHideControls] = useState(false);
     const handleControlsVisibility = (pHideControls: boolean): void => {

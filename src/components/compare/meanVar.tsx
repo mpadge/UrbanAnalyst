@@ -11,7 +11,7 @@ interface meanVarProps {
     handleMeanChange: (mn: boolean) => void
 }
 
-export default function MeanVarButtons(props: meanVarProps): JSX.Element {
+export default function MeanVarButtons(props: meanVarProps): React.JSX.Element {
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
         props.handleMeanChange((event.target as HTMLInputElement).value === "average");

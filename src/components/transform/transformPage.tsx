@@ -106,7 +106,7 @@ function TransformPagePresentation({
     handleOutputLayerChange,
     tourProps,
     handleTourOpen
-}: TransformPagePresentationProps): JSX.Element {
+}: TransformPagePresentationProps): React.JSX.Element {
     return (
         <>
             <ErrorBoundary fallback={<ComponentErrorSkeleton />}>
@@ -146,7 +146,7 @@ function TransformPagePresentation({
     );
 }
 
-export default function TransformPage(): JSX.Element {
+export default function TransformPage(): React.JSX.Element {
 
     const [idx, setIdx] = useState<number>(LAYER_CONSTANTS.DEFAULT_CITY_INDEX);
     const [idx2, setIdx2] = useState<number>(LAYER_CONSTANTS.DEFAULT_TARGET_CITY_INDEX);

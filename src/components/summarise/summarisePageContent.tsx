@@ -9,7 +9,7 @@ import Content from '@/components/summarise/citySummaryData';
 import { localStorageHelpers } from '@/components/utils/localStorageUtils';
 import { useIpCityDefault } from '@/components/utils/useIpCityDefault';
 
-export default function SummarisePageContent(): JSX.Element {
+export default function SummarisePageContent(): React.JSX.Element {
 
     const searchParams = useSearchParams();
     const contentArray = Content();
