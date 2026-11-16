@@ -1,4 +1,4 @@
-.PHONY: all lint dev build
+.PHONY: all lint dev serve build
 
 ENGINE=npm
 
@@ -15,6 +15,9 @@ install: ## Install everything to run/build
 	$(ENGINE) install
 
 dev: ## Start dev server
+	$(ENGINE) run dev
+
+serve: ## Same as 'dev': Start dev server
 	$(ENGINE) run dev
 
 test: ## Run all tests

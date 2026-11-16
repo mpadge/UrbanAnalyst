@@ -28,9 +28,9 @@ vi.mock('@deck.gl/react/typed', () => ({
   )
 }))
 
-vi.mock('react-map-gl', () => ({
-  Map: ({ mapStyle, mapboxAccessToken }: any) => (
-    <div data-testid="map" data-style={mapStyle} data-token={mapboxAccessToken ? 'present' : 'none'} />
+vi.mock('react-map-gl/maplibre', () => ({
+  Map: ({ mapStyle }: any) => (
+    <div data-testid="map" data-style={mapStyle} />
   )
 }))
 
@@ -62,7 +62,6 @@ const createMockProps = (overrides = {}): TransformProps => ({
 describe('TransformComponent', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    vi.stubEnv('NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN', 'test-token')
   })
 
   it('renders the TransformComponent component', () => {

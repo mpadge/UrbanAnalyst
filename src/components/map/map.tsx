@@ -1,15 +1,15 @@
 import { Suspense } from "react";
 import { DeckGL } from "@deck.gl/react/typed";
-import { Map } from "react-map-gl";
+import { Map } from "react-map-gl/maplibre";
 
 import mapLayer from '@/components/map/mapLayer'
 
 import { MapProps } from "@/components/map/mapPageContent";
 
-const MapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 
 // const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-nolabels-gl-style/style.json';
-const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
+// const MAP_STYLE = "mapbox://styles/mapbox/light-v10"
+const MAP_STYLE = `https://api.protomaps.com/styles/v5/grayscale/en.json?key=${process.env.NEXT_PUBLIC_PROTOMAPS_KEY}`
 
 /**
  * Map function to load DeckGL overlap and base map.
@@ -38,7 +38,6 @@ export default function UTAMap(props: MapProps): JSX.Element {
                     >
                         <Map
                             mapStyle={MAP_STYLE}
-                            mapboxAccessToken={MapboxAccessToken}
                         >
                         </Map>
                     </DeckGL>

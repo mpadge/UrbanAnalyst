@@ -34,7 +34,7 @@
         "@vercel/speed-insights": "^1.0.10",
         "d3": "^7.8.5",
         "deck.gl": "^8.9.30",
-        "mapbox-gl": "^3.1.2",
+        "maplibre-gl": "^4.7.1",
         "next": "^16.3.4",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
