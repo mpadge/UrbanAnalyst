@@ -23,7 +23,17 @@ import type { NumLayersMode } from '@/components/utils/pageConstants';
 
 const DEFAULT_LAYER = LAYER_CONSTANTS.DEFAULT_LAYER;
 
-const MAP_QUERY_KEYS = ['city', 'layer', 'layer2', 'numLayers'] as const;
+// layer2 is only part of the URL when numLayers is 'Paired'
+const hasFullMapQuery = (params: URLSearchParams): boolean =>
+    ['city', 'layer', 'numLayers'].every(k => params.has(k)) &&
+    (params.get('numLayers') !== 'Paired' || params.has('layer2'));
+
+const buildMapParams = (city: string, layer: string, layer2: string, numLayers: string): URLSearchParams => {
+    const params = new URLSearchParams({ city, layer });
+    if (numLayers === 'Paired') params.set('layer2', layer2);
+    params.set('numLayers', numLayers);
+    return params;
+};
 
 const validateAndSetDefaultLayer = (
     layer: string,
@@ -196,7 +206,7 @@ export default function MapPageContent(): React.JSX.Element {
     /* eslint-disable react-hooks/set-state-in-effect */
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
-        const hasFullQuery = MAP_QUERY_KEYS.every(k => params.has(k));
+        const hasFullQuery = hasFullMapQuery(params);
 
         let idxLocal: number;
         let layerLocal: string;
@@ -211,8 +221,8 @@ export default function MapPageContent(): React.JSX.Element {
             const cityName = params.get('city')!;
             idxLocal = Math.max(0, CITY_DATA.citiesArray.findIndex(c => c.name === cityName));
             layerLocal = params.get('layer')!;
-            layer2Local = params.get('layer2')!;
             numLayersLocal = params.get('numLayers')!;
+            layer2Local = params.get('layer2') ?? initialState.layer2;
             localStorageHelpers.setItem('uaCityIdx', idxLocal.toString());
             localStorageHelpers.setItem('uaLayer', layerLocal);
             localStorageHelpers.setItem('uaLayer2', layer2Local);
@@ -258,12 +268,12 @@ export default function MapPageContent(): React.JSX.Element {
         setLayerStartStop([rangeData.layer_start, rangeData.layer_stop]);
 
         // Canonicalize URL on every load — removes stale params (e.g. alpha from old URLs)
-        const canonicalParams = new URLSearchParams({
-            city: CITY_DATA.citiesArray[idxLocal].name,
-            layer: validatedLayer,
-            layer2: validatedLayer2,
-            numLayers: numLayersLocal
-        });
+        const canonicalParams = buildMapParams(
+            CITY_DATA.citiesArray[idxLocal].name,
+            validatedLayer,
+            validatedLayer2,
+            numLayersLocal
+        );
         window.history.replaceState(null, '', `?${canonicalParams.toString()}`);
     }, [])
     /* eslint-enable react-hooks/set-state-in-effect */
@@ -287,7 +297,7 @@ export default function MapPageContent(): React.JSX.Element {
 
     useEffect(() => {
         if (!cityLayers.length) return;
-        const params = new URLSearchParams({ city: CITY_DATA.citiesArray[idx]?.name ?? '', layer, layer2, numLayers });
+        const params = buildMapParams(CITY_DATA.citiesArray[idx]?.name ?? '', layer, layer2, numLayers);
         window.history.replaceState(null, '', `?${params.toString()}`);
     }, [idx, layer, layer2, numLayers, cityLayers.length]);
 
