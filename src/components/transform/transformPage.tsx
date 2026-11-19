@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState, useCallback, useMemo, lazy, Suspense} from 'react';
+import { useEffect, useState, useCallback, useMemo, lazy, Suspense} from 'react';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 import type { UATourProps } from '@/components/tour/tourWrapper';
 
@@ -171,13 +171,10 @@ export default function TransformPage(): React.JSX.Element {
     const [outputLayer, setOutputLayer] = useState<OutputLayerType>(OUTPUT_LAYER_TYPES.RELATIVE);
     const [cityLayers, setCityLayers] = useState<string[]>([]);
 
-    const fromUrl = useRef<boolean | null>(null);
-
     /* eslint-disable react-hooks/set-state-in-effect */
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const hasFullQuery = TRANSFORM_QUERY_KEYS.every(k => params.has(k));
-        fromUrl.current = hasFullQuery;
 
         let idxLocal: number;
         let idx2Local: number;
@@ -265,7 +262,7 @@ export default function TransformPage(): React.JSX.Element {
     /* eslint-enable react-hooks/set-state-in-effect */
 
     useEffect(() => {
-        if (fromUrl.current !== false || !cityLayers.length) return;
+        if (!cityLayers.length) return;
         const params = new URLSearchParams({
             city: CITY_DATA.citiesArray[idx]?.name ?? '',
             targetCity: CITY_DATA.citiesArray[idx2]?.name ?? '',
