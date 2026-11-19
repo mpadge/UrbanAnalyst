@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState, useCallback, useMemo, lazy, Suspense } from "react";
+import { useEffect, useState, useCallback, useMemo, lazy, Suspense } from "react";
 import type { UATourProps } from '@/components/tour/tourWrapper';
 import { FlyToInterpolator } from "@deck.gl/core/typed";
 
@@ -193,13 +193,10 @@ export default function MapPageContent(): React.JSX.Element {
     const [layerStartStop, setLayerStartStop] = useState<[number, number]>(LAYER_CONSTANTS.DEFAULT_LAYER_START_STOP);
     const [layerRange, setLayerRange] = useState<[number, number]>(LAYER_CONSTANTS.DEFAULT_LAYER_RANGE);
 
-    const fromUrl = useRef<boolean | null>(null);
-
     /* eslint-disable react-hooks/set-state-in-effect */
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const hasFullQuery = MAP_QUERY_KEYS.every(k => params.has(k));
-        fromUrl.current = hasFullQuery;
 
         let idxLocal: number;
         let layerLocal: string;
@@ -289,7 +286,7 @@ export default function MapPageContent(): React.JSX.Element {
     /* eslint-enable react-hooks/set-state-in-effect */
 
     useEffect(() => {
-        if (fromUrl.current !== false || !cityLayers.length) return;
+        if (!cityLayers.length) return;
         const params = new URLSearchParams({ city: CITY_DATA.citiesArray[idx]?.name ?? '', layer, layer2, numLayers });
         window.history.replaceState(null, '', `?${params.toString()}`);
     }, [idx, layer, layer2, numLayers, cityLayers.length]);
