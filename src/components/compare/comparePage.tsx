@@ -95,7 +95,7 @@ function ComparePagePresentation({
     );
 }
 
-const COMPARE_QUERY_KEYS = ['layer', 'layer2', 'numLayers', 'sortOpt', 'meanVals'] as const;
+const COMPARE_QUERY_KEYS = ['layer', 'numLayers', 'sortOpt', 'meanVals'] as const;
 
 export default function ComparePage(): React.JSX.Element {
 
@@ -104,19 +104,20 @@ export default function ComparePage(): React.JSX.Element {
     const numLayersOptions: NumLayersMode[] = useMemo(() => [...NUM_LAYERS_OPTIONS], []);
 
     const searchParams = useSearchParams();
-    // Capture URL params on the initial render only via lazy useState. Next.js patches
-    // replaceState, so useSearchParams() would otherwise update after the first URL write
-    // and flip hasFullQuery to true, breaking subsequent URL updates from state changes.
-    const [urlOverrides] = useState<Partial<CompareState> | undefined>(() =>
-        searchParams && COMPARE_QUERY_KEYS.every(k => searchParams.has(k)) ? {
+    // Capture URL params on the initial render only. layer2 is only part of the URL when
+    // numLayers is 'Paired'; otherwise the stored/default layer2 is used.
+    const [urlOverrides] = useState<Partial<CompareState> | undefined>(() => {
+        if (!searchParams || !COMPARE_QUERY_KEYS.every(k => searchParams.has(k))) return undefined;
+        const numLayers = searchParams.get('numLayers') as "Single" | "Paired";
+        if (numLayers === 'Paired' && !searchParams.has('layer2')) return undefined;
+        return {
             layer: searchParams.get('layer') as DataRangeKeys,
-            layer2: searchParams.get('layer2') as DataRangeKeys,
-            numLayers: searchParams.get('numLayers') as "Single" | "Paired",
+            ...(searchParams.has('layer2') ? { layer2: searchParams.get('layer2') as DataRangeKeys } : {}),
+            numLayers,
             sortOpt: searchParams.get('sortOpt') ?? '',
             meanVals: searchParams.get('meanVals') === 'true'
-        } : undefined
-    );
-    const hasFullQuery = urlOverrides !== undefined;
+        };
+    });
 
     const { state, actions } = useCompareState(urlOverrides);
     const { layer, layer2, numLayers, sortOpt, meanVals } = state;
@@ -124,16 +125,13 @@ export default function ComparePage(): React.JSX.Element {
     const { tourProps, handleTourOpen } = useTourLogic();
 
     useEffect(() => {
-        if (hasFullQuery) return;
-        const params = new URLSearchParams({
-            layer,
-            layer2,
-            numLayers,
-            sortOpt,
-            meanVals: String(meanVals)
-        });
+        const params = new URLSearchParams({ layer });
+        if (numLayers === 'Paired') params.set('layer2', layer2);
+        params.set('numLayers', numLayers);
+        params.set('sortOpt', sortOpt);
+        params.set('meanVals', String(meanVals));
         window.history.replaceState(null, '', `?${params.toString()}`);
-    }, [hasFullQuery, layer, layer2, numLayers, sortOpt, meanVals]);
+    }, [layer, layer2, numLayers, sortOpt, meanVals]);
 
     const processedCitiesData = useMemo(() => {
         return {
